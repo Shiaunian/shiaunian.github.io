@@ -123,7 +123,12 @@
   <div id="app"></div>
   <script>
 
-  // ===== 登入帳號密碼驗證（改為呼叫 GAS API） =====
+// ===== 登入帳號密碼清單 =====
+const users = [
+  { username: "t2user", password: "0128" },
+  { username: "alice", password: "1234" },
+  { username: "h124030017", password: "0128" } // 郭健鴻，帳號統一小寫
+];
 
 const LIMIT = 3600000; // 1小時（毫秒）
 
@@ -154,30 +159,21 @@ function showLogin() {
       </form>
     </div>
   `;
-  document.getElementById('loginForm').onsubmit = async function(e) {
+  document.getElementById('loginForm').onsubmit = function(e) {
     e.preventDefault();
     const uname = document.getElementById('username').value.trim();
     const pwd = document.getElementById('password').value.trim();
     document.getElementById('errorMsg').textContent = "";
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbxIqGY3Shg6T-G7PdkKb-wTjH32cMP-cNv9lwrZt070258POI_q1Rop6ZESecdqt0jA8Q/exec', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: uname,
-          password: pwd
-        })
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem("t2_login", "yes");
-        localStorage.setItem("t2_login_time", Date.now().toString());
-        window.location.href = "page2.html";
-      } else {
-        document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
-      }
-    } catch (err) {
-      document.getElementById('errorMsg').textContent = "伺服器連線失敗，請稍後再試！";
+    
+    // 本地驗證帳號密碼
+    const user = users.find(u => u.username === uname && u.password === pwd);
+    
+    if (user) {
+      localStorage.setItem("t2_login", "yes");
+      localStorage.setItem("t2_login_time", Date.now().toString());
+      window.location.href = "page2.html";
+    } else {
+      document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
     }
   };
   document.getElementById('username').oninput =
