@@ -164,11 +164,13 @@ function showLogin() {
     // 轉小寫比對，不分大小寫
     const uname = document.getElementById('username').value.trim().toLowerCase();
     const pwd = document.getElementById('password').value.trim().toLowerCase();
-    const user = users.find(u => u.username === uname && u.password === pwd);
+    const user = users.find(u =>
+      u.username.toLowerCase() === uname && u.password.toLowerCase() === pwd
+    );
     if (user) {
       localStorage.setItem("t2_login", "yes");
       localStorage.setItem("t2_login_time", Date.now().toString());
-      showMain();
+      window.location.href = "page2.html"; // 登入成功直接跳轉
     } else {
       document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
     }
