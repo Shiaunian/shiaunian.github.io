@@ -2,14 +2,56 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>第二頁</title>
+  <title>T2日檢疫功能頁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <style>
+    body {
+      font-family: "微軟正黑體", Arial, sans-serif;
+      background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .main-content {
+      width: 94vw; max-width: 420px;
+      margin: 7vw auto 0 auto;
+      padding: 7vw 4vw 6vw 4vw;
+      background: rgba(255,255,255,0.98);
+      border-radius: 15px;
+      box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
+    }
+    .login-logo {
+      font-size: 2.3rem;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 4px #0001);
+    }
+    .logout-btn {
+      width: 100%; padding: 16px 0;
+      background: linear-gradient(90deg, #e65555 60%, #b71c1c 100%);
+      color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 1.18rem; font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #e6555522;
+      transition: background 0.2s, transform 0.13s;
+      margin-top: 6vw;
+    }
+    .logout-btn:hover {
+      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+    }
+  </style>
 </head>
 <body>
-  <h1>這是第二個 HTML 頁面！</h1>
-  <a href="index.html">回首頁</a>
-
+  <div class="main-content">
+    <h2><span class="login-logo">🦠</span>這是 T2日檢疫功能頁</h2>
+    <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
+      恭喜登入成功！這裡可以放你的功能內容。
+    </p>
+    <button class="logout-btn" id="logoutBtn">登出</button>
+  </div>
   <script>
-    // 登入時效（1小時）
+    // 檢查登入狀態與時效（與 index.html 相同邏輯）
     const LIMIT = 3600000;
     function checkLogin() {
       const flag = localStorage.getItem("t2_login");
@@ -17,10 +59,18 @@
       if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
         localStorage.removeItem("t2_login");
         localStorage.removeItem("t2_login_time");
+        alert("請先登入！");
         window.location.href = "index.html";
       }
     }
     checkLogin();
+
+    // 登出按鈕
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem("t2_login");
+      localStorage.removeItem("t2_login_time");
+      window.location.href = "index.html";
+    };
   </script>
 </body>
 </html>
