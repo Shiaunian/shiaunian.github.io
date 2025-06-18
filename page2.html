@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>T2日檢疫功能頁</title>
+  <title>T2日檢疫人員內部資訊</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
     body {
@@ -13,17 +13,81 @@
       padding: 0;
     }
     .main-content {
-      width: 94vw; max-width: 420px;
+      width: 94vw; max-width: 450px;
       margin: 7vw auto 0 auto;
       padding: 7vw 4vw 6vw 4vw;
       background: rgba(255,255,255,0.98);
       border-radius: 15px;
       box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
     }
-    .login-logo {
-      font-size: 2.3rem;
-      vertical-align: middle;
-      filter: drop-shadow(0 2px 4px #0001);
+    .page-title {
+      font-size: 1.45rem;
+      font-weight: bold;
+      color: #263161;
+      margin-bottom: 1.1em;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    .notice-board {
+      background: #f4f7fb;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #b3b3d622;
+      padding: 1.2em 1em 1em 1em;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 2.2em;
+      border-left: 6px solid #6c81d5;
+    }
+    .notice-item {
+      margin-bottom: 1.2em;
+    }
+    .notice-title {
+      font-weight: 700;
+      color: #3949ab;
+      font-size: 1.08em;
+      margin-bottom: 0.3em;
+    }
+    .notice-content {
+      color: #23315c;
+      font-size: 0.99em;
+      line-height: 1.7;
+      margin-left: 0.5em;
+    }
+    .notice-end {
+      color: #c62828;
+      font-size: 0.92em;
+      display: flex;
+      align-items: center;
+      margin-top: 0.5em;
+    }
+    .notice-end .icon {
+      font-size: 1.3em;
+      margin-right: 0.2em;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8em;
+      justify-content: center;
+      margin-bottom: 1.5em;
+    }
+    .func-btn {
+      flex: 1 1 40%;
+      min-width: 105px;
+      padding: 0.85em 0;
+      background: linear-gradient(90deg, #7c90e1 60%, #3949ab 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.07rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #3949ab22;
+      transition: background 0.2s, transform 0.13s;
+    }
+    .func-btn:hover {
+      background: linear-gradient(90deg, #3949ab 60%, #7c90e1 100%);
     }
     .logout-btn {
       width: 100%; padding: 16px 0;
@@ -35,23 +99,204 @@
       cursor: pointer;
       box-shadow: 0 2px 8px #e6555522;
       transition: background 0.2s, transform 0.13s;
-      margin-top: 6vw;
+      margin-top: 2vw;
     }
     .logout-btn:hover {
       background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+    }
+    /* 彈窗樣式 */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(30,40,80,0.23);
+      z-index: 99;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-bg.active {
+      display: flex;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      min-width: 260px;
+      max-width: 380px;
+      width: 88vw;
+      box-shadow: 0 8px 32px #3949ab33, 0 1.5px 8px #0002;
+      padding: 0;
+      position: relative;
+      animation: popup 0.18s;
+      display: flex;
+      flex-direction: column;
+      max-height: 65vh;
+      overflow: hidden;
+      cursor: grab;
+    }
+    @keyframes popup {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .modal-header {
+      padding: 0.95em 1.2em 0.7em 1.2em;
+      background: #e3e9ff;
+      border-radius: 12px 12px 0 0;
+      font-weight: bold;
+      color: #3949ab;
+      cursor: grab;
+      user-select: none;
+      font-size: 1.13em;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      color: #b71c1c;
+      font-size: 1.3em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 0.5em;
+      transition: color 0.16s;
+    }
+    .modal-close:hover {
+      color: #e65555;
+    }
+    .modal-body {
+      padding: 1.1em 1.2em 1.3em 1.2em;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      color: #263161;
+      font-size: 1em;
+    }
+    /* 滾動條美化 */
+    ::-webkit-scrollbar {
+      width: 7px;
+      background: #f4f7fb;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b3b3d6;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
   <div class="main-content">
-    <h2><span class="login-logo">🦠</span>這是 T2日檢疫功能頁</h2>
-    <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
-      恭喜登入成功！這裡可以放你的功能內容。
-    </p>
+    <div class="page-title">T2日檢疫人員內部資訊</div>
+    <!-- 公告欄 -->
+    <div class="notice-board" id="noticeBoard">
+      <!-- 公告動態插入 -->
+    </div>
+    <!-- 功能按鈕 -->
+    <div class="btn-group">
+      <button class="func-btn" data-modal="前導">前導</button>
+      <button class="func-btn" data-modal="複查">複查</button>
+      <button class="func-btn" data-modal="分流">分流</button>
+      <button class="func-btn" data-modal="分流2">分流2</button>
+      <button class="func-btn" data-modal="X光">X光</button>
+      <button class="func-btn" data-modal="規定事項">規定事項</button>
+      <button class="func-btn" data-modal="規定要求">規定要求</button>
+      <button class="func-btn" data-modal="檢疫物相關">檢疫物相關</button>
+    </div>
     <button class="logout-btn" id="logoutBtn">登出</button>
   </div>
+  <!-- 彈窗 -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modalBox">
+      <div class="modal-header" id="modalHeader">
+        <span id="modalTitle">標題</span>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        內容
+      </div>
+    </div>
+  </div>
   <script>
-    // 檢查登入狀態與時效（與 index.html 相同邏輯）
+    // 公告內容資料
+    const notices = [
+      {
+        title: "桃園分署檢疫站通報",
+        content: `來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境`
+      },
+      {
+        title: "洗便當盒",
+        content: `(1)洗便當盒請先將便當菜渣清理乾淨，再沖洗，不要留下菜渣導致水槽堵塞<br>
+        (2)洗抹布、便當盒盡量不要弄濕地板，以免發生危險，不慎弄濕地板，麻煩擦乾淨。<br>
+        <span class="notice-end"><span class="icon">⚠️</span>不要增加信實阿姨工作困擾請將心比心</span>`
+      },
+      {
+        title: ".新進人員須知。",
+        content: `所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。`
+      },
+      {
+        title: ".輪椅旅客狀況判斷。",
+        content: `輪椅旅客正常由前導2線接，但如前導2線有例外情況，還請1線依照現場狀況協助幫忙。`
+      },
+    ];
+    // 動態插入公告
+    const noticeBoard = document.getElementById('noticeBoard');
+    function renderNotices() {
+      noticeBoard.innerHTML = '';
+      notices.forEach(n => {
+        const item = document.createElement('div');
+        item.className = 'notice-item';
+        item.innerHTML = `<div class="notice-title">${n.title}</div>
+          <div class="notice-content">${n.content}</div>`;
+        noticeBoard.appendChild(item);
+      });
+    }
+    renderNotices();
+    // 彈窗功能
+    const modalBg = document.getElementById('modalBg');
+    const modalBox = document.getElementById('modalBox');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+    document.querySelectorAll('.func-btn').forEach(btn => {
+      btn.onclick = function() {
+        modalTitle.textContent = btn.textContent;
+        modalBody.innerHTML = '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
+        modalBg.classList.add('active');
+      };
+    });
+    modalClose.onclick = function() {
+      modalBg.classList.remove('active');
+    };
+    modalBg.onclick = function(e) {
+      if(e.target === modalBg) modalBg.classList.remove('active');
+    };
+    // 彈窗可拖拉
+    let isDragging = false, startX, startY, startLeft, startTop;
+    const header = document.getElementById('modalHeader');
+    header.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      modalBox.style.transition = 'none';
+      startX = e.clientX;
+      startY = e.clientY;
+      const rect = modalBox.getBoundingClientRect();
+      startLeft = rect.left;
+      startTop = rect.top;
+      document.body.style.userSelect = 'none';
+    });
+    document.addEventListener('mousemove', function(e) {
+      if(isDragging) {
+        let dx = e.clientX - startX;
+        let dy = e.clientY - startY;
+        modalBox.style.position = 'fixed';
+        modalBox.style.left = (startLeft + dx) + 'px';
+        modalBox.style.top = (startTop + dy) + 'px';
+      }
+    });
+    document.addEventListener('mouseup', function() {
+      isDragging = false;
+      modalBox.style.transition = '';
+      document.body.style.userSelect = '';
+    });
+
+        // 檢查登入狀態與時效（與 index.html 相同邏輯）
     const LIMIT = 3600000;
     function checkLogin() {
       const flag = localStorage.getItem("t2_login");
@@ -65,7 +310,7 @@
     }
     checkLogin();
 
-    // 登出按鈕
+    // 登出
     document.getElementById('logoutBtn').onclick = function() {
       localStorage.removeItem("t2_login");
       localStorage.removeItem("t2_login_time");
