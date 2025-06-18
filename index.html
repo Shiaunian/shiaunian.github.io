@@ -118,12 +118,17 @@
   <!-- 右下角浮動版權區塊 -->
   <div class="copyright-floating">
     <span style="font-size:15px;vertical-align:middle;">&#169;</span>
-    網站架設人員:念念  PS:此為內部重要資訊
+    網站架設人員 念念 此為內部重要資訊
   </div>
   <div id="app"></div>
   <script>
 
-  // ===== 登入帳號密碼驗證（改為呼叫 GAS API） =====
+// ===== 登入帳號密碼清單 =====
+const users = [
+  { username: "t2user", password: "0128" },
+  { username: "alice", password: "1234" },
+  { username: "h124030017", password: "0128" } // 郭健鴻，帳號統一小寫
+];
 
 const LIMIT = 3600000; // 1小時（毫秒）
 
@@ -154,32 +159,21 @@ function showLogin() {
       </form>
     </div>
   `;
-  document.getElementById('loginForm').onsubmit = async function(e) {
+  document.getElementById('loginForm').onsubmit = function(e) {
     e.preventDefault();
     const uname = document.getElementById('username').value.trim();
     const pwd = document.getElementById('password').value.trim();
     document.getElementById('errorMsg').textContent = "";
     
-    try {
-      // 改用 GET 請求，將資料放在 URL 參數中
-      const url = `https://script.google.com/macros/s/AKfycbxIqGY3Shg6T-G7PdkKb-wTjH32cMP-cNv9lwrZt070258POI_q1Rop6ZESecdqt0jA8Q/exec?username=${encodeURIComponent(uname)}&password=${encodeURIComponent(pwd)}`;
-      
-      const res = await fetch(url, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem("t2_login", "yes");
-        localStorage.setItem("t2_login_time", Date.now().toString());
-        window.location.href = "page2.html";
-      } else {
-        document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
-      }
-    } catch (err) {
-      document.getElementById('errorMsg').textContent = "伺服器連線失敗，請稍後再試！";
-      console.error('登入錯誤:', err);
+    // 本地驗證帳號密碼
+    const user = users.find(u => u.username === uname && u.password === pwd);
+    
+    if (user) {
+      localStorage.setItem("t2_login", "yes");
+      localStorage.setItem("t2_login_time", Date.now().toString());
+      window.location.href = "page2.html";
+    } else {
+      document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
     }
   };
   document.getElementById('username').oninput =
