@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>程式碼順序排列工具</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Microsoft JhengHei', Arial, sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          padding: 20px;
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          overflow: hidden;
+      }
+
+      .header {
+          background: linear-gradient(135deg, #4CAF50, #45a049);
+          color: white;
+          padding: 20px;
+          text-align: center;
+      }
+
+      .header h1 {
+          margin: 0;
+          font-size: 24px;
+      }
+
+      .header p {
+          margin: 10px 0 0 0;
+          opacity: 0.9;
+      }
+
+      .main-content {
+          display: flex;
+          height: 70vh;
+      }
+
+      .input-section, .output-section {
+          flex: 1;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .input-section {
+          border-right: 2px solid #eee;
+      }
+
+      .section-title {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 15px;
+          color: #333;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+
+      .textarea {
+          flex: 1;
+          border: 2px solid #ddd;
+          border-radius: 8px;
+          padding: 15px;
+          font-family: 'Consolas', 'Monaco', monospace;
+          font-size: 14px;
+          resize: none;
+          outline: none;
+          transition: border-color 0.3s;
+      }
+
+      .textarea:focus {
+          border-color: #4CAF50;
+      }
+
+      .input-textarea {
+          background: #f9f9f9;
+      }
+
+      .output-textarea {
+          background: #f0f8f0;
+          color: #2d5a2d;
+      }
+
+      .controls {
+          display: flex;
+          gap: 10px;
+          margin: 15px 20px;
+          justify-content: center;
+      }
+
+      .btn {
+          padding: 12px 24px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: bold;
+          transition: all 0.3s;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      .btn-primary {
+          background: linear-gradient(135deg, #4CAF50, #45a049);
+          color: white;
+      }
+
+      .btn-primary:hover {
+          background: linear-gradient(135deg, #45a049, #3d8b40);
+          transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+          background: linear-gradient(135deg, #2196F3, #1976D2);
+          color: white;
+      }
+
+      .btn-secondary:hover {
+          background: linear-gradient(135deg, #1976D2, #1565C0);
+          transform: translateY(-2px);
+      }
+
+      .btn-clear {
+          background: linear-gradient(135deg, #f44336, #d32f2f);
+          color: white;
+      }
+
+      .btn-clear:hover {
+          background: linear-gradient(135deg, #d32f2f, #c62828);
+          transform: translateY(-2px);
+      }
+
+      .stats {
+          background: #f5f5f5;
+          padding: 15px 20px;
+          border-top: 1px solid #ddd;
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          color: #666;
+      }
+
+      .example {
+          background: #e8f5e8;
+          margin: 10px 20px;
+          padding: 15px;
+          border-radius: 8px;
+          border-left: 4px solid #4CAF50;
+      }
+
+      .example h3 {
+          margin: 0 0 10px 0;
+          color: #2d5a2d;
+      }
+
+      .example code {
+          background: #d4edda;
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-family: monospace;
+      }
+
+      @media (max-width: 768px) {
+          .main-content {
+              flex-direction: column;
+              height: auto;
+          }
+          
+          .input-section {
+              border-right: none;
+              border-bottom: 2px solid #eee;
+          }
+          
+          .textarea {
+              height: 300px;
+          }
+          
+          .controls {
+              flex-wrap: wrap;
+          }
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+      <div class="header">
+          <h1>🔧 程式碼順序排列工具</h1>
+          <p>自動移除程式碼內容，保留中文註釋和結構標籤，方便檢查程式順序</p>
+      </div>
+
+      <div class="example">
+          <h3>📝 使用說明：</h3>
+          <p>1. 將完整的 HTML 程式碼貼到左側輸入框</p>
+          <p>2. 點擊「分析程式結構」按鈕</p>
+          <p>3. 右側會顯示只保留中文註釋的版本：</p>
+          <p>• <code>// 遊戲狀態管理</code>（JS 註釋）</p>
+          <p>• <code>/* 戰鬥中央區域 */</code>（CSS 註釋）</p>
+          <p>• <code>&lt;!-- 背包系統彈窗 --&gt;</code>（HTML 註釋）</p>
+          <p>4. 複製右側結果，就可以方便地檢查程式順序了！</p>
+      </div>
+
+      <div class="main-content">
+          <div class="input-section">
+              <div class="section-title">
+                  📥 輸入完整程式碼
+              </div>
+              <textarea 
+                  id="inputCode" 
+                  class="textarea input-textarea" 
+                  placeholder="請貼上你的完整 HTML 程式碼...
+
+例如：
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      /* 戰鬥中央區域 */
+      .battle-area { 
+          width: 100%; 
+          height: 400px; 
+      }
+      
+      /* 玩家資訊區域 */
+      .player-info { margin: 10px; }
+  </style>
+</head>
+<body>
+  <!-- 背包系統彈窗 -->
+  <div>內容</div>
+  
+  <script>
+      // 遊戲狀態管理
+      const gameState = { ... };
+      
+      // 初始化遊戲
+      function initGame() { ... }
+  </script>
+</body>
+</html>"></textarea>
+          </div>
+
+          <div class="output-section">
+              <div class="section-title">
+                  📤 程式結構順序
+              </div>
+              <textarea 
+                  id="outputCode" 
+                  class="textarea output-textarea" 
+                  readonly 
+                  placeholder="分析結果會顯示在這裡...
+
+只會保留：
+• HTML 結構標籤 (<!DOCTYPE>, <html>, <head>, <body>, </script>, </body>, </html>)
+• 中文註釋：
+- // 中文註釋 (JavaScript)
+- /* 戰鬥中央區域 */ (CSS)
+- <!-- 背包系統彈窗 --> (HTML)
+• 函數名稱行
+• 重要的程式區塊標示
+
+移除：
+• 具體的程式碼實作
+• 英文註釋
+• CSS 詳細內容
+• JavaScript 實作細節"></textarea>
+          </div>
+      </div>
+
+      <div class="controls">
+          <button class="btn btn-primary" onclick="analyzeCode()">
+              🔍 分析程式結構
+          </button>
+          <button class="btn btn-secondary" onclick="copyOutput()">
+              📋 複製結果
+          </button>
+          <button class="btn btn-clear" onclick="clearAll()">
+              🗑️ 清空全部
+          </button>
+      </div>
+
+      <div class="stats">
+          <span id="inputStats">輸入：0 行</span>
+          <span id="outputStats">輸出：0 行</span>
+          <span id="reductionStats">精簡：0%</span>
+      </div>
+  </div>
+
+  <script>
+      function analyzeCode() {
+          const input = document.getElementById('inputCode').value;
+          if (!input.trim()) {
+              alert('請先輸入程式碼！');
+              return;
+          }
+
+          const lines = input.split('\n');
+          const result = [];
+          let inScript = false;
+          let inStyle = false;
+
+          for (let line of lines) {
+              const trimmed = line.trim();
+              
+              // 保留 HTML 結構標籤
+              if (trimmed.match(/^<!DOCTYPE|^<html|^<head|^<\/head>|^<body|^<\/body>|^<\/html>|^<script|^<\/script>|^<style|^<\/style>/i)) {
+                  result.push(line);
+                  if (trimmed.match(/<script/i)) inScript = true;
+                  if (trimmed.match(/<\/script>/i)) inScript = false;
+                  if (trimmed.match(/<style/i)) inStyle = true;
+                  if (trimmed.match(/<\/style>/i)) inStyle = false;
+                  continue;
+              }
+
+              // 保留所有包含中文的 HTML 註釋
+              if (trimmed.match(/<!--.*[\u4e00-\u9fff].*-->/) ||
+                  trimmed.match(/<!--[\s]*[\u4e00-\u9fff]/) ||
+                  trimmed.match(/^<!--.*[\u4e00-\u9fff]/)) {
+                  result.push(line);
+                  continue;
+              }
+
+              // 在 script 標籤內
+              if (inScript) {
+                  // 保留中文註釋
+                  if (trimmed.match(/^\/\/.*[\u4e00-\u9fff]/) || 
+                      trimmed.match(/^\/\*.*[\u4e00-\u9fff]/) ||
+                      trimmed.match(/\*\/.*[\u4e00-\u9fff]/)) {
+                      result.push(line);
+                      continue;
+                  }
+                  
+                  // 保留函數定義行（只保留函數名，移除內容）
+                  if (trimmed.match(/^function\s+\w+\s*\(/)) {
+                      result.push(line.replace(/\{[\s\S]*$/, ''));
+                      continue;
+                  }
+                  
+                  // 保留變數宣告行（只保留宣告，移除值）
+                  if (trimmed.match(/^(const|let|var)\s+\w+/)) {
+                      const match = trimmed.match(/^(const|let|var)\s+\w+/);
+                      result.push(line.substring(0, line.indexOf(match[0]) + match[0].length) + ';');
+                      continue;
+                  }
+                  
+                  // 保留事件監聽器（簡化版）
+                  if (trimmed.match(/addEventListener\s*\(/) || 
+                      trimmed.match(/window\.addEventListener/) ||
+                      trimmed.match(/document\.addEventListener/)) {
+                      result.push(line.replace(/\{[\s\S]*$/, ''));
+                      continue;
+                  }
+                  
+                  // 保留重要的程式區塊註釋
+                  if (trimmed.match(/^\/\/\s*={3,}/) || 
+                      trimmed.match(/^\/\*\s*={3,}/)) {
+                      result.push(line);
+                      continue;
+                  }
+              }
+
+              // 在 style 標籤內 - 保留中文註釋（改進版）
+              if (inStyle) {
+                  // 保留單行中文 CSS 註釋 /* 戰鬥中央區域 */
+                  if (trimmed.match(/\/\*.*[\u4e00-\u9fff].*\*\//) ||
+                      trimmed.match(/^\/\*.*[\u4e00-\u9fff]/) ||
+                      trimmed.match(/\/\*[\s]*[\u4e00-\u9fff]/)) {
+                      result.push(line);
+                      continue;
+                  }
+                  
+                  // 保留多行註釋的結尾（如果包含中文）
+                  if (trimmed.match(/.*[\u4e00-\u9fff].*\*\//)) {
+                      result.push(line);
+                      continue;
+                  }
+              }
+
+              // 在任何地方都保留獨立的中文 CSS 註釋（不在 style 標籤內的情況）
+              if (trimmed.match(/^\/\*.*[\u4e00-\u9fff].*\*\//)) {
+                  result.push(line);
+                  continue;
+              }
+
+              // 保留空行（但限制連續空行）
+              if (trimmed === '' && result[result.length - 1] !== '') {
+                  result.push('');
+              }
+          }
+
+          // 移除結尾多餘的空行
+          while (result.length > 0 && result[result.length - 1].trim() === '') {
+              result.pop();
+          }
+
+          document.getElementById('outputCode').value = result.join('\n');
+          updateStats(lines.length, result.length);
+      }
+
+      function copyOutput() {
+          const output = document.getElementById('outputCode');
+          if (!output.value.trim()) {
+              alert('沒有內容可以複製！請先分析程式碼。');
+              return;
+          }
+          
+          output.select();
+          document.execCommand('copy');
+          
+          // 視覺反饋
+          const btn = event.target;
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '✅ 已複製！';
+          btn.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
+          
+          setTimeout(() => {
+              btn.innerHTML = originalText;
+              btn.style.background = 'linear-gradient(135deg, #2196F3, #1976D2)';
+          }, 2000);
+      }
+
+      function clearAll() {
+          if (confirm('確定要清空所有內容嗎？')) {
+              document.getElementById('inputCode').value = '';
+              document.getElementById('outputCode').value = '';
+              updateStats(0, 0);
+          }
+      }
+
+      function updateStats(inputLines, outputLines) {
+          document.getElementById('inputStats').textContent = `輸入：${inputLines} 行`;
+          document.getElementById('outputStats').textContent = `輸出：${outputLines} 行`;
+          
+          const reduction = inputLines > 0 ? Math.round((1 - outputLines / inputLines) * 100) : 0;
+          document.getElementById('reductionStats').textContent = `精簡：${reduction}%`;
+      }
+
+      // 初始化
+      document.addEventListener('DOMContentLoaded', function() {
+          updateStats(0, 0);
+      });
+  </script>
+</body>
+</html>
