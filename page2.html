@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>第二頁</title>
+</head>
+<body>
+  <h1>這是第二個 HTML 頁面！</h1>
+  <a href="index.html">回首頁</a>
+
+  <script>
+    // 登入時效（1小時，和主程式一致）
+    const LIMIT = 3600000;
+
+    function checkLogin() {
+      const flag = localStorage.getItem("t2_login");
+      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
+        // 清除狀態並跳回登入頁
+        localStorage.removeItem("t2_login");
+        localStorage.removeItem("t2_login_time");
+        window.location.href = "index.html"; // 這裡請改成你的登入頁檔名
+      }
+    }
+
+    checkLogin();
+  </script>
+</body>
+</html>
