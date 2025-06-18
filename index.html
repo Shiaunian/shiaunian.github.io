@@ -92,6 +92,17 @@
       box-shadow: 0 2px 8px #e6555522;
       transition: background 0.2s;
     }
+    .login-notice {
+      color: #5468e5;
+      background: #e8f0ff;
+      border-radius: 6px;
+      margin: 0 0 2vw 0;
+      padding: 9px 12px;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow: 0 2px 8px #5468e511;
+    }
     .copyright-floating {
       position: fixed; right: 8px; bottom: 8px;
       background: rgba(255,255,255,0.94); color: #8a8a8a;
@@ -151,6 +162,7 @@ function showLogin() {
   document.getElementById('app').innerHTML = `
     <div class="login-box">
       <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
+      <div class="login-notice">📢 提醒：帳號統一使用小寫</div>
       <form id="loginForm" autocomplete="off">
         <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
         <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
@@ -161,7 +173,8 @@ function showLogin() {
   `;
   document.getElementById('loginForm').onsubmit = function(e) {
     e.preventDefault();
-    const uname = document.getElementById('username').value.trim();
+    // 將輸入的帳號轉換為小寫
+    const uname = document.getElementById('username').value.trim().toLowerCase();
     const pwd = document.getElementById('password').value.trim();
     document.getElementById('errorMsg').textContent = "";
     
