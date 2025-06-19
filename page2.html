@@ -12,6 +12,7 @@
       margin: 0;
       padding: 0;
     }
+    /* 主要內容區塊 */
     .main-content {
       width: 94vw; max-width: 450px;
       margin: 7vw auto 0 auto;
@@ -20,6 +21,8 @@
       border-radius: 15px;
       box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
     }
+
+    /* 頁面標題 */
     .page-title {
       font-size: 1.45rem;
       font-weight: bold;
@@ -28,6 +31,8 @@
       letter-spacing: 2px;
       text-align: center;
     }
+
+    /* 通知看板 */
     .notice-board {
       background: #f4f7fb;
       border-radius: 10px;
@@ -38,21 +43,28 @@
       margin-bottom: 2.2em;
       border-left: 6px solid #6c81d5;
     }
+
+    /* 通知項目 */
     .notice-item {
       margin-bottom: 1.2em;
     }
+
+    /* 通知標題 */
     .notice-title {
       font-weight: 700;
       color: #3949ab;
       font-size: 1.08em;
       margin-bottom: 0.3em;
     }
+
+    /* 通知內容 */
     .notice-content {
       color: #23315c;
       font-size: 0.99em;
       line-height: 1.7;
       margin-left: 0.5em;
     }
+    /* 通知結尾 */
     .notice-end {
       color: #c62828;
       font-size: 0.92em;
@@ -60,10 +72,14 @@
       align-items: center;
       margin-top: 0.5em;
     }
+
+    /* 通知結尾圖示 */
     .notice-end .icon {
       font-size: 1.3em;
       margin-right: 0.2em;
     }
+
+    /* 按鈕群組 */
     .btn-group {
       display: flex;
       flex-wrap: wrap;
@@ -71,6 +87,7 @@
       justify-content: center;
       margin-bottom: 1.5em;
     }
+    /* 功能按鈕 */
     .func-btn {
       flex: 1 1 40%;
       min-width: 105px;
@@ -86,12 +103,16 @@
       box-shadow: 0 2px 8px #3949ab22;
       transition: background 0.2s, transform 0.13s;
     }
+
+    /* 功能按鈕懸停效果 */
     .func-btn:hover {
       background: linear-gradient(90deg, #3949ab 60%, #7c90e1 100%);
     }
+
+    /* 登出按鈕 */
     .logout-btn {
       width: 100%; padding: 16px 0;
-      background: linear-gradient(90deg, #e65555 60%, #b71c1c 100%);
+      background: linear-gradient(90deg, #251111 60%, #695858 100%);
       color: #fff;
       border: none; border-radius: 8px;
       font-size: 1.18rem; font-weight: 600;
@@ -114,14 +135,17 @@
       justify-content: center;
       align-items: center;
     }
+    /* 模態背景啟用時 */
     .modal-bg.active {
       display: flex;
     }
+
+    /* 模態容器 */
     .modal {
       background: #fff;
       border-radius: 12px;
       min-width: 260px;
-      max-width: 380px;
+      max-width: 550px;
       width: 88vw;
       box-shadow: 0 8px 32px #3949ab33, 0 1.5px 8px #0002;
       padding: 0;
@@ -129,14 +153,18 @@
       animation: popup 0.18s;
       display: flex;
       flex-direction: column;
-      max-height: 65vh;
+      max-height: 85vh;
       overflow: hidden;
       cursor: grab;
     }
+
+    /* 彈出動畫效果 */
     @keyframes popup {
       from { transform: scale(0.92); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+
+    /* 模態標題區 */
     .modal-header {
       padding: 0.95em 1.2em 0.7em 1.2em;
       background: #e3e9ff;
@@ -151,25 +179,105 @@
       justify-content: space-between;
       align-items: center;
     }
+
+    /* 模態關閉按鈕 */
     .modal-close {
       background: none;
-      border: none;
-      color: #b71c1c;
-      font-size: 1.3em;
+      border: 2px solid #333; /* 黑色邊框 */
+      border-radius: 4px; /* 輕微的圓角 */
+      width: 32px; /* 固定寬度 */
+      height: 32px; /* 固定高度 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333; /* 黑色 X */
+      font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
       margin-left: 0.5em;
-      transition: color 0.16s;
+      transition: background-color 0.16s, color 0.16s;
+      position: relative;
+      overflow: hidden;
     }
+
+    /* X 符號的偽元素 */
+    .modal-close::before,
+    .modal-close::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      background-color: #333;
+    }
+
+    .modal-close::before {
+      transform: rotate(45deg);
+    }
+
+    .modal-close::after {
+      transform: rotate(-45deg);
+    }
+
+    /* 懸停效果 */
     .modal-close:hover {
-      color: #e65555;
+      background-color: #333;
     }
+
+    .modal-close:hover::before,
+    .modal-close:hover::after {
+      background-color: #fff;
+    }
+
+    /* 模態內容區 */
     .modal-body {
       padding: 1.1em 1.2em 1.3em 1.2em;
       overflow-y: auto;
       flex: 1 1 auto;
       color: #263161;
       font-size: 1em;
+    }
+    /* 標題內容專用樣式 */
+    .section-title {
+      color: #3949ab;
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      border-bottom: 2px solid #e3e9ff;
+      padding-bottom: 0.3em;
+    }
+    .section-title:first-child {
+      margin-top: 0;
+    }
+    .content-block {
+      margin-bottom: 1.2em;
+    }
+    .sub-title {
+      font-weight: bold;
+      color: #263161;
+      margin-bottom: 0.5em;
+      margin-top: 1em;
+    }
+    .content-list {
+      margin-left: 1em;
+      line-height: 1.8;
+    }
+    .content-list li {
+      margin-bottom: 0.5em;
+    }
+    .highlight-box {
+      background: #f4f7fb;
+      border-left: 4px solid #7c90e1;
+      padding: 0.8em;
+      margin: 0.8em 0;
+      border-radius: 4px;
+    }
+    .warning-text {
+      color: #c62828;
+      font-weight: bold;
+    }
+    .indent {
+      margin-left: 1.5em;
     }
     /* 滾動條美化 */
     ::-webkit-scrollbar {
@@ -180,26 +288,65 @@
       background: #b3b3d6;
       border-radius: 6px;
     }
+
+/* 跑馬燈容器樣式 */
+.marquee-container {
+  width: 100%; /* 寬度佔滿整個父容器 */
+  overflow: hidden; /* 隱藏超出容器的內容 */
+  background: #f0f4ff; /* 淺藍色背景 */
+  border-radius: 8px; /* 圓角 */
+  margin-bottom: 1em; /* 底部外邊距 */
+  padding: 0.5em 0; /* 上下內邊距 */
+}
+
+/* 跑馬燈內容樣式 */
+.marquee-content {
+  display: inline-block; /* 行內塊級元素 */
+  white-space: nowrap; /* 不換行 */
+  animation: marquee 40s linear infinite; /* 動畫設定：30秒、線性、無限循環 */
+}
+
+/* 跑馬燈動畫關鍵幀 */
+@keyframes marquee {
+  0% { transform: translateX(20%); } /* 起始位置：從右側20%開始 */
+  100% { transform: translateX(-100%); } /* 結束位置：向左移動100% */
+}
+
+/* 滑鼠懸停時暫停動畫 */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused; /* 暫停動畫 */
+}
+  
   </style>
 </head>
 <body>
   <div class="main-content">
     <div class="page-title">T2日檢疫人員內部資訊</div>
     <!-- 公告欄 -->
+<div class="marquee-container">
+    <div class="marquee-content">
+      即日起所有更新會陸續由這裡做更新  06/18更新項目:1.循環扇遙控器  在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。  2.接到輪椅的旅客  行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
+    </div>
+   </div>    
     <div class="notice-board" id="noticeBoard">
       <!-- 公告動態插入 -->
     </div>
     <!-- 功能按鈕 -->
     <div class="btn-group">
-      <button class="func-btn" data-modal="前導">前導</button>
-      <button class="func-btn" data-modal="複查">複查</button>
-      <button class="func-btn" data-modal="分流">分流</button>
-      <button class="func-btn" data-modal="分流2">分流2</button>
-      <button class="func-btn" data-modal="X光">X光</button>
-      <button class="func-btn" data-modal="規定事項">規定事項</button>
-      <button class="func-btn" data-modal="規定要求">規定要求</button>
+      <button class="func-btn" data-modal="📋前導">📋前導</button>
+      <button class="func-btn" data-modal="📋複查">📋複查</button>
+      <button class="func-btn" data-modal="📋分流">📋分流</button>
+      <button class="func-btn" data-modal="📋分流2">📋分流2</button>
+      <button class="func-btn" data-modal="📋X光">📋X光</button>
+      <button class="func-btn" data-modal="⚠️規定事項">⚠️規定事項</button>
+      <button class="func-btn" data-modal="⚠️規定要求">⚠️規定要求</button>
       <button class="func-btn" data-modal="檢疫物相關">檢疫物相關</button>
     </div>
+    <div class="marquee-container">
+    <div class="marquee-content">
+      即日起所有更新會陸續由這裡做更新  06/18更新項目:1.循環扇遙控器  在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。  2.接到輪椅的旅客  行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
+   </div>
+   </div>
     <button class="logout-btn" id="logoutBtn">登出</button>
   </div>
   <!-- 彈窗 -->
@@ -215,6 +362,20 @@
     </div>
   </div>
   <script>
+
+        // 檢查登入狀態
+    function checkLogin() {
+      const flag = localStorage.getItem("t2_login");
+      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+      const LIMIT = 3600000; // 1小時
+      
+      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
+        localStorage.removeItem("t2_login");
+        localStorage.removeItem("t2_login_time");
+        window.location.href = "index.html";
+      }
+    }
+    
     // 公告內容資料
     const notices = [
       {
@@ -236,6 +397,7 @@
         content: `輪椅旅客正常由前導2線接，但如前導2線有例外情況，還請1線依照現場狀況協助幫忙。`
       },
     ];
+    
     // 動態插入公告
     const noticeBoard = document.getElementById('noticeBoard');
     function renderNotices() {
@@ -249,25 +411,366 @@
       });
     }
     renderNotices();
+    
+    // 各按鈕的內容
+    const modalContents = {
+      "📋前導": `
+        <div class="section-title">前導基本須知</div>
+        
+        <div class="content-block">
+          <div class="sub-title">一般通關必問</div>
+          <ul class="content-list">
+            <li>詢問旅客「請問有帶到新鮮水果或者是含肉類製品的飛機餐或麵包嗎？」</li>
+            <li>如有旅客帶拍立得相機請詢問「請問相機內底片有拿出來嗎？」</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">一般通關規則</div>
+          <ul class="content-list">
+            <li>旅客一位放置行李，請勿一次兩位超過黃線移動到放置行李區。</li>
+            <li>可自主行動小朋友規則相同。</li>
+            <li>可先行宣導：「一位往前，第二位麻煩黃線後稍等」。<br>
+                <span class="warning-text indent">(整線請隨時注意，不然可能會取消當日調哨)</span></li>
+            <li>如有低風險疫區卡片者收取後請他直接往前不用過Ｘ光，並告知前面人員：「旅客已收卡」。</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">例外情況</div>
+          <ul class="content-list">
+            <li>行動不方便者（例如：高齡者或孕婦無法拿動行李），可一位幫忙一起。</li>
+            <li>手抱嬰兒者（例如：爸爸抱著小孩），可一位幫忙。</li>
+          </ul>
+        </div>
+        
+        <div class="section-title">現場管理要點</div>
+        
+        <div class="content-block">
+          <div class="sub-title">盆具管理：</div>
+          <ul class="content-list">
+            <li>及時補充，勿待堆積。</li>
+            <li>整理旅客放置盆內的行李袋，整理再盆內。</li>
+            <li>一位旅客放置一個間格空盆。</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">特殊旅客優先（中間道）</div>
+          <ul class="content-list">
+            <li>機組人員（機組行李由大中小擺放）</li>
+            <li>輪椅旅客</li>
+            <li>行動不便者</li>
+            <li>孕婦</li>
+          </ul>
+          <div class="highlight-box">以上等待三位一般旅客後通行</div>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">收尾工作：</div>
+          <ul class="content-list">
+            <li>換哨／下哨時處理檢疫物</li>
+            <li>清理垃圾至指定棄置桶</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <div class="sub-title">補充：基本檢查流程</div>
+          <div style="margin-top: 0.5em;">
+            <strong>旅客管制：</strong><br>
+            確保旅客在黃線後等待一位一位依序通過先過行李，人後過電動車通過時暫停接待。<br><br>
+            <strong>必問事項：</strong><br>
+            • 飛機餐/麵包/水果<br>
+            • 相機底片<br>
+            • 告知X光員特殊物品位置
+          </div>
+        </div>
+        
+        <div class="section-title">額外狀況處理</div>
+        
+        <div class="content-block">
+          <div class="sub-title">1. 對講機通報車輛通過</div>
+          <ul class="content-list">
+            <li>請先完成當下旅客行李放置。</li>
+            <li>執行秩序維護，引導旅客至黃線後等候。</li>
+            <li>告知：「不好意思，麻煩我們先都在黃線後稍等，有車子要通行，避免各位擦撞到」。</li>
+            <li>由2線前導開線引導車子通過（除非機動X光有過去幫忙）</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">2. 特殊旅客處理</div>
+          <ul class="content-list">
+            <li><strong>推嬰兒車旅客：</strong>確認嬰兒車上有無行李，看過請旅客推到前面。</li>
+            <li><strong>無行李旅客：</strong>請往前通行，並告知X光「旅客沒有行李」。</li>
+            <li><strong>抱家人旅客：</strong>查看證明文件無需過Ｘ光機，但其他行李需過機，並告知X光「旅客手中是家人已看過證明」。</li>
+            <li><strong>攜帶寵物旅客：</strong>請出示寵物證明文件，寵物無需過Ｘ光機，並告知X光「旅客手上有寵物」。</li>
+            <li><strong>攜帶電動行李旅客：</strong>請旅客帶著電動行李箱往前進行首檢就好。</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">需要過X光機（由X光人員判斷是否需手檢）</div>
+          <ul class="content-list">
+            <li>大包包</li>
+            <li>小包包</li>
+            <li>提袋</li>
+            <li>購物袋</li>
+            <li>行李箱</li>
+            <li>包裝紙箱</li>
+            <li>工程箱</li>
+            <li>裝在樂器袋的樂器</li>
+            <li>其他包覆、裝袋、裝包、裝行李等看不見內容物品</li>
+          </ul>
+        </div>
+        
+        <div class="section-title">物品通關分類</div>
+        
+        <div class="content-block">
+          <div class="sub-title">需前面手檢（不須過X光機）</div>
+          <ul class="content-list">
+            <li>電動行李車</li>
+            <li>斑蘭蛋糕</li>
+            <li>港澳蛋撻</li>
+            <li>大型公仔</li>
+            <li>過大物體</li>
+            <li>玩具</li>
+            <li>細緻工藝品（有裝袋）</li>
+            <li>旅客指定脆弱不便過機物品</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">不須過X光機也不放置盆子</div>
+          <ul class="content-list">
+            <li>手機、外套、耳機、護照</li>
+            <li>會倒的飲料、帽子</li>
+            <li>相機底片、項鍊、皮帶、戒指</li>
+            <li>其他非提袋、包包、行李箱的物品</li>
+            <li>神像／或明顯可見工藝品</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box" style="background: #ffe8e8; border-color: #e65555;">
+          <strong>前導不要硬請旅客把包包放盒內，幫忙一下。</strong>
+        </div>
+        
+        <div class="highlight-box" style="margin-top: 1.5em;">
+          <div class="sub-title" style="color: #c62828; margin-top: 0;">前導嬰兒車須注意</div>
+          這是原本就需要注意的，如旅客有推嬰兒車，請前導擋住桌腳避免小孩撞到等等（包括孕婦）。
+        </div>
+      `,
+      "📋複查": `
+        <div class="section-title">複查作業流程</div>
+        
+        <div class="content-block">
+          <div class="sub-title">一、基本檢查流程</div>
+          <ul class="content-list">
+            <li>X光說要檢查，複查一定要先問旅客「方便跟您打開做個檢查嗎？」</li>
+            <li>複查在接包包的位置問能不能檢查，不要拉到後面才問，如果旅客不願意檢查，以口頭及傳單宣導。</li>
+            <li>確實接收Ｘ光說明需要檢查的包包行李。</li>
+            <li>請旅客往最前面至第一張桌子稍等拿行李，不用檢查的請旅客先拿走，需檢查的要告知旅客，旅客之間會有間隔空盆做區隔，等全部的包包行李到齊再一起移動至最後一張桌子。</li>
+            <li>複查時保持間距，防止旅客的物品擠在一起避免搞混。</li>
+            <li>檢查行李時，把旅客的行李拿出盆子放在桌上，再將旅客行李的東西整齊有順序地放在盆子內檢查。</li>
+            <li>檢查請由小地方到大地方檢查，尤其是包包的暗層不能忽視，檢查好的東西先拿出來放盆子，避免漏查。</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">複查重點</div>
+          <ul class="content-list">
+            <li>水果、肉類製品</li>
+            <li>植物性產品</li>
+            <li>動物製品</li>
+            <li>醫藥品</li>
+            <li>特殊工藝品</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          複查時務必謹慎，確保檢疫安全
+        </div>
+      `,
+      "📋分流": `
+        <div class="section-title">旅客分流管理</div>
+        
+        <div class="content-block">
+          <div class="sub-title">分流原則</div>
+          <ul class="content-list">
+            <li>依旅客特性快速引導</li>
+            <li>減少等候時間</li>
+            <li>確保通關順暢</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">分流類型</div>
+          <ul class="content-list">
+            <li>一般旅客通道</li>
+            <li>特殊旅客通道（老弱病殘）</li>
+            <li>機組人員通道</li>
+            <li>快速通關通道</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          有效分流可提升整體通關效率
+        </div>
+      `,
+      "📋分流2": `
+        <div class="section-title">進階分流策略</div>
+        
+        <div class="content-block">
+          <div class="sub-title">客群識別</div>
+          <ul class="content-list">
+            <li>國籍差異</li>
+            <li>旅行目的</li>
+            <li>行李類型</li>
+            <li>特殊需求</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">分流技巧</div>
+          <ul class="content-list">
+            <li>即時評估旅客特性</li>
+            <li>靈活調整分流通道</li>
+            <li>預留特殊情況處理空間</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          精準分流，優化通關體驗
+        </div>
+      `,
+      "📋X光": `
+        <div class="section-title">X光檢查作業</div>
+        
+        <div class="content-block">
+          <div class="sub-title">檢查重點</div>
+          <ul class="content-list">
+            <li>偵測違禁物品</li>
+            <li>識別可疑物品</li>
+            <li>確保旅客安全</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">操作規範</div>
+          <ul class="content-list">
+            <li>正確調整機器參數</li>
+            <li>仔細觀察螢幕影像</li>
+            <li>保持設備清潔與校準</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          精準掃描，守護安全
+        </div>
+      `,
+      "⚠️規定事項": `
+        <div class="section-title">檢疫作業規定</div>
+        
+        <div class="content-block">
+          <div class="sub-title">基本守則</div>
+          <ul class="content-list">
+            <li>遵守國際檢疫標準</li>
+            <li>保持專業態度</li>
+            <li>維護旅客隱私</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">職業安全</div>
+          <ul class="content-list">
+            <li>穿戴適當防護裝備</li>
+            <li>遵守衛生安全程序</li>
+            <li>定期接受專業訓練</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          規範即安全，安全即服務
+        </div>
+      `,
+      "⚠️規定要求": `
+        <div class="section-title">作業要求標準</div>
+        
+        <div class="content-block">
+          <div class="sub-title">服務品質</div>
+          <ul class="content-list">
+            <li>迅速精準</li>
+            <li>禮貌周到</li>
+            <li>耐心溝通</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">專業要求</div>
+          <ul class="content-list">
+            <li>熟悉檢疫流程</li>
+            <li>掌握最新規定</li>
+            <li>具備應變能力</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          高標準源於專業與敬業
+        </div>
+      `,
+      "檢疫物相關": `
+        <div class="section-title">檢疫物管理</div>
+        
+        <div class="content-block">
+          <div class="sub-title">常見檢疫物</div>
+          <ul class="content-list">
+            <li>農產品</li>
+            <li>肉類製品</li>
+            <li>動植物標本</li>
+            <li>醫藥品</li>
+            <li>特殊工藝品</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">處理原則</div>
+          <ul class="content-list">
+            <li>確認來源</li>
+            <li>評估風險</li>
+            <li>依規定處置</li>
+            <li>必要時銷毀</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          嚴謹把關，保護國境biosafety
+        </div>
+      `
+    };    
     // 彈窗功能
     const modalBg = document.getElementById('modalBg');
     const modalBox = document.getElementById('modalBox');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
     const modalClose = document.getElementById('modalClose');
+    
     document.querySelectorAll('.func-btn').forEach(btn => {
       btn.onclick = function() {
-        modalTitle.textContent = btn.textContent;
-        modalBody.innerHTML = '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
+        const btnText = btn.textContent;
+        modalTitle.textContent = btnText;
+        modalBody.innerHTML = modalContents[btnText] || '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
         modalBg.classList.add('active');
       };
     });
+    
     modalClose.onclick = function() {
       modalBg.classList.remove('active');
     };
+    
     modalBg.onclick = function(e) {
       if(e.target === modalBg) modalBg.classList.remove('active');
     };
+    
     // 彈窗可拖拉
     let isDragging = false, startX, startY, startLeft, startTop;
     const header = document.getElementById('modalHeader');
@@ -281,6 +784,7 @@
       startTop = rect.top;
       document.body.style.userSelect = 'none';
     });
+    
     document.addEventListener('mousemove', function(e) {
       if(isDragging) {
         let dx = e.clientX - startX;
@@ -290,24 +794,13 @@
         modalBox.style.top = (startTop + dy) + 'px';
       }
     });
+    
     document.addEventListener('mouseup', function() {
       isDragging = false;
       modalBox.style.transition = '';
       document.body.style.userSelect = '';
     });
 
-        // 檢查登入狀態與時效（與 index.html 相同邏輯）
-    const LIMIT = 3600000;
-    function checkLogin() {
-      const flag = localStorage.getItem("t2_login");
-      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
-        localStorage.removeItem("t2_login");
-        localStorage.removeItem("t2_login_time");
-        alert("請先登入！");
-        window.location.href = "index.html";
-      }
-    }
     checkLogin();
 
     // 登出
