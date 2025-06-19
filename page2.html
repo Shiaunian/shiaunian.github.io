@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
   <meta charset="UTF-8">
   <title>T2日檢疫人員內部資訊</title>
@@ -12,14 +13,16 @@
       margin: 0;
       padding: 0;
     }
+
     /* 主要內容區塊 */
     .main-content {
-      width: 94vw; max-width: 450px;
+      width: 94vw;
+      max-width: 450px;
       margin: 7vw auto 0 auto;
       padding: 7vw 4vw 6vw 4vw;
-      background: rgba(255,255,255,0.98);
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 15px;
-      box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
+      box-shadow: 0 6px 24px 0 rgba(58, 85, 170, 0.10), 0 1.5px 8px 0 #0001;
     }
 
     /* 頁面標題 */
@@ -64,6 +67,7 @@
       line-height: 1.7;
       margin-left: 0.5em;
     }
+
     /* 通知結尾 */
     .notice-end {
       color: #c62828;
@@ -87,6 +91,7 @@
       justify-content: center;
       margin-bottom: 1.5em;
     }
+
     /* 功能按鈕 */
     .func-btn {
       flex: 1 1 40%;
@@ -111,30 +116,39 @@
 
     /* 登出按鈕 */
     .logout-btn {
-      width: 100%; padding: 16px 0;
+      width: 100%;
+      padding: 16px 0;
       background: linear-gradient(90deg, #251111 60%, #695858 100%);
       color: #fff;
-      border: none; border-radius: 8px;
-      font-size: 1.18rem; font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.18rem;
+      font-weight: 600;
       letter-spacing: 1px;
       cursor: pointer;
       box-shadow: 0 2px 8px #e6555522;
       transition: background 0.2s, transform 0.13s;
       margin-top: 2vw;
     }
+
     .logout-btn:hover {
       background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
     }
+
     /* 彈窗樣式 */
     .modal-bg {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(30,40,80,0.23);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(30, 40, 80, 0.23);
       z-index: 99;
       justify-content: center;
       align-items: center;
     }
+
     /* 模態背景啟用時 */
     .modal-bg.active {
       display: flex;
@@ -160,8 +174,15 @@
 
     /* 彈出動畫效果 */
     @keyframes popup {
-      from { transform: scale(0.92); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.92);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     /* 模態標題區 */
@@ -183,14 +204,19 @@
     /* 模態關閉按鈕 */
     .modal-close {
       background: none;
-      border: 2px solid #333; /* 黑色邊框 */
-      border-radius: 4px; /* 輕微的圓角 */
-      width: 32px; /* 固定寬度 */
-      height: 32px; /* 固定高度 */
+      border: 2px solid #333;
+      /* 黑色邊框 */
+      border-radius: 4px;
+      /* 輕微的圓角 */
+      width: 32px;
+      /* 固定寬度 */
+      height: 32px;
+      /* 固定高度 */
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #333; /* 黑色 X */
+      color: #333;
+      /* 黑色 X */
       font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
@@ -236,6 +262,7 @@
       color: #263161;
       font-size: 1em;
     }
+
     /* 標題內容專用樣式 */
     .section-title {
       color: #3949ab;
@@ -246,25 +273,31 @@
       border-bottom: 2px solid #e3e9ff;
       padding-bottom: 0.3em;
     }
+
     .section-title:first-child {
       margin-top: 0;
     }
+
     .content-block {
       margin-bottom: 1.2em;
     }
+
     .sub-title {
       font-weight: bold;
       color: #263161;
       margin-bottom: 0.5em;
       margin-top: 1em;
     }
+
     .content-list {
       margin-left: 1em;
       line-height: 1.8;
     }
+
     .content-list li {
       margin-bottom: 0.5em;
     }
+
     .highlight-box {
       background: #f4f7fb;
       border-left: 4px solid #7c90e1;
@@ -272,62 +305,112 @@
       margin: 0.8em 0;
       border-radius: 4px;
     }
+
     .warning-text {
       color: #c62828;
       font-weight: bold;
     }
+
     .indent {
       margin-left: 1.5em;
     }
+
     /* 滾動條美化 */
     ::-webkit-scrollbar {
       width: 7px;
       background: #f4f7fb;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #b3b3d6;
       border-radius: 6px;
     }
 
-/* 跑馬燈容器樣式 */
-.marquee-container {
-  width: 100%; /* 寬度佔滿整個父容器 */
-  overflow: hidden; /* 隱藏超出容器的內容 */
-  background: #f0f4ff; /* 淺藍色背景 */
-  border-radius: 8px; /* 圓角 */
-  margin-bottom: 1em; /* 底部外邊距 */
-  padding: 0.5em 0; /* 上下內邊距 */
-}
+    /* 跑馬燈容器樣式 */
+    .marquee-container {
+      width: 100%;
+      /* 寬度佔滿整個父容器 */
+      overflow: hidden;
+      /* 隱藏超出容器的內容 */
+      background: #f0f4ff;
+      /* 淺藍色背景 */
+      border-radius: 8px;
+      /* 圓角 */
+      margin-bottom: 1em;
+      /* 底部外邊距 */
+      padding: 0.5em 0;
+      /* 上下內邊距 */
+    }
 
-/* 跑馬燈內容樣式 */
-.marquee-content {
-  display: inline-block; /* 行內塊級元素 */
-  white-space: nowrap; /* 不換行 */
-  animation: marquee 50s linear infinite; /* 動畫設定：30秒、線性、無限循環 */
-}
+    /* 跑馬燈內容樣式 */
+    .marquee-content {
+      display: inline-block;
+      /* 行內塊級元素 */
+      white-space: nowrap;
+      /* 不換行 */
+      animation: marquee 50s linear infinite;
+      /* 動畫設定：30秒、線性、無限循環 */
+    }
 
-/* 跑馬燈動畫關鍵幀 */
-@keyframes marquee {
-  0% { transform: translateX(15%); } /* 起始位置：從右側20%開始 */
-  100% { transform: translateX(-100%); } /* 結束位置：向左移動100% */
-}
+    /* 跑馬燈動畫關鍵幀 */
+    @keyframes marquee {
+      0% {
+        transform: translateX(15%);
+      }
 
-/* 滑鼠懸停時暫停動畫 */
-.marquee-container:hover .marquee-content {
-  animation-play-state: paused; /* 暫停動畫 */
-}
-  
+      /* 起始位置：從右側20%開始 */
+      100% {
+        transform: translateX(-100%);
+      }
+
+      /* 結束位置：向左移動100% */
+    }
+
+    /* 滑鼠懸停時暫停動畫 */
+    .marquee-container:hover .marquee-content {
+      animation-play-state: paused;
+      /* 暫停動畫 */
+    }
+
+    sans-serif;
+          line-height: 1.6;
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+      h1 {
+          color: #333;
+          border-bottom: 2px solid #666;
+          padding-bottom: 10px;
+      }
+      .code-section {
+          background-color: #f4f4f4;
+          padding: 10px;
+          margin: 10px 0;
+          border-radius: 5px;
+      }
+      .highlight {
+          color: red;
+          font-weight: bold;
+      }
+      .note {
+          font-size: 0.9em;
+          color: #666;
+      }
+
   </style>
 </head>
+
 <body>
   <div class="main-content">
     <div class="page-title">T2日檢疫人員內部資訊</div>
     <!-- 公告欄 -->
-<div class="marquee-container">
-    <div class="marquee-content">
-      即日起所有更新會陸續由這裡做更新  06/18更新項目:1.循環扇遙控器  在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。  2.接到輪椅的旅客  行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
+    <div class="marquee-container">
+      <div class="marquee-content">
+        即日起所有更新會陸續由這裡做更新 06/18更新項目:1.循環扇遙控器 在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。 2.接到輪椅的旅客
+        行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
+      </div>
     </div>
-   </div>    
     <div class="notice-board" id="noticeBoard">
       <!-- 公告動態插入 -->
     </div>
@@ -343,77 +426,78 @@
       <button class="func-btn" data-modal="檢疫物相關">檢疫物相關</button>
     </div>
     <div class="marquee-container">
-    <div class="marquee-content">
-      即日起所有更新會陸續由這裡做更新  06/18更新項目:1.循環扇遙控器  在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。  2.接到輪椅的旅客  行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
-   </div>
-   </div>
-    <button class="logout-btn" id="logoutBtn">登出</button>
-  <!-- 彈窗 -->
-  <div class="modal-bg" id="modalBg">
-    <div class="modal" id="modalBox">
-      <div class="modal-header" id="modalHeader">
-        <span id="modalTitle">標題</span>
-        <button class="modal-close" id="modalClose">&times;</button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        內容
+      <div class="marquee-content">
+        即日起所有更新會陸續由這裡做更新 06/18更新項目:1.循環扇遙控器 在D區、與C區的四線旁邊盒子，都會放一個循環扇遙控器。再麻煩各位的4-2複查，日夜交接的時候要確認。 2.接到輪椅的旅客
+        行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。
       </div>
     </div>
-  </div>
-  <script>
+    <button class="logout-btn" id="logoutBtn">登出</button>
+    <!-- 彈窗 -->
+    <div class="modal-bg" id="modalBg">
+      <div class="modal" id="modalBox">
+        <div class="modal-header" id="modalHeader">
+          <span id="modalTitle">標題</span>
+          <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody">
+          內容
+        </div>
+      </div>
+    </div>
+    <script>
+      
         // 檢查登入狀態
-      function checkLogin() {
-        const flag = localStorage.getItem("t2_login");
-        const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-        const LIMIT = 3600000; // 1小時
-        
-        if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
-          localStorage.removeItem("t2_login");
-          localStorage.removeItem("t2_login_time");
-          window.location.href = "index.html";
-        }
+    function checkLogin() {
+      const flag = localStorage.getItem("t2_login");
+      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+      const LIMIT = 3600000; // 1小時
+      
+      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
+        localStorage.removeItem("t2_login");
+        localStorage.removeItem("t2_login_time");
+        window.location.href = "index.html";
       }
-  
-    
-    // 公告內容資料
-    const notices = [
-      {
-        title: "桃園分署檢疫站通報",
-        content: `來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境`
-      },
-      {
-        title: "洗便當盒",
-        content: `(1)洗便當盒請先將便當菜渣清理乾淨，再沖洗，不要留下菜渣導致水槽堵塞<br>
+    }
+
+      // 公告內容資料
+      const notices = [
+        {
+          title: "桃園分署檢疫站通報",
+          content: `來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境`
+        },
+        {
+          title: "洗便當盒",
+          content: `(1)洗便當盒請先將便當菜渣清理乾淨，再沖洗，不要留下菜渣導致水槽堵塞<br>
         (2)洗抹布、便當盒盡量不要弄濕地板，以免發生危險，不慎弄濕地板，麻煩擦乾淨。<br>
         <span class="notice-end"><span class="icon">⚠️</span>不要增加信實阿姨工作困擾請將心比心</span>`
-      },
-      {
-        title: ".新進人員須知。",
-        content: `所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。`
-      },
-      {
-        title: ".輪椅旅客狀況判斷。",
-        content: `輪椅旅客正常由前導2線接，但如前導2線有例外情況，還請1線依照現場狀況協助幫忙。`
-      },
-    ];
-    
-    // 動態插入公告
-    const noticeBoard = document.getElementById('noticeBoard');
-    function renderNotices() {
-      noticeBoard.innerHTML = '';
-      notices.forEach(n => {
-        const item = document.createElement('div');
-        item.className = 'notice-item';
-        item.innerHTML = `<div class="notice-title">${n.title}</div>
+        },
+        {
+          title: ".新進人員須知。",
+          content: `所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。`
+        },
+        {
+          title: ".輪椅旅客狀況判斷。",
+          content: `輪椅旅客正常由前導2線接，但如前導2線有例外情況，還請1線依照現場狀況協助幫忙。`
+        },
+      ];
+
+      // 動態插入公告
+      const noticeBoard = document.getElementById('noticeBoard');
+      function renderNotices() {
+        noticeBoard.innerHTML = '';
+        notices.forEach(n => {
+          const item = document.createElement('div');
+          item.className = 'notice-item';
+          item.innerHTML = `<div class="notice-title">${n.title}</div>
           <div class="notice-content">${n.content}</div>`;
-        noticeBoard.appendChild(item);
-      });
-    }
-    renderNotices();
-    
-    // 各按鈕的內容
-    const modalContents = {
-      "📋前導": `
+          noticeBoard.appendChild(item);
+        });
+      }
+      renderNotices();
+
+      // 各按鈕的內容
+      const modalContents = {
+        "📋前導": `
         <div class="section-title">前導基本須知</div>
         
         <div class="content-block">
@@ -559,7 +643,7 @@
           這是原本就需要注意的，如旅客有推嬰兒車，請前導擋住桌腳避免小孩撞到等等（包括孕婦）。
         </div>
       `,
-      "📋複查": `
+        "📋複查": `
         <div class="section-title">複查作業流程</div>
         <div class="content-block">
           <div class="sub-title">一、基本檢查流程</div>
@@ -605,129 +689,165 @@
             <li>用手機翻譯看外文，請看清楚是否看到過敏原，不要看到有肉就急著扣下來，因為也許是寫過敏原而已。</li>
             <li>請各位同仁如果遇到食物請不要直接跟旅客剝開看，跟旅客確認成分並告知跟宣導就好。</li>
           </ul>
-
-
-
-
-        </div>
-        <div class="content-block">
-          <div class="sub-title">複查重點</div>
+          <div class="sub-title">七、其他注意事項</div>
           <ul class="content-list">
-            <li>水果、肉類製品</li>
-            <li>植物性產品</li>
-            <li>動物製品</li>
-            <li>醫藥品</li>
-            <li>特殊工藝品</li>
+            <li>帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，很多人就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</li>
+            <li>如有Ｘ光同事把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「請問裡面沒有帶到含肉製品、新鮮水果嗎？」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</li>
+            <li>如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（檢疫物桶那邊桌子）填寫意見單。</li>
+            <li>噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</li>
+            <li>每一哨複查上哨的那一線需要簽寫密錄器板子。</li>
+            <li>桌上放有檢疫拋棄跟密錄器確認簽寫的板子一律朝上放。</li>
+            <li>哨上很忙時，檢疫本先做記號就好，不要別浪費時間在那邊寫檢疫本。</li>
           </ul>
-        </div>
-        
-        <div class="highlight-box">
-          複查時務必謹慎，確保檢疫安全
-        </div>
+          <div class="highlight-box" style="margin-top: 1.5em;">
+          <div class="sub-title" style="color: #c62828; margin-top: 0;">宣導DM告知旅客</div>
+                如有X光放宣導DM至有鉅記籃子時，請先詢問旅客裡面有無帶到含肉製品跟肉鬆等食品，確認過後給宣導DM告知旅客。
+          </div>
+          <div class="highlight-box">
+                複查時務必謹慎，確保檢疫安全
+          </div>
       `,
-      "📋分流": `
-        <div class="section-title">旅客分流管理</div>
+        "📋分流": `
+          <div class="section-title" style="text-align: center; letter-spacing: 12px; font-weight: bold;">注 . 意 . 事 . 項</div>
+          <ul class="content-list">
+            <li>1.分流不要把一條線塞滿再換一條塞爆，要分散。</li>
+            <li>2.卡片一台斤（600克）為單位，未滿一台斤（600克）就繼續交接給下一哨。</li>
+            <li>3.要稍微記一下持卡和未持卡的班機，有時候會有從一航走過來迷路的旅客。</li>
+            <li>4.航空公司領卡，請親自點交，一箱換一箱，沒有蓋子換沒有蓋子，如果正在忙就請他們待會再來領卡。</li>
+            <li>5.如果目前沒有持卡的航班，只有未持卡的航班，就把綠色通道的紅龍關起來，然後去分流導引旅客。</li>
+            <li>6.航空公司取卡以一個空盒換一盒卡片，如果沒有卡片，請呼叫線上的X光聯絡組長或是督導。</li>
+            <li>7.輪椅和行動不便的旅客走中間的走道，機組的話，如果某條線沒有旅客或是旅客剩下三四個，就直接放那條，都有旅客的情況下請機組人稍等一下，先呼叫詢問走哪條線，有回覆再放機組。</li>
+            <li>8.走中間的旅客、機組，要先看一下後面是否有車子要經過，然後先用對講機呼叫後再放人，如果先放再呼的話，旅客可能會跟車子衝突到。</li>
+            <li>9.旅客、機組放中間時，要一組一組的放，等前導接完一組開始接其他旅客時，再放一組進去。(持卡輪椅可一次走)</li>
+            <li>10.有推嬰兒車的旅客要請他們走1、2線，3、4線的走道太狹窄了。</li>
+            <li>11.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。</li>
+            <li>12.換哨下哨要清空分流的白色檢疫桶、交接卡片、密錄器。</li>
+            <li>13.棄置桶裡的檢疫物，快要滿出來或是已經滿出來，拿一個透明垃圾袋放在旁邊，把一些滿出來的檢疫物拿出來。</li>
+            <li>14.救護車、輪椅旅客、旅客自行推輪椅、整班機組、行動不便的要幫忙拉紅龍。</li>
+            <li>15.分流判斷當下，同時來了收卡與手檢旅客，現況需要分流2時，請呼叫分流2。</li>
+            <li>16.分流只有非手檢班機時，旅客未持卡以看機票確認。</li>
+            <li>17.當有手檢跟非手檢班機時，分流2幫忙確認應持卡未持卡旅客的機票，非手檢班機的旅客協助導至綠線。</li>
+         <li>18.機組檢查大更新
+            <div>離峰-3條線/尖峰-4條線</div>
+            <div>
+                如果是離峰時間(3條線)，機組照舊進手檢區做檢查，但請以四線X光去四線接掉或是丟至線內完成，請勿丟中間，必須避免旅客抱怨。<br>
+                如果是尖峰時間(4條線)，機組則以抽查優先。
+            </div>
+            <div>
+                需抽查的班機如下：
+                <ol>
+                    <li>BR62、BR398、BR212、BR392 — 這四班為主。</li>
+                    <li>三班抽檢則以優先挑選三位外籍機組，如沒有外籍機組再改以本國機組員作代替。</li>
+                </ol>
+            </div>
+            <div>
+                其餘的班機：
+                <ol>
+                    <li>可以直接放行走綠色通道，並告知機長現在為尖峰時段，所以不進手檢區。</li>
+                    <li>請機場跟組員宣導不要帶到任何違規動植物產品。</li>
+                </ol>
+            </div>
+            <li>19.早上打掃請記得清理白色的棄置桶。</li>
+            <li>20.不要去攔旅客推手推車，那不是我們的工作內容，但旅客把手推車丟在我們工作區域，要請旅客推走。</li>
+            <li>21.輪椅一樣由二線，二線前導接收到通知後，等輪椅客到黃線稍等，接幾位旅客後換接中間的輪椅客。
+                <ol>
+                    <li>今天如果走中間的輪椅人數是多少人，那等待的人數就要x 3ex : 航勤1+2，所以他們在前導就要等9個人才能輪到他們，以此類推</li>
+                    <li>中間有人在控管的的話（ex:四線X光），就交給中間的控管，1、2線的前導就不要再出來拉紅龍跟算人數了，都交給中間管理</li>
+                    <li>今天機組走3個，就是1線負責去接</li>
+                </ol>
+            <li>22.跨月份UA來領卡的簽收單，大家記一下，以後只要月底最後一天或月初第一天這張跟卡片會放在分流，分流有碰到換卡時UA來領的話，記得叫他們簽單子。</li>
+            <li>23.機組放四線的話一定要問能不能放四線，有回覆在放機組。</li>
+            <li>24.分流佩掛密錄器，防疫櫃檯會不定期、不定時檢查分流人員是否佩掛密錄器（需要有電並開機使用），違反者將採行政裁罰（罰款），請同事務必遵守！
+         </li>
+        `,
+        "📋分流2": `
+            <div class="section-title">機場分流2人員工作指南</div>
+        
+            <div class="content-block">
+            <div class="sub-title">工作說明</div>
+            <ul class="content-list">
+                <li>【啟動時機】
+                    <ol>
+                        <li>同時來了收卡與手檢旅客。</li>
+                        <li>主分流判斷下呼叫分流2。</li>
+                    </ol>
+                </li>
+                
+                <li>【主要職責】
+                    <ol>
+                        <li>在需要協助時負責接手引導手檢旅客並且宣導。</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="sub-title">D C 區電風扇清潔</div>
+            <ul class="content-list">
+                <li>以後固定每一個禮拜一的A哨分流2，要清兩邊電風扇。</li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="sub-title">注意事項</div>
+            <ul class="content-list">
+                <li>1.分流需要支援，請分流二盡快去，不要在那邊散步、神遊。</li>
+            </ul>
+        </div>      
+        `,
+
+        "📋X光": `
+        <div class="section-title">注 . 意 . 事 . 項</div>
         
         <div class="content-block">
-          <div class="sub-title">分流原則</div>
-          <ul class="content-list">
-            <li>依旅客特性快速引導</li>
-            <li>減少等候時間</li>
-            <li>確保通關順暢</li>
-          </ul>
+            <ul class="content-list">
+                <li>1.不要疊盆，桌上有空盆第一件事就是收空盆，尤其是X光自己收盆的時候要特別注意。</li>
+                <li>2.小心拉旅客的行李，以防刮傷旅客的行李。</li>
+                <li>3.X光有空就協助搬盒子。</li>
+                <li>4.兩邊C跟D分流2 檢疫物棄置桶需要清潔。</li>
+            </ul>
         </div>
-        
-        <div class="content-block">
-          <div class="sub-title">分流類型</div>
-          <ul class="content-list">
-            <li>一般旅客通道</li>
-            <li>特殊旅客通道（老弱病殘）</li>
-            <li>機組人員通道</li>
-            <li>快速通關通道</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box">
-          有效分流可提升整體通關效率
-        </div>
-      `,
-      "📋分流2": `
-        <div class="section-title">進階分流策略</div>
-        
-        <div class="content-block">
-          <div class="sub-title">客群識別</div>
-          <ul class="content-list">
-            <li>國籍差異</li>
-            <li>旅行目的</li>
-            <li>行李類型</li>
-            <li>特殊需求</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">分流技巧</div>
-          <ul class="content-list">
-            <li>即時評估旅客特性</li>
-            <li>靈活調整分流通道</li>
-            <li>預留特殊情況處理空間</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box">
-          精準分流，優化通關體驗
-        </div>
-      `,
-      "📋X光": `
-        <div class="section-title">X光檢查作業</div>
-        
-        <div class="content-block">
-          <div class="sub-title">檢查重點</div>
-          <ul class="content-list">
-            <li>偵測違禁物品</li>
-            <li>識別可疑物品</li>
-            <li>確保旅客安全</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">操作規範</div>
-          <ul class="content-list">
-            <li>正確調整機器參數</li>
-            <li>仔細觀察螢幕影像</li>
-            <li>保持設備清潔與校準</li>
-          </ul>
-        </div>
-        
         <div class="highlight-box">
           精準掃描，守護安全
         </div>
       `,
-      "⚠️規定事項": `
-        <div class="section-title">檢疫作業規定</div>
-        
-        <div class="content-block">
-          <div class="sub-title">基本守則</div>
-          <ul class="content-list">
-            <li>遵守國際檢疫標準</li>
-            <li>保持專業態度</li>
-            <li>維護旅客隱私</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">職業安全</div>
-          <ul class="content-list">
-            <li>穿戴適當防護裝備</li>
-            <li>遵守衛生安全程序</li>
-            <li>定期接受專業訓練</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box">
-          規範即安全，安全即服務
-        </div>
-      `,
-      "⚠️規定要求": `
+            "⚠️規定事項": `
+  <div class="section">
+      <p class="code">代號333=奧客   兩95=廁所</p>
+  </div>
+
+  <div class="section">
+      <p><span class="rule-number">1.</span>更新2025由於近期遲到人數過多 即日起(06/05)起開始。</p>
+
+      <p>如有遲到者(天災人禍除外) 修正取消次月必休選休</p>
+
+      <p><span class="rule-number">1-1.</span>遲到未參與勤教 修正取消次月必休2天。<span class="note">&lt;這行7PT&gt;</span></p>
+      <p><span class="rule-number">1-2.</span>30分鐘以內 修正取消次月必休2天選休2天。<span class="note">&lt;這行7PT&gt;</span></p>
+      <p><span class="rule-number">1-3.</span>60分鐘以內 修正取消次月必休2天選休4天。<span class="note">&lt;這行7PT&gt;</span></p>
+      <p><span class="rule-number">1-4.</span>60分鐘以上 修正取消次月必休2天選休6天。<span class="note">&lt;這行7PT&gt;</span></p>
+      <p class="highlight-red">應到未到2個月<span class="note">&lt;這行9PT&gt;&lt;紅色&gt;</span></p>
+
+      <p class="note">天災人禍除外，非遲到者不會有以上問題<span class="note">&lt;這行7PT&gt;</span></p>
+  </div>
+
+  <div class="section">
+      <p><span class="rule-number">2.</span>備勤室私人物品亂放，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</p>
+      <p><span class="rule-number">3.</span>看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</p>
+      <p><span class="rule-number">4.</span>當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</p>
+      <p><span class="rule-number">5.</span>麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。不懂的來問督導。</p>
+  </div>
+
+  <div class="section">
+      <p><span class="rule-number">6.</span>關於脫換背心</p>
+      <p>除分流以外，凡A B C 哨，統一全部服裝都要一樣，穿背心大家就都要穿。</p>
+  </div>
+
+  <div class="section">
+      <p><span class="rule-number">7.</span>關於寫時數表/任何資料等等</p>
+      <p>如當日有拿時數表請當日寫完，任何資料如要提，交請在下午三點前給，下午三點過後一律不收任何資料文件，請隔日再繳交。</p>
+  </div>      
+     `,
+        "⚠️規定要求": `
         <div class="section-title">作業要求標準</div>
         
         <div class="content-block">
@@ -752,7 +872,7 @@
           高標準源於專業與敬業
         </div>
       `,
-      "檢疫物相關": `
+        "檢疫物相關": `
         <div class="section-title">檢疫物管理</div>
         
         <div class="content-block">
@@ -780,69 +900,70 @@
           嚴謹把關，保護國境biosafety
         </div>
       `
-    };    
-    // 彈窗功能
-    const modalBg = document.getElementById('modalBg');
-    const modalBox = document.getElementById('modalBox');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const modalClose = document.getElementById('modalClose');
-    
-    document.querySelectorAll('.func-btn').forEach(btn => {
-      btn.onclick = function() {
-        const btnText = btn.textContent;
-        modalTitle.textContent = btnText;
-        modalBody.innerHTML = modalContents[btnText] || '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
-        modalBg.classList.add('active');
       };
-    });
-    
-    modalClose.onclick = function() {
-      modalBg.classList.remove('active');
-    };
-    
-    modalBg.onclick = function(e) {
-      if(e.target === modalBg) modalBg.classList.remove('active');
-    };
-    
-    // 彈窗可拖拉
-    let isDragging = false, startX, startY, startLeft, startTop;
-    const header = document.getElementById('modalHeader');
-    header.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      modalBox.style.transition = 'none';
-      startX = e.clientX;
-      startY = e.clientY;
-      const rect = modalBox.getBoundingClientRect();
-      startLeft = rect.left;
-      startTop = rect.top;
-      document.body.style.userSelect = 'none';
-    });
-    
-    document.addEventListener('mousemove', function(e) {
-      if(isDragging) {
-        let dx = e.clientX - startX;
-        let dy = e.clientY - startY;
-        modalBox.style.position = 'fixed';
-        modalBox.style.left = (startLeft + dx) + 'px';
-        modalBox.style.top = (startTop + dy) + 'px';
-      }
-    });
-    
-    document.addEventListener('mouseup', function() {
-      isDragging = false;
-      modalBox.style.transition = '';
-      document.body.style.userSelect = '';
-    });
+      // 彈窗功能
+      const modalBg = document.getElementById('modalBg');
+      const modalBox = document.getElementById('modalBox');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalBody = document.getElementById('modalBody');
+      const modalClose = document.getElementById('modalClose');
 
-    checkLogin();
+      document.querySelectorAll('.func-btn').forEach(btn => {
+        btn.onclick = function () {
+          const btnText = btn.textContent;
+          modalTitle.textContent = btnText;
+          modalBody.innerHTML = modalContents[btnText] || '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
+          modalBg.classList.add('active');
+        };
+      });
 
-    // 登出
-    document.getElementById('logoutBtn').onclick = function() {
-      localStorage.removeItem("t2_login");
-      localStorage.removeItem("t2_login_time");
-      window.location.href = "index.html";
-    };
-  </script>
+      modalClose.onclick = function () {
+        modalBg.classList.remove('active');
+      };
+
+      modalBg.onclick = function (e) {
+        if (e.target === modalBg) modalBg.classList.remove('active');
+      };
+
+      // 彈窗可拖拉
+      let isDragging = false, startX, startY, startLeft, startTop;
+      const header = document.getElementById('modalHeader');
+      header.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        modalBox.style.transition = 'none';
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = modalBox.getBoundingClientRect();
+        startLeft = rect.left;
+        startTop = rect.top;
+        document.body.style.userSelect = 'none';
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+          let dx = e.clientX - startX;
+          let dy = e.clientY - startY;
+          modalBox.style.position = 'fixed';
+          modalBox.style.left = (startLeft + dx) + 'px';
+          modalBox.style.top = (startTop + dy) + 'px';
+        }
+      });
+
+      document.addEventListener('mouseup', function () {
+        isDragging = false;
+        modalBox.style.transition = '';
+        document.body.style.userSelect = '';
+      });
+
+      checkLogin();
+
+      // 登出
+      document.getElementById('logoutBtn').onclick = function () {
+        localStorage.removeItem("t2_login");
+        localStorage.removeItem("t2_login_time");
+        window.location.href = "index.html";
+      };
+    </script>
 </body>
+
 </html>
