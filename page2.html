@@ -303,12 +303,12 @@
 .marquee-content {
   display: inline-block; /* 行內塊級元素 */
   white-space: nowrap; /* 不換行 */
-  animation: marquee 40s linear infinite; /* 動畫設定：30秒、線性、無限循環 */
+  animation: marquee 50s linear infinite; /* 動畫設定：30秒、線性、無限循環 */
 }
 
 /* 跑馬燈動畫關鍵幀 */
 @keyframes marquee {
-  0% { transform: translateX(20%); } /* 起始位置：從右側20%開始 */
+  0% { transform: translateX(15%); } /* 起始位置：從右側20%開始 */
   100% { transform: translateX(-100%); } /* 結束位置：向左移動100% */
 }
 
@@ -348,7 +348,6 @@
    </div>
    </div>
     <button class="logout-btn" id="logoutBtn">登出</button>
-  </div>
   <!-- 彈窗 -->
   <div class="modal-bg" id="modalBg">
     <div class="modal" id="modalBox">
@@ -362,19 +361,19 @@
     </div>
   </div>
   <script>
-
         // 檢查登入狀態
-    function checkLogin() {
-      const flag = localStorage.getItem("t2_login");
-      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-      const LIMIT = 3600000; // 1小時
-      
-      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
-        localStorage.removeItem("t2_login");
-        localStorage.removeItem("t2_login_time");
-        window.location.href = "index.html";
+      function checkLogin() {
+        const flag = localStorage.getItem("t2_login");
+        const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+        const LIMIT = 3600000; // 1小時
+        
+        if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
+          localStorage.removeItem("t2_login");
+          localStorage.removeItem("t2_login_time");
+          window.location.href = "index.html";
+        }
       }
-    }
+  
     
     // 公告內容資料
     const notices = [
@@ -562,7 +561,6 @@
       `,
       "📋複查": `
         <div class="section-title">複查作業流程</div>
-        
         <div class="content-block">
           <div class="sub-title">一、基本檢查流程</div>
           <ul class="content-list">
@@ -574,8 +572,44 @@
             <li>檢查行李時，把旅客的行李拿出盆子放在桌上，再將旅客行李的東西整齊有順序地放在盆子內檢查。</li>
             <li>檢查請由小地方到大地方檢查，尤其是包包的暗層不能忽視，檢查好的東西先拿出來放盆子，避免漏查。</li>
           </ul>
+        <div class="content-block">
+          <div class="sub-title">二、檢疫物處理</div>
+          <ul class="content-list">
+            <li>如果旅客有檢疫物不能帶或有疑慮，不願意去檢疫櫃檯確認要直接丟棄，我們就要宣導告知並請旅客在檢疫本上簽名同意拋棄，有疑慮自願拋棄的要註明自願，簽完名後再將東西放到檢疫桶。</li>
+            <li>從旅客行李裡如有查獲到不確定或無法判斷的東西，先詢問身邊的同事，如果現場都沒有人可以判定，那就請旅客把東西拿到檢疫櫃檯詢問。</li>
+            <li>丟檢疫物要確實分類跟破壞包裝。</li>
+          </ul>
+          <div class="sub-title">三、交接與記錄</div>
+          <ul class="content-list">
+            <li>換哨要交接密錄器、剪刀、膠帶。</li>
+            <li>如果有查獲檢疫物，先在檢疫本上寫上航班、國家、檢疫物的代號或記號，然後再來接旅客，不要寫檢疫本太久，等到快換哨下哨的前１０分鐘再補齊其他內容。</li>
+            <li>換哨下哨要清空手套桶。</li>
+          </ul>
+          <div class="sub-title">四、複查作業</div>
+          <ul class="content-list">
+            <li>複查排隊依順序等待檢查旅客，第二、三位以後的複查請勿擋道桌子，避免複查第一位要檢查時擋住作業動線。</li>
+            <li>複查搬盆子一律由複查排隊最後一位來搬。</li>
+            <li>複查檢查完就去搬盆子（不管疊多少盆子），搬完後就去排隊等待檢查，如盆子疊過多就由排隊最後一位去搬。</li>
+          </ul>
+          <div class="sub-title">五、特殊情況處理</div>
+          <ul class="content-list">
+            <li>旅客拒絕檢查時，先詢問旅客：「請問隨身行李都確定沒有帶到任何含肉類製品或是新鮮水果發芽種子嗎？」旅客確定都沒有的話就遞一張入境動植物檢疫單給旅客，再請旅客往前。</li>
+            <li>倘若確定旅客行李裡面是水果或檢疫物，旅客依然堅持不是，那就一樣宣導並給檢疫物單子，並記下旅客的特徵、性別、服裝、手提行李、體型還有可能的航班等特徵，隨後告知Ｘ光或是告知組長或督導，請聯繫檢疫櫃檯通報。</li>
+            <li>一位旅客對一位協勤，閒雜人等不要無端去湊熱鬧，除非有需要協助。</li>
+            <li>稻香村如沒有成分表的一律請旅客至櫃台詢問。</li>
+          </ul>
+          <div class="sub-title">六、衛生與安全</div>
+          <ul class="content-list">
+            <li>手套檢查完直接丟垃圾桶，不要塞口袋，如有看到地板有飛散的手套立刻撿起來，避免旅客踩到滑倒。</li>
+            <li>請在檢查旅客時，要在旅客面前換新手套，檢查一位旅客換一次手套。</li>
+            <li>用手機翻譯看外文，請看清楚是否看到過敏原，不要看到有肉就急著扣下來，因為也許是寫過敏原而已。</li>
+            <li>請各位同仁如果遇到食物請不要直接跟旅客剝開看，跟旅客確認成分並告知跟宣導就好。</li>
+          </ul>
+
+
+
+
         </div>
-        
         <div class="content-block">
           <div class="sub-title">複查重點</div>
           <ul class="content-list">
