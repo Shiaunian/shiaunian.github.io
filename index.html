@@ -206,29 +206,17 @@
     };
   }
 
-  // ===== 顯示主頁內容 =====
-  function showMain() {
-    if (!isLoggedIn()) {
-      showLogin();
-      return;
-    }
-    document.getElementById('app').innerHTML = `
-      <div class="main-content">
-        <h2><span class="login-logo">🦠</span>歡迎進入 T2日檢疫系統</h2>
-        <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
-          登入成功！
-        </p>
-        <button class="logout-btn" id="logoutBtn">登出</button>
-      </div>
-    `;
-    document.getElementById('logoutBtn').onclick = function() {
-      localStorage.removeItem("t2_login");
-      localStorage.removeItem("t2_login_time");
-      showLogin();
-    };
-    startTimeoutCheck();
+  // ===== 登入判定 =====
+function showMain() {
+  // 如果沒登入，回登入畫面
+  if (!isLoggedIn()) {
+    showLogin();
+    return;
   }
-
+  // 只要登入就直接跳轉主頁
+  window.location.href = "page2.html";
+  return;
+}
   // ===== 定時檢查是否超時，超時自動登出 =====
   let timeoutTimer = null;
   function startTimeoutCheck() {
