@@ -133,111 +133,114 @@
   </div>
   <div id="app"></div>
   <script>
+  let users = []; // 全域帳密清單
 
-// ===== 登入帳號密碼清單 =====
-const users = [
-  { username: "t2user", password: "0128" },
-  { username: "alice", password: "1234" },
-  { username: "h124030017", password: "0128" } // 郭健鴻，帳號統一小寫
-];
+  // 讀取 password.json
+  fetch('password.json')
+    .then(response => response.json())
+    .then(data => {
+      users = Array.isArray(data) ? data : [data];
+      // 這裡才判斷登入狀態
+      if (isLoggedIn()) {
+        showMain();
+      } else {
+        showLogin();
+      }
+    })
+    .catch(err => {
+      document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
+      console.error('載入 password.json 失敗:', err);
+    });
 
-const LIMIT = 3600000; // 1小時（毫秒）
+  const LIMIT = 3600000; // 1小時（毫秒）
 
-// ===== 檢查登入狀態與時效 =====
-function isLoggedIn() {
-  const flag = localStorage.getItem("t2_login");
-  const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-  if (flag !== "yes" || !time) return false;
-  if (Date.now() - time > LIMIT) {
-    // 超時，清除狀態
-    localStorage.removeItem("t2_login");
-    localStorage.removeItem("t2_login_time");
-    return false;
-  }
-  return true;
-}
-
-// ===== 顯示登入介面 =====
-function showLogin() {
-  document.getElementById('app').innerHTML = `
-    <div class="login-box">
-      <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
-      <div class="login-notice">📢 提醒：帳號統一使用小寫</div>
-      <form id="loginForm" autocomplete="off">
-        <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
-        <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
-        <button type="submit">登入</button>
-        <div class="error" id="errorMsg"></div>
-      </form>
-    </div>
-  `;
-  document.getElementById('loginForm').onsubmit = function(e) {
-    e.preventDefault();
-    // 將輸入的帳號轉換為小寫
-    const uname = document.getElementById('username').value.trim().toLowerCase();
-    const pwd = document.getElementById('password').value.trim();
-    document.getElementById('errorMsg').textContent = "";
-    
-    // 本地驗證帳號密碼
-    const user = users.find(u => u.username === uname && u.password === pwd);
-    
-    if (user) {
-      localStorage.setItem("t2_login", "yes");
-      localStorage.setItem("t2_login_time", Date.now().toString());
-      window.location.href = "page2.html";
-    } else {
-      document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
+  // ===== 檢查登入狀態與時效 =====
+  function isLoggedIn() {
+    const flag = localStorage.getItem("t2_login");
+    const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+    if (flag !== "yes" || !time) return false;
+    if (Date.now() - time > LIMIT) {
+      // 超時，清除狀態
+      localStorage.removeItem("t2_login");
+      localStorage.removeItem("t2_login_time");
+      return false;
     }
-  };
-  document.getElementById('username').oninput =
-  document.getElementById('password').oninput = function() {
-    document.getElementById('errorMsg').textContent = "";
-  };
-}
-
-// ===== 顯示主頁內容 =====
-function showMain() {
-  if (!isLoggedIn()) {
-    showLogin();
-    return;
+    return true;
   }
-  document.getElementById('app').innerHTML = `
-    <div class="main-content">
-      <h2><span class="login-logo">🦠</span>歡迎進入 T2日檢疫系統</h2>
-      <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
-        登入成功！
-      </p>
-      <button class="logout-btn" id="logoutBtn">登出</button>
-    </div>
-  `;
-  document.getElementById('logoutBtn').onclick = function() {
-    localStorage.removeItem("t2_login");
-    localStorage.removeItem("t2_login_time");
-    showLogin();
-  };
-  startTimeoutCheck();
-}
 
-// ===== 定時檢查是否超時，超時自動登出 =====
-let timeoutTimer = null;
-function startTimeoutCheck() {
-  if (timeoutTimer) clearInterval(timeoutTimer);
-  timeoutTimer = setInterval(() => {
+  // ===== 顯示登入介面 =====
+  function showLogin() {
+    document.getElementById('app').innerHTML = `
+      <div class="login-box">
+        <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
+        <div class="login-notice">📢 提醒：帳號統一使用小寫</div>
+        <form id="loginForm" autocomplete="off">
+          <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
+          <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
+          <button type="submit">登入</button>
+          <div class="error" id="errorMsg"></div>
+        </form>
+      </div>
+    `;
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      // 將輸入的帳號轉換為小寫
+      const uname = document.getElementById('username').value.trim().toLowerCase();
+      const pwd = document.getElementById('password').value.trim();
+      document.getElementById('errorMsg').textContent = "";
+      
+      // 本地驗證帳號密碼
+      const user = users.find(u => u.username === uname && u.password === pwd);
+      
+      if (user) {
+        localStorage.setItem("t2_login", "yes");
+        localStorage.setItem("t2_login_time", Date.now().toString());
+        window.location.href = "page2.html";
+      } else {
+        document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
+      }
+    };
+    document.getElementById('username').oninput =
+    document.getElementById('password').oninput = function() {
+      document.getElementById('errorMsg').textContent = "";
+    };
+  }
+
+  // ===== 顯示主頁內容 =====
+  function showMain() {
     if (!isLoggedIn()) {
-      alert("登入已超時，請重新登入！");
       showLogin();
-      clearInterval(timeoutTimer);
+      return;
     }
-  }, 30000);
-}
+    document.getElementById('app').innerHTML = `
+      <div class="main-content">
+        <h2><span class="login-logo">🦠</span>歡迎進入 T2日檢疫系統</h2>
+        <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
+          登入成功！
+        </p>
+        <button class="logout-btn" id="logoutBtn">登出</button>
+      </div>
+    `;
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem("t2_login");
+      localStorage.removeItem("t2_login_time");
+      showLogin();
+    };
+    startTimeoutCheck();
+  }
 
-// ===== 頁面初始載入時，判斷登入狀態 =====
-if (isLoggedIn()) {
-  showMain();
-} else {
-  showLogin();
-}
-
+  // ===== 定時檢查是否超時，超時自動登出 =====
+  let timeoutTimer = null;
+  function startTimeoutCheck() {
+    if (timeoutTimer) clearInterval(timeoutTimer);
+    timeoutTimer = setInterval(() => {
+      if (!isLoggedIn()) {
+        alert("登入已超時，請重新登入！");
+        showLogin();
+        clearInterval(timeoutTimer);
+      }
+    }, 30000);
+  }
   </script>
 </body>
 </html>
