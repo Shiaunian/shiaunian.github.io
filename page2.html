@@ -372,12 +372,41 @@
       /* 暫停動畫 */
     }
 
-    sans-serif;
-          line-height: 1.6;
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 20px;
-      }
+    /* 全域文字樣式 */
+    body {
+        font-family: sans-serif;        /* 字體 */
+        line-height: 1.6;               /* 行高 */
+        max-width: 800px;               /* 最大寬度 */
+        margin: 0 auto;                 /* 水平置中 */
+        padding: 20px;                  /* 內邊距 */
+    }
+
+    /* 標題樣式 */
+    h1 {
+        color: #333;                    /* 文字顏色 */
+        border-bottom: 2px solid #666;  /* 下邊框 */
+        padding-bottom: 10px;           /* 底部內邊距 */
+    }
+
+    /* 代碼區塊樣式 */
+    .code-section {
+        background-color: #f4f4f4;      /* 背景色 */
+        padding: 10px;                  /* 內邊距 */
+        margin: 10px 0;                 /* 上下外邊距 */
+        border-radius: 5px;             /* 圓角 */
+    }
+
+    /* 高亮文字樣式 */
+    .highlight {
+        color: red;                     /* 文字顏色 */
+        font-weight: bold;              /* 粗體 */
+    }
+
+    /* 備註文字樣式 */
+    .note {
+        font-size: 0.9em;               /* 字體大小 */
+        color: #666;                    /* 文字顏色 */
+    }
       h1 {
           color: #333;
           border-bottom: 2px solid #666;
@@ -445,7 +474,7 @@
       </div>
     </div>
     <script>
-          // 檢查登入狀態
+    // 檢查登入狀態
     function checkLogin() {
       const flag = localStorage.getItem("t2_login");
       const time = parseInt(localStorage.getItem("t2_login_time"), 10);
@@ -457,7 +486,6 @@
         window.location.href = "index.html";
       }
     }
-
       // 公告內容資料
       const notices = [
         {
@@ -573,7 +601,7 @@
         <div class="content-block">
           <div class="sub-title">1. 對講機通報車輛通過</div>
           <ul class="content-list">
-            <li>請先完成當下旅客行李放置。</li>
+            <li>請先完成當下旅客<span style="color:red;">行李放置</span>。</li>
             <li>執行秩序維護，引導旅客至黃線後等候。</li>
             <li>告知：「不好意思，麻煩我們先都在黃線後稍等，有車子要通行，避免各位擦撞到」。</li>
             <li>由2線前導開線引導車子通過（除非機動X光有過去幫忙）</li>
@@ -640,6 +668,7 @@
         <div class="highlight-box" style="margin-top: 1.5em;">
           <div class="sub-title" style="color: #c62828; margin-top: 0;">前導嬰兒車須注意</div>
           這是原本就需要注意的，如旅客有推嬰兒車，請前導擋住桌腳避免小孩撞到等等（包括孕婦）。
+          <img src="https://i.ibb.co/KcRfPjyY/2025-04-23-073636.png" width="100%" height="auto" />
         </div>
       `,
         "📋複查": `
@@ -814,44 +843,37 @@
   <div class="section">
       <p class="code">代號333=奧客   兩95=廁所</p>
   </div>
-
-  <div class="section">
-      <p style="font-size: 12t; color: bule;">1.更新2025由於近期遲到人數過多 即日起(06/05)起開始。</p>
-      <div>
-      <p style="font-size: 10pt; color: red;">30分鐘以內 修正取消次月必休2天選休2天</p>
-
-      <p style="font-size: 8pt;">遲到未參與勤教 修正取消次月必休2天。</p>
-      <p style="font-size: 8pt;">30分鐘以內 修正取消次月必休2天選休2天。</p>
-      <p style="font-size: 8pt;">60分鐘以內 修正取消次月必休2天選休4天。</p>
-      <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
-      <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
-      <p style="font-size: 11pt; color: red;">應到未到2個月</p>
-
-      <li style="font-size: 12pt; color: bule;">2.備勤室私人物品亂放，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</p>
-      <p style="font-size: 12pt; color: bule;">3.看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</p>
-      <p style="font-size: 12pt; color: bule;">4.當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</p>
-      <p style="font-size: 12pt; color: bule;">5.麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。不懂的來問督導</p>
-      <p style="font-size: 12pt; color: red;">6.關於脫換背心</p>
-      <p style="font-size: 9pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
-
-  </div>
-
-  <div class="section">
-      <p><span class="rule-number">2.</span>備勤室私人物品亂放，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</p>
-      <p><span class="rule-number">3.</span>看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</p>
-      <p><span class="rule-number">4.</span>當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</p>
-      <p><span class="rule-number">5.</span>麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。不懂的來問督導。</p>
-  </div>
-
-  <div class="section">
-      <p><span class="rule-number">6.</span>關於脫換背心</p>
-      <p>除分流以外，凡A B C 哨，統一全部服裝都要一樣，穿背心大家就都要穿。</p>
-  </div>
-
-  <div class="section">
-      <p><span class="rule-number">7.</span>關於寫時數表/任何資料等等</p>
-      <p>如當日有拿時數表請當日寫完，任何資料如要提，交請在下午三點前給，下午三點過後一律不收任何資料文件，請隔日再繳交。</p>
-  </div>      
+  <div class="content-block">
+      <ul class="content-list">
+          <li>1.更新2025由於近期遲到人數過多 即日起(06/05)起開始。</li>
+          <p style="font-size: 10pt; color: red;">30分鐘以內 修正取消次月必休2天選休2天</p>
+                <p style="font-size: 8pt;">遲到未參與勤教 修正取消次月必休2天。</p>
+                <p style="font-size: 8pt;">30分鐘以內 修正取消次月必休2天選休2天。</p>
+                <p style="font-size: 8pt;">60分鐘以內 修正取消次月必休2天選休4天。</p>
+                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
+                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
+                <p style="font-size: 11pt; color: red;">應到未到2個月</p>
+          <li>2.備勤室私人物品亂放，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</li>
+          <li>3.看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</li>
+          <li>4.當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</li>
+          <li>5.麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。</li>
+          <li>6.<span style="color:red;">關於脫換背心 </span>除分流以外，凡A B C 哨，統一全部服裝都要一樣，穿背心大家就都要穿。</li>
+          <li>7.<span style="color:red;">關於寫時數表/任何資料等等 </span>如當日有拿時數表請當日寫完，任何資料如要提，交請在下午三點前給，下午三點過後一律不收任何資料文件，請隔日再繳交。</li>
+          <li>8.<span style="color:red;">複查檢查完畢宣導 </span>應強化提醒旅客不能帶水果肉類，並提醒注意托運行李自行檢查不能帶水果肉類。</li>
+          <li>9.<span style="color:red;">檢查手套 </span>協勤人員應先戴拋棄式檢查手套才檢查旅客行李。</li>
+          <li>10.<span style="color:red;">複查排隊 </span>複查請依照順序排隊檢查，不要已經有最後已檢查回來了，自己還搬盆又排到最後一位，理應就自己要自動排到檢查回來的前面。(同一天這樣的事情重複4次就不是不小心或是忘記了)</li>
+          <li>11.<span style="color:red;">檢查行李箱 </span>建議開箱由旅客自行打開行李，或是口頭詢問可否由協勤人員協助開箱確認。</li>
+          <li>12.<span style="color:red;">複查中如有機組來時 </span>協勤人員請旅客暫停等候機組人員先行檢查時，口氣可再和緩一點。</li>
+          <li>13.<span style="color:red;">晚上6:30以後提前下哨須知 </span>6:30提早下哨的話，請2位輪流進去拿東西再換下2位以此類推。</li>
+          <li>14.<span style="color:red;">哨上規矩 </span>防檢署會抽查，在哨上請守規矩，不要併排聊天。</li>
+          <li>15.<span style="color:red;">消毒毯時間 </span>消毒毯時間為<sapn style="color:red;">雙數30分</span>。</li>
+          <li>16.<span style="color:red;">哨上椅子擺放 </span>下哨麻煩各位椅子都靠往X光機方向排放整齊。</li>
+          <li>17.<span style="color:red;">上哨時間內未出現 </span>私人物品(睡袋)不要放在鐵架那一個區塊下班就麻煩收回自己的櫃子，不然就帶回如，發現會取消大家調哨。</li>
+          <li>18.<span style=color:red;>循環扇遙控器 </span>在D區 與C區的四線旁邊盒子都會放一個循環扇遙控器，再麻煩各位的4-2的複查，日夜交接的時候要確認。</li>
+          <li>19.<span style=color:red;>接到輪椅的旅客 </span>行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。</li>
+          <li>20.<span style=color:red;>分流的紅龍 </span>麻煩分流收卡那紅龍請對其各區標準。</li>
+          <li>21.<span style=color:red;>桃園分署檢疫站通報 </span>來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境。</li>
+      </ul> 
      `,
         "⚠️規定要求": `
         <div class="section-title">作業要求標準</div>
