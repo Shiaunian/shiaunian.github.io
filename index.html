@@ -133,40 +133,41 @@
   </div>
   <div id="app"></div>
   <script>
-  let users = []; // 全域帳密清單
+let users = []; // 全域帳密清單
 
-  // 讀取 password.json
-  fetch('password.json')
-    .then(response => response.json())
-    .then(data => {
-      users = Array.isArray(data) ? data : [data];
-      // 這裡才判斷登入狀態
-      if (isLoggedIn()) {
-        showMain();
-      } else {
-        showLogin();
-      }
-    })
-    .catch(err => {
-      document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
-      console.error('載入 password.json 失敗:', err);
-    });
-
-  const LIMIT = 3600000; // 1小時（毫秒）
-
-  // ===== 檢查登入狀態與時效 =====
-  function isLoggedIn() {
-    const flag = localStorage.getItem("t2_login");
-    const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-    if (flag !== "yes" || !time) return false;
-    if (Date.now() - time > LIMIT) {
-      // 超時，清除狀態
-      localStorage.removeItem("t2_login");
-      localStorage.removeItem("t2_login_time");
-      return false;
+// 讀取 password.json
+fetch('password.json')
+  .then(response => response.json())
+  .then(data => {
+    users = Array.isArray(data) ? data : [data];
+    // 這裡才判斷登入狀態
+    if (isLoggedIn()) {
+      showMain();
+    } else {
+      showLogin();
     }
-    return true;
+  })
+  .catch(err => {
+    document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
+    console.error('載入 password.json 失敗:', err);
+  });
+
+const LIMIT = 3600000; // 1小時（毫秒）
+
+// ===== 檢查登入狀態與時效 =====
+function isLoggedIn() {
+  const flag = localStorage.getItem("t2_login");
+  const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+  if (flag !== "yes" || !time) return false;
+  if (Date.now() - time > LIMIT) {
+    // 超時，清除狀態
+    localStorage.removeItem("t2_login");
+    localStorage.removeItem("t2_login_time");
+    localStorage.removeItem("t2_login_user"); // ← 新增：超時也清掉帳號
+    return false;
   }
+  return true;
+}
 
 // ===== 顯示登入介面 =====
 function showLogin() {
@@ -195,6 +196,7 @@ function showLogin() {
     if (user) {
       localStorage.setItem("t2_login", "yes");
       localStorage.setItem("t2_login_time", Date.now().toString());
+      localStorage.setItem("t2_login_user", user.username); // ★ 新增這行，記錄登入帳號
       showWelcome(user); // 登入成功後顯示歡迎訊息
     } else {
       document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
@@ -222,7 +224,7 @@ function showWelcome(user) {
   };
 }
 
-  // ===== 登入判定 =====
+// ===== 登入判定 =====
 function showMain() {
   // 如果沒登入，回登入畫面
   if (!isLoggedIn()) {
@@ -233,18 +235,20 @@ function showMain() {
   window.location.href = "page2.html";
   return;
 }
-  // ===== 定時檢查是否超時，超時自動登出 =====
-  let timeoutTimer = null;
-  function startTimeoutCheck() {
-    if (timeoutTimer) clearInterval(timeoutTimer);
-    timeoutTimer = setInterval(() => {
-      if (!isLoggedIn()) {
-        alert("登入已超時，請重新登入！");
-        showLogin();
-        clearInterval(timeoutTimer);
-      }
-    }, 30000);
-  }
+
+// ===== 定時檢查是否超時，超時自動登出 =====
+let timeoutTimer = null;
+function startTimeoutCheck() {
+  if (timeoutTimer) clearInterval(timeoutTimer);
+  timeoutTimer = setInterval(() => {
+    if (!isLoggedIn()) {
+      alert("登入已超時，請重新登入！");
+      showLogin();
+      clearInterval(timeoutTimer);
+    }
+  }, 30000);
+}
+
   </script>
 </body>
 </html>
