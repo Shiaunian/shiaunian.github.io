@@ -475,18 +475,39 @@
     </div>
     <script>
 
-    // 檢查登入狀態
-    function checkLogin() {
-      const flag = localStorage.getItem("t2_login");
-      const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-      const LIMIT = 3600000; // 1小時
-      
-      if (flag !== "yes" || !time || (Date.now() - time > LIMIT)) {
-        localStorage.removeItem("t2_login");
-        localStorage.removeItem("t2_login_time");
+// ====== 強化登入檢查：帳號還在不在名單內 ======
+function checkLogin() {
+  const flag = localStorage.getItem("t2_login");
+  const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+  const loginUser = localStorage.getItem("t2_login_user");
+  const LIMIT = 3600000; // 1小時
+
+  // 1. 檢查基本登入狀態
+  if (flag !== "yes" || !time || (Date.now() - time > LIMIT) || !loginUser) {
+    localStorage.clear();
+    window.location.href = "index.html";
+    return;
+  }
+
+  // 2. 讀 password.json 比對帳號
+  fetch('password.json')
+    .then(res => res.json())
+    .then(data => {
+      const users = Array.isArray(data) ? data : [data];
+      const valid = users.some(u => u.username === loginUser);
+      if (!valid) {
+        alert("您的帳號已停用或不存在，請聯絡管理員。");
+        localStorage.clear();
         window.location.href = "index.html";
+        return;
       }
-    }
+      // 通過檢查才繼續顯示主頁內容
+    })
+    .catch(() => {
+      document.body.innerHTML = '<div style="color:red;">無法讀取帳號名單，請聯絡管理員！</div>';
+    });
+}
+
 
       // 公告內容資料
       const notices = [
