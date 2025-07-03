@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
 <head>
   <meta charset="UTF-8">
   <title>T2日檢疫人員內部資訊</title>
@@ -60,210 +59,15 @@
       margin-bottom: 0.3em;
     }
 
-    /* 通知內容 */
-    .notice-content {
-      color: #23315c;
-      font-size: 0.99em;
-      line-height: 1.7;
-      margin-left: 0.5em;
-    }
-
-    /* 通知結尾 */
-    .notice-end {
-      color: #c62828;
-      font-size: 0.92em;
-      display: flex;
-      align-items: center;
-      margin-top: 0.5em;
-    }
-
-    /* 通知結尾圖示 */
-    .notice-end .icon {
-      font-size: 1.3em;
-      margin-right: 0.2em;
-    }
-
-    /* 按鈕群組 */
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8em;
-      justify-content: center;
-      margin-bottom: 1.5em;
-    }
-
-    /* 功能按鈕 */
-    .func-btn {
-      flex: 1 1 40%;
-      min-width: 105px;
-      padding: 0.85em 0;
-      background: linear-gradient(90deg, #7c90e1 60%, #3949ab 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.07rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #3949ab22;
-      transition: background 0.2s, transform 0.13s;
-    }
-
-    /* 功能按鈕懸停效果 */
-    .func-btn:hover {
-      background: linear-gradient(90deg, #3949ab 60%, #7c90e1 100%);
-    }
-
-    /* 登出按鈕 */
-    .logout-btn {
-      width: 100%;
-      padding: 16px 0;
-      background: linear-gradient(90deg, #251111 60%, #695858 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #e6555522;
-      transition: background 0.2s, transform 0.13s;
-      margin-top: 2vw;
-    }
-
-    .logout-btn:hover {
-      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
-    }
-
-    /* 彈窗樣式 */
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(30, 40, 80, 0.23);
-      z-index: 99;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* 模態背景啟用時 */
-    .modal-bg.active {
-      display: flex;
-    }
-
-    /* 模態容器 */
-    .modal {
-      background: #fff;
-      border-radius: 12px;
-      min-width: 260px;
-      max-width: 550px;
-      width: 88vw;
-      box-shadow: 0 8px 32px #3949ab33, 0 1.5px 8px #0002;
-      padding: 0;
-      position: relative;
-      animation: popup 0.18s;
-      display: flex;
-      flex-direction: column;
-      max-height: 85vh;
-      overflow: hidden;
-      cursor: grab;
-    }
-
-    /* 彈出動畫效果 */
-    @keyframes popup {
-      from {
-        transform: scale(0.92);
-        opacity: 0;
-      }
-
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* 模態標題區 */
-    .modal-header {
-      padding: 0.95em 1.2em 0.7em 1.2em;
-      background: #e3e9ff;
-      border-radius: 12px 12px 0 0;
-      font-weight: bold;
-      color: #3949ab;
-      cursor: grab;
-      user-select: none;
-      font-size: 1.13em;
-      letter-spacing: 1px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    /* 模態關閉按鈕 */
-    .modal-close {
-      background: none;
-      border: 2px solid #333;
-      /* 黑色邊框 */
+    .highlight-box {
+      background: #f4f7fb;
+      border-left: 4px solid #7c90e1;
+      padding: 0.8em;
+      margin: 0.8em 0;
       border-radius: 4px;
-      /* 輕微的圓角 */
-      width: 32px;
-      /* 固定寬度 */
-      height: 32px;
-      /* 固定高度 */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #333;
-      /* 黑色 X */
-      font-size: 1.2em;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 0.5em;
-      transition: background-color 0.16s, color 0.16s;
-      position: relative;
-      overflow: hidden;
     }
 
-    /* X 符號的偽元素 */
-    .modal-close::before,
-    .modal-close::after {
-      content: '';
-      position: absolute;
-      width: 16px;
-      height: 2px;
-      background-color: #333;
-    }
-
-    .modal-close::before {
-      transform: rotate(45deg);
-    }
-
-    .modal-close::after {
-      transform: rotate(-45deg);
-    }
-
-    /* 懸停效果 */
-    .modal-close:hover {
-      background-color: #333;
-    }
-
-    .modal-close:hover::before,
-    .modal-close:hover::after {
-      background-color: #fff;
-    }
-
-    /* 模態內容區 */
-    .modal-body {
-      padding: 1.1em 1.2em 1.3em 1.2em;
-      overflow-y: auto;
-      flex: 1 1 auto;
-      color: #263161;
-      font-size: 1em;
-    }
-
-    /* 標題內容專用樣式 */
+        /* 標題內容專用樣式 */
     .section-title {
       color: #3949ab;
       font-size: 12pt;
@@ -326,155 +130,499 @@
       border-radius: 6px;
     }
 
-    /* 跑馬燈容器樣式 */
+    /* 通知內容 */
+    .notice-content {
+      color: #23315c;
+      font-size: 0.99em;
+      line-height: 1.7;
+      margin-left: 0.5em;
+    }
+
+    /* 按鈕群組 - 3x3 網格布局 */
+    .btn-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8em;
+      margin-bottom: 1.5em;
+    }
+
+    /* 功能按鈕 */
+    .func-btn {
+      padding: 0.85em 0.5em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 按鈕顏色 - 根據圖片調整 */
+    .func-btn.blue {
+      background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
+      color: #fff;
+    }
+
+    .func-btn.blue:hover {
+      background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.dark-blue {
+      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+      color: #fff;
+    }
+
+    .func-btn.dark-blue:hover {
+      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.red {
+      background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+      color: #fff;
+    }
+
+    .func-btn.red:hover {
+      background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.yellow {
+      background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+      color: #fff;
+    }
+
+    .func-btn.yellow:hover {
+      background: linear-gradient(135deg, #ff8f00 0%, #e65100 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.green {
+      background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+      color: #fff;
+    }
+
+    .func-btn.green:hover {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 登出按鈕 */
+    .logout-btn {
+      width: 100%;
+      padding: 16px 0;
+      background: linear-gradient(90deg, #251111 60%, #695858 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #e6555522;
+      transition: all 0.3s ease;
+      margin-top: 1em;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 彈窗樣式 */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(30, 40, 80, 0.4);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-bg.active {
+      display: flex;
+    }
+
+    /* 模態容器 */
+    .modal {
+      background: #fff;
+      border-radius: 15px;
+      min-width: 300px;
+      max-width: 600px;
+      width: 90vw;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      padding: 0;
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+      overflow: hidden;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: scale(0.9) translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* 模態標題區 */
+    .modal-header {
+      padding: 1.2em 1.5em;
+      background: linear-gradient(135deg, #e3e9ff 0%, #f0f4ff 100%);
+      border-radius: 15px 15px 0 0;
+      font-weight: bold;
+      color: #3949ab;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e3e9ff;
+    }
+
+    /* 模態關閉按鈕 */
+    .modal-close {
+      background: #ff4757;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: #ff3742;
+      transform: scale(1.1);
+    }
+
+    /* 模態內容區 */
+    .modal-body {
+      padding: 1.5em;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      color: #263161;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    /* 跑馬燈容器 */
     .marquee-container {
       width: 100%;
-      /* 寬度佔滿整個父容器 */
       overflow: hidden;
-      /* 隱藏超出容器的內容 */
-      background: #f0f4ff;
-      /* 淺藍色背景 */
-      border-radius: 8px;
-      /* 圓角 */
-      margin-bottom: 1em;
-      /* 底部外邊距 */
-      padding: 0.5em 0;
-      /* 上下內邊距 */
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+      border-radius: 10px;
+      margin-bottom: 1.5em;
+      padding: 0.8em 0;
+      border: 2px solid #e3e9ff;
     }
 
-    /* 跑馬燈內容樣式 */
     .marquee-content {
       display: inline-block;
-      /* 行內塊級元素 */
       white-space: nowrap;
-      /* 不換行 */
       animation: marquee 50s linear infinite;
-      /* 動畫設定：30秒、線性、無限循環 */
+      color: #c62828;
+      font-weight: 600;
     }
 
-    /* 跑馬燈動畫關鍵幀 */
     @keyframes marquee {
-      0% {
-        transform: translateX(15%);
-      }
-
-      /* 起始位置：從右側20%開始 */
-      100% {
-        transform: translateX(-100%);
-      }
-
-      /* 結束位置：向左移動100% */
+      0% { transform: translateX(15%); }
+      100% { transform: translateX(-100%); }
     }
 
-    /* 滑鼠懸停時暫停動畫 */
     .marquee-container:hover .marquee-content {
       animation-play-state: paused;
-      /* 暫停動畫 */
     }
 
-    /* 全域文字樣式 */
-    body {
-        font-family: sans-serif;        /* 字體 */
-        line-height: 1.6;               /* 行高 */
-        max-width: 800px;               /* 最大寬度 */
-        margin: 0 auto;                 /* 水平置中 */
-        padding: 20px;                  /* 內邊距 */
+    /* 考試系統樣式 */
+    .exam-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
     }
 
-    /* 標題樣式 */
-    h1 {
-        color: #333;                    /* 文字顏色 */
-        border-bottom: 2px solid #666;  /* 下邊框 */
-        padding-bottom: 10px;           /* 底部內邊距 */
+    .exam-item {
+      padding: 1em;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+      border-radius: 10px;
+      border: 2px solid #4caf50;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-weight: 600;
+      color: #2e7d32;
     }
 
-    /* 代碼區塊樣式 */
-    .code-section {
-        background-color: #f4f4f4;      /* 背景色 */
-        padding: 10px;                  /* 內邊距 */
-        margin: 10px 0;                 /* 上下外邊距 */
-        border-radius: 5px;             /* 圓角 */
+    .exam-item:hover {
+      background: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
     }
 
-    /* 高亮文字樣式 */
-    .highlight {
-        color: red;                     /* 文字顏色 */
-        font-weight: bold;              /* 粗體 */
+    /* 考試介面 */
+    .exam-interface {
+      display: none;
     }
 
-    /* 備註文字樣式 */
-    .note {
-        font-size: 0.9em;               /* 字體大小 */
-        color: #666;                    /* 文字顏色 */
+    .exam-interface.active {
+      display: block;
     }
-      h1 {
-          color: #333;
-          border-bottom: 2px solid #666;
-          padding-bottom: 10px;
-      }
-      .code-section {
-          background-color: #f4f4f4;
-          padding: 10px;
-          margin: 10px 0;
-          border-radius: 5px;
-      }
-      .highlight {
-          color: red;
-          font-weight: bold;
-      }
-      .note {
-          font-size: 0.9em;
-          color: #666;
-      }
 
+    .question-container {
+      margin-bottom: 2em;
+    }
+
+    .question-number {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #3949ab;
+      margin-bottom: 0.5em;
+    }
+
+    .question-text {
+      font-size: 1.05em;
+      margin-bottom: 1em;
+      line-height: 1.6;
+      color: #263161;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8em;
+      margin-bottom: 1.5em;
+    }
+
+    .option {
+      padding: 0.8em 1em;
+      background: #f8f9ff;
+      border: 2px solid #e3e9ff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background: #e3e9ff;
+      border-color: #7986cb;
+    }
+
+    .option.selected {
+      background: #3949ab;
+      color: white;
+      border-color: #3949ab;
+    }
+
+    .exam-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 2px solid #e3e9ff;
+    }
+
+    .exam-btn {
+      padding: 0.8em 1.5em;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .exam-btn.primary {
+      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+      color: white;
+    }
+
+    .exam-btn.primary:hover {
+      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+      transform: translateY(-2px);
+    }
+
+    .exam-btn.secondary {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+      color: white;
+    }
+
+    .exam-btn.secondary:hover {
+      background: linear-gradient(135deg, #757575 0%, #616161 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 成績顯示 */
+    .result-container {
+      text-align: center;
+      padding: 2em 1em;
+    }
+
+    .score-display {
+      font-size: 2em;
+      font-weight: bold;
+      margin: 1em 0;
+      padding: 1em;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+      border: 3px solid #4caf50;
+    }
+
+    .score-good {
+      color: #2e7d32;
+    }
+
+    .score-average {
+      color: #f57c00;
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border-color: #ff9800;
+    }
+
+    .score-poor {
+      color: #c62828;
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      border-color: #f44336;
+    }
+
+    .wrong-answers {
+      margin-top: 2em;
+      text-align: left;
+    }
+
+    .wrong-answer-item {
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #ffebee;
+      border-radius: 8px;
+      border-left: 4px solid #f44336;
+    }
+
+    .wrong-question {
+      font-weight: bold;
+      color: #c62828;
+      margin-bottom: 0.5em;
+    }
+
+    .correct-answer {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    /* 待更新提示 */
+    .update-notice {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      padding: 2em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 2px dashed #ddd;
+    }
+
+    /* 滾動條美化 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f3ff;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #7c90e1, #3949ab);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #3949ab, #7c90e1);
+    }
   </style>
 </head>
 
 <body>
   <div class="main-content">
     <div class="page-title">T2日檢疫人員內部資訊</div>
-    <!-- 公告欄 -->
+    
+    <!-- 公告跑馬燈 -->
     <div class="marquee-container">
       <div class="marquee-content">
-        <span style="color: red">還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!!!!還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!
-        </span>
+        📢 還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!!!!還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!
       </div>
     </div>
-    <div class="notice-board" id="noticeBoard">
-      <!-- 公告動態插入 -->
-    </div>
-    <!-- 功能按鈕 -->
-    <div class="btn-group">
-      <button class="func-btn" data-modal="📋前導">📋前導</button>
-      <button class="func-btn" data-modal="📋複查">📋複查</button>
-      <button class="func-btn" data-modal="📋分流">📋分流</button>
-      <button class="func-btn" data-modal="📋分流2">📋分流2</button>
-      <button class="func-btn" data-modal="📋X光">📋X光</button>
-      <button class="func-btn" data-modal="⚠️規定事項">⚠️規定事項</button>
-      <button class="func-btn" data-modal="⚠️各項連結">⚠️各項連結</button>
-      <button class="func-btn" data-modal="檢疫物相關">檢疫物相關</button>
-    </div>
-    <div class="marquee-container">
-      <div class="marquee-content">
-        近期修正更新 X光跟前導要互相配合／皮帶上的腰包／前導請注意旅客身上未放行李／前導輪椅旅客現場判斷／防檢規範不做回應／分流密錄器／主管PO訊息看過請按貼圖／明確統計拒檢次數／手推車／駐外使節人員／GoPro擺放
-      </div>
-    </div>
-    <button class="logout-btn" id="logoutBtn">登出</button>
-    <!-- 彈窗 -->
-    <div class="modal-bg" id="modalBg">
-      <div class="modal" id="modalBox">
-        <div class="modal-header" id="modalHeader">
-          <span id="modalTitle">標題</span>
-          <button class="modal-close" id="modalClose">&times;</button>
-        </div>
-        <div class="modal-body" id="modalBody">
-          內容
-        </div>
-      </div>
-    </div>
-    <script>
 
-// ====== 強化登入檢查：帳號還在不在名單內 ======
+    <!-- 通知看板 -->
+    <div class="notice-board" id="noticeBoard">
+      <div class="notice-item">
+        <div class="notice-title">🦽 複查輪椅旅客</div>
+        <div class="notice-content">以後碰到輪椅旅客，不管有多少行李，一律請他們往最前面稍等，避免造成交通組塞。</div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-title">🤝 X光跟前導要互相配合</div>
+        <div class="notice-content">任何一方要告知任何事，例如中間輪椅或是包包有麵包，雙方都要回應一下，確實彼此有收到訊息。</div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-title">📋 新進人員須知</div>
+        <div class="notice-content">所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</div>
+      </div>
+    </div>
+
+    <!-- 功能按鈕 - 3x3 網格 -->
+    <div class="btn-group">
+      <button class="func-btn blue" data-modal="📋前導">前導</button>
+      <button class="func-btn blue" data-modal="📋複查">複查</button>
+      <button class="func-btn blue" data-modal="📋X光">X光</button>
+      <button class="func-btn blue" data-modal="📋分流">分流</button>
+      <button class="func-btn blue" data-modal="📋分流2">分流2</button>
+      <button class="func-btn red" data-modal="⚠️規定事項">規定</button>
+      <button class="func-btn dark-blue" data-modal="⚠️各項連結">連結</button>
+      <button class="func-btn yellow" data-modal="檢疫物相關">檢疫物</button>
+      <button class="func-btn green" onclick="openExamModal()">自我考試</button>
+    </div>
+
+    <!-- 登出按鈕 -->
+    <button class="logout-btn" id="logoutBtn">登出</button>
+  </div>
+
+  <!-- 彈窗 -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modalBox">
+      <div class="modal-header" id="modalHeader">
+        <span id="modalTitle">標題</span>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        內容載入中...
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    // ====== 強化登入檢查：帳號還在不在名單內 ======
 function checkLogin() {
   const flag = localStorage.getItem("t2_login");
   const time = parseInt(localStorage.getItem("t2_login_time"), 10);
@@ -507,41 +655,148 @@ function checkLogin() {
     });
 }
 
-
-      // 公告內容資料
-      const notices = [
+    // ==========================================
+    // 🔧 考試系統設定區域
+    // ==========================================
+    
+    // 考試類別設定
+    const examCategories = {
+      "檢疫物考試": [
         {
-          title: "複查輪椅旅客",
-          content: `以後碰到輪椅旅客，不管有多少行李，一律請他們往最前面稍等，避免造成交通組塞。`
+          question: "以下哪種物品需要過X光機檢查？",
+          options: ["A. 手機", "B. 大包包", "C. 護照", "D. 帽子"],
+          correct: 1
         },
         {
-          title: "X光跟前導要互相配合",
-          content: `任何一方要告知任何事，例如中間輪椅或是包包有麵包，雙方都要回應一下，確實彼此有收到訊息。`
+          question: "旅客攜帶拍立得相機時，前導人員應該詢問什麼？",
+          options: ["A. 相機品牌", "B. 相機價格", "C. 底片是否已取出", "D. 購買地點"],
+          correct: 2
         },
         {
-          title: "新進人員須知。",
-          content: `所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。`
+          question: "以下哪種情況可以讓兩位旅客同時超過黃線？",
+          options: ["A. 趕時間的旅客", "B. 行動不便的高齡者需要協助", "C. VIP旅客", "D. 都不可以"],
+          correct: 1
         },
-      ];
+        {
+          question: "骨灰罐應該如何處理？",
+          options: ["A. 正常過X光機", "B. 請勿過X光，告知X光員是家人", "C. 直接放行", "D. 需要特殊檢查"],
+          correct: 1
+        },
+        {
+          question: "機組人員的行李應該如何擺放？",
+          options: ["A. 隨意擺放", "B. 由大到小擺放", "C. 由小到大擺放", "D. 分開擺放"],
+          correct: 1
+        },
+        {
+          question: "以下哪種物品不需要過X光機？",
+          options: ["A. 購物袋", "B. 工程箱", "C. 神像", "D. 提袋"],
+          correct: 2
+        },
+        {
+          question: "輪椅旅客應該使用哪個通道？",
+          options: ["A. 左側通道", "B. 右側通道", "C. 中間通道", "D. 任意通道"],
+          correct: 2
+        },
+        {
+          question: "電動行李箱應該如何處理？",
+          options: ["A. 過X光機", "B. 帶往前面手檢", "C. 直接放行", "D. 拒絕通關"],
+          correct: 1
+        },
+        {
+          question: "旅客詢問是否可以攜帶飛機餐時，正確的回應是？",
+          options: ["A. 可以攜帶", "B. 不可以攜帶", "C. 詢問是否含肉類製品", "D. 需要申報"],
+          correct: 2
+        },
+        {
+          question: "前導人員看到電動車通過時應該？",
+          options: ["A. 繼續工作", "B. 先完成當下旅客行李放置再維護秩序", "C. 立即停止工作", "D. 請旅客等待"],
+          correct: 1
+        },
+        {
+          question: "港澳蛋撻應該如何處理？",
+          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 禁止攜帶"],
+          correct: 1
+        },
+        {
+          question: "攜帶寵物的旅客需要？",
+          options: ["A. 寵物過X光機", "B. 出示寵物證明文件", "C. 額外收費", "D. 隔離檢查"],
+          correct: 1
+        },
+        {
+          question: "本機場免稅袋是否需要過X光機？",
+          options: ["A. 需要", "B. 不需要", "C. 視情況而定", "D. 由旅客決定"],
+          correct: 1
+        },
+        {
+          question: "旅客沒有行李時應該？",
+          options: ["A. 請其等待", "B. 請往前通行並告知X光員", "C. 進行手檢", "D. 填寫表格"],
+          correct: 1
+        },
+        {
+          question: "斑蘭蛋糕應該如何處理？",
+          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 需要申報"],
+          correct: 1
+        },
+        {
+          question: "低風險疫區卡片收取後應該？",
+          options: ["A. 請旅客過X光", "B. 直接往前不用過X光", "C. 進行手檢", "D. 填寫記錄"],
+          correct: 1
+        },
+        {
+          question: "嬰兒車推車旅客的處理方式？",
+          options: ["A. 直接通過", "B. 確認車上有無行李後請推到前面", "C. 過X光機", "D. 手檢"],
+          correct: 1
+        },
+        {
+          question: "盆具管理的原則是？",
+          options: ["A. 等堆積再補充", "B. 及時補充勿待堆積", "C. 一天補充一次", "D. 旅客自己拿取"],
+          correct: 1
+        },
+        {
+          question: "旅客攜帶會倒的飲料應該？",
+          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子", "C. 前面手檢", "D. 禁止攜帶"],
+          correct: 1
+        },
+        {
+          question: "換哨/下哨時需要做什麼？",
+          options: ["A. 直接離開", "B. 處理檢疫物和清理垃圾", "C. 只需清理垃圾", "D. 只需處理檢疫物"],
+          correct: 1
+        },
+        {
+          question: "大型公仔應該如何處理？",
+          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 拆開檢查"],
+          correct: 1
+        },
+        {
+          question: "樂器袋裝的樂器需要？",
+          options: ["A. 前面手檢", "B. 過X光機", "C. 直接放行", "D. 開袋檢查"],
+          correct: 1
+        },
+        {
+          question: "孕婦旅客應該使用哪個通道？",
+          options: ["A. 一般通道", "B. 中間通道優先", "C. 左側通道", "D. 右側通道"],
+          correct: 1
+        },
+        {
+          question: "相機底片應該如何處理？",
+          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子", "C. 前面手檢", "D. 特殊處理"],
+          correct: 1
+        },
+        {
+          question: "包裝紙箱需要？",
+          options: ["A. 拆開檢查", "B. 過X光機", "C. 直接放行", "D. 前面手檢"],
+          correct: 1
+        }
+      ]
+    };
 
+    // ==========================================
+    // 系統功能區域
+    // ==========================================
 
-      // 動態插入公告
-      const noticeBoard = document.getElementById('noticeBoard');
-      function renderNotices() {
-        noticeBoard.innerHTML = '';
-        notices.forEach(n => {
-          const item = document.createElement('div');
-          item.className = 'notice-item';
-          item.innerHTML = `<div class="notice-title">${n.title}</div>
-          <div class="notice-content">${n.content}</div>`;
-          noticeBoard.appendChild(item);
-        });
-      }
-      renderNotices();
-
-      // 各按鈕的內容
-      const modalContents = {
-        "📋前導": `
+    // 各按鈕的內容
+    const modalContents = {
+      "📋前導": `
         <div class="section-title">前導基本須知</div>
         
         <div class="content-block">
@@ -654,6 +909,7 @@ function checkLogin() {
             <li>大包包</li>
             <li>小包包</li>
             <li>提袋(本機場免稅袋除外)</li>
+            <img src="https://i.ibb.co/3m4w42BD/image.jpg" width="100%" height="auto" />
             <li>購物袋(本機場免稅袋除外)</li>
             <li>行李箱</li>
             <li>包裝紙箱</li>
@@ -670,6 +926,7 @@ function checkLogin() {
           <ul class="content-list">
             <li>電動行李車</li>
             <li>斑蘭蛋糕</li>
+            <img src="https://i.ibb.co/GvtZV6zR/image.jpg" width="100%" height="auto" />
             <li>港澳蛋撻</li>
             <li>大型公仔</li>
             <li>過大物體</li>
@@ -700,7 +957,8 @@ function checkLogin() {
           <img src="https://i.ibb.co/KcRfPjyY/2025-04-23-073636.png" width="100%" height="auto" />
         </div>
       `,
-        "📋複查": `
+
+    "📋複查": `
         <div class="section-title">複查作業流程</div>
         <div class="content-block">
           <div class="sub-title">一、基本檢查流程</div>
@@ -773,7 +1031,25 @@ function checkLogin() {
                 複查時務必謹慎，確保檢疫安全
           </div>
       `,
-        "📋分流": `
+
+    "📋X光": `
+        <div class="section-title">注 . 意 . 事 . 項</div>
+        
+        <div class="content-block">
+            <ul class="content-list">
+                <li>1.不要疊盆，桌上有空盆第一件事就是收空盆，尤其是X光自己收盆的時候要特別注意。</li>
+                <li>2.小心拉旅客的行李，以防刮傷旅客的行李。</li>
+                <li>3.X光有空就協助搬盒子。</li>
+                <li>4.<span style="color:red";>分流回報狀況告知前導 </span>當分流回報情況時，需前導知道的情況就需要告知，像是前方有車子、救護車，X光請告知前，但倘諾前導沒聽到或者沒回覆，可直呼前導大名或停機告知，確認有收到並且清楚，才進行操作模式。</li>
+
+            </ul>
+        </div>
+        <div class="highlight-box">
+          精準掃描，守護安全
+        </div>
+      `,
+
+    "📋分流": `
           <div class="section-title" style="text-align: center; letter-spacing: 12px; font-weight: bold;">注 . 意 . 事 . 項</div>
           <ul class="content-list">
             <li>1.<span style="color:red;">均分各線 </span>分流不要把一條線塞滿再換一條塞爆，請均分。</li>
@@ -831,7 +1107,8 @@ function checkLogin() {
             <li>29.<span style=color:red;>明確統計拒檢次數 </span>分流要記得明確統計拒檢次數，後面手檢區有碰到也麻煩記得回報給分流，好讓分流做統計。</li>
             
         `,
-        "📋分流2": `
+
+    "📋分流2": `
             <div class="section-title">機場分流2人員工作指南</div>
         
             <div class="content-block">
@@ -870,23 +1147,7 @@ function checkLogin() {
         </div>      
         `,
 
-        "📋X光": `
-        <div class="section-title">注 . 意 . 事 . 項</div>
-        
-        <div class="content-block">
-            <ul class="content-list">
-                <li>1.不要疊盆，桌上有空盆第一件事就是收空盆，尤其是X光自己收盆的時候要特別注意。</li>
-                <li>2.小心拉旅客的行李，以防刮傷旅客的行李。</li>
-                <li>3.X光有空就協助搬盒子。</li>
-                <li>4.<span style="color:red";>分流回報狀況告知前導 </span>當分流回報情況時，需前導知道的情況就需要告知，像是前方有車子、救護車，X光請告知前，但倘諾前導沒聽到或者沒回覆，可直呼前導大名或停機告知，確認有收到並且清楚，才進行操作模式。</li>
-
-            </ul>
-        </div>
-        <div class="highlight-box">
-          精準掃描，守護安全
-        </div>
-      `,
-            "⚠️規定事項": `
+    "⚠️規定事項": `
   <div class="section">
       <p class="code">代號333=奧客   兩95=廁所</p>
   </div>
@@ -956,7 +1217,8 @@ function checkLogin() {
 
       </ul> 
      `,
-        "⚠️各項連結": `
+
+    "⚠️各項連結": `
         <div class="section-title">語言學習</div>
         <div class="content-block">
           <div class="sub-title">英文</div>
@@ -990,7 +1252,8 @@ function checkLogin() {
           高標準源於專業與敬業
         </div>
       `,
-        "檢疫物相關": `
+
+    "檢疫物相關": `
         <div class="section-title">雞蛋</div>
         <div class="content-block">
           <div class="sub-title">半熟蛋類不可攜帶</div>
@@ -1178,76 +1441,322 @@ function checkLogin() {
             <li>很多旅客會帶一些魚乾、魷魚乾、小魚乾之類的，基本上只要去過內臟，如有旅客帶生魚片也沒關係的，主要是針對動植物產品。</li>
             <img src="https://i.ibb.co/Xk8bZkcH/21.jpg" width="100%" height="auto" />
             <img src="https://i.ibb.co/N20WwMk9/22.jpg" width="100%" height="auto" />
+
+
             <div>
             <div class="highlight-box">
               嚴謹把關，保護國境biosafety
             </div>
-          `
-      };
+    `
+  };
 
-      // 彈窗功能
-      const modalBg = document.getElementById('modalBg');
-      const modalBox = document.getElementById('modalBox');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalBody = document.getElementById('modalBody');
-      const modalClose = document.getElementById('modalClose');
+  // ==========================================
+  // 考試系統變數
+  // ==========================================
+  let currentExam = null;
+  let currentQuestions = [];
+  let currentQuestionIndex = 0;
+  let userAnswers = [];
+  let examStartTime = null;
 
-      document.querySelectorAll('.func-btn').forEach(btn => {
-        btn.onclick = function () {
-          const btnText = btn.textContent;
-          modalTitle.textContent = btnText;
-          modalBody.innerHTML = modalContents[btnText] || '<div style="color:#b3b3d6;font-size:1.1em;text-align:center;padding:2em 0;">待更新</div>';
-          modalBg.classList.add('active');
-        };
+  // ==========================================
+  // 基本功能函數
+  // ==========================================
+
+  // 開啟模態視窗
+  function openModal(title, content) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML = content;
+    document.getElementById('modalBg').classList.add('active');
+  }
+
+  // 關閉模態視窗
+  function closeModal() {
+    document.getElementById('modalBg').classList.remove('active');
+    // 重置考試相關顯示
+    resetExamDisplay();
+  }
+
+  // 重置考試顯示
+  function resetExamDisplay() {
+    const examList = document.querySelector('.exam-list');
+    const examInterface = document.querySelector('.exam-interface');
+    const resultContainer = document.querySelector('.result-container');
+    
+    if (examList) examList.style.display = 'flex';
+    if (examInterface) examInterface.style.display = 'none';
+    if (resultContainer) resultContainer.style.display = 'none';
+  }
+
+  // ==========================================
+  // 考試系統函數
+  // ==========================================
+
+  // 開啟考試選單
+  function openExamModal() {
+    let examListHTML = `
+      <div class="section-title">📚 自我考試系統</div>
+      <div class="exam-list">
+    `;
+    
+    for (let examName in examCategories) {
+      examListHTML += `
+        <div class="exam-item" onclick="startExam('${examName}')">
+          ${examName}
+        </div>
+      `;
+    }
+    
+    examListHTML += `</div>`;
+    
+    openModal('自我考試系統', examListHTML);
+  }
+
+  // 開始考試
+  function startExam(examName) {
+    currentExam = examName;
+    const allQuestions = examCategories[examName];
+    
+    // 隨機選取20題
+    currentQuestions = shuffleArray([...allQuestions]).slice(0, Math.min(20, allQuestions.length));
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    examStartTime = new Date();
+    
+    showExamInterface();
+    displayQuestion();
+  }
+
+  // 顯示考試介面
+  function showExamInterface() {
+    const examInterfaceHTML = `
+      <div class="exam-interface active">
+        <div class="question-container">
+          <div class="question-number" id="questionNumber"></div>
+          <div class="question-text" id="questionText"></div>
+          <div class="options-container" id="optionsContainer"></div>
+        </div>
+        <div class="exam-controls">
+          <button class="exam-btn secondary" onclick="previousQuestion()" id="prevBtn">上一題</button>
+          <span id="questionCounter"></span>
+          <button class="exam-btn primary" onclick="nextQuestion()" id="nextBtn">下一題</button>
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('modalBody').innerHTML = examInterfaceHTML;
+  }
+
+  // 顯示題目
+  function displayQuestion() {
+    const question = currentQuestions[currentQuestionIndex];
+    
+    document.getElementById('questionNumber').textContent = `第 ${currentQuestionIndex + 1} 題`;
+    document.getElementById('questionText').textContent = question.question;
+    document.getElementById('questionCounter').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+    
+    const optionsContainer = document.getElementById('optionsContainer');
+    optionsContainer.innerHTML = '';
+    
+    question.options.forEach((option, index) => {
+      const optionDiv = document.createElement('div');
+      optionDiv.className = 'option';
+      optionDiv.textContent = option;
+      optionDiv.onclick = () => selectOption(index);
+      
+      // 如果已經有答案，顯示選中狀態
+      if (userAnswers[currentQuestionIndex] === index) {
+        optionDiv.classList.add('selected');
+      }
+      
+      optionsContainer.appendChild(optionDiv);
+    });
+    
+    // 更新按鈕狀態
+    document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'inline-block';
+    
+    const nextBtn = document.getElementById('nextBtn');
+    if (currentQuestionIndex === currentQuestions.length - 1) {
+      nextBtn.textContent = '完成考試';
+      nextBtn.onclick = finishExam;
+    } else {
+      nextBtn.textContent = '下一題';
+      nextBtn.onclick = nextQuestion;
+    }
+  }
+
+  // 選擇答案
+  function selectOption(optionIndex) {
+    userAnswers[currentQuestionIndex] = optionIndex;
+    
+    // 更新選項顯示
+    const options = document.querySelectorAll('.option');
+    options.forEach((option, index) => {
+      option.classList.toggle('selected', index === optionIndex);
+    });
+  }
+
+  // 上一題
+  function previousQuestion() {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      displayQuestion();
+    }
+  }
+
+  // 下一題
+  function nextQuestion() {
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+      currentQuestionIndex++;
+      displayQuestion();
+    }
+  }
+
+  // 完成考試
+  function finishExam() {
+    // 檢查是否所有題目都已回答
+    const unansweredQuestions = [];
+    for (let i = 0; i < currentQuestions.length; i++) {
+      if (userAnswers[i] === undefined) {
+        unansweredQuestions.push(i + 1);
+      }
+    }
+    
+    if (unansweredQuestions.length > 0) {
+      alert(`還有 ${unansweredQuestions.length} 題未作答：第 ${unansweredQuestions.join(', ')} 題`);
+      return;
+    }
+    
+    showResults();
+  }
+
+  // 顯示考試結果
+  function showResults() {
+    let correctCount = 0;
+    let wrongAnswers = [];
+    
+    currentQuestions.forEach((question, index) => {
+      if (userAnswers[index] === question.correct) {
+        correctCount++;
+      } else {
+        wrongAnswers.push({
+          questionNumber: index + 1,
+          question: question.question,
+          userAnswer: question.options[userAnswers[index]] || '未作答',
+          correctAnswer: question.options[question.correct]
+        });
+      }
+    });
+    
+    const score = Math.round((correctCount / currentQuestions.length) * 100);
+    const examEndTime = new Date();
+    const examDuration = Math.round((examEndTime - examStartTime) / 1000);
+    
+    let scoreClass = 'score-good';
+    let scoreComment = '優秀！';
+    if (score < 60) {
+      scoreClass = 'score-poor';
+      scoreComment = '需要加強！';
+    } else if (score < 80) {
+      scoreClass = 'score-average';
+      scoreComment = '還不錯！';
+    }
+    
+    let resultHTML = `
+      <div class="result-container">
+        <div class="section-title">📊 考試成績</div>
+        
+        <div class="score-display ${scoreClass}">
+          <div style="font-size: 0.6em; margin-bottom: 0.3em;">考試：${currentExam}</div>
+          <div>成績：${score} 分</div>
+          <div style="font-size: 0.5em; margin-top: 0.3em;">${scoreComment}</div>
+        </div>
+        
+        <div style="text-align: center; margin: 1em 0; color: #666;">
+          <div>答對：${correctCount} / ${currentQuestions.length} 題</div>
+          <div>用時：${Math.floor(examDuration / 60)} 分 ${examDuration % 60} 秒</div>
+        </div>
+    `;
+    
+    if (wrongAnswers.length > 0) {
+      resultHTML += `
+        <div class="wrong-answers">
+          <div style="font-weight: bold; color: #c62828; margin-bottom: 1em;">❌ 錯誤題目解析：</div>
+      `;
+      
+      wrongAnswers.forEach(wrong => {
+        resultHTML += `
+          <div class="wrong-answer-item">
+            <div class="wrong-question">第 ${wrong.questionNumber} 題：${wrong.question}</div>
+            <div style="color: #c62828;">你的答案：${wrong.userAnswer}</div>
+            <div class="correct-answer">正確答案：${wrong.correctAnswer}</div>
+          </div>
+        `;
       });
+      
+      resultHTML += `</div>`;
+    }
+    
+    resultHTML += `
+        <div style="text-align: center; margin-top: 2em;">
+          <button class="exam-btn primary" onclick="openExamModal()">返回考試選單</button>
+        </div>
+      </div>
+    `;
+    
+    document.getElementById('modalBody').innerHTML = resultHTML;
+  }
 
-      modalClose.onclick = function () {
-        modalBg.classList.remove('active');
-      };
+  // 陣列隨機排序函數
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
 
-      modalBg.onclick = function (e) {
-        if (e.target === modalBg) modalBg.classList.remove('active');
-      };
+  // ==========================================
+  // 事件監聽器設置
+  // ==========================================
 
-      // 彈窗可拖拉
-      let isDragging = false, startX, startY, startLeft, startTop;
-      const header = document.getElementById('modalHeader');
-      header.addEventListener('mousedown', function (e) {
-        isDragging = true;
-        modalBox.style.transition = 'none';
-        startX = e.clientX;
-        startY = e.clientY;
-        const rect = modalBox.getBoundingClientRect();
-        startLeft = rect.left;
-        startTop = rect.top;
-        document.body.style.userSelect = 'none';
+  document.addEventListener('DOMContentLoaded', function() {
+    // 功能按鈕點擊事件
+    document.querySelectorAll('.func-btn[data-modal]').forEach(button => {
+      button.addEventListener('click', function() {
+        const modalKey = this.getAttribute('data-modal');
+        openModal(modalKey, modalContents[modalKey]);
       });
+    });
 
-      document.addEventListener('mousemove', function (e) {
-        if (isDragging) {
-          let dx = e.clientX - startX;
-          let dy = e.clientY - startY;
-          modalBox.style.position = 'fixed';
-          modalBox.style.left = (startLeft + dx) + 'px';
-          modalBox.style.top = (startTop + dy) + 'px';
-        }
-      });
+    // 關閉模態視窗
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalBg').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
 
-      document.addEventListener('mouseup', function () {
-        isDragging = false;
-        modalBox.style.transition = '';
-        document.body.style.userSelect = '';
-      });
+    
+    checkLogin();
 
-      checkLogin();
-
-      // 登出
-      document.getElementById('logoutBtn').onclick = function () {
+    // 登出按鈕
+    document.getElementById('logoutBtn').onclick = function() {
+      if (confirm('確定要登出嗎？')) {
         localStorage.removeItem("t2_login");
         localStorage.removeItem("t2_login_time");
+        alert('已登出系統');
         window.location.href = "index.html";
-      };
-    </script>
-</body>
+      }
+    };
 
+    // ESC 鍵關閉模態視窗
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  });
+</script>
+</body>
 </html>
