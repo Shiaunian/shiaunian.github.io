@@ -59,6 +59,77 @@
       margin-bottom: 0.3em;
     }
 
+    .highlight-box {
+      background: #f4f7fb;
+      border-left: 4px solid #7c90e1;
+      padding: 0.8em;
+      margin: 0.8em 0;
+      border-radius: 4px;
+    }
+
+        /* 標題內容專用樣式 */
+    .section-title {
+      color: #3949ab;
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      border-bottom: 2px solid #e3e9ff;
+      padding-bottom: 0.3em;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    .content-block {
+      margin-bottom: 1.2em;
+    }
+
+    .sub-title {
+      font-weight: bold;
+      color: #263161;
+      margin-bottom: 0.5em;
+      margin-top: 1em;
+    }
+
+    .content-list {
+      margin-left: 1em;
+      line-height: 1.8;
+    }
+
+    .content-list li {
+      margin-bottom: 0.5em;
+    }
+
+    .highlight-box {
+      background: #f4f7fb;
+      border-left: 4px solid #7c90e1;
+      padding: 0.8em;
+      margin: 0.8em 0;
+      border-radius: 4px;
+    }
+
+    .warning-text {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .indent {
+      margin-left: 1.5em;
+    }
+
+    /* 滾動條美化 */
+    ::-webkit-scrollbar {
+      width: 7px;
+      background: #f4f7fb;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #b3b3d6;
+      border-radius: 6px;
+    }
+
     /* 通知內容 */
     .notice-content {
       color: #23315c;
@@ -273,13 +344,13 @@
     .marquee-content {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee 30s linear infinite;
+      animation: marquee 50s linear infinite;
       color: #c62828;
       font-weight: 600;
     }
 
     @keyframes marquee {
-      0% { transform: translateX(100%); }
+      0% { transform: translateX(15%); }
       100% { transform: translateX(-100%); }
     }
 
@@ -499,7 +570,7 @@
     <!-- 公告跑馬燈 -->
     <div class="marquee-container">
       <div class="marquee-content">
-        📢 系統框架已更新完成，各項內容陸續填入中，敬請期待！
+        📢 還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!!!!還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!
       </div>
     </div>
 
@@ -854,59 +925,494 @@
       `,
 
     "📋複查": `
-      <div class="update-notice">
-        📝 複查相關內容準備中...
-        <br><br>
-        此區塊將包含複查作業流程、注意事項等相關資訊
-      </div>
-    `,
+        <div class="section-title">複查作業流程</div>
+        <div class="content-block">
+          <div class="sub-title">一、基本檢查流程</div>
+          <ul class="content-list">
+            <li><span style=color:red;>詢問旅客 </span>X光說要檢查，複查一定要先問旅客「方便跟您打開做個檢查嗎？」複查在接包包的位置問能不能檢查，不要拉到後面才問，如果旅客不願意檢查，以口頭及傳單宣導。</li>
+            <li><span style=color:red;>重點檢查 </span>X確實接收Ｘ光說明需要檢查的包包行李。</li>
+            <li><span style=color:red;>移動行李 </span>請旅客往最前面至第一張桌子稍等拿行李，不用檢查的請旅客先拿走，需檢查的要告知旅客，旅客之間會有間隔空盆做區隔，等全部的包包行李到齊再一起移動至最後一張桌子。</li>
+            <li><span style=color:red;>保持距離 </span>複查時保持間距，防止旅客的物品擠在一起避免搞混。</li>
+            <li><span style=color:red;>順序擺放 </span>檢查行李時，把旅客的行李拿出盆子放在桌上，再將旅客行李的東西整齊有順序地放在盆子內檢查。</li>
+            <li><span style=color:red;>基本檢查順序 </span>檢查請由小地方到大地方檢查，尤其是包包的暗層不能忽視，檢查好的東西先拿出來放盆子，避免漏查。</li>
+          </ul>
+        <div class="content-block">
+          <div class="sub-title">二、檢疫物處理</div>
+          <ul class="content-list">
+            <li><span style=color:red;>如果旅客有檢疫物不能帶或有疑慮</span>不願意去檢疫櫃檯確認要直接丟棄，我們就要宣導告知並請旅客在檢疫本上簽名同意拋棄，有疑慮自願拋棄的要註明自願，簽完名後再將東西放到檢疫桶。</li>
+            <li>從旅客行李裡如有<span style=color:red;>查獲到不確定或無法判斷的東西</span>，先詢問身邊的同事，如果現場都沒有人可以判定，那就請旅客把東西拿到檢疫櫃檯詢問。</li>
+            <li>丟檢疫物<span style=color:red;>要確實分類跟破壞包裝</span>。</li>
+          </ul>
+          <div class="sub-title">三、交接與記錄</div>
+          <ul class="content-list">
+            <li>換哨要交接密錄器、剪刀、膠帶。</li>
+            <li>如果有查獲檢疫物，先在檢疫本上寫上航班、國家、檢疫物的代號或記號，然後再來接旅客，不要寫檢疫本太久，等到快換哨下哨的前１０分鐘再補齊其他內容。</li>
+            <li>換哨下哨要清空手套桶。</li>
+          </ul>
+          <div class="sub-title">四、複查作業</div>
+          <ul class="content-list">
+            <li>複查排隊依順序等待檢查旅客，第二、三位以後的複查請勿擋道桌子，避免複查第一位要檢查時擋住作業動線。</li>
+            <li>複查搬盆子一律由複查排隊最後一位來搬。</li>
+            <li>複查檢查完就去搬盆子（不管疊多少盆子），搬完後就去排隊等待檢查，如盆子疊過多就由排隊最後一位去搬。</li>
+          </ul>
+          <div class="sub-title">五、特殊情況處理</div>
+          <ul class="content-list">
+            <li>旅客拒絕檢查時，先詢問旅客：「請問隨身行李都確定沒有帶到任何含肉類製品或是新鮮水果發芽種子嗎？」旅客確定都沒有的話就遞一張入境動植物檢疫單給旅客，再請旅客往前。</li>
+            <li>倘若確定旅客行李裡面是水果或檢疫物，旅客依然堅持不是，那就一樣宣導並給檢疫物單子，並記下旅客的特徵、性別、服裝、手提行李、體型還有可能的航班等特徵，隨後告知Ｘ光或是告知組長或督導，請聯繫檢疫櫃檯通報。</li>
+            <li>一位旅客對一位協勤，閒雜人等不要無端去湊熱鬧，除非有需要協助。</li>
+            <li>稻香村如沒有成分表的一律請旅客至櫃台詢問。</li>
+          </ul>
+          <div class="sub-title">六、衛生與安全</div>
+          <ul class="content-list">
+            <li>手套檢查完直接丟垃圾桶，不要塞口袋，如有看到地板有飛散的手套立刻撿起來，避免旅客踩到滑倒。</li>
+            <li>請在檢查旅客時，要在旅客面前換新手套，檢查一位旅客換一次手套。</li>
+            <li>用手機翻譯看外文，請看清楚是否看到過敏原，不要看到有肉就急著扣下來，因為也許是寫過敏原而已。</li>
+            <li>請各位同仁如果遇到食物請不要直接跟旅客剝開看，跟旅客確認成分並告知跟宣導就好。</li>
+          </ul>
+          <div class="sub-title">七、其他注意事項</div>
+          <ul class="content-list">
+            <li>1.帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，很多人就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</li>
+            <li>2.如有Ｘ光同事把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「請問裡面沒有帶到含肉製品、新鮮水果嗎？」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</li>
+            <li>3.如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（檢疫物桶那邊桌子）填寫意見單。</li>
+            <li>4.噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</li>
+            <li>5.每一哨複查上哨的那一線需要簽寫密錄器板子。</li>
+            <li>6.桌上放有檢疫拋棄跟密錄器確認簽寫的板子一律朝上放。</li>
+            <li>7.哨上很忙時，檢疫本先做記號就好，不要別浪費時間在那邊寫檢疫本。</li>
+            <li>8.<span style=color:red;>接到輪椅的旅客 </span>行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。</li>
+            <li>9.<span style=color:red;>循環扇遙控器 </span>在D區 與C區的四線旁邊盒子都會放一個循環扇遙控器，再麻煩各位的4-2的複查，日夜交接的時候要確認。</li>
+            <li>10.<span style="color:red;">複查排隊 </span>複查請依照順序排隊檢查，不要已經有最後已檢查回來了，自己還搬盆又排到最後一位，理應就自己要自動排到檢查回來的前面。(同一天這樣的事情重複4次就不是不小心或是忘記了)</li>
+            <li>11.<span style="color:red;">消毒毯時間 </span>消毒毯時間為<sapn style="color:red;">雙數30分</span>麻煩請由各哨4-2執行(如4-2不在由4-1)。</li>
+            <li>12.<span style="color:red;">複查檢查完畢宣導 </span>應強化提醒旅客不能帶水果肉類，並提醒注意托運行李自行檢查不能帶水果肉類。</li>
+            <li>13.<span style="color:red;">檢查行李箱 </span>建議開箱由旅客自行打開行李，或是口頭詢問可否由協勤人員協助開箱確認。</li>
+            <li>14.<span style="color:red;">1-1管理百寶袋 </span>早上1-1記得要先拿當區的百寶袋，如果1-1出公差或者另外情況請那一線幫忙注意一下。</li>
+            <li>15.<span style="color:red;">1-2回報手機 </span>1-2在每次上哨前記得在大群回報手機，如果<span style="color:red;">主管在現場</span>就直接跟主管報備。</li>
+            <li>16.<span style="color:red;">4-1回收檢疫物 </span>請於A.B班12:30回收檢疫物。</li>
+            <li>17.<span style="color:red;">4-2噴消毒毯 </span>請於雙數的30分4-2噴消毒毯，如果4-2不在請由4-1幫忙。</li>
+          </ul>
+          <div class="highlight-box" style="margin-top: 1.5em;">
+          <div class="sub-title" style="color: #c62828; margin-top: 0;">宣導DM告知旅客</div>
+                如有X光放宣導DM至有鉅記籃子時，請先詢問旅客裡面有無帶到含肉製品跟肉鬆等食品，確認過後給宣導DM告知旅客。
+          </div>
+          <div class="highlight-box">
+                複查時務必謹慎，確保檢疫安全
+          </div>
+      `,
 
     "📋X光": `
-      <div class="update-notice">
-        📝 X光相關內容準備中...
-        <br><br>
-        此區塊將包含X光機操作、安全須知等相關資訊
-      </div>
-    `,
+        <div class="section-title">注 . 意 . 事 . 項</div>
+        
+        <div class="content-block">
+            <ul class="content-list">
+                <li>1.不要疊盆，桌上有空盆第一件事就是收空盆，尤其是X光自己收盆的時候要特別注意。</li>
+                <li>2.小心拉旅客的行李，以防刮傷旅客的行李。</li>
+                <li>3.X光有空就協助搬盒子。</li>
+                <li>4.<span style="color:red";>分流回報狀況告知前導 </span>當分流回報情況時，需前導知道的情況就需要告知，像是前方有車子、救護車，X光請告知前，但倘諾前導沒聽到或者沒回覆，可直呼前導大名或停機告知，確認有收到並且清楚，才進行操作模式。</li>
+
+            </ul>
+        </div>
+        <div class="highlight-box">
+          精準掃描，守護安全
+        </div>
+      `,
 
     "📋分流": `
-      <div class="update-notice">
-        📝 分流相關內容準備中...
-        <br><br>
-        此區塊將包含分流作業程序、旅客引導等相關資訊
-      </div>
-    `,
+          <div class="section-title" style="text-align: center; letter-spacing: 12px; font-weight: bold;">注 . 意 . 事 . 項</div>
+          <ul class="content-list">
+            <li>1.<span style="color:red;">均分各線 </span>分流不要把一條線塞滿再換一條塞爆，請均分。</li>
+            <li>2.<span style="color:red;">秤重 </span>卡片一台斤（600克）為單位，未滿一台斤（600克）就繼續交接給下一哨。</li>
+            <li>3.<span style="color:red;">記當下時段航班 </span>要稍微記一下持卡和未持卡的班機，有時候會有從一航走過來迷路的旅客。</li>
+            <li>4.<span style="color:red;">航空公司領卡 </span>請親自點交，一箱換一箱，沒有蓋子換沒有蓋子，如果正在忙就請他們待會再來領卡，請呼叫線上的X光聯絡組長或是督導。</li>
+            <li>5.<span style="color:red;">當沒持卡航班(低風險地區) </span>此時綠色通道的紅龍請關起來，然後去分流導引旅客。</li>
+            <li>6.<span style="color:red;">開線要放旅客請注意 </span>走中間的旅客、機組，要先看一下後面是否有車子要經過，然後先用對講機呼叫後再放人，如果先放再呼的話，旅客可能會跟車子衝突到。</li>
+            <li>7.<span style="color:red;">當旅客機組過多組時 </span>旅客、機組放中間時，要一組一組的放，等前導接完一組開始接其他旅客時，再放一組進去。(持卡輪椅可一次走)</li>
+            <li>8.<span style="color:red;">嬰兒推車 </span>有推嬰兒車的旅客要請他們走1、2線，3、4線的走道太狹窄了。</li>
+            <li>9.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。</li>
+            <li>10.換哨下哨要清空分流的白色檢疫桶、交接卡片、密錄器。</li>
+            <li>11.棄置桶裡的檢疫物，快要滿出來或是已經滿出來，拿一個透明垃圾袋放在旁邊，把一些滿出來的檢疫物拿出來。</li>
+            <li>12.救護車、輪椅旅客、旅客自行推輪椅、整班機組、行動不便的要幫忙拉紅龍。</li>
+            <li>13.分流判斷當下，同時來了收卡與手檢旅客，現況需要分流2時，請呼叫分流2。</li>
+            <li>14.分流只有非手檢班機時，旅客未持卡以看機票確認。</li>
+            <li>15.當有手檢跟非手檢班機時，分流2幫忙確認應持卡未持卡旅客的機票，非手檢班機的旅客協助導至綠線。</li>
+         <li>16.機組檢查大更新
+            <div>離峰-3條線/尖峰-4條線</div>
+            <div>
+                如果是離峰時間(3條線)，機組照舊進手檢區做檢查，但請以四線X光去四線接掉或是丟至線內完成，請勿丟中間，必須避免旅客抱怨。<br>
+                如果是尖峰時間(4條線)，機組則以抽查優先。
+            </div>
+            <div>
+                需抽查的班機如下：
+                <ol>
+                    <li><span style=color:red;>BR62、BR398、BR212、BR392</span> — 這四班為主。</li>
+                    <li>三班抽檢則以優先挑選三位外籍機組，如沒有外籍機組再改以本國機組員作代替。</li>
+                </ol>
+            </div>
+            <div>
+                其餘的班機：
+                <ol>
+                    <li>可以直接放行走綠色通道，並告知機長現在為尖峰時段，所以不進手檢區。</li>
+                    <li>請機場跟組員宣導不要帶到任何違規動植物產品。</li>
+                </ol>
+            </div>
+            <li>17.早上打掃請記得清理白色的棄置桶。</li>
+            <li>18.不要去攔旅客推手推車，那不是我們的工作內容，但旅客把手推車丟在我們工作區域，要請旅客推走。</li>
+            <li>19.<span style="color:red";>輪椅旅客 </span>輪椅一樣由二線，二線前導接收到通知後，等輪椅客到黃線稍等，接幾位旅客後換接中間的輪椅客。
+                <ol>
+                    <li>今天如果走中間的輪椅人數是多少人，那等待的人數就要x 3ex : 航勤1+2，所以他們在前導就要等9個人才能輪到他們，以此類推</li>
+                    <li>中間有人在控管的的話（ex:四線X光），就交給中間的控管，1、2線的前導就不要再出來拉紅龍跟算人數了，都交給中間管理</li>
+                    <li>今天機組走3個，就是1線負責去接</li>
+                </ol>
+            <li>20.<span style="color:red";>跨月份UA簽收單 </span>大家記一下，以後只要月底最後一天或月初第一天這張跟卡片會放在分流，分流有碰到換卡時UA來領的話，記得叫他們簽單子。</li>
+            <li>21.<span style="color:red";>機組放四線 </span>一定要問能不能放四線，有回覆在放機組。</li>
+            <li>22.<span style="color:red";>分流佩掛密錄器 </span>防疫櫃檯會不定期、不定時檢查分流人員是否佩掛密錄器（需要有電並開機使用），違反者將採行政裁罰（罰款），請同事務必遵守！</li>
+            <li>23.<span style="color:red";>行動電源 </span>今日起CD區分流行動電源不需要充電及收回，日夜班分流必需交接清楚。</li>
+            <li>24.<span style="color:red";>桃園分署檢疫站通報 </span>來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境。</li>
+            <li>25.<span style="color:red";>GoPro使用說明 </span>C區分流的GoPro用的行動電源充電用他自己的線充才能充進去喔!</li>
+            <li>26.<span style=color:red;>GoPro擺放 </span>C區分流GoPro攝像頭擺放位置朝分流方向。</li>
+            <li>27.<span style="color:red";>駐外使節人員 </span>入境並持外交部發的工作證，視同持卡旅客引導綠線。</li>
+            <li>28.<span style=color:red;>手推車 </span>如有看到旅客推手推車，都優先引導至三線。</li>
+            <li>29.<span style=color:red;>明確統計拒檢次數 </span>分流要記得明確統計拒檢次數，後面手檢區有碰到也麻煩記得回報給分流，好讓分流做統計。</li>
+            
+        `,
 
     "📋分流2": `
-      <div class="update-notice">
-        📝 分流2相關內容準備中...
-        <br><br>
-        此區塊將包含第二階段分流作業等相關資訊
-      </div>
-    `,
+            <div class="section-title">機場分流2人員工作指南</div>
+        
+            <div class="content-block">
+            <div class="sub-title">工作說明</div>
+            <ul class="content-list">
+                <li>【啟動時機】
+                    <ol>
+                        <li>同時來了收卡與手檢旅客。</li>
+                        <li>主分流判斷下呼叫分流2。</li>
+                    </ol>
+                </li>
+                
+                <li>【主要職責】
+                    <ol>
+                        <li>在需要協助時負責接手引導手檢旅客並且宣導。</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="sub-title">D C 區電風扇清潔</div>
+            <ul class="content-list">
+                <li>以後固定每一個禮拜一的A哨分流2，要清兩邊電風扇。</li>
+            </ul>
+        </div>
+
+        <div class="content-block">
+            <div class="sub-title">注意事項</div>
+            <ul class="content-list">
+                <li>1.分流需要支援，請分流二盡快去，不要在那邊散步、神遊。</li>
+                <li>2.C區跟D區的檢疫物棄置桶，由分流2清潔。</li>
+                <li>3.<span style="color:red";>清消備勤室 </span>分流2請於18:00清消備勤室。</li>
+
+            </ul>
+        </div>      
+        `,
 
     "⚠️規定事項": `
-      <div class="update-notice">
-        📝 規定事項內容準備中...
-        <br><br>
-        此區塊將包含各項檢疫規定、法規條文等重要資訊
-      </div>
-    `,
+  <div class="section">
+      <p class="code">代號333=奧客   兩95=廁所</p>
+  </div>
+  <div class="content-block">
+      <ul class="content-list">
+          <li>1.更新2025由於近期遲到人數過多 即日起(06/05)起開始。</li>
+          <p style="font-size: 10pt; color: red;">30分鐘以內 修正取消次月必休2天選休2天</p>
+                <p style="font-size: 8pt;">遲到未參與勤教 修正取消次月必休2天。</p>
+                <p style="font-size: 8pt;">30分鐘以內 修正取消次月必休2天選休2天。</p>
+                <p style="font-size: 8pt;">60分鐘以內 修正取消次月必休2天選休4天。</p>
+                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
+                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
+                <p style="font-size: 11pt; color: red;">應到未到2個月</p>
+          <li>2.<span style="color:red;">備勤室私人物品 </span>請勿亂放(尤其下班前)，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</li>
+          <li>3.<span style="color:red;">旅客跌倒 </span>看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</li>
+          <li>4.<span style="color:red;">旅客受傷時 </span>當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</li>
+          <li>5.<span style="color:red;">跨月排假 </span>麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。</li>
+          <li>6.<span style="color:red;">關於脫換背心 </span>除分流以外，凡A B C 哨，統一全部服裝都要一樣，穿背心大家就都要穿。</li>
+          <li>7.<span style="color:red;">關於寫時數表/任何資料等等 </span>如當日有拿時數表請當日寫完，任何資料如要提，交請在下午三點前給，下午三點過後一律不收任何資料文件，請隔日再繳交。</li>
+          <li>8.<span style="color:red;">複查檢查完畢宣導 </span>應強化提醒旅客不能帶水果肉類，並提醒注意托運行李自行檢查不能帶水果肉類。</li>
+          <li>9.<span style="color:red;">檢查行李箱 </span>建議開箱由旅客自行打開行李，或是口頭詢問可否由協勤人員協助開箱確認。</li>
+          <li>10.<span style="color:red;">晚上6:30以後提前下哨須知 </span>6:30提早下哨的話，請2位輪流進去拿東西再換下2位以此類推。</li>
+          <li>11.<span style="color:red;">哨上規矩 </span>防檢署會抽查，在哨上請守規矩，不要併排聊天。</li>
+          <li>12.<span style="color:red;">消毒毯時間 </span>消毒毯時間為<sapn style="color:red;">雙數30分</span>麻煩請由各哨4-2執行(如4-2不在由4-1)。</li>
+          <li>13.<span style="color:red;">哨上椅子擺放 </span>下哨麻煩各位椅子都靠往X光機方向排放整齊。</li>
+          <li>14.<span style="color:red;">上哨時間內未出現 </span>私人物品(睡袋)不要放在鐵架那一個區塊下班就麻煩收回自己的櫃子，不然就帶回如，發現會取消大家調哨。</li>
+          <li>15.<span style=color:red;>分流的紅龍 </span>麻煩分流收卡那紅龍請對其各區標準。</li>
+          <li>16.<span style=color:red;>預排假</span>如果今天的休假是本來沒有劃休的假，是屬於預排假，假設臨時有同事沒辦法來上班，請麻煩來支援。</li>
+          <li>17.<span style=color:red;>冰箱日期 </span>冰箱麻煩要寫名子日期，日期天數說明都有貼在冰箱上，請勿造成打掃人的困擾。</li>
+          <li>18.<span style=color:red;>主管PO訊息 </span>再次提醒主管在群組發的任何重要事項，請仔細閱讀並且點個貼圖確認有收到訊息。</li>
+          <li>19.<span style=color:red;>時數表 </span>當月發的時數表，請對照當月大表裡你名子的號碼，寫完後請按照號碼順序擺放。(下午3點後一律不收任何資料)</li>
+          <li>21.<span style=color:red;>分流密錄器 </span>分流單獨使用密錄器C區D區各兩隻。</li>
+          <li>22.<span style="color:red";>防檢規範不做回應 </span>除了勤務上專業知識，有關防檢署規範的政策一律不做回應，請至防檢櫃台詢問。</li>
+          <li>23.<span style="color:red;">洗便當盒 </span>洗便當盒請先將便當菜渣清理乾淨，再沖洗，不要留下菜渣導致水槽堵塞。洗抹布、便當盒盡量不要弄濕地板，以免發生危險，不慎弄濕地板，麻煩擦乾淨。</li>
+          <span class="notice-end"><span class="icon">⚠️</span>不要增加信實阿姨工作困擾請將心比心</span>
+
+                  <div class="section-title">備勤室打掃</div>
+          <p style="font-size: 10pt; color: red;">正常打掃由各線X光落實檢查/監督</p>
+
+        <div class="content-block">
+          <div class="sub-title">重點檢查/監督：</div>
+          <ul class="content-list">
+            <li><span style="color:red";>A2分流 </span>微波爐下三個櫃子都要確認。</li>
+            <li><span style="color:red";>3線檢查重點 </span>督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭動作。</li>
+            <li><span style="color:red";>4線檢查重點 </span>空氣濾清機、手機架、門旁邊鏡子，確認是否有擦拭。</li>
+            <li><span style="color:red";>其他重點 </span>冰箱裡門旁與底部抽屜，檢查是否有擦拭。</li>
+          </ul>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">其他提醒</div>
+          <ul class="content-list">
+            <li>如有提早下哨，麻煩在 18:30 以後，請兩位兩位進來（進來 2 位、出來後再進去 2 位）。</li>
+            <li>因為這時候會有夜班的，加上這時間為打掃時間，還麻煩各位請多多配合。</li>
+          </ul>
+          <div class="highlight-box">打掃輪值</div>
+        </div>
+        
+        <div class="content-block">
+          <div class="sub-title">由
+          衛生管理大隊長 邱詩秦：</div>
+          <ul class="content-list">
+            <li>麻煩在 18:00 以後，打掃備勤室、並由小隊長監督。</li>
+            <li>如當日大隊長休假，在由B哨的4線X光監督 ，或者由組長決定派一位監督。</li>
+          </ul>
+        </div>
+
+      </ul> 
+     `,
 
     "⚠️各項連結": `
-      <div class="update-notice">
-        📝 各項連結內容準備中...
-        <br><br>
-        此區塊將包含相關網站連結、系統入口等資訊
-      </div>
-    `,
+        <div class="section-title">語言學習</div>
+        <div class="content-block">
+          <div class="sub-title">英文</div>
+          <ul class="content-list">
+            <li><a href="https://youtu.be/_QT9WavEdJ0" target="_blank">⭐英文 日常檢疫常用句與單字</a></li>
+            <li><a href="https://youtu.be/zetV0h91fWw" target="_blank">⭐英文 常用英文 方向指引 檢疫與入境規範</a></li>
+          </ul>
+        <div class="content-block">
+          <div class="sub-title">其他語言</div>
+          <ul class="content-list">
+            <li><a href="https://youtu.be/JLo0Ztq44D0" target="_blank">⭐韓文 日常檢疫常用句與單字</a></li>
+            <li><a href="https://youtu.be/vhGPw-1Ot2o" target="_blank">⭐越南 日常檢疫常用句與單字</a></li>
+            <li><a href="https://youtu.be/R0BsrVctClM" target="_blank">⭐日語 日常檢疫常用句與單字</a></li>
+            <li><a href="https://youtu.be/sJgVxPrJPB4" target="_blank">⭐泰語 日常檢疫常用句與單字(男女版本)</a></li>
+            <li><a href="https://youtu.be/HhtYZRM2PXQ" target="_blank">⭐香港粵語/廣東話 日常檢疫常用句與單字</a></li>
+
+
+          </ul>
+        </div>
+        <div class="section-title">新人相關連結</div>
+        <div class="content-block">
+      
+          <div class="sub-title">前導示範</div>
+          <ul class="content-list">
+            <li><a href="https://youtu.be/NLZt2fc13gM" target="_blank">⭐前導現場影片示範</a></li>
+            <li><a href="https://forms.gle/FqiqiEkA5YX34n2a9" target="_blank">⭐T2日緊急聯絡人資料填寫</a></li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          高標準源於專業與敬業
+        </div>
+      `,
 
     "檢疫物相關": `
-      <div class="update-notice">
-        📝 檢疫物相關內容準備中...
-        <br><br>
-        此區塊將包含檢疫物品清單、處理程序等詳細資訊
-      </div>
+        <div class="section-title">雞蛋</div>
+        <div class="content-block">
+          <div class="sub-title">半熟蛋類不可攜帶</div>
+            <li>鴨蛋、鵝蛋、煮過的皮蛋請旅客下去櫃台詢問，如是雞蛋自行判定</li>
+            <img src="https://i.ibb.co/LDr00tMF/01.jpg" width="100%" height="auto" />
+        
+        <div class="section-title">堅果/松果</div>
+            <li>花生、核桃、芝麻那一類旅客說生的就是生的，熟的就是熟的，要手指指一下詢問物，向監視器表示我們有確實宣導，跟旅客說生的不能攜帶，但熟的可以。</li>
+            <img src="https://i.ibb.co/6JXv8M80/02.jpg" width="100%" height="auto" />
+            <li>松果部分全過(除非看的出來有明顯沙土，可請旅客至櫃台詢問太誇張的建議拋棄)。</li>
+            <img src="https://i.ibb.co/TB8D5Qkw/04.jpg" width="100%" height="auto" />
+        <div class="section-title">水果蛋糕/大幅</div>
+            <li>這類的蔬菜水果加工製品，例如草莓蛋糕，表面上看得到水果。假設蛋糕上只有一顆草莓，可以直接請旅客把草莓吃掉就可以了；但如果蛋糕幾乎都是水果，並且這些水果並非全包覆在奶油裡面，就不行。</li>
+            <li>就如同下圖，基本上如果是如圖就都不行帶。例如左邊一顆草莓，它並非整個包覆住，但如果遇到這種基本上可以請旅客看要不要直接吃掉，那像右邊水果很多就需要回去吃掉或拋棄/挑掉不能現場吃掉。</li>
+　　　　　　 <img src="https://i.ibb.co/YF8xZFzZ/03.jpg" width="100%" height="auto" />
+            <li>那像草莓/水果/芒果大福也是可以的，因為奶油已完全包覆在裡面，但如果今天是像下面左圖那種切開的就不行，那就要請旅客回去吃或是簽名丟棄。</li>
+            <img src="https://i.ibb.co/qYMsK5vj/05.jpg" width="100%" height="auto" />
+            <div class="section-title">另外補充重點</div>
+            <li>草果、羅望子、乾辣椒、龍眼乾...等果乾類，只要它是果實類夠＂夠乾燥＂就可以，就算裡面有籽也沒關係</li>
+            <img src="https://i.ibb.co/9HnM8Fz4/06.jpg" width="100%" height="auto" />
+            <br><br>
+            <li>速食麵、粥、米粉、粉條類商品，如為明顯可見肉塊（如雞爪、半熟蛋、火腿腸...等檢疫物），就請旅客拆開包裝主動棄置檢疫物。</li>
+            <li><span style=color:red;>一般常見傳統罐頭包裝，如馬口鐵、玻璃罐等，包裝應完全密閉，經商業滅菌且可於常溫保存。</span>如為非典型罐頭商品，如真空包、滅菌袋、軟袋...等，除以上判定外，外包裝有註明【罐頭】，即可判定為罐頭。</li>
+            <br>請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，在不行就是請旅客去檢疫櫃檯詢問。<br>
+        <div class="section-title">各航空常見飛機餐總整理</div>
+            <br>MF 廈門航空</br>
+              <li>雞肉腸仔麵包 / 火腿麵包 / 菠菜火腿腸麵包 / 雞肉鬆麵包 </li>
+            <br>HU 海南航空</br>
+              <li>雞肉末炒飯 / 雞肉長麵包 </li>
+            <br>HX 香港航空</br>
+              <li>鴨肉麵包 </li>
+            <br>HX BR香港</br>
+              <li>叉燒酥 </li>
+            <br>ZH 深圳航空<br>
+              <li>魚肉漢堡含有雞肉 / 柳丁 / 火龍果 </li>
+            <br>CZ 南方航空<br>
+              <li>火腿芝士三明治 / 廣州雞肉腸麵包 </li>
+            <br>JX 星宇航空<br>
+              <li>豬肉洋蔥麵包</li>
+            <br>SQ 新加坡<br>
+              <li>火腿腸飯盒 / 雞肉麵 </li>
+            <br>GA 中國航空</br>
+              <li>豬排包</li>
+            <br>MU 東方航空</br>
+              <li>機肉包子</li>
+        <div class="section-title">常見豬肉成分名稱與關鍵單字</div>
+          <table style="margin:auto; border-collapse:collapse; font-size:1.1em; text-align:center; border:1px solid #bbb;">
+            <thead>
+              <tr style="background:#f7f7f7;">
+                <th style="border:1px solid #bbb;">中文</th>
+                <th style="border:1px solid #bbb;">英文</th>
+                <th style="border:1px solid #bbb;">韓文</th>
+                <th style="border:1px solid #bbb;">越南文</th>
+                <th style="border:1px solid #bbb;">日文</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border:1px solid #bbb;">肉</td>
+                <td style="border:1px solid #bbb;">meat</td>
+                <td style="border:1px solid #bbb;">고기</td>
+                <td style="border:1px solid #bbb;">Thịt khô</td>
+                <td style="border:1px solid #bbb;">肉</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">豬肉</td>
+                <td style="border:1px solid #bbb;">pork</td>
+                <td style="border:1px solid #bbb;">돼지고기</td>
+                <td style="border:1px solid #bbb;">thịt lợn</td>
+                <td style="border:1px solid #bbb;">豚肉</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">牛肉</td>
+                <td style="border:1px solid #bbb;">beef</td>
+                <td style="border:1px solid #bbb;">소고기</td>
+                <td style="border:1px solid #bbb;">thịt bò</td>
+                <td style="border:1px solid #bbb;">牛肉</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">雞肉</td>
+                <td style="border:1px solid #bbb;">chicken</td>
+                <td style="border:1px solid #bbb;">닭고기</td>
+                <td style="border:1px solid #bbb;">thịt gà</td>
+                <td style="border:1px solid #bbb;">チキン</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">肉鬆</td>
+                <td style="border:1px solid #bbb;">meat floss</td>
+                <td style="border:1px solid #bbb;">고기 치실</td>
+                <td style="border:1px solid #bbb;">xỉa thịt</td>
+                <td style="border:1px solid #bbb;">ミートフロス</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">火腿</td>
+                <td style="border:1px solid #bbb;">ham</td>
+                <td style="border:1px solid #bbb;">햄</td>
+                <td style="border:1px solid #bbb;">Giăm bông</td>
+                <td style="border:1px solid #bbb;">ハム</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">臘腸</td>
+                <td style="border:1px solid #bbb;">sausage</td>
+                <td style="border:1px solid #bbb;">소시지</td>
+                <td style="border:1px solid #bbb;">xúc xích</td>
+                <td style="border:1px solid #bbb;">ソーセージ</td>
+              </tr>
+              <tr>
+                <td style="border:1px solid #bbb;">肉乾</td>
+                <td style="border:1px solid #bbb;">dried meat</td>
+                <td style="border:1px solid #bbb;">말린 고기</td>
+                <td style="border:1px solid #bbb;">Thịt khô</td>
+                <td style="border:1px solid #bbb;">干し肉</td>
+              </tr>
+            </tbody>
+          </table>
+             <br><br>
+             
+              <tr>
+                <td style="border:1px solid #bbb;"> 肉鬆粉 </td>
+                <td style="border:1px solid #bbb;"> 云腿 </td>
+                <td style="border:1px solid #bbb;"> 豬肥標 </td>
+                <td style="border:1px solid #bbb;"> 金華火腿 </td>
+                <td style="border:1px solid #bbb;"> 原味鬆鬆 </td>
+                <td style="border:1px solid #bbb;"> 冰肉 </td>
+                <td style="border:1px solid #bbb;"> 臘腸 </td>
+                <td style="border:1px solid #bbb;"> 肉脯 </td>
+              </tr>
+
+            <div class="section-title">特殊狀況食物</div>
+
+            <img src="https://i.ibb.co/qYN121fB/01.jpg" width="100%" height="auto" />
+
+            <hr>
+            <div style="text-align:center;">如果遇到鵝肝醬請旅客至六號櫃台詢問，先不要扣下來。<br>
+            <img src="https://i.ibb.co/rKQrrpDq/02.jpg" width="100%" height="auto" />
+
+            <hr>
+            <div style="text-align:center;">貝母已跟檢疫官確認過，是可以帶的!<br>
+            <img src="https://i.ibb.co/gLc7N5z7/03.jpg" width="100%" height="auto" />
+
+            <hr>
+            <div style="text-align:center;">蕎麥米，不可放行!<br>
+            <img src="https://i.ibb.co/v4s14CLC/04.jpg" width="100%" height="auto" />
+
+            <div class="section-title">檢疫物參考</div>
+            <img src="https://i.ibb.co/XfVhY6NJ/05.jpg" width="100%" height="auto" />
+            <img src="https://i.ibb.co/LDDFHRsr/06.jpg" width="100%" height="auto" />
+            <img src="https://i.ibb.co/8nHRznmn/07.jpg" width="100%" height="auto" />
+            <img src="https://i.ibb.co/LzM1wSLK/08.jpg" width="100%" height="auto" />
+            <img src="https://i.ibb.co/Z6WcF31h/09.jpg" width="100%" height="auto" />
+            <hr>
+            <li>肉粽很多種類，例如像左邊這種就不能攜帶因為含有肉類製品，右圖的是甜粽這種就可以攜帶。</li>
+            <img src="https://i.ibb.co/m5v04vf6/10.jpg" width="100%" height="auto" />
+            <hr>
+            <li>鳳凰捲有些含有肉鬆，例如澳門旅客就很常攜帶，所以當有看到一定要多注意這部分!</li>
+            <img src="https://i.ibb.co/8LNWvDwm/11.jpg" width="100%" height="auto" />
+            <hr>
+            <li>如圖生菜吐司就有多種不能攜帶，像圖裡的生菜、番茄、還有肉類，所以三明治跟吐司都要特別注意過。</li>
+            <img src="https://i.ibb.co/TDQkqKGg/12.jpg" width="100%" height="auto" />
+            <hr>
+            <li>小黃瓜、地瓜、生辣椒、絲瓜等等各種生鮮都是不能帶入境的，除非是煮過的，例如很多航空職員會帶得烤地瓜。</li>
+            <img src="https://i.ibb.co/B2mTJ53y/13.jpg" width="100%" height="auto" />
+            <hr>
+            <li>圖下是泰國露楚很多新進同仁會以為是水果，泰國露楚是一種色彩繽紛、造型精緻的小點心，屬於泰國傳統甜點。它的外型常常被製作成各種迷你蔬果，如辣椒、茄子、芒果、豆子等，非常可愛討喜。</li>
+            <img src="https://i.ibb.co/n8cMgxLq/14.jpg" width="100%" height="auto" />
+            <hr>
+            <li>鹿茸，是指雄鹿尚未骨化、帶有絨毛的幼角。這些角尚未鈣化，質地柔軟、富有血管和營養成分，是中藥材中的名貴補品之一。</li>
+            <img src="https://i.ibb.co/JwPhJ4TV/15.jpg" width="100%" height="auto" />
+            <hr>
+            <li>泰國糯米飯（Mango Sticky Rice）是泰國著名的甜點，主要由芒果和糯米搭配椰漿製成。其中的芒果屬於新鮮水果，依照台灣動植物防疫檢疫規定，新鮮水果禁止攜帶入境，以防止外來病蟲害入侵，保護台灣本地農業安全。</li>
+            <img src="https://i.ibb.co/hxWWyxBZ/16.jpg" width="100%" height="auto" />
+            <hr>
+            <li>未經加工的羽毛屬於動物來源產品，根據檢疫規定，禁止攜帶入境。</li>
+            <img src="https://i.ibb.co/MDWHRSFp/17.jpg" width="100%" height="auto" />
+            <hr>
+            <li>炸雞皮屬於動物性產品，根據台灣動物檢疫相關法令，禁止從國外攜帶入境。即使已經過油炸等簡單加工處理，仍有可能攜帶動物疫病病原體，影響本地動物產業安全。</li>
+            <img src="https://i.ibb.co/FLXjPF2F/18.jpg" width="100%" height="auto" />
+            <hr>
+            <li>雞內金是指雞胗（砂囊）內壁的乾燥薄膜，常見於中藥材或食品中。即使已曬乾、烘烤或包裝，仍可能攜帶動物疫病病原體，對本地動物產業造成風險。</li>
+            <img src="https://i.ibb.co/kVGR9qbX/19.jpg" width="100%" height="auto" />
+            <hr>
+            <li>牛糞餅（又稱牛糞乾、牛糞塊），常用於燃料、宗教祭祀或農業用途。牛糞餅屬於動物來源產品，根據台灣動物檢疫相關法令，禁止從國外攜帶入境。</li>
+            <img src="https://i.ibb.co/cS1Xj1Yn/20.jpg" width="100%" height="auto" />
+            <hr>
+            <li>很多旅客會帶一些魚乾、魷魚乾、小魚乾之類的，基本上只要去過內臟，如有旅客帶生魚片也沒關係的，主要是針對動植物產品。</li>
+            <img src="https://i.ibb.co/Xk8bZkcH/21.jpg" width="100%" height="auto" />
+            <img src="https://i.ibb.co/N20WwMk9/22.jpg" width="100%" height="auto" />
+
+
+            <div>
+            <div class="highlight-box">
+              嚴謹把關，保護國境biosafety
+            </div>
     `
   };
 
