@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T2內部語音通話系統</title>
+    <title>T2內部訊息系統</title>
     <style>
         * {
             margin: 0;
@@ -18,33 +18,49 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem;
         }
 
         .container {
             background: white;
-            padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 500px;
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 15px 15px 0 0;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #333;
             margin-bottom: 0.5rem;
         }
 
         .subtitle {
-            color: #666;
-            margin-bottom: 2rem;
             font-size: 0.9rem;
+            opacity: 0.9;
         }
 
-        .login-section, .call-section {
-            margin-bottom: 2rem;
+        .login-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
         }
 
         .input-group {
@@ -65,12 +81,13 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
         }
 
         .btn {
@@ -81,133 +98,461 @@
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
             margin: 0.5rem;
         }
 
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
         }
 
         .btn:disabled {
             background: #ccc;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
-        .status {
+        .chat-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .chat-info {
+            background: #f8f9fa;
             padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            font-weight: 500;
-        }
-
-        .status.online {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status.calling {
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-
-        .status.incoming {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .online-users {
-            text-align: left;
-            margin: 1rem 0;
-        }
-
-        .user-item {
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem;
-            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 1;
         }
 
-        .user-status {
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .online-indicator {
             width: 10px;
             height: 10px;
-            border-radius: 50%;
             background: #28a745;
-            display: inline-block;
-            margin-right: 0.5rem;
+            border-radius: 50%;
+            position: relative;
         }
 
-        .call-btn {
-            background: #28a745;
+        .online-indicator.offline {
+            background: #dc3545;
+        }
+
+        .online-indicator.offline::after {
+            content: "離線";
+            position: absolute;
+            left: 15px;
+            white-space: nowrap;
+            color: #dc3545;
+            font-size: 0.8rem;
+        }
+
+        .online-count {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8f9fa;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        .messages-container::after {
+            content: "";
+            display: block;
+            height: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 70%;
+            word-wrap: break-word;
+            animation: messageAppear 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.own {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .message.other {
+            background: white;
+            border: 1px solid #e0e0e0;
+            margin-right: auto;
+        }
+
+        .message-header {
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            opacity: 0.8;
+        }
+
+        .message.own .message-header {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .message.other .message-header {
+            color: #666;
+        }
+
+        .message-content {
+            font-size: 1rem;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            opacity: 0.6;
+        }
+
+        .system-message {
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+            font-style: italic;
+            animation: systemMessageAppear 0.3s ease;
+        }
+
+        @keyframes systemMessageAppear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .input-section {
+            background: white;
+            padding: 1rem;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-input-group {
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .message-input {
+            flex: 1;
+            min-height: 40px;
+            max-height: 100px;
+            resize: none;
+            padding: 0.8rem;
+            padding-right: 3rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.4;
+            transition: all 0.3s ease;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+        }
+
+        .char-count {
+            position: absolute;
+            right: 6rem;
+            bottom: 0.8rem;
+            font-size: 0.8rem;
+            color: #666;
+            pointer-events: none;
+        }
+
+        .char-count.near-limit {
+            color: #f39c12;
+        }
+
+        .char-count.at-limit {
+            color: #dc3545;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 0.3rem 0.8rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
             font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #666;
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .network-status {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            z-index: 1000;
+            animation: slideDown 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -100%);
+            }
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .network-status.offline {
+            background: #dc3545;
+            color: white;
+        }
+
+        .network-status.reconnecting {
+            background: #ffc107;
+            color: black;
+        }
+
+        .network-status.online {
+            background: #28a745;
+            color: white;
+        }
+
+        .messages-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .messages-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .new-messages-indicator {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            z-index: 3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .header {
+                border-radius: 0;
+                padding: 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .input-section {
+                border-radius: 0;
+                padding: 0.8rem;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+
+            .send-btn {
+                padding: 0.8rem 1.2rem;
+                min-width: 60px;
+            }
+
+            .char-count {
+                right: 5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div id="networkStatus" class="network-status hidden"></div>
     <div class="container">
-        <div class="logo">📞 T2語音通話</div>
-        <div class="subtitle">內部通訊系統</div>
+        <div class="header">
+            <div class="logo">💬 T2內部訊息系統</div>
+            <div class="subtitle">即時通訊平台</div>
+        </div>
 
-        <!-- 登入區域 -->
         <div id="loginSection" class="login-section">
             <div class="input-group">
                 <label for="username">使用者名稱</label>
-                <input type="text" id="username" placeholder="請輸入您的姓名">
+                <input type="text" id="username" placeholder="請輸入您的姓名" maxlength="20">
             </div>
-            <button class="btn" onclick="login()">登入系統</button>
+            <button class="btn" id="loginBtn" onclick="login()">進入聊天室</button>
         </div>
 
-        <!-- 通話區域 -->
-        <div id="callSection" class="call-section hidden">
-            <div id="userStatus" class="status online">
-                <span id="currentUser"></span> - 線上
+        <div id="chatSection" class="chat-section hidden">
+            <div class="chat-info">
+                <div class="user-info">
+                    <div id="connectionIndicator" class="online-indicator"></div>
+                    <span id="currentUser"></span>
+                </div>
+                <div>
+                    <span class="online-count" id="onlineCount">線上 0 人</span>
+                    <button class="logout-btn" onclick="logout()">登出</button>
+                </div>
             </div>
 
-            <div class="online-users">
-                <h3>線上用戶</h3>
-                <div id="usersList"></div>
+            <div class="messages-container" id="messagesContainer">
+                <div id="loading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <div>載入訊息中...</div>
+                </div>
             </div>
 
-            <div class="input-group">
-                <label for="targetUser">撥打給</label>
-                <input type="text" id="targetUser" placeholder="輸入對方姓名">
+            <div id="newMessagesIndicator" class="new-messages-indicator" onclick="scrollToBottom()">
+                ↓ 新訊息
             </div>
 
-            <button class="btn" onclick="makeCall()">📞 撥打電話</button>
-            <button class="btn" onclick="logout()" style="background: #dc3545;">登出</button>
-
-            <!-- 來電通知 -->
-            <div id="incomingCall" class="status incoming hidden">
-                <div>📞 <span id="callerName"></span> 來電中...</div>
-                <button class="btn" onclick="acceptCall()" style="background: #28a745;">接聽</button>
-                <button class="btn" onclick="rejectCall()" style="background: #dc3545;">拒絕</button>
-            </div>
-
-            <!-- 通話中狀態 -->
-            <div id="callStatus" class="status calling hidden">
-                <div>🔊 通話中：<span id="callPartner"></span></div>
-                <button class="btn" onclick="endCall()" style="background: #dc3545;">結束通話</button>
+            <div class="input-section">
+                <div class="message-input-group">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input" 
+                        placeholder="輸入訊息..." 
+                        rows="1"
+                        maxlength="500"></textarea>
+                    <span id="charCount" class="char-count">0/500</span>
+                    <button id="sendBtn" class="send-btn" onclick="sendMessage()" disabled>傳送</button>
+                </div>
             </div>
         </div>
     </div>
@@ -226,40 +571,146 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
+        // 全域變數
         let currentUser = '';
         let onlineUsers = {};
-        let currentCall = null;
+        let isOnline = true;
+        let reconnectAttempts = 0;
+        let maxReconnectAttempts = 5;
+        let reconnectDelay = 1000;
+        let isAtBottom = true;
+        let unreadMessages = 0;
+        let lastMessageTime = 0;
+        let messagesLoaded = false;
+
+        // DOM 元素
+        const networkStatus = document.getElementById('networkStatus');
+        const connectionIndicator = document.getElementById('connectionIndicator');
+        const messagesContainer = document.getElementById('messagesContainer');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const charCount = document.getElementById('charCount');
+        const loading = document.getElementById('loading');
+        const newMessagesIndicator = document.getElementById('newMessagesIndicator');
+
+        // 網路狀態監控
+        function initializeNetworkMonitoring() {
+            const connectedRef = database.ref('.info/connected');
+            connectedRef.on('value', (snap) => {
+                if (snap.val() === true) {
+                    onConnected();
+                } else {
+                    onDisconnected();
+                }
+            });
+        }
+
+        function onConnected() {
+            isOnline = true;
+            reconnectAttempts = 0;
+            showNetworkStatus('online', '已連線');
+            connectionIndicator.classList.remove('offline');
+            
+            if (currentUser) {
+                updateUserStatus('online');
+            }
+
+            setTimeout(() => {
+                hideNetworkStatus();
+            }, 3000);
+        }
+
+        function onDisconnected() {
+            isOnline = false;
+            showNetworkStatus('offline', '連線中斷');
+            connectionIndicator.classList.add('offline');
+            
+            if (currentUser && reconnectAttempts < maxReconnectAttempts) {
+                attemptReconnect();
+            }
+        }
+
+        function attemptReconnect() {
+            reconnectAttempts++;
+            showNetworkStatus('reconnecting', `重新連線中 (${reconnectAttempts}/${maxReconnectAttempts})`);
+            
+            setTimeout(() => {
+                if (!isOnline && reconnectAttempts < maxReconnectAttempts) {
+                    database.goOnline();
+                } else if (!isOnline) {
+                    showNetworkStatus('offline', '無法連線，請重新整理頁面');
+                }
+            }, reconnectDelay * Math.pow(2, reconnectAttempts - 1));
+        }
+
+        function showNetworkStatus(type, message) {
+            networkStatus.className = `network-status ${type}`;
+            networkStatus.textContent = message;
+            networkStatus.classList.remove('hidden');
+        }
+
+        function hideNetworkStatus() {
+            networkStatus.classList.add('hidden');
+        }
 
         // 登入功能
         function login() {
             const username = document.getElementById('username').value.trim();
+            const loginBtn = document.getElementById('loginBtn');
+            
             if (!username) {
                 alert('請輸入使用者名稱');
                 return;
             }
 
+            if (username.length > 20) {
+                alert('使用者名稱不能超過20個字元');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            
+            // 檢查是否已有相同用戶名
+            database.ref('users').once('value')
+                .then((snapshot) => {
+                    const users = snapshot.val() || {};
+                    if (users[username]) {
+                        alert('此用戶名已被使用');
+                        loginBtn.disabled = false;
+                        return;
+                    }
+                    
+                    completeLogin(username);
+                })
+                .catch((error) => {
+                    console.error('登入檢查失敗:', error);
+                    alert('登入失敗，請重試');
+                    loginBtn.disabled = false;
+                });
+        }
+
+        function completeLogin(username) {
             currentUser = username;
             
             // 設置用戶在線狀態
-            const userRef = database.ref('users/' + currentUser);
-            userRef.set({
-                status: 'online',
-                lastSeen: firebase.database.ServerValue.TIMESTAMP
-            });
+            updateUserStatus('online');
 
             // 監聽斷線時自動下線
-            userRef.onDisconnect().set({
-                status: 'offline',
-                lastSeen: firebase.database.ServerValue.TIMESTAMP
-            });
+            database.ref('users/' + currentUser).onDisconnect().remove();
 
-            // 顯示通話界面
+            // 發送系統訊息
+            sendSystemMessage(currentUser + ' 加入了聊天室');
+
+            // 顯示聊天界面
             document.getElementById('loginSection').classList.add('hidden');
-            document.getElementById('callSection').classList.remove('hidden');
+            document.getElementById('chatSection').classList.remove('hidden');
             document.getElementById('currentUser').textContent = currentUser;
 
             // 開始監聽
             startListening();
+            
+            // 焦點到輸入框
+            messageInput.focus();
         }
 
         // 開始監聽各種事件
@@ -270,181 +721,250 @@
                 onlineUsers = {};
                 
                 Object.keys(users).forEach(username => {
-                    if (users[username].status === 'online' && username !== currentUser) {
+                    if (users[username].status === 'online') {
                         onlineUsers[username] = users[username];
                     }
                 });
                 
-                updateUsersList();
+                updateOnlineCount();
             });
 
-            // 監聽來電
-            database.ref('calls/' + currentUser).on('value', (snapshot) => {
-                const callData = snapshot.val();
-                if (callData && callData.status === 'calling' && callData.caller !== currentUser) {
-                    showIncomingCall(callData.caller);
-                }
-            });
-
-            // 監聽通話狀態變化
-            database.ref('calls/' + currentUser).on('value', (snapshot) => {
-                const callData = snapshot.val();
-                if (callData) {
-                    if (callData.status === 'connected') {
-                        showCallConnected(callData.caller === currentUser ? callData.receiver : callData.caller);
-                    } else if (callData.status === 'ended') {
-                        endCall();
+            // 監聽訊息
+            database.ref('messages')
+                .orderByChild('timestamp')
+                .limitToLast(50)
+                .on('child_added', (snapshot) => {
+                    const message = snapshot.val();
+                    if (message.timestamp > lastMessageTime) {
+                        displayMessage(message);
+                        lastMessageTime = message.timestamp;
                     }
-                }
-            });
-        }
-
-        // 更新線上用戶列表
-        function updateUsersList() {
-            const usersList = document.getElementById('usersList');
-            usersList.innerHTML = '';
-
-            Object.keys(onlineUsers).forEach(username => {
-                const userItem = document.createElement('div');
-                userItem.className = 'user-item';
-                userItem.innerHTML = `
-                    <span><span class="user-status"></span>${username}</span>
-                    <button class="call-btn" onclick="callUser('${username}')">通話</button>
-                `;
-                usersList.appendChild(userItem);
-            });
-
-            if (Object.keys(onlineUsers).length === 0) {
-                usersList.innerHTML = '<div style="text-align: center; color: #666;">目前沒有其他用戶在線</div>';
-            }
-        }
-
-        // 撥打電話
-        function makeCall() {
-            const targetUser = document.getElementById('targetUser').value.trim();
-            if (!targetUser) {
-                alert('請輸入要撥打的用戶名稱');
-                return;
-            }
-            callUser(targetUser);
-        }
-
-        // 呼叫用戶
-        function callUser(targetUser) {
-            if (!onlineUsers[targetUser]) {
-                alert('用戶不在線或不存在');
-                return;
-            }
-
-            // 設置通話請求
-            database.ref('calls/' + targetUser).set({
-                caller: currentUser,
-                receiver: targetUser,
-                status: 'calling',
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            });
-
-            // 顯示撥號中狀態
-            document.getElementById('callStatus').classList.remove('hidden');
-            document.getElementById('callPartner').textContent = targetUser;
-            document.getElementById('callStatus').innerHTML = `
-                <div>📞 撥號中：${targetUser}</div>
-                <button class="btn" onclick="cancelCall()" style="background: #dc3545;">取消</button>
-            `;
-        }
-
-        // 顯示來電
-        function showIncomingCall(caller) {
-            document.getElementById('incomingCall').classList.remove('hidden');
-            document.getElementById('callerName').textContent = caller;
-            currentCall = caller;
-        }
-
-        // 接聽電話
-        function acceptCall() {
-            if (currentCall) {
-                // 更新通話狀態為已連接
-                database.ref('calls/' + currentUser).update({
-                    status: 'connected'
                 });
+
+            // 載入完成後隱藏載入提示
+            setTimeout(() => {
+                loading.style.display = 'none';
+                messagesLoaded = true;
+            }, 1000);
+        }
+
+        // 更新用戶狀態
+        function updateUserStatus(status) {
+            if (currentUser) {
+                database.ref('users/' + currentUser).set({
+                    status: status,
+                    lastSeen: firebase.database.ServerValue.TIMESTAMP
+                });
+            }
+        }
+
+        // 更新線上人數
+        function updateOnlineCount() {
+            const count = Object.keys(onlineUsers).length;
+            document.getElementById('onlineCount').textContent = `線上 ${count} 人`;
+        }
+
+        // 傳送訊息
+        function sendMessage() {
+            const messageText = messageInput.value.trim();
+            
+            if (!messageText || !isOnline) {
+                return;
+            }
+
+            if (messageText.length > 500) {
+                alert('訊息不能超過500個字元');
+                return;
+            }
+
+            sendBtn.disabled = true;
+
+            // 建立訊息物件
+            const message = {
+                sender: currentUser,
+                content: messageText,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                type: 'user'
+            };
+
+            // 傳送到 Firebase
+            database.ref('messages').push(message)
+                .then(() => {
+                    messageInput.value = '';
+                    messageInput.style.height = 'auto';
+                    updateCharCount();
+                    sendBtn.disabled = false;
+                    messageInput.focus();
+                })
+                .catch((error) => {
+                    console.error('訊息傳送失敗:', error);
+                    alert('訊息傳送失敗，請重試');
+                    sendBtn.disabled = false;
+                });
+        }
+
+        // 傳送系統訊息
+        function sendSystemMessage(content) {
+            const message = {
+                content: content,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                type: 'system'
+            };
+
+            database.ref('messages').push(message);
+        }
+
+        // 顯示訊息
+        function displayMessage(message) {
+            const messageElement = document.createElement('div');
+
+            if (message.type === 'system') {
+                messageElement.className = 'system-message';
+                messageElement.textContent = message.content;
+            } else {
+                const isOwn = message.sender === currentUser;
+                messageElement.className = `message ${isOwn ? 'own' : 'other'}`;
                 
-                database.ref('calls/' + currentCall).update({
-                    status: 'connected'
+                const time = new Date(message.timestamp).toLocaleTimeString('zh-TW', {
+                    hour: '2-digit',
+                    minute: '2-digit'
                 });
 
-                showCallConnected(currentCall);
+                messageElement.innerHTML = `
+                    <div class="message-header">${isOwn ? '我' : message.sender}</div>
+                    <div class="message-content">${escapeHtml(message.content)}</div>
+                    <div class="message-time">${time}</div>
+                `;
+            }
+
+            messagesContainer.appendChild(messageElement);
+            
+            // 檢查是否需要滾動到底部
+            const wasAtBottom = isAtBottom;
+            isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < 50;
+            
+            if (wasAtBottom) {
+                scrollToBottom();
+            } else if (messagesLoaded) {
+                unreadMessages++;
+                showNewMessageIndicator();
             }
         }
 
-        // 拒絕電話
-        function rejectCall() {
-            if (currentCall) {
-                database.ref('calls/' + currentUser).remove();
-                database.ref('calls/' + currentCall).remove();
-                hideIncomingCall();
-            }
+        // 滾動到底部
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            unreadMessages = 0;
+            hideNewMessageIndicator();
         }
 
-        // 隱藏來電通知
-        function hideIncomingCall() {
-            document.getElementById('incomingCall').classList.add('hidden');
-            currentCall = null;
+        // 顯示新訊息提示
+        function showNewMessageIndicator() {
+            newMessagesIndicator.style.display = 'block';
+            newMessagesIndicator.textContent = `↓ ${unreadMessages} 則新訊息`;
         }
 
-        // 顯示通話已連接
-        function showCallConnected(partner) {
-            hideIncomingCall();
-            document.getElementById('callStatus').classList.remove('hidden');
-            document.getElementById('callPartner').textContent = partner;
-            document.getElementById('callStatus').innerHTML = `
-                <div>🔊 通話中：${partner}</div>
-                <button class="btn" onclick="endCall()" style="background: #dc3545;">結束通話</button>
-            `;
+        // 隱藏新訊息提示
+        function hideNewMessageIndicator() {
+            newMessagesIndicator.style.display = 'none';
         }
 
-        // 結束通話
-        function endCall() {
-            // 清除通話記錄
-            database.ref('calls/' + currentUser).remove();
-            if (currentCall) {
-                database.ref('calls/' + currentCall).remove();
-            }
-
-            // 隱藏通話相關界面
-            document.getElementById('callStatus').classList.add('hidden');
-            hideIncomingCall();
-            currentCall = null;
-        }
-
-        // 取消撥號
-        function cancelCall() {
-            const partner = document.getElementById('callPartner').textContent;
-            database.ref('calls/' + partner).remove();
-            endCall();
+        // HTML 轉義
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // 登出
         function logout() {
+            if (!confirm('確定要登出嗎？')) {
+                return;
+            }
+
+            // 發送系統訊息
+            sendSystemMessage(currentUser + ' 離開了聊天室');
+            
             // 清除用戶狀態
             database.ref('users/' + currentUser).remove();
-            
-            // 清除通話記錄
-            database.ref('calls/' + currentUser).remove();
+
+            // 移除事件監聽
+            database.ref('users').off();
+            database.ref('messages').off();
 
             // 重置界面
-            document.getElementById('callSection').classList.add('hidden');
+            document.getElementById('chatSection').classList.add('hidden');
             document.getElementById('loginSection').classList.remove('hidden');
             document.getElementById('username').value = '';
+            messagesContainer.innerHTML = '';
+            loading.style.display = 'block';
             
+            // 重置變數
             currentUser = '';
-            currentCall = null;
+            unreadMessages = 0;
+            lastMessageTime = 0;
+            messagesLoaded = false;
+            hideNewMessageIndicator();
         }
+
+        // 更新字數統計
+        function updateCharCount() {
+            const length = messageInput.value.length;
+            charCount.textContent = `${length}/500`;
+            
+            if (length >= 500) {
+                charCount.classList.add('at-limit');
+                charCount.classList.remove('near-limit');
+            } else if (length >= 400) {
+                charCount.classList.add('near-limit');
+                charCount.classList.remove('at-limit');
+            } else {
+                charCount.classList.remove('near-limit', 'at-limit');
+            }
+
+            sendBtn.disabled = length === 0 || length > 500 || !isOnline;
+        }
+
+        // 事件監聽器
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+            updateCharCount();
+        });
+
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        messagesContainer.addEventListener('scroll', function() {
+            isAtBottom = this.scrollHeight - this.scrollTop - this.clientHeight < 50;
+            if (isAtBottom) {
+                hideNewMessageIndicator();
+                unreadMessages = 0;
+            }
+        });
+
+        // 頁面載入完成後初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNetworkMonitoring();
+            updateCharCount();
+        });
 
         // 頁面關閉時清理
         window.addEventListener('beforeunload', () => {
             if (currentUser) {
                 database.ref('users/' + currentUser).remove();
-                database.ref('calls/' + currentUser).remove();
+                sendSystemMessage(currentUser + ' 離開了聊天室');
+            }
+        });
+
+        // 防止重複登入同一個名稱
+        window.addEventListener('focus', () => {
+            if (currentUser) {
+                updateUserStatus('online');
             }
         });
     </script>
