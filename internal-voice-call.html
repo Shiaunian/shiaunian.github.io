@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>語音通話系統</title>
+    <title>T2內部語音通話系統</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -19,778 +19,434 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .container {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             width: 90%;
             max-width: 500px;
-        }
-        
-        .header {
             text-align: center;
-            margin-bottom: 30px;
         }
-        
-        .header h1 {
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
             color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
+            margin-bottom: 0.5rem;
         }
-        
-        .header p {
+
+        .subtitle {
             color: #666;
-            font-size: 16px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
         }
-        
-        /* 登入畫面 */
-        .login-screen {
-            display: block;
+
+        .login-section, .call-section {
+            margin-bottom: 2rem;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
         }
-        
+
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             color: #333;
-            font-weight: bold;
+            font-weight: 500;
         }
-        
+
         input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
             transition: border-color 0.3s;
         }
-        
+
         input:focus {
             outline: none;
             border-color: #667eea;
         }
-        
-        button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-        
-        .btn-primary {
-            background: #667eea;
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 0.5rem;
         }
-        
-        .btn-primary:hover {
-            background: #5a67d8;
+
+        .btn:hover {
             transform: translateY(-2px);
         }
-        
-        .btn-success {
-            background: #48bb78;
-            color: white;
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
         }
-        
-        .btn-success:hover {
-            background: #38a169;
+
+        .status {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-weight: 500;
         }
-        
-        .btn-danger {
-            background: #f56565;
-            color: white;
+
+        .status.online {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
-        
-        .btn-danger:hover {
-            background: #e53e3e;
+
+        .status.calling {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
         }
-        
-        .btn-warning {
-            background: #ed8936;
-            color: white;
+
+        .status.incoming {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            animation: pulse 1s infinite;
         }
-        
-        .btn-warning:hover {
-            background: #dd6b20;
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
-        
-        /* 主畫面 */
-        .main-screen {
+
+        .hidden {
             display: none;
         }
-        
-        .user-info {
-            background: #f7fafc;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .user-info h3 {
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-        
-        .status {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        
-        .status.online {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-        
-        .status.calling {
-            background: #fed7d7;
-            color: #742a2a;
-        }
-        
-        .status.in-call {
-            background: #bee3f8;
-            color: #2a4365;
-        }
-        
+
         .online-users {
-            margin-bottom: 25px;
+            text-align: left;
+            margin: 1rem 0;
         }
-        
-        .online-users h4 {
-            color: #2d3748;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .user-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
+
         .user-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: #f7fafc;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            transition: background 0.3s;
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
         }
-        
-        .user-item:hover {
-            background: #edf2f7;
+
+        .user-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #28a745;
+            display: inline-block;
+            margin-right: 0.5rem;
         }
-        
-        .user-item span {
-            font-weight: bold;
-            color: #2d3748;
-        }
-        
+
         .call-btn {
-            padding: 8px 16px;
-            background: #48bb78;
+            background: #28a745;
             color: white;
             border: none;
-            border-radius: 6px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-        
-        .call-btn:hover {
-            background: #38a169;
-        }
-        
-        .call-btn:disabled {
-            background: #cbd5e0;
-            cursor: not-allowed;
-        }
-        
-        /* 通話畫面 */
-        .call-screen {
-            display: none;
-            text-align: center;
-        }
-        
-        .call-info {
-            margin-bottom: 30px;
-        }
-        
-        .call-info h3 {
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-        
-        .call-timer {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-        
-        .call-controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .call-controls button {
-            width: auto;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 14px;
-        }
-        
-        /* 來電畫面 */
-        .incoming-call {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .incoming-call-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            max-width: 400px;
-            width: 90%;
-        }
-        
-        .incoming-call h3 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .incoming-call-controls {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-        
-        .incoming-call-controls button {
-            width: auto;
-            padding: 15px 30px;
-            border-radius: 10px;
-        }
-        
-        /* 音效控制 */
-        .volume-control {
-            margin: 20px 0;
-            text-align: center;
-        }
-        
-        .volume-slider {
-            width: 200px;
-            margin: 0 10px;
-        }
-        
-        /* 響應式設計 */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                width: 95%;
-            }
-            
-            .call-controls {
-                flex-direction: column;
-            }
-            
-            .incoming-call-controls {
-                flex-direction: column;
-            }
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 登入畫面 -->
-        <div id="loginScreen" class="login-screen">
-            <div class="header">
-                <h1>🎙️ 語音通話系統</h1>
-                <p>請輸入您的姓名登入</p>
-            </div>
-            
-            <div class="form-group">
+        <div class="logo">📞 T2語音通話</div>
+        <div class="subtitle">內部通訊系統</div>
+
+        <!-- 登入區域 -->
+        <div id="loginSection" class="login-section">
+            <div class="input-group">
                 <label for="username">使用者名稱</label>
-                <input type="text" id="username" placeholder="請輸入您的姓名" maxlength="20">
+                <input type="text" id="username" placeholder="請輸入您的姓名">
             </div>
-            
-            <button id="loginBtn" class="btn-primary">🚀 登入系統</button>
+            <button class="btn" onclick="login()">登入系統</button>
         </div>
-        
-        <!-- 主畫面 -->
-        <div id="mainScreen" class="main-screen">
-            <div class="header">
-                <h1>🎙️ 語音通話系統</h1>
+
+        <!-- 通話區域 -->
+        <div id="callSection" class="call-section hidden">
+            <div id="userStatus" class="status online">
+                <span id="currentUser"></span> - 線上
             </div>
-            
-            <div class="user-info">
-                <h3>歡迎，<span id="currentUser"></span></h3>
-                <span id="userStatus" class="status online">線上</span>
-            </div>
-            
+
             <div class="online-users">
-                <h4>📋 線上用戶</h4>
-                <div id="userList" class="user-list">
-                    <!-- 動態生成用戶列表 -->
-                </div>
+                <h3>線上用戶</h3>
+                <div id="usersList"></div>
             </div>
-            
-            <div class="volume-control">
-                <label>🔊 音量控制</label>
-                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="80">
-                <span id="volumeValue">80%</span>
+
+            <div class="input-group">
+                <label for="targetUser">撥打給</label>
+                <input type="text" id="targetUser" placeholder="輸入對方姓名">
             </div>
-            
-            <button id="logoutBtn" class="btn-danger">🚪 登出系統</button>
-        </div>
-        
-        <!-- 通話畫面 -->
-        <div id="callScreen" class="call-screen">
-            <div class="call-info">
-                <h3>🎙️ 通話中</h3>
-                <p>正在與 <strong id="callingUser"></strong> 通話</p>
-                <div id="callTimer" class="call-timer">00:00</div>
+
+            <button class="btn" onclick="makeCall()">📞 撥打電話</button>
+            <button class="btn" onclick="logout()" style="background: #dc3545;">登出</button>
+
+            <!-- 來電通知 -->
+            <div id="incomingCall" class="status incoming hidden">
+                <div>📞 <span id="callerName"></span> 來電中...</div>
+                <button class="btn" onclick="acceptCall()" style="background: #28a745;">接聽</button>
+                <button class="btn" onclick="rejectCall()" style="background: #dc3545;">拒絕</button>
             </div>
-            
-            <div class="call-controls">
-                <button id="muteBtn" class="btn-warning">🔇 靜音</button>
-                <button id="hangupBtn" class="btn-danger">📞 掛斷</button>
-            </div>
-            
-            <!-- 隱藏的音訊元素 -->
-            <audio id="localAudio" muted></audio>
-            <audio id="remoteAudio" autoplay></audio>
-        </div>
-    </div>
-    
-    <!-- 來電通知 -->
-    <div id="incomingCall" class="incoming-call">
-        <div class="incoming-call-box">
-            <h3>📞 來電通知</h3>
-            <p><strong id="callerName"></strong> 正在呼叫您</p>
-            <div class="incoming-call-controls">
-                <button id="acceptCallBtn" class="btn-success">✅ 接聽</button>
-                <button id="rejectCallBtn" class="btn-danger">❌ 拒接</button>
+
+            <!-- 通話中狀態 -->
+            <div id="callStatus" class="status calling hidden">
+                <div>🔊 通話中：<span id="callPartner"></span></div>
+                <button class="btn" onclick="endCall()" style="background: #dc3545;">結束通話</button>
             </div>
         </div>
     </div>
-    
-    <!-- 音效檔案 -->
-    <audio id="ringTone" loop>
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU4kdXy0n0vBSF3x+/eizELElyx5+yrWBUIQ53d87xtIgUqgM7y2Ik2CBxqvfDim04MD1Gq5O24ZRoFOZLU8tJ+LgUgdsfw3YwxCxJcsefjrVkVCEOd3fO7bSMFKoDO8tiJNggcab3w45xODA5QquTtuWUaBTmS1PLSfi4FIHbH8N2MMQsSXLHn461ZFQhDnd3zu20jBSqAzvLYiTYIHGm98OOcTgwOUKrk7bllGgU5ktTy0n4uBSB2x/DdjDELElyx5+OtWRUIQ53d87ttIwUqgM7y2Ik2CBxpvfDjnE4MDlCq5O25ZRoFOZLU8tJ+LgUgdsfw3YwxCxJcsefjrVkVCEOd3fO7bSMFKoDO8tiJNggcab3w45xODA5QquTtuWUaBTmS1PLSfi4FIHbH8N2MMQsSXLHn461ZFQhDnd3zu20jBSqAzvLYiTYIHGm98OOcTgwOUKrk7bllGgU5ktTy0n4uBSB2x/DdjDELElyx5+OtWRUIQ53d87ttIwUqgM7y2Ik2CBxpvfDjnE4MDlCq5O25ZRoFOZLU8tJ+LgUgdsfw3YwxCxJcsefjrVkVCEOd3fO7bSMFKoDO8tiJNggcab3w45xODA5QquTtuWUaBTmS1PLSfi4FIHbH8N2MMQsSXLHn461ZFQhDnd3zu20jBSqAzvLYiTYIHGm98OOcTgwOUKrk7bllGgU5ktTy0n4uBSB2x/DdjDELElyx5+OtWRUIQ53d87ttIwUqgM7y2Ik2CBxpvfDjnE4MDlCq5O25ZRoFOZLU8tJ+LgUgdsfw3YwxCxJcsefjrVkVCEOd3fO7bSMFKoDO8tiJNggcab3w45xODA5QquTtuWUaBTmS1PLSfi4FIHbH8N2MMQsSXLHn461ZFQhDnd3zu20jBSqAzvLYiTYIHGm98OOcTgwOUKrk7bllGgU5ktTy0n4uBSB2x/DdjDELElyx5+OtWRUIQ53d87ttIwUqgM7y2Ik2CBxpvfDjnE4MDlCq5O25ZRoFOZLU8tJ+LgUgdsfw3YwxCxJcsefjrVkVCEOd3fO7bSMFKoDO8tiJNggcab3w45xODA5QquTtuWUaBTmS1PLSfi4FIHbH8N2MMQsSXLHn461ZFQhDnd3zu20jBSqAzvLYiTYIHGm98OOcTgwOUKrk7bllGgU5ktTy0n4uBSB2x/DdjDELElyx5+OtWRUIQ53d87ttIwUqgM7y2Ik=" type="audio/wav">
-    </audio>
-    
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
     <script>
-        // 全域變數
-        let currentUser = '';
-        let onlineUsers = new Map();
-        let peerConnection = null;
-        let localStream = null;
-        let callTimer = null;
-        let callStartTime = null;
-        let isMuted = false;
-        
-        // DOM 元素
-        const loginScreen = document.getElementById('loginScreen');
-        const mainScreen = document.getElementById('mainScreen');
-        const callScreen = document.getElementById('callScreen');
-        const incomingCall = document.getElementById('incomingCall');
-        
-        const usernameInput = document.getElementById('username');
-        const loginBtn = document.getElementById('loginBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const currentUserSpan = document.getElementById('currentUser');
-        const userList = document.getElementById('userList');
-        const volumeSlider = document.getElementById('volumeSlider');
-        const volumeValue = document.getElementById('volumeValue');
-        
-        const callingUser = document.getElementById('callingUser');
-        const callTimerDiv = document.getElementById('callTimer');
-        const muteBtn = document.getElementById('muteBtn');
-        const hangupBtn = document.getElementById('hangupBtn');
-        
-        const callerName = document.getElementById('callerName');
-        const acceptCallBtn = document.getElementById('acceptCallBtn');
-        const rejectCallBtn = document.getElementById('rejectCallBtn');
-        
-        const localAudio = document.getElementById('localAudio');
-        const remoteAudio = document.getElementById('remoteAudio');
-        const ringTone = document.getElementById('ringTone');
-        
-        // WebRTC 設定
-        const rtcConfiguration = {
-            iceServers: [
-                { urls: 'stun:stun.l.google.com:19302' },
-                { urls: 'stun:stun1.l.google.com:19302' }
-            ]
+        // Firebase 配置
+        const firebaseConfig = {
+            databaseURL: "https://my-awesome-project-id-1c490-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
-        
-        // 事件監聽器
-        loginBtn.addEventListener('click', login);
-        logoutBtn.addEventListener('click', logout);
-        muteBtn.addEventListener('click', toggleMute);
-        hangupBtn.addEventListener('click', endCall);
-        acceptCallBtn.addEventListener('click', acceptCall);
-        rejectCallBtn.addEventListener('click', rejectCall);
-        
-        usernameInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') login();
-        });
-        
-        volumeSlider.addEventListener('input', (e) => {
-            const volume = e.target.value;
-            volumeValue.textContent = volume + '%';
-            remoteAudio.volume = volume / 100;
-        });
-        
+
+        // 初始化 Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        let currentUser = '';
+        let onlineUsers = {};
+        let currentCall = null;
+
         // 登入功能
         function login() {
-            const username = usernameInput.value.trim();
+            const username = document.getElementById('username').value.trim();
             if (!username) {
                 alert('請輸入使用者名稱');
                 return;
             }
-            
+
             currentUser = username;
-            currentUserSpan.textContent = username;
             
-            // 模擬其他線上用戶
-            simulateOnlineUsers();
-            
-            // 切換到主畫面
-            loginScreen.style.display = 'none';
-            mainScreen.style.display = 'block';
-            
-            // 初始化音訊
-            initializeAudio();
-            
-            console.log(`${username} 已登入系統`);
+            // 設置用戶在線狀態
+            const userRef = database.ref('users/' + currentUser);
+            userRef.set({
+                status: 'online',
+                lastSeen: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            // 監聽斷線時自動下線
+            userRef.onDisconnect().set({
+                status: 'offline',
+                lastSeen: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            // 顯示通話界面
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('callSection').classList.remove('hidden');
+            document.getElementById('currentUser').textContent = currentUser;
+
+            // 開始監聽
+            startListening();
         }
-        
-        // 登出功能
-        function logout() {
-            if (peerConnection) {
-                endCall();
-            }
-            
-            if (localStream) {
-                localStream.getTracks().forEach(track => track.stop());
-            }
-            
-            currentUser = '';
-            onlineUsers.clear();
-            
-            loginScreen.style.display = 'block';
-            mainScreen.style.display = 'none';
-            callScreen.style.display = 'none';
-            incomingCall.style.display = 'none';
-            
-            usernameInput.value = '';
-            
-            console.log('已登出系統');
-        }
-        
-        // 模擬線上用戶
-        function simulateOnlineUsers() {
-            const users = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve'];
-            onlineUsers.clear();
-            
-            // 隨機添加 2-4 個用戶
-            const userCount = Math.floor(Math.random() * 3) + 2;
-            const selectedUsers = users.sort(() => 0.5 - Math.random()).slice(0, userCount);
-            
-            selectedUsers.forEach(user => {
-                if (user !== currentUser) {
-                    onlineUsers.set(user, { status: 'online' });
+
+        // 開始監聽各種事件
+        function startListening() {
+            // 監聽線上用戶
+            database.ref('users').on('value', (snapshot) => {
+                const users = snapshot.val() || {};
+                onlineUsers = {};
+                
+                Object.keys(users).forEach(username => {
+                    if (users[username].status === 'online' && username !== currentUser) {
+                        onlineUsers[username] = users[username];
+                    }
+                });
+                
+                updateUsersList();
+            });
+
+            // 監聽來電
+            database.ref('calls/' + currentUser).on('value', (snapshot) => {
+                const callData = snapshot.val();
+                if (callData && callData.status === 'calling' && callData.caller !== currentUser) {
+                    showIncomingCall(callData.caller);
                 }
             });
-            
-            updateUserList();
+
+            // 監聽通話狀態變化
+            database.ref('calls/' + currentUser).on('value', (snapshot) => {
+                const callData = snapshot.val();
+                if (callData) {
+                    if (callData.status === 'connected') {
+                        showCallConnected(callData.caller === currentUser ? callData.receiver : callData.caller);
+                    } else if (callData.status === 'ended') {
+                        endCall();
+                    }
+                }
+            });
         }
-        
-        // 更新用戶列表
-        function updateUserList() {
-            userList.innerHTML = '';
-            
-            if (onlineUsers.size === 0) {
-                userList.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">目前沒有其他用戶線上</div>';
-                return;
-            }
-            
-            onlineUsers.forEach((userData, username) => {
+
+        // 更新線上用戶列表
+        function updateUsersList() {
+            const usersList = document.getElementById('usersList');
+            usersList.innerHTML = '';
+
+            Object.keys(onlineUsers).forEach(username => {
                 const userItem = document.createElement('div');
                 userItem.className = 'user-item';
-                
-                const isInCall = userData.status === 'in-call';
-                
                 userItem.innerHTML = `
-                    <span>${username}</span>
-                    <button class="call-btn" onclick="makeCall('${username}')" ${isInCall ? 'disabled' : ''}>
-                        ${isInCall ? '通話中' : '📞 撥打'}
-                    </button>
+                    <span><span class="user-status"></span>${username}</span>
+                    <button class="call-btn" onclick="callUser('${username}')">通話</button>
                 `;
-                
-                userList.appendChild(userItem);
+                usersList.appendChild(userItem);
             });
-        }
-        
-        // 初始化音訊
-        async function initializeAudio() {
-            try {
-                localStream = await navigator.mediaDevices.getUserMedia({ 
-                    audio: true, 
-                    video: false 
-                });
-                localAudio.srcObject = localStream;
-                console.log('音訊初始化成功');
-            } catch (error) {
-                console.error('無法取得麥克風權限:', error);
-                alert('無法取得麥克風權限，請檢查瀏覽器設定');
+
+            if (Object.keys(onlineUsers).length === 0) {
+                usersList.innerHTML = '<div style="text-align: center; color: #666;">目前沒有其他用戶在線</div>';
             }
         }
-        
+
         // 撥打電話
-        async function makeCall(targetUser) {
-            if (!localStream) {
-                alert('請先允許麥克風權限');
+        function makeCall() {
+            const targetUser = document.getElementById('targetUser').value.trim();
+            if (!targetUser) {
+                alert('請輸入要撥打的用戶名稱');
                 return;
             }
-            
-            console.log(`正在撥打給 ${targetUser}`);
-            
-            // 模擬撥打延遲
-            setTimeout(() => {
-                // 模擬對方接聽或拒接
-                const willAnswer = Math.random() > 0.3; // 70% 機率接聽
-                
-                if (willAnswer) {
-                    startCall(targetUser);
-                } else {
-                    alert(`${targetUser} 沒有接聽`);
-                }
-            }, 2000);
-            
-            // 更新用戶狀態
-            onlineUsers.get(targetUser).status = 'calling';
-            updateUserList();
+            callUser(targetUser);
         }
-        
-        // 模擬來電
-        function simulateIncomingCall() {
-            const callers = Array.from(onlineUsers.keys());
-            if (callers.length === 0) return;
-            
-            const caller = callers[Math.floor(Math.random() * callers.length)];
-            showIncomingCall(caller);
+
+        // 呼叫用戶
+        function callUser(targetUser) {
+            if (!onlineUsers[targetUser]) {
+                alert('用戶不在線或不存在');
+                return;
+            }
+
+            // 設置通話請求
+            database.ref('calls/' + targetUser).set({
+                caller: currentUser,
+                receiver: targetUser,
+                status: 'calling',
+                timestamp: firebase.database.ServerValue.TIMESTAMP
+            });
+
+            // 顯示撥號中狀態
+            document.getElementById('callStatus').classList.remove('hidden');
+            document.getElementById('callPartner').textContent = targetUser;
+            document.getElementById('callStatus').innerHTML = `
+                <div>📞 撥號中：${targetUser}</div>
+                <button class="btn" onclick="cancelCall()" style="background: #dc3545;">取消</button>
+            `;
         }
-        
-        // 顯示來電通知
+
+        // 顯示來電
         function showIncomingCall(caller) {
-            callerName.textContent = caller;
-            incomingCall.style.display = 'flex';
-            
-            // 播放鈴聲
-            ringTone.currentTime = 0;
-            ringTone.play().catch(e => console.log('無法播放鈴聲:', e));
-            
-            console.log(`收到來自 ${caller} 的來電`);
+            document.getElementById('incomingCall').classList.remove('hidden');
+            document.getElementById('callerName').textContent = caller;
+            currentCall = caller;
         }
-        
+
         // 接聽電話
         function acceptCall() {
-            const caller = callerName.textContent;
-            
-            // 停止鈴聲
-            ringTone.pause();
-            ringTone.currentTime = 0;
-            
-            // 隱藏來電通知
-            incomingCall.style.display = 'none';
-            
-            // 開始通話
-            startCall(caller);
-            
-            console.log(`接聽來自 ${caller} 的電話`);
-        }
-        
-        // 拒接電話
-        function rejectCall() {
-            const caller = callerName.textContent;
-            
-            // 停止鈴聲
-            ringTone.pause();
-            ringTone.currentTime = 0;
-            
-            // 隱藏來電通知
-            incomingCall.style.display = 'none';
-            
-            console.log(`拒接來自 ${caller} 的電話`);
-        }
-        
-        // 開始通話
-        async function startCall(otherUser) {
-            try {
-                // 建立 WebRTC 連線
-                peerConnection = new RTCPeerConnection(rtcConfiguration);
-                
-                // 添加本地音訊流
-                localStream.getTracks().forEach(track => {
-                    peerConnection.addTrack(track, localStream);
+            if (currentCall) {
+                // 更新通話狀態為已連接
+                database.ref('calls/' + currentUser).update({
+                    status: 'connected'
                 });
                 
-                // 處理遠端音訊流
-                peerConnection.ontrack = (event) => {
-                    remoteAudio.srcObject = event.streams[0];
-                };
-                
-                // 切換到通話畫面
-                mainScreen.style.display = 'none';
-                callScreen.style.display = 'block';
-                
-                callingUser.textContent = otherUser;
-                
-                // 開始計時
-                startCallTimer();
-                
-                // 更新用戶狀態
-                document.getElementById('userStatus').textContent = '通話中';
-                document.getElementById('userStatus').className = 'status in-call';
-                
-                console.log(`與 ${otherUser} 的通話已開始`);
-                
-            } catch (error) {
-                console.error('建立通話連線失敗:', error);
-                alert('建立通話連線失敗');
+                database.ref('calls/' + currentCall).update({
+                    status: 'connected'
+                });
+
+                showCallConnected(currentCall);
             }
         }
-        
-        // 開始通話計時
-        function startCallTimer() {
-            callStartTime = Date.now();
-            callTimer = setInterval(() => {
-                const elapsed = Math.floor((Date.now() - callStartTime) / 1000);
-                const minutes = Math.floor(elapsed / 60);
-                const seconds = elapsed % 60;
-                callTimerDiv.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-        
-        // 切換靜音
-        function toggleMute() {
-            if (!localStream) return;
-            
-            const audioTrack = localStream.getAudioTracks()[0];
-            if (audioTrack) {
-                audioTrack.enabled = !audioTrack.enabled;
-                isMuted = !audioTrack.enabled;
-                
-                muteBtn.textContent = isMuted ? '🔊 取消靜音' : '🔇 靜音';
-                muteBtn.className = isMuted ? 'btn-success' : 'btn-warning';
-                
-                console.log(isMuted ? '已靜音' : '已取消靜音');
+
+        // 拒絕電話
+        function rejectCall() {
+            if (currentCall) {
+                database.ref('calls/' + currentUser).remove();
+                database.ref('calls/' + currentCall).remove();
+                hideIncomingCall();
             }
         }
-        
+
+        // 隱藏來電通知
+        function hideIncomingCall() {
+            document.getElementById('incomingCall').classList.add('hidden');
+            currentCall = null;
+        }
+
+        // 顯示通話已連接
+        function showCallConnected(partner) {
+            hideIncomingCall();
+            document.getElementById('callStatus').classList.remove('hidden');
+            document.getElementById('callPartner').textContent = partner;
+            document.getElementById('callStatus').innerHTML = `
+                <div>🔊 通話中：${partner}</div>
+                <button class="btn" onclick="endCall()" style="background: #dc3545;">結束通話</button>
+            `;
+        }
+
         // 結束通話
         function endCall() {
-            // 停止計時
-            if (callTimer) {
-                clearInterval(callTimer);
-                callTimer = null;
+            // 清除通話記錄
+            database.ref('calls/' + currentUser).remove();
+            if (currentCall) {
+                database.ref('calls/' + currentCall).remove();
             }
-            
-            // 關閉 WebRTC 連線
-            if (peerConnection) {
-                peerConnection.close();
-                peerConnection = null;
-            }
-            
-            // 重置音訊
-            remoteAudio.srcObject = null;
-            
-            // 重置靜音狀態
-            if (localStream) {
-                const audioTrack = localStream.getAudioTracks()[0];
-                if (audioTrack) {
-                    audioTrack.enabled = true;
-                }
-            }
-            isMuted = false;
-            muteBtn.textContent = '🔇 靜音';
-            muteBtn.className = 'btn-warning';
-            
-            // 切換回主畫面
-            callScreen.style.display = 'none';
-            mainScreen.style.display = 'block';
-            
-            // 重置用戶狀態
-            document.getElementById('userStatus').textContent = '線上';
-            document.getElementById('userStatus').className = 'status online';
-            
-            // 重置其他用戶狀態
-            onlineUsers.forEach((userData, username) => {
-                userData.status = 'online';
-            });
-            updateUserList();
-            
-            console.log('通話已結束');
+
+            // 隱藏通話相關界面
+            document.getElementById('callStatus').classList.add('hidden');
+            hideIncomingCall();
+            currentCall = null;
         }
-        
-        // 模擬定期收到來電 (測試用)
-        setInterval(() => {
-            if (currentUser && mainScreen.style.display === 'block' && Math.random() > 0.7) {
-                simulateIncomingCall();
-            }
-        }, 30000); // 每30秒有30%機率收到來電
-        
-        // 頁面載入完成後的初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('語音通話系統已載入');
-        });
-        
-        // 頁面關閉前清理資源
+
+        // 取消撥號
+        function cancelCall() {
+            const partner = document.getElementById('callPartner').textContent;
+            database.ref('calls/' + partner).remove();
+            endCall();
+        }
+
+        // 登出
+        function logout() {
+            // 清除用戶狀態
+            database.ref('users/' + currentUser).remove();
+            
+            // 清除通話記錄
+            database.ref('calls/' + currentUser).remove();
+
+            // 重置界面
+            document.getElementById('callSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            
+            currentUser = '';
+            currentCall = null;
+        }
+
+        // 頁面關閉時清理
         window.addEventListener('beforeunload', () => {
-            if (localStream) {
-                localStream.getTracks().forEach(track => track.stop());
-            }
-            if (peerConnection) {
-                peerConnection.close();
+            if (currentUser) {
+                database.ref('users/' + currentUser).remove();
+                database.ref('calls/' + currentUser).remove();
             }
         });
-        
-        // 處理瀏覽器權限變化
-        navigator.permissions.query({name: 'microphone'}).then((result) => {
-            result.onchange = () => {
-                console.log('麥克風權限狀態:', result.state);
-            };
-        });
-        
     </script>
 </body>
 </html>
