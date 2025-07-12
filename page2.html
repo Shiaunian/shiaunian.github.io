@@ -621,6 +621,7 @@
   </div>
 
   <script>
+
         // ====== 強化登入檢查：帳號還在不在名單內 ======
 function checkLogin() {
   const flag = localStorage.getItem("t2_login");
@@ -732,13 +733,13 @@ function checkLogin() {
           correct: 1
         },
         {
-          question: "斑蘭蛋糕應該如何處理？",
+          question: "如有蛋糕應該如何處理？",
           options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 需要申報"],
           correct: 1
         },
         {
-          question: "低風險疫區卡片收取後應該？",
-          options: ["A. 請旅客過X光", "B. 直接往前不用過X光", "C. 進行手檢", "D. 填寫記錄"],
+          question: "如前導收取到，低風險疫區卡片收取後應該？",
+          options: ["A. 請旅客過X光", "B. 直接往前不用過X光，並告知同仁", "C. 進行手檢", "D. 填寫記錄"],
           correct: 1
         },
         {
@@ -753,12 +754,12 @@ function checkLogin() {
         },
         {
           question: "旅客攜帶會倒的飲料應該？",
-          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子", "C. 前面手檢", "D. 禁止攜帶"],
+          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子，前面手檢", "C. 請旅客先喝完再回來過行李", "D. 請旅客拋棄"],
           correct: 1
         },
         {
-          question: "換哨/下哨時需要做什麼？",
-          options: ["A. 直接離開", "B. 處理檢疫物和清理垃圾", "C. 只需清理垃圾", "D. 只需處理檢疫物"],
+          question: "換哨/下哨時，前導主要需要做什麼？",
+          options: ["A. 直接離開", "B. 處理檢疫物和清理垃圾", "C. 等待接哨人員，才能離開", "D. 自己東西要拿走"],
           correct: 1
         },
         {
@@ -768,7 +769,7 @@ function checkLogin() {
         },
         {
           question: "樂器袋裝的樂器需要？",
-          options: ["A. 前面手檢", "B. 過X光機", "C. 直接放行", "D. 開袋檢查"],
+          options: ["A. 前面手檢", "B. 過X光機", "C. 直接放行", "D. 現場開袋檢查"],
           correct: 1
         },
         {
@@ -778,15 +779,218 @@ function checkLogin() {
         },
         {
           question: "相機底片應該如何處理？",
-          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子", "C. 前面手檢", "D. 特殊處理"],
-          correct: 1
+          options: ["A. 過X光機", "B. 請旅客拿到前面，給複查手檢查看", "C. 底片不能帶，請旅客拋棄", "D. 請旅客拿在手上往前，並告知是底片"],
+          correct: 3
         },
         {
           question: "包裝紙箱需要？",
-          options: ["A. 拆開檢查", "B. 過X光機", "C. 直接放行", "D. 前面手檢"],
+          options: ["A. 請旅客先拆開，再過Ｘ光機", "B. 一樣過X光機", "C. 直接放行", "D. 不須過X光，前面手檢"],
           correct: 1
         }
+            ],
+            "英文基本食物類單字考試": [
+        {
+          question: "蘋果的英文是？",
+          options: ["A. apple", "B. april", "C. ample", "D. ankle"],
+          correct: 0
+        },
+        {
+          question: "香蕉的英文是？",
+          options: ["A. balance", "B. banana", "C. bandana", "D. bamboo"],
+          correct: 1
+        },
+        {
+          question: "紅蘿蔔的英文是？",
+          options: ["A. carpet", "B. carbon", "C. carrot", "D. carton"],
+          correct: 2
+        },
+        {
+          question: "馬鈴薯的英文是？",
+          options: ["A. potato", "B. tomato", "C. photo", "D. pilot"],
+          correct: 0
+        },
+        {
+          question: "牛肉的英文是？",
+          options: ["A. beach", "B. beast", "C. beard", "D. beef"],
+          correct: 3
+        },
+        {
+          question: "豬肉的英文是？",
+          options: ["A. park", "B. pork", "C. port", "D. poor"],
+          correct: 1
+        },
+        {
+          question: "起司的英文是？",
+          options: ["A. choose", "B. chase", "C. cheese", "D. cheap"],
+          correct: 2
+        },
+        {
+          question: "檸檬的英文是？",
+          options: ["A. lemon", "B. melon", "C. lesson", "D. legal"],
+          correct: 0
+        },
+        {
+          question: "玉米的英文是？",
+          options: ["A. coin", "B. core", "C. corn", "D. cord"],
+          correct: 2
+        },
+        {
+          question: "海鮮的英文是？",
+          options: ["A. season", "B. seafood", "C. second", "D. secret"],
+          correct: 1
+        },
+        {
+          question: "堅果的英文是？",
+          options: ["A. nuts", "B. news", "C. next", "D. neck"],
+          correct: 0
+        },
+        {
+          question: "種子的英文是？",
+          options: ["A. seems", "B. seven", "C. seeds", "D. sense"],
+          correct: 2
+        },
+        {
+          question: "蜂蜜的英文是？",
+          options: ["A. happy", "B. heavy", "C. honey", "D. horse"],
+          correct: 2
+        },
+        {
+          question: "雞肉的英文是？",
+          options: ["A. chicken", "B. kitchen", "C. children", "D. check"],
+          correct: 0
+        },
+        {
+          question: "魚肉的英文是？",
+          options: ["A. face", "B. fish", "C. first", "D. fire"],
+          correct: 1
+        },
+        {
+          question: "葡萄的英文是？",
+          options: ["A. group", "B. great", "C. grape", "D. green"],
+          correct: 2
+        },
+        {
+          question: "芒果的英文是？",
+          options: ["A. money", "B. mango", "C. month", "D. mouse"],
+          correct: 1
+        },
+        {
+          question: "洋蔥的英文是？",
+          options: ["A. onion", "B. ocean", "C. often", "D. option"],
+          correct: 0
+        },
+        {
+          question: "大蒜的英文是？",
+          options: ["A. game", "B. gate", "C. garlic", "D. garden"],
+          correct: 2
+        },
+        {
+          question: "高麗菜的英文是？",
+          options: ["A. camera", "B. cabbage", "C. candle", "D. castle"],
+          correct: 1
+        },
+        {
+          question: "萵苣的英文是？",
+          options: ["A. letter", "B. little", "C. lettuce", "D. listen"],
+          correct: 2
+        },
+        {
+          question: "小黃瓜的英文是？",
+          options: ["A. culture", "B. current", "C. cucumber", "D. customer"],
+          correct: 2
+        },
+        {
+          question: "辣椒的英文是？",
+          options: ["A. people", "B. pepper", "C. paper", "D. peace"],
+          correct: 1
+        },
+        {
+          question: "牛奶的英文是？",
+          options: ["A. make", "B. mile", "C. milk", "D. mind"],
+          correct: 2
+        },
+        {
+          question: "奶油的英文是？",
+          options: ["A. better", "B. butter", "C. bottle", "D. battle"],
+          correct: 1
+        },
+        {
+          question: "優格的英文是？",
+          options: ["A. young", "B. yellow", "C. yogurt", "D. yesterday"],
+          correct: 2
+        },
+        {
+          question: "米飯的英文是？",
+          options: ["A. race", "B. rich", "C. rice", "D. ride"],
+          correct: 2
+        },
+        {
+          question: "麵包的英文是？",
+          options: ["A. break", "B. bread", "C. bring", "D. brown"],
+          correct: 1
+        },
+        {
+          question: "雞蛋的英文是？",
+          options: ["A. each", "B. easy", "C. egg", "D. end"],
+          correct: 2
+        },
+        {
+          question: "茶葉的英文是？",
+          options: ["A. tea", "B. ten", "C. tell", "D. tree"],
+          correct: 0
+        },
+        {
+          question: "咖啡的英文是？",
+          options: ["A. coffee", "B. corner", "C. course", "D. color"],
+          correct: 0
+        },
+        {
+          question: "新鮮食物的英文是？",
+          options: ["A. fresh food", "B. free food", "C. first food", "D. friend food"],
+          correct: 0
+        },
+        {
+          question: "加工食品的英文是？",
+          options: ["A. process food", "B. processed food", "C. progress food", "D. protect food"],
+          correct: 1
+        },
+        {
+          question: "罐頭食品的英文是？",
+          options: ["A. can food", "B. canned food", "C. call food", "D. card food"],
+          correct: 1
+        },
+        {
+          question: "乾燥食品的英文是？",
+          options: ["A. drive food", "B. dream food", "C. dried food", "D. drink food"],
+          correct: 2
+        },
+        {
+          question: "冷凍食品的英文是？",
+          options: ["A. frozen food", "B. friend food", "C. front food", "D. fresh food"],
+          correct: 0
+        },
+        {
+          question: "包裝食品的英文是？",
+          options: ["A. package food", "B. packaged food", "C. parking food", "D. party food"],
+          correct: 1
+        },
+        {
+          question: "香腸的英文是？",
+          options: ["A. sandwich", "B. sausage", "C. service", "D. science"],
+          correct: 1
+        },
+        {
+          question: "火腿的英文是？",
+          options: ["A. hand", "B. hard", "C. ham", "D. hat"],
+          correct: 2
+        },
+        {
+          question: "培根的英文是？",
+          options: ["A. begin", "B. become", "C. bacon", "D. beach"],
+          correct: 2
+        }
       ]
+
     };
 
     // ==========================================
