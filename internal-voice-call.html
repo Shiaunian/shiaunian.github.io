@@ -4,16 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T2內部訊息系統</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a67d8;
+            --secondary: #764ba2;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --radius-sm: 5px;
+            --radius-md: 10px;
+            --radius-lg: 15px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
-            font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -21,179 +47,422 @@
             padding: 1rem;
         }
 
-        .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        .hidden {
+            display: none !important;
+        }
+
+        /* 登入頁面 */
+        .login-container {
             width: 100%;
-            max-width: 800px;
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 15px 15px 0 0;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .login-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            max-width: 400px;
+            background: white;
             padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .login-header {
             text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .input-group {
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        label {
-            display: block;
+        .login-title {
+            font-size: 1.5rem;
+            color: var(--gray-900);
             margin-bottom: 0.5rem;
-            color: #333;
+        }
+
+        .login-subtitle {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            color: var(--gray-700);
             font-weight: 500;
         }
 
-        input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+        .form-input {
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-md);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
 
-        input:focus {
+        .form-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
         }
 
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .login-btn {
+            margin-top: 1rem;
+            padding: 0.875rem;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
             font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 0.5rem;
+            transition: var(--transition);
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        .login-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
-        .btn:disabled {
-            background: #ccc;
+        .login-btn:disabled {
+            background: var(--gray-400);
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        .chat-section {
-            flex: 1;
+        /* 主要聊天介面 */
+        .app-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 90vh;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 側邊欄樣式 */
+        .sidebar {
+            width: 280px;
+            background: var(--gray-100);
+            border-right: 1px solid var(--gray-300);
             display: flex;
             flex-direction: column;
-            height: 100%;
-            position: relative;
+            transition: var(--transition);
         }
 
-        .chat-info {
-            background: #f8f9fa;
+        .sidebar-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .app-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-subtitle {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .online-users {
+            flex: 1;
+            overflow-y: auto;
             padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .user-list-header {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            font-weight: 500;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 1;
+            justify-content: space-between;
+        }
+
+        .user-count {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .user-item:hover {
+            background: var(--gray-200);
+        }
+
+        .user-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+
+        .user-status.online {
+            background: var(--success);
+        }
+
+        .user-status.offline {
+            background: var(--gray-400);
         }
 
         .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            color: var(--gray-800);
+            font-weight: 500;
+        }
+
+        .user-last-seen {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* 主要內容區域 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .chat-header {
+            padding: 1rem 1.5rem;
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-sidebar {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--gray-600);
+            transition: var(--transition);
+        }
+
+        .toggle-sidebar:hover {
+            color: var(--primary);
+        }
+
+        .current-user {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .online-indicator {
+        .connection-status {
             width: 10px;
             height: 10px;
-            background: #28a745;
             border-radius: 50%;
-            position: relative;
+            background: var(--success);
         }
 
-        .online-indicator.offline {
-            background: #dc3545;
+        .connection-status.offline {
+            background: var(--danger);
         }
 
-        .online-indicator.offline::after {
-            content: "離線";
-            position: absolute;
-            left: 15px;
-            white-space: nowrap;
-            color: #dc3545;
-            font-size: 0.8rem;
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .online-count {
-            background: #667eea;
+        .logout-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: var(--danger);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
         }
 
         .messages-container {
             flex: 1;
             overflow-y: auto;
-            padding: 1rem;
-            background: #f8f9fa;
-            scroll-behavior: smooth;
-            position: relative;
-        }
-
-        .messages-container::after {
-            content: "";
-            display: block;
-            height: 1rem;
+            padding: 1.5rem;
+            background: var(--gray-100);
         }
 
         .message {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
             max-width: 70%;
-            word-wrap: break-word;
+            margin-bottom: 1rem;
             animation: messageAppear 0.3s ease;
+        }
+
+        .message.own {
+            align-self: flex-end;
+        }
+
+        .message-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            background: white;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.own .message-bubble {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+        }
+
+        .message-header {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            margin-bottom: 0.25rem;
+        }
+
+        .message.own .message-header {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .message-content {
+            font-size: 0.9375rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 0.25rem;
+            align-self: flex-end;
+        }
+
+        .message.own .message-time {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .system-message {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .input-container {
+            padding: 1rem 1.5rem;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .message-form {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
             position: relative;
         }
 
+        .message-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            resize: none;
+            min-height: 42px;
+            max-height: 120px;
+            transition: var(--transition);
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .char-count {
+            position: absolute;
+            right: 100px;
+            bottom: 12px;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+        }
+
+        .char-count.near-limit {
+            color: var(--warning);
+        }
+
+        .char-count.at-limit {
+            color: var(--danger);
+        }
+
+        .send-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 80px;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .send-btn:disabled {
+            background: var(--gray-400);
+            cursor: not-allowed;
+        }
+
+        .new-messages-indicator {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            z-index: 10;
+        }
+
+        /* 動畫 */
         @keyframes messageAppear {
             from {
                 opacity: 0;
@@ -203,258 +472,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        .message.own {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            margin-left: auto;
-            text-align: right;
-        }
-
-        .message.other {
-            background: white;
-            border: 1px solid #e0e0e0;
-            margin-right: auto;
-        }
-
-        .message-header {
-            font-size: 0.8rem;
-            margin-bottom: 0.3rem;
-            opacity: 0.8;
-        }
-
-        .message.own .message-header {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .message.other .message-header {
-            color: #666;
-        }
-
-        .message-content {
-            font-size: 1rem;
-            line-height: 1.4;
-            white-space: pre-wrap;
-        }
-
-        .message-time {
-            font-size: 0.7rem;
-            margin-top: 0.3rem;
-            opacity: 0.6;
-        }
-
-        .system-message {
-            text-align: center;
-            color: #666;
-            font-size: 0.8rem;
-            margin: 0.5rem 0;
-            font-style: italic;
-            animation: systemMessageAppear 0.3s ease;
-        }
-
-        @keyframes systemMessageAppear {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .input-section {
-            background: white;
-            padding: 1rem;
-            border-top: 1px solid #e0e0e0;
-            border-radius: 0 0 15px 15px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .message-input-group {
-            display: flex;
-            gap: 0.5rem;
-            align-items: flex-end;
-            position: relative;
-        }
-
-        .message-input {
-            flex: 1;
-            min-height: 40px;
-            max-height: 100px;
-            resize: none;
-            padding: 0.8rem;
-            padding-right: 3rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 20px;
-            font-family: inherit;
-            font-size: 1rem;
-            line-height: 1.4;
-            transition: all 0.3s ease;
-        }
-
-        .message-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
-        }
-
-        .char-count {
-            position: absolute;
-            right: 6rem;
-            bottom: 0.8rem;
-            font-size: 0.8rem;
-            color: #666;
-            pointer-events: none;
-        }
-
-        .char-count.near-limit {
-            color: #f39c12;
-        }
-
-        .char-count.at-limit {
-            color: #dc3545;
-        }
-
-        .send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1rem;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            min-width: 80px;
-        }
-
-        .send-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
-        }
-
-        .send-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .logout-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
-            transform: translateY(-1px);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #666;
-        }
-
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 0.5rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .network-status {
-            position: fixed;
-            top: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            z-index: 1000;
-            animation: slideDown 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translate(-50%, -100%);
-            }
-            to {
-                transform: translate(-50%, 0);
-            }
-        }
-
-        .network-status.offline {
-            background: #dc3545;
-            color: white;
-        }
-
-        .network-status.reconnecting {
-            background: #ffc107;
-            color: black;
-        }
-
-        .network-status.online {
-            background: #28a745;
-            color: white;
-        }
-
-        .messages-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .messages-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .messages-container::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
-        }
-
-        .messages-container::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        .new-messages-indicator {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #667eea;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            display: none;
-            animation: fadeIn 0.3s ease;
-            z-index: 3;
         }
 
         @keyframes fadeIn {
@@ -468,92 +485,131 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .container {
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .app-container {
                 height: 100vh;
                 border-radius: 0;
             }
-            
-            .header {
-                border-radius: 0;
-                padding: 0.8rem;
+
+            .sidebar {
+                position: absolute;
+                left: -280px;
+                height: 100%;
+                z-index: 20;
             }
 
-            .logo {
-                font-size: 1.2rem;
+            .sidebar.show {
+                left: 0;
             }
-            
-            .input-section {
-                border-radius: 0;
-                padding: 0.8rem;
+
+            .toggle-sidebar {
+                display: block;
             }
-            
+
             .message {
                 max-width: 85%;
             }
+        }
 
-            .send-btn {
-                padding: 0.8rem 1.2rem;
-                min-width: 60px;
-            }
+        /* 滾動條樣式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
 
-            .char-count {
-                right: 5rem;
-            }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
         }
     </style>
 </head>
 <body>
-    <div id="networkStatus" class="network-status hidden"></div>
-    <div class="container">
-        <div class="header">
-            <div class="logo">💬 T2內部訊息系統</div>
-            <div class="subtitle">即時通訊平台</div>
+    <div id="app">
+        <!-- 登入頁面 -->
+        <div id="loginPage" class="login-container">
+            <div class="login-header">
+                <h1 class="login-title">💬 T2內部訊息系統</h1>
+                <p class="login-subtitle">請輸入您的名稱以進入聊天室</p>
+            </div>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username" class="form-label">使用者名稱</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="form-input"
+                        placeholder="請輸入您的姓名"
+                        maxlength="20"
+                        required
+                    >
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">進入聊天室</button>
+            </form>
         </div>
 
-        <div id="loginSection" class="login-section">
-            <div class="input-group">
-                <label for="username">使用者名稱</label>
-                <input type="text" id="username" placeholder="請輸入您的姓名" maxlength="20">
-            </div>
-            <button class="btn" id="loginBtn" onclick="login()">進入聊天室</button>
-        </div>
-
-        <div id="chatSection" class="chat-section hidden">
-            <div class="chat-info">
-                <div class="user-info">
-                    <div id="connectionIndicator" class="online-indicator"></div>
-                    <span id="currentUser"></span>
+        <!-- 主要聊天介面 -->
+        <div id="chatPage" class="app-container hidden">
+            <!-- 側邊欄 -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h1 class="app-title">💬 T2內部訊息系統</h1>
+                    <p class="app-subtitle">即時通訊平台</p>
                 </div>
-                <div>
-                    <span class="online-count" id="onlineCount">線上 0 人</span>
-                    <button class="logout-btn" onclick="logout()">登出</button>
+                <div class="online-users">
+                    <div class="user-list-header">
+                        <span>在線用戶</span>
+                        <span class="user-count" id="userCount">0 人</span>
+                    </div>
+                    <div id="userList">
+                        <!-- 用戶列表會動態插入這裡 -->
+                    </div>
                 </div>
-            </div>
+            </aside>
 
-            <div class="messages-container" id="messagesContainer">
-                <div id="loading" class="loading">
-                    <div class="loading-spinner"></div>
-                    <div>載入訊息中...</div>
+            <!-- 主要聊天區域 -->
+            <main class="main-content">
+                <header class="chat-header">
+                    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+                    <div class="current-user">
+                        <div class="connection-status" id="connectionStatus"></div>
+                        <span id="currentUser"></span>
+                    </div>
+                    <div class="user-actions">
+                        <button class="logout-btn" onclick="handleLogout()">登出</button>
+                    </div>
+                </header>
+
+                <div class="messages-container" id="messagesContainer">
+                    <!-- 訊息會動態插入這裡 -->
                 </div>
-            </div>
 
-            <div id="newMessagesIndicator" class="new-messages-indicator" onclick="scrollToBottom()">
-                ↓ 新訊息
-            </div>
-
-            <div class="input-section">
-                <div class="message-input-group">
-                    <textarea 
-                        id="messageInput" 
-                        class="message-input" 
-                        placeholder="輸入訊息..." 
-                        rows="1"
-                        maxlength="500"></textarea>
-                    <span id="charCount" class="char-count">0/500</span>
-                    <button id="sendBtn" class="send-btn" onclick="sendMessage()" disabled>傳送</button>
+                <div class="new-messages-indicator" id="newMessagesIndicator" onclick="scrollToBottom()">
+                    ↓ 新訊息
                 </div>
-            </div>
+
+                <div class="input-container">
+                    <form class="message-form" onsubmit="handleSendMessage(event)">
+                        <textarea 
+                            id="messageInput"
+                            class="message-input"
+                            placeholder="輸入訊息..."
+                            rows="1"
+                            maxlength="500"
+                            onInput="handleInput(event)"
+                        ></textarea>
+                        <span id="charCount" class="char-count">0/500</span>
+                        <button type="submit" class="send-btn" id="sendBtn" disabled>傳送</button>
+                    </form>
+                </div>
+            </main>
         </div>
     </div>
 
@@ -584,16 +640,25 @@
         let messagesLoaded = false;
 
         // DOM 元素
-        const networkStatus = document.getElementById('networkStatus');
-        const connectionIndicator = document.getElementById('connectionIndicator');
+        const loginPage = document.getElementById('loginPage');
+        const chatPage = document.getElementById('chatPage');
+        const sidebar = document.querySelector('.sidebar');
+        const userList = document.getElementById('userList');
+        const userCount = document.getElementById('userCount');
+        const connectionStatus = document.getElementById('connectionStatus');
+        const currentUserDisplay = document.getElementById('currentUser');
         const messagesContainer = document.getElementById('messagesContainer');
         const messageInput = document.getElementById('messageInput');
         const sendBtn = document.getElementById('sendBtn');
         const charCount = document.getElementById('charCount');
-        const loading = document.getElementById('loading');
         const newMessagesIndicator = document.getElementById('newMessagesIndicator');
 
-        // 網路狀態監控
+        // 切換側邊欄
+        function toggleSidebar() {
+            sidebar.classList.toggle('show');
+        }
+
+        // 初始化網路監控
         function initializeNetworkMonitoring() {
             const connectedRef = database.ref('.info/connected');
             connectedRef.on('value', (snap) => {
@@ -605,72 +670,49 @@
             });
         }
 
+        // 連線成功處理
         function onConnected() {
             isOnline = true;
             reconnectAttempts = 0;
-            showNetworkStatus('online', '已連線');
-            connectionIndicator.classList.remove('offline');
+            connectionStatus.classList.remove('offline');
             
             if (currentUser) {
                 updateUserStatus('online');
             }
-
-            setTimeout(() => {
-                hideNetworkStatus();
-            }, 3000);
         }
 
+        // 斷線處理
         function onDisconnected() {
             isOnline = false;
-            showNetworkStatus('offline', '連線中斷');
-            connectionIndicator.classList.add('offline');
+            connectionStatus.classList.add('offline');
             
             if (currentUser && reconnectAttempts < maxReconnectAttempts) {
                 attemptReconnect();
             }
         }
 
+        // 嘗試重新連線
         function attemptReconnect() {
             reconnectAttempts++;
-            showNetworkStatus('reconnecting', `重新連線中 (${reconnectAttempts}/${maxReconnectAttempts})`);
             
             setTimeout(() => {
                 if (!isOnline && reconnectAttempts < maxReconnectAttempts) {
                     database.goOnline();
-                } else if (!isOnline) {
-                    showNetworkStatus('offline', '無法連線，請重新整理頁面');
                 }
             }, reconnectDelay * Math.pow(2, reconnectAttempts - 1));
         }
 
-        function showNetworkStatus(type, message) {
-            networkStatus.className = `network-status ${type}`;
-            networkStatus.textContent = message;
-            networkStatus.classList.remove('hidden');
-        }
-
-        function hideNetworkStatus() {
-            networkStatus.classList.add('hidden');
-        }
-
-        // 登入功能
-        function login() {
+        // 處理登入
+        function handleLogin(event) {
+            event.preventDefault();
             const username = document.getElementById('username').value.trim();
             const loginBtn = document.getElementById('loginBtn');
             
-            if (!username) {
-                alert('請輸入使用者名稱');
-                return;
-            }
-
-            if (username.length > 20) {
-                alert('使用者名稱不能超過20個字元');
-                return;
-            }
-
+            if (!username) return;
+            
             loginBtn.disabled = true;
             
-            // 檢查是否已有相同用戶名
+            // 檢查用戶名是否已存在
             database.ref('users').once('value')
                 .then((snapshot) => {
                     const users = snapshot.val() || {};
@@ -689,33 +731,34 @@
                 });
         }
 
+        // 完成登入程序
         function completeLogin(username) {
             currentUser = username;
+            currentUserDisplay.textContent = username;
             
-            // 設置用戶在線狀態
+            // 設置用戶狀態
             updateUserStatus('online');
 
-            // 監聽斷線時自動下線
-            database.ref('users/' + currentUser).onDisconnect().remove();
+            // 設置斷線自動清除
+            database.ref('users/' + username).onDisconnect().remove();
 
             // 發送系統訊息
-            sendSystemMessage(currentUser + ' 加入了聊天室');
+            sendSystemMessage(`${username} 加入了聊天室`);
 
-            // 顯示聊天界面
-            document.getElementById('loginSection').classList.add('hidden');
-            document.getElementById('chatSection').classList.remove('hidden');
-            document.getElementById('currentUser').textContent = currentUser;
+            // 切換介面
+            loginPage.classList.add('hidden');
+            chatPage.classList.remove('hidden');
 
             // 開始監聽
             startListening();
             
-            // 焦點到輸入框
+            // 聚焦輸入框
             messageInput.focus();
         }
 
-        // 開始監聽各種事件
+        // 開始監聽事件
         function startListening() {
-            // 監聽線上用戶
+            // 監聽在線用戶
             database.ref('users').on('value', (snapshot) => {
                 const users = snapshot.val() || {};
                 onlineUsers = {};
@@ -726,7 +769,7 @@
                     }
                 });
                 
-                updateOnlineCount();
+                updateUserList();
             });
 
             // 監聽訊息
@@ -740,12 +783,35 @@
                         lastMessageTime = message.timestamp;
                     }
                 });
+        }
 
-            // 載入完成後隱藏載入提示
-            setTimeout(() => {
-                loading.style.display = 'none';
-                messagesLoaded = true;
-            }, 1000);
+        // 更新用戶列表
+        function updateUserList() {
+            userList.innerHTML = '';
+            const count = Object.keys(onlineUsers).length;
+            userCount.textContent = `${count} 人`;
+
+            Object.entries(onlineUsers)
+                .sort(([, a], [, b]) => b.lastSeen - a.lastSeen)
+                .forEach(([username, data]) => {
+                    const userElement = document.createElement('div');
+                    userElement.className = 'user-item';
+                    
+                    const time = new Date(data.lastSeen).toLocaleTimeString('zh-TW', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    userElement.innerHTML = `
+                        <div class="user-status ${data.status}"></div>
+                        <div class="user-info">
+                            <div class="user-name">${username}</div>
+                            <div class="user-last-seen">最後上線：${time}</div>
+                        </div>
+                    `;
+
+                    userList.appendChild(userElement);
+                });
         }
 
         // 更新用戶狀態
@@ -758,28 +824,15 @@
             }
         }
 
-        // 更新線上人數
-        function updateOnlineCount() {
-            const count = Object.keys(onlineUsers).length;
-            document.getElementById('onlineCount').textContent = `線上 ${count} 人`;
-        }
-
-        // 傳送訊息
-        function sendMessage() {
+        // 處理訊息發送
+        function handleSendMessage(event) {
+            event.preventDefault();
             const messageText = messageInput.value.trim();
             
-            if (!messageText || !isOnline) {
-                return;
-            }
-
-            if (messageText.length > 500) {
-                alert('訊息不能超過500個字元');
-                return;
-            }
-
+            if (!messageText || !isOnline) return;
+            
             sendBtn.disabled = true;
 
-            // 建立訊息物件
             const message = {
                 sender: currentUser,
                 content: messageText,
@@ -787,7 +840,6 @@
                 type: 'user'
             };
 
-            // 傳送到 Firebase
             database.ref('messages').push(message)
                 .then(() => {
                     messageInput.value = '';
@@ -803,7 +855,7 @@
                 });
         }
 
-        // 傳送系統訊息
+        // 發送系統訊息
         function sendSystemMessage(content) {
             const message = {
                 content: content,
@@ -823,7 +875,7 @@
                 messageElement.textContent = message.content;
             } else {
                 const isOwn = message.sender === currentUser;
-                messageElement.className = `message ${isOwn ? 'own' : 'other'}`;
+                messageElement.className = `message ${isOwn ? 'own' : ''}`;
                 
                 const time = new Date(message.timestamp).toLocaleTimeString('zh-TW', {
                     hour: '2-digit',
@@ -831,80 +883,33 @@
                 });
 
                 messageElement.innerHTML = `
-                    <div class="message-header">${isOwn ? '我' : message.sender}</div>
-                    <div class="message-content">${escapeHtml(message.content)}</div>
-                    <div class="message-time">${time}</div>
+                    <div class="message-bubble">
+                        <div class="message-header">${isOwn ? '我' : message.sender}</div>
+                        <div class="message-content">${escapeHtml(message.content)}</div>
+                        <div class="message-time">${time}</div>
+                    </div>
                 `;
             }
 
             messagesContainer.appendChild(messageElement);
             
-            // 檢查是否需要滾動到底部
             const wasAtBottom = isAtBottom;
             isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < 50;
             
             if (wasAtBottom) {
                 scrollToBottom();
-            } else if (messagesLoaded) {
+            } else {
                 unreadMessages++;
                 showNewMessageIndicator();
             }
         }
 
-        // 滾動到底部
-        function scrollToBottom() {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            unreadMessages = 0;
-            hideNewMessageIndicator();
-        }
-
-        // 顯示新訊息提示
-        function showNewMessageIndicator() {
-            newMessagesIndicator.style.display = 'block';
-            newMessagesIndicator.textContent = `↓ ${unreadMessages} 則新訊息`;
-        }
-
-        // 隱藏新訊息提示
-        function hideNewMessageIndicator() {
-            newMessagesIndicator.style.display = 'none';
-        }
-
-        // HTML 轉義
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // 登出
-        function logout() {
-            if (!confirm('確定要登出嗎？')) {
-                return;
-            }
-
-            // 發送系統訊息
-            sendSystemMessage(currentUser + ' 離開了聊天室');
-            
-            // 清除用戶狀態
-            database.ref('users/' + currentUser).remove();
-
-            // 移除事件監聽
-            database.ref('users').off();
-            database.ref('messages').off();
-
-            // 重置界面
-            document.getElementById('chatSection').classList.add('hidden');
-            document.getElementById('loginSection').classList.remove('hidden');
-            document.getElementById('username').value = '';
-            messagesContainer.innerHTML = '';
-            loading.style.display = 'block';
-            
-            // 重置變數
-            currentUser = '';
-            unreadMessages = 0;
-            lastMessageTime = 0;
-            messagesLoaded = false;
-            hideNewMessageIndicator();
+        // 處理輸入
+        function handleInput(event) {
+            const target = event.target;
+            target.style.height = 'auto';
+            target.style.height = Math.min(target.scrollHeight, 120) + 'px';
+            updateCharCount();
         }
 
         // 更新字數統計
@@ -925,25 +930,81 @@
             sendBtn.disabled = length === 0 || length > 500 || !isOnline;
         }
 
-        // 事件監聽器
-        messageInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 100) + 'px';
-            updateCharCount();
-        });
+        // 滾動到底部
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            unreadMessages = 0;
+            hideNewMessageIndicator();
+        }
 
+        // 顯示新訊息提示
+        function showNewMessageIndicator() {
+            newMessagesIndicator.style.display = 'block';
+            newMessagesIndicator.textContent = `↓ ${unreadMessages} 則新訊息`;
+        }
+
+        // 隱藏新訊息提示
+        function hideNewMessageIndicator() {
+            newMessagesIndicator.style.display = 'none';
+        }
+                // HTML 轉義函數
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 處理登出
+        function handleLogout() {
+            if (!confirm('確定要登出嗎？')) {
+                return;
+            }
+
+            // 發送系統訊息
+            sendSystemMessage(`${currentUser} 離開了聊天室`);
+            
+            // 清除用戶狀態
+            database.ref('users/' + currentUser).remove();
+
+            // 移除事件監聽
+            database.ref('users').off();
+            database.ref('messages').off();
+
+            // 重置界面
+            loginPage.classList.remove('hidden');
+            chatPage.classList.add('hidden');
+            document.getElementById('username').value = '';
+            messagesContainer.innerHTML = '';
+            
+            // 重置變數
+            currentUser = '';
+            unreadMessages = 0;
+            lastMessageTime = 0;
+            messagesLoaded = false;
+            hideNewMessageIndicator();
+        }
+
+        // 監聽訊息輸入框的 Enter 鍵
         messageInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                sendMessage();
+                handleSendMessage(e);
             }
         });
 
+        // 監聽訊息容器的滾動
         messagesContainer.addEventListener('scroll', function() {
             isAtBottom = this.scrollHeight - this.scrollTop - this.clientHeight < 50;
             if (isAtBottom) {
                 hideNewMessageIndicator();
                 unreadMessages = 0;
+            }
+        });
+
+        // 點擊聊天區域時關閉側邊欄（在手機版特別有用）
+        messagesContainer.addEventListener('click', () => {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
             }
         });
 
@@ -957,11 +1018,11 @@
         window.addEventListener('beforeunload', () => {
             if (currentUser) {
                 database.ref('users/' + currentUser).remove();
-                sendSystemMessage(currentUser + ' 離開了聊天室');
+                sendSystemMessage(`${currentUser} 離開了聊天室`);
             }
         });
 
-        // 防止重複登入同一個名稱
+        // 頁面獲得焦點時更新狀態
         window.addEventListener('focus', () => {
             if (currentUser) {
                 updateUserStatus('online');
