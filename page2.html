@@ -595,8 +595,8 @@
       <button class="func-btn blue" data-modal="📋前導">前導</button>
       <button class="func-btn blue" data-modal="📋複查">複查</button>
       <button class="func-btn blue" data-modal="📋X光">X光</button>
-      <button class="func-btn blue" data-modal="📋分流">分流</button>
-      <button class="func-btn blue" data-modal="📋分流2">分流2</button>
+      <button class="func-btn blue" data-modal="📋分流/2">分流/2</button>
+      <button class="func-btn blue" data-modal="📋新人須知">新人須知</button>
       <button class="func-btn red" data-modal="⚠️規定事項">規定</button>
       <button class="func-btn dark-blue" data-modal="⚠️各項連結">連結</button>
       <button class="func-btn yellow" data-modal="檢疫物相關">檢疫物</button>
@@ -621,8 +621,7 @@
   </div>
 
   <script>
-
-    // ====== 強化登入檢查：帳號還在不在名單內 ======
+        // ====== 強化登入檢查：帳號還在不在名單內 ======
 function checkLogin() {
   const flag = localStorage.getItem("t2_login");
   const time = parseInt(localStorage.getItem("t2_login_time"), 10);
@@ -1052,7 +1051,7 @@ function checkLogin() {
         </div>
       `,
 
-    "📋分流": `
+    "📋分流/2": `
           <div class="section-title" style="text-align: center; letter-spacing: 12px; font-weight: bold;">注 . 意 . 事 . 項</div>
           <ul class="content-list">
             <li>1.<span style="color:red;">均分各線 </span>分流不要把一條線塞滿再換一條塞爆，請均分。</li>
@@ -1111,11 +1110,7 @@ function checkLogin() {
             <li>29.<span style=color:red;>明確統計拒檢次數 </span>分流要記得明確統計拒檢次數，後面手檢區有碰到也麻煩記得回報給分流，好讓分流做統計。</li>
             <li>30.<span style="color:red";>消毒水B哨分流 </span>備勤室消毒水固定交由B哨分流補充，分流二懲罰時一樣由B分流補充，假設到這條線就拿去補(如下)。B哨分流擔任備勤室地毯消毒水檢查員，要注意消毒水的量是否還夠用。</li>
             <img src="https://i.ibb.co/vnJ3t6K/image.jpg" width="100%" height="auto" />
-            
-        `,
-
-    "📋分流2": `
-            <div class="section-title">機場分流2人員工作指南</div>
+                        <div class="section-title">機場分流2人員工作指南</div>
         
             <div class="content-block">
             <div class="sub-title">工作說明</div>
@@ -1151,6 +1146,161 @@ function checkLogin() {
 
             </ul>
         </div>      
+            
+        `,
+
+    "📋新人須知": `
+            <div class="section-title">基本規定須知</div>
+        
+            <div class="content-block">
+            <div class="sub-title">一、證件與管制區規定</div>
+            <ul class="content-list">
+                <li>【臨時證使用規定】
+                    <ol>
+                        <li>新同仁剛進來基本上都是換臨時證。</li>
+                        <li>進入管制區後，上班期間如需出管制區有次數限制（2次）。</li>
+                        <li>機場管制區本單位員工同仁嚴禁到免稅商店閒逛/購買。</li>
+                        <li>可前往餐飲區用餐，多數商家提供員工餐（需出示員工證件）。</li>
+                        <li>新增：持臨時證同仁用餐須有正式證件同仁陪同。</li>
+                    </ol>
+                </li>
+                
+                <li>【正式證公務門】
+                    <ol>
+                        <li>公務門進出，切記要注意門有沒有關好，沒關好會是嚴重缺失。</li>
+                        <li>在管制區應將通行證佩掛在正面腰部以上之明顯處，不得逾期、越區、冒用、轉借他人及從事與職務不符活動，違者暫停權限1-6個月，重則撤銷通行證。 </li>                    </ol>
+                </li>
+                <li>【正式證公務門】
+                    <ol>
+                        <li>機場證件遺失通行證，需通報航警局勤指中心 電話:03-3982177。</li>
+                        <li>遺失通行證費用為2000元。</li>         
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="content-block">
+            <div class="sub-title">二、基本著裝要求</div>
+            <ul class="content-list">
+                <li>【必備項目】
+                    <ol>
+                        <li>腰帶/領帶/肩章/黑色皮鞋/</li>
+                        <li>機場證件/小白卡</li>
+                        <li><span style="color:red";>注意：</span>上班未帶證件者，下班後證件需放置主任辦公室一週。</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="content-block">
+            <div class="sub-title">三、通訊群組管理</div>
+            <ul class="content-list">
+                <li>【群組分類】
+                    <ol>
+                        <li>T2日班群組(用於重要事項每日都要看的大群)</li>
+                        <li>群組大小事(如有訂便當都會在這裡統一訂)</li>
+                    </ol>
+                </li>
+                <li>【T2日班群組重點】
+                    <ol>
+                        <li>用途：重要事項發布、每日航班公告</li>
+                        <li>必看：每天都需查看</li>
+                        <li>記事本：包含工作內容與規定（建議新進同仁多加閱讀</li>
+                        <li>如有不懂可詢問同仁</li>
+                    </ol>
+                </li>
+                <li>【主管聯繫】
+                    <ol>
+                        <li>新進同仁務必加入主管Line</li>
+                        <li>任何問題若有疑問也請找主管討論，請勿任意決定/猜忌</li>
+                        <li>有任何工作上問題需當日值班主管協助，盡可能在上班時間詢問，或晚上十點以前，切勿凌晨或休假時間傳訊息給主管</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="content-block">
+            <div class="sub-title">四、置物櫃管理</div>
+            <ul class="content-list">
+                <li>【基本說明】
+                    <ol>
+                        <li>新進人員適人力狀況分配置物櫃</li>
+                    </ol>
+                </li>
+                <li>【注意事項】
+                    <ol>
+                        <li>主管指派置物櫃後，需提供照片與姓名製作櫃子磁鐵（費用25元)</li>
+                        <li>嚴禁在置物櫃上張貼貼紙（因人員離職做適當的調整</li>
+                    </ol>
+                </li>
+            </ul>
+
+            <div class="content-block">
+            <div class="sub-title">五、請假規定</div>
+            <ul class="content-list">
+                <li>【請假流程】
+                    <ol>
+                        <li>切忌臨時缺勤 除天災人禍</li>
+                        <li>臨時請假應先找當日休假同仁協調代班或調換班</li>
+                        <li>雙方確認後告知當日值班主管</li>
+                    </ol>
+                </li>
+                <li>【違規處理】
+                    <ol>
+                        <li>應到班而未到班將依規定輪值15天的A分流2，或是清運</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="content-block">
+            <div class="sub-title">六、行政作業規定</div>
+            <ul class="content-list">
+                <li>【資料繳交時間】
+                    <ol>
+                        <li>需交給主管的資料請於當日下午三點前繳交</li>
+                        <li>超過下午三點者，請於隔天繳交</li>
+                        <li>如隔日為休假，可交代同仁代為繳交</li>
+                        <li>下午三點後一律不收件</li>
+                    </ol>
+                </li>
+                <li>【新進人員表單】
+                    <ol>
+                        <li>需填寫緊急連絡資料表單</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="content-block">
+            <div class="sub-title">七、送洗衣服</div>
+            <ul class="content-list">
+                <li>【單月】
+                    <ol>
+                        <li>包月金額為250元/月</li>
+                        <li>包月洗衣為襯衫、長褲。</li>
+                        <li>背心(每月1件/次)</li>
+                    </ol>
+                </li>
+                <li>【收送時間】
+                    <ol>
+                        <li>本單位於每週一、三、五11:00左右收送(請提早將送洗衣物投入)</li>
+                    </ol>
+                </li>
+            </ul>
+            <div class="content-block">
+            <div class="sub-title">八、備勤室使用規則</div>
+            <ul class="content-list">
+                <li>【微波爐使用規定】
+                    <ol>
+                        <li>微波食物如無蓋子，需用濕衛生紙覆蓋，避免濺射</li>
+                        <li>為延長微波爐壽命，使用完必須是歸0狀態，才打開，切勿直接打開。</li>
+                    </ol>
+                </li>
+                <li>【冰箱使用規定】
+                    <ol>
+                        <li>可供同仁存放飲料/食物</li>
+                        <li>需在物品上貼標籤註明：[格式]：姓名 + 日期 [範例]：王小明 5/3 [保存期限]：2天</li>
+                        <li>打掃冰箱同仁會檢查日期</li>
+                        <li>過期品項會公告在群組供認領</li>
+                        <li>無人認領者當日丟棄</li>
+                    </ol>
+                </li>
+            </ul>
+        </div>
         `,
 
     "⚠️規定事項": `
