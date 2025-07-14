@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
@@ -37,6 +36,18 @@
       gap: 10px;
       justify-content: center;
     }
+    .version-tag {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: #5468e5;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(84,104,229,0.3);
+    }
     .login-logo {
       font-size: 2.3rem;
       vertical-align: middle;
@@ -55,6 +66,23 @@
       box-shadow: 0 0 0 2px #dbe5ff;
       background: #fff;
     }
+    .login-notice {
+      color: #5468e5;
+      background: #e8f0ff;
+      border-radius: 8px;
+      margin: 0 0 4vw 0;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+    }
+    .login-notice ul {
+      margin: 5px 0 0 0;
+      padding-left: 20px;
+    }
+    .login-notice li {
+      margin: 3px 0;
+    }
     .login-box button, .logout-btn {
       width: 100%; padding: 16px 0;
       background: linear-gradient(90deg, #5468e5 60%, #3949ab 100%);
@@ -64,7 +92,7 @@
       letter-spacing: 1px;
       cursor: pointer;
       box-shadow: 0 2px 8px #5468e522;
-      transition: background 0.2s, transform 0.13s;
+      transition: all 0.3s ease;
       margin-top: 2vw;
     }
     .login-box button:hover, .logout-btn:hover {
@@ -92,17 +120,6 @@
       box-shadow: 0 2px 8px #e6555522;
       transition: background 0.2s;
     }
-    .login-notice {
-      color: #5468e5;
-      background: #e8f0ff;
-      border-radius: 6px;
-      margin: 0 0 2vw 0;
-      padding: 9px 12px;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      text-align: center;
-      box-shadow: 0 2px 8px #5468e511;
-    }
     .copyright-floating {
       position: fixed; right: 8px; bottom: 8px;
       background: rgba(255,255,255,0.94); color: #8a8a8a;
@@ -126,129 +143,125 @@
   </style>
 </head>
 <body>
-  <!-- 右下角浮動版權區塊 -->
   <div class="copyright-floating">
     <span style="font-size:15px;vertical-align:middle;">&#169;</span>
     網站架設人員 念念 此為內部重要資訊
   </div>
   <div id="app"></div>
+
   <script>
-let users = []; // 全域帳密清單
+  // ===== 登入帳號密碼清單 =====
+  const users = [
+    { username: "t2user", password: "0128" },
+    { username: "alice", password: "1234" },
+    { username: "h124030017", password: "0128" } // 郭健鴻，帳號統一小寫
+  ];
 
-// 讀取 password.json
-fetch('password.json')
-  .then(response => response.json())
-  .then(data => {
-    users = Array.isArray(data) ? data : [data];
-    // 這裡才判斷登入狀態
-    if (isLoggedIn()) {
-      showMain();
-    } else {
-      showLogin();
+  const LIMIT = 3600000; // 1小時（毫秒）
+
+  // ===== 檢查登入狀態與時效 =====
+  function isLoggedIn() {
+    const flag = localStorage.getItem("t2_login");
+    const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+    if (flag !== "yes" || !time) return false;
+    if (Date.now() - time > LIMIT) {
+      // 超時，清除狀態
+      localStorage.removeItem("t2_login");
+      localStorage.removeItem("t2_login_time");
+      return false;
     }
-  })
-  .catch(err => {
-    document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
-    console.error('載入 password.json 失敗:', err);
-  });
-
-const LIMIT = 3600000; // 1小時（毫秒）
-
-// ===== 檢查登入狀態與時效 =====
-function isLoggedIn() {
-  const flag = localStorage.getItem("t2_login");
-  const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-  if (flag !== "yes" || !time) return false;
-  if (Date.now() - time > LIMIT) {
-    // 超時，清除狀態
-    localStorage.removeItem("t2_login");
-    localStorage.removeItem("t2_login_time");
-    localStorage.removeItem("t2_login_user"); // ← 新增：超時也清掉帳號
-    return false;
+    return true;
   }
-  return true;
-}
 
-// ===== 顯示登入介面 =====
-function showLogin() {
-  document.getElementById('app').innerHTML = `
-    <div class="login-box">
-      <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
-      <div class="login-notice">📢 提醒：帳號密碼統一後4碼</div>
-      <form id="loginForm" autocomplete="off">
-        <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
-        <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
-        <button type="submit">登入</button>
-        <div class="error" id="errorMsg"></div>
-      </form>
-    </div>
-  `;
-  document.getElementById('loginForm').onsubmit = function(e) {
-    e.preventDefault();
-    // 將輸入的帳號轉換為小寫
-    const uname = document.getElementById('username').value.trim().toLowerCase();
-    const pwd = document.getElementById('password').value.trim();
-    document.getElementById('errorMsg').textContent = "";
-
-    // 本地驗證帳號密碼
-    const user = users.find(u => u.username === uname && u.password === pwd);
-
-    if (user) {
-      localStorage.setItem("t2_login", "yes");
-      localStorage.setItem("t2_login_time", Date.now().toString());
-      localStorage.setItem("t2_login_user", user.username); // ★ 新增這行，記錄登入帳號
-      showWelcome(user); // 登入成功後顯示歡迎訊息
-    } else {
-      document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
-    }
-  };
-  document.getElementById('username').oninput =
-  document.getElementById('password').oninput = function() {
-    document.getElementById('errorMsg').textContent = "";
-  };
-}
-
-// ===== 顯示歡迎訊息 =====
-function showWelcome(user) {
-  document.getElementById('app').innerHTML = `
-    <div class="main-content" style="text-align:center;">
-      <h2>🎉 歡迎登入</h2>
-      <div style="font-size:1.2rem;margin:2vw 0 4vw 0;color:#263175;">
-        ${user.welcome || "歡迎使用本系統！"}
+  // ===== 顯示登入介面 =====
+  function showLogin() {
+    document.getElementById('app').innerHTML = `
+      <div class="login-box">
+        <div class="version-tag">V3.0</div>
+        <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
+        <div class="login-notice">
+          📢 登入提醒：
+          <ul>
+            <li>帳號：請使用身分證後4碼</li>
+            <li>密碼：請使用生日4碼 (MMDD)</li>
+          </ul>
+        </div>
+        <form id="loginForm" autocomplete="off">
+          <input type="text" id="username" placeholder="請輸入身分證後4碼" autocomplete="username" required>
+          <input type="password" id="password" placeholder="請輸入生日4碼" autocomplete="current-password" required>
+          <button type="submit">登入</button>
+          <div class="error" id="errorMsg"></div>
+        </form>
       </div>
-      <button id="goNextBtn" style="padding:0.6em 2em;font-size:1.1em;">進入主頁</button>
-    </div>
-  `;
-  document.getElementById('goNextBtn').onclick = function() {
-    window.location.href = "page2.html";
-  };
-}
+    `;
 
-// ===== 登入判定 =====
-function showMain() {
-  // 如果沒登入，回登入畫面
-  if (!isLoggedIn()) {
-    showLogin();
-    return;
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const uname = document.getElementById('username').value.trim().toLowerCase();
+      const pwd = document.getElementById('password').value.trim();
+      document.getElementById('errorMsg').textContent = "";
+      
+      // 本地驗證帳號密碼
+      const user = users.find(u => u.username === uname && u.password === pwd);
+      
+      if (user) {
+        localStorage.setItem("t2_login", "yes");
+        localStorage.setItem("t2_login_time", Date.now().toString());
+        window.location.href = "page2.html";
+      } else {
+        document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
+      }
+    };
+
+    document.getElementById('username').oninput =
+    document.getElementById('password').oninput = function() {
+      document.getElementById('errorMsg').textContent = "";
+    };
   }
-  // 只要登入就直接跳轉主頁
-  window.location.href = "page2.html";
-  return;
-}
 
-// ===== 定時檢查是否超時，超時自動登出 =====
-let timeoutTimer = null;
-function startTimeoutCheck() {
-  if (timeoutTimer) clearInterval(timeoutTimer);
-  timeoutTimer = setInterval(() => {
+  // ===== 顯示主頁內容 =====
+  function showMain() {
     if (!isLoggedIn()) {
-      alert("登入已超時，請重新登入！");
       showLogin();
-      clearInterval(timeoutTimer);
+      return;
     }
-  }, 30000);
-}
+    document.getElementById('app').innerHTML = `
+      <div class="main-content">
+        <div class="version-tag">V3.0</div>
+        <h2><span class="login-logo">🦠</span>歡迎進入 T2日檢疫系統</h2>
+        <p style="color:#3949ab;font-size:1.07rem;margin-bottom:5vw;">
+          登入成功！
+        </p>
+        <button class="logout-btn" id="logoutBtn">登出</button>
+      </div>
+    `;
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem("t2_login");
+      localStorage.removeItem("t2_login_time");
+      showLogin();
+    };
+    startTimeoutCheck();
+  }
 
+  // ===== 定時檢查是否超時，超時自動登出 =====
+  let timeoutTimer = null;
+  function startTimeoutCheck() {
+    if (timeoutTimer) clearInterval(timeoutTimer);
+    timeoutTimer = setInterval(() => {
+      if (!isLoggedIn()) {
+        alert("登入已超時，請重新登入！");
+        showLogin();
+        clearInterval(timeoutTimer);
+      }
+    }, 30000);
+  }
+
+  // ===== 頁面初始載入時，判斷登入狀態 =====
+  if (isLoggedIn()) {
+    showMain();
+  } else {
+    showLogin();
+  }
   </script>
 </body>
 </html>
