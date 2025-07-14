@@ -151,7 +151,7 @@
 
 <script>
 const LIMIT = 3600000; // 1小時（毫秒）
-let users = []; // 將改為從 JSON 讀取
+let users = []; // 從 JSON 讀取
 
 // ===== 從 JSON 讀取帳密 =====
 async function loadUsers() {
@@ -218,6 +218,7 @@ function showLogin() {
     if (user) {
       localStorage.setItem("t2_login", "yes");
       localStorage.setItem("t2_login_time", Date.now().toString());
+      localStorage.setItem("t2_user", uname);
       window.location.href = "page2.html";
     } else {
       document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
@@ -249,6 +250,7 @@ function showMain() {
   document.getElementById('logoutBtn').onclick = function() {
     localStorage.removeItem("t2_login");
     localStorage.removeItem("t2_login_time");
+    localStorage.removeItem("t2_user");
     showLogin();
   };
   startTimeoutCheck();
