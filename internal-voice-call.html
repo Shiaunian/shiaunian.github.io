@@ -1,1033 +1,1357 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T2內部訊息系統</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-        }
-
-        :root {
-            --primary: #667eea;
-            --primary-dark: #5a67d8;
-            --secondary: #764ba2;
-            --success: #28a745;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --gray-100: #f8f9fa;
-            --gray-200: #e9ecef;
-            --gray-300: #dee2e6;
-            --gray-400: #ced4da;
-            --gray-500: #adb5bd;
-            --gray-600: #6c757d;
-            --gray-700: #495057;
-            --gray-800: #343a40;
-            --gray-900: #212529;
-            --radius-sm: 5px;
-            --radius-md: 10px;
-            --radius-lg: 15px;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* 登入頁面 */
-        .login-container {
-            width: 100%;
-            max-width: 400px;
-            background: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .login-title {
-            font-size: 1.5rem;
-            color: var(--gray-900);
-            margin-bottom: 0.5rem;
-        }
-
-        .login-subtitle {
-            color: var(--gray-600);
-            font-size: 0.875rem;
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .form-label {
-            font-size: 0.875rem;
-            color: var(--gray-700);
-            font-weight: 500;
-        }
-
-        .form-input {
-            padding: 0.75rem;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--radius-md);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-        }
-
-        .login-btn {
-            margin-top: 1rem;
-            padding: 0.875rem;
-            border: none;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .login-btn:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .login-btn:disabled {
-            background: var(--gray-400);
-            cursor: not-allowed;
-        }
-
-        /* 主要聊天介面 */
-        .app-container {
-            width: 100%;
-            max-width: 1200px;
-            height: 90vh;
-            background: white;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-            display: flex;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* 側邊欄樣式 */
-        .sidebar {
-            width: 280px;
-            background: var(--gray-100);
-            border-right: 1px solid var(--gray-300);
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-        }
-
-        .sidebar-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-        }
-
-        .app-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .app-subtitle {
-            font-size: 0.875rem;
-            opacity: 0.9;
-        }
-
-        .online-users {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-
-        .user-list-header {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            color: var(--gray-600);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .user-count {
-            background: var(--primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-        }
-
-        .user-item {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius-sm);
-            margin-bottom: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .user-item:hover {
-            background: var(--gray-200);
-        }
-
-        .user-status {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 0.75rem;
-        }
-
-        .user-status.online {
-            background: var(--success);
-        }
-
-        .user-status.offline {
-            background: var(--gray-400);
-        }
-
-        .user-info {
-            flex: 1;
-        }
-
-        .user-name {
-            font-size: 0.875rem;
-            color: var(--gray-800);
-            font-weight: 500;
-        }
-
-        .user-last-seen {
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            margin-top: 0.25rem;
-        }
-
-        /* 主要內容區域 */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: white;
-        }
-
-        .chat-header {
-            padding: 1rem 1.5rem;
-            background: white;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .toggle-sidebar {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--gray-600);
-            transition: var(--transition);
-        }
-
-        .toggle-sidebar:hover {
-            color: var(--primary);
-        }
-
-        .current-user {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .connection-status {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--success);
-        }
-
-        .connection-status.offline {
-            background: var(--danger);
-        }
-
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logout-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: var(--radius-sm);
-            background: var(--danger);
-            color: white;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: var(--transition);
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
-        }
-
-        .messages-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            background: var(--gray-100);
-        }
-
-        .message {
-            display: flex;
-            flex-direction: column;
-            max-width: 70%;
-            margin-bottom: 1rem;
-            animation: messageAppear 0.3s ease;
-        }
-
-        .message.own {
-            align-self: flex-end;
-        }
-
-        .message-bubble {
-            padding: 0.75rem 1rem;
-            border-radius: var(--radius-md);
-            background: white;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .message.own .message-bubble {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-        }
-
-        .message-header {
-            font-size: 0.75rem;
-            color: var(--gray-600);
-            margin-bottom: 0.25rem;
-        }
-
-        .message.own .message-header {
-            color: rgba(255,255,255,0.9);
-        }
-
-        .message-content {
-            font-size: 0.9375rem;
-            line-height: 1.4;
-        }
-
-        .message-time {
-            font-size: 0.75rem;
-            color: var(--gray-500);
-            margin-top: 0.25rem;
-            align-self: flex-end;
-        }
-
-        .message.own .message-time {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .system-message {
-            text-align: center;
-            color: var(--gray-600);
-            font-size: 0.875rem;
-            margin: 1rem 0;
-            font-style: italic;
-        }
-
-        .input-container {
-            padding: 1rem 1.5rem;
-            background: white;
-            border-top: 1px solid var(--gray-200);
-        }
-
-        .message-form {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-end;
-            position: relative;
-        }
-
-        .message-input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 2px solid var(--gray-300);
-            border-radius: var(--radius-md);
-            font-size: 0.9375rem;
-            resize: none;
-            min-height: 42px;
-            max-height: 120px;
-            transition: var(--transition);
-        }
-
-        .message-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-        }
-
-        .char-count {
-            position: absolute;
-            right: 100px;
-            bottom: 12px;
-            font-size: 0.75rem;
-            color: var(--gray-500);
-        }
-
-        .char-count.near-limit {
-            color: var(--warning);
-        }
-
-        .char-count.at-limit {
-            color: var(--danger);
-        }
-
-        .send-btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            font-size: 0.9375rem;
-            cursor: pointer;
-            transition: var(--transition);
-            min-width: 80px;
-        }
-
-        .send-btn:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .send-btn:disabled {
-            background: var(--gray-400);
-            cursor: not-allowed;
-        }
-
-        .new-messages-indicator {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            display: none;
-            animation: fadeIn 0.3s ease;
-            z-index: 10;
-        }
-
-        /* 動畫 */
-        @keyframes messageAppear {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, 10px);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .app-container {
-                height: 100vh;
-                border-radius: 0;
-            }
-
-            .sidebar {
-                position: absolute;
-                left: -280px;
-                height: 100%;
-                z-index: 20;
-            }
-
-            .sidebar.show {
-                left: 0;
-            }
-
-            .toggle-sidebar {
-                display: block;
-            }
-
-            .message {
-                max-width: 85%;
-            }
-        }
-
-        /* 滾動條樣式 */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gray-400);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gray-500);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>T2日檢疫人員內部資訊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <style>
+    body {
+      font-family: "微軟正黑體", Arial, sans-serif;
+      background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 主要內容區塊 */
+    .main-content {
+      width: 94vw;
+      max-width: 450px;
+      margin: 7vw auto 0 auto;
+      padding: 7vw 4vw 6vw 4vw;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 15px;
+      box-shadow: 0 6px 24px 0 rgba(58, 85, 170, 0.10), 0 1.5px 8px 0 #0001;
+    }
+
+    /* 頁面標題 */
+    .page-title {
+      font-size: 1.45rem;
+      font-weight: bold;
+      color: #263161;
+      margin-bottom: 1.1em;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    /* 通知看板 */
+    .notice-board {
+      background: #f4f7fb;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #b3b3d622;
+      padding: 1.2em 1em 1em 1em;
+      max-height: 240px;
+      overflow-y: auto;
+      margin-bottom: 2.2em;
+      border-left: 6px solid #6c81d5;
+    }
+
+    /* 通知項目 */
+    .notice-item {
+      margin-bottom: 1.2em;
+    }
+
+    /* 通知標題 */
+    .notice-title {
+      font-weight: 700;
+      color: #3949ab;
+      font-size: 1.08em;
+      margin-bottom: 0.3em;
+    }
+
+    .highlight-box {
+      background: #f4f7fb;
+      border-left: 4px solid #7c90e1;
+      padding: 0.8em;
+      margin: 0.8em 0;
+      border-radius: 4px;
+    }
+
+    /* 標題內容專用樣式 */
+    .section-title {
+      color: #3949ab;
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      border-bottom: 2px solid #e3e9ff;
+      padding-bottom: 0.3em;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    .content-block {
+      margin-bottom: 1.2em;
+    }
+
+    .sub-title {
+      font-weight: bold;
+      color: #263161;
+      margin-bottom: 0.5em;
+      margin-top: 1em;
+    }
+
+    .content-list {
+      margin-left: 1em;
+      line-height: 1.8;
+    }
+
+    .content-list li {
+      margin-bottom: 0.5em;
+    }
+
+    .warning-text {
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .indent {
+      margin-left: 1.5em;
+    }
+
+    /* 通知內容 */
+    .notice-content {
+      color: #23315c;
+      font-size: 0.99em;
+      line-height: 1.7;
+      margin-left: 0.5em;
+    }
+
+    /* 按鈕群組 - 3x3 網格布局 */
+    .btn-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8em;
+      margin-bottom: 1.5em;
+    }
+
+    /* 功能按鈕 */
+    .func-btn {
+      padding: 0.85em 0.5em;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 按鈕顏色 */
+    .func-btn.blue {
+      background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
+      color: #fff;
+    }
+
+    .func-btn.blue:hover {
+      background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.dark-blue {
+      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+      color: #fff;
+    }
+
+    .func-btn.dark-blue:hover {
+      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.red {
+      background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+      color: #fff;
+    }
+
+    .func-btn.red:hover {
+      background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.yellow {
+      background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+      color: #fff;
+    }
+
+    .func-btn.yellow:hover {
+      background: linear-gradient(135deg, #ff8f00 0%, #e65100 100%);
+      transform: translateY(-2px);
+    }
+
+    .func-btn.green {
+      background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+      color: #fff;
+    }
+
+    .func-btn.green:hover {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 登出按鈕 */
+    .logout-btn {
+      width: 100%;
+      padding: 16px 0;
+      background: linear-gradient(90deg, #251111 60%, #695858 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #e6555522;
+      transition: all 0.3s ease;
+      margin-top: 1em;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 彈窗樣式 */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(30, 40, 80, 0.4);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-bg.active {
+      display: flex;
+    }
+
+    /* 模態容器 */
+    .modal {
+      background: #fff;
+      border-radius: 15px;
+      min-width: 300px;
+      max-width: 600px;
+      width: 90vw;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      padding: 0;
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+      overflow: hidden;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: scale(0.9) translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* 模態標題區 */
+    .modal-header {
+      padding: 1.2em 1.5em;
+      background: linear-gradient(135deg, #e3e9ff 0%, #f0f4ff 100%);
+      border-radius: 15px 15px 0 0;
+      font-weight: bold;
+      color: #3949ab;
+      font-size: 1.2em;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #e3e9ff;
+    }
+
+    /* 模態關閉按鈕 */
+    .modal-close {
+      background: #ff4757;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: #ff3742;
+      transform: scale(1.1);
+    }
+
+    /* 模態內容區 */
+    .modal-body {
+      padding: 1.5em;
+      overflow-y: auto;
+      flex: 1 1 auto;
+      color: #263161;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    /* 跑馬燈容器 */
+    .marquee-container {
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+      border-radius: 10px;
+      margin-bottom: 1.5em;
+      padding: 0.8em 0;
+      border: 2px solid #e3e9ff;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee 50s linear infinite;
+      color: #c62828;
+      font-weight: 600;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(15%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .marquee-container:hover .marquee-content {
+      animation-play-state: paused;
+    }
+
+    /* 考試系統樣式 */
+    .exam-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    /* 考試類別樣式 */
+    .exam-category {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5em;
+      margin-bottom: 1em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 2px solid #e3e9ff;
+      transition: all 0.3s ease;
+    }
+
+    .exam-category:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+      border-color: #7c90e1;
+    }
+
+    .exam-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #3949ab;
+      margin-bottom: 1em;
+      padding-bottom: 0.5em;
+      border-bottom: 2px solid #e3e9ff;
+    }
+
+    .exam-buttons {
+      display: flex;
+      gap: 1em;
+    }
+
+    .exam-action-btn {
+      flex: 1;
+      padding: 0.8em;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+    }
+
+    .start-exam {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      color: white;
+    }
+
+    .start-exam:hover {
+      background: linear-gradient(135deg, #45a049 0%, #388E3C 100%);
+      transform: translateY(-2px);
+    }
+
+    .view-ranking {
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      color: white;
+    }
+
+    .view-ranking:hover {
+      background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+      transform: translateY(-2px);
+    }
+
+    .btn-icon {
+      font-size: 1.2em;
+    }
+
+    /* 考試介面 */
+    .exam-interface {
+      display: none;
+    }
+
+    .exam-interface.active {
+      display: block;
+    }
+
+    .question-container {
+      margin-bottom: 2em;
+    }
+
+    .question-number {
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #3949ab;
+      margin-bottom: 0.5em;
+    }
+
+    .question-text {
+      font-size: 1.05em;
+      margin-bottom: 1em;
+      line-height: 1.6;
+      color: #263161;
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8em;
+      margin-bottom: 1.5em;
+    }
+
+    .option {
+      padding: 0.8em 1em;
+      background: #f8f9ff;
+      border: 2px solid #e3e9ff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background: #e3e9ff;
+      border-color: #7986cb;
+    }
+
+    .option.selected {
+      background: #3949ab;
+      color: white;
+      border-color: #3949ab;
+    }
+
+    .exam-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 2px solid #e3e9ff;
+    }
+
+    .exam-btn {
+      padding: 0.8em 1.5em;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .exam-btn.primary {
+      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+      color: white;
+    }
+
+    .exam-btn.primary:hover {
+      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+      transform: translateY(-2px);
+    }
+
+    .exam-btn.secondary {
+      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
+      color: white;
+    }
+
+    .exam-btn.secondary:hover {
+      background: linear-gradient(135deg, #757575 0%, #616161 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 成績顯示 */
+    .result-container {
+      text-align: center;
+      padding: 2em 1em;
+    }
+
+    .score-display {
+      font-size: 2em;
+      font-weight: bold;
+      margin: 1em 0;
+      padding: 1em;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+      border: 3px solid #4caf50;
+    }
+
+    .score-good {
+      color: #2e7d32;
+    }
+
+    .score-average {
+      color: #f57c00;
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border-color: #ff9800;
+    }
+
+    .score-poor {
+      color: #c62828;
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      border-color: #f44336;
+    }
+
+    .wrong-answers {
+      margin-top: 2em;
+      text-align: left;
+    }
+
+    .wrong-answer-item {
+      margin-bottom: 1.5em;
+      padding: 1em;
+      background: #ffebee;
+      border-radius: 8px;
+      border-left: 4px solid #f44336;
+    }
+
+    .wrong-question {
+      font-weight: bold;
+      color: #c62828;
+      margin-bottom: 0.5em;
+    }
+
+    .correct-answer {
+      color: #2e7d32;
+      font-weight: 600;
+    }
+
+    /* 排行榜樣式 */
+    .ranking-container {
+      padding: 1em;
+    }
+
+    .ranking-list {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 1em 0;
+      border: 2px solid #e3e9ff;
+    }
+
+    .ranking-header {
+      background: #f4f7fb;
+      padding: 1em;
+      font-weight: bold;
+      display: grid;
+      grid-template-columns: 80px 1fr 100px 120px;
+      gap: 1em;
+      border-bottom: 2px solid #e3e9ff;
+    }
+
+    .ranking-item {
+      padding: 1em;
+      display: grid;
+      grid-template-columns: 80px 1fr 100px 120px;
+      gap: 1em;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+    }
+
+    .ranking-item:hover {
+      background: #f8f9ff;
+    }
+
+    .top-1 {
+      background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+    }
+
+    .top-2 {
+      background: linear-gradient(135deg, #f5f5f5 0%, #eeeeee 100%);
+    }
+
+    .top-3 {
+      background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+    }
+
+    .rank-column {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .score-column {
+      text-align: right;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .date-column {
+      text-align: center;
+      color: #666;
+    }
+
+    /* 排行榜返回按鈕 */
+    .ranking-back-btn {
+      display: block;
+      width: 100%;
+      max-width: 200px;
+      margin: 2em auto 1em auto;
+      padding: 0.8em 1.5em;
+      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .ranking-back-btn:hover {
+      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+      transform: translateY(-2px);
+    }
+
+    /* 空排行榜提示 */
+    .empty-ranking {
+      text-align: center;
+      padding: 3em 1em;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* 排行榜加載動畫 */
+    .ranking-loading {
+      text-align: center;
+      padding: 2em;
+      color: #3949ab;
+    }
+
+    .ranking-loading::after {
+      content: "...";
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { content: "."; }
+      33% { content: ".."; }
+      66% { content: "..."; }
+    }
+
+    /* 待更新提示 */
+    .update-notice {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      padding: 2em;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 2px dashed #ddd;
+    }
+
+    /* 滾動條美化 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f3ff;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #7c90e1, #3949ab);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #3949ab, #7c90e1);
+    }
+  </style>
 </head>
 <body>
-    <div id="app">
-        <!-- 登入頁面 -->
-        <div id="loginPage" class="login-container">
-            <div class="login-header">
-                <h1 class="login-title">💬 T2內部訊息系統</h1>
-                <p class="login-subtitle">請輸入您的名稱以進入聊天室</p>
-            </div>
-            <form class="login-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="username" class="form-label">使用者名稱</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        class="form-input"
-                        placeholder="請輸入您的姓名"
-                        maxlength="20"
-                        required
-                    >
-                </div>
-                <button type="submit" class="login-btn" id="loginBtn">進入聊天室</button>
-            </form>
-        </div>
-
-        <!-- 主要聊天介面 -->
-        <div id="chatPage" class="app-container hidden">
-            <!-- 側邊欄 -->
-            <aside class="sidebar">
-                <div class="sidebar-header">
-                    <h1 class="app-title">💬 T2內部訊息系統</h1>
-                    <p class="app-subtitle">即時通訊平台</p>
-                </div>
-                <div class="online-users">
-                    <div class="user-list-header">
-                        <span>在線用戶</span>
-                        <span class="user-count" id="userCount">0 人</span>
-                    </div>
-                    <div id="userList">
-                        <!-- 用戶列表會動態插入這裡 -->
-                    </div>
-                </div>
-            </aside>
-
-            <!-- 主要聊天區域 -->
-            <main class="main-content">
-                <header class="chat-header">
-                    <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
-                    <div class="current-user">
-                        <div class="connection-status" id="connectionStatus"></div>
-                        <span id="currentUser"></span>
-                    </div>
-                    <div class="user-actions">
-                        <button class="logout-btn" onclick="handleLogout()">登出</button>
-                    </div>
-                </header>
-
-                <div class="messages-container" id="messagesContainer">
-                    <!-- 訊息會動態插入這裡 -->
-                </div>
-
-                <div class="new-messages-indicator" id="newMessagesIndicator" onclick="scrollToBottom()">
-                    ↓ 新訊息
-                </div>
-
-                <div class="input-container">
-                    <form class="message-form" onsubmit="handleSendMessage(event)">
-                        <textarea 
-                            id="messageInput"
-                            class="message-input"
-                            placeholder="輸入訊息..."
-                            rows="1"
-                            maxlength="500"
-                            onInput="handleInput(event)"
-                        ></textarea>
-                        <span id="charCount" class="char-count">0/500</span>
-                        <button type="submit" class="send-btn" id="sendBtn" disabled>傳送</button>
-                    </form>
-                </div>
-            </main>
-        </div>
+  <div class="main-content">
+    <div class="page-title">T2日檢疫人員內部資訊</div>
+    
+    <!-- 公告跑馬燈 -->
+    <div class="marquee-container">
+      <div class="marquee-content">
+        📢 還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!!!!還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!
+      </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <!-- 通知看板 -->
+    <div class="notice-board" id="noticeBoard">
+      <div class="notice-item">
+        <div class="notice-title">🦽 複查輪椅旅客</div>
+        <div class="notice-content">以後碰到輪椅旅客，不管有多少行李，一律請他們往最前面稍等，避免造成交通組塞。</div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-title">🤝 X光跟前導要互相配合</div>
+        <div class="notice-content">任何一方要告知任何事，例如中間輪椅或是包包有麵包，雙方都要回應一下，確實彼此有收到訊息。</div>
+      </div>
+      <div class="notice-item">
+        <div class="notice-title">📋 新進人員須知</div>
+        <div class="notice-content">所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</div>
+      </div>
+    </div>
 
-    <script>
-        // Firebase 配置
-        const firebaseConfig = {
-            databaseURL: "https://my-awesome-project-id-1c490-default-rtdb.asia-southeast1.firebasedatabase.app"
-        };
+    <!-- 功能按鈕 - 3x3 網格 -->
+    <div class="btn-group">
+      <button class="func-btn blue" data-modal="📋前導">前導</button>
+      <button class="func-btn blue" data-modal="📋複查">複查</button>
+      <button class="func-btn blue" data-modal="📋X光">X光</button>
+      <button class="func-btn blue" data-modal="📋分流/2">分流/2</button>
+      <button class="func-btn blue" data-modal="📋新人須知">新人須知</button>
+      <button class="func-btn red" data-modal="⚠️規定事項">規定</button>
+      <button class="func-btn dark-blue" data-modal="⚠️各項連結">連結</button>
+      <button class="func-btn yellow" data-modal="檢疫物相關">檢疫物</button>
+      <button class="func-btn green" onclick="openExamModal()">自我考試</button>
+    </div>
 
-        // 初始化 Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+    <!-- 登出按鈕 -->
+    <button class="logout-btn" id="logoutBtn">登出</button>
+  </div>
 
-        // 全域變數
-        let currentUser = '';
-        let onlineUsers = {};
-        let isOnline = true;
-        let reconnectAttempts = 0;
-        let maxReconnectAttempts = 5;
-        let reconnectDelay = 1000;
-        let isAtBottom = true;
-        let unreadMessages = 0;
-        let lastMessageTime = 0;
-        let messagesLoaded = false;
+  <!-- 彈窗 -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal" id="modalBox">
+      <div class="modal-header" id="modalHeader">
+        <span id="modalTitle">標題</span>
+        <button class="modal-close" id="modalClose">×</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        內容載入中...
+      </div>
+    </div>
+  </div>
+<script>
+    // Firebase 配置
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvKmn0jCTS_jIgEYOuQjc8vyYU40Q5F3I",
+      authDomain: "stellarblue-system.firebaseapp.com",
+      databaseURL: "https://stellarblue-system-default-rtdb.firebaseio.com",
+      projectId: "stellarblue-system",
+      storageBucket: "stellarblue-system.firebasestorage.app",
+      messagingSenderId: "803212433649",
+      appId: "1:803212433649:web:887080d10a51d533b23150",
+      measurementId: "G-YY94484DV9"
+    };
 
-        // DOM 元素
-        const loginPage = document.getElementById('loginPage');
-        const chatPage = document.getElementById('chatPage');
-        const sidebar = document.querySelector('.sidebar');
-        const userList = document.getElementById('userList');
-        const userCount = document.getElementById('userCount');
-        const connectionStatus = document.getElementById('connectionStatus');
-        const currentUserDisplay = document.getElementById('currentUser');
-        const messagesContainer = document.getElementById('messagesContainer');
-        const messageInput = document.getElementById('messageInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const charCount = document.getElementById('charCount');
-        const newMessagesIndicator = document.getElementById('newMessagesIndicator');
+    // 初始化 Firebase
+    firebase.initializeApp(firebaseConfig);
 
-        // 切換側邊欄
-        function toggleSidebar() {
-            sidebar.classList.toggle('show');
+    // 用戶名稱映射表
+    const userNameMap = {
+        'user001': '張小明',
+        'user002': '王大明',
+        'user003': '李小華',
+        // 可以繼續添加更多用戶映射
+    };
+
+    // 用戶資料初始化函數
+    function initializeUserData(username) {
+        const userRef = firebase.database().ref(`users/${username}`);
+        userRef.once('value').then((snapshot) => {
+            if (!snapshot.exists()) {
+                // 如果是新用戶，創建初始資料
+                userRef.set({
+                    username: username,
+                    chineseName: userNameMap[username] || username,
+                    createDate: new Date().toISOString(),
+                    lastLogin: new Date().toISOString(),
+                    examRecords: {}
+                });
+            } else {
+                // 如果是既有用戶，更新登入時間
+                userRef.update({
+                    lastLogin: new Date().toISOString()
+                });
+            }
+        });
+    }
+
+    // ==========================================
+    // 🔧 考試系統設定區域
+    // ==========================================
+    
+    // 考試類別設定
+    const examCategories = {
+      "基礎哨員考試": [
+        {
+          question: "以下哪種物品需要過X光機檢查？",
+          options: ["A. 手機", "B. 大包包", "C. 護照", "D. 帽子"],
+          correct: 1
+        },
+        {
+          question: "旅客攜帶拍立得相機時，前導人員應該詢問什麼？",
+          options: ["A. 相機品牌", "B. 相機價格", "C. 底片是否已取出", "D. 購買地點"],
+          correct: 2
+        },
+        {
+          question: "以下哪種情況可以讓兩位旅客同時超過黃線？",
+          options: ["A. 趕時間的旅客", "B. 行動不便的高齡者需要協助", "C. VIP旅客", "D. 都不可以"],
+          correct: 1
+        },
+        {
+          question: "骨灰罐應該如何處理？",
+          options: ["A. 正常過X光機", "B. 請勿過X光，告知X光員是家人", "C. 直接放行", "D. 需要特殊檢查"],
+          correct: 1
+        },
+        {
+          question: "機組人員的行李應該如何擺放？",
+          options: ["A. 隨意擺放", "B. 由大到小擺放", "C. 由小到大擺放", "D. 分開擺放"],
+          correct: 1
+        },
+        {
+          question: "以下哪種物品不需要過X光機？",
+          options: ["A. 購物袋", "B. 工程箱", "C. 神像", "D. 提袋"],
+          correct: 2
+        },
+        {
+          question: "輪椅旅客應該使用哪個通道？",
+          options: ["A. 左側通道", "B. 右側通道", "C. 中間通道", "D. 任意通道"],
+          correct: 2
+        },
+        {
+          question: "電動行李箱應該如何處理？",
+          options: ["A. 過X光機", "B. 帶往前面手檢", "C. 直接放行", "D. 拒絕通關"],
+          correct: 0
+        },
+        {
+          question: "旅客詢問是否可以攜帶飛機餐時，正確的回應是？",
+          options: ["A. 可以攜帶", "B. 不可以攜帶", "C. 詢問是否含肉類製品", "D. 需要申報"],
+          correct: 1
+        },
+        {
+          question: "前導人員看到電動車通過時應該？",
+          options: ["A. 繼續工作", "B. 先完成當下旅客行李放置再維護秩序", "C. 立即停止工作", "D. 請旅客等待"],
+          correct: 1
+        },
+        {
+          question: "港澳蛋撻應該如何處理？",
+          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 禁止攜帶"],
+          correct: 0
+        },
+        {
+          question: "攜帶寵物的旅客需要？",
+          options: ["A. 寵物過X光機", "B. 出示寵物證明文件", "C. 額外收費", "D. 隔離檢查"],
+          correct: 1
         }
+      ]
+    };
 
-        // 初始化網路監控
-        function initializeNetworkMonitoring() {
-            const connectedRef = database.ref('.info/connected');
-            connectedRef.on('value', (snap) => {
-                if (snap.val() === true) {
-                    onConnected();
-                } else {
-                    onDisconnected();
-                }
+    // ==========================================
+    // 系統功能區域
+    // ==========================================
+
+    // 各按鈕的內容
+    const modalContents = {
+      "📋前導": `
+        <div class="section-title">前導人員工作須知</div>
+        <div class="content-block">
+          <div class="sub-title">基本職責</div>
+          <ul class="content-list">
+            <li>引導旅客正確排隊與放置行李</li>
+            <li>確保 X 光機運作順暢</li>
+            <li>處理特殊物品與情況</li>
+          </ul>
+        </div>
+        <div class="content-block">
+          <div class="sub-title">重要提醒</div>
+          <div class="highlight-box">
+            確保每位旅客都理解並遵守檢查程序，保持檢查區域秩序。
+          </div>
+        </div>
+      `,
+
+      "📋複查": `
+        <div class="section-title">複查人員工作須知</div>
+        <div class="content-block">
+          <div class="sub-title">主要職責</div>
+          <ul class="content-list">
+            <li>執行手動檢查程序</li>
+            <li>處理特殊物品檢查</li>
+            <li>與其他崗位配合協調</li>
+          </ul>
+        </div>
+      `,
+
+      "📋X光": `
+        <div class="section-title">X光檢查人員須知</div>
+        <div class="content-block">
+          <div class="sub-title">基本要求</div>
+          <ul class="content-list">
+            <li>熟悉X光機操作流程</li>
+            <li>準確識別可疑物品</li>
+            <li>保持與前導人員溝通</li>
+          </ul>
+        </div>
+      `,
+
+      "📋分流/2": `
+        <div class="section-title">分流崗位工作指南</div>
+        <div class="content-block">
+          <div class="sub-title">工作重點</div>
+          <ul class="content-list">
+            <li>正確引導旅客分流</li>
+            <li>維持通道秩序</li>
+            <li>處理特殊情況</li>
+          </ul>
+        </div>
+      `,
+
+      "📋新人須知": `
+        <div class="section-title">新進人員重要須知</div>
+        <div class="content-block">
+          <div class="warning-text">必讀事項：</div>
+          <ul class="content-list">
+            <li>熟悉基本工作流程</li>
+            <li>了解各項規定</li>
+            <li>保持良好溝通</li>
+          </ul>
+        </div>
+      `,
+
+      "⚠️規定事項": `
+        <div class="section-title">重要規定事項</div>
+        <div class="content-block">
+          <div class="warning-text">注意事項：</div>
+          <ul class="content-list">
+            <li>嚴格遵守檢查程序</li>
+            <li>保持工作崗位整潔</li>
+            <li>確實執行交接程序</li>
+          </ul>
+        </div>
+      `,
+
+      "⚠️各項連結": `
+        <div class="section-title">系統連結</div>
+        <div class="content-block">
+          <ul class="content-list">
+            <li>檢疫系統入口</li>
+            <li>教育訓練平台</li>
+            <li>工作排班系統</li>
+          </ul>
+        </div>
+      `,
+
+      "檢疫物相關": `
+        <div class="section-title">檢疫物品處理指南</div>
+        <div class="content-block">
+          <ul class="content-list">
+            <li>常見檢疫物品清單</li>
+            <li>處理流程說明</li>
+            <li>特殊情況處理</li>
+          </ul>
+        </div>
+      `
+    };
+
+    // ==========================================
+    // 考試系統變數
+    // ==========================================
+    let currentExam = null;
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let examStartTime = null;
+
+    // ==========================================
+    // 基本功能函數
+    // ==========================================
+
+    // 檢查登入狀態
+    function checkLogin() {
+      const loginUser = localStorage.getItem('t2_login');
+      const loginTime = localStorage.getItem('t2_login_time');
+      
+      if (!loginUser || !loginTime) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // 檢查登入時間是否超過8小時
+      const now = new Date().getTime();
+      const loginTimeStamp = parseInt(loginTime);
+      const EIGHT_HOURS = 8 * 60 * 60 * 1000;
+
+      if (now - loginTimeStamp > EIGHT_HOURS) {
+        alert('登入時間已超過8小時，請重新登入');
+        localStorage.removeItem('t2_login');
+        localStorage.removeItem('t2_login_time');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // 初始化或更新用戶資料
+      initializeUserData(loginUser);
+    }
+
+    // 開啟模態視窗
+    function openModal(title, content) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').innerHTML = content;
+      document.getElementById('modalBg').classList.add('active');
+    }
+
+    // 關閉模態視窗
+    function closeModal() {
+      document.getElementById('modalBg').classList.remove('active');
+      resetExamDisplay();
+    }
+
+    // 重置考試顯示
+    function resetExamDisplay() {
+      const examList = document.querySelector('.exam-list');
+      const examInterface = document.querySelector('.exam-interface');
+      const resultContainer = document.querySelector('.result-container');
+      
+      if (examList) examList.style.display = 'flex';
+      if (examInterface) examInterface.style.display = 'none';
+      if (resultContainer) resultContainer.style.display = 'none';
+    }
+
+    // ==========================================
+    // 考試系統函數
+    // ==========================================
+
+    // 開啟考試選單
+    function openExamModal() {
+      let examListHTML = `
+        <div class="section-title">📚 自我考試系統</div>
+        <div class="exam-list">
+      `;
+      
+      for (let examName in examCategories) {
+        examListHTML += `
+          <div class="exam-category">
+            <div class="exam-title">${examName}</div>
+            <div class="exam-buttons">
+              <button class="exam-action-btn start-exam" onclick="startExam('${examName}')">
+                <span class="btn-icon">📝</span>考試
+              </button>
+              <button class="exam-action-btn view-ranking" onclick="showRanking('${examName}')">
+                <span class="btn-icon">🏆</span>排行榜
+              </button>
+            </div>
+          </div>
+        `;
+      }
+      
+      examListHTML += `</div>`;
+      
+      openModal('自我考試系統', examListHTML);
+    }
+
+    // 顯示排行榜
+    function showRanking(examName) {
+      const rankingRef = firebase.database().ref(`rankings/${examName}`);
+      
+      rankingRef.orderByChild('score').limitToLast(10).once('value', (snapshot) => {
+        let rankings = [];
+        snapshot.forEach((childSnapshot) => {
+          const userData = childSnapshot.val();
+          // 從用戶資料中獲取中文名稱
+          const userRef = firebase.database().ref(`users/${userData.username}`);
+          userRef.once('value').then((userSnapshot) => {
+            const userInfo = userSnapshot.val();
+            rankings.push({
+              username: userInfo ? userInfo.chineseName : userData.username,
+              score: userData.score,
+              date: userData.date
             });
-        }
-
-        // 連線成功處理
-        function onConnected() {
-            isOnline = true;
-            reconnectAttempts = 0;
-            connectionStatus.classList.remove('offline');
             
-            if (currentUser) {
-                updateUserStatus('online');
+            if (rankings.length === snapshot.numChildren()) {
+              displayRankings(examName, rankings.sort((a, b) => b.score - a.score));
             }
-        }
-
-        // 斷線處理
-        function onDisconnected() {
-            isOnline = false;
-            connectionStatus.classList.add('offline');
-            
-            if (currentUser && reconnectAttempts < maxReconnectAttempts) {
-                attemptReconnect();
-            }
-        }
-
-        // 嘗試重新連線
-        function attemptReconnect() {
-            reconnectAttempts++;
-            
-            setTimeout(() => {
-                if (!isOnline && reconnectAttempts < maxReconnectAttempts) {
-                    database.goOnline();
-                }
-            }, reconnectDelay * Math.pow(2, reconnectAttempts - 1));
-        }
-
-        // 處理登入
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const loginBtn = document.getElementById('loginBtn');
-            
-            if (!username) return;
-            
-            loginBtn.disabled = true;
-            
-            // 檢查用戶名是否已存在
-            database.ref('users').once('value')
-                .then((snapshot) => {
-                    const users = snapshot.val() || {};
-                    if (users[username]) {
-                        alert('此用戶名已被使用');
-                        loginBtn.disabled = false;
-                        return;
-                    }
-                    
-                    completeLogin(username);
-                })
-                .catch((error) => {
-                    console.error('登入檢查失敗:', error);
-                    alert('登入失敗，請重試');
-                    loginBtn.disabled = false;
-                });
-        }
-
-        // 完成登入程序
-        function completeLogin(username) {
-            currentUser = username;
-            currentUserDisplay.textContent = username;
-            
-            // 設置用戶狀態
-            updateUserStatus('online');
-
-            // 設置斷線自動清除
-            database.ref('users/' + username).onDisconnect().remove();
-
-            // 發送系統訊息
-            sendSystemMessage(`${username} 加入了聊天室`);
-
-            // 切換介面
-            loginPage.classList.add('hidden');
-            chatPage.classList.remove('hidden');
-
-            // 開始監聽
-            startListening();
-            
-            // 聚焦輸入框
-            messageInput.focus();
-        }
-
-        // 開始監聽事件
-        function startListening() {
-            // 監聽在線用戶
-            database.ref('users').on('value', (snapshot) => {
-                const users = snapshot.val() || {};
-                onlineUsers = {};
-                
-                Object.keys(users).forEach(username => {
-                    if (users[username].status === 'online') {
-                        onlineUsers[username] = users[username];
-                    }
-                });
-                
-                updateUserList();
-            });
-
-            // 監聽訊息
-            database.ref('messages')
-                .orderByChild('timestamp')
-                .limitToLast(50)
-                .on('child_added', (snapshot) => {
-                    const message = snapshot.val();
-                    if (message.timestamp > lastMessageTime) {
-                        displayMessage(message);
-                        lastMessageTime = message.timestamp;
-                    }
-                });
-        }
-
-        // 更新用戶列表
-        function updateUserList() {
-            userList.innerHTML = '';
-            const count = Object.keys(onlineUsers).length;
-            userCount.textContent = `${count} 人`;
-
-            Object.entries(onlineUsers)
-                .sort(([, a], [, b]) => b.lastSeen - a.lastSeen)
-                .forEach(([username, data]) => {
-                    const userElement = document.createElement('div');
-                    userElement.className = 'user-item';
-                    
-                    const time = new Date(data.lastSeen).toLocaleTimeString('zh-TW', {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-
-                    userElement.innerHTML = `
-                        <div class="user-status ${data.status}"></div>
-                        <div class="user-info">
-                            <div class="user-name">${username}</div>
-                            <div class="user-last-seen">最後上線：${time}</div>
-                        </div>
-                    `;
-
-                    userList.appendChild(userElement);
-                });
-        }
-
-        // 更新用戶狀態
-        function updateUserStatus(status) {
-            if (currentUser) {
-                database.ref('users/' + currentUser).set({
-                    status: status,
-                    lastSeen: firebase.database.ServerValue.TIMESTAMP
-                });
-            }
-        }
-
-        // 處理訊息發送
-        function handleSendMessage(event) {
-            event.preventDefault();
-            const messageText = messageInput.value.trim();
-            
-            if (!messageText || !isOnline) return;
-            
-            sendBtn.disabled = true;
-
-            const message = {
-                sender: currentUser,
-                content: messageText,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                type: 'user'
-            };
-
-            database.ref('messages').push(message)
-                .then(() => {
-                    messageInput.value = '';
-                    messageInput.style.height = 'auto';
-                    updateCharCount();
-                    sendBtn.disabled = false;
-                    messageInput.focus();
-                })
-                .catch((error) => {
-                    console.error('訊息傳送失敗:', error);
-                    alert('訊息傳送失敗，請重試');
-                    sendBtn.disabled = false;
-                });
-        }
-
-        // 發送系統訊息
-        function sendSystemMessage(content) {
-            const message = {
-                content: content,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                type: 'system'
-            };
-
-            database.ref('messages').push(message);
-        }
-
-        // 顯示訊息
-        function displayMessage(message) {
-            const messageElement = document.createElement('div');
-
-            if (message.type === 'system') {
-                messageElement.className = 'system-message';
-                messageElement.textContent = message.content;
-            } else {
-                const isOwn = message.sender === currentUser;
-                messageElement.className = `message ${isOwn ? 'own' : ''}`;
-                
-                const time = new Date(message.timestamp).toLocaleTimeString('zh-TW', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-
-                messageElement.innerHTML = `
-                    <div class="message-bubble">
-                        <div class="message-header">${isOwn ? '我' : message.sender}</div>
-                        <div class="message-content">${escapeHtml(message.content)}</div>
-                        <div class="message-time">${time}</div>
-                    </div>
-                `;
-            }
-
-            messagesContainer.appendChild(messageElement);
-            
-            const wasAtBottom = isAtBottom;
-            isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < 50;
-            
-            if (wasAtBottom) {
-                scrollToBottom();
-            } else {
-                unreadMessages++;
-                showNewMessageIndicator();
-            }
-        }
-
-        // 處理輸入
-        function handleInput(event) {
-            const target = event.target;
-            target.style.height = 'auto';
-            target.style.height = Math.min(target.scrollHeight, 120) + 'px';
-            updateCharCount();
-        }
-
-        // 更新字數統計
-        function updateCharCount() {
-            const length = messageInput.value.length;
-            charCount.textContent = `${length}/500`;
-            
-            if (length >= 500) {
-                charCount.classList.add('at-limit');
-                charCount.classList.remove('near-limit');
-            } else if (length >= 400) {
-                charCount.classList.add('near-limit');
-                charCount.classList.remove('at-limit');
-            } else {
-                charCount.classList.remove('near-limit', 'at-limit');
-            }
-
-            sendBtn.disabled = length === 0 || length > 500 || !isOnline;
-        }
-
-        // 滾動到底部
-        function scrollToBottom() {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            unreadMessages = 0;
-            hideNewMessageIndicator();
-        }
-
-        // 顯示新訊息提示
-        function showNewMessageIndicator() {
-            newMessagesIndicator.style.display = 'block';
-            newMessagesIndicator.textContent = `↓ ${unreadMessages} 則新訊息`;
-        }
-
-        // 隱藏新訊息提示
-        function hideNewMessageIndicator() {
-            newMessagesIndicator.style.display = 'none';
-        }
-                // HTML 轉義函數
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // 處理登出
-        function handleLogout() {
-            if (!confirm('確定要登出嗎？')) {
-                return;
-            }
-
-            // 發送系統訊息
-            sendSystemMessage(`${currentUser} 離開了聊天室`);
-            
-            // 清除用戶狀態
-            database.ref('users/' + currentUser).remove();
-
-            // 移除事件監聽
-            database.ref('users').off();
-            database.ref('messages').off();
-
-            // 重置界面
-            loginPage.classList.remove('hidden');
-            chatPage.classList.add('hidden');
-            document.getElementById('username').value = '';
-            messagesContainer.innerHTML = '';
-            
-            // 重置變數
-            currentUser = '';
-            unreadMessages = 0;
-            lastMessageTime = 0;
-            messagesLoaded = false;
-            hideNewMessageIndicator();
-        }
-
-        // 監聽訊息輸入框的 Enter 鍵
-        messageInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleSendMessage(e);
-            }
+          });
         });
+      });
+    }
 
-        // 監聽訊息容器的滾動
-        messagesContainer.addEventListener('scroll', function() {
-            isAtBottom = this.scrollHeight - this.scrollTop - this.clientHeight < 50;
-            if (isAtBottom) {
-                hideNewMessageIndicator();
-                unreadMessages = 0;
-            }
+    // 顯示排行榜內容
+    function displayRankings(examName, rankings) {
+      let rankingHTML = `
+        <div class="ranking-container">
+          <div class="section-title">${examName} - 排行榜</div>
+          <div class="ranking-list">
+            <div class="ranking-header">
+              <span class="rank-column">排名</span>
+              <span class="name-column">姓名</span>
+              <span class="score-column">分數</span>
+              <span class="date-column">日期</span>
+            </div>
+      `;
+      
+      if (rankings.length === 0) {
+        rankingHTML += `
+          <div class="empty-ranking">
+            目前還沒有考試紀錄
+          </div>
+        `;
+      } else {
+        rankings.forEach((rank, index) => {
+          rankingHTML += `
+            <div class="ranking-item ${index < 3 ? 'top-' + (index + 1) : ''}">
+              <span class="rank-column">${index + 1}</span>
+              <span class="name-column">${rank.username}</span>
+              <span class="score-column">${rank.score}</span>
+              <span class="date-column">${rank.date}</span>
+            </div>
+          `;
         });
+      }
+      
+      rankingHTML += `
+          </div>
+          <button class="ranking-back-btn" onclick="openExamModal()">返回考試選單</button>
+        </div>
+      `;
+      
+      document.getElementById('modalBody').innerHTML = rankingHTML;
+    }
 
-        // 點擊聊天區域時關閉側邊欄（在手機版特別有用）
-        messagesContainer.addEventListener('click', () => {
-            if (window.innerWidth <= 768 && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-            }
-        });
+    // 開始考試
+    function startExam(examName) {
+      currentExam = examName;
+      const allQuestions = examCategories[examName];
+      
+      // 隨機選擇20題或全部題目（如果題目少於20題）
+      currentQuestions = shuffleArray([...allQuestions]).slice(0, Math.min(20, allQuestions.length));
+      currentQuestionIndex = 0;
+      userAnswers = [];
+      examStartTime = new Date();
+      
+      showExamInterface();
+      displayQuestion();
+    }
 
-        // 頁面載入完成後初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeNetworkMonitoring();
-            updateCharCount();
-        });
+    // 顯示考試介面
+    function showExamInterface() {
+      const examInterfaceHTML = `
+        <div class="exam-interface active">
+          <div class="question-container">
+            <div class="question-number" id="questionNumber"></div>
+            <div class="question-text" id="questionText"></div>
+            <div class="options-container" id="optionsContainer"></div>
+          </div>
+          <div class="exam-controls">
+            <button class="exam-btn secondary" onclick="previousQuestion()" id="prevBtn">上一題</button>
+            <span id="questionCounter"></span>
+            <button class="exam-btn primary" onclick="nextQuestion()" id="nextBtn">下一題</button>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('modalBody').innerHTML = examInterfaceHTML;
+    }
 
-        // 頁面關閉時清理
-        window.addEventListener('beforeunload', () => {
-            if (currentUser) {
-                database.ref('users/' + currentUser).remove();
-                sendSystemMessage(`${currentUser} 離開了聊天室`);
-            }
-        });
+    // 顯示題目
+    function displayQuestion() {
+      const question = currentQuestions[currentQuestionIndex];
+      
+      document.getElementById('questionNumber').textContent = `第 ${currentQuestionIndex + 1} 題`;
+      document.getElementById('questionText').textContent = question.question;
+      document.getElementById('questionCounter').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+      
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.textContent = option;
+        optionDiv.onclick = () => selectOption(index);
+        
+        if (userAnswers[currentQuestionIndex] === index) {
+          optionDiv.classList.add('selected');
+        }
+        
+        optionsContainer.appendChild(optionDiv);
+      });
+      
+      // 控制按鈕顯示
+      document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'inline-block';
+      
+      const nextBtn = document.getElementById('nextBtn');
+      if (currentQuestionIndex === currentQuestions.length - 1) {
+        nextBtn.textContent = '完成考試';
+        nextBtn.onclick = finishExam;
+      } else {
+        nextBtn.textContent = '下一題';
+        nextBtn.onclick = nextQuestion;
+      }
+    }
 
-        // 頁面獲得焦點時更新狀態
-        window.addEventListener('focus', () => {
-            if (currentUser) {
-                updateUserStatus('online');
-            }
+    // 選擇答案
+    function selectOption(optionIndex) {
+      userAnswers[currentQuestionIndex] = optionIndex;
+      
+      const options = document.querySelectorAll('.option');
+      options.forEach((option, index) => {
+        option.classList.toggle('selected', index === optionIndex);
+      });
+    }
+
+    // 上一題
+    function previousQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion();
+      }
+    }
+
+    // 下一題
+    function nextQuestion() {
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+      }
+    }
+
+    // 完成考試
+    function finishExam() {
+      // 檢查是否有未作答的題目
+      const unansweredQuestions = [];
+      for (let i = 0; i < currentQuestions.length; i++) {
+        if (userAnswers[i] === undefined) {
+          unansweredQuestions.push(i + 1);
+        }
+      }
+      
+      if (unansweredQuestions.length > 0) {
+        alert(`還有 ${unansweredQuestions.length} 題未作答：第 ${unansweredQuestions.join(', ')} 題`);
+        return;
+      }
+      
+      // 計算分數並更新排行榜
+      let correctCount = 0;
+      currentQuestions.forEach((question, index) => {
+        if (userAnswers[index] === question.correct) {
+          correctCount++;
+        }
+      });
+      
+      const score = Math.round((correctCount / currentQuestions.length) * 100);
+      const username = localStorage.getItem('t2_login');
+      const currentDate = new Date().toLocaleDateString();
+      
+      // 儲存考試記錄到用戶資料
+      const userRef = firebase.database().ref(`users/${username}/examRecords/${currentExam}`);
+      userRef.push({
+        score: score,
+        date: currentDate,
+        duration: Math.round((new Date() - examStartTime) / 1000)
+      });
+      
+      // 更新排行榜
+      const rankingRef = firebase.database().ref(`rankings/${currentExam}`);
+      rankingRef.push({
+        username: username,
+        score: score,
+        date: currentDate
+      }).then(() => {
+        showResults(correctCount);
+      }).catch(error => {
+        console.error("Error saving score:", error);
+        showResults(correctCount);
+      });
+    }
+
+    // 陣列隨機排序函數
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // ==========================================
+    // 事件監聽器設置
+    // ==========================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // 功能按鈕點擊事件
+      document.querySelectorAll('.func-btn[data-modal]').forEach(button => {
+        button.addEventListener('click', function() {
+          const modalKey = this.getAttribute('data-modal');
+          openModal(modalKey, modalContents[modalKey]);
         });
-    </script>
+      });
+
+      // 關閉模態視窗
+      document.getElementById('modalClose').addEventListener('click', closeModal);
+      document.getElementById('modalBg').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeModal();
+        }
+      });
+
+      // 初始檢查登入狀態
+      checkLogin();
+
+      // 登出按鈕
+      document.getElementById('logoutBtn').onclick = function() {
+        if (confirm('確定要登出嗎？')) {
+          localStorage.removeItem('t2_login');
+          localStorage.removeItem('t2_login_time');
+          alert('已登出系統');
+          window.location.href = 'index.html';
+        }
+      };
+
+      // ESC 鍵關閉模態視窗
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
+
