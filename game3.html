@@ -553,7 +553,7 @@ function validateUser(username) {
 function showWelcomeMessage(user) {
   const welcomeElement = document.getElementById('currentUserWelcome');
   const displayName = user.welcome || user._comment || user.username;
-  welcomeElement.textContent = displayName;
+  welcomeElement.textContent = `歡迎回來，${displayName}`;  // 只在頁面顯示時加上"歡迎回來"
 }
 
 // 主要初始化函數
@@ -1230,7 +1230,7 @@ try {
     const timestamp = Date.now();
     const scoreData = {
         username: currentUser.username,
-        displayName: currentUser.welcome || currentUser._comment || currentUser.username,
+        displayName: currentUser._comment || currentUser.username,
         score: score,
         examType: currentExam,
         timestamp: timestamp,
@@ -1247,6 +1247,7 @@ try {
     alert('❌ 保存成績失敗，請稍後再試');
 }
 }
+
 
 // 重新考試
 function restartExam() {
