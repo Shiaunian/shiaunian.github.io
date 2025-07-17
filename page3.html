@@ -1,430 +1,492 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <title>T2日檢疫人員內部資訊</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<meta charset="UTF-8">
+<title>T2日檢疫人員內部資訊</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-  <style>
-    body {
-      font-family: "微軟正黑體", Arial, sans-serif;
-      background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-    /* 主要內容區塊 */
-    .main-content {
-      width: 94vw;
-      max-width: 450px;
-      margin: 7vw auto 0 auto;
-      padding: 7vw 4vw 6vw 4vw;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 15px;
-      box-shadow: 0 6px 24px 0 rgba(58, 85, 170, 0.10), 0 1.5px 8px 0 #0001;
-    }
+<style>
+  body {
+    font-family: "微軟正黑體", Arial, sans-serif;
+    background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
 
-    /* 頁面標題 */
-    .page-title {
-      font-size: 1.45rem;
-      font-weight: bold;
-      color: #263161;
-      margin-bottom: 1.1em;
-      letter-spacing: 2px;
-      text-align: center;
-    }
+  /* 主要內容區塊 */
+  .main-content {
+    width: 94vw;
+    max-width: 450px;
+    margin: 7vw auto 0 auto;
+    padding: 7vw 4vw 6vw 4vw;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 15px;
+    box-shadow: 0 6px 24px 0 rgba(58, 85, 170, 0.10), 0 1.5px 8px 0 #0001;
+  }
 
-    /* 通知看板 */
-    .notice-board {
-      background: #f4f7fb;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px #b3b3d622;
-      padding: 1.2em 1em 1em 1em;
-      max-height: 240px;
-      overflow-y: auto;
-      margin-bottom: 2.2em;
-      border-left: 6px solid #6c81d5;
-    }
+  /* 頁面標題 */
+  .page-title {
+    font-size: 1.45rem;
+    font-weight: bold;
+    color: #263161;
+    margin-bottom: 1.1em;
+    letter-spacing: 2px;
+    text-align: center;
+  }
 
-    /* 通知項目 */
-    .notice-item {
-      margin-bottom: 1.2em;
-    }
+  /* 用戶歡迎區塊 */
+  .welcome-section {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    text-align: center;
+    border: 2px solid #e3e9ff;
+  }
 
-    /* 通知標題 */
-    .notice-title {
-      font-weight: 700;
-      color: #3949ab;
-      font-size: 1.08em;
-      margin-bottom: 0.3em;
-    }
+  .welcome-text {
+    color: #3949ab;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+  }
 
-    .highlight-box {
-      background: #f4f7fb;
-      border-left: 4px solid #7c90e1;
-      padding: 0.8em;
-      margin: 0.8em 0;
-      border-radius: 4px;
-    }
+  .user-name {
+    color: #263161;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 
-    /* 標題內容專用樣式 */
-    .section-title {
-      color: #3949ab;
-      font-size: 12pt;
-      font-weight: bold;
-      margin-top: 1.5em;
-      margin-bottom: 0.8em;
-      border-bottom: 2px solid #e3e9ff;
-      padding-bottom: 0.3em;
-    }
+  /* 通知看板 */
+  .notice-board {
+    background: #f4f7fb;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #b3b3d622;
+    padding: 1.2em 1em 1em 1em;
+    max-height: 240px;
+    overflow-y: auto;
+    margin-bottom: 2.2em;
+    border-left: 6px solid #6c81d5;
+  }
 
-    .section-title:first-child {
-      margin-top: 0;
-    }
+  /* 通知項目 */
+  .notice-item {
+    margin-bottom: 1.2em;
+  }
 
-    .content-block {
-      margin-bottom: 1.2em;
-    }
+  /* 通知標題 */
+  .notice-title {
+    font-weight: 700;
+    color: #3949ab;
+    font-size: 1.08em;
+    margin-bottom: 0.3em;
+  }
 
-    .sub-title {
-      font-weight: bold;
-      color: #263161;
-      margin-bottom: 0.5em;
-      margin-top: 1em;
-    }
+  .highlight-box {
+    background: #f4f7fb;
+    border-left: 4px solid #7c90e1;
+    padding: 0.8em;
+    margin: 0.8em 0;
+    border-radius: 4px;
+  }
 
-    .content-list {
-      margin-left: 1em;
-      line-height: 1.8;
-    }
+  /* 標題內容專用樣式 */
+  .section-title {
+    color: #3949ab;
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    border-bottom: 2px solid #e3e9ff;
+    padding-bottom: 0.3em;
+  }
 
-    .content-list li {
-      margin-bottom: 0.5em;
-    }
+  .section-title:first-child {
+    margin-top: 0;
+  }
 
-    .warning-text {
-      color: #c62828;
-      font-weight: bold;
-    }
+  .content-block {
+    margin-bottom: 1.2em;
+  }
 
-    .indent {
-      margin-left: 1.5em;
-    }
+  .sub-title {
+    font-weight: bold;
+    color: #263161;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+  }
 
-    /* 通知內容 */
-    .notice-content {
-      color: #23315c;
-      font-size: 0.99em;
-      line-height: 1.7;
-      margin-left: 0.5em;
-    }
+  .content-list {
+    margin-left: 1em;
+    line-height: 1.8;
+  }
 
-    /* 按鈕群組 - 3x3 網格布局 */
-    .btn-group {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.8em;
-      margin-bottom: 1.5em;
-    }
+  .content-list li {
+    margin-bottom: 0.5em;
+  }
 
-    /* 功能按鈕 */
-    .func-btn {
-      padding: 0.85em 0.5em;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      min-height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  .warning-text {
+    color: #c62828;
+    font-weight: bold;
+  }
 
-    /* 按鈕顏色 */
-    .func-btn.blue {
-      background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
-      color: #fff;
-    }
+  .indent {
+    margin-left: 1.5em;
+  }
 
-    .func-btn.blue:hover {
-      background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
-      transform: translateY(-2px);
-    }
+  /* 通知內容 */
+  .notice-content {
+    color: #23315c;
+    font-size: 0.99em;
+    line-height: 1.7;
+    margin-left: 0.5em;
+  }
 
-    .func-btn.dark-blue {
-      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
-      color: #fff;
-    }
+  /* 按鈕群組 - 3x3 網格布局 */
+  .btn-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8em;
+    margin-bottom: 1.5em;
+  }
 
-    .func-btn.dark-blue:hover {
-      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
-      transform: translateY(-2px);
-    }
+  /* 功能按鈕 */
+  .func-btn {
+    padding: 0.85em 0.5em;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .func-btn.red {
-      background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
-      color: #fff;
-    }
+  /* 按鈕顏色 */
+  .func-btn.blue {
+    background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
+    color: #fff;
+  }
 
-    .func-btn.red:hover {
-      background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
-      transform: translateY(-2px);
-    }
+  .func-btn.blue:hover {
+    background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+    transform: translateY(-2px);
+  }
 
-    .func-btn.yellow {
-      background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
-      color: #fff;
-    }
+  .func-btn.dark-blue {
+    background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
+    color: #fff;
+  }
 
-    .func-btn.yellow:hover {
-      background: linear-gradient(135deg, #ff8f00 0%, #e65100 100%);
-      transform: translateY(-2px);
-    }
+  .func-btn.dark-blue:hover {
+    background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+    transform: translateY(-2px);
+  }
 
-    .func-btn.green {
-      background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
-      color: #fff;
-    }
+  .func-btn.red {
+    background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+    color: #fff;
+  }
 
-    .func-btn.green:hover {
-      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-      transform: translateY(-2px);
-    }
+  .func-btn.red:hover {
+    background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+    transform: translateY(-2px);
+  }
 
-    /* 登出按鈕 */
-    .logout-btn {
-      width: 100%;
-      padding: 16px 0;
-      background: linear-gradient(90deg, #251111 60%, #695858 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #e6555522;
-      transition: all 0.3s ease;
-      margin-top: 1em;
-    }
+  .func-btn.yellow {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    color: #fff;
+  }
 
-    .logout-btn:hover {
-      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
-      transform: translateY(-2px);
-    }
+  .func-btn.yellow:hover {
+    background: linear-gradient(135deg, #ff8f00 0%, #e65100 100%);
+    transform: translateY(-2px);
+  }
 
-    /* 彈窗樣式 */
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(30, 40, 80, 0.4);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: blur(5px);
-    }
+  .func-btn.green {
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    color: #fff;
+  }
 
-    .modal-bg.active {
-      display: flex;
-    }
+  .func-btn.green:hover {
+    background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+    transform: translateY(-2px);
+  }
 
-    /* 模態容器 */
-    .modal {
-      background: #fff;
-      border-radius: 15px;
-      min-width: 300px;
-      max-width: 600px;
-      width: 90vw;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      padding: 0;
-      position: relative;
-      animation: modalSlideIn 0.3s ease-out;
-      display: flex;
-      flex-direction: column;
-      max-height: 85vh;
-      overflow: hidden;
-    }
+  /* 登出按鈕 */
+  .logout-btn {
+    width: 100%;
+    padding: 16px 0;
+    background: linear-gradient(90deg, #251111 60%, #695858 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.18rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e6555522;
+    transition: all 0.3s ease;
+    margin-top: 1em;
+  }
 
-    @keyframes modalSlideIn {
-      from {
-        transform: scale(0.9) translateY(-20px);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-      }
-    }
+  .logout-btn:hover {
+    background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+    transform: translateY(-2px);
+  }
 
-    /* 模態標題區 */
-    .modal-header {
-      padding: 1.2em 1.5em;
-      background: linear-gradient(135deg, #e3e9ff 0%, #f0f4ff 100%);
-      border-radius: 15px 15px 0 0;
-      font-weight: bold;
-      color: #3949ab;
-      font-size: 1.2em;
-      letter-spacing: 1px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #e3e9ff;
-    }
+  /* 彈窗樣式 */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(30, 40, 80, 0.4);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
 
-    /* 模態關閉按鈕 */
-    .modal-close {
-      background: #ff4757;
-      border: none;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 1.2em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+  .modal-bg.active {
+    display: flex;
+  }
 
-    .modal-close:hover {
-      background: #ff3742;
-      transform: scale(1.1);
-    }
+  /* 模態容器 */
+  .modal {
+    background: #fff;
+    border-radius: 15px;
+    min-width: 300px;
+    max-width: 600px;
+    width: 90vw;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    padding: 0;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow: hidden;
+  }
 
-    /* 模態內容區 */
-    .modal-body {
-      padding: 1.5em;
-      overflow-y: auto;
-      flex: 1 1 auto;
-      color: #263161;
-      font-size: 1em;
-      line-height: 1.6;
+  @keyframes modalSlideIn {
+    from {
+      transform: scale(0.9) translateY(-20px);
+      opacity: 0;
     }
+    to {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
 
-    /* 跑馬燈容器 */
-    .marquee-container {
-      width: 100%;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
-      border-radius: 10px;
-      margin-bottom: 1.5em;
-      padding: 0.8em 0;
-      border: 2px solid #e3e9ff;
-    }
+  /* 模態標題區 */
+  .modal-header {
+    padding: 1.2em 1.5em;
+    background: linear-gradient(135deg, #e3e9ff 0%, #f0f4ff 100%);
+    border-radius: 15px 15px 0 0;
+    font-weight: bold;
+    color: #3949ab;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e3e9ff;
+  }
 
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee 50s linear infinite;
-      color: #c62828;
-      font-weight: 600;
-    }
+  /* 模態關閉按鈕 */
+  .modal-close {
+    background: #ff4757;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
 
-    @keyframes marquee {
-      0% { transform: translateX(15%); }
-      100% { transform: translateX(-100%); }
-    }
+  .modal-close:hover {
+    background: #ff3742;
+    transform: scale(1.1);
+  }
 
-    .marquee-container:hover .marquee-content {
-      animation-play-state: paused;
-    }
+  /* 模態內容區 */
+  .modal-body {
+    padding: 1.5em;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    color: #263161;
+    font-size: 1em;
+    line-height: 1.6;
+  }
 
-    /* 考試系統樣式 */
-    .exam-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
+  /* 跑馬燈容器 */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
+    border-radius: 10px;
+    margin-bottom: 1.5em;
+    padding: 0.8em 0;
+    border: 2px solid #e3e9ff;
+  }
 
-    /* 考試類別樣式 */
-    .exam-category {
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.5em;
-      margin-bottom: 1em;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border: 2px solid #e3e9ff;
-      transition: all 0.3s ease;
-    }
+  .marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 50s linear infinite;
+    color: #c62828;
+    font-weight: 600;
+  }
 
-    .exam-category:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-      border-color: #7c90e1;
-    }
+  @keyframes marquee {
+    0% { transform: translateX(15%); }
+    100% { transform: translateX(-100%); }
+  }
 
-    .exam-title {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #3949ab;
-      margin-bottom: 1em;
-      padding-bottom: 0.5em;
-      border-bottom: 2px solid #e3e9ff;
-    }
+  .marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+  }
 
-    .exam-buttons {
-      display: flex;
-      gap: 1em;
-    }
+  /* 考試系統樣式 */
+  .exam-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 
-    .exam-action-btn {
-      flex: 1;
-      padding: 0.8em;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5em;
-    }
+  /* 考試類別樣式 */
+  .exam-category {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 2px solid #e3e9ff;
+    transition: all 0.3s ease;
+  }
 
-    .start-exam {
-      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-      color: white;
-    }
+  .exam-category:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+    border-color: #7c90e1;
+  }
 
-    .start-exam:hover {
-      background: linear-gradient(135deg, #45a049 0%, #388E3C 100%);
-      transform: translateY(-2px);
-    }
+  .exam-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3949ab;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid #e3e9ff;
+  }
 
-    .view-ranking {
-      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-      color: white;
-    }
+  .exam-buttons {
+    display: flex;
+    gap: 1em;
+  }
 
-    .view-ranking:hover {
-      background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
-      transform: translateY(-2px);
-    }
+  .exam-action-btn {
+    flex: 1;
+    padding: 0.8em;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
 
-    .btn-icon {
-      font-size: 1.2em;
-    }
-  </style>
+  .start-exam {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+  }
+
+  .start-exam:hover {
+    background: linear-gradient(135deg, #45a049 0%, #388E3C 100%);
+    transform: translateY(-2px);
+  }
+
+  .view-ranking {
+    background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+    color: white;
+  }
+
+  .view-ranking:hover {
+    background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+    transform: translateY(-2px);
+  }
+
+  .btn-icon {
+    font-size: 1.2em;
+  }
+
+  /* 載入中樣式 */
+  .loading {
+    text-align: center;
+    padding: 2em;
+    color: #666;
+    font-size: 1.1em;
+  }
+
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
 </head>
 <body>
-  <div class="main-content">
-    <div class="page-title">T2日檢疫人員內部資訊</div>
-    
+<div class="main-content">
+  <div class="page-title">T2日檢疫人員內部資訊</div>
+  
+  <!-- 用戶歡迎區塊 -->
+  <div class="welcome-section" id="welcomeSection" style="display: none;">
+    <div class="welcome-text">歡迎回來</div>
+    <div class="user-name" id="userName">載入中...</div>
+  </div>
+
+  <!-- 載入中提示 -->
+  <div class="loading" id="loadingSection">
+    <div class="loading-spinner"></div>
+    正在驗證登入狀態...
+  </div>
+
+  <!-- 主要內容區域 (初始隱藏) -->
+  <div id="mainContent" style="display: none;">
     <!-- 公告跑馬燈 -->
     <div class="marquee-container">
       <div class="marquee-content">
@@ -464,280 +526,388 @@
     <!-- 登出按鈕 -->
     <button class="logout-btn" id="logoutBtn">登出</button>
   </div>
+</div>
 
-  <!-- 彈窗 -->
-  <div class="modal-bg" id="modalBg">
-    <div class="modal" id="modalBox">
-      <div class="modal-header" id="modalHeader">
-        <span id="modalTitle">標題</span>
-        <button class="modal-close" id="modalClose">×</button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        內容載入中...
-      </div>
+<!-- 彈窗 -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modalBox">
+    <div class="modal-header" id="modalHeader">
+      <span id="modalTitle">標題</span>
+      <button class="modal-close" id="modalClose">×</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      內容載入中...
     </div>
   </div>
+</div>
+
 <script>
-    // Firebase 配置
-    const firebaseConfig = {
-      apiKey: "AIzaSyBvKmn0jCTS_jIgEYOuQjc8vyYU40Q5F3I",
-      authDomain: "stellarblue-system.firebaseapp.com",
-      databaseURL: "https://stellarblue-system-default-rtdb.firebaseio.com",
-      projectId: "stellarblue-system",
-      storageBucket: "stellarblue-system.firebasestorage.app",
-      messagingSenderId: "803212433649",
-      appId: "1:803212433649:web:887080d10a51d533b23150",
-      measurementId: "G-YY94484DV9"
-    };
+  // Firebase 配置
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvKmn0jCTS_jIgEYOuQjc8vyYU40Q5F3I",
+    authDomain: "stellarblue-system.firebaseapp.com",
+    databaseURL: "https://stellarblue-system-default-rtdb.firebaseio.com",
+    projectId: "stellarblue-system",
+    storageBucket: "stellarblue-system.firebasestorage.app",
+    messagingSenderId: "803212433649",
+    appId: "1:803212433649:web:887080d10a51d533b23150",
+    measurementId: "G-YY94484DV9"
+  };
 
-    // 初始化 Firebase
-    firebase.initializeApp(firebaseConfig);
+  // 初始化 Firebase
+  firebase.initializeApp(firebaseConfig);
 
-    // 用戶名稱映射表
-    const userNameMap = {
-        'user001': '張小明',
-        'user002': '王大明',
-        'user003': '李小華',
-        // 可以繼續添加更多用戶映射
-    };
+  // 全域變數
+  let currentUser = null;
+  let usersData = [];
 
-    // 用戶資料初始化函數
-    function initializeUserData(username) {
-        const userRef = firebase.database().ref(`users/${username}`);
-        userRef.once('value').then((snapshot) => {
-            if (!snapshot.exists()) {
-                // 如果是新用戶，創建初始資料
-                userRef.set({
-                    username: username,
-                    chineseName: userNameMap[username] || username,
-                    createDate: new Date().toISOString(),
-                    lastLogin: new Date().toISOString(),
-                    examRecords: {}
-                });
-            } else {
-                // 如果是既有用戶，更新登入時間
-                userRef.update({
-                    lastLogin: new Date().toISOString()
-                });
-            }
-        });
+  // 各按鈕的內容
+  const modalContents = {
+    "📋前導": `
+      <div class="section-title">前導人員工作須知</div>
+      <div class="content-block">
+        <div class="sub-title">基本職責</div>
+        <ul class="content-list">
+          <li>引導旅客正確排隊與放置行李</li>
+          <li>確保 X 光機運作順暢</li>
+          <li>處理特殊物品與情況</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <div class="sub-title">重要提醒</div>
+        <div class="highlight-box">
+          確保每位旅客都理解並遵守檢查程序，保持檢查區域秩序。
+        </div>
+      </div>
+    `,
+
+    "📋複查": `
+      <div class="section-title">複查人員工作須知</div>
+      <div class="content-block">
+        <div class="sub-title">主要職責</div>
+        <ul class="content-list">
+          <li>執行手動檢查程序</li>
+          <li>處理特殊物品檢查</li>
+          <li>與其他崗位配合協調</li>
+        </ul>
+      </div>
+    `,
+
+    "📋X光": `
+      <div class="section-title">X光檢查人員須知</div>
+      <div class="content-block">
+        <div class="sub-title">基本要求</div>
+        <ul class="content-list">
+          <li>熟悉X光機操作流程</li>
+          <li>準確識別可疑物品</li>
+          <li>保持與前導人員溝通</li>
+        </ul>
+      </div>
+    `,
+
+    "📋分流/2": `
+      <div class="section-title">分流崗位工作指南</div>
+      <div class="content-block">
+        <div class="sub-title">工作重點</div>
+        <ul class="content-list">
+          <li>正確引導旅客分流</li>
+          <li>維持通道秩序</li>
+          <li>處理特殊情況</li>
+        </ul>
+      </div>
+    `,
+
+    "📋新人須知": `
+      <div class="section-title">新進人員重要須知</div>
+      <div class="content-block">
+        <div class="warning-text">必讀事項：</div>
+        <ul class="content-list">
+          <li>熟悉基本工作流程</li>
+          <li>了解各項規定</li>
+          <li>保持良好溝通</li>
+        </ul>
+      </div>
+    `,
+
+    "⚠️規定事項": `
+      <div class="section-title">重要規定事項</div>
+      <div class="content-block">
+        <div class="warning-text">注意事項：</div>
+        <ul class="content-list">
+          <li>嚴格遵守檢查程序</li>
+          <li>保持工作崗位整潔</li>
+          <li>確實執行交接程序</li>
+        </ul>
+      </div>
+    `,
+
+    "⚠️各項連結": `
+      <div class="section-title">系統連結</div>
+      <div class="content-block">
+        <ul class="content-list">
+          <li>檢疫系統入口</li>
+          <li>教育訓練平台</li>
+          <li>工作排班系統</li>
+        </ul>
+      </div>
+    `,
+
+    "檢疫物相關": `
+      <div class="section-title">檢疫物品處理指南</div>
+      <div class="content-block">
+        <ul class="content-list">
+          <li>常見檢疫物品清單</li>
+          <li>處理流程說明</li>
+          <li>特殊情況處理</li>
+        </ul>
+      </div>
+    `
+  };
+
+  // 強制登出函數
+  function forceLogout(message = '登入驗證失敗，請重新登入') {
+    localStorage.removeItem('t2_login');
+    localStorage.removeItem('t2_login_time');
+    localStorage.removeItem('t2_login_user');
+    alert(message);
+    window.location.href = 'index3.html';
+  }
+
+  // 檢查登入狀態和時效
+  function checkLoginStatus() {
+    const loginFlag = localStorage.getItem('t2_login');
+    const loginTime = localStorage.getItem('t2_login_time');
+    const loginUser = localStorage.getItem('t2_login_user');
+
+    // 檢查基本登入資訊
+    if (loginFlag !== 'yes' || !loginTime || !loginUser) {
+      forceLogout('未檢測到有效登入狀態');
+      return false;
     }
 
-    // 各按鈕的內容
-    const modalContents = {
-      "📋前導": `
-        <div class="section-title">前導人員工作須知</div>
-        <div class="content-block">
-          <div class="sub-title">基本職責</div>
-          <ul class="content-list">
-            <li>引導旅客正確排隊與放置行李</li>
-            <li>確保 X 光機運作順暢</li>
-            <li>處理特殊物品與情況</li>
-          </ul>
-        </div>
-        <div class="content-block">
-          <div class="sub-title">重要提醒</div>
-          <div class="highlight-box">
-            確保每位旅客都理解並遵守檢查程序，保持檢查區域秩序。
-          </div>
-        </div>
-      `,
+    // 檢查登入時效 (1小時 = 3600000毫秒)
+    const now = Date.now();
+    const loginTimeStamp = parseInt(loginTime);
+    const LIMIT = 3600000; // 1小時
 
-      "📋複查": `
-        <div class="section-title">複查人員工作須知</div>
-        <div class="content-block">
-          <div class="sub-title">主要職責</div>
-          <ul class="content-list">
-            <li>執行手動檢查程序</li>
-            <li>處理特殊物品檢查</li>
-            <li>與其他崗位配合協調</li>
-          </ul>
-        </div>
-      `,
+    if (now - loginTimeStamp > LIMIT) {
+      forceLogout('登入時間已超過1小時，請重新登入');
+      return false;
+    }
 
-      "📋X光": `
-        <div class="section-title">X光檢查人員須知</div>
-        <div class="content-block">
-          <div class="sub-title">基本要求</div>
-          <ul class="content-list">
-            <li>熟悉X光機操作流程</li>
-            <li>準確識別可疑物品</li>
-            <li>保持與前導人員溝通</li>
-          </ul>
-        </div>
-      `,
+    return loginUser;
+  }
 
-      "📋分流/2": `
-        <div class="section-title">分流崗位工作指南</div>
-        <div class="content-block">
-          <div class="sub-title">工作重點</div>
-          <ul class="content-list">
-            <li>正確引導旅客分流</li>
-            <li>維持通道秩序</li>
-            <li>處理特殊情況</li>
-          </ul>
-        </div>
-      `,
+  // 載入用戶資料庫
+  async function loadUsersData() {
+    try {
+      const response = await fetch('password.json');
+      if (!response.ok) {
+        throw new Error('無法載入用戶資料庫');
+      }
+      const data = await response.json();
+      usersData = Array.isArray(data) ? data : [data];
+      return true;
+    } catch (error) {
+      console.error('載入用戶資料庫失敗:', error);
+      forceLogout('系統錯誤：無法載入用戶資料庫');
+      return false;
+    }
+  }
 
-      "📋新人須知": `
-        <div class="section-title">新進人員重要須知</div>
-        <div class="content-block">
-          <div class="warning-text">必讀事項：</div>
-          <ul class="content-list">
-            <li>熟悉基本工作流程</li>
-            <li>了解各項規定</li>
-            <li>保持良好溝通</li>
-          </ul>
-        </div>
-      `,
+  // 驗證用戶是否存在於資料庫中
+  function validateUser(username) {
+    const user = usersData.find(u => u.username === username);
+    if (!user) {
+      forceLogout('用戶帳號不存在於系統中');
+      return null;
+    }
+    return user;
+  }
 
-      "⚠️規定事項": `
-        <div class="section-title">重要規定事項</div>
-        <div class="content-block">
-          <div class="warning-text">注意事項：</div>
-          <ul class="content-list">
-            <li>嚴格遵守檢查程序</li>
-            <li>保持工作崗位整潔</li>
-            <li>確實執行交接程序</li>
-          </ul>
-        </div>
-      `,
+  // 顯示用戶歡迎訊息
+  function showWelcomeMessage(user) {
+    const welcomeSection = document.getElementById('welcomeSection');
+    const userNameElement = document.getElementById('userName');
+    
+    // 從 _comment 欄位提取中文名字
+    let displayName = user._comment || user.username;
+    
+    userNameElement.textContent = displayName;
+    welcomeSection.style.display = 'block';
+  }
 
-      "⚠️各項連結": `
-        <div class="section-title">系統連結</div>
-        <div class="content-block">
-          <ul class="content-list">
-            <li>檢疫系統入口</li>
-            <li>教育訓練平台</li>
-            <li>工作排班系統</li>
-          </ul>
-        </div>
-      `,
+  // 顯示主要內容
+  function showMainContent() {
+    document.getElementById('loadingSection').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+  }
 
-      "檢疫物相關": `
-        <div class="section-title">檢疫物品處理指南</div>
-        <div class="content-block">
-          <ul class="content-list">
-            <li>常見檢疫物品清單</li>
-            <li>處理流程說明</li>
-            <li>特殊情況處理</li>
-          </ul>
-        </div>
-      `
-    };
+  // 用戶資料初始化函數 (Firebase)
+  function initializeUserData(username) {
+    const userRef = firebase.database().ref(`users/${username}`);
+    userRef.once('value').then((snapshot) => {
+      if (!snapshot.exists()) {
+        // 如果是新用戶，創建初始資料
+        userRef.set({
+          username: username,
+          chineseName: currentUser._comment || username,
+          createDate: new Date().toISOString(),
+          lastLogin: new Date().toISOString(),
+          examRecords: {}
+        });
+      } else {
+        // 如果是既有用戶，更新登入時間
+        userRef.update({
+          lastLogin: new Date().toISOString()
+        });
+      }
+    }).catch(error => {
+      console.error('Firebase 初始化失敗:', error);
+    });
+  }
 
-    // 檢查登入狀態
-    function checkLogin() {
-      const loginUser = localStorage.getItem('t2_login');
-      const loginTime = localStorage.getItem('t2_login_time');
-      
-      if (!loginUser || !loginTime) {
-        window.location.href = 'index3.html';
-        return;
+  // 主要初始化函數
+  async function initializePage() {
+    try {
+      // 1. 檢查登入狀態
+      const loginUser = checkLoginStatus();
+      if (!loginUser) {
+        return; // checkLoginStatus 已經處理登出
       }
 
-      const now = new Date().getTime();
-      const loginTimeStamp = parseInt(loginTime);
-      const EIGHT_HOURS = 8 * 60 * 60 * 1000;
-
-      if (now - loginTimeStamp > EIGHT_HOURS) {
-        alert('登入時間已超過8小時，請重新登入');
-        localStorage.removeItem('t2_login');
-        localStorage.removeItem('t2_login_time');
-        window.location.href = 'index3.html';
-        return;
+      // 2. 載入用戶資料庫
+      const loadSuccess = await loadUsersData();
+      if (!loadSuccess) {
+        return; // loadUsersData 已經處理錯誤
       }
 
+      // 3. 驗證用戶是否存在於資料庫中
+      const user = validateUser(loginUser);
+      if (!user) {
+        return; // validateUser 已經處理錯誤
+      }
+
+      // 4. 設定當前用戶
+      currentUser = user;
+
+      // 5. 顯示歡迎訊息
+      showWelcomeMessage(user);
+
+      // 6. 初始化 Firebase 用戶資料
       initializeUserData(loginUser);
-    }
 
-    // 開啟模態視窗
-    function openModal(title, content) {
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalBody').innerHTML = content;
-      document.getElementById('modalBg').classList.add('active');
-    }
+      // 7. 顯示主要內容
+      showMainContent();
 
-    // 關閉模態視窗
-    function closeModal() {
-      document.getElementById('modalBg').classList.remove('active');
+    } catch (error) {
+      console.error('頁面初始化失敗:', error);
+      forceLogout('系統初始化失敗，請重新登入');
     }
+  }
 
-    // 開啟自我考試模態視窗（目前只顯示考試選單，可自行修改為跳轉頁面）
-    function openExamModal() {
-      let examListHTML = `
-        <div class="section-title">📚 自我考試系統</div>
-        <div class="exam-list">
-      `;
-      
-      for (let examName in examCategories) {
-        examListHTML += `
-          <div class="exam-category">
-            <div class="exam-title">${examName}</div>
-            <div class="exam-buttons">
-              <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
-                <span class="btn-icon">📝</span>考試
-              </button>
-              <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
-                <span class="btn-icon">🏆</span>排行榜
-              </button>
-            </div>
+  // 開啟模態視窗
+  function openModal(title, content) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').innerHTML = content;
+    document.getElementById('modalBg').classList.add('active');
+  }
+
+  // 關閉模態視窗
+  function closeModal() {
+    document.getElementById('modalBg').classList.remove('active');
+  }
+
+  // 開啟自我考試模態視窗
+  function openExamModal() {
+    const examListHTML = `
+      <div class="section-title">📚 自我考試系統</div>
+      <div class="exam-list">
+        <div class="exam-category">
+          <div class="exam-title">基礎檢疫知識</div>
+          <div class="exam-buttons">
+            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">📝</span>考試
+            </button>
+            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">🏆</span>排行榜
+            </button>
           </div>
-        `;
-      }
-      
-      examListHTML += `</div>`;
-      
-      openModal('自我考試系統', examListHTML);
-    }
+        </div>
+        <div class="exam-category">
+          <div class="exam-title">設備操作規範</div>
+          <div class="exam-buttons">
+            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">📝</span>考試
+            </button>
+            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">🏆</span>排行榜
+            </button>
+          </div>
+        </div>
+        <div class="exam-category">
+          <div class="exam-title">緊急處理程序</div>
+          <div class="exam-buttons">
+            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">📝</span>考試
+            </button>
+            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
+              <span class="btn-icon">🏆</span>排行榜
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    openModal('自我考試系統', examListHTML);
+  }
 
-    // 陣列隨機排序函數（保留，如需使用）
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
+  // 事件監聽器設置
+  document.addEventListener('DOMContentLoaded', function() {
+    // 立即開始初始化
+    initializePage();
 
-    // 事件監聽器設置
-    document.addEventListener('DOMContentLoaded', function() {
-      // 功能按鈕點擊事件
-      document.querySelectorAll('.func-btn[data-modal]').forEach(button => {
-        button.addEventListener('click', function() {
-          const modalKey = this.getAttribute('data-modal');
-          openModal(modalKey, modalContents[modalKey]);
-        });
-      });
-
-      // 關閉模態視窗
-      document.getElementById('modalClose').addEventListener('click', closeModal);
-      document.getElementById('modalBg').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeModal();
-        }
-      });
-
-      // 初始檢查登入狀態
-      checkLogin();
-
-      // 登出按鈕
-      document.getElementById('logoutBtn').onclick = function() {
-        if (confirm('確定要登出嗎？')) {
-          localStorage.removeItem('t2_login');
-          localStorage.removeItem('t2_login_time');
-          alert('已登出系統');
-          window.location.href = 'index3.html';
-        }
-      };
-
-      // ESC 鍵關閉模態視窗
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeModal();
-        }
+    // 功能按鈕點擊事件
+    document.querySelectorAll('.func-btn[data-modal]').forEach(button => {
+      button.addEventListener('click', function() {
+        const modalKey = this.getAttribute('data-modal');
+        openModal(modalKey, modalContents[modalKey]);
       });
     });
-  </script>
+
+    // 關閉模態視窗事件
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalBg').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // 登出按鈕事件
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      if (confirm('確定要登出嗎？')) {
+        localStorage.removeItem('t2_login');
+        localStorage.removeItem('t2_login_time');
+        localStorage.removeItem('t2_login_user');
+        alert('已登出系統');
+        window.location.href = 'index3.html';
+      }
+    });
+
+    // ESC 鍵關閉模態視窗
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // 定期檢查登入狀態（每30秒檢查一次）
+    setInterval(() => {
+      if (!checkLoginStatus()) {
+        // checkLoginStatus 會自動處理登出
+      }
+    }, 30000);
+  });
+</script>
 </body>
 </html>
