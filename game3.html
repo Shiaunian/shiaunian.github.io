@@ -1213,120 +1213,149 @@ if (currentQuestionIndex >= currentQuestions.length) {
 }
 }
 
-// 完成考試
-function finishExam() {
-if (examTimer) {
-    clearInterval(examTimer);
-    examTimer = null;
-}
+// 修改完成考試函數，自動保存並避免重複
+async function finishExam() {
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
 
-const config = examConfigs[currentExam];
-const totalQuestions = currentQuestions.length;
-const correctRate = (userScores.correctAnswers / totalQuestions * 100).toFixed(1);
-const fastRate = (userScores.fastAnswers / totalQuestions * 100).toFixed(1);
+    const config = examConfigs[currentExam];
+    const totalQuestions = currentQuestions.length;
+    const correctRate = (userScores.correctAnswers / totalQuestions * 100).toFixed(1);
+    const fastRate = (userScores.fastAnswers / totalQuestions * 100).toFixed(1);
 
-// 計算分數
-const baseScore = userScores.correctAnswers * 10;
-const fastBonus = userScores.fastAnswers * 5;
-const totalScore = baseScore + fastBonus;
+    // 計算分數
+    const baseScore = userScores.correctAnswers * 10;
+    const fastBonus = userScores.fastAnswers * 5;
+    const totalScore = baseScore + fastBonus;
 
-// 🔧 修正：使用 mainContent 而不是 .container
-const container = document.getElementById('mainContent');
-container.innerHTML = `
-    <div class="exam-result">
-        <h2>🎉 考試完成！</h2>
-        <p>考試類型：${config.name}</p>
-        <p>正確題數：${userScores.correctAnswers} / ${totalQuestions}</p>
-        <p>正確率：${correctRate}%</p>
-        <p>快速答題：${userScores.fastAnswers} 題</p>
-        <p>快速答題率：${fastRate}%</p>
-        <p><strong>總分：${totalScore} 分</strong></p>
-        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-            <button class="btn btn-primary" onclick="saveScore(${totalScore})">💾 保存成績</button>
-            <button class="btn btn-secondary" onclick="restartExam()">🔄 重新考試</button>
-            <button class="btn btn-danger" onclick="backToMain()">🏠 返回主頁</button>
+    // 🔧 自動保存成績（避免重複）
+    await autoSaveScore(totalScore);
+
+    // 顯示結果（移除手動保存按鈕）
+    const container = document.getElementById('mainContent');
+    container.innerHTML = `
+        <div class="exam-result">
+            <h2>🎉 考試完成！</h2>
+            <p>考試類型：${config.name}</p>
+            <p>正確題數：${userScores.correctAnswers} / ${totalQuestions}</p>
+            <p>正確率：${correctRate}%</p>
+            <p>快速答題：${userScores.fastAnswers} 題</p>
+            <p>快速答題率：${fastRate}%</p>
+            <p><strong>總分：${totalScore} 分</strong></p>
+            <p style="color: #22c55e;">✅ 成績已自動保存！</p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="restartExam()">🔄 重新考試</button>
+                <button class="btn btn-primary" onclick="showLeaderboard('${currentExam}')">📊 查看排行榜</button>
+                <button class="btn btn-danger" onclick="backToMain()">🏠 返回主頁</button>
+            </div>
         </div>
-    </div>
-`;
+    `;
 }
 
-// 保存成績
+// 🔧 新增：自動保存成績（避免同用戶重複）
+async function autoSaveScore(score) {
+    try {
+        const timestamp = Date.now();
+        const scoreData = {
+            username: currentUser.username,
+            displayName: currentUser._comment || currentUser.username,
+            score: score,
+            examType: currentExam,
+            timestamp: timestamp,
+            correctAnswers: userScores.correctAnswers,
+            fastAnswers: userScores.fastAnswers,
+            totalQuestions: currentQuestions.length
+        };
+        
+        // 🔧 使用用戶名作為 key，避免重複
+        await database.ref(`scores/${currentExam}/${currentUser.username}`).set(scoreData);
+        console.log('✅ 成績已自動保存！');
+        
+    } catch (error) {
+        console.error('自動保存成績失敗:', error);
+        alert('❌ 保存成績失敗，請稍後再試');
+    }
+}
+
+// 保存成績（保留原函數，以防其他地方使用）
 async function saveScore(score) {
-try {
-    const timestamp = Date.now();
-    const scoreData = {
-        username: currentUser.username,
-        displayName: currentUser._comment || currentUser.username,
-        score: score,
-        examType: currentExam,
-        timestamp: timestamp,
-        correctAnswers: userScores.correctAnswers,
-        fastAnswers: userScores.fastAnswers,
-        totalQuestions: currentQuestions.length
-    };
-    
-    await database.ref(`scores/${currentExam}/${timestamp}`).set(scoreData);
-    alert('✅ 成績已保存！');
-    
-} catch (error) {
-    console.error('保存成績失敗:', error);
-    alert('❌ 保存成績失敗，請稍後再試');
+    try {
+        const timestamp = Date.now();
+        const scoreData = {
+            username: currentUser.username,
+            displayName: currentUser._comment || currentUser.username,
+            score: score,
+            examType: currentExam,
+            timestamp: timestamp,
+            correctAnswers: userScores.correctAnswers,
+            fastAnswers: userScores.fastAnswers,
+            totalQuestions: currentQuestions.length
+        };
+        
+        await database.ref(`scores/${currentExam}/${timestamp}`).set(scoreData);
+        alert('✅ 成績已保存！');
+        
+    } catch (error) {
+        console.error('保存成績失敗:', error);
+        alert('❌ 保存成績失敗，請稍後再試');
+    }
 }
-}
-
 
 // 重新考試
 function restartExam() {
-startExam(currentExam);
+    startExam(currentExam);
 }
 
 // 返回主頁
 function backToMain() {
-location.reload();
+    location.reload();
 }
 
 // 顯示排行榜
 async function showLeaderboard(examType) {
-try {
-    const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(10).once('value');
-    const scores = [];
-    
-    snapshot.forEach(child => {
-        scores.push(child.val());
-    });
-    
-    // 按分數排序（高到低）
-    scores.sort((a, b) => b.score - a.score);
-    
-    const modalTitle = document.getElementById('modalTitle');
-    const leaderboardContent = document.getElementById('leaderboardContent');
-    
-    modalTitle.textContent = `${examConfigs[examType].name} - 排行榜`;
-    
-    if (scores.length === 0) {
-        leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
-    } else {
-        leaderboardContent.innerHTML = scores.map((score, index) => `
-            <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
-                <span class="rank">#${index + 1}</span>
-                <span class="user-name">${score.displayName}</span>
-                <span class="score">${score.score}分</span>
-            </div>
-        `).join('');
+    try {
+        const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(10).once('value');
+        const scores = [];
+        
+        snapshot.forEach(child => {
+            scores.push(child.val());
+        });
+        
+        // 按分數排序（高到低）
+        scores.sort((a, b) => b.score - a.score);
+        
+        const modalTitle = document.getElementById('modalTitle');
+        const leaderboardContent = document.getElementById('leaderboardContent');
+        
+        modalTitle.textContent = `${examConfigs[examType].name} - 排行榜`;
+        
+        if (scores.length === 0) {
+            leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
+        } else {
+            leaderboardContent.innerHTML = scores.map((score, index) => `
+                <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
+                    <span class="rank">#${index + 1}</span>
+                    <span class="user-name">${score.displayName}</span>
+                    <span class="score">${score.score}分</span>
+                </div>
+            `).join('');
+        }
+        
+        document.getElementById('leaderboardModal').style.display = 'flex';
+        
+    } catch (error) {
+        console.error('載入排行榜失敗:', error);
+        alert('❌ 載入排行榜失敗，請稍後再試');
     }
-    
-    document.getElementById('leaderboardModal').style.display = 'flex';
-    
-} catch (error) {
-    console.error('載入排行榜失敗:', error);
-    alert('❌ 載入排行榜失敗，請稍後再試');
-}
 }
 
 // 隱藏排行榜
 function hideLeaderboard() {
-document.getElementById('leaderboardModal').style.display = 'none';
+    document.getElementById('leaderboardModal').style.display = 'none';
 }
+
 
 // 登出
 function logout() {
