@@ -818,48 +818,9 @@
     document.getElementById('modalBg').classList.remove('active');
   }
 
-  // 開啟自我考試模態視窗
+  // 開啟自我考試模態視窗 - 直接跳轉到考試頁面
   function openExamModal() {
-    const examListHTML = `
-      <div class="section-title">📚 自我考試系統</div>
-      <div class="exam-list">
-        <div class="exam-category">
-          <div class="exam-title">基礎檢疫知識</div>
-          <div class="exam-buttons">
-            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">📝</span>考試
-            </button>
-            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">🏆</span>排行榜
-            </button>
-          </div>
-        </div>
-        <div class="exam-category">
-          <div class="exam-title">設備操作規範</div>
-          <div class="exam-buttons">
-            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">📝</span>考試
-            </button>
-            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">🏆</span>排行榜
-            </button>
-          </div>
-        </div>
-        <div class="exam-category">
-          <div class="exam-title">緊急處理程序</div>
-          <div class="exam-buttons">
-            <button class="exam-action-btn start-exam" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">📝</span>考試
-            </button>
-            <button class="exam-action-btn view-ranking" onclick="alert('此功能尚未啟用')">
-              <span class="btn-icon">🏆</span>排行榜
-            </button>
-          </div>
-        </div>
-      </div>
-    `;
-    
-    openModal('自我考試系統', examListHTML);
+  window.location.href = 'game3.html';
   }
 
   // 事件監聽器設置
