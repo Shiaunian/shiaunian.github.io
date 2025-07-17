@@ -959,20 +959,41 @@ showQuestion();
 
 // 🔧 修正版顯示考試界面 - 關鍵修正！
 function showExamInterface() {
-// 修正：直接選擇 mainContent 而不是 .container
-const container = document.getElementById('mainContent');
-container.innerHTML = `
-    <div class="exam-container">
-        <div class="exam-header">
-            <h2>${examConfigs[currentExam].name}</h2>
-            <div class="timer" id="timer">00:00</div>
+    // 修正：直接選擇 mainContent 而不是 .container
+    const container = document.getElementById('mainContent');
+    container.innerHTML = `
+        <div class="exam-container">
+            <div class="exam-header">
+                <h2>${examConfigs[currentExam].name}</h2>
+                <div class="timer" id="timer">00:00</div>
+            </div>
+            <div id="questionContainer"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-danger" onclick="abandonExam()" style="background: #dc3545;">🚪 放棄考試</button>
+            </div>
         </div>
-        <div id="questionContainer"></div>
-        <div style="text-align: center; margin-top: 20px;">
-            <button class="btn btn-danger" onclick="abandonExam()" style="background: #dc3545;">🚪 放棄考試</button>
-        </div>
-    </div>
-`;
+    `;
+}
+
+// 放棄考試
+function abandonExam() {
+    // 清除計時器
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
+    
+    // 確認對話框
+    const confirmed = confirm('🤔 確定要放棄考試嗎？\n\n⚠️ 放棄後將不會保存任何成績！');
+    
+    if (confirmed) {
+        alert('😔 考試已放棄，返回主頁面');
+        // 🔧 修正：重新載入頁面回到主畫面
+        location.reload();
+    } else {
+        // 如果取消，重新開始計時
+        startQuestionTimer();
+    }
 }
 
 // 顯示題目函數
