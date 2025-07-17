@@ -968,6 +968,9 @@ container.innerHTML = `
             <div class="timer" id="timer">00:00</div>
         </div>
         <div id="questionContainer"></div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-danger" onclick="abandonExam()" style="background: #dc3545;">🚪 放棄考試</button>
+        </div>
     </div>
 `;
 }
@@ -1217,9 +1220,11 @@ container.innerHTML = `
         <p>快速答題：${userScores.fastAnswers} 題</p>
         <p>快速答題率：${fastRate}%</p>
         <p><strong>總分：${totalScore} 分</strong></p>
-        <button class="btn btn-primary" onclick="saveScore(${totalScore})">保存成績</button>
-        <button class="btn btn-secondary" onclick="restartExam()">重新考試</button>
-        <button class="btn btn-danger" onclick="backToMain()">返回主頁</button>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="saveScore(${totalScore})">💾 保存成績</button>
+            <button class="btn btn-secondary" onclick="restartExam()">🔄 重新考試</button>
+            <button class="btn btn-danger" onclick="backToMain()">🏠 返回主頁</button>
+        </div>
     </div>
 `;
 }
