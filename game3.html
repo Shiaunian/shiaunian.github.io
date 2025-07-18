@@ -396,7 +396,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">分流考試挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('basic')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('basic')">排行榜</button>
@@ -405,7 +405,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">食物英文單字考試</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題5秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共10題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('food')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
@@ -414,7 +414,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">前導複查挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('precheck')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('precheck')">排行榜</button>
@@ -423,7 +423,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">規定挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('rule')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('rule')">排行榜</button>
@@ -432,7 +432,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">初階數獨挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共5題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
@@ -1154,35 +1154,35 @@ const examQuestions = {
 const examConfigs = {
   'basic': {
       name: '分流考試挑戰',                    // 考試名稱
-      timePerQuestion: 10,                     // 每題時間限制
+      timePerQuestion: 60,                     // 每題時間限制
       questionCount: 10,                       // 考試總題數
       fastAnswerThreshold: 5,                  // 快速答題門檻
       questions: examQuestions['basic']        // 題庫來源
   },
   'food': {
       name: '食物英文單字考試',                // 考試名稱
-      timePerQuestion: 5,                      // 每題時間限制
+      timePerQuestion: 15,                      // 每題時間限制
       questionCount: 10,                       // 考試總題數
       fastAnswerThreshold: 2.5,                // 快速答題門檻
       questions: examQuestions['food']         // 題庫來源
   },
   'precheck': {
       name: '前導複查挑戰',                    // 考試名稱
-      timePerQuestion: 15,                     // 每題時間限制
-      questionCount: 15,                       // 考試總題數
-      fastAnswerThreshold: 7.5,                // 快速答題門檻
+      timePerQuestion: 60,                     // 每題時間限制
+      questionCount: 10,                       // 考試總題數
+      fastAnswerThreshold: 5,                // 快速答題門檻
       questions: examQuestions['precheck']     // 題庫來源
   },
   'rule': {
       name: '規定挑戰',                        // 考試名稱
-      timePerQuestion: 15,                     // 每題時間限制
+      timePerQuestion: 60,                     // 每題時間限制
       questionCount: 10,                       // 考試總題數
-      fastAnswerThreshold: 7.5,                // 快速答題門檻
+      fastAnswerThreshold: 5,                // 快速答題門檻
       questions: examQuestions['rule']         // 題庫來源
   },
   'sudoku': {
       name: '初階數獨挑戰',                    // 考試名稱
-      timePerQuestion: 60,                     // 每題時間限制
+      timePerQuestion: 80,                     // 每題時間限制
       questionCount: 5,                        // 考試總題數
       fastAnswerThreshold: 30,                 // 快速答題門檻
       questions: []                            // 題庫來源（動態生成）
