@@ -520,7 +520,7 @@
       <button class="func-btn red" data-modal="⚠️規定事項">規定</button>
       <button class="func-btn dark-blue" data-modal="⚠️各項連結">連結</button>
       <button class="func-btn yellow" data-modal="檢疫物相關">檢疫物</button>
-      <button class="func-btn green" onclick="openExamModal()">自我考試</button>
+      <button class="func-btn green" onclick="openExamModal()">挑戰系統</button>
     </div>
 
     <!-- 登出按鈕 -->
@@ -1386,7 +1386,7 @@
             </div>
     `
   };
-  
+
   // 強制登出函數
   function forceLogout(message = '登入驗證失敗，請重新登入') {
     localStorage.removeItem('t2_login');
@@ -1541,7 +1541,7 @@
     document.getElementById('modalBg').classList.remove('active');
   }
 
-  // 開啟自我考試模態視窗 - 直接跳轉到考試頁面
+  // 開啟挑戰系統模態視窗 - 直接跳轉到挑戰系統
   function openExamModal() {
   window.location.href = 'game3.html';
   }
