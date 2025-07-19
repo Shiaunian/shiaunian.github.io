@@ -404,8 +404,8 @@ body {
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">食物英文單字考試</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共10題</p>
+  <h3 class="challenge-title">⭐英文單字考試⭐</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('food')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
@@ -414,7 +414,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">前導複查挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('precheck')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('precheck')">排行榜</button>
@@ -423,7 +423,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">規定挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('rule')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('rule')">排行榜</button>
@@ -432,7 +432,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">初階數獨挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題</p>
+  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
@@ -708,206 +708,556 @@ const examQuestions = {
     }
   ],
   "food": [
-        {
-          question: "蘋果的英文是？",
-          options: ["A. apple", "B. april", "C. ample", "D. ankle"],
-          correct: 0
-        },
-        {
-          question: "香蕉的英文是？",
-          options: ["A. balance", "B. banana", "C. bandana", "D. bamboo"],
-          correct: 1
-        },
-        {
-          question: "紅蘿蔔的英文是？",
-          options: ["A. carpet", "B. carbon", "C. carrot", "D. carton"],
-          correct: 2
-        },
-        {
-          question: "馬鈴薯的英文是？",
-          options: ["A. potato", "B. tomato", "C. photo", "D. pilot"],
-          correct: 0
-        },
-        {
-          question: "牛肉的英文是？",
-          options: ["A. beach", "B. beast", "C. beard", "D. beef"],
-          correct: 3
-        },
-        {
-          question: "豬肉的英文是？",
-          options: ["A. park", "B. pork", "C. port", "D. poor"],
-          correct: 1
-        },
-        {
-          question: "起司的英文是？",
-          options: ["A. choose", "B. chase", "C. cheese", "D. cheap"],
-          correct: 2
-        },
-        {
-          question: "檸檬的英文是？",
-          options: ["A. lemon", "B. melon", "C. lesson", "D. legal"],
-          correct: 0
-        },
-        {
-          question: "玉米的英文是？",
-          options: ["A. coin", "B. core", "C. corn", "D. cord"],
-          correct: 2
-        },
-        {
-          question: "海鮮的英文是？",
-          options: ["A. season", "B. seafood", "C. second", "D. secret"],
-          correct: 1
-        },
-        {
-          question: "堅果的英文是？",
-          options: ["A. nuts", "B. news", "C. next", "D. neck"],
-          correct: 0
-        },
-        {
-          question: "種子的英文是？",
-          options: ["A. seems", "B. seven", "C. seeds", "D. sense"],
-          correct: 2
-        },
-        {
-          question: "蜂蜜的英文是？",
-          options: ["A. happy", "B. heavy", "C. honey", "D. horse"],
-          correct: 2
-        },
-        {
-          question: "雞肉的英文是？",
-          options: ["A. chicken", "B. kitchen", "C. children", "D. check"],
-          correct: 0
-        },
-        {
-          question: "魚肉的英文是？",
-          options: ["A. face", "B. fish", "C. first", "D. fire"],
-          correct: 1
-        },
-        {
-          question: "葡萄的英文是？",
-          options: ["A. group", "B. great", "C. grape", "D. green"],
-          correct: 2
-        },
-        {
-          question: "芒果的英文是？",
-          options: ["A. money", "B. mango", "C. month", "D. mouse"],
-          correct: 1
-        },
-        {
-          question: "洋蔥的英文是？",
-          options: ["A. onion", "B. ocean", "C. often", "D. option"],
-          correct: 0
-        },
-        {
-          question: "大蒜的英文是？",
-          options: ["A. game", "B. gate", "C. garlic", "D. garden"],
-          correct: 2
-        },
-        {
-          question: "高麗菜的英文是？",
-          options: ["A. camera", "B. cabbage", "C. candle", "D. castle"],
-          correct: 1
-        },
-        {
-          question: "萵苣的英文是？",
-          options: ["A. letter", "B. little", "C. lettuce", "D. listen"],
-          correct: 2
-        },
-        {
-          question: "小黃瓜的英文是？",
-          options: ["A. culture", "B. current", "C. cucumber", "D. customer"],
-          correct: 2
-        },
-        {
-          question: "辣椒的英文是？",
-          options: ["A. people", "B. Chili", "C. paper", "D. peace"],
-          correct: 1
-        },
-        {
-          question: "牛奶的英文是？",
-          options: ["A. make", "B. mile", "C. milk", "D. mind"],
-          correct: 2
-        },
-        {
-          question: "奶油的英文是？",
-          options: ["A. better", "B. butter", "C. bottle", "D. battle"],
-          correct: 1
-        },
-        {
-          question: "優格的英文是？",
-          options: ["A. young", "B. yellow", "C. yogurt", "D. yesterday"],
-          correct: 2
-        },
-        {
-          question: "米飯的英文是？",
-          options: ["A. race", "B. rich", "C. rice", "D. ride"],
-          correct: 2
-        },
-        {
-          question: "麵包的英文是？",
-          options: ["A. break", "B. bread", "C. bring", "D. brown"],
-          correct: 1
-        },
-        {
-          question: "雞蛋的英文是？",
-          options: ["A. each", "B. easy", "C. egg", "D. end"],
-          correct: 2
-        },
-        {
-          question: "茶葉的英文是？",
-          options: ["A. tea", "B. ten", "C. tell", "D. tree"],
-          correct: 0
-        },
-        {
-          question: "咖啡的英文是？",
-          options: ["A. coffee", "B. corner", "C. course", "D. color"],
-          correct: 0
-        },
-        {
-          question: "新鮮食物的英文是？",
-          options: ["A. fresh food", "B. free food", "C. first food", "D. friend food"],
-          correct: 0
-        },
-        {
-          question: "加工食品的英文是？",
-          options: ["A. process food", "B. processed food", "C. progress food", "D. protect food"],
-          correct: 1
-        },
-        {
-          question: "罐頭食品的英文是？",
-          options: ["A. can food", "B. canned food", "C. call food", "D. card food"],
-          correct: 1
-        },
-        {
-          question: "乾燥食品的英文是？",
-          options: ["A. drive food", "B. dream food", "C. dried food", "D. drink food"],
-          correct: 2
-        },
-        {
-          question: "冷凍食品的英文是？",
-          options: ["A. frozen food", "B. friend food", "C. front food", "D. fresh food"],
-          correct: 0
-        },
-        {
-          question: "包裝食品的英文是？",
-          options: ["A. package food", "B. packaged food", "C. parking food", "D. party food"],
-          correct: 1
-        },
-        {
-          question: "香腸的英文是？",
-          options: ["A. sandwich", "B. sausage", "C. service", "D. science"],
-          correct: 1
-        },
-        {
-          question: "火腿的英文是？",
-          options: ["A. hand", "B. hard", "C. ham", "D. hat"],
-          correct: 2
-        },
-        {
-          question: "培根的英文是？",
-          options: ["A. begin", "B. become", "C. bacon", "D. beach"],
-          correct: 2
-        }    
+    {
+      question: "蘋果的英文是？",
+      options: ["A. apple", "B. april", "C. ample", "D. ankle"],
+      correct: 0
+    },
+    {
+      question: "香蕉的英文是？",
+      options: ["A. balance", "B. banana", "C. bandana", "D. bamboo"],
+      correct: 1
+    },
+    {
+      question: "葡萄的英文是？",
+      options: ["A. graph", "B. grasp", "C. grape", "D. grace"],
+      correct: 2
+    },
+    {
+      question: "鳳梨的英文是？",
+      options: ["A. pineapple", "B. principle", "C. pipeline", "D. pinnacle"],
+      correct: 0
+    },
+    {
+      question: "芒果的英文是？",
+      options: ["A. manage", "B. mango", "C. manner", "D. marble"],
+      correct: 1
+    },
+    {
+      question: "草莓的英文是？",
+      options: ["A. strategy", "B. strawberry", "C. structure", "D. struggle"],
+      correct: 1
+    },
+    {
+      question: "西瓜的英文是？",
+      options: ["A. watermelon", "B. waterfall", "C. warehouse", "D. wardrobe"],
+      correct: 0
+    },
+    {
+      question: "檸檬的英文是？",
+      options: ["A. lemon", "B. melon", "C. lesson", "D. legend"],
+      correct: 0
+    },
+    {
+      question: "桃子的英文是？",
+      options: ["A. peace", "B. peach", "C. pearl", "D. panel"],
+      correct: 1
+    },
+    {
+      question: "櫻桃的英文是？",
+      options: ["A. charity", "B. chamber", "C. cherry", "D. cheese"],
+      correct: 2
+    },
+    {
+      question: "奇異果的英文是？",
+      options: ["A. kiwi", "B. king", "C. kind", "D. kick"],
+      correct: 0
+    },
+    {
+      question: "梨子的英文是？",
+      options: ["A. pair", "B. pear", "C. park", "D. part"],
+      correct: 1
+    },
+    {
+      question: "藍莓的英文是？",
+      options: ["A. blueberry", "B. blueprint", "C. bluebird", "D. bluebell"],
+      correct: 0
+    },
+    {
+      question: "木瓜的英文是？",
+      options: ["A. papaya", "B. parade", "C. palace", "D. package"],
+      correct: 0
+    },
+    {
+      question: "楊桃的英文是？",
+      options: ["A. starfish", "B. starfruit", "C. starlight", "D. standard"],
+      correct: 1
+    },
+    {
+      question: "椰子的英文是？",
+      options: ["A. coconut", "B. cocoon", "C. cocktail", "D. cockpit"],
+      correct: 0
+    },
+    {
+      question: "石榴的英文是？",
+      options: ["A. pomegranate", "B. pomegranite", "C. pomegranate", "D. pomegranite"],
+      correct: 0
+    },
+    {
+      question: "火龍果的英文是？",
+      options: ["A. dragon fruit", "B. dragon fly", "C. dragon boat", "D. dragon dance"],
+      correct: 0
+    },
+    {
+      question: "牛肉的英文是？",
+      options: ["A. beach", "B. beast", "C. beard", "D. beef"],
+      correct: 3
+    },
+    {
+      question: "豬肉的英文是？",
+      options: ["A. park", "B. pork", "C. port", "D. post"],
+      correct: 1
+    },
+    {
+      question: "雞肉的英文是？",
+      options: ["A. chicken", "B. kitchen", "C. children", "D. chimney"],
+      correct: 0
+    },
+    {
+      question: "羊肉的英文是？",
+      options: ["A. lamp", "B. lamb", "C. land", "D. lane"],
+      correct: 1
+    },
+    {
+      question: "火腿的英文是？",
+      options: ["A. hand", "B. hard", "C. ham", "D. hat"],
+      correct: 2
+    },
+    {
+      question: "香腸的英文是？",
+      options: ["A. sandwich", "B. sausage", "C. savage", "D. saucer"],
+      correct: 1
+    },
+    {
+      question: "培根的英文是？",
+      options: ["A. beacon", "B. become", "C. bacon", "D. basket"],
+      correct: 2
+    },
+    {
+      question: "火雞肉的英文是？",
+      options: ["A. turkey", "B. turnip", "C. turtle", "D. tunnel"],
+      correct: 0
+    },
+    {
+      question: "鴨肉的英文是？",
+      options: ["A. duck", "B. dust", "C. dusk", "D. duty"],
+      correct: 0
+    },
+    {
+      question: "鹿肉的英文是？",
+      options: ["A. version", "B. venison", "C. veteran", "D. vessel"],
+      correct: 1
+    },
+    {
+      question: "兔肉的英文是？",
+      options: ["A. rabbit", "B. racket", "C. radius", "D. random"],
+      correct: 0
+    },
+    {
+      question: "牛排的英文是？",
+      options: ["A. stake", "B. steak", "C. steam", "D. steel"],
+      correct: 1
+    },
+    {
+      question: "肉丸的英文是？",
+      options: ["A. meatball", "B. meetball", "C. metalball", "D. medalball"],
+      correct: 0
+    },
+    {
+      question: "牛腩的英文是？",
+      options: ["A. bracket", "B. blanket", "C. brisket", "D. bucket"],
+      correct: 2
+    },
+    {
+      question: "牛肋排的英文是？",
+      options: ["A. ribs", "B. rips", "C. rice", "D. rich"],
+      correct: 0
+    },
+    {
+      question: "豬排的英文是？",
+      options: ["A. pork chop", "B. pork shop", "C. pork chip", "D. pork ship"],
+      correct: 0
+    },
+    {
+      question: "雞翅的英文是？",
+      options: ["A. chicken wings", "B. chicken rings", "C. chicken kings", "D. chicken things"],
+      correct: 0
+    },
+    {
+      question: "雞胸肉的英文是？",
+      options: ["A. chicken beast", "B. chicken breast", "C. chicken best", "D. chicken blast"],
+      correct: 1
+    },
+    {
+      question: "肉鬆的英文是？",
+      options: ["A. pork floss", "B. pork gloss", "C. pork cross", "D. pork gross"],
+      correct: 0
+    },
+    {
+      question: "高麗菜的英文是？",
+      options: ["A. garbage", "B. cabbage", "C. baggage", "D. package"],
+      correct: 1
+    },
+    {
+      question: "胡蘿蔔的英文是？",
+      options: ["A. carpet", "B. carbon", "C. carrot", "D. carton"],
+      correct: 2
+    },
+    {
+      question: "番茄的英文是？",
+      options: ["A. tomato", "B. tornado", "C. tobacco", "D. torpedo"],
+      correct: 0
+    },
+    {
+      question: "黃瓜的英文是？",
+      options: ["A. cucumber", "B. customer", "C. computer", "D. culture"],
+      correct: 0
+    },
+    {
+      question: "菠菜的英文是？",
+      options: ["A. spinach", "B. spanish", "C. speech", "D. special"],
+      correct: 0
+    },
+    {
+      question: "洋蔥的英文是？",
+      options: ["A. onion", "B. ocean", "C. option", "D. organ"],
+      correct: 0
+    },
+    {
+      question: "青椒的英文是？",
+      options: ["A. green pepper", "B. green paper", "C. green proper", "D. greenpper"],
+      correct: 0
+    },
+    {
+      question: "花椰菜的英文是？",
+      options: ["A. cauliflower", "B. sunflower", "C. wallflower", "D. cornflower"],
+      correct: 0
+    },
+    {
+      question: "茄子的英文是？",
+      options: ["A. eggplant", "B. elephant", "C. elegant", "D. element"],
+      correct: 0
+    },
+    {
+      question: "地瓜的英文是？",
+      options: ["A. sweet potato", "B. sweet tomato", "C. sweet photo", "D. sweet motto"],
+      correct: 0
+    },
+    {
+      question: "糖果的英文是？",
+      options: ["A. candy", "B. candle", "C. cancel", "D. canvas"],
+      correct: 0
+    },
+    {
+      question: "肉乾的英文是？",
+      options: ["A. jerky", "B. jersey", "C. jelly", "D. jewel"],
+      correct: 0
+    },
+    {
+      question: "種子的英文是？",
+      options: ["A. seems", "B. seven", "C. seeds", "D. sense"],
+      correct: 2
+    },
+    {
+      question: "全熟的英文是？",
+      options: ["A. well done", "B. well gone", "C. well known", "D. well worn"],
+      correct: 0
+    },
+    {
+      question: "油的英文是？",
+      options: ["A. oil", "B. owl", "C. old", "D. our"],
+      correct: 0
+    },
+    {
+      question: "生菜的英文是？",
+      options: ["A. letter", "B. little", "C. lettuce", "D. listen"],
+      correct: 2
+    },
+    {
+      question: "往前的英文是？",
+      options: ["A. forward", "B. toward", "C. reward", "D. awkward"],
+      correct: 0
+    },
+    {
+      question: "檢查的英文是？",
+      options: ["A. check", "B. cheek", "C. chess", "D. chest"],
+      correct: 0
+    },
+    {
+      question: "打開的英文是？",
+      options: ["A. open", "B. opera", "C. often", "D. ocean"],
+      correct: 0
+    },
+    {
+      question: "肥皂的英文是？",
+      options: ["A. soap", "B. soup", "C. shop", "D. stop"],
+      correct: 0
+    },
+    {
+      question: "衣服的英文是？",
+      options: ["A. clothes", "B. clouds", "C. clocks", "D. clubs"],
+      correct: 0
+    },
+    {
+      question: "手機的英文是？",
+      options: ["A. mobile phone", "B. mobile home", "C. mobile bone", "D. mobile zone"],
+      correct: 0
+    },
+    {
+      question: "眼鏡的英文是？",
+      options: ["A. glasses", "B. classes", "C. grasses", "D. masses"],
+      correct: 0
+    },
+    {
+      question: "鞋子的英文是？",
+      options: ["A. shoes", "B. shows", "C. shops", "D. shots"],
+      correct: 0
+    },
+    {
+      question: "熱狗的英文是？",
+      options: ["A. hot dog", "B. hot fog", "C. hot log", "D. hot hog"],
+      correct: 0
+    },
+    {
+      question: "三明治的英文是？",
+      options: ["A. sandwich", "B. sandwish", "C. handwich", "D. bandwich"],
+      correct: 0
+    },
+    {
+      question: "餅乾的英文是？",
+      options: ["A. cookie", "B. cooker", "C. corner", "D. copper"],
+      correct: 0
+    },
+    {
+      question: "寵物餅乾的英文是？",
+      options: ["A. pet treat", "B. pet street", "C. pet sweet", "D. pet meet"],
+      correct: 0
+    },
+    {
+      question: "機票的英文是？",
+      options: ["A. plane ticket", "B. plain ticket", "C. plant ticket", "D. planet ticket"],
+      correct: 0
+    },
+    {
+      question: "入境的英文是？",
+      options: ["A. immigration", "B. imagination", "C. imitation", "D. invitation"],
+      correct: 0
+    },
+    {
+      question: "出境的英文是？",
+      options: ["A. emigration", "B. immigration", "C. education", "D. examination"],
+      correct: 0
+    },
+    {
+      question: "皮夾的英文是？",
+      options: ["A. wallet", "B. water", "C. winter", "D. wonder"],
+      correct: 0
+    },
+    {
+      question: "行李的英文是？",
+      options: ["A. luggage", "B. language", "C. linkage", "D. leakage"],
+      correct: 0
+    },
+    {
+      question: "花生的英文是？",
+      options: ["A. peanut", "B. peacock", "C. peanut", "D. peasant"],
+      correct: 0
+    },
+    {
+      question: "玉米的英文是？",
+      options: ["A. coin", "B. core", "C. corn", "D. cord"],
+      correct: 2
+    },
+    {
+      question: "肉製品的英文是？",
+      options: ["A. meat products", "B. meet products", "C. neat products", "D. heat products"],
+      correct: 0
+    },
+    {
+      question: "果乾的英文是？",
+      options: ["A. dried fruit", "B. fried fruit", "C. tried fruit", "D. cried fruit"],
+      correct: 0
+    },
+    {
+      question: "鮮花的英文是？",
+      options: ["A. fresh flowers", "B. flesh flowers", "C. flash flowers", "D. flush flowers"],
+      correct: 0
+    },
+    {
+      question: "葉子的英文是？",
+      options: ["A. leaf", "B. beef", "C. deaf", "D. reef"],
+      correct: 0
+    },
+    {
+      question: "紅豆的英文是？",
+      options: ["A. red bean", "B. red been", "C. red dean", "D. red lean"],
+      correct: 0
+    },
+    {
+      question: "垃圾桶的英文是？",
+      options: ["A. trash can", "B. trash van", "C. trash pan", "D. trash man"],
+      correct: 0
+    },
+    {
+      question: "走道的英文是？",
+      options: ["A. aisle", "B. isle", "C. able", "D. angle"],
+      correct: 0
+    },
+    {
+      question: "左轉的英文是？",
+      options: ["A. turn left", "B. turn lift", "C. turn loft", "D. turn lost"],
+      correct: 0
+    },
+    {
+      question: "右轉的英文是？",
+      options: ["A. turn right", "B. turn light", "C. turn night", "D. turn sight"],
+      correct: 0
+    },
+    {
+      question: "直走的英文是？",
+      options: ["A. go straight", "B. go street", "C. go stream", "D. go strong"],
+      correct: 0
+    },
+    {
+      question: "機場的英文是？",
+      options: ["A. airport", "B. airpost", "C. airpart", "D. airpot"],
+      correct: 0
+    },
+    {
+      question: "登機口的英文是？",
+      options: ["A. gate", "B. gate", "C. hate", "D. late"],
+      correct: 0
+    },
+    {
+      question: "登機證的英文是？",
+      options: ["A. boarding pass", "B. boarding bass", "C. boarding mass", "D. boarding class"],
+      correct: 0
+    },
+    {
+      question: "行李箱的英文是？",
+      options: ["A. suitcase", "B. staircase", "C. showcase", "D. briefcase"],
+      correct: 0
+    },
+    {
+      question: "托運行李的英文是？",
+      options: ["A. checked baggage", "B. chicken baggage", "C. chosen baggage", "D. changed baggage"],
+      correct: 0
+    },
+    {
+      question: "手提行李的英文是？",
+      options: ["A. carry-on luggage", "B. carry-in luggage", "C. carry-up luggage", "D. carry-out luggage"],
+      correct: 0
+    },
+    {
+      question: "安檢的英文是？",
+      options: ["A. security check", "B. security cheek", "C. security chess", "D. security chest"],
+      correct: 0
+    },
+    {
+      question: "海關的英文是？",
+      options: ["A. customs", "B. customers", "C. costumes", "D. columns"],
+      correct: 0
+    },
+    {
+      question: "登機的英文是？",
+      options: ["A. boarding", "B. boating", "C. booking", "D. boxing"],
+      correct: 0
+    },
+    {
+      question: "起飛的英文是？",
+      options: ["A. take off", "B. makeup", "C. pickup", "D. backup"],
+      correct: 0
+    },
+    {
+      question: "降落的英文是？",
+      options: ["A. landing", "B. lending", "C. leading", "D. loading"],
+      correct: 0
+    },
+    {
+      question: "航班的英文是？",
+      options: ["A. flight", "B. fright", "C. bright", "D. light"],
+      correct: 0
+    },
+    {
+      question: "登機橋的英文是？",
+      options: ["A. jet bridge", "B. get bridge", "C. net bridge", "D. set bridge"],
+      correct: 0
+    },
+    {
+      question: "航空公司的英文是？",
+      options: ["A. airline", "B. hairline", "C. outline", "D. online"],
+      correct: 0
+    },
+    {
+      question: "候機室的英文是？",
+      options: ["A. waiting lounge", "B. waiting lounge", "C. waiting launch", "D. waiting lunch"],
+      correct: 0
+    },
+    {
+      question: "行李轉盤的英文是？",
+      options: ["A. baggage claim", "B. baggage clamp", "C. baggage clam", "D. baggage clan"],
+      correct: 0
+    },
+    {
+      question: "銀行的英文是？",
+      options: ["A. bank", "B. bark", "C. back", "D. bulk"],
+      correct: 0
+    },
+    {
+      question: "禁止錄影的英文是？",
+      options: ["A. no video recording", "B. no video recoding", "C. no video according", "D. no video rewarding"],
+      correct: 0
+    },
+    {
+      question: "禁止拍攝的英文是？",
+      options: ["A. no photography", "B. no biography", "C. no geography", "D. no typography"],
+      correct: 0
+    },
+    {
+      question: "請問有攜帶肉製品嗎?的英文是？",
+      options: ["A. Do you have any meat products?", "B. Do you have any meet products?", "C. Do you have any neat products?", "D. Do you have any heat products?"],
+      correct: 0
+    },
+    {
+      question: "卡片回收的英文是？",
+      options: ["A. card recycling", "B. card reciting", "C. card receiving", "D. card recording"],
+      correct: 0
+    },
+    {
+      question: "麻煩旁邊稍等的英文是？",
+      options: ["A. Please wait aside", "B. Please wait inside", "C. Please wait outside", "D. Please wait beside"],
+      correct: 0
+    },
+    {
+      question: "這個請拿著的英文是？",
+      options: ["A. Please hold this", "B. Please fold this", "C. Please cold this", "D. Please told this"],
+      correct: 0
+    },
+    {
+      question: "請問有帶到新鮮水果或是肉製品嗎?的英文是？",
+      options: ["A. Do you have fresh fruit or meat products?", "B. Do you have flesh fruit or meet products?", "C. Do you have flash fruit or neat products?", "D. Do you have fresh fruit or heat products?"],
+      correct: 0
+    },
+    {
+      question: "這個是生的還是熟的?的英文是？",
+      options: ["A. Is this raw or cooked?", "B. Is this row or looked?", "C. Is this saw or booked?", "D. Is this law or hooked?"],
+      correct: 0
+    },
+    {
+      question: "不好意思，請問您可以移到這邊一下嗎?的英文是？",
+      options: ["A. Excuse me, could you move here?", "B. Excuse me, could you love here?", "C. Excuse me, could you prove here?", "D. Excuse me, could you remove here?"],
+      correct: 0
+    },
+    {
+      question: "泥土的英文是？",
+      options: ["A. soil", "B. boil", "C. coil", "D. foil"],
+      correct: 0
+    },
+    {
+      question: "木頭的英文是？",
+      options: ["A. wood", "B. wool", "C. word", "D. world"],
+      correct: 0
+    }          
   ],
   "precheck": [
     {
@@ -1310,9 +1660,9 @@ const examConfigs = {
       questions: examQuestions['basic']        // 題庫來源
   },
   'food': {
-      name: '食物英文單字考試',                // 考試名稱
+      name: '⭐英文單字考試⭐',                // 考試名稱
       timePerQuestion: 15,                      // 每題時間限制
-      questionCount: 10,                       // 考試總題數
+      questionCount: 15,                       // 考試總題數
       fastAnswerThreshold: 2.5,                // 快速答題門檻
       questions: examQuestions['food']         // 題庫來源
   },
