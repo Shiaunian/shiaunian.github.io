@@ -163,9 +163,11 @@ if (Date.now() - time > LIMIT) {
   // 超時，清除狀態
   localStorage.removeItem("t2_login");
   localStorage.removeItem("t2_login_time");
-  localStorage.removeItem("t2_login_user"); // ← 新增：超時也清掉帳號
+  localStorage.removeItem("t2_login_user");
+  localStorage.removeItem("t2_login_password"); // ← 新增：超時也清掉密碼
   return false;
 }
+
 return true;
 }
 
