@@ -596,116 +596,167 @@ async function initializePage() {
 // 考試題庫 - 修正題庫鍵值對應
 const examQuestions = {
   "basic": [
-    {
-      question: "秤重卡片多少克為單位？",
-      options: ["500克", "300克", "600克", "800克"],
-      correct: 2
-    },
-    {
-      question: "旅客來時分流應該如何分？",
-      options: [
-        "一條線塞滿再換一條塞",
-        "均分各線",
-        "一律先丟3線滿了再換其他線",
-        "一二線先放滿"
-      ],
-      correct: 1
-    },
-    {
-      question: "航空公司領卡何者正確？",
-      options: [
-        "需要航空公司主管過來才可以給卡片",
-        "航空公司簽名就可以拿一箱卡片了",
-        "請組長先來確認",
-        "一箱卡換一箱空的"
-      ],
-      correct: 3
-    },
-    {
-      question: "哪種不需要幫忙拉紅龍？",
-      options: [
-        "推車的信實",
-        "輪椅旅客",
-        "救護車",
-        "環宇車子"
-      ],
-      correct: 0
-    },
-    {
-      question: "下列哪個地方需要手檢？",
-      options: ["洛杉磯", "仁川", "新加坡", "杜拜"],
-      correct: 1
-    },
-    {
-      question: "下列哪個地方需要手檢？",
-      options: ["洛杉磯", "名古屋", "胡志明", "日本"],
-      correct: 2
-    },
-    {
-      question: "下列哪個地方需要手檢？",
-      options: ["香港", "福岡", "神戶", "大阪"],
-      correct: 0
-    },
-    {
-      question: "下列哪個國家需要收卡？",
-      options: ["曼谷", "福岡", "香港", "浦東"],
-      correct: 1
-    },
-    {
-      question: "下列哪個國家需要收卡？",
-      options: ["廣州", "澳門", "新加坡", "釜山"],
-      correct: 2
-    },
-    {
-      question: "下列哪個國家需要收卡？",
-      options: ["杜拜", "澳門", "仁川", "釜山"],
-      correct: 0
-    },
-    {
-      question: "中華航空代號是？",
-      options: ["MF", "CI", "HX", "JX"],
-      correct: 1
-    },
-    {
-      question: "東方航空代號是？",
-      options: ["BR", "MF", "MU", "SQ"],
-      correct: 2
-    },
-    {
-      question: "華信航空代號是？",
-      options: ["AC", "MF", "SQ", "AE"],
-      correct: 3
-    },
-    {
-      question: "海南航空代號是？",
-      options: ["BE", "UH", "CU", "HU"],
-      correct: 3
-    },
-    {
-      question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-      options: ["BR169", "BR2781", "BR62", "BR105"],
-      correct: 2
-    },
-    {
-      question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-      options: ["BR105", "BR398", "BR2900", "BR169"],
-      correct: 1
-    },
-    {
-      question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-      options: ["BR212", "BR131", "BR169", "BR2900"],
-      correct: 0
-    },
-    {
-      question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-      options: ["BR868", "BR153", "BR802", "BR392"],
-      correct: 3
-    },
-    {
-      question: "如有看到旅客推手推車，都優先引導至幾線？",
-      options: ["1線", "2線", "3線", "4線"],
-      correct: 2
-    }
+  {
+    question: "秤重卡片多少克為單位？",
+    options: ["500克", "300克", "600克", "800克"],
+    correct: 2
+  },
+  {
+    question: "旅客來時分流應該如何分？",
+    options: [
+      "一條線塞滿再換一條塞",
+      "均分各線",
+      "一律先丟3線滿了再換其他線",
+      "一二線先放滿"
+    ],
+    correct: 1
+  },
+  {
+    question: "航空公司領卡何者正確？",
+    options: [
+      "需要航空公司主管過來才可以給卡片",
+      "航空公司簽名就可以拿一箱卡片了",
+      "請組長先來確認",
+      "一箱卡換一箱空的"
+    ],
+    correct: 3
+  },
+  {
+    question: "哪種不需要幫忙拉紅龍？",
+    options: [
+      "推車的信實",
+      "輪椅旅客",
+      "救護車",
+      "環宇車子"
+    ],
+    correct: 0
+  },
+  {
+    question: "下列哪個地方需要手檢？",
+    options: ["洛杉磯", "仁川", "新加坡", "杜拜"],
+    correct: 1
+  },
+  {
+    question: "下列哪個地方需要手檢？",
+    options: ["洛杉磯", "名古屋", "胡志明", "日本"],
+    correct: 2
+  },
+  {
+    question: "下列哪個地方需要手檢？",
+    options: ["香港", "福岡", "神戶", "大阪"],
+    correct: 0
+  },
+  {
+    question: "下列哪個國家需要收卡？",
+    options: ["曼谷", "福岡", "香港", "浦東"],
+    correct: 1
+  },
+  {
+    question: "下列哪個國家需要收卡？",
+    options: ["廣州", "澳門", "新加坡", "釜山"],
+    correct: 2
+  },
+  {
+    question: "下列哪個國家需要收卡？",
+    options: ["杜拜", "澳門", "仁川", "釜山"],
+    correct: 0
+  },
+  {
+    question: "中華航空代號是？",
+    options: ["MF", "CI", "HX", "JX"],
+    correct: 1
+  },
+  {
+    question: "東方航空代號是？",
+    options: ["BR", "MF", "MU", "SQ"],
+    correct: 2
+  },
+  {
+    question: "華信航空代號是？",
+    options: ["AC", "MF", "SQ", "AE"],
+    correct: 3
+  },
+  {
+    question: "海南航空代號是？",
+    options: ["BE", "UH", "CU", "HU"],
+    correct: 3
+  },
+  {
+    question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+    options: ["BR169", "BR2781", "BR62", "BR105"],
+    correct: 2
+  },
+  {
+    question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+    options: ["BR105", "BR398", "BR2900", "BR169"],
+    correct: 1
+  },
+  {
+    question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+    options: ["BR212", "BR131", "BR169", "BR2900"],
+    correct: 0
+  },
+  {
+    question: "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+    options: ["BR868", "BR153", "BR802", "BR392"],
+    correct: 3
+  },
+  {
+    question: "如有看到旅客推手推車，都優先引導至幾線？",
+    options: ["1線", "2線", "3線", "4線"],
+    correct: 2
+  },
+  // 新增題目開始
+  {
+    question: "主分流早上以下哪些行為是錯誤？",
+    options: ["清理白色棄置桶", "擦拭分流工作桌子", "查看前導棄置桶", "查看分流密錄器有沒有電量"],
+    correct: 2
+  },
+  {
+    question: "假設4線全滿情況「未有收卡」，主分流下列動作是錯誤？",
+    options: ["站在前面引導旅客", "呼叫分流2支援", "打開宣導大聲公", "關閉收卡紅龍避免收卡旅客進入"],
+    correct: 1
+  },
+  {
+    question: "關於CD區行動電源何者錯誤？",
+    options: ["日夜需要交接清楚", "不需要充電及回收", "需要充電及回收", "早上先確認有無電量"],
+    correct: 2
+  },
+  {
+    question: "駐外使節人員請問要引導至？",
+    options: ["4線", "中間", "紅線", "綠線"],
+    correct: 3
+  },
+  {
+    question: "下列分流相關何者錯誤？",
+    options: ["手推車優先引導3線", "備勤室消毒水固定A分流補充", "輪椅旅客分流需要幫忙開紅龍", "嬰兒推車走一二線"],
+    correct: 1
+  },
+  {
+    question: "下列分流相關何者正確？",
+    options: ["旅客有推手推車，要攔住他們叫他們推回去", "收卡「未拿」卡片，請確認過機票，確認後再放綠線並宣導", "低風險旅客「想手檢」，一樣請他走綠線", "手檢旅客身上沒任何行李，一樣放紅線"],
+    correct: 1
+  },
+  {
+    question: "南方航空代號是？",
+    options: ["ZC", "CA", "CZ", "QZ"],
+    correct: 2
+  },
+  {
+    question: "深圳航空代號是？",
+    options: ["HZ", "ZH", "CZ", "HX"],
+    correct: 1
+  },
+  {
+    question: "釜山航空代號是？",
+    options: ["XB", "OZ", "BX", "BR"],
+    correct: 2
+  },
+  {
+    question: "下列哪一個並非高風險地區？",
+    options: ["曼谷", "馬尼拉", "寧波", "仙台"],
+    correct: 3
+  }
   ],
   "food": [
     {
