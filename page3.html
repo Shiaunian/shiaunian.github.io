@@ -1438,10 +1438,9 @@
     }
   }
 
+  // 驗證用戶是否存在於資料庫中
   function validateUser(username) {
-    // 取得儲存的密碼來進行完整驗證
-    const storedPassword = localStorage.getItem('t2_login_password');
-    const user = usersData.find(u => u.username === username && u.password === storedPassword);
+    const user = usersData.find(u => u.username === username);
     if (!user) {
       forceLogout('用戶帳號不存在於系統中');
       return null;
