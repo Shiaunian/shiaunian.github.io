@@ -413,7 +413,7 @@ body {
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐英文單字考試基礎版⭐</h3>
+  <h3 class="challenge-title">⭐英文考試基礎版⭐</h3>
   <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('food1')">考試</button>
@@ -422,8 +422,8 @@ body {
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐英文單字考試⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
+  <h3 class="challenge-title">⭐英文考試進階版⭐</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共20題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('food')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
@@ -557,15 +557,17 @@ async function loadUsersData() {
   }
 }
 
-// 驗證用戶是否存在於資料庫中
+// ✅ 同時驗證用戶名和密碼，確保找到正確用戶
 function validateUser(username) {
-  const user = usersData.find(u => u.username === username);
+  const storedPassword = localStorage.getItem('t2_login_password');
+  const user = usersData.find(u => u.username === username && u.password === storedPassword);
   if (!user) {
       forceLogout('用戶帳號不存在於系統中');
       return null;
   }
   return user;
 }
+
 
 // 顯示用戶歡迎訊息
 function showWelcomeMessage(user) {
@@ -1942,17 +1944,17 @@ const examConfigs = {
       questions: examQuestions['basic']        // 題庫來源
   },
   'food1': {
-      name: '⭐英文單字考試基礎版⭐',                // 考試名稱
+      name: '⭐英文考試基礎版⭐',                // 考試名稱
       timePerQuestion: 15,                      // 每題時間限制
       questionCount: 15,                       // 考試總題數
       fastAnswerThreshold: 2.5,                // 快速答題門檻
       questions: examQuestions['food1']         // 題庫來源
   },
   'food': {
-      name: '⭐英文單字考試⭐',                // 考試名稱
-      timePerQuestion: 15,                      // 每題時間限制
-      questionCount: 15,                       // 考試總題數
-      fastAnswerThreshold: 2.5,                // 快速答題門檻
+      name: '⭐英文考試進階版⭐',                // 考試名稱
+      timePerQuestion: 10,                      // 每題時間限制
+      questionCount: 20,                       // 考試總題數
+      fastAnswerThreshold: 2,                // 快速答題門檻
       questions: examQuestions['food']         // 題庫來源
   },
   'precheck': {
