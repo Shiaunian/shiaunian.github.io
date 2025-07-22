@@ -413,6 +413,15 @@ body {
 </div>
 
 <div class="challenge-item">
+  <h3 class="challenge-title">⭐英文單字考試基礎版⭐</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
+  <div class="challenge-actions">
+      <button class="btn btn-primary" onclick="startExam('food1')">考試</button>
+      <button class="btn btn-secondary" onclick="showLeaderboard('food1')">排行榜</button>
+  </div>
+</div>
+
+<div class="challenge-item">
   <h3 class="challenge-title">⭐英文單字考試⭐</h3>
   <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
   <div class="challenge-actions">
@@ -767,6 +776,108 @@ const examQuestions = {
     correct: 3
   }
   ],
+    "food1": [
+    {
+      question: "蘋果的英文是？",
+      options: ["A. apple", "B. april", "C. ample", "D. ankle"],
+      correct: 0
+    },
+    {
+      question: "泥土的英文是？",
+      options: ["A. boil", "B. soil", "C. coil", "D. foil"],
+      correct: 1
+    },
+    {
+      question: "木頭的英文是？",
+      options: ["A. word", "B. wool", "C. wood", "D. world"],
+      correct: 2
+    },
+    {
+      question: "雞肉的英文是？",
+      options: ["A. kitchen", "B. chicken", "C. children", "D. chosen"],
+      correct: 1
+    },
+    {
+      question: "牛肉的英文是？",
+      options: ["A. beef", "B. beer", "C. been", "D. bear"],
+      correct: 0
+    },
+    {
+      question: "豬肉的英文是？",
+      options: ["A. park", "B. port", "C. pork", "D. part"],
+      correct: 2
+    },
+    {
+      question: "培根的英文是？",
+      options: ["A. beacon", "B. bacon", "C. broken", "D. bucket"],
+      correct: 1
+    },
+    {
+      question: "火腿腸的英文是？",
+      options: ["A. ham sausage", "B. home storage", "C. hand savage", "D. head surface"],
+      correct: 0
+    },
+    {
+      question: "三明治的英文是？",
+      options: ["A. sandwich", "B. sandals", "C. standard", "D. sunlight"],
+      correct: 0
+    },
+    {
+      question: "漢堡的英文是？",
+      options: ["A. hunger", "B. hamburger", "C. hamster", "D. hammer"],
+      correct: 1
+    },
+    {
+      question: "糖果的英文是？",
+      options: ["A. candle", "B. cancel", "C. candy", "D. camera"],
+      correct: 2
+    },
+    {
+      question: "生菜的英文是？",
+      options: ["A. letter", "B. little", "C. latter", "D. lettuce"],
+      correct: 3
+    },
+    {
+      question: "餅乾的英文是？",
+      options: ["A. cookie", "B. cooking", "C. corner", "D. copper"],
+      correct: 0
+    },
+    {
+      question: "水果的英文是？",
+      options: ["A. front", "B. fruit", "C. frost", "D. first"],
+      correct: 1
+    },
+    {
+      question: "肉的英文是？",
+      options: ["A. meet", "B. meal", "C. meat", "D. mean"],
+      correct: 2
+    },
+    {
+      question: "肉乾的英文是？",
+      options: ["A. jerky", "B. jacket", "C. jungle", "D. junior"],
+      correct: 0
+    },
+    {
+      question: "肉製品的英文是？",
+      options: ["A. meat products", "B. meet problems", "C. main projects", "D. most progress"],
+      correct: 0
+    },
+    {
+      question: "新鮮的英文是？",
+      options: ["A. flesh", "B. flash", "C. fresh", "D. crash"],
+      correct: 2
+    },
+    {
+      question: "肥皂的英文是？",
+      options: ["A. soup", "B. soap", "C. shop", "D. stop"],
+      correct: 1
+    },
+    {
+      question: "種子的英文是？",
+      options: ["A. seeds", "B. needs", "C. feeds", "D. deeds"],
+      correct: 0
+    }
+    ],
   "food": [
     {
       question: "蘋果的英文是？",
@@ -1829,6 +1940,13 @@ const examConfigs = {
       questionCount: 10,                       // 考試總題數
       fastAnswerThreshold: 5,                  // 快速答題門檻
       questions: examQuestions['basic']        // 題庫來源
+  },
+  'food1': {
+      name: '⭐英文單字考試基礎版⭐',                // 考試名稱
+      timePerQuestion: 15,                      // 每題時間限制
+      questionCount: 15,                       // 考試總題數
+      fastAnswerThreshold: 2.5,                // 快速答題門檻
+      questions: examQuestions['food1']         // 題庫來源
   },
   'food': {
       name: '⭐英文單字考試⭐',                // 考試名稱
