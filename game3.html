@@ -449,6 +449,15 @@ body {
 </div>
 
 <div class="challenge-item">
+  <h3 class="challenge-title">🇰🇷韓語挑戰基礎版🇰🇷</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
+  <div class="challenge-actions">
+      <button class="btn btn-primary" onclick="startExam('korean')">考試</button>
+      <button class="btn btn-secondary" onclick="showLeaderboard('korean')">排行榜</button>
+  </div>
+</div>
+
+<div class="challenge-item">
   <h3 class="challenge-title">初階數獨挑戰</h3>
   <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題 一題10分</p>
   <div class="challenge-actions">
@@ -1432,6 +1441,118 @@ const examQuestions = {
       correct: 2
     }          
   ],
+    "korean": [
+    {
+      question: "사탕(沙趟)請問是？",
+      options: ["A. 糖果", "B. 餅乾", "C. 巧克力", "D. 蛋糕"],
+      correct: 0
+    },
+    {
+      question: "쌀(塞哀)請問是？",
+      options: ["A. 麵條", "B. 米飯", "C. 麵包", "D. 餃子"],
+      correct: 1
+    },
+    {
+      question: "고기(摳ㄎ一)請問是？",
+      options: ["A. 魚", "B. 蛋", "C. 肉", "D. 菜"],
+      correct: 2
+    },
+    {
+      question: "육포(油ㄆㄡ)請問是？",
+      options: ["A. 肉乾", "B. 魚乾", "C. 果乾", "D. 菜乾"],
+      correct: 0
+    },
+    {
+      question: "과일(快一)請問是？",
+      options: ["A. 蔬菜", "B. 水果", "C. 肉類", "D. 飲料"],
+      correct: 1
+    },
+    {
+      question: "샐러드(仙(台)搂deu)請問是？",
+      options: ["A. 湯", "B. 飯", "C. 沙拉", "D. 麵"],
+      correct: 2
+    },
+    {
+      question: "씨앗(西阿)請問是？",
+      options: ["A. 種子", "B. 花朵", "C. 葉子", "D. 根部"],
+      correct: 0
+    },
+    {
+      question: "핸드폰(haen deu pon)請問是？",
+      options: ["A. 電腦", "B. 手機", "C. 平板", "D. 相機"],
+      correct: 1
+    },
+    {
+      question: "야채(壓切ㄟ)請問是？",
+      options: ["A. 水果", "B. 肉類", "C. 蔬菜", "D. 海鮮"],
+      correct: 2
+    },
+    {
+      question: "과자(誇佳)請問是？",
+      options: ["A. 餅乾", "B. 糖果", "C. 蛋糕", "D. 麵包"],
+      correct: 0
+    },
+    {
+      question: "기내식(ㄍ一ㄏ一ㄋㄟ西n)請問是？",
+      options: ["A. 機場餐廳", "B. 飛機餐", "C. 免稅商品", "D. 登機證"],
+      correct: 1
+    },
+    {
+      question: "여권(油鍋ㄣn)請問是？",
+      options: ["A. 機票", "B. 護照", "C. 簽證", "D. 身分證"],
+      correct: 1
+    },
+    {
+      question: "계란(ㄎ一ㄝ爛n)請問是？",
+      options: ["A. 雞蛋", "B. 鴨蛋", "C. 鵝蛋", "D. 魚卵"],
+      correct: 0
+    },
+    {
+      question: "소고기(搜ㄎㄡㄎ一)請問是？",
+      options: ["A. 豬肉", "B. 雞肉", "C. 牛肉", "D. 羊肉"],
+      correct: 2
+    },
+    {
+      question: "가방(咖棒)請問是？",
+      options: ["A. 皮夾", "B. 包包", "C. 帽子", "D. 鞋子"],
+      correct: 1
+    },
+    {
+      question: "이것(依Go)請問是？",
+      options: ["A. 那個", "B. 這個", "C. 哪個", "D. 什麼"],
+      correct: 1
+    },
+    {
+      question: "닭고기(踏ㄎㄡㄎ一)請問是？",
+      options: ["A. 牛肉", "B. 豬肉", "C. 雞肉", "D. 魚肉"],
+      correct: 2
+    },
+    {
+      question: "반숙계란(潘n書ㄎㄟ爛ㄚn)請問是？",
+      options: ["A. 生雞蛋", "B. 半熟蛋", "C. 全熟蛋", "D. 炒蛋"],
+      correct: 1
+    },
+    {
+      question: "비행기표(批n ㄏ一n ㄍ一 ㄆ一ㄡ)請問是？",
+      options: ["A. 機票", "B. 護照", "C. 登機證", "D. 行李票"],
+      correct: 0
+    },
+    {
+      question: "돼지고기(推 機 ㄎㄡ ㄎ一)請問是？",
+      options: ["A. 牛肉", "B. 豬肉", "C. 雞肉", "D. 羊肉"],
+      correct: 1
+    },
+    {
+      question: "완숙계란(萬n 書ㄎㄟ爛ㄚn)請問是？",
+      options: ["A. 生雞蛋", "B. 半熟蛋", "C. 全熟蛋", "D. 水煮蛋"],
+      correct: 2
+    },
+    {
+      question: "입국심사(一不新n沙)請問是？",
+      options: ["A. 出境檢查", "B. 入境審查", "C. 安全檢查", "D. 海關檢查"],
+      correct: 1
+    }
+  ],
 "precheck": [
 {
   question: "如有詢問旅客方便檢查確認時，旅客回答不方便檢查時，這時候我們應該？",
@@ -1970,6 +2091,13 @@ const examConfigs = {
       questionCount: 10,                       // 考試總題數
       fastAnswerThreshold: 5,                // 快速答題門檻
       questions: examQuestions['rule']         // 題庫來源
+  },
+  'korean': {
+    name: '🇰🇷韓語挑戰基礎版🇰🇷',
+    timePerQuestion: 12,                      // 每題12秒
+    questionCount: 15,                        // 考試總題數
+    fastAnswerThreshold: 3,                   // 快速答題門檻
+    questions: examQuestions['korean']        // 題庫來源
   },
   'sudoku': {
       name: '初階數獨挑戰',                    // 考試名稱
