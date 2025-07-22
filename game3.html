@@ -186,6 +186,15 @@ body {
   padding: 15px;
   overflow-y: auto;
   max-height: calc(80vh - 56px);
+  /* 🔧 新增：確保滾動條顯示 */
+  min-height: 200px; /* 設定最小高度 */
+}
+
+/* 🔧 新增：確保排行榜內容可滾動 */
+.leaderboard-container {
+  max-height: calc(60vh - 100px);
+  overflow-y: auto;
+  padding-right: 5px; /* 為滾動條留空間 */
 }
 
 .leaderboard-item {
@@ -2323,7 +2332,7 @@ function backToMain() {
 // 顯示排行榜
 async function showLeaderboard(examType) {
     try {
-        const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(10).once('value');
+const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(30).once('value');
         const scores = [];
         
         snapshot.forEach(child => {
@@ -2338,17 +2347,21 @@ async function showLeaderboard(examType) {
         
         modalTitle.textContent = `${examConfigs[examType].name} - 排行榜`;
         
-        if (scores.length === 0) {
-            leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
-        } else {
-            leaderboardContent.innerHTML = scores.map((score, index) => `
-                <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
-                    <span class="rank">#${index + 1}</span>
-                    <span class="user-name">${score.displayName}</span>
-                    <span class="score">${score.score}分</span>
-                </div>
-            `).join('');
-        }
+      if (scores.length === 0) {
+          leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
+      } else {
+          leaderboardContent.innerHTML = `
+              <div class="leaderboard-container">
+                  ${scores.map((score, index) => `
+                      <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
+                          <span class="rank">#${index + 1}</span>
+                          <span class="user-name">${score.displayName}</span>
+                          <span class="score">${score.score}分</span>
+                      </div>
+                  `).join('')}
+              </div>
+          `;
+      }
         
         document.getElementById('leaderboardModal').style.display = 'flex';
         
