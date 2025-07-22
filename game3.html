@@ -458,6 +458,15 @@ body {
 </div>
 
 <div class="challenge-item">
+  <h3 class="challenge-title">🇻🇳越南語詞彙挑戰🇻🇳</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
+  <div class="challenge-actions">
+      <button class="btn btn-primary" onclick="startExam('vietnamese')">考試</button>
+      <button class="btn btn-secondary" onclick="showLeaderboard('vietnamese')">排行榜</button>
+  </div>
+</div>
+
+<div class="challenge-item">
   <h3 class="challenge-title">初階數獨挑戰</h3>
   <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題 一題10分</p>
   <div class="challenge-actions">
@@ -1441,6 +1450,113 @@ const examQuestions = {
       correct: 2
     }          
   ],
+    "vietnamese": [
+    {
+      question: "gạo(擾)請問是？",
+      options: ["A. 米", "B. 麵", "C. 豆", "D. 麥"],
+      correct: 0
+    },
+    {
+      question: "kẹo(ˊㄍ一ㄠ)請問是？",
+      options: ["A. 餅乾", "B. 糖果", "C. 蛋糕", "D. 巧克力"],
+      correct: 1
+    },
+    {
+      question: "balo(ˊㄅㄚ喽)請問是？",
+      options: ["A. 手提包", "B. 後背包", "C. 行李箱", "D. 錢包"],
+      correct: 1
+    },
+    {
+      question: "ký tên(ˊㄍ一 ㄉ一ㄢ ㄣ氣)請問是？",
+      options: ["A. 寫字", "B. 簽名", "C. 蓋章", "D. 填表"],
+      correct: 1
+    },
+    {
+      question: "salad請問是？",
+      options: ["A. 湯", "B. 飯", "C. 沙拉", "D. 麵"],
+      correct: 2
+    },
+    {
+      question: "hoa quả(花 瓜)請問是？",
+      options: ["A. 蔬菜", "B. 水果", "C. 花朵", "D. 種子"],
+      correct: 1
+    },
+    {
+      question: "túi xách(dui 誰)請問是？",
+      options: ["A. 手提袋", "B. 塑膠袋", "C. 紙袋", "D. 垃圾袋"],
+      correct: 0
+    },
+    {
+      question: "Hải sản(孩 商ㄣ)請問是？",
+      options: ["A. 肉類", "B. 蔬菜", "C. 海鮮", "D. 水果"],
+      correct: 2
+    },
+    {
+      question: "thịt bò(踢 ˊㄅㄡ)請問是？",
+      options: ["A. 豬肉", "B. 雞肉", "C. 牛肉", "D. 羊肉"],
+      correct: 2
+    },
+    {
+      question: "rau xanh(繞 山)請問是？",
+      options: ["A. 紅蘿蔔", "B. 綠色蔬菜", "C. 白蘿蔔", "D. 洋蔥"],
+      correct: 1
+    },
+    {
+      question: "kiểm tra(ㄍ一ㄣ 渣)請問是？",
+      options: ["A. 檢查", "B. 登記", "C. 申請", "D. 填寫"],
+      correct: 0
+    },
+    {
+      question: "tỏi(奪)請問是？",
+      options: ["A. 洋蔥", "B. 大蒜", "C. 生薑", "D. 辣椒"],
+      correct: 1
+    },
+    {
+      question: "thịt(踢)請問是？",
+      options: ["A. 魚", "B. 蛋", "C. 肉", "D. 菜"],
+      correct: 2
+    },
+    {
+      question: "trứng gà(存ㄍㄚ)請問是？",
+      options: ["A. 鴨蛋", "B. 鵝蛋", "C. 雞蛋", "D. 鵪鶉蛋"],
+      correct: 2
+    },
+    {
+      question: "Được rồi(溜走ˋ一)請問是？",
+      options: ["A. 不好", "B. 好的", "C. 不行", "D. 等等"],
+      correct: 1
+    },
+    {
+      question: "hạt giống(哈宗~)請問是？",
+      options: ["A. 種子", "B. 花朵", "C. 葉子", "D. 果實"],
+      correct: 0
+    },
+    {
+      question: "thịt gà(踢ㄍㄚ)請問是？",
+      options: ["A. 牛肉", "B. 豬肉", "C. 雞肉", "D. 魚肉"],
+      correct: 2
+    },
+    {
+      question: "Đi thẳng(哩趟ng)請問是？",
+      options: ["A. 左轉", "B. 右轉", "C. 直走", "D. 後退"],
+      correct: 2
+    },
+    {
+      question: "thịt khô(踢枯)請問是？",
+      options: ["A. 新鮮肉", "B. 肉乾", "C. 冷凍肉", "D. 罐頭肉"],
+      correct: 1
+    },
+    {
+      question: "thịt heo(踢ㄏ一ㄡ)請問是？",
+      options: ["A. 牛肉", "B. 豬肉", "C. 雞肉", "D. 羊肉"],
+      correct: 1
+    },
+    {
+      question: "mở ra(ㄇㄜ渣)請問是？",
+      options: ["A. 關閉", "B. 打開", "C. 鎖住", "D. 封住"],
+      correct: 1
+    }
+  ],
     "korean": [
     {
       question: "사탕(沙趟)請問是？",
@@ -2098,6 +2214,13 @@ const examConfigs = {
     questionCount: 15,                        // 考試總題數
     fastAnswerThreshold: 3,                   // 快速答題門檻
     questions: examQuestions['korean']        // 題庫來源
+  },
+  'vietnamese': {
+    name: '🇻🇳越南語詞彙挑戰🇻🇳',
+    timePerQuestion: 12,                      // 每題12秒
+    questionCount: 15,                        // 考試總題數
+    fastAnswerThreshold: 3,                   // 快速答題門檻
+    questions: examQuestions['vietnamese']    // 題庫來源
   },
   'sudoku': {
       name: '初階數獨挑戰',                    // 考試名稱
