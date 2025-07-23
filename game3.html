@@ -512,6 +512,7 @@ let currentQuestions = [];
 let currentQuestionIndex = 0;
 let examTimer = null;
 let questionStartTime = null;
+let examStartTime = null;
 let userScores = {
   fastAnswers: 0,
   correctAnswers: 0
@@ -2337,6 +2338,7 @@ userScores = {
     fastAnswers: 0,
     correctAnswers: 0
 };
+examStartTime = Date.now();
 
 // 準備題目
 if (examType === 'sudoku') {
@@ -2514,6 +2516,16 @@ function selectAnswer(selectedIndex, correctIndex = null) {
     const isCorrect = selectedIndex === actualCorrectIndex;
     const isFast = answerTime <= config.fastAnswerThreshold;
 
+    // 🔧 修正：更新分數統計
+    if (isCorrect) {
+        userScores.correctAnswers++;
+        console.log(`✅ 答對！目前正確題數: ${userScores.correctAnswers}`);
+    }
+    if (isFast && isCorrect) {
+        userScores.fastAnswers++;
+        console.log(`⚡ 快速答題！目前快速答題數: ${userScores.fastAnswers}`);
+    }
+
     // 顯示答案反饋
     showAnswerFeedback(selectedIndex, actualCorrectIndex, isCorrect);
 
@@ -2667,12 +2679,15 @@ async function finishExam() {
 async function autoSaveScore(score) {
     try {
         const timestamp = Date.now();
+        const totalTime = Math.round((timestamp - examStartTime) / 1000); // 🆕 計算總消耗時間（秒）
+        
         const scoreData = {
             username: currentUser.username,
             displayName: currentUser._comment || currentUser.username,
             score: score,
             examType: currentExam,
             timestamp: timestamp,
+            totalTime: totalTime, // 🆕 新增總消耗時間
             correctAnswers: userScores.correctAnswers,
             fastAnswers: userScores.fastAnswers,
             totalQuestions: currentQuestions.length
@@ -2695,12 +2710,15 @@ async function autoSaveScore(score) {
 async function saveScore(score) {
     try {
         const timestamp = Date.now();
+        const totalTime = Math.round((timestamp - examStartTime) / 1000); // 🆕 計算總消耗時間（秒）
+        
         const scoreData = {
             username: currentUser.username,
             displayName: currentUser._comment || currentUser.username,
             score: score,
             examType: currentExam,
             timestamp: timestamp,
+            totalTime: totalTime, // 🆕 新增總消耗時間
             correctAnswers: userScores.correctAnswers,
             fastAnswers: userScores.fastAnswers,
             totalQuestions: currentQuestions.length
@@ -2736,12 +2754,15 @@ async function showLeaderboard(examType) {
             scores.push(child.val());
         });
         
-        // 🏆 排序邏輯：分數高到低，同分時首綁優先（時間戳早的在前）
+        // 🏆 新的排序邏輯：分數 → 消耗時間 → 首綁時間
         scores.sort((a, b) => {
             if (b.score !== a.score) {
                 return b.score - a.score; // 分數高的在前
             }
-            return a.timestamp - b.timestamp; // 同分時，時間早的在前（首綁）
+            if (a.totalTime !== b.totalTime) {
+                return (a.totalTime || 999999) - (b.totalTime || 999999); // 同分時，時間短的在前
+            }
+            return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
         });
         
         // 只取前30名顯示
@@ -2758,16 +2779,25 @@ async function showLeaderboard(examType) {
             leaderboardContent.innerHTML = `
                 <div class="leaderboard-container">
                     ${topScores.map((score, index) => {
-              // 🏆 檢查是否為首綁（只有第一名且同分時才顯示）
-              const isFirstPlace = index === 0; // 是否為第一名
-              const sameScoreCount = scores.filter(s => s.score === score.score).length;
-              const isFirstBind = isFirstPlace && sameScoreCount > 1; // 只有第一名且有同分才顯示首綁
-              const bindStatus = isFirstBind ? ' 🥇' : '';                
+                        // 🏆 檢查是否為首綁
+                        const isFirstPlace = index === 0;
+                        const sameScoreCount = scores.filter(s => s.score === score.score).length;
+                        const isFirstBind = isFirstPlace && sameScoreCount > 1;
+                        const bindStatus = isFirstBind ? ' 🥇' : '';
+                        
+                        // 🆕 格式化時間顯示
+                        const timeDisplay = score.totalTime ? 
+                            `${Math.floor(score.totalTime / 60)}:${(score.totalTime % 60).toString().padStart(2, '0')}` : 
+                            '--:--';
+                        
                         return `
                             <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
                                 <span class="rank">#${index + 1}</span>
                                 <span class="user-name">${score.displayName}${bindStatus}</span>
-                                <span class="score">${score.score}分</span>
+                                <div style="text-align: right;">
+                                    <div class="score">${score.score}分</div>
+                                    <div style="font-size: 0.8rem; color: #a0a0a0;">${timeDisplay}</div>
+                                </div>
                             </div>
                         `;
                     }).join('')}
@@ -2804,25 +2834,27 @@ async function loadAllChampions() {
             });
             
             if (scores.length > 0) {
-                // 🏆 排序邏輯：
-                // 1. 分數高到低
-                // 2. 同分時，時間戳早到晚 (首綁優先)
+                // 🏆 新的排序邏輯：分數 → 消耗時間 → 首綁時間
                 scores.sort((a, b) => {
                     if (b.score !== a.score) {
                         return b.score - a.score; // 分數高的在前
                     }
-                    return a.timestamp - b.timestamp; // 同分時，時間早的在前（首綁）
+                    if (a.totalTime !== b.totalTime) {
+                        return (a.totalTime || 999999) - (b.totalTime || 999999); // 同分時，時間短的在前
+                    }
+                    return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
                 });
                 
-            // 取得榜首
-            const champion = scores[0];
-            const sameScoreCount = scores.filter(s => s.score === champion.score).length;
-            champions[examType] = {
-                displayName: champion.displayName,
-                score: champion.score,
-                timestamp: champion.timestamp,
-                hasMultipleSameScore: sameScoreCount > 1  // 檢查是否有同分
-            };
+                // 取得榜首
+                const champion = scores[0];
+                const sameScoreCount = scores.filter(s => s.score === champion.score).length;
+                champions[examType] = {
+                    displayName: champion.displayName,
+                    score: champion.score,
+                    timestamp: champion.timestamp,
+                    totalTime: champion.totalTime, // 🆕 新增總消耗時間
+                    hasMultipleSameScore: sameScoreCount > 1  // 檢查是否有同分
+                };
                 
                 console.log(`🏆 ${examType} 榜首: ${champion.displayName} (${champion.score}分) - 首綁時間: ${new Date(champion.timestamp).toLocaleString()}`);
             }
@@ -2870,22 +2902,30 @@ function updateChampionDisplay(champions) {
             const champion = champions[examType];
             const bindDate = new Date(champion.timestamp).toLocaleDateString();
             
-        // 🏆 檢查是否真的有同分才顯示首綁標記
-        const bindMark = champion.hasMultipleSameScore ? ' 🥇' : '';
+            // 🏆 檢查是否真的有同分才顯示首綁標記
+            const bindMark = champion.hasMultipleSameScore ? ' 🥇' : '';
+            
+            // 🆕 格式化時間顯示
+            const timeDisplay = champion.totalTime ? 
+                `${Math.floor(champion.totalTime / 60)}:${(champion.totalTime % 60).toString().padStart(2, '0')}` : 
+                '';
 
-        championDiv.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between; 
-                    background: linear-gradient(45deg, #FFD700, #FFA500); 
-                    color: #000; padding: 6px 12px; border-radius: 6px; 
-                    font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
-                    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
-                <span>🏆 榜首：${champion.displayName}${bindMark}</span>
-                <div style="text-align: right;">
-                    <div>${champion.score}分</div>
-                    <div style="font-size: 0.7rem; opacity: 0.8;">${champion.hasMultipleSameScore ? '首綁 ' : ''}${bindDate}</div>
+            championDiv.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; 
+                        background: linear-gradient(45deg, #FFD700, #FFA500); 
+                        color: #000; padding: 6px 12px; border-radius: 6px; 
+                        font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
+                        box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
+                    <span>🏆 榜首：${champion.displayName}${bindMark}</span>
+                    <div style="text-align: right;">
+                        <div>${champion.score}分</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">
+                            ${champion.hasMultipleSameScore ? '首綁 ' : ''}${bindDate}
+                            ${timeDisplay ? ` (${timeDisplay})` : ''}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
         } else if (examType) {
             // 如果沒有榜首資訊，顯示空榜首
             let championDiv = item.querySelector('.champion-display');
