@@ -2477,150 +2477,149 @@ startQuestionTimer();
 
 // 計時器函數
 function startQuestionTimer() {
-const config = examConfigs[currentExam];
-let timeLeft = config.timePerQuestion;
+    const config = examConfigs[currentExam];
+    let timeLeft = config.timePerQuestion;
 
-const timerElement = document.getElementById('timer');
-if (!timerElement) return;
+    const timerElement = document.getElementById('timer');
+    if (!timerElement) return;
 
-examTimer = setInterval(() => {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-    if (timeLeft <= 0) {
-        clearInterval(examTimer);
-        examTimer = null;
-        timeUp();
-        return;
-    }
-    timeLeft--;
-}, 1000);
+    examTimer = setInterval(() => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (timeLeft <= 0) {
+            clearInterval(examTimer);
+            examTimer = null;
+            timeUp();
+            return;
+        }
+        timeLeft--;
+    }, 1000);
 }
 
 // 選擇答案
 function selectAnswer(selectedIndex, correctIndex = null) {
-if (examTimer) {
-    clearInterval(examTimer);
-    examTimer = null;
-}
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
 
-const question = currentQuestions[currentQuestionIndex];
-const config = examConfigs[currentExam];
-const answerTime = (Date.now() - questionStartTime) / 1000;
+    const question = currentQuestions[currentQuestionIndex];
+    const config = examConfigs[currentExam];
+    const answerTime = (Date.now() - questionStartTime) / 1000;
 
-// 如果有傳入 correctIndex 參數（打亂選項的情況），使用它；否則使用原本的邏輯
-const actualCorrectIndex = correctIndex !== null ? correctIndex : question.correct;
-const isCorrect = selectedIndex === actualCorrectIndex;
-const isFast = answerTime <= config.fastAnswerThreshold;
+    // 如果有傳入 correctIndex 參數（打亂選項的情況），使用它；否則使用原本的邏輯
+    const actualCorrectIndex = correctIndex !== null ? correctIndex : question.correct;
+    const isCorrect = selectedIndex === actualCorrectIndex;
+    const isFast = answerTime <= config.fastAnswerThreshold;
 
+    // 顯示答案反饋
+    showAnswerFeedback(selectedIndex, actualCorrectIndex, isCorrect);
 
-// 顯示答案反饋
-showAnswerFeedback(selectedIndex, actualCorrectIndex, isCorrect);
-
-setTimeout(() => {
-    nextQuestion();
-}, 2000);
+    setTimeout(() => {
+        nextQuestion();
+    }, 2000);
 }
 
 // 提交數獨答案
 function submitSudokuAnswer() {
-if (examTimer) {
-    clearInterval(examTimer);
-    examTimer = null;
-}
-
-const question = currentQuestions[currentQuestionIndex];
-const config = examConfigs[currentExam];
-const answerTime = (Date.now() - questionStartTime) / 1000;
-
-// 收集用戶答案
-const userAnswer = Array(4).fill().map(() => Array(4).fill(0));
-const cells = document.querySelectorAll('.sudoku-cell');
-
-cells.forEach(cell => {
-    const row = parseInt(cell.dataset.row);
-    const col = parseInt(cell.dataset.col);
-    const value = parseInt(cell.value) || 0;
-    userAnswer[row][col] = value;
-});
-
-const isCorrect = checkSudokuAnswer(userAnswer, question.solution);
-const isFast = answerTime <= config.fastAnswerThreshold;
-
-if (isCorrect) {
-    userScores.correctAnswers++;
-}
-if (isFast && isCorrect) {
-    userScores.fastAnswers++;
-}
-
-// 顯示結果
-const container = document.getElementById('questionContainer');
-container.innerHTML = `
-    <div class="question">
-        <h3>${isCorrect ? '✅ 正確！' : '❌ 錯誤！'}</h3>
-        <p>用時：${answerTime.toFixed(1)}秒</p>
-        ${!isCorrect ? '<p>正確答案已顯示在網格中</p>' : ''}
-        <div class="sudoku-grid" id="resultGrid"></div>
-    </div>
-`;
-
-// 顯示正確答案
-const resultGrid = document.getElementById('resultGrid');
-for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-        const cell = document.createElement('input');
-        cell.type = 'number';
-        cell.className = 'sudoku-cell';
-        cell.value = question.solution[i][j];
-        cell.disabled = true;
-        resultGrid.appendChild(cell);
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
     }
-}
 
-setTimeout(() => {
-    nextQuestion();
-}, 3000);
+    const question = currentQuestions[currentQuestionIndex];
+    const config = examConfigs[currentExam];
+    const answerTime = (Date.now() - questionStartTime) / 1000;
+
+    // 收集用戶答案
+    const userAnswer = Array(4).fill().map(() => Array(4).fill(0));
+    const cells = document.querySelectorAll('.sudoku-cell');
+
+    cells.forEach(cell => {
+        const row = parseInt(cell.dataset.row);
+        const col = parseInt(cell.dataset.col);
+        const value = parseInt(cell.value) || 0;
+        userAnswer[row][col] = value;
+    });
+
+    const isCorrect = checkSudokuAnswer(userAnswer, question.solution);
+    const isFast = answerTime <= config.fastAnswerThreshold;
+
+    if (isCorrect) {
+        userScores.correctAnswers++;
+    }
+    if (isFast && isCorrect) {
+        userScores.fastAnswers++;
+    }
+
+    // 顯示結果
+    const container = document.getElementById('questionContainer');
+    container.innerHTML = `
+        <div class="question">
+            <h3>${isCorrect ? '✅ 正確！' : '❌ 錯誤！'}</h3>
+            <p>用時：${answerTime.toFixed(1)}秒</p>
+            ${!isCorrect ? '<p>正確答案已顯示在網格中</p>' : ''}
+            <div class="sudoku-grid" id="resultGrid"></div>
+        </div>
+    `;
+
+    // 顯示正確答案
+    const resultGrid = document.getElementById('resultGrid');
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            const cell = document.createElement('input');
+            cell.type = 'number';
+            cell.className = 'sudoku-cell';
+            cell.value = question.solution[i][j];
+            cell.disabled = true;
+            resultGrid.appendChild(cell);
+        }
+    }
+
+    setTimeout(() => {
+        nextQuestion();
+    }, 3000);
 }
 
 // 跳過題目
 function skipQuestion() {
-if (examTimer) {
-    clearInterval(examTimer);
-    examTimer = null;
-}
-nextQuestion();
+    if (examTimer) {
+        clearInterval(examTimer);
+        examTimer = null;
+    }
+    nextQuestion();
 }
 
 // 時間到
 function timeUp() {
-alert('⏰ 時間到！');
-nextQuestion();
+    alert('⏰ 時間到！');
+    nextQuestion();
 }
 
 // 顯示答案反饋
 function showAnswerFeedback(selectedIndex, correctIndex, isCorrect) {
-const options = document.querySelectorAll('.option-btn');
-options.forEach((btn, index) => {
-    btn.disabled = true;
-    if (index === correctIndex) {
-        btn.classList.add('correct');
-    } else if (index === selectedIndex && !isCorrect) {
-        btn.classList.add('wrong');
-    }
-});
+    const options = document.querySelectorAll('.option-btn');
+    options.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === correctIndex) {
+            btn.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+            btn.classList.add('wrong');
+        }
+    });
 }
 
 // 下一題
 function nextQuestion() {
-currentQuestionIndex++;
+    currentQuestionIndex++;
 
-if (currentQuestionIndex >= currentQuestions.length) {
-    finishExam();
-} else {
-    showQuestion();
-}
+    if (currentQuestionIndex >= currentQuestions.length) {
+        finishExam();
+    } else {
+        showQuestion();
+    }
 }
 
 // 修改完成考試函數，自動保存並避免重複
@@ -2666,30 +2665,30 @@ async function finishExam() {
 
 // 🔧 新增：自動保存成績（避免同用戶重複）
 async function autoSaveScore(score) {
-  try {
-      const timestamp = Date.now();
-      const scoreData = {
-          username: currentUser.username,
-          displayName: currentUser._comment || currentUser.username,
-          score: score,
-          examType: currentExam,
-          timestamp: timestamp,
-          correctAnswers: userScores.correctAnswers,
-          fastAnswers: userScores.fastAnswers,
-          totalQuestions: currentQuestions.length
-      };
-      
-      // 🔧 使用用戶名作為 key，避免重複
-      await database.ref(`scores/${currentExam}/${currentUser.username}`).set(scoreData);
-      console.log('✅ 成績已自動保存！');
-      
-      // 🏆 保存後重新載入榜首資訊
-      await loadAllChampions();
-      
-  } catch (error) {
-      console.error('自動保存成績失敗:', error);
-      alert('❌ 保存成績失敗，請稍後再試');
-  }
+    try {
+        const timestamp = Date.now();
+        const scoreData = {
+            username: currentUser.username,
+            displayName: currentUser._comment || currentUser.username,
+            score: score,
+            examType: currentExam,
+            timestamp: timestamp,
+            correctAnswers: userScores.correctAnswers,
+            fastAnswers: userScores.fastAnswers,
+            totalQuestions: currentQuestions.length
+        };
+        
+        // 🔧 使用用戶名作為 key，避免重複
+        await database.ref(`scores/${currentExam}/${currentUser.username}`).set(scoreData);
+        console.log('✅ 成績已自動保存！');
+        
+        // 🏆 保存後重新載入榜首資訊
+        await loadAllChampions();
+        
+    } catch (error) {
+        console.error('自動保存成績失敗:', error);
+        alert('❌ 保存成績失敗，請稍後再試');
+    }
 }
 
 // 保存成績（保留原函數，以防其他地方使用）
@@ -2726,39 +2725,56 @@ function backToMain() {
     location.reload();
 }
 
-// 顯示排行榜
+// 🔧 顯示排行榜 - 修正同分排序
 async function showLeaderboard(examType) {
     try {
-const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(30).once('value');
+        // 🔧 修正：取得所有成績，不限制數量以正確處理同分
+        const snapshot = await database.ref(`scores/${examType}`).once('value');
         const scores = [];
         
         snapshot.forEach(child => {
             scores.push(child.val());
         });
         
-        // 按分數排序（高到低）
-        scores.sort((a, b) => b.score - a.score);
+        // 🏆 排序邏輯：分數高到低，同分時首綁優先（時間戳早的在前）
+        scores.sort((a, b) => {
+            if (b.score !== a.score) {
+                return b.score - a.score; // 分數高的在前
+            }
+            return a.timestamp - b.timestamp; // 同分時，時間早的在前（首綁）
+        });
+        
+        // 只取前30名顯示
+        const topScores = scores.slice(0, 30);
         
         const modalTitle = document.getElementById('modalTitle');
         const leaderboardContent = document.getElementById('leaderboardContent');
         
         modalTitle.textContent = `${examConfigs[examType].name} - 排行榜`;
         
-      if (scores.length === 0) {
-          leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
-      } else {
-          leaderboardContent.innerHTML = `
-              <div class="leaderboard-container">
-                  ${scores.map((score, index) => `
-                      <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
-                          <span class="rank">#${index + 1}</span>
-                          <span class="user-name">${score.displayName}</span>
-                          <span class="score">${score.score}分</span>
-                      </div>
-                  `).join('')}
-              </div>
-          `;
-      }
+        if (topScores.length === 0) {
+            leaderboardContent.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
+        } else {
+            leaderboardContent.innerHTML = `
+                <div class="leaderboard-container">
+                    ${topScores.map((score, index) => {
+                        // 🏆 檢查是否為同分中的首綁
+                        const sameScoreCount = scores.filter(s => s.score === score.score).length;
+                        const isFirstBind = sameScoreCount > 1 && 
+                                          scores.findIndex(s => s.score === score.score) === scores.findIndex(s => s.username === score.username);
+                        const bindStatus = isFirstBind ? ' 🥇' : '';
+                        
+                        return `
+                            <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
+                                <span class="rank">#${index + 1}</span>
+                                <span class="user-name">${score.displayName}${bindStatus}</span>
+                                <span class="score">${score.score}分</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
         
         document.getElementById('leaderboardModal').style.display = 'flex';
         
@@ -2773,105 +2789,133 @@ function hideLeaderboard() {
     document.getElementById('leaderboardModal').style.display = 'none';
 }
 
-// 🏆 新增：載入所有榜首資訊
+// 🏆 新增：載入所有榜首資訊 - 修正同分處理
 async function loadAllChampions() {
-  const examTypes = ['basic', 'food1', 'food', 'precheck', 'rule', 'korean', 'vietnamese', 'sudoku'];
-  const champions = {};
-  
-  try {
-      for (const examType of examTypes) {
-          const snapshot = await database.ref(`scores/${examType}`).orderByChild('score').limitToLast(1).once('value');
-          
-          snapshot.forEach(child => {
-              const data = child.val();
-              champions[examType] = {
-                  displayName: data.displayName,
-                  score: data.score
-              };
-          });
-      }
-      
-      // 更新頁面顯示
-      updateChampionDisplay(champions);
-      
-  } catch (error) {
-      console.error('載入榜首資訊失敗:', error);
-  }
+    const examTypes = ['basic', 'food1', 'food', 'precheck', 'rule', 'korean', 'vietnamese', 'sudoku'];
+    const champions = {};
+    
+    try {
+        for (const examType of examTypes) {
+            // 🔧 修正：取得所有成績並進行排序
+            const snapshot = await database.ref(`scores/${examType}`).once('value');
+            const scores = [];
+            
+            snapshot.forEach(child => {
+                scores.push(child.val());
+            });
+            
+            if (scores.length > 0) {
+                // 🏆 排序邏輯：
+                // 1. 分數高到低
+                // 2. 同分時，時間戳早到晚 (首綁優先)
+                scores.sort((a, b) => {
+                    if (b.score !== a.score) {
+                        return b.score - a.score; // 分數高的在前
+                    }
+                    return a.timestamp - b.timestamp; // 同分時，時間早的在前（首綁）
+                });
+                
+                // 取得榜首
+                const champion = scores[0];
+                champions[examType] = {
+                    displayName: champion.displayName,
+                    score: champion.score,
+                    timestamp: champion.timestamp,
+                    isFirstBind: true // 標記為首綁
+                };
+                
+                console.log(`🏆 ${examType} 榜首: ${champion.displayName} (${champion.score}分) - 首綁時間: ${new Date(champion.timestamp).toLocaleString()}`);
+            }
+        }
+        
+        // 更新頁面顯示
+        updateChampionDisplay(champions);
+        
+    } catch (error) {
+        console.error('載入榜首資訊失敗:', error);
+    }
 }
 
-// 🏆 更新榜首顯示
+// 🏆 更新榜首顯示 - 加入首綁標記
 function updateChampionDisplay(champions) {
-  const challengeItems = document.querySelectorAll('.challenge-item');
-  
-  challengeItems.forEach(item => {
-      const title = item.querySelector('.challenge-title');
-      const actions = item.querySelector('.challenge-actions');
-      
-      // 根據標題判斷考試類型
-      let examType = '';
-      if (title.textContent.includes('分流考試挑戰')) examType = 'basic';
-      else if (title.textContent.includes('⭐英文考試基礎版⭐')) examType = 'food1';
-      else if (title.textContent.includes('⭐英文考試進階版⭐')) examType = 'food';
-      else if (title.textContent.includes('⭐前導複查挑戰⭐')) examType = 'precheck';
-      else if (title.textContent.includes('規定挑戰')) examType = 'rule';
-      else if (title.textContent.includes('🇰🇷韓語挑戰基礎版🇰🇷')) examType = 'korean';
-      else if (title.textContent.includes('🇻🇳越南語詞彙挑戰🇻🇳')) examType = 'vietnamese';
-      else if (title.textContent.includes('初階數獨挑戰')) examType = 'sudoku';
-      
-      // 如果有榜首資訊，添加顯示
-      if (examType && champions[examType]) {
-          // 檢查是否已經有榜首顯示，避免重複添加
-          let championDiv = item.querySelector('.champion-display');
-          if (!championDiv) {
-              championDiv = document.createElement('div');
-              championDiv.className = 'champion-display';
-              // 插入到 challenge-actions 之前
-              item.insertBefore(championDiv, actions);
-          }
-          
-          championDiv.innerHTML = `
-              <div style="display: flex; align-items: center; justify-content: space-between; 
-                         background: linear-gradient(45deg, #FFD700, #FFA500); 
-                         color: #000; padding: 6px 12px; border-radius: 6px; 
-                         font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
-                         box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
-                  <span>🏆 榜首：${champions[examType].displayName}</span>
-                  <span>${champions[examType].score}分</span>
-              </div>
-          `;
-      } else if (examType) {
-          // 如果沒有榜首資訊，顯示空榜首
-          let championDiv = item.querySelector('.champion-display');
-          if (!championDiv) {
-              championDiv = document.createElement('div');
-              championDiv.className = 'champion-display';
-              item.insertBefore(championDiv, actions);
-          }
-          
-          championDiv.innerHTML = `
-              <div style="display: flex; align-items: center; justify-content: center; 
-                         background: rgba(255, 255, 255, 0.1); 
-                         color: #a0a0a0; padding: 6px 12px; border-radius: 6px; 
-                         font-size: 0.85rem; margin-bottom: 8px;
-                         border: 1px dashed rgba(255, 255, 255, 0.2);">
-                  <span>🏆 暫無榜首</span>
-              </div>
-          `;
-      }
-  });
+    const challengeItems = document.querySelectorAll('.challenge-item');
+    
+    challengeItems.forEach(item => {
+        const title = item.querySelector('.challenge-title');
+        const actions = item.querySelector('.challenge-actions');
+        
+        // 根據標題判斷考試類型
+        let examType = '';
+        if (title.textContent.includes('分流考試挑戰')) examType = 'basic';
+        else if (title.textContent.includes('⭐英文考試基礎版⭐')) examType = 'food1';
+        else if (title.textContent.includes('⭐英文考試進階版⭐')) examType = 'food';
+        else if (title.textContent.includes('⭐前導複查挑戰⭐')) examType = 'precheck';
+        else if (title.textContent.includes('規定挑戰')) examType = 'rule';
+        else if (title.textContent.includes('🇰🇷韓語挑戰基礎版🇰🇷')) examType = 'korean';
+        else if (title.textContent.includes('🇻🇳越南語詞彙挑戰🇻🇳')) examType = 'vietnamese';
+        else if (title.textContent.includes('初階數獨挑戰')) examType = 'sudoku';
+        
+        // 如果有榜首資訊，添加顯示
+        if (examType && champions[examType]) {
+            // 檢查是否已經有榜首顯示，避免重複添加
+            let championDiv = item.querySelector('.champion-display');
+            if (!championDiv) {
+                championDiv = document.createElement('div');
+                championDiv.className = 'champion-display';
+                // 插入到 challenge-actions 之前
+                item.insertBefore(championDiv, actions);
+            }
+            
+            // 🏆 加入首綁標記和時間顯示
+            const champion = champions[examType];
+            const bindDate = new Date(champion.timestamp).toLocaleDateString();
+            
+            championDiv.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; 
+                           background: linear-gradient(45deg, #FFD700, #FFA500); 
+                           color: #000; padding: 6px 12px; border-radius: 6px; 
+                           font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
+                           box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
+                    <span>🏆 榜首：${champion.displayName} 🥇</span>
+                    <div style="text-align: right;">
+                        <div>${champion.score}分</div>
+                        <div style="font-size: 0.7rem; opacity: 0.8;">首綁 ${bindDate}</div>
+                    </div>
+                </div>
+            `;
+        } else if (examType) {
+            // 如果沒有榜首資訊，顯示空榜首
+            let championDiv = item.querySelector('.champion-display');
+            if (!championDiv) {
+                championDiv = document.createElement('div');
+                championDiv.className = 'champion-display';
+                item.insertBefore(championDiv, actions);
+            }
+            
+            championDiv.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; 
+                           background: rgba(255, 255, 255, 0.1); 
+                           color: #a0a0a0; padding: 6px 12px; border-radius: 6px; 
+                           font-size: 0.85rem; margin-bottom: 8px;
+                           border: 1px dashed rgba(255, 255, 255, 0.2);">
+                    <span>🏆 暫無榜首</span>
+                </div>
+            `;
+        }
+    });
 }
-  
+
 // 登出
 function logout() {
-localStorage.removeItem('t2_login');
-localStorage.removeItem('t2_login_time');
-localStorage.removeItem('t2_login_user');
-window.location.href = 'index.html';
+    localStorage.removeItem('t2_login');
+    localStorage.removeItem('t2_login_time');
+    localStorage.removeItem('t2_login_user');
+    window.location.href = 'index.html';
 }
 
 // 返回T2日
 function backToT2() {
-window.location.href = 'page3.html';
+    window.location.href = 'page3.html';
 }
 
 // 頁面載入時初始化
@@ -2879,10 +2923,10 @@ window.addEventListener('load', initializePage);
 
 // 點擊模態視窗外部關閉
 document.addEventListener('click', function(event) {
-const modal = document.getElementById('leaderboardModal');
-if (event.target === modal) {
-    hideLeaderboard();
-}
+    const modal = document.getElementById('leaderboardModal');
+    if (event.target === modal) {
+        hideLeaderboard();
+    }
 });
 </script>
 </body>
