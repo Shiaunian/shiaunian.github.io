@@ -2758,12 +2758,11 @@ async function showLeaderboard(examType) {
             leaderboardContent.innerHTML = `
                 <div class="leaderboard-container">
                     ${topScores.map((score, index) => {
-                        // 🏆 檢查是否為同分中的首綁
-                        const sameScoreCount = scores.filter(s => s.score === score.score).length;
-                        const isFirstBind = sameScoreCount > 1 && 
-                                          scores.findIndex(s => s.score === score.score) === scores.findIndex(s => s.username === score.username);
-                        const bindStatus = isFirstBind ? ' 🥇' : '';
-                        
+              // 🏆 檢查是否為首綁（只有第一名且同分時才顯示）
+              const isFirstPlace = index === 0; // 是否為第一名
+              const sameScoreCount = scores.filter(s => s.score === score.score).length;
+              const isFirstBind = isFirstPlace && sameScoreCount > 1; // 只有第一名且有同分才顯示首綁
+              const bindStatus = isFirstBind ? ' 🥇' : '';                
                         return `
                             <div class="leaderboard-item ${score.username === currentUser.username ? 'current-user' : ''}">
                                 <span class="rank">#${index + 1}</span>
