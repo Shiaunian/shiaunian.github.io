@@ -432,7 +432,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">⭐英文考試強化版⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共25題 一題10分(有點困難)</p>
+  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共30題 一題10分(有點困難)</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('foodplus')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('foodplus')">排行榜</button>
@@ -1004,7 +1004,7 @@ const examQuestions = {
   },
   {
     question: "石榴的英文是？",
-    options: ["pomegranate", "pomegranite", "pomegranate", "pomegranite"],
+    options: ["pomegranate", "pomegranite", "pomelo", "pumpkin"],
     correct: 0
   },
   {
@@ -1219,7 +1219,7 @@ const examQuestions = {
   },
   {
     question: "眼鏡的英文是？",
-    options: ["grasses", "glasses", "grasses", "masses"],
+    options: ["grasses", "glasses", "classes", "masses"],
     correct: 1
   },
   {
@@ -1274,7 +1274,7 @@ const examQuestions = {
   },
   {
     question: "花生的英文是？",
-    options: ["peanut", "peacock", "peanut", "peasant"],
+    options: ["peanut", "peacock", "peasant", "pleasant"],
     correct: 0
   },
   {
@@ -1404,7 +1404,7 @@ const examQuestions = {
   },
   {
     question: "候機室的英文是？",
-    options: ["waiting lounge", "waiting lounge", "waiting launch", "waiting lunch"],
+    options: ["waiting lounge", "waiting room", "waiting launch", "waiting lunch"],
     correct: 0
   },
   {
@@ -3086,7 +3086,7 @@ const examConfigs = {
   'foodplus': {
     name: '⭐英文考試強化版⭐',              // 考試名稱
     timePerQuestion: 10,                     // 每題時間限制
-    questionCount: 25,                       // 考試總題數
+    questionCount: 30,                       // 考試總題數
     fastAnswerThreshold: 2.5,                // 快速答題門檻
     questions: examQuestions['foodplus']         // 題庫來源（使用進階版題庫）
 },
