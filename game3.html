@@ -2433,19 +2433,30 @@ if (question.type === 'sudoku') {
         }
     }
 } else {
-    // 選擇題
-    container.innerHTML = `
-        <div class="question">
-            <h3>第 ${currentQuestionIndex + 1} 題 / ${currentQuestions.length}</h3>
-            <p>${question.question}</p>
-            <div class="options">
-                ${question.options.map((option, index) => 
-                    `<button class="btn btn-primary option-btn" onclick="selectAnswer(${index})">${option}</button>`
-                ).join('')}
-            </div>
-        </div>
-    `;
+// 選擇題 - 打亂選項順序
+const shuffledOptions = [...question.options];
+const correctOption = shuffledOptions[question.correct];
+
+// Fisher-Yates 洗牌算法
+for (let i = shuffledOptions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
 }
+
+// 找到正確答案在新順序中的位置
+const newCorrectIndex = shuffledOptions.indexOf(correctOption);
+
+container.innerHTML = `
+    <div class="question">
+        <h3>第 ${currentQuestionIndex + 1} 題 / ${currentQuestions.length}</h3>
+        <p>${question.question}</p>
+        <div class="options">
+            ${shuffledOptions.map((option, index) => 
+                `<button class="btn btn-primary option-btn" onclick="selectAnswer(${index}, ${newCorrectIndex})">${option}</button>`
+            ).join('')}
+        </div>
+    </div>
+`;
 
 // 開始計時
 startQuestionTimer();
@@ -2475,7 +2486,7 @@ examTimer = setInterval(() => {
 }
 
 // 選擇答案
-function selectAnswer(selectedIndex) {
+function selectAnswer(selectedIndex, correctIndex = null) {
 if (examTimer) {
     clearInterval(examTimer);
     examTimer = null;
@@ -2485,18 +2496,14 @@ const question = currentQuestions[currentQuestionIndex];
 const config = examConfigs[currentExam];
 const answerTime = (Date.now() - questionStartTime) / 1000;
 
-const isCorrect = selectedIndex === question.correct;
+// 如果有傳入 correctIndex 參數（打亂選項的情況），使用它；否則使用原本的邏輯
+const actualCorrectIndex = correctIndex !== null ? correctIndex : question.correct;
+const isCorrect = selectedIndex === actualCorrectIndex;
 const isFast = answerTime <= config.fastAnswerThreshold;
 
-if (isCorrect) {
-    userScores.correctAnswers++;
-}
-if (isFast && isCorrect) {
-    userScores.fastAnswers++;
-}
 
 // 顯示答案反饋
-showAnswerFeedback(selectedIndex, question.correct, isCorrect);
+showAnswerFeedback(selectedIndex, actualCorrectIndex, isCorrect);
 
 setTimeout(() => {
     nextQuestion();
