@@ -577,14 +577,24 @@ async function loadUsersData() {
 
 // ✅ 同時驗證用戶名和密碼，確保找到正確用戶
 function validateUser(username) {
+  console.log('🔍 驗證用戶:', username);
+  console.log('📊 用戶資料庫:', usersData);
+  
   const storedPassword = localStorage.getItem('t2_login_password');
+  console.log('🔑 儲存的密碼:', storedPassword);
+  
   const user = usersData.find(u => u.username === username && u.password === storedPassword);
+  
   if (!user) {
+      console.error('❌ 找不到用戶:', username);
       forceLogout('用戶帳號不存在於系統中');
       return null;
   }
+  
+  console.log('✅ 找到用戶:', user);
   return user;
 }
+
 
 
 // 顯示用戶歡迎訊息
@@ -2458,9 +2468,12 @@ container.innerHTML = `
     </div>
 `;
 
+}
+
 // 開始計時
 startQuestionTimer();
 }
+
 
 // 計時器函數
 function startQuestionTimer() {
