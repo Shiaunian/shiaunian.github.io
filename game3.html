@@ -2814,14 +2814,15 @@ async function loadAllChampions() {
                     return a.timestamp - b.timestamp; // 同分時，時間早的在前（首綁）
                 });
                 
-                // 取得榜首
-                const champion = scores[0];
-                champions[examType] = {
-                    displayName: champion.displayName,
-                    score: champion.score,
-                    timestamp: champion.timestamp,
-                    isFirstBind: true // 標記為首綁
-                };
+            // 取得榜首
+            const champion = scores[0];
+            const sameScoreCount = scores.filter(s => s.score === champion.score).length;
+            champions[examType] = {
+                displayName: champion.displayName,
+                score: champion.score,
+                timestamp: champion.timestamp,
+                hasMultipleSameScore: sameScoreCount > 1  // 檢查是否有同分
+            };
                 
                 console.log(`🏆 ${examType} 榜首: ${champion.displayName} (${champion.score}分) - 首綁時間: ${new Date(champion.timestamp).toLocaleString()}`);
             }
@@ -2869,19 +2870,22 @@ function updateChampionDisplay(champions) {
             const champion = champions[examType];
             const bindDate = new Date(champion.timestamp).toLocaleDateString();
             
-            championDiv.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: space-between; 
-                           background: linear-gradient(45deg, #FFD700, #FFA500); 
-                           color: #000; padding: 6px 12px; border-radius: 6px; 
-                           font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
-                           box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
-                    <span>🏆 榜首：${champion.displayName} 🥇</span>
-                    <div style="text-align: right;">
-                        <div>${champion.score}分</div>
-                        <div style="font-size: 0.7rem; opacity: 0.8;">首綁 ${bindDate}</div>
-                    </div>
+        // 🏆 檢查是否真的有同分才顯示首綁標記
+        const bindMark = champion.hasMultipleSameScore ? ' 🥇' : '';
+
+        championDiv.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; 
+                    background: linear-gradient(45deg, #FFD700, #FFA500); 
+                    color: #000; padding: 6px 12px; border-radius: 6px; 
+                    font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
+                    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
+                <span>🏆 榜首：${champion.displayName}${bindMark}</span>
+                <div style="text-align: right;">
+                    <div>${champion.score}分</div>
+                    <div style="font-size: 0.7rem; opacity: 0.8;">${champion.hasMultipleSameScore ? '首綁 ' : ''}${bindDate}</div>
                 </div>
-            `;
+            </div>
+        `;
         } else if (examType) {
             // 如果沒有榜首資訊，顯示空榜首
             let championDiv = item.querySelector('.champion-display');
