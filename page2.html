@@ -2,2133 +2,961 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <title>T2日檢疫人員內部資訊</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英文考試系統</title>
   <style>
-    body {
-      font-family: "微軟正黑體", Arial, sans-serif;
-      background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* 主要內容區塊 */
-    .main-content {
-      width: 94vw;
-      max-width: 450px;
-      margin: 7vw auto 0 auto;
-      padding: 7vw 4vw 6vw 4vw;
-      background: rgba(255, 255, 255, 0.98);
-      border-radius: 15px;
-      box-shadow: 0 6px 24px 0 rgba(58, 85, 170, 0.10), 0 1.5px 8px 0 #0001;
-    }
-
-    /* 頁面標題 */
-    .page-title {
-      font-size: 1.45rem;
-      font-weight: bold;
-      color: #263161;
-      margin-bottom: 1.1em;
-      letter-spacing: 2px;
-      text-align: center;
-    }
-
-    /* 通知看板 */
-    .notice-board {
-      background: #f4f7fb;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px #b3b3d622;
-      padding: 1.2em 1em 1em 1em;
-      max-height: 240px;
-      overflow-y: auto;
-      margin-bottom: 2.2em;
-      border-left: 6px solid #6c81d5;
-    }
-
-    /* 通知項目 */
-    .notice-item {
-      margin-bottom: 1.2em;
-    }
-
-    /* 通知標題 */
-    .notice-title {
-      font-weight: 700;
-      color: #3949ab;
-      font-size: 1.08em;
-      margin-bottom: 0.3em;
-    }
-
-    .highlight-box {
-      background: #f4f7fb;
-      border-left: 4px solid #7c90e1;
-      padding: 0.8em;
-      margin: 0.8em 0;
-      border-radius: 4px;
-    }
-
-        /* 標題內容專用樣式 */
-    .section-title {
-      color: #3949ab;
-      font-size: 12pt;
-      font-weight: bold;
-      margin-top: 1.5em;
-      margin-bottom: 0.8em;
-      border-bottom: 2px solid #e3e9ff;
-      padding-bottom: 0.3em;
-    }
-
-    .section-title:first-child {
-      margin-top: 0;
-    }
-
-    .content-block {
-      margin-bottom: 1.2em;
-    }
-
-    .sub-title {
-      font-weight: bold;
-      color: #263161;
-      margin-bottom: 0.5em;
-      margin-top: 1em;
-    }
-
-    .content-list {
-      margin-left: 1em;
-      line-height: 1.8;
-    }
-
-    .content-list li {
-      margin-bottom: 0.5em;
-    }
-
-    .highlight-box {
-      background: #f4f7fb;
-      border-left: 4px solid #7c90e1;
-      padding: 0.8em;
-      margin: 0.8em 0;
-      border-radius: 4px;
-    }
-
-    .warning-text {
-      color: #c62828;
-      font-weight: bold;
-    }
-
-    .indent {
-      margin-left: 1.5em;
-    }
-
-    /* 滾動條美化 */
-    ::-webkit-scrollbar {
-      width: 7px;
-      background: #f4f7fb;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #b3b3d6;
-      border-radius: 6px;
-    }
-
-    /* 通知內容 */
-    .notice-content {
-      color: #23315c;
-      font-size: 0.99em;
-      line-height: 1.7;
-      margin-left: 0.5em;
-    }
-
-    /* 按鈕群組 - 3x3 網格布局 */
-    .btn-group {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.8em;
-      margin-bottom: 1.5em;
-    }
-
-    /* 功能按鈕 */
-    .func-btn {
-      padding: 0.85em 0.5em;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      min-height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* 按鈕顏色 - 根據圖片調整 */
-    .func-btn.blue {
-      background: linear-gradient(135deg, #7986cb 0%, #5c6bc0 100%);
-      color: #fff;
-    }
-
-    .func-btn.blue:hover {
-      background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
-      transform: translateY(-2px);
-    }
-
-    .func-btn.dark-blue {
-      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
-      color: #fff;
-    }
-
-    .func-btn.dark-blue:hover {
-      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
-      transform: translateY(-2px);
-    }
-
-    .func-btn.red {
-      background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
-      color: #fff;
-    }
-
-    .func-btn.red:hover {
-      background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
-      transform: translateY(-2px);
-    }
-
-    .func-btn.yellow {
-      background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
-      color: #fff;
-    }
-
-    .func-btn.yellow:hover {
-      background: linear-gradient(135deg, #ff8f00 0%, #e65100 100%);
-      transform: translateY(-2px);
-    }
-
-    .func-btn.green {
-      background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
-      color: #fff;
-    }
-
-    .func-btn.green:hover {
-      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-      transform: translateY(-2px);
-    }
-
-    /* 登出按鈕 */
-    .logout-btn {
-      width: 100%;
-      padding: 16px 0;
-      background: linear-gradient(90deg, #251111 60%, #695858 100%);
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.18rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px #e6555522;
-      transition: all 0.3s ease;
-      margin-top: 1em;
-    }
-
-    .logout-btn:hover {
-      background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
-      transform: translateY(-2px);
-    }
-
-    /* 彈窗樣式 */
-    .modal-bg {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(30, 40, 80, 0.4);
-      z-index: 999;
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .modal-bg.active {
-      display: flex;
-    }
-
-    /* 模態容器 */
-    .modal {
-      background: #fff;
-      border-radius: 15px;
-      min-width: 300px;
-      max-width: 600px;
-      width: 90vw;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      padding: 0;
-      position: relative;
-      animation: modalSlideIn 0.3s ease-out;
-      display: flex;
-      flex-direction: column;
-      max-height: 85vh;
-      overflow: hidden;
-    }
-
-    @keyframes modalSlideIn {
-      from {
-        transform: scale(0.9) translateY(-20px);
-        opacity: 0;
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
       }
-      to {
-        transform: scale(1) translateY(0);
-        opacity: 1;
+
+      body {
+          font-family: 'Microsoft JhengHei', Arial, sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          color: #333;
       }
-    }
 
-    /* 模態標題區 */
-    .modal-header {
-      padding: 1.2em 1.5em;
-      background: linear-gradient(135deg, #e3e9ff 0%, #f0f4ff 100%);
-      border-radius: 15px 15px 0 0;
-      font-weight: bold;
-      color: #3949ab;
-      font-size: 1.2em;
-      letter-spacing: 1px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #e3e9ff;
-    }
+      .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+      }
 
-    /* 模態關閉按鈕 */
-    .modal-close {
-      background: #ff4757;
-      border: none;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 1.2em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
+      .header {
+          text-align: center;
+          color: white;
+          margin-bottom: 30px;
+      }
 
-    .modal-close:hover {
-      background: #ff3742;
-      transform: scale(1.1);
-    }
+      .header h1 {
+          font-size: 2.5em;
+          margin-bottom: 10px;
+          text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      }
 
-    /* 模態內容區 */
-    .modal-body {
-      padding: 1.5em;
-      overflow-y: auto;
-      flex: 1 1 auto;
-      color: #263161;
-      font-size: 1em;
-      line-height: 1.6;
-    }
+      .main-menu {
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
 
-    /* 跑馬燈容器 */
-    .marquee-container {
-      width: 100%;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f0f4ff 0%, #e8f2ff 100%);
-      border-radius: 10px;
-      margin-bottom: 1.5em;
-      padding: 0.8em 0;
-      border: 2px solid #e3e9ff;
-    }
+      .exam-category {
+          margin-bottom: 25px;
+          padding: 20px;
+          border: 2px solid #e0e0e0;
+          border-radius: 10px;
+          transition: all 0.3s ease;
+      }
 
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee 50s linear infinite;
-      color: #c62828;
-      font-weight: 600;
-    }
+      .exam-category:hover {
+          border-color: #667eea;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
 
-    @keyframes marquee {
-      0% { transform: translateX(15%); }
-      100% { transform: translateX(-100%); }
-    }
+      .category-title {
+          font-size: 1.3em;
+          font-weight: bold;
+          color: #667eea;
+          margin-bottom: 15px;
+      }
 
-    .marquee-container:hover .marquee-content {
-      animation-play-state: paused;
-    }
+      .category-buttons {
+          display: flex;
+          gap: 15px;
+          flex-wrap: wrap;
+      }
 
-    /* 考試系統樣式 */
-    .exam-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-    }
+      .btn {
+          padding: 12px 24px;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+          text-decoration: none;
+          display: inline-block;
+          text-align: center;
+      }
 
-    .exam-item {
-      padding: 1em;
-      background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
-      border-radius: 10px;
-      border: 2px solid #4caf50;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-weight: 600;
-      color: #2e7d32;
-    }
+      .btn-primary {
+          background: linear-gradient(45deg, #667eea, #764ba2);
+          color: white;
+      }
 
-    .exam-item:hover {
-      background: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-    }
+      .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
 
-    /* 考試介面 */
-    .exam-interface {
-      display: none;
-    }
+      .btn-secondary {
+          background: #f8f9fa;
+          color: #667eea;
+          border: 2px solid #667eea;
+      }
 
-    .exam-interface.active {
-      display: block;
-    }
+      .btn-secondary:hover {
+          background: #667eea;
+          color: white;
+      }
 
-    .question-container {
-      margin-bottom: 2em;
-    }
+      .exam-screen {
+          display: none;
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
 
-    .question-number {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: #3949ab;
-      margin-bottom: 0.5em;
-    }
+      .exam-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          padding-bottom: 20px;
+          border-bottom: 2px solid #e0e0e0;
+      }
 
-    .question-text {
-      font-size: 1.05em;
-      margin-bottom: 1em;
-      line-height: 1.6;
-      color: #263161;
-    }
+      .progress-bar {
+          background: #e0e0e0;
+          height: 10px;
+          border-radius: 5px;
+          margin: 20px 0;
+          overflow: hidden;
+      }
 
-    .options-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8em;
-      margin-bottom: 1.5em;
-    }
+      .progress-fill {
+          background: linear-gradient(45deg, #667eea, #764ba2);
+          height: 100%;
+          width: 0%;
+          transition: width 0.3s ease;
+      }
 
-    .option {
-      padding: 0.8em 1em;
-      background: #f8f9ff;
-      border: 2px solid #e3e9ff;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+      .timer {
+          font-size: 1.5em;
+          font-weight: bold;
+          color: #e74c3c;
+          background: #fff5f5;
+          padding: 10px 20px;
+          border-radius: 25px;
+          border: 2px solid #e74c3c;
+      }
 
-    .option:hover {
-      background: #e3e9ff;
-      border-color: #7986cb;
-    }
+      .question-container {
+          margin: 30px 0;
+      }
 
-    .option.selected {
-      background: #3949ab;
-      color: white;
-      border-color: #3949ab;
-    }
+      .question {
+          font-size: 1.4em;
+          font-weight: bold;
+          margin-bottom: 25px;
+          color: #333;
+          text-align: center;
+          padding: 20px;
+          background: #f8f9fa;
+          border-radius: 10px;
+      }
 
-    .exam-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2em;
-      padding-top: 1em;
-      border-top: 2px solid #e3e9ff;
-    }
+      .options {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 15px;
+          margin: 20px 0;
+      }
 
-    .exam-btn {
-      padding: 0.8em 1.5em;
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+      .option {
+          padding: 15px 20px;
+          border: 2px solid #e0e0e0;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background: white;
+          font-size: 1.1em;
+      }
 
-    .exam-btn.primary {
-      background: linear-gradient(135deg, #3949ab 0%, #283593 100%);
-      color: white;
-    }
+      .option:hover {
+          border-color: #667eea;
+          background: #f0f4ff;
+      }
 
-    .exam-btn.primary:hover {
-      background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
-      transform: translateY(-2px);
-    }
+      .option.selected {
+          border-color: #667eea;
+          background: #667eea;
+          color: white;
+      }
 
-    .exam-btn.secondary {
-      background: linear-gradient(135deg, #9e9e9e 0%, #757575 100%);
-      color: white;
-    }
+      .exam-controls {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 30px;
+      }
 
-    .exam-btn.secondary:hover {
-      background: linear-gradient(135deg, #757575 0%, #616161 100%);
-      transform: translateY(-2px);
-    }
+      .result-screen {
+          display: none;
+          background: white;
+          border-radius: 15px;
+          padding: 40px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          text-align: center;
+      }
 
-    /* 成績顯示 */
-    .result-container {
-      text-align: center;
-      padding: 2em 1em;
-    }
+      .score-display {
+          font-size: 3em;
+          font-weight: bold;
+          color: #667eea;
+          margin: 20px 0;
+      }
 
-    .score-display {
-      font-size: 2em;
-      font-weight: bold;
-      margin: 1em 0;
-      padding: 1em;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
-      border: 3px solid #4caf50;
-    }
+      .score-details {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: 10px;
+          margin: 20px 0;
+      }
 
-    .score-good {
-      color: #2e7d32;
-    }
+      .records-screen {
+          display: none;
+          background: white;
+          border-radius: 15px;
+          padding: 30px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
 
-    .score-average {
-      color: #f57c00;
-      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-      border-color: #ff9800;
-    }
+      .record-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px;
+          border-bottom: 1px solid #e0e0e0;
+          margin-bottom: 10px;
+      }
 
-    .score-poor {
-      color: #c62828;
-      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-      border-color: #f44336;
-    }
+      .record-item:last-child {
+          border-bottom: none;
+      }
 
-    .wrong-answers {
-      margin-top: 2em;
-      text-align: left;
-    }
+      .fast-answer-bonus {
+          color: #27ae60;
+          font-weight: bold;
+          animation: pulse 0.5s ease-in-out;
+      }
 
-    .wrong-answer-item {
-      margin-bottom: 1.5em;
-      padding: 1em;
-      background: #ffebee;
-      border-radius: 8px;
-      border-left: 4px solid #f44336;
-    }
+      @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1); }
+      }
 
-    .wrong-question {
-      font-weight: bold;
-      color: #c62828;
-      margin-bottom: 0.5em;
-    }
+      .hidden {
+          display: none !important;
+      }
 
-    .correct-answer {
-      color: #2e7d32;
-      font-weight: 600;
-    }
-
-    /* 待更新提示 */
-    .update-notice {
-      text-align: center;
-      color: #666;
-      font-style: italic;
-      padding: 2em;
-      background: #f8f9fa;
-      border-radius: 8px;
-      border: 2px dashed #ddd;
-    }
-
-    /* 滾動條美化 */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f3ff;
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #7c90e1, #3949ab);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #3949ab, #7c90e1);
-    }
+      @media (max-width: 600px) {
+          .options {
+              grid-template-columns: 1fr;
+          }
+          
+          .category-buttons {
+              flex-direction: column;
+          }
+          
+          .exam-controls {
+              flex-direction: column;
+              gap: 15px;
+          }
+      }
   </style>
 </head>
-
 <body>
-  <div class="main-content">
-    <div class="page-title">T2日檢疫人員內部資訊</div>
-    
-    <!-- 公告跑馬燈 -->
-    <div class="marquee-container">
-      <div class="marquee-content">
-        📢 還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!!!!還請麻煩各位同仁仔細看一下每一項的規定，尤其是新進的同仁還麻煩請多看，尤其是每個位置的工作內容。避免取消各位福利!!!
+  <div class="container">
+      <div class="header">
+          <h1>🎓 英文考試系統</h1>
+          <p>測試你的英文詞彙能力！</p>
       </div>
-    </div>
 
-    <!-- 通知看板 -->
-    <div class="notice-board" id="noticeBoard">
-      <div class="notice-item">
-        <div class="notice-title">🦽 複查輪椅旅客</div>
-        <div class="notice-content">以後碰到輪椅旅客，不管有多少行李，一律請他們往最前面稍等，避免造成交通組塞。</div>
-      </div>
-      <div class="notice-item">
-        <div class="notice-title">🤝 X光跟前導要互相配合</div>
-        <div class="notice-content">任何一方要告知任何事，例如中間輪椅或是包包有麵包，雙方都要回應一下，確實彼此有收到訊息。</div>
-      </div>
-      <div class="notice-item">
-        <div class="notice-title">📋 新進人員須知</div>
-        <div class="notice-content">所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</div>
-      </div>
-    </div>
+      <!-- 主選單 -->
+      <div id="mainMenu" class="main-menu">
+          <div class="exam-category">
+              <div class="category-title">🍎 水果類 / 🐱 動物類</div>
+              <div class="category-buttons">
+                  <button class="btn btn-primary" onclick="startExam('fruits-animals')">開始考試</button>
+                  <button class="btn btn-secondary" onclick="showRecords('fruits-animals')">查看紀錄</button>
+              </div>
+          </div>
 
-    <!-- 功能按鈕 - 3x3 網格 -->
-    <div class="btn-group">
-      <button class="func-btn blue" data-modal="📋前導">前導</button>
-      <button class="func-btn blue" data-modal="📋複查">複查</button>
-      <button class="func-btn blue" data-modal="📋X光">X光</button>
-      <button class="func-btn blue" data-modal="📋分流/2">分流/2</button>
-      <button class="func-btn blue" data-modal="📋新人須知">新人須知</button>
-      <button class="func-btn red" data-modal="⚠️規定事項">規定</button>
-      <button class="func-btn dark-blue" data-modal="⚠️各項連結">連結</button>
-      <button class="func-btn yellow" data-modal="檢疫物相關">檢疫物</button>
-      <button class="func-btn green" onclick="openExamModal()">自我考試</button>
-    </div>
+          <div class="exam-category">
+              <div class="category-title">🏠 家電類 / 🐛 昆蟲類</div>
+              <div class="category-buttons">
+                  <button class="btn btn-primary" onclick="startExam('appliances-insects')">開始考試</button>
+                  <button class="btn btn-secondary" onclick="showRecords('appliances-insects')">查看紀錄</button>
+              </div>
+          </div>
 
-    <!-- 登出按鈕 -->
-    <button class="logout-btn" id="logoutBtn">登出</button>
-  </div>
+          <div class="exam-category">
+              <div class="category-title">📝 描述類 / 👤 身體類</div>
+              <div class="category-buttons">
+                  <button class="btn btn-primary" onclick="startExam('descriptions-body')">開始考試</button>
+                  <button class="btn btn-secondary" onclick="showRecords('descriptions-body')">查看紀錄</button>
+              </div>
+          </div>
+      </div>
 
-  <!-- 彈窗 -->
-  <div class="modal-bg" id="modalBg">
-    <div class="modal" id="modalBox">
-      <div class="modal-header" id="modalHeader">
-        <span id="modalTitle">標題</span>
-        <button class="modal-close" id="modalClose">×</button>
+      <!-- 考試畫面 -->
+      <div id="examScreen" class="exam-screen">
+          <div class="exam-header">
+              <h2 id="examTitle">考試進行中</h2>
+              <div class="timer" id="timer">10</div>
+          </div>
+          
+          <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+          </div>
+          
+          <div class="question-container">
+              <div class="question" id="question">載入中...</div>
+              <div class="options" id="options"></div>
+          </div>
+          
+          <div class="exam-controls">
+              <button class="btn btn-secondary" onclick="abandonExam()">放棄考試</button>
+              <div>
+                  <span>題目 <span id="currentQuestion">1</span> / <span id="totalQuestions">20</span></span>
+              </div>
+          </div>
       </div>
-      <div class="modal-body" id="modalBody">
-        內容載入中...
+
+      <!-- 結果畫面 -->
+      <div id="resultScreen" class="result-screen">
+          <h2>🎉 考試完成！</h2>
+          <div class="score-display" id="finalScore">0</div>
+          <div class="score-details">
+              <p>正確題數: <span id="correctCount">0</span> / <span id="totalCount">20</span></p>
+              <p>基本分數: <span id="baseScore">0</span> 分</p>
+              <p>快速回答加分: <span id="bonusScore">0</span> 分</p>
+              <p>總分: <span id="totalScore">0</span> 分</p>
+          </div>
+          <div class="category-buttons">
+              <button class="btn btn-primary" onclick="retakeExam()">再考一次</button>
+              <button class="btn btn-secondary" onclick="showRecords(currentCategory)">查看紀錄</button>
+              <button class="btn btn-secondary" onclick="backToMenu()">返回主選單</button>
+          </div>
       </div>
-    </div>
+
+      <!-- 紀錄畫面 -->
+      <div id="recordsScreen" class="records-screen">
+          <h2 id="recordsTitle">考試紀錄</h2>
+          <div id="recordsList"></div>
+          <div style="text-align: center; margin-top: 30px;">
+              <button class="btn btn-secondary" onclick="backToMenu()">返回主選單</button>
+          </div>
+      </div>
   </div>
 
   <script>
+      // 題庫資料
+      const questionBank = {
+          'fruits-animals': [
+              // 主食類 - 中文選英文
+              { q: "米飯", options: ["rice", "bread", "noodles", "pasta"], correct: 0 },
+              { q: "麵包", options: ["rice", "bread", "oatmeal", "porridge"], correct: 1 },
+              { q: "麵條", options: ["pasta", "noodles", "ramen", "udon"], correct: 1 },
+              { q: "義大利麵", options: ["noodles", "pasta", "soba", "vermicelli"], correct: 1 },
+              { q: "拉麵", options: ["udon", "ramen", "soba", "noodles"], correct: 1 },
+              { q: "烏龍麵", options: ["ramen", "udon", "soba", "pasta"], correct: 1 },
+              { q: "蕎麥麵", options: ["udon", "soba", "ramen", "vermicelli"], correct: 1 },
+              { q: "河粉", options: ["vermicelli", "rice noodles", "noodles", "pasta"], correct: 1 },
+              { q: "米粉", options: ["rice noodles", "vermicelli", "soba", "udon"], correct: 1 },
+              { q: "饅頭", options: ["bun", "steamed bun", "dumpling", "sesame cake"], correct: 1 },
+              { q: "包子", options: ["steamed bun", "bun", "dumpling", "bread"], correct: 1 },
+              { q: "餃子", options: ["bun", "dumpling", "steamed bun", "sesame cake"], correct: 1 },
+              { q: "燒餅", options: ["bread", "sesame cake", "steamed bun", "oatmeal"], correct: 1 },
+              { q: "粥", options: ["oatmeal", "porridge", "rice", "bread"], correct: 1 },
+              { q: "燕麥", options: ["porridge", "oatmeal", "rice", "corn"], correct: 1 },
+              { q: "玉米", options: ["potato", "corn", "sweet potato", "pumpkin"], correct: 1 },
+              { q: "馬鈴薯", options: ["sweet potato", "potato", "taro", "corn"], correct: 1 },
+              { q: "地瓜", options: ["potato", "sweet potato", "taro", "pumpkin"], correct: 1 },
+              { q: "芋頭", options: ["sweet potato", "taro", "potato", "pumpkin"], correct: 1 },
+              { q: "南瓜", options: ["sweet potato", "pumpkin", "taro", "corn"], correct: 1 },
 
-        // ====== 強化登入檢查：帳號還在不在名單內 ======
-function checkLogin() {
-  const flag = localStorage.getItem("t2_login");
-  const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-  const loginUser = localStorage.getItem("t2_login_user");
-  const LIMIT = 3600000; // 1小時
+              // 肉類 - 中文選英文
+              { q: "豬肉", options: ["beef", "pork", "lamb", "chicken"], correct: 1 },
+              { q: "牛肉", options: ["pork", "beef", "lamb", "duck"], correct: 1 },
+              { q: "雞肉", options: ["duck", "chicken", "turkey", "goose"], correct: 1 },
+              { q: "鴨肉", options: ["chicken", "duck", "goose", "turkey"], correct: 1 },
+              { q: "羊肉", options: ["beef", "lamb", "pork", "venison"], correct: 1 },
+              { q: "火腿", options: ["bacon", "ham", "sausage", "hot dog"], correct: 1 },
+              { q: "香腸", options: ["hot dog", "sausage", "ham", "bacon"], correct: 1 },
+              { q: "熱狗", options: ["sausage", "hot dog", "ham", "patty"], correct: 1 },
+              { q: "培根", options: ["ham", "bacon", "sausage", "pork floss"], correct: 1 },
+              { q: "肉鬆", options: ["bacon", "pork floss", "ham", "preserved meat"], correct: 1 },
+              { q: "牛排", options: ["pork chop", "steak", "beef", "patty"], correct: 1 },
+              { q: "炸雞", options: ["roasted chicken", "fried chicken", "chicken wings", "chicken leg"], correct: 1 },
+              { q: "烤雞", options: ["fried chicken", "roasted chicken", "chicken wings", "barbecue"], correct: 1 },
+              { q: "雞翅", options: ["chicken leg", "chicken wings", "fried chicken", "roasted chicken"], correct: 1 },
+              { q: "雞腿", options: ["chicken wings", "chicken leg", "fried chicken", "duck"], correct: 1 },
+              { q: "豬排", options: ["steak", "pork chop", "char siu", "patty"], correct: 1 },
+              { q: "叉燒", options: ["barbecue", "char siu", "pork chop", "preserved meat"], correct: 1 },
+              { q: "燒肉", options: ["char siu", "barbecue", "roasted chicken", "steak"], correct: 1 },
+              { q: "肉丸", options: ["patty", "meatball", "pork chop", "sausage"], correct: 1 },
+              { q: "漢堡肉", options: ["meatball", "patty", "steak", "pork chop"], correct: 1 },
+              { q: "火雞", options: ["chicken", "turkey", "duck", "goose"], correct: 1 },
+              { q: "鵝肉", options: ["duck", "goose", "turkey", "chicken"], correct: 1 },
+              { q: "兔肉", options: ["lamb", "rabbit", "venison", "duck"], correct: 1 },
+              { q: "鹿肉", options: ["rabbit", "venison", "lamb", "goose"], correct: 1 },
+              { q: "臘肉", options: ["bacon", "preserved meat", "ham", "pork floss"], correct: 1 },
 
-  // 1. 檢查基本登入狀態
-  if (flag !== "yes" || !time || (Date.now() - time > LIMIT) || !loginUser) {
-    localStorage.clear();
-    window.location.href = "index.html";
-    return;
-  }
+              // 海鮮類 - 中文選英文
+              { q: "魚", options: ["shrimp", "fish", "crab", "squid"], correct: 1 },
+              { q: "鮭魚", options: ["tuna", "salmon", "mackerel", "cod"], correct: 1 },
+              { q: "鮪魚", options: ["salmon", "tuna", "mackerel", "flounder"], correct: 1 },
+              { q: "鯖魚", options: ["tuna", "mackerel", "salmon", "saury"], correct: 1 },
+              { q: "比目魚", options: ["cod", "flounder", "grouper", "tilapia"], correct: 1 },
+              { q: "蝦", options: ["crab", "shrimp", "lobster", "squid"], correct: 1 },
+              { q: "螃蟹", options: ["shrimp", "crab", "lobster", "octopus"], correct: 1 },
+              { q: "龍蝦", options: ["crab", "lobster", "shrimp", "abalone"], correct: 1 },
+              { q: "牡蠣", options: ["clam", "oyster", "scallop", "abalone"], correct: 1 },
+              { q: "蛤蜊", options: ["oyster", "clam", "scallop", "sea cucumber"], correct: 1 },
+              { q: "扇貝", options: ["clam", "scallop", "oyster", "dried scallop"], correct: 1 },
+              { q: "魷魚", options: ["octopus", "squid", "eel", "fish"], correct: 1 },
+              { q: "章魚", options: ["squid", "octopus", "eel", "sea cucumber"], correct: 1 },
+              { q: "海帶", options: ["laver", "seaweed", "sea cucumber", "fish"], correct: 1 },
+              { q: "紫菜", options: ["seaweed", "laver", "sea cucumber", "clam"], correct: 1 },
+              { q: "鰻魚", options: ["squid", "eel", "octopus", "cod"], correct: 1 },
+              { q: "鱈魚", options: ["flounder", "cod", "grouper", "salmon"], correct: 1 },
+              { q: "石斑魚", options: ["cod", "grouper", "flounder", "tilapia"], correct: 1 },
+              { q: "虱目魚", options: ["tilapia", "milkfish", "grouper", "saury"], correct: 1 },
+              { q: "秋刀魚", options: ["mackerel", "saury", "milkfish", "eel"], correct: 1 },
+              { q: "吳郭魚", options: ["milkfish", "tilapia", "grouper", "flounder"], correct: 1 },
+              { q: "海參", options: ["octopus", "sea cucumber", "abalone", "laver"], correct: 1 },
+              { q: "鮑魚", options: ["sea cucumber", "abalone", "oyster", "lobster"], correct: 1 },
+              { q: "干貝", options: ["scallop", "dried scallop", "clam", "oyster"], correct: 1 },
+              { q: "魚丸", options: ["fish", "fish ball", "meatball", "squid"], correct: 1 },
 
-  // 2. 讀 password.json 比對帳號
-  fetch('password.json')
-    .then(res => res.json())
-    .then(data => {
-      const users = Array.isArray(data) ? data : [data];
-      const valid = users.some(u => u.username === loginUser);
-      if (!valid) {
-        alert("您的帳號已停用或不存在，請聯絡管理員。");
-        localStorage.clear();
-        window.location.href = "index.html";
-        return;
-      }
-      // 通過檢查才繼續顯示主頁內容
-    })
-    .catch(() => {
-      document.body.innerHTML = '<div style="color:red;">無法讀取帳號名單，請聯絡管理員！</div>';
-    });
-}
+              // 蔬菜類 - 中文選英文
+              { q: "高麗菜", options: ["lettuce", "cabbage", "bok choy", "spinach"], correct: 1 },
+              { q: "菠菜", options: ["cabbage", "spinach", "lettuce", "water spinach"], correct: 1 },
+              { q: "青江菜", options: ["spinach", "bok choy", "cabbage", "lettuce"], correct: 1 },
+              { q: "萵苣", options: ["bok choy", "lettuce", "cabbage", "spinach"], correct: 1 },
+              { q: "花椰菜", options: ["broccoli", "cauliflower", "cabbage", "lettuce"], correct: 1 },
+              { q: "青花菜", options: ["cauliflower", "broccoli", "asparagus", "green bean"], correct: 1 },
+              { q: "紅蘿蔔", options: ["radish", "carrot", "ginger", "lotus root"], correct: 1 },
+              { q: "白蘿蔔", options: ["carrot", "radish", "ginger", "lotus root"], correct: 1 },
+              { q: "洋蔥", options: ["garlic", "onion", "leek", "ginger"], correct: 1 },
+              { q: "大蒜", options: ["onion", "garlic", "ginger", "leek"], correct: 1 },
+              { q: "薑", options: ["garlic", "ginger", "onion", "radish"], correct: 1 },
+              { q: "韭菜", options: ["celery", "leek", "green bean", "asparagus"], correct: 1 },
+              { q: "芹菜", options: ["leek", "celery", "asparagus", "green bean"], correct: 1 },
+              { q: "茄子", options: ["tomato", "eggplant", "bell pepper", "cucumber"], correct: 1 },
+              { q: "番茄", options: ["eggplant", "tomato", "bell pepper", "chili"], correct: 1 },
+              { q: "小黃瓜", options: ["loofah", "cucumber", "winter melon", "bitter gourd"], correct: 1 },
+              { q: "絲瓜", options: ["cucumber", "loofah", "winter melon", "bitter gourd"], correct: 1 },
+              { q: "冬瓜", options: ["bitter gourd", "winter melon", "loofah", "cucumber"], correct: 1 },
+              { q: "苦瓜", options: ["winter melon", "bitter gourd", "loofah", "cucumber"], correct: 1 },
+              { q: "辣椒", options: ["bell pepper", "chili", "tomato", "eggplant"], correct: 1 },
+              { q: "青椒", options: ["chili", "bell pepper", "tomato", "eggplant"], correct: 1 },
+              { q: "玉米筍", options: ["bamboo shoot", "baby corn", "asparagus", "bean sprout"], correct: 1 },
+              { q: "竹筍", options: ["baby corn", "bamboo shoot", "asparagus", "lotus root"], correct: 1 },
+              { q: "豆芽菜", options: ["asparagus", "bean sprout", "baby corn", "green bean"], correct: 1 },
+              { q: "空心菜", options: ["spinach", "water spinach", "bok choy", "lettuce"], correct: 1 },
+              { q: "蘆筍", options: ["celery", "asparagus", "leek", "green bean"], correct: 1 },
+              { q: "四季豆", options: ["pea", "green bean", "edamame", "bean sprout"], correct: 1 },
+              { q: "豌豆", options: ["green bean", "pea", "edamame", "bean sprout"], correct: 1 },
+              { q: "毛豆", options: ["pea", "edamame", "green bean", "bean sprout"], correct: 1 },
+              { q: "蓮藕", options: ["radish", "lotus root", "bamboo shoot", "ginger"], correct: 1 },
 
-    // ==========================================
-    // 🔧 考試系統設定區域
-    // ==========================================
+              // 水果類 - 中文選英文
+              { q: "蘋果", options: ["orange", "apple", "grape", "pear"], correct: 1 },
+              { q: "香蕉", options: ["mango", "banana", "pineapple", "papaya"], correct: 1 },
+              { q: "橘子", options: ["apple", "orange", "tangerine", "grapefruit"], correct: 1 },
+              { q: "葡萄", options: ["cherry", "grape", "blueberry", "strawberry"], correct: 1 },
+              { q: "西瓜", options: ["cantaloupe", "watermelon", "papaya", "coconut"], correct: 1 },
+              { q: "哈密瓜", options: ["watermelon", "cantaloupe", "papaya", "coconut"], correct: 1 },
+              { q: "草莓", options: ["raspberry", "strawberry", "cherry", "blueberry"], correct: 1 },
+              { q: "櫻桃", options: ["strawberry", "cherry", "grape", "plum"], correct: 1 },
+              { q: "桃子", options: ["pear", "peach", "plum", "apricot"], correct: 1 },
+              { q: "梨子", options: ["peach", "pear", "apple", "plum"], correct: 1 },
+              { q: "檸檬", options: ["lime", "lemon", "orange", "grapefruit"], correct: 1 },
+              { q: "萊姆", options: ["lemon", "lime", "kiwi", "avocado"], correct: 1 },
+              { q: "芒果", options: ["papaya", "mango", "pineapple", "banana"], correct: 1 },
+              { q: "鳳梨", options: ["mango", "pineapple", "papaya", "coconut"], correct: 1 },
+              { q: "奇異果", options: ["avocado", "kiwi", "lime", "grape"], correct: 1 },
+              { q: "酪梨", options: ["kiwi", "avocado", "lime", "coconut"], correct: 1 },
+              { q: "藍莓", options: ["blackberry", "blueberry", "raspberry", "grape"], correct: 1 },
+              { q: "覆盆子", options: ["blueberry", "raspberry", "strawberry", "blackberry"], correct: 1 },
+              { q: "黑莓", options: ["raspberry", "blackberry", "blueberry", "mulberry"], correct: 1 },
+              { q: "椰子", options: ["avocado", "coconut", "cantaloupe", "watermelon"], correct: 1 },
+              { q: "木瓜", options: ["mango", "papaya", "pineapple", "cantaloupe"], correct: 1 },
+              { q: "火龍果", options: ["kiwi", "dragon fruit", "star fruit", "passion fruit"], correct: 1 },
+              { q: "荔枝", options: ["longan", "lychee", "rambutan", "mangosteen"], correct: 1 },
+              { q: "龍眼", options: ["lychee", "longan", "rambutan", "jujube"], correct: 1 },
+              { q: "柿子", options: ["apricot", "persimmon", "plum", "fig"], correct: 1 },
+              { q: "葡萄柚", options: ["orange", "grapefruit", "tangerine", "lemon"], correct: 1 },
+              { q: "橙子", options: ["orange", "tangerine", "grapefruit", "lemon"], correct: 1 },
+              { q: "李子", options: ["peach", "plum", "apricot", "cherry"], correct: 1 },
+              { q: "杏子", options: ["plum", "apricot", "peach", "persimmon"], correct: 1 },
+              { q: "無花果", options: ["persimmon", "fig", "pomegranate", "guava"], correct: 1 },
+              { q: "石榴", options: ["fig", "pomegranate", "guava", "passion fruit"], correct: 1 },
+              { q: "百香果", options: ["guava", "passion fruit", "dragon fruit", "star fruit"], correct: 1 },
+              { q: "番石榴", options: ["passion fruit", "guava", "pomegranate", "fig"], correct: 1 },
+              { q: "蓮霧", options: ["guava", "wax apple", "sugar apple", "star fruit"], correct: 1 },
+              { q: "楊桃", options: ["dragon fruit", "star fruit", "passion fruit", "wax apple"], correct: 1 },
+              { q: "釋迦", options: ["wax apple", "sugar apple", "guava", "durian"], correct: 1 },
+              { q: "榴槤", options: ["sugar apple", "durian", "mangosteen", "rambutan"], correct: 1 },
+              { q: "山竹", options: ["durian", "mangosteen", "rambutan", "lychee"], correct: 1 },
+              { q: "紅毛丹", options: ["lychee", "rambutan", "longan", "mangosteen"], correct: 1 },
+              { q: "棗子", options: ["longan", "jujube", "loquat", "persimmon"], correct: 1 },
+              { q: "枇杷", options: ["jujube", "loquat", "apricot", "persimmon"], correct: 1 },
+              { q: "桑葚", options: ["blackberry", "mulberry", "blueberry", "blackcurrant"], correct: 1 },
+              { q: "葡萄乾", options: ["grape", "raisin", "cranberry", "goji berry"], correct: 1 },
+              { q: "蔓越莓", options: ["raisin", "cranberry", "goji berry", "blackcurrant"], correct: 1 },
+              { q: "黑醋栗", options: ["redcurrant", "blackcurrant", "cranberry", "blackberry"], correct: 1 },
+              { q: "紅醋栗", options: ["blackcurrant", "redcurrant", "cranberry", "raspberry"], correct: 1 },
+              { q: "枸杞", options: ["cranberry", "goji berry", "raisin", "jujube"], correct: 1 },
+
+              豆類製品 (15個)
+              // 豆類堅果 - 中文選英文
+              { q: "豆腐", options: ["soy milk", "tofu", "dried tofu", "tofu skin"], correct: 1 },
+              { q: "豆漿", options: ["tofu", "soy milk", "miso", "natto"], correct: 1 },
+              { q: "豆干", options: ["tofu", "dried tofu", "fried tofu", "tofu skin"], correct: 1 },
+              { q: "油豆腐", options: ["dried tofu", "fried tofu", "stinky tofu", "tofu"], correct: 1 },
+              { q: "臭豆腐", options: ["fried tofu", "stinky tofu", "dried tofu", "tofu skin"], correct: 1 },
+              { q: "豆皮", options: ["dried tofu", "tofu skin", "fried tofu", "soy milk"], correct: 1 },
+              { q: "納豆", options: ["miso", "natto", "tofu", "soy milk"], correct: 1 },
+              { q: "味噌", options: ["natto", "miso", "soy milk", "tofu"], correct: 1 },
+              { q: "紅豆", options: ["mung bean", "red bean", "black bean", "green bean"], correct: 1 },
+              { q: "綠豆", options: ["red bean", "mung bean", "black bean", "green bean"], correct: 1 },
+              { q: "黑豆", options: ["red bean", "black bean", "mung bean", "soy bean"], correct: 1 },
+              { q: "花生", options: ["cashew", "peanut", "almond", "walnut"], correct: 1 },
+              { q: "腰果", options: ["peanut", "cashew", "almond", "walnut"], correct: 1 },
+              { q: "杏仁", options: ["walnut", "almond", "cashew", "peanut"], correct: 1 },
+              { q: "核桃", options: ["almond", "walnut", "cashew", "peanut"], correct: 1 },
+
+              // 乳製品 - 中文選英文
+              { q: "牛奶", options: ["cream", "milk", "soy milk", "milk powder"], correct: 1 },
+              { q: "起司", options: ["butter", "cheese", "cheddar", "cream"], correct: 1 },
+              { q: "奶油", options: ["cream", "butter", "milk", "yogurt"], correct: 1 },
+              { q: "優格", options: ["pudding", "yogurt", "cream", "milk"], correct: 1 },
+              { q: "鮮奶油", options: ["butter", "cream", "milk", "condensed milk"], correct: 1 },
+              { q: "煉乳", options: ["milk", "condensed milk", "cream", "milk powder"], correct: 1 },
+              { q: "奶粉", options: ["condensed milk", "milk powder", "milk", "cream"], correct: 1 },
+              { q: "冰淇淋", options: ["milkshake", "ice cream", "pudding", "yogurt"], correct: 1 },
+              { q: "布丁", options: ["yogurt", "pudding", "ice cream", "cream"], correct: 1 },
+              { q: "奶昔", options: ["ice cream", "milkshake", "milk", "cream"], correct: 1 },
+              { q: "起司蛋糕", options: ["ice cream", "cheesecake", "pudding", "cake"], correct: 1 },
+              { q: "切達起司", options: ["cheese", "cheddar", "butter", "cream"], correct: 1 },
+
+              // 甜點糕餅 - 中文選英文
+              { q: "餅乾", options: ["cake", "cookie", "cracker", "waffle"], correct: 1 },
+              { q: "蛋糕", options: ["cookie", "cake", "pie", "rice cake"], correct: 1 },
+              { q: "巧克力", options: ["candy", "chocolate", "cocoa", "cookie"], correct: 1 },
+              { q: "糖果", options: ["chocolate", "candy", "marshmallow", "jelly"], correct: 1 },
+              { q: "棉花糖", options: ["candy", "marshmallow", "jelly", "cotton"], correct: 1 },
+              { q: "果凍", options: ["marshmallow", "jelly", "pudding", "mousse"], correct: 1 },
+              { q: "甜甜圈", options: ["cookie", "donut", "bagel", "cake"], correct: 1 },
+              { q: "馬卡龍", options: ["cookie", "macaron", "cream puff", "souffle"], correct: 1 },
+              { q: "泡芙", options: ["macaron", "cream puff", "souffle", "donut"], correct: 1 },
+              { q: "鬆餅", options: ["pancake", "waffle", "cake", "cookie"], correct: 1 },
+              { q: "薄餅", options: ["waffle", "pancake", "crepe", "cake"], correct: 1 },
+              { q: "派", options: ["cake", "pie", "tart", "pizza"], correct: 1 },
+              { q: "提拉米蘇", options: ["mousse", "tiramisu", "souffle", "cake"], correct: 1 },
+              { q: "慕斯", options: ["tiramisu", "mousse", "souffle", "pudding"], correct: 1 },
+              { q: "舒芙蕾", options: ["mousse", "souffle", "cream puff", "tiramisu"], correct: 1 },
+              { q: "年糕", options: ["cake", "rice cake", "mochi", "dumpling"], correct: 1 },
+              { q: "湯圓", options: ["dumpling", "tangyuan", "mochi", "rice cake"], correct: 1 },
+
+              // 速食輕食 - 中文選英文
+              { q: "漢堡", options: ["sandwich", "hamburger", "burger", "hot dog"], correct: 1 },
+              { q: "薯條", options: ["potato chips", "french fries", "fries", "chips"], correct: 1 },
+              { q: "披薩", options: ["pie", "pizza", "pancake", "flatbread"], correct: 1 },
+              { q: "三明治", options: ["hamburger", "sandwich", "toast", "submarine sandwich"], correct: 1 },
+              { q: "潛艇堡", options: ["sandwich", "submarine sandwich", "hamburger", "hot dog"], correct: 1 },
+              { q: "可樂餅", options: ["nuggets", "croquette", "fritter", "dumpling"], correct: 1 },
+              { q: "雞塊", options: ["croquette", "chicken nuggets", "fried chicken", "popcorn chicken"], correct: 1 },
+              { q: "洋蔥圈", options: ["french fries", "onion rings", "fried onion", "rings"], correct: 1 },
+              { q: "蛋餅", options: ["pancake", "egg pancake", "omelet", "crepe"], correct: 1 },
+              { q: "肉包", options: ["dumpling", "meat bun", "steamed bun", "bao"], correct: 1 },
+              { q: "便當", options: ["lunch box", "bento", "meal", "takeout"], correct: 1 },
+
+              // 調味料配料 - 中文選英文
+              { q: "雞蛋", options: ["duck egg", "egg", "century egg", "yolk"], correct: 1 },
+              { q: "鹹鴨蛋", options: ["egg", "salted duck egg", "century egg", "duck egg"], correct: 1 },
+              { q: "皮蛋", options: ["salted duck egg", "century egg", "preserved egg", "black egg"], correct: 1 },
+              { q: "蜂蜜", options: ["syrup", "honey", "jam", "sugar"], correct: 1 },
+              { q: "果醬", options: ["honey", "jam", "jelly", "preserve"], correct: 1 },
+              { q: "花生醬", options: ["jam", "peanut butter", "butter", "nut butter"], correct: 1 },
+              { q: "芝麻", options: ["seed", "sesame", "sunflower", "peanut"], correct: 1 },
+              { q: "醋", options: ["sauce", "vinegar", "wine", "acid"], correct: 1 },
+              { q: "醬油", options: ["vinegar", "soy sauce", "fish sauce", "oyster sauce"], correct: 1 },
+              { q: "鹽", options: ["sugar", "salt", "pepper", "powder"], correct: 1 },
+              { q: "糖", options: ["salt", "sugar", "honey", "syrup"], correct: 1 },
+              { q: "胡椒", options: ["salt", "pepper", "spice", "chili"], correct: 1 },
+              { q: "辣椒粉", options: ["pepper", "chili powder", "curry powder", "paprika"], correct: 1 },
+              { q: "咖哩粉", options: ["chili powder", "curry powder", "turmeric", "spice"], correct: 1 },
+              { q: "番茄醬", options: ["sauce", "ketchup", "tomato sauce", "paste"], correct: 1 },
+              { q: "美乃滋", options: ["ketchup", "mayonnaise", "cream", "dressing"], correct: 1 },
+              { q: "芥末", options: ["mayonnaise", "mustard", "wasabi", "horseradish"], correct: 1 },
+              { q: "橄欖油", options: ["oil", "olive oil", "vegetable oil", "cooking oil"], correct: 1 },
+              { q: "香草", options: ["herb", "vanilla", "mint", "basil"], correct: 1 },
+              { q: "肉桂", options: ["vanilla", "cinnamon", "nutmeg", "clove"], correct: 1 }              
+          ],
+
+          'appliances-insects': [
+              {q: 'Refrigerator', options: ['冰箱', '洗衣機', '烤箱', '微波爐'], correct: 0},
+              {q: 'Butterfly', options: ['蜜蜂', '蝴蝶', '蜻蜓', '螞蟻'], correct: 1},
+              {q: 'Television', options: ['收音機', '電視', '電腦', '手機'], correct: 1},
+              {q: 'Ant', options: ['螞蟻', '蜘蛛', '蟑螂', '蚊子'], correct: 0},
+              {q: 'Washing Machine', options: ['洗碗機', '烘乾機', '洗衣機', '吸塵器'], correct: 2},
+              {q: 'Bee', options: ['黃蜂', '蜜蜂', '大黃蜂', '蒼蝇'], correct: 1},
+              {q: 'Microwave', options: ['烤箱', '微波爐', '電鍋', '氣炸鍋'], correct: 1},
+              {q: 'Spider', options: ['蜘蛛', '蠍子', '蜈蚣', '壁虎'], correct: 0},
+              {q: 'Air Conditioner', options: ['電風扇', '除濕機', '冷氣機', '暖氣機'], correct: 2},
+              {q: 'Mosquito', options: ['蚊子', '蒼蝇', '蚋', '蠓'], correct: 0},
+              {q: 'Vacuum Cleaner', options: ['掃把', '拖把', '吸塵器', '蒸氣拖把'], correct: 2},
+              {q: 'Dragonfly', options: ['蝴蝶', '蜻蜓', '蛾', '蚱蜢'], correct: 1},
+              {q: 'Dishwasher', options: ['洗衣機', '洗碗機', '烘碗機', '消毒櫃'], correct: 1},
+              {q: 'Cockroach', options: ['甲蟲', '蟑螂', '蟋蟀', '螞蚱'], correct: 1},
+              {q: 'Oven', options: ['烤箱', '微波爐', '蒸爐', '電鍋'], correct: 0},
+              {q: 'Grasshopper', options: ['蚱蜢', '蟋蟀', '螞蚱', '蝗蟲'], correct: 0},
+              {q: 'Blender', options: ['果汁機', '攪拌機', '食物調理機', '咖啡機'], correct: 1},
+              {q: 'Ladybug', options: ['瓢蟲', '金龜子', '獨角仙', '鍬形蟲'], correct: 0},
+              {q: 'Hair Dryer', options: ['吹風機', '直髮器', '捲髮器', '理髮器'], correct: 0},
+              {q: 'Beetle', options: ['蟬', '甲蟲', '蝉', '金蟬'], correct: 1}
+          ],
+          'descriptions-body': [
+              {q: 'Beautiful', options: ['美麗的', '醜陋的', '可愛的', '迷人的'], correct: 0},
+              {q: 'Head', options: ['手', '腳', '頭', '身體'], correct: 2},
+              {q: 'Happy', options: ['悲傷的', '快樂的', '生氣的', '害怕的'], correct: 1},
+              {q: 'Hand', options: ['手', '腳', '臂', '指'], correct: 0},
+              {q: 'Big', options: ['小的', '大的', '高的', '矮的'], correct: 1},
+              {q: 'Eye', options: ['耳朵', '鼻子', '眼睛', '嘴巴'], correct: 2},
+              {q: 'Cold', options: ['熱的', '溫暖的', '冷的', '涼的'], correct: 2},
+              {q: 'Foot', options: ['手', '腳', '腿', '膝蓋'], correct: 1},
+              {q: 'Fast', options: ['慢的', '快的', '急的', '緩的'], correct: 1},
+              {q: 'Nose', options: ['眼睛', '耳朵', '鼻子', '嘴巴'], correct: 2},
+              {q: 'Tall', options: ['矮的', '高的', '大的', '小的'], correct: 1},
+              {q: 'Mouth', options: ['鼻子', '嘴巴', '下巴', '臉頰'], correct: 1},
+              {q: 'Heavy', options: ['輕的', '重的', '厚的', '薄的'], correct: 1},
+              {q: 'Ear', options: ['耳朵', '眼睛', '鼻子', '頭髮'], correct: 0},
+              {q: 'Bright', options: ['暗的', '亮的', '黑的', '白的'], correct: 1},
+              {q: 'Arm', options: ['腿', '手臂', '肩膀', '手肘'], correct: 1},
+              {q: 'Soft', options: ['硬的', '軟的', '粗的', '細的'], correct: 1},
+              {q: 'Leg', options: ['手', '腿', '腳', '膝蓋'], correct: 1},
+              {q: 'Strong', options: ['弱的', '強的', '壯的', '瘦的'], correct: 1},
+              {q: 'Finger', options: ['手指', '腳趾', '手掌', '手腕'], correct: 0}
+          ]
+      };
+
+// ========== 考試設定區 (可自由修改) ==========
+const EXAM_CONFIG = {
+    // 考題設定
+    QUESTION_COUNT: 10,          // 考題數量 (設為 0 表示全部題目)
     
-    // 考試類別設定
-    const examCategories = {
-      "基礎哨員考試": [
-        {
-          question: "以下哪種物品需要過X光機檢查？",
-          options: ["A. 手機", "B. 大包包", "C. 護照", "D. 帽子"],
-          correct: 1
-        },
-        {
-          question: "旅客攜帶拍立得相機時，前導人員應該詢問什麼？",
-          options: ["A. 相機品牌", "B. 相機價格", "C. 底片是否已取出", "D. 購買地點"],
-          correct: 2
-        },
-        {
-          question: "以下哪種情況可以讓兩位旅客同時超過黃線？",
-          options: ["A. 趕時間的旅客", "B. 行動不便的高齡者需要協助", "C. VIP旅客", "D. 都不可以"],
-          correct: 1
-        },
-        {
-          question: "骨灰罐應該如何處理？",
-          options: ["A. 正常過X光機", "B. 請勿過X光，告知X光員是家人", "C. 直接放行", "D. 需要特殊檢查"],
-          correct: 1
-        },
-        {
-          question: "機組人員的行李應該如何擺放？",
-          options: ["A. 隨意擺放", "B. 由大到小擺放", "C. 由小到大擺放", "D. 分開擺放"],
-          correct: 1
-        },
-        {
-          question: "以下哪種物品不需要過X光機？",
-          options: ["A. 購物袋", "B. 工程箱", "C. 神像", "D. 提袋"],
-          correct: 2
-        },
-        {
-          question: "輪椅旅客應該使用哪個通道？",
-          options: ["A. 左側通道", "B. 右側通道", "C. 中間通道", "D. 任意通道"],
-          correct: 2
-        },
-        {
-          question: "電動行李箱應該如何處理？",
-          options: ["A. 過X光機", "B. 帶往前面手檢", "C. 直接放行", "D. 拒絕通關"],
-          correct: 1
-        },
-        {
-          question: "旅客詢問是否可以攜帶飛機餐時，正確的回應是？",
-          options: ["A. 可以攜帶", "B. 不可以攜帶", "C. 詢問是否含肉類製品", "D. 需要申報"],
-          correct: 2
-        },
-        {
-          question: "前導人員看到電動車通過時應該？",
-          options: ["A. 繼續工作", "B. 先完成當下旅客行李放置再維護秩序", "C. 立即停止工作", "D. 請旅客等待"],
-          correct: 1
-        },
-        {
-          question: "港澳蛋撻應該如何處理？",
-          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 禁止攜帶"],
-          correct: 1
-        },
-        {
-          question: "攜帶寵物的旅客需要？",
-          options: ["A. 寵物過X光機", "B. 出示寵物證明文件", "C. 額外收費", "D. 隔離檢查"],
-          correct: 1
-        },
-        {
-          question: "本機場免稅袋是否需要過X光機？",
-          options: ["A. 需要", "B. 不需要", "C. 視情況而定", "D. 由旅客決定"],
-          correct: 1
-        },
-        {
-          question: "旅客沒有行李時應該？",
-          options: ["A. 請其等待", "B. 請往前通行並告知X光員", "C. 進行手檢", "D. 填寫表格"],
-          correct: 1
-        },
-        {
-          question: "如有蛋糕應該如何處理？",
-          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 需要申報"],
-          correct: 1
-        },
-        {
-          question: "如前導收取到，低風險疫區卡片收取後應該？",
-          options: ["A. 請旅客過X光", "B. 直接往前不用過X光，並告知同仁", "C. 進行手檢", "D. 填寫記錄"],
-          correct: 1
-        },
-        {
-          question: "嬰兒車推車旅客的處理方式？",
-          options: ["A. 直接通過", "B. 確認車上有無行李後請推到前面", "C. 過X光機", "D. 手檢"],
-          correct: 1
-        },
-        {
-          question: "盆具管理的原則是？",
-          options: ["A. 等堆積再補充", "B. 及時補充勿待堆積", "C. 一天補充一次", "D. 旅客自己拿取"],
-          correct: 1
-        },
-        {
-          question: "旅客攜帶會倒的飲料應該？",
-          options: ["A. 過X光機", "B. 不須過X光機也不放置盆子，前面手檢", "C. 請旅客先喝完再回來過行李", "D. 請旅客拋棄"],
-          correct: 1
-        },
-        {
-          question: "換哨/下哨時，前導主要需要做什麼？",
-          options: ["A. 直接離開", "B. 處理檢疫物和清理垃圾", "C. 等待接哨人員，才能離開", "D. 自己東西要拿走"],
-          correct: 1
-        },
-        {
-          question: "大型公仔應該如何處理？",
-          options: ["A. 過X光機", "B. 前面手檢", "C. 直接放行", "D. 拆開檢查"],
-          correct: 1
-        },
-        {
-          question: "樂器袋裝的樂器需要？",
-          options: ["A. 前面手檢", "B. 過X光機", "C. 直接放行", "D. 現場開袋檢查"],
-          correct: 1
-        },
-        {
-          question: "孕婦旅客應該使用哪個通道？",
-          options: ["A. 一般通道", "B. 中間通道優先", "C. 左側通道", "D. 右側通道"],
-          correct: 1
-        },
-        {
-          question: "相機底片應該如何處理？",
-          options: ["A. 過X光機", "B. 請旅客拿到前面，給複查手檢查看", "C. 底片不能帶，請旅客拋棄", "D. 請旅客拿在手上往前，並告知是底片"],
-          correct: 3
-        },
-        {
-          question: "包裝紙箱需要？",
-          options: ["A. 請旅客先拆開，再過Ｘ光機", "B. 一樣過X光機", "C. 直接放行", "D. 不須過X光，前面手檢"],
-          correct: 1
-        }
-            ],
-            "英文基本食物類單字考試": [
-        {
-          question: "蘋果的英文是？",
-          options: ["A. apple", "B. april", "C. ample", "D. ankle"],
-          correct: 0
-        },
-        {
-          question: "香蕉的英文是？",
-          options: ["A. balance", "B. banana", "C. bandana", "D. bamboo"],
-          correct: 1
-        },
-        {
-          question: "紅蘿蔔的英文是？",
-          options: ["A. carpet", "B. carbon", "C. carrot", "D. carton"],
-          correct: 2
-        },
-        {
-          question: "馬鈴薯的英文是？",
-          options: ["A. potato", "B. tomato", "C. photo", "D. pilot"],
-          correct: 0
-        },
-        {
-          question: "牛肉的英文是？",
-          options: ["A. beach", "B. beast", "C. beard", "D. beef"],
-          correct: 3
-        },
-        {
-          question: "豬肉的英文是？",
-          options: ["A. park", "B. pork", "C. port", "D. poor"],
-          correct: 1
-        },
-        {
-          question: "起司的英文是？",
-          options: ["A. choose", "B. chase", "C. cheese", "D. cheap"],
-          correct: 2
-        },
-        {
-          question: "檸檬的英文是？",
-          options: ["A. lemon", "B. melon", "C. lesson", "D. legal"],
-          correct: 0
-        },
-        {
-          question: "玉米的英文是？",
-          options: ["A. coin", "B. core", "C. corn", "D. cord"],
-          correct: 2
-        },
-        {
-          question: "海鮮的英文是？",
-          options: ["A. season", "B. seafood", "C. second", "D. secret"],
-          correct: 1
-        },
-        {
-          question: "堅果的英文是？",
-          options: ["A. nuts", "B. news", "C. next", "D. neck"],
-          correct: 0
-        },
-        {
-          question: "種子的英文是？",
-          options: ["A. seems", "B. seven", "C. seeds", "D. sense"],
-          correct: 2
-        },
-        {
-          question: "蜂蜜的英文是？",
-          options: ["A. happy", "B. heavy", "C. honey", "D. horse"],
-          correct: 2
-        },
-        {
-          question: "雞肉的英文是？",
-          options: ["A. chicken", "B. kitchen", "C. children", "D. check"],
-          correct: 0
-        },
-        {
-          question: "魚肉的英文是？",
-          options: ["A. face", "B. fish", "C. first", "D. fire"],
-          correct: 1
-        },
-        {
-          question: "葡萄的英文是？",
-          options: ["A. group", "B. great", "C. grape", "D. green"],
-          correct: 2
-        },
-        {
-          question: "芒果的英文是？",
-          options: ["A. money", "B. mango", "C. month", "D. mouse"],
-          correct: 1
-        },
-        {
-          question: "洋蔥的英文是？",
-          options: ["A. onion", "B. ocean", "C. often", "D. option"],
-          correct: 0
-        },
-        {
-          question: "大蒜的英文是？",
-          options: ["A. game", "B. gate", "C. garlic", "D. garden"],
-          correct: 2
-        },
-        {
-          question: "高麗菜的英文是？",
-          options: ["A. camera", "B. cabbage", "C. candle", "D. castle"],
-          correct: 1
-        },
-        {
-          question: "萵苣的英文是？",
-          options: ["A. letter", "B. little", "C. lettuce", "D. listen"],
-          correct: 2
-        },
-        {
-          question: "小黃瓜的英文是？",
-          options: ["A. culture", "B. current", "C. cucumber", "D. customer"],
-          correct: 2
-        },
-        {
-          question: "辣椒的英文是？",
-          options: ["A. people", "B. pepper", "C. paper", "D. peace"],
-          correct: 1
-        },
-        {
-          question: "牛奶的英文是？",
-          options: ["A. make", "B. mile", "C. milk", "D. mind"],
-          correct: 2
-        },
-        {
-          question: "奶油的英文是？",
-          options: ["A. better", "B. butter", "C. bottle", "D. battle"],
-          correct: 1
-        },
-        {
-          question: "優格的英文是？",
-          options: ["A. young", "B. yellow", "C. yogurt", "D. yesterday"],
-          correct: 2
-        },
-        {
-          question: "米飯的英文是？",
-          options: ["A. race", "B. rich", "C. rice", "D. ride"],
-          correct: 2
-        },
-        {
-          question: "麵包的英文是？",
-          options: ["A. break", "B. bread", "C. bring", "D. brown"],
-          correct: 1
-        },
-        {
-          question: "雞蛋的英文是？",
-          options: ["A. each", "B. easy", "C. egg", "D. end"],
-          correct: 2
-        },
-        {
-          question: "茶葉的英文是？",
-          options: ["A. tea", "B. ten", "C. tell", "D. tree"],
-          correct: 0
-        },
-        {
-          question: "咖啡的英文是？",
-          options: ["A. coffee", "B. corner", "C. course", "D. color"],
-          correct: 0
-        },
-        {
-          question: "新鮮食物的英文是？",
-          options: ["A. fresh food", "B. free food", "C. first food", "D. friend food"],
-          correct: 0
-        },
-        {
-          question: "加工食品的英文是？",
-          options: ["A. process food", "B. processed food", "C. progress food", "D. protect food"],
-          correct: 1
-        },
-        {
-          question: "罐頭食品的英文是？",
-          options: ["A. can food", "B. canned food", "C. call food", "D. card food"],
-          correct: 1
-        },
-        {
-          question: "乾燥食品的英文是？",
-          options: ["A. drive food", "B. dream food", "C. dried food", "D. drink food"],
-          correct: 2
-        },
-        {
-          question: "冷凍食品的英文是？",
-          options: ["A. frozen food", "B. friend food", "C. front food", "D. fresh food"],
-          correct: 0
-        },
-        {
-          question: "包裝食品的英文是？",
-          options: ["A. package food", "B. packaged food", "C. parking food", "D. party food"],
-          correct: 1
-        },
-        {
-          question: "香腸的英文是？",
-          options: ["A. sandwich", "B. sausage", "C. service", "D. science"],
-          correct: 1
-        },
-        {
-          question: "火腿的英文是？",
-          options: ["A. hand", "B. hard", "C. ham", "D. hat"],
-          correct: 2
-        },
-        {
-          question: "培根的英文是？",
-          options: ["A. begin", "B. become", "C. bacon", "D. beach"],
-          correct: 2
-        }
-      ]
-
-    };
-
-    // ==========================================
-    // 系統功能區域
-    // ==========================================
-
-    // 各按鈕的內容
-    const modalContents = {
-      "📋前導": `
-        <div class="section-title">前導基本須知</div>
-        
-        <div class="content-block">
-          <div class="sub-title">一般通關必問</div>
-          <ul class="content-list">
-            <li>詢問旅客「請問有帶到新鮮水果或者是含肉類製品的飛機餐或麵包嗎？」</li>
-            <li>如有旅客帶拍立得相機請詢問「請問相機內底片有拿出來嗎？」</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">一般通關規則</div>
-          <ul class="content-list">
-            <li>旅客一位放置行李，請勿一次兩位超過黃線移動到放置行李區。</li>
-            <li>可自主行動小朋友規則相同。</li>
-            <li>可先行宣導：「一位往前，第二位麻煩黃線後稍等」。<br>
-                <span class="warning-text indent">(整線請隨時注意，不然可能會取消當日調哨)</span></li>
-            <li>如有低風險疫區卡片者收取後請他直接往前不用過Ｘ光，並告知前面人員：「旅客已收卡」。</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">例外情況</div>
-          <ul class="content-list">
-            <li>行動不方便者（例如：高齡者或孕婦無法拿動行李），可一位幫忙一起。</li>
-            <li>手抱嬰兒者（例如：爸爸抱著小孩），可一位幫忙。</li>
-            <li>如是骨灰罐請勿過X光，告知X光是家人。</li>
-          </ul>
-        </div>
-
-                <div class="content-block">
-          <div class="sub-title">其他規定告知</div>
-          <ul class="content-list">
-            <li>1.<span style="color:red;">A哨3線前導推車上哨 </span>早上勤教，麻煩A哨3線前導推手推車上D區。</li>
-            <li>2.<span style="color:red;">皮帶上的腰包 </span>前導碰到繫在皮帶上的腰包，一律跟旅客說我們後面幫你檢查，那是複查的工作，不是前導。"記得告知腰包"</li>
-            <img src="https://i.ibb.co/7dNcMdmj/image.jpg" width="100%" height="auto" />
-            <li>3.<span style="color:red;">注意身上行李 </span>麻煩多注意旅客身上的行李是否都已放置完成，確定沒有再請旅客往前。</li>
-            <li>4.<span style="color:red;">輪椅旅客狀況判斷 </span>輪椅旅客正常由前導2線接，但如前導2線有例外情況，還請1線依照現場狀況協助幫忙。</li>
-            <li>5.<span style="color:red;">4線線後等待 </span>由於四線沒有貼黃線稍等，再麻煩請旅客由紅龍最後一根圓柱等待。</li>
-          </ul>
-        </div>
-
-        
-        <div class="section-title">現場管理要點</div>
-        
-        <div class="content-block">
-          <div class="sub-title">盆具管理：</div>
-          <ul class="content-list">
-            <li>及時補充，勿待堆積。</li>
-            <li>整理旅客放置盆內的行李袋，整理再盆內。</li>
-            <li>一位旅客放置一個間格空盆。</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">特殊旅客優先（中間道）</div>
-          <ul class="content-list">
-            <li>機組人員（機組行李由大中小擺放）</li>
-            <li>輪椅旅客</li>
-            <li>行動不便者</li>
-            <li>孕婦</li>
-          </ul>
-          <div class="highlight-box">中間輪椅人數多少，等待人數就要Ｘ３</div>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">收尾工作：</div>
-          <ul class="content-list">
-            <li>換哨／下哨時處理檢疫物</li>
-            <li>清理垃圾至指定棄置桶</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box">
-          <div class="sub-title">補充：基本檢查流程</div>
-          <div style="margin-top: 0.5em;">
-            <strong>旅客管制：</strong><br>
-            確保旅客在黃線後等待一位一位依序通過先過行李，人後過電動車通過時暫停接待。<br><br>
-            <strong>必問事項：</strong><br>
-            • 飛機餐/麵包/水果<br>
-            • 相機底片<br>
-            • 告知X光員特殊物品位置
-          </div>
-        </div>
-        
-        <div class="section-title">額外狀況處理</div>
-        
-        <div class="content-block">
-          <div class="sub-title">1. 對講機通報車輛通過</div>
-          <ul class="content-list">
-            <li>請先完成當下旅客<span style="color:red;">行李放置</span>。</li>
-            <li>執行秩序維護，引導旅客至黃線後等候。</li>
-            <li>告知：「不好意思，麻煩我們先都在黃線後稍等，有車子要通行，避免各位擦撞到」。</li>
-            <li>由2線前導開線引導車子通過（除非機動X光有過去幫忙）</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">2. 特殊旅客處理</div>
-          <ul class="content-list">
-            <li><strong>推嬰兒車旅客：</strong>確認嬰兒車上有無行李，看過請旅客推到前面。</li>
-            <li><strong>無行李旅客：</strong>請往前通行，並告知X光「旅客沒有行李」。</li>
-            <li><strong>抱家人旅客：</strong>查看證明文件無需過Ｘ光機，但其他行李需過機，並告知X光「旅客手中是家人已看過證明」。</li>
-            <li><strong>攜帶寵物旅客：</strong>請出示寵物證明文件，寵物無需過Ｘ光機，並告知X光「旅客手上有寵物」。</li>
-            <li><strong>攜帶電動行李旅客：</strong>請旅客帶著電動行李箱往前進行手檢就好。</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">需要過X光機（由X光人員判斷是否需手檢）</div>
-          <ul class="content-list">
-            <li>大包包</li>
-            <li>小包包</li>
-            <li>提袋(本機場免稅袋除外)</li>
-            <img src="https://i.ibb.co/3m4w42BD/image.jpg" width="100%" height="auto" />
-            <li>購物袋(本機場免稅袋除外)</li>
-            <li>行李箱</li>
-            <li>包裝紙箱</li>
-            <li>工程箱</li>
-            <li>裝在樂器袋的樂器</li>
-            <li>其他包覆、裝袋、裝包、裝行李等看不見內容物品</li>
-          </ul>
-        </div>
-        
-        <div class="section-title">物品通關分類</div>
-        
-        <div class="content-block">
-          <div class="sub-title">需前面手檢（不須過X光機）</div>
-          <ul class="content-list">
-            <li>電動行李車</li>
-            <li>斑蘭蛋糕</li>
-            <img src="https://i.ibb.co/GvtZV6zR/image.jpg" width="100%" height="auto" />
-            <li>港澳蛋撻</li>
-            <li>大型公仔</li>
-            <li>過大物體</li>
-            <li>玩具</li>
-            <li>細緻工藝品（有裝袋）</li>
-            <li>旅客指定脆弱不便過機物品</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">不須過X光機也不放置盆子</div>
-          <ul class="content-list">
-            <li>手機、外套、耳機、護照</li>
-            <li>會倒的飲料、帽子</li>
-            <li>相機底片、項鍊、皮帶、戒指</li>
-            <li>其他非提袋、包包、行李箱的物品</li>
-            <li>神像／或明顯可見工藝品</li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box" style="background: #ffe8e8; border-color: #e65555;">
-          <strong>前導不要硬請旅客把包包放盒內，幫忙一下。</strong>
-        </div>
-        
-        <div class="highlight-box" style="margin-top: 1.5em;">
-          <div class="sub-title" style="color: #c62828; margin-top: 0;">前導嬰兒車須注意</div>
-          這是原本就需要注意的，如旅客有推嬰兒車，請前導擋住桌腳避免小孩撞到等等（包括孕婦）。
-          <img src="https://i.ibb.co/KcRfPjyY/2025-04-23-073636.png" width="100%" height="auto" />
-        </div>
-      `,
-
-    "📋複查": `
-        <div class="section-title">複查作業流程</div>
-        <div class="content-block">
-          <div class="sub-title">一、基本檢查流程</div>
-          <ul class="content-list">
-            <li><span style=color:red;>詢問旅客 </span>X光說要檢查，複查一定要先問旅客「方便跟您打開做個檢查嗎？」複查在接包包的位置問能不能檢查，不要拉到後面才問，如果旅客不願意檢查，以口頭及傳單宣導。</li>
-            <li><span style=color:red;>重點檢查 </span>X確實接收Ｘ光說明需要檢查的包包行李。</li>
-            <li><span style=color:red;>移動行李 </span>請旅客往最前面至第一張桌子稍等拿行李，不用檢查的請旅客先拿走，需檢查的要告知旅客，旅客之間會有間隔空盆做區隔，等全部的包包行李到齊再一起移動至最後一張桌子。</li>
-            <li><span style=color:red;>保持距離 </span>複查時保持間距，防止旅客的物品擠在一起避免搞混。</li>
-            <li><span style=color:red;>順序擺放 </span>檢查行李時，把旅客的行李拿出盆子放在桌上，再將旅客行李的東西整齊有順序地放在盆子內檢查。</li>
-            <li><span style=color:red;>基本檢查順序 </span>檢查請由小地方到大地方檢查，尤其是包包的暗層不能忽視，檢查好的東西先拿出來放盆子，避免漏查。</li>
-          </ul>
-        <div class="content-block">
-          <div class="sub-title">二、檢疫物處理</div>
-          <ul class="content-list">
-            <li><span style=color:red;>如果旅客有檢疫物不能帶或有疑慮</span>不願意去檢疫櫃檯確認要直接丟棄，我們就要宣導告知並請旅客在檢疫本上簽名同意拋棄，有疑慮自願拋棄的要註明自願，簽完名後再將東西放到檢疫桶。</li>
-            <li>從旅客行李裡如有<span style=color:red;>查獲到不確定或無法判斷的東西</span>，先詢問身邊的同事，如果現場都沒有人可以判定，那就請旅客把東西拿到檢疫櫃檯詢問。</li>
-            <li>丟檢疫物<span style=color:red;>要確實分類跟破壞包裝</span>。</li>
-          </ul>
-          <div class="sub-title">三、交接與記錄</div>
-          <ul class="content-list">
-            <li>換哨要交接密錄器、剪刀、膠帶。</li>
-            <li>如果有查獲檢疫物，先在檢疫本上寫上航班、國家、檢疫物的代號或記號，然後再來接旅客，不要寫檢疫本太久，等到快換哨下哨的前１０分鐘再補齊其他內容。</li>
-            <li>換哨下哨要清空手套桶。</li>
-          </ul>
-          <div class="sub-title">四、複查作業</div>
-          <ul class="content-list">
-            <li>複查排隊依順序等待檢查旅客，第二、三位以後的複查請勿擋道桌子，避免複查第一位要檢查時擋住作業動線。</li>
-            <li>複查搬盆子一律由複查排隊最後一位來搬。</li>
-            <li>複查檢查完就去搬盆子（不管疊多少盆子），搬完後就去排隊等待檢查，如盆子疊過多就由排隊最後一位去搬。</li>
-          </ul>
-          <div class="sub-title">五、特殊情況處理</div>
-          <ul class="content-list">
-            <li>旅客拒絕檢查時，先詢問旅客：「請問隨身行李都確定沒有帶到任何含肉類製品或是新鮮水果發芽種子嗎？」旅客確定都沒有的話就遞一張入境動植物檢疫單給旅客，再請旅客往前。</li>
-            <li>倘若確定旅客行李裡面是水果或檢疫物，旅客依然堅持不是，那就一樣宣導並給檢疫物單子，並記下旅客的特徵、性別、服裝、手提行李、體型還有可能的航班等特徵，隨後告知Ｘ光或是告知組長或督導，請聯繫檢疫櫃檯通報。</li>
-            <li>一位旅客對一位協勤，閒雜人等不要無端去湊熱鬧，除非有需要協助。</li>
-            <li>稻香村如沒有成分表的一律請旅客至櫃台詢問。</li>
-          </ul>
-          <div class="sub-title">六、衛生與安全</div>
-          <ul class="content-list">
-            <li>手套檢查完直接丟垃圾桶，不要塞口袋，如有看到地板有飛散的手套立刻撿起來，避免旅客踩到滑倒。</li>
-            <li>請在檢查旅客時，要在旅客面前換新手套，檢查一位旅客換一次手套。</li>
-            <li>用手機翻譯看外文，請看清楚是否看到過敏原，不要看到有肉就急著扣下來，因為也許是寫過敏原而已。</li>
-            <li>請各位同仁如果遇到食物請不要直接跟旅客剝開看，跟旅客確認成分並告知跟宣導就好。</li>
-          </ul>
-          <div class="sub-title">七、其他注意事項</div>
-          <ul class="content-list">
-            <li>1.<span style=color:red;>帶旅客去檢疫櫃檯 </span>帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，很多人就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</li>
-            <li>2.<span style=color:red;>放DM </span>如果X光同仁把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「請問裡面沒有帶到含肉製品、新鮮水果嗎？」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</li>
-            <li>3.<span style=color:red;>提出申訴 </span>如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（檢疫物桶那邊桌子）填寫意見單。</li>
-            <li>4.<span style=color:red;>噴消毒毯方向 </span>噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</li>
-            <li>5.<span style=color:red;>密錄器簽寫 </span>每一哨複查上哨的那一線需要簽寫密錄器板子。</li>
-            <li>6.<span style=color:red;>板子朝上 </span>桌上放有檢疫拋棄跟密錄器確認簽寫的板子一律朝上放。</li>
-            <li>7.<span style=color:red;>寫檢疫本 </span>哨上很忙時，檢疫本先做記號就好，不要別浪費時間在那邊寫檢疫本。</li>
-            <li>8.<span style=color:red;>接到輪椅的旅客 </span>行李要記得往後拉，儘量不要卡在第一張桌子，因為有時候他們會拿比較慢，會堵塞到後面的旅客，如果行李很多，像是7-8件的話，後面到複查麻煩視情況幫忙移動行李。</li>
-            <li>9.<span style=color:red;>循環扇遙控器 </span>在D區 與C區的四線旁邊盒子都會放一個循環扇遙控器，再麻煩各位的4-2的複查，日夜交接的時候要確認。</li>
-              <img src="https://i.ibb.co/gMfSzsrV/image.jpg" width="100%" height="auto" />
-            <li>10.<span style="color:red;">複查排隊 </span>複查請依照順序排隊檢查，不要已經有最後已檢查回來了，自己還搬盆又排到最後一位，理應就自己要自動排到檢查回來的前面。(同一天這樣的事情重複4次就不是不小心或是忘記了)</li>
-            <li>11.<span style="color:red;">消毒毯時間 </span>消毒毯時間為<sapn style="color:red;">雙數30分</span>麻煩請由各哨4-2執行(如4-2不在由4-1)。</li>
-            <li>12.<span style="color:red;">複查檢查完畢宣導 </span>應強化提醒旅客不能帶水果肉類，並提醒注意托運行李自行檢查不能帶水果肉類。</li>
-            <li>13.<span style="color:red;">檢查行李箱 </span>建議開箱由旅客自行打開行李，或是口頭詢問可否由協勤人員協助開箱確認。</li>
-            <li>14.<span style="color:red;">1-1管理百寶袋 </span>早上1-1記得要先拿當區的百寶袋，如果1-1出公差或者另外情況請那一線幫忙注意一下。</li>
-            <li>15.<span style="color:red;">1-2回報手機 </span>1-2在每次上哨前記得在大群回報手機，如果<span style="color:red;">主管在現場</span>就直接跟主管報備。</li>
-            <li>16.<span style="color:red;">4-1回收檢疫物 </span>請於A.B班12:30回收檢疫物。</li>
-            <li>17.<span style="color:red;">4-2噴消毒毯 </span>請於雙數的30分4-2噴消毒毯，如果4-2不在請由4-1幫忙。</li>
-            <li>18.<span style="color:red;">檢查旅客一定要在面前 </span>檢查包包要旅客也在面前的情況下才能做檢查，假設今天有車要通過，要請旅客迴避時，一樣請停止手上檢查工作，帶車子通過再繼續檢查。</li>
-            <li>19.<span style="color:red;">4X接機組 </span>假如4線有走機組，並且有需要開行李檢查，再麻煩請3線最後一個複查幫忙過去協助4線X光檢查。</li>
-            <li>20.<span style="color:red;">回去吃/回去丟 </span>旅客要回去吃東西，或是回去丟東西，複查要告知X光以便讓X光與分流可以相互通報，並確認旅客是否有確實執行。</li>
-          </ul>
-          <div class="highlight-box" style="margin-top: 1.5em;">
-          <div class="sub-title" style="color: #c62828; margin-top: 0;">宣導DM告知旅客</div>
-                如有X光放宣導DM至有鉅記籃子時，請先詢問旅客裡面有無帶到含肉製品跟肉鬆等食品，確認過後給宣導DM告知旅客。
-          </div>
-          <div class="highlight-box">
-                複查時務必謹慎，確保檢疫安全
-          </div>
-      `,
-
-    "📋X光": `
-        <div class="section-title">注 . 意 . 事 . 項</div>
-        
-        <div class="content-block">
-            <ul class="content-list">
-                <li>1.不要疊盆，桌上有空盆第一件事就是收空盆，尤其是X光自己收盆的時候要特別注意。</li>
-                <li>2.小心拉旅客的行李，以防刮傷旅客的行李。</li>
-                <li>3.X光有空就協助搬盒子。</li>
-                <li>4.<span style="color:red";>分流回報狀況告知前導 </span>當分流回報情況時，需前導知道的情況就需要告知，像是前方有車子、救護車，X光請告知前，但倘諾前導沒聽到或者沒回覆，可直呼前導大名或停機告知，確認有收到並且清楚，才進行操作模式。</li>
-
-            </ul>
-        </div>
-        <div class="highlight-box">
-          精準掃描，守護安全
-        </div>
-      `,
-
-    "📋分流/2": `
-          <div class="section-title" style="text-align: center; letter-spacing: 12px; font-weight: bold;">注 . 意 . 事 . 項</div>
-          <ul class="content-list">
-            <li>1.<span style="color:red;">均分各線 </span>分流不要把一條線塞滿再換一條塞爆，請均分。</li>
-            <li>2.<span style="color:red;">秤重 </span>卡片一台斤（600克）為單位，未滿一台斤（600克）就繼續交接給下一哨。</li>
-            <li>3.<span style="color:red;">記當下時段航班 </span>要稍微記一下持卡和未持卡的班機，有時候會有從一航走過來迷路的旅客。</li>
-            <li>4.<span style="color:red;">航空公司領卡 </span>請親自點交，一箱換一箱，沒有蓋子換沒有蓋子，如果正在忙就請他們待會再來領卡，請呼叫線上的X光聯絡組長或是督導。</li>
-            <li>5.<span style="color:red;">當沒持卡航班(低風險地區) </span>此時綠色通道的紅龍請關起來，然後去分流導引旅客。</li>
-            <li>6.<span style="color:red;">開線要放旅客請注意 </span>走中間的旅客、機組，要先看一下後面是否有車子要經過，然後先用對講機呼叫後再放人，如果先放再呼的話，旅客可能會跟車子衝突到。</li>
-            <li>7.<span style="color:red;">當旅客機組過多組時 </span>旅客、機組放中間時，要一組一組的放，等前導接完一組開始接其他旅客時，再放一組進去。(持卡輪椅可一次走)</li>
-            <li>8.<span style="color:red;">嬰兒推車 </span>有推嬰兒車的旅客要請他們走1、2線，3、4線的走道太狹窄了。</li>
-            <li>9.<span style="color:red;">廣播 </span>旅客人潮超過規定的距離，要打開等待10分鐘的廣播。</li>
-            <li>10.<span style="color:red;">換哨下哨 </span>清空分流的白色檢疫桶、交接卡片、密錄器。</li>
-            <li>11.<span style="color:red;">棄置桶滿了 </span>棄置桶裡的檢疫物，快要滿出來或是已經滿出來，拿一個透明垃圾袋放在旁邊，把一些滿出來的檢疫物拿出來。</li>
-            <li>12.<span style="color:red;">拉紅龍 </span>救護車、輪椅旅客、旅客自行推輪椅、整班機組、行動不便的要幫忙拉紅龍。</li>
-            <li>13.<span style="color:red;">判斷與呼叫 </span>分流判斷當下，同時來了收卡與手檢旅客，現況需要分流2時，請呼叫分流2。</li>
-            <li>14.<span style="color:red;">低風險國家 </span>分流只有非手檢班機時，旅客未持卡以看機票確認。</li>
-            <li>15.<span style="color:red;">確認機票 </span>當有手檢跟非手檢班機時，分流2幫忙確認應持卡未持卡旅客的機票，非手檢班機的旅客協助導至綠線。</li>
-         <li>16.機組檢查大更新
-            <div>離峰-3條線/尖峰-4條線</div>
-            <div>
-                如果是離峰時間(3條線)，機組照舊進手檢區做檢查，但請以四線X光去四線接掉或是丟至線內完成，請勿丟中間，必須避免旅客抱怨。<br>
-                如果是尖峰時間(4條線)，機組則以抽查優先。
-            </div>
-            <div>
-                需抽查的班機如下：
-                <ol>
-                    <li><span style=color:red;>BR62、BR398、BR212、BR392</span> — 這四班為主。</li>
-                    <li>三班抽檢則以優先挑選三位外籍機組，如沒有外籍機組再改以本國機組員作代替。</li>
-                </ol>
-            </div>
-            <div>
-                其餘的班機：
-                <ol>
-                    <li>可以直接放行走綠色通道，並告知機長現在為尖峰時段，所以不進手檢區。</li>
-                    <li>請機場跟組員宣導不要帶到任何違規動植物產品。</li>
-                </ol>
-            </div>
-            <li>17.早上打掃請記得清理白色的棄置桶。</li>
-            <li>18.不要去攔旅客推手推車，那不是我們的工作內容，但旅客把手推車丟在我們工作區域，要請旅客推走。</li>
-            <li>19.<span style="color:red";>輪椅旅客 </span>輪椅一樣由二線，二線前導接收到通知後，等輪椅客到黃線稍等，接幾位旅客後換接中間的輪椅客。
-                <ol>
-                    <li>今天如果走中間的輪椅人數是多少人，那等待的人數就要x 3ex : 航勤1+2，所以他們在前導就要等9個人才能輪到他們，以此類推</li>
-                    <li>中間有人在控管的的話（ex:四線X光），就交給中間的控管，1、2線的前導就不要再出來拉紅龍跟算人數了，都交給中間管理</li>
-                    <li>今天機組走3個，就是1線負責去接</li>
-                </ol>
-            <li>20.<span style="color:red";>跨月份UA簽收單 </span>大家記一下，以後只要月底最後一天或月初第一天這張跟卡片會放在分流，分流有碰到換卡時UA來領的話，記得叫他們簽單子。</li>
-            <li>21.<span style="color:red";>機組放四線 </span>一定要問能不能放四線，有回覆在放機組。</li>
-            <li>22.<span style="color:red";>分流佩掛密錄器 </span>防疫櫃檯會不定期、不定時檢查分流人員是否佩掛密錄器（需要有電並開機使用），違反者將採行政裁罰（罰款），請同事務必遵守！</li>
-            <li>23.<span style="color:red";>行動電源 </span>今日起CD區分流行動電源不需要充電及收回，日夜班分流必需交接清楚。</li>
-            <li>24.<span style="color:red";>桃園分署檢疫站通報 </span>來自新加坡的旅客不用進手檢區檢查，比照日本入境旅客模式，持卡通過分流入境。</li>
-            <li>25.<span style="color:red";>GoPro使用說明 </span>C區分流的GoPro用的行動電源充電用他自己的線充才能充進去喔!</li>
-            <li>26.<span style=color:red;>GoPro擺放 </span>C區分流GoPro攝像頭擺放位置朝分流方向。</li>
-            <li>27.<span style="color:red";>駐外使節人員 </span>入境並持外交部發的工作證，視同持卡旅客引導綠線。</li>
-            <img src="https://i.ibb.co/93gWBWP9/image.jpg" width="100%" height="auto" />
-            <li>28.<span style=color:red;>手推車 </span>如有看到旅客推手推車，都優先引導至三線。</li>
-            <li>29.<span style=color:red;>明確統計拒檢次數 </span>分流要記得明確統計拒檢次數，後面手檢區有碰到也麻煩記得回報給分流，好讓分流做統計。</li>
-            <li>30.<span style="color:red";>消毒水B哨分流 </span>備勤室消毒水固定交由B哨分流補充，分流二懲罰時一樣由B分流補充，假設到這條線就拿去補(如下)。B哨分流擔任備勤室地毯消毒水檢查員，要注意消毒水的量是否還夠用。</li>
-            <img src="https://i.ibb.co/vnJ3t6K/image.jpg" width="100%" height="auto" />
-                        <div class="section-title">機場分流2人員工作指南</div>
-            <li>31.<span style=color:red;>機組回報 </span>分流放機組先問是哪來的，再回報組員哪裡來走哪一條線/是否可走4線。</li>
-        
-            <div class="content-block">
-            <div class="sub-title">工作說明</div>
-            <ul class="content-list">
-                <li>【啟動時機】
-                    <ol>
-                        <li>同時來了收卡與手檢旅客。</li>
-                        <li>主分流判斷下呼叫分流2。</li>
-                    </ol>
-                </li>
-                
-                <li>【主要職責】
-                    <ol>
-                        <li>在需要協助時負責接手引導手檢旅客並且宣導。</li>
-                    </ol>
-                </li>
-            </ul>
-        </div>
-
-        <div class="content-block">
-            <div class="sub-title">D C 區電風扇清潔</div>
-            <ul class="content-list">
-                <li>以後固定每一個禮拜一的A哨分流2，要清兩邊電風扇。</li>
-            </ul>
-        </div>
-
-        <div class="content-block">
-            <div class="sub-title">注意事項</div>
-            <ul class="content-list">
-                <li>1.分流需要支援，請分流二盡快去，不要在那邊散步、神遊。</li>
-                <li>2.C區跟D區的檢疫物棄置桶，由分流2清潔。</li>
-                <li>3.<span style="color:red";>清消備勤室 </span>分流2請於18:00清消備勤室。</li>
-                <li>4.<span style="color:red";>改機動 </span>分流2改為機動，哪一條線需要支援就過去那條線幫忙支援。</li>
-
-            </ul>
-        </div>      
-            
-        `,
-
-    "📋新人須知": `
-            <div class="section-title">基本規定須知</div>
-        
-            <div class="content-block">
-            <div class="sub-title">一、證件與管制區規定</div>
-            <ul class="content-list">
-                <li>【臨時證使用規定】
-                    <ol>
-                        <li>新同仁剛進來基本上都是換臨時證。</li>
-                        <li>進入管制區後，上班期間如需出管制區有次數限制（2次）。</li>
-                        <li>機場管制區本單位員工同仁嚴禁到免稅商店閒逛/購買。</li>
-                        <li>可前往餐飲區用餐，多數商家提供員工餐（需出示員工證件）。</li>
-                        <li>新增：持臨時證同仁用餐須有正式證件同仁陪同。</li>
-                    </ol>
-                </li>
-                
-                <li>【正式證公務門】
-                    <ol>
-                        <li>公務門進出，切記要注意門有沒有關好，沒關好會是嚴重缺失。</li>
-                        <li>在管制區應將通行證佩掛在正面腰部以上之明顯處，不得逾期、越區、冒用、轉借他人及從事與職務不符活動，違者暫停權限1-6個月，重則撤銷通行證。 </li>                    </ol>
-                </li>
-                <li>【正式證公務門】
-                    <ol>
-                        <li>機場證件遺失通行證，需通報航警局勤指中心 電話:03-3982177。</li>
-                        <li>遺失通行證費用為2000元。</li>         
-                    </ol>
-                </li>
-            </ul>
-
-            <div class="content-block">
-            <div class="sub-title">二、基本著裝要求</div>
-            <ul class="content-list">
-                <li>【必備項目】
-                    <ol>
-                        <li>腰帶/領帶/肩章/黑色皮鞋/</li>
-                        <li>機場證件/小白卡</li>
-                        <li><span style="color:red";>注意：</span>上班未帶證件者，下班後證件需放置主任辦公室一週。</li>
-                    </ol>
-                </li>
-            </ul>
-
-            <div class="content-block">
-            <div class="sub-title">三、通訊群組管理</div>
-            <ul class="content-list">
-                <li>【群組分類】
-                    <ol>
-                        <li>T2日班群組(用於重要事項每日都要看的大群)</li>
-                        <li>群組大小事(如有訂便當都會在這裡統一訂)</li>
-                    </ol>
-                </li>
-                <li>【T2日班群組重點】
-                    <ol>
-                        <li>用途：重要事項發布、每日航班公告</li>
-                        <li>必看：每天都需查看</li>
-                        <li>記事本：包含工作內容與規定（建議新進同仁多加閱讀</li>
-                        <li>如有不懂可詢問同仁</li>
-                    </ol>
-                </li>
-                <li>【主管聯繫】
-                    <ol>
-                        <li>新進同仁務必加入主管Line</li>
-                        <li>任何問題若有疑問也請找主管討論，請勿任意決定/猜忌</li>
-                        <li>有任何工作上問題需當日值班主管協助，盡可能在上班時間詢問，或晚上十點以前，切勿凌晨或休假時間傳訊息給主管</li>
-                    </ol>
-                </li>
-            </ul>
-
-            <div class="content-block">
-            <div class="sub-title">四、置物櫃管理</div>
-            <ul class="content-list">
-                <li>【基本說明】
-                    <ol>
-                        <li>新進人員適人力狀況分配置物櫃</li>
-                    </ol>
-                </li>
-                <li>【注意事項】
-                    <ol>
-                        <li>主管指派置物櫃後，需提供照片與姓名製作櫃子磁鐵（費用25元)</li>
-                        <li>嚴禁在置物櫃上張貼貼紙（因人員離職做適當的調整</li>
-                    </ol>
-                </li>
-            </ul>
-
-            <div class="content-block">
-            <div class="sub-title">五、請假規定</div>
-            <ul class="content-list">
-                <li>【請假流程】
-                    <ol>
-                        <li>切忌臨時缺勤 除天災人禍</li>
-                        <li>臨時請假應先找當日休假同仁協調代班或調換班</li>
-                        <li>雙方確認後告知當日值班主管</li>
-                    </ol>
-                </li>
-                <li>【違規處理】
-                    <ol>
-                        <li>應到班而未到班將依規定輪值15天的A分流2，或是清運</li>
-                    </ol>
-                </li>
-            </ul>
-            <div class="content-block">
-            <div class="sub-title">六、行政作業規定</div>
-            <ul class="content-list">
-                <li>【資料繳交時間】
-                    <ol>
-                        <li>需交給主管的資料請於當日下午三點前繳交</li>
-                        <li>超過下午三點者，請於隔天繳交</li>
-                        <li>如隔日為休假，可交代同仁代為繳交</li>
-                        <li>下午三點後一律不收件</li>
-                    </ol>
-                </li>
-                <li>【新進人員表單】
-                    <ol>
-                        <li>需填寫緊急連絡資料表單</li>
-                    </ol>
-                </li>
-            </ul>
-            <div class="content-block">
-            <div class="sub-title">七、送洗衣服</div>
-            <ul class="content-list">
-                <li>【單月】
-                    <ol>
-                        <li>包月金額為250元/月</li>
-                        <li>包月洗衣為襯衫、長褲。</li>
-                        <li>背心(每月1件/次)</li>
-                    </ol>
-                </li>
-                <li>【收送時間】
-                    <ol>
-                        <li>本單位於每週一、三、五11:00左右收送(請提早將送洗衣物投入)</li>
-                    </ol>
-                </li>
-            </ul>
-            <div class="content-block">
-            <div class="sub-title">八、備勤室使用規則</div>
-            <ul class="content-list">
-                <li>【微波爐使用規定】
-                    <ol>
-                        <li>微波食物如無蓋子，需用濕衛生紙覆蓋，避免濺射</li>
-                        <li>為延長微波爐壽命，使用完必須是歸0狀態，才打開，切勿直接打開。</li>
-                    </ol>
-                </li>
-                <li>【冰箱使用規定】
-                    <ol>
-                        <li>可供同仁存放飲料/食物</li>
-                        <li>需在物品上貼標籤註明：[格式]：姓名 + 日期 [範例]：王小明 5/3 [保存期限]：2天</li>
-                        <li>打掃冰箱同仁會檢查日期</li>
-                        <li>過期品項會公告在群組供認領</li>
-                        <li>無人認領者當日丟棄</li>
-                    </ol>
-                </li>
-            </ul>
-        </div>
-        `,
-
-    "⚠️規定事項": `
-  <div class="section">
-      <p class="code">代號333=奧客   兩95=廁所</p>
-  </div>
-  <div class="content-block">
-      <ul class="content-list">
-          <li>1.更新2025由於近期遲到人數過多 即日起(06/05)起開始。</li>
-          <p style="font-size: 10pt; color: red;">30分鐘以內 修正取消次月必休2天選休2天</p>
-                <p style="font-size: 8pt;">遲到未參與勤教 修正取消次月必休2天。</p>
-                <p style="font-size: 8pt;">30分鐘以內 修正取消次月必休2天選休2天。</p>
-                <p style="font-size: 8pt;">60分鐘以內 修正取消次月必休2天選休4天。</p>
-                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
-                <p style="font-size: 8pt;">60分鐘以上 修正取消次月必休2天選休6天。</p>
-                <p style="font-size: 11pt; color: red;">應到未到2個月</p>
-          <li>2.<span style="color:red;">備勤室私人物品 </span>請勿亂放(尤其下班前)，桌面東西未清，椅子未歸位者備勤室輪值分流2，2天。</li>
-          <li>3.<span style="color:red;">旅客跌倒 </span>看到有人跌倒就立馬通報61999，第一個發現有旅客跌倒的人，請立馬上前關心詢問是否需要協助。</li>
-          <li>4.<span style="color:red;">旅客受傷時 </span>當有旅客受傷時，請第一位發現者放下手邊工作先上前幫忙詢問狀況，是否需要幫忙，遇到這種突發狀況，大家跟旅客是能諒解的。</li>
-          <li>5.<span style="color:red;">跨月排假 </span>麻煩同仁選假注意必需符合勞基法。跨月一樣要算，我們沒有歸零。</li>
-          <li>6.<span style="color:red;">關於脫換背心 </span>除分流以外，凡A B C 哨，統一全部服裝都要一樣，穿背心大家就都要穿。</li>
-          <li>7.<span style="color:red;">關於寫時數表/任何資料等等 </span>如當日有拿時數表請當日寫完，任何資料如要提，交請在下午三點前給，下午三點過後一律不收任何資料文件，請隔日再繳交。</li>
-          <li>8.<span style="color:red;">複查檢查完畢宣導 </span>應強化提醒旅客不能帶水果肉類，並提醒注意托運行李自行檢查不能帶水果肉類。</li>
-          <li>9.<span style="color:red;">檢查行李箱 </span>建議開箱由旅客自行打開行李，或是口頭詢問可否由協勤人員協助開箱確認。</li>
-          <li>10.<span style="color:red;">晚上6:30以後提前下哨須知 </span>6:30提早下哨的話，請2位輪流進去拿東西再換下2位以此類推。</li>
-          <li>11.<span style="color:red;">哨上規矩 </span>防檢署會抽查，在哨上請守規矩，不要併排聊天。</li>
-          <li>12.<span style="color:red;">消毒毯時間 </span>消毒毯時間為<sapn style="color:red;">雙數30分</span>麻煩請由各哨4-2執行(如4-2不在由4-1)。</li>
-          <li>13.<span style="color:red;">哨上椅子擺放 </span>下哨麻煩各位椅子都靠往X光機方向排放整齊。</li>
-          <li>14.<span style="color:red;">上哨時間內未出現 </span>私人物品(睡袋)不要放在鐵架那一個區塊下班就麻煩收回自己的櫃子，不然就帶回如，發現會取消大家調哨。</li>
-          <li>15.<span style=color:red;>分流的紅龍 </span>麻煩分流收卡那紅龍請對其各區標準。</li>
-          <li>16.<span style=color:red;>預排假</span>如果今天的休假是本來沒有劃休的假，是屬於預排假，假設臨時有同事沒辦法來上班，請麻煩來支援。</li>
-          <li>17.<span style=color:red;>冰箱日期 </span>冰箱麻煩要寫名子日期，日期天數說明都有貼在冰箱上，請勿造成打掃人的困擾。</li>
-          <li>18.<span style=color:red;>主管PO訊息 </span>再次提醒主管在群組發的任何重要事項，請仔細閱讀並且點個貼圖確認有收到訊息。</li>
-          <li>19.<span style=color:red;>時數表 </span>當月發的時數表，請對照當月大表裡你名子的號碼，寫完後請按照號碼順序擺放。(下午3點後一律不收任何資料)</li>
-          <li>21.<span style=color:red;>分流密錄器 </span>分流單獨使用密錄器C區D區各兩隻。</li>
-          <li>22.<span style="color:red";>防檢規範不做回應 </span>除了勤務上專業知識，有關防檢署規範的政策一律不做回應，請至防檢櫃台詢問。</li>
-          <li>23.<span style="color:red;">洗便當盒 </span>洗便當盒請先將便當菜渣清理乾淨，再沖洗，不要留下菜渣導致水槽堵塞。洗抹布、便當盒盡量不要弄濕地板，以免發生危險，不慎弄濕地板，麻煩擦乾淨。</li>
-          <span class="notice-end"><span class="icon">⚠️</span>不要增加信實阿姨工作困擾請將心比心</span>
-          <li>24.<span style=color:red;>D區紅龍位置 </span>各位在參考以下圖片。</li>
-          <img src="https://i.ibb.co/kg0wyhgx/01.jpg" width="100%" height="auto" />
-          <img src="https://i.ibb.co/0RQmhhJg/02.jpg" width="100%" height="auto" />
-          <img src="https://i.ibb.co/q3QHthJj/03.jpg" width="100%" height="auto" />
-          <li>25.<span style=color:red;>綠色椅子改放 </span>在第一張手檢桌的後端。</li>
-          <img src="https://i.ibb.co/dwSr2FzV/image.jpg" width="100%" height="auto" />
-          <li>26.<span style=color:red;>集合出發時 </span>集合前做完所有前置作業，上廁所裝水丟垃圾，都是上哨前要完成的事，集合一律在備勤室外集合出發，不准在D6門前面等出發。</li>
-          <li>27.<span style=color:red;>小蜜蜂🐝跟大聲公📢 </span>分流用的小蜜蜂🐝跟大聲公📢統一11:00AM拿到分流使用。(請由主分流設定時間通知，並提醒當區哨員)</li>
-                  <div class="section-title">備勤室打掃</div>
-          <p style="font-size: 10pt; color: red;">正常打掃由各線X光落實檢查/監督</p>
-
-        <div class="content-block">
-          <div class="sub-title">重點檢查/監督：</div>
-          <ul class="content-list">
-            <li><span style="color:red";>A2分流 </span>微波爐下三個櫃子都要確認。</li>
-            <li><span style="color:red";>3線檢查重點 </span>督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭動作。</li>
-            <li><span style="color:red";>4線檢查重點 </span>空氣濾清機、手機架、門旁邊鏡子，確認是否有擦拭。</li>
-            <li><span style="color:red";>其他重點 </span>冰箱裡門旁與底部抽屜，檢查是否有擦拭。</li>
-          </ul>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">其他提醒</div>
-          <ul class="content-list">
-            <li>如有提早下哨，麻煩在 18:30 以後，請兩位兩位進來（進來 2 位、出來後再進去 2 位）。</li>
-            <li>因為這時候會有夜班的，加上這時間為打掃時間，還麻煩各位請多多配合。</li>
-          </ul>
-          <div class="highlight-box">打掃輪值</div>
-        </div>
-        
-        <div class="content-block">
-          <div class="sub-title">由
-          衛生管理大隊長 邱詩秦：</div>
-          <ul class="content-list">
-            <li>麻煩在 18:00 以後，打掃備勤室、並由小隊長監督。</li>
-            <li>如當日大隊長休假，在由B哨的4線X光監督 ，或者由組長決定派一位監督。</li>
-          </ul>
-        </div>
-
-      </ul> 
-     `,
-
-    "⚠️各項連結": `
-        <div class="section-title">語言學習</div>
-        <div class="content-block">
-          <div class="sub-title">英文</div>
-          <ul class="content-list">
-            <li><a href="https://youtu.be/_QT9WavEdJ0" target="_blank">⭐英文 日常檢疫常用句與單字</a></li>
-            <li><a href="https://youtu.be/zetV0h91fWw" target="_blank">⭐英文 常用英文 方向指引 檢疫與入境規範</a></li>
-          </ul>
-        <div class="content-block">
-          <div class="sub-title">其他語言</div>
-          <ul class="content-list">
-            <li><a href="https://youtu.be/JLo0Ztq44D0" target="_blank">⭐韓文 日常檢疫常用句與單字</a></li>
-            <li><a href="https://youtu.be/vhGPw-1Ot2o" target="_blank">⭐越南 日常檢疫常用句與單字</a></li>
-            <li><a href="https://youtu.be/R0BsrVctClM" target="_blank">⭐日語 日常檢疫常用句與單字</a></li>
-            <li><a href="https://youtu.be/sJgVxPrJPB4" target="_blank">⭐泰語 日常檢疫常用句與單字(男女版本)</a></li>
-            <li><a href="https://youtu.be/HhtYZRM2PXQ" target="_blank">⭐香港粵語/廣東話 日常檢疫常用句與單字</a></li>
-
-
-          </ul>
-        </div>
-        <div class="section-title">新人相關連結</div>
-        <div class="content-block">
-      
-          <div class="sub-title">前導示範</div>
-          <ul class="content-list">
-            <li><a href="https://youtu.be/NLZt2fc13gM" target="_blank">⭐前導現場影片示範</a></li>
-            <li><a href="https://forms.gle/FqiqiEkA5YX34n2a9" target="_blank">⭐T2日緊急聯絡人資料填寫</a></li>
-          </ul>
-        </div>
-        
-        <div class="highlight-box">
-          高標準源於專業與敬業
-        </div>
-      `,
-
-    "檢疫物相關": `
-        <div class="section-title">雞蛋</div>
-        <div class="content-block">
-          <div class="sub-title">半熟蛋類不可攜帶</div>
-            <li>鴨蛋、鵝蛋、煮過的皮蛋請旅客下去櫃台詢問，如是雞蛋自行判定</li>
-            <img src="https://i.ibb.co/LDr00tMF/01.jpg" width="100%" height="auto" />
-        
-        <div class="section-title">堅果/松果</div>
-            <li>花生、核桃、芝麻那一類旅客說生的就是生的，熟的就是熟的，要手指指一下詢問物，向監視器表示我們有確實宣導，跟旅客說生的不能攜帶，但熟的可以。</li>
-            <img src="https://i.ibb.co/6JXv8M80/02.jpg" width="100%" height="auto" />
-            <li>松果部分全過(除非看的出來有明顯沙土，可請旅客至櫃台詢問太誇張的建議拋棄)。</li>
-            <img src="https://i.ibb.co/TB8D5Qkw/04.jpg" width="100%" height="auto" />
-        <div class="section-title">水果蛋糕/大幅</div>
-            <li>這類的蔬菜水果加工製品，例如草莓蛋糕，表面上看得到水果。假設蛋糕上只有一顆草莓，可以直接請旅客把草莓吃掉就可以了；但如果蛋糕幾乎都是水果，並且這些水果並非全包覆在奶油裡面，就不行。</li>
-            <li>就如同下圖，基本上如果是如圖就都不行帶。例如左邊一顆草莓，它並非整個包覆住，但如果遇到這種基本上可以請旅客看要不要直接吃掉，那像右邊水果很多就需要回去吃掉或拋棄/挑掉不能現場吃掉。</li>
-　　　　　　 <img src="https://i.ibb.co/YF8xZFzZ/03.jpg" width="100%" height="auto" />
-            <li>那像草莓/水果/芒果大福也是可以的，因為奶油已完全包覆在裡面，但如果今天是像下面左圖那種切開的就不行，那就要請旅客回去吃或是簽名丟棄。</li>
-            <img src="https://i.ibb.co/qYMsK5vj/05.jpg" width="100%" height="auto" />
-            <div class="section-title">另外補充重點</div>
-            <li>草果、羅望子、乾辣椒、龍眼乾...等果乾類，只要它是果實類夠＂夠乾燥＂就可以，就算裡面有籽也沒關係</li>
-            <img src="https://i.ibb.co/9HnM8Fz4/06.jpg" width="100%" height="auto" />
-            <br><br>
-            <li>速食麵、粥、米粉、粉條類商品，如為明顯可見肉塊（如雞爪、半熟蛋、火腿腸...等檢疫物），就請旅客拆開包裝主動棄置檢疫物。</li>
-            <li><span style=color:red;>一般常見傳統罐頭包裝，如馬口鐵、玻璃罐等，包裝應完全密閉，經商業滅菌且可於常溫保存。</span>如為非典型罐頭商品，如真空包、滅菌袋、軟袋...等，除以上判定外，外包裝有註明【罐頭】，即可判定為罐頭。</li>
-            <br>請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，在不行就是請旅客去檢疫櫃檯詢問。<br>
-        <div class="section-title">各航空常見飛機餐總整理</div>
-            <br>MF 廈門航空</br>
-              <li>雞肉腸仔麵包 / 火腿麵包 / 菠菜火腿腸麵包 / 雞肉鬆麵包 </li>
-            <br>HU 海南航空</br>
-              <li>雞肉末炒飯 / 雞肉長麵包 </li>
-            <br>HX 香港航空</br>
-              <li>鴨肉麵包 </li>
-            <br>HX BR香港</br>
-              <li>叉燒酥 </li>
-            <br>ZH 深圳航空<br>
-              <li>魚肉漢堡含有雞肉 / 柳丁 / 火龍果 </li>
-            <br>CZ 南方航空<br>
-              <li>火腿芝士三明治 / 廣州雞肉腸麵包 </li>
-            <br>JX 星宇航空<br>
-              <li>豬肉洋蔥麵包</li>
-            <br>SQ 新加坡<br>
-              <li>火腿腸飯盒 / 雞肉麵 </li>
-            <br>GA 中國航空</br>
-              <li>豬排包</li>
-            <br>MU 東方航空</br>
-              <li>機肉包子</li>
-        <div class="section-title">常見豬肉成分名稱與關鍵單字</div>
-          <table style="margin:auto; border-collapse:collapse; font-size:1.1em; text-align:center; border:1px solid #bbb;">
-            <thead>
-              <tr style="background:#f7f7f7;">
-                <th style="border:1px solid #bbb;">中文</th>
-                <th style="border:1px solid #bbb;">英文</th>
-                <th style="border:1px solid #bbb;">韓文</th>
-                <th style="border:1px solid #bbb;">越南文</th>
-                <th style="border:1px solid #bbb;">日文</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="border:1px solid #bbb;">肉</td>
-                <td style="border:1px solid #bbb;">meat</td>
-                <td style="border:1px solid #bbb;">고기</td>
-                <td style="border:1px solid #bbb;">Thịt khô</td>
-                <td style="border:1px solid #bbb;">肉</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">豬肉</td>
-                <td style="border:1px solid #bbb;">pork</td>
-                <td style="border:1px solid #bbb;">돼지고기</td>
-                <td style="border:1px solid #bbb;">thịt lợn</td>
-                <td style="border:1px solid #bbb;">豚肉</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">牛肉</td>
-                <td style="border:1px solid #bbb;">beef</td>
-                <td style="border:1px solid #bbb;">소고기</td>
-                <td style="border:1px solid #bbb;">thịt bò</td>
-                <td style="border:1px solid #bbb;">牛肉</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">雞肉</td>
-                <td style="border:1px solid #bbb;">chicken</td>
-                <td style="border:1px solid #bbb;">닭고기</td>
-                <td style="border:1px solid #bbb;">thịt gà</td>
-                <td style="border:1px solid #bbb;">チキン</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">肉鬆</td>
-                <td style="border:1px solid #bbb;">meat floss</td>
-                <td style="border:1px solid #bbb;">고기 치실</td>
-                <td style="border:1px solid #bbb;">xỉa thịt</td>
-                <td style="border:1px solid #bbb;">ミートフロス</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">火腿</td>
-                <td style="border:1px solid #bbb;">ham</td>
-                <td style="border:1px solid #bbb;">햄</td>
-                <td style="border:1px solid #bbb;">Giăm bông</td>
-                <td style="border:1px solid #bbb;">ハム</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">臘腸</td>
-                <td style="border:1px solid #bbb;">sausage</td>
-                <td style="border:1px solid #bbb;">소시지</td>
-                <td style="border:1px solid #bbb;">xúc xích</td>
-                <td style="border:1px solid #bbb;">ソーセージ</td>
-              </tr>
-              <tr>
-                <td style="border:1px solid #bbb;">肉乾</td>
-                <td style="border:1px solid #bbb;">dried meat</td>
-                <td style="border:1px solid #bbb;">말린 고기</td>
-                <td style="border:1px solid #bbb;">Thịt khô</td>
-                <td style="border:1px solid #bbb;">干し肉</td>
-              </tr>
-            </tbody>
-          </table>
-             <br><br>
-             
-              <tr>
-                <td style="border:1px solid #bbb;"> 肉鬆粉 </td>
-                <td style="border:1px solid #bbb;"> 云腿 </td>
-                <td style="border:1px solid #bbb;"> 豬肥標 </td>
-                <td style="border:1px solid #bbb;"> 金華火腿 </td>
-                <td style="border:1px solid #bbb;"> 原味鬆鬆 </td>
-                <td style="border:1px solid #bbb;"> 冰肉 </td>
-                <td style="border:1px solid #bbb;"> 臘腸 </td>
-                <td style="border:1px solid #bbb;"> 肉脯 </td>
-              </tr>
-
-            <div class="section-title">特殊狀況食物</div>
-
-            <img src="https://i.ibb.co/qYN121fB/01.jpg" width="100%" height="auto" />
-
-            <hr>
-            <div style="text-align:center;">如果遇到鵝肝醬請旅客至六號櫃台詢問，先不要扣下來。<br>
-            <img src="https://i.ibb.co/rKQrrpDq/02.jpg" width="100%" height="auto" />
-
-            <hr>
-            <div style="text-align:center;">貝母已跟檢疫官確認過，是可以帶的!<br>
-            <img src="https://i.ibb.co/gLc7N5z7/03.jpg" width="100%" height="auto" />
-
-            <hr>
-            <div style="text-align:center;">蕎麥米，不可放行!<br>
-            <img src="https://i.ibb.co/v4s14CLC/04.jpg" width="100%" height="auto" />
-
-            <div class="section-title">檢疫物參考</div>
-            <img src="https://i.ibb.co/XfVhY6NJ/05.jpg" width="100%" height="auto" />
-            <img src="https://i.ibb.co/LDDFHRsr/06.jpg" width="100%" height="auto" />
-            <img src="https://i.ibb.co/8nHRznmn/07.jpg" width="100%" height="auto" />
-            <img src="https://i.ibb.co/LzM1wSLK/08.jpg" width="100%" height="auto" />
-            <img src="https://i.ibb.co/Z6WcF31h/09.jpg" width="100%" height="auto" />
-            <hr>
-            <li>肉粽很多種類，例如像左邊這種就不能攜帶因為含有肉類製品，右圖的是甜粽這種就可以攜帶。</li>
-            <img src="https://i.ibb.co/m5v04vf6/10.jpg" width="100%" height="auto" />
-            <hr>
-            <li>鳳凰捲有些含有肉鬆，例如澳門旅客就很常攜帶，所以當有看到一定要多注意這部分!</li>
-            <img src="https://i.ibb.co/8LNWvDwm/11.jpg" width="100%" height="auto" />
-            <hr>
-            <li>如圖生菜吐司就有多種不能攜帶，像圖裡的生菜、番茄、還有肉類，所以三明治跟吐司都要特別注意過。</li>
-            <img src="https://i.ibb.co/TDQkqKGg/12.jpg" width="100%" height="auto" />
-            <hr>
-            <li>小黃瓜、地瓜、生辣椒、絲瓜等等各種生鮮都是不能帶入境的，除非是煮過的，例如很多航空職員會帶得烤地瓜。</li>
-            <img src="https://i.ibb.co/B2mTJ53y/13.jpg" width="100%" height="auto" />
-            <hr>
-            <li>圖下是泰國露楚很多新進同仁會以為是水果，泰國露楚是一種色彩繽紛、造型精緻的小點心，屬於泰國傳統甜點。它的外型常常被製作成各種迷你蔬果，如辣椒、茄子、芒果、豆子等，非常可愛討喜。</li>
-            <img src="https://i.ibb.co/n8cMgxLq/14.jpg" width="100%" height="auto" />
-            <hr>
-            <li>鹿茸，是指雄鹿尚未骨化、帶有絨毛的幼角。這些角尚未鈣化，質地柔軟、富有血管和營養成分，是中藥材中的名貴補品之一。</li>
-            <img src="https://i.ibb.co/JwPhJ4TV/15.jpg" width="100%" height="auto" />
-            <hr>
-            <li>泰國糯米飯（Mango Sticky Rice）是泰國著名的甜點，主要由芒果和糯米搭配椰漿製成。其中的芒果屬於新鮮水果，依照台灣動植物防疫檢疫規定，新鮮水果禁止攜帶入境，以防止外來病蟲害入侵，保護台灣本地農業安全。</li>
-            <img src="https://i.ibb.co/hxWWyxBZ/16.jpg" width="100%" height="auto" />
-            <hr>
-            <li>未經加工的羽毛屬於動物來源產品，根據檢疫規定，禁止攜帶入境。</li>
-            <img src="https://i.ibb.co/MDWHRSFp/17.jpg" width="100%" height="auto" />
-            <hr>
-            <li>炸雞皮屬於動物性產品，根據台灣動物檢疫相關法令，禁止從國外攜帶入境。即使已經過油炸等簡單加工處理，仍有可能攜帶動物疫病病原體，影響本地動物產業安全。</li>
-            <img src="https://i.ibb.co/FLXjPF2F/18.jpg" width="100%" height="auto" />
-            <hr>
-            <li>雞內金是指雞胗（砂囊）內壁的乾燥薄膜，常見於中藥材或食品中。即使已曬乾、烘烤或包裝，仍可能攜帶動物疫病病原體，對本地動物產業造成風險。</li>
-            <img src="https://i.ibb.co/kVGR9qbX/19.jpg" width="100%" height="auto" />
-            <hr>
-            <li>牛糞餅（又稱牛糞乾、牛糞塊），常用於燃料、宗教祭祀或農業用途。牛糞餅屬於動物來源產品，根據台灣動物檢疫相關法令，禁止從國外攜帶入境。</li>
-            <img src="https://i.ibb.co/cS1Xj1Yn/20.jpg" width="100%" height="auto" />
-            <hr>
-            <li>很多旅客會帶一些魚乾、魷魚乾、小魚乾之類的，基本上只要去過內臟，如有旅客帶生魚片也沒關係的，主要是針對動植物產品。</li>
-            <img src="https://i.ibb.co/Xk8bZkcH/21.jpg" width="100%" height="auto" />
-            <img src="https://i.ibb.co/N20WwMk9/22.jpg" width="100%" height="auto" />
-
-
-            <div>
-            <div class="highlight-box">
-              嚴謹把關，保護國境biosafety
-            </div>
-    `
-  };
-
-  // ==========================================
-  // 考試系統變數
-  // ==========================================
-  let currentExam = null;
-  let currentQuestions = [];
-  let currentQuestionIndex = 0;
-  let userAnswers = [];
-  let examStartTime = null;
-
-  // ==========================================
-  // 基本功能函數
-  // ==========================================
-
-  // 開啟模態視窗
-  function openModal(title, content) {
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalBody').innerHTML = content;
-    document.getElementById('modalBg').classList.add('active');
-  }
-
-  // 關閉模態視窗
-  function closeModal() {
-    document.getElementById('modalBg').classList.remove('active');
-    // 重置考試相關顯示
-    resetExamDisplay();
-  }
-
-  // 重置考試顯示
-  function resetExamDisplay() {
-    const examList = document.querySelector('.exam-list');
-    const examInterface = document.querySelector('.exam-interface');
-    const resultContainer = document.querySelector('.result-container');
+    // 時間設定
+    TIME_PER_QUESTION: 10,       // 每題時間 (秒)
+    FAST_ANSWER_TIME: 3,         // 快速回答時間門檻 (秒)
+    ANSWER_DISPLAY_TIME: 1.5,    // 答案顯示時間 (秒)
     
-    if (examList) examList.style.display = 'flex';
-    if (examInterface) examInterface.style.display = 'none';
-    if (resultContainer) resultContainer.style.display = 'none';
-  }
-
-  // ==========================================
-  // 考試系統函數
-  // ==========================================
-
-  // 開啟考試選單
-  function openExamModal() {
-    let examListHTML = `
-      <div class="section-title">📚 自我考試系統</div>
-      <div class="exam-list">
-    `;
+    // 分數設定
+    BASE_POINTS: 10,             // 基本分數
+    BONUS_POINTS: 5,             // 快速回答加分
     
-    for (let examName in examCategories) {
-      examListHTML += `
-        <div class="exam-item" onclick="startExam('${examName}')">
-          ${examName}
-        </div>
-      `;
+    // 其他設定
+    SHUFFLE_QUESTIONS: true,     // 是否隨機排列題目
+    SHUFFLE_OPTIONS: true,       // 是否隨機排列選項
+    SHOW_PROGRESS: true,         // 是否顯示進度條
+    AUTO_NEXT: true              // 是否自動進入下一題
+};
+// ===============================================
+
+// 全域變數
+let currentCategory = '';
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let score = 0;
+let correctAnswers = 0;
+let bonusPoints = 0;
+let timer = null;
+let timeLeft = EXAM_CONFIG.TIME_PER_QUESTION;
+let questionStartTime = 0;
+
+// 開始考試
+function startExam(category) {
+    currentCategory = category;
+    
+    // 根據設定準備題目
+    let allQuestions = [...questionBank[category]];
+    if (EXAM_CONFIG.QUESTION_COUNT === 0 || EXAM_CONFIG.QUESTION_COUNT >= allQuestions.length) {
+        currentQuestions = EXAM_CONFIG.SHUFFLE_QUESTIONS ? shuffleArray(allQuestions) : allQuestions;
+    } else {
+        currentQuestions = EXAM_CONFIG.SHUFFLE_QUESTIONS ? 
+            shuffleArray(allQuestions).slice(0, EXAM_CONFIG.QUESTION_COUNT) : 
+            allQuestions.slice(0, EXAM_CONFIG.QUESTION_COUNT);
     }
     
-    examListHTML += `</div>`;
-    
-    openModal('自我考試系統', examListHTML);
-  }
-
-  // 開始考試
-  function startExam(examName) {
-    currentExam = examName;
-    const allQuestions = examCategories[examName];
-    
-    // 隨機選取20題
-    currentQuestions = shuffleArray([...allQuestions]).slice(0, Math.min(20, allQuestions.length));
     currentQuestionIndex = 0;
-    userAnswers = [];
-    examStartTime = new Date();
+    score = 0;
+    correctAnswers = 0;
+    bonusPoints = 0;
     
-    showExamInterface();
-    displayQuestion();
-  }
-
-  // 顯示考試介面
-  function showExamInterface() {
-    const examInterfaceHTML = `
-      <div class="exam-interface active">
-        <div class="question-container">
-          <div class="question-number" id="questionNumber"></div>
-          <div class="question-text" id="questionText"></div>
-          <div class="options-container" id="optionsContainer"></div>
-        </div>
-        <div class="exam-controls">
-          <button class="exam-btn secondary" onclick="previousQuestion()" id="prevBtn">上一題</button>
-          <span id="questionCounter"></span>
-          <button class="exam-btn primary" onclick="nextQuestion()" id="nextBtn">下一題</button>
-        </div>
-      </div>
-    `;
+    // 隨機化選項位置 (根據設定)
+    if (EXAM_CONFIG.SHUFFLE_OPTIONS) {
+        currentQuestions.forEach(q => {
+            const correctAnswer = q.options[q.correct];
+            q.options = shuffleArray([...q.options]);
+            q.correct = q.options.indexOf(correctAnswer);
+        });
+    }
     
-    document.getElementById('modalBody').innerHTML = examInterfaceHTML;
-  }
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('examScreen').style.display = 'block';
+    
+    const titles = {
+        'fruits-animals': '🍎 水果類 / 🐱 動物類',
+        'appliances-insects': '🏠 家電類 / 🐛 昆蟲類',
+        'descriptions-body': '📝 描述類 / 👤 身體類'
+    };
+    
+    document.getElementById('examTitle').textContent = titles[category];
+    document.getElementById('totalQuestions').textContent = currentQuestions.length;
+    
+    showQuestion();
+}
 
-  // 顯示題目
-  function displayQuestion() {
+// 顯示題目
+function showQuestion() {
+    if (currentQuestionIndex >= currentQuestions.length) {
+        showResult();
+        return;
+    }
+    
     const question = currentQuestions[currentQuestionIndex];
+    document.getElementById('question').textContent = question.q;
+    document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
     
-    document.getElementById('questionNumber').textContent = `第 ${currentQuestionIndex + 1} 題`;
-    document.getElementById('questionText').textContent = question.question;
-    document.getElementById('questionCounter').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
-    
-    const optionsContainer = document.getElementById('optionsContainer');
+    const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
     
     question.options.forEach((option, index) => {
-      const optionDiv = document.createElement('div');
-      optionDiv.className = 'option';
-      optionDiv.textContent = option;
-      optionDiv.onclick = () => selectOption(index);
-      
-      // 如果已經有答案，顯示選中狀態
-      if (userAnswers[currentQuestionIndex] === index) {
-        optionDiv.classList.add('selected');
-      }
-      
-      optionsContainer.appendChild(optionDiv);
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.textContent = option;
+        optionDiv.onclick = () => selectAnswer(index);
+        optionsContainer.appendChild(optionDiv);
     });
     
-    // 更新按鈕狀態
-    document.getElementById('prevBtn').style.display = currentQuestionIndex === 0 ? 'none' : 'inline-block';
+    // 更新進度條 (根據設定)
+    if (EXAM_CONFIG.SHOW_PROGRESS) {
+        const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+    }
     
-    const nextBtn = document.getElementById('nextBtn');
-    if (currentQuestionIndex === currentQuestions.length - 1) {
-      nextBtn.textContent = '完成考試';
-      nextBtn.onclick = finishExam;
+    // 開始計時
+    startTimer();
+}
+
+// 開始計時器
+function startTimer() {
+    timeLeft = EXAM_CONFIG.TIME_PER_QUESTION;
+    questionStartTime = Date.now();
+    updateTimerDisplay();
+    
+    timer = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            selectAnswer(-1); // 時間到，自動選擇錯誤答案
+        }
+    }, 1000);
+}
+
+// 更新計時器顯示
+function updateTimerDisplay() {
+    const timerElement = document.getElementById('timer');
+    timerElement.textContent = timeLeft;
+    
+    if (timeLeft <= 3) {
+        timerElement.style.color = '#e74c3c';
+        timerElement.style.animation = 'pulse 0.5s infinite';
     } else {
-      nextBtn.textContent = '下一題';
-      nextBtn.onclick = nextQuestion;
+        timerElement.style.color = '#27ae60';
+        timerElement.style.animation = 'none';
     }
-  }
+}
 
-  // 選擇答案
-  function selectOption(optionIndex) {
-    userAnswers[currentQuestionIndex] = optionIndex;
+// 選擇答案
+function selectAnswer(selectedIndex) {
+    clearInterval(timer);
     
-    // 更新選項顯示
+    const question = currentQuestions[currentQuestionIndex];
     const options = document.querySelectorAll('.option');
+    
+    // 顯示正確答案
     options.forEach((option, index) => {
-      option.classList.toggle('selected', index === optionIndex);
-    });
-  }
-
-  // 上一題
-  function previousQuestion() {
-    if (currentQuestionIndex > 0) {
-      currentQuestionIndex--;
-      displayQuestion();
-    }
-  }
-
-  // 下一題
-  function nextQuestion() {
-    if (currentQuestionIndex < currentQuestions.length - 1) {
-      currentQuestionIndex++;
-      displayQuestion();
-    }
-  }
-
-  // 完成考試
-  function finishExam() {
-    // 檢查是否所有題目都已回答
-    const unansweredQuestions = [];
-    for (let i = 0; i < currentQuestions.length; i++) {
-      if (userAnswers[i] === undefined) {
-        unansweredQuestions.push(i + 1);
-      }
-    }
-    
-    if (unansweredQuestions.length > 0) {
-      alert(`還有 ${unansweredQuestions.length} 題未作答：第 ${unansweredQuestions.join(', ')} 題`);
-      return;
-    }
-    
-    showResults();
-  }
-
-  // 顯示考試結果
-  function showResults() {
-    let correctCount = 0;
-    let wrongAnswers = [];
-    
-    currentQuestions.forEach((question, index) => {
-      if (userAnswers[index] === question.correct) {
-        correctCount++;
-      } else {
-        wrongAnswers.push({
-          questionNumber: index + 1,
-          question: question.question,
-          userAnswer: question.options[userAnswers[index]] || '未作答',
-          correctAnswer: question.options[question.correct]
-        });
-      }
+        if (index === question.correct) {
+            option.style.background = '#27ae60';
+            option.style.color = 'white';
+            option.style.borderColor = '#27ae60';
+        } else if (index === selectedIndex && selectedIndex !== question.correct) {
+            option.style.background = '#e74c3c';
+            option.style.color = 'white';
+            option.style.borderColor = '#e74c3c';
+        }
+        option.style.pointerEvents = 'none';
     });
     
-    const score = Math.round((correctCount / currentQuestions.length) * 100);
-    const examEndTime = new Date();
-    const examDuration = Math.round((examEndTime - examStartTime) / 1000);
-    
-    let scoreClass = 'score-good';
-    let scoreComment = '優秀！';
-    if (score < 60) {
-      scoreClass = 'score-poor';
-      scoreComment = '需要加強！';
-    } else if (score < 80) {
-      scoreClass = 'score-average';
-      scoreComment = '還不錯！';
-    }
-    
-    let resultHTML = `
-      <div class="result-container">
-        <div class="section-title">📊 考試成績</div>
+    // 計算分數
+    if (selectedIndex === question.correct) {
+        correctAnswers++;
+        score += EXAM_CONFIG.BASE_POINTS; // 使用設定的基本分數
         
-        <div class="score-display ${scoreClass}">
-          <div style="font-size: 0.6em; margin-bottom: 0.3em;">考試：${currentExam}</div>
-          <div>成績：${score} 分</div>
-          <div style="font-size: 0.5em; margin-top: 0.3em;">${scoreComment}</div>
-        </div>
-        
-        <div style="text-align: center; margin: 1em 0; color: #666;">
-          <div>答對：${correctCount} / ${currentQuestions.length} 題</div>
-          <div>用時：${Math.floor(examDuration / 60)} 分 ${examDuration % 60} 秒</div>
-        </div>
-    `;
-    
-    if (wrongAnswers.length > 0) {
-      resultHTML += `
-        <div class="wrong-answers">
-          <div style="font-weight: bold; color: #c62828; margin-bottom: 1em;">❌ 錯誤題目解析：</div>
-      `;
-      
-      wrongAnswers.forEach(wrong => {
-        resultHTML += `
-          <div class="wrong-answer-item">
-            <div class="wrong-question">第 ${wrong.questionNumber} 題：${wrong.question}</div>
-            <div style="color: #c62828;">你的答案：${wrong.userAnswer}</div>
-            <div class="correct-answer">正確答案：${wrong.correctAnswer}</div>
-          </div>
-        `;
-      });
-      
-      resultHTML += `</div>`;
+        // 檢查快速回答加分
+        const answerTime = (Date.now() - questionStartTime) / 1000;
+        if (answerTime <= EXAM_CONFIG.FAST_ANSWER_TIME) {
+            bonusPoints += EXAM_CONFIG.BONUS_POINTS;
+            score += EXAM_CONFIG.BONUS_POINTS;
+            
+            // 顯示快速回答提示
+            const bonusDiv = document.createElement('div');
+            bonusDiv.className = 'fast-answer-bonus';
+            bonusDiv.textContent = `⚡ 快速回答 +${EXAM_CONFIG.BONUS_POINTS}分!`;
+            bonusDiv.style.position = 'fixed';
+            bonusDiv.style.top = '50%';
+            bonusDiv.style.left = '50%';
+            bonusDiv.style.transform = 'translate(-50%, -50%)';
+            bonusDiv.style.fontSize = '1.5em';
+            bonusDiv.style.zIndex = '1000';
+            document.body.appendChild(bonusDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(bonusDiv);
+            }, 1500);
+        }
     }
     
-    resultHTML += `
-        <div style="text-align: center; margin-top: 2em;">
-          <button class="exam-btn primary" onclick="openExamModal()">返回考試選單</button>
-        </div>
-      </div>
-    `;
-    
-    document.getElementById('modalBody').innerHTML = resultHTML;
-  }
-
-  // 陣列隨機排序函數
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    // 延遲顯示下一題 (使用設定的等待時間)
+    if (EXAM_CONFIG.AUTO_NEXT) {
+        setTimeout(() => {
+            currentQuestionIndex++;
+            showQuestion();
+        }, EXAM_CONFIG.ANSWER_DISPLAY_TIME * 1000);
     }
-    return array;
-  }
+}
 
-  // ==========================================
-  // 事件監聽器設置
-  // ==========================================
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // 功能按鈕點擊事件
-    document.querySelectorAll('.func-btn[data-modal]').forEach(button => {
-      button.addEventListener('click', function() {
-        const modalKey = this.getAttribute('data-modal');
-        openModal(modalKey, modalContents[modalKey]);
-      });
-    });
-
-    // 關閉模態視窗
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalBg').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
-    });
-
+// 顯示結果
+function showResult() {
+    document.getElementById('examScreen').style.display = 'none';
+    document.getElementById('resultScreen').style.display = 'block';
     
-    checkLogin();
+    const baseScore = correctAnswers * EXAM_CONFIG.BASE_POINTS;
+    
+    document.getElementById('finalScore').textContent = score + ' 分';
+    document.getElementById('correctCount').textContent = correctAnswers;
+    document.getElementById('totalCount').textContent = currentQuestions.length;
+    document.getElementById('baseScore').textContent = baseScore;
+    document.getElementById('bonusScore').textContent = bonusPoints;
+    document.getElementById('totalScore').textContent = score;
+    
+    // 儲存記錄
+    saveRecord();
+}
 
-    // 登出按鈕
-    document.getElementById('logoutBtn').onclick = function() {
-      if (confirm('確定要登出嗎？')) {
-        localStorage.removeItem("t2_login");
-        localStorage.removeItem("t2_login_time");
-        alert('已登出系統');
-        window.location.href = "index.html";
-      }
+// 儲存記錄
+function saveRecord() {
+    const records = JSON.parse(localStorage.getItem('examRecords') || '{}');
+    if (!records[currentCategory]) {
+        records[currentCategory] = [];
+    }
+    
+    const record = {
+        date: new Date().toLocaleString('zh-TW'),
+        score: score,
+        correct: correctAnswers,
+        total: currentQuestions.length,
+        bonus: bonusPoints
     };
+    
+    records[currentCategory].push(record);
+    records[currentCategory].sort((a, b) => b.score - a.score); // 按分數排序
+    
+    localStorage.setItem('examRecords', JSON.stringify(records));
+}
 
-    // ESC 鍵關閉模態視窗
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    });
-  });
-</script>
+// 顯示記錄
+function showRecords(category) {
+    currentCategory = category;
+    document.getElementById('mainMenu').style.display = 'none';
+    document.getElementById('recordsScreen').style.display = 'block';
+    
+    const titles = {
+        'fruits-animals': '🍎 水果類 / 🐱 動物類',
+        'appliances-insects': '🏠 家電類 / 🐛 昆蟲類',
+        'descriptions-body': '📝 描述類 / 👤 身體類'
+    };
+    
+    document.getElementById('recordsTitle').textContent = titles[category] + ' - 考試紀錄';
+    
+    const records = JSON.parse(localStorage.getItem('examRecords') || '{}');
+    const categoryRecords = records[category] || [];
+    
+    const recordsList = document.getElementById('recordsList');
+    recordsList.innerHTML = '';
+    
+    if (categoryRecords.length === 0) {
+        recordsList.innerHTML = '<p style="text-align: center; color: #666;">尚無考試記錄</p>';
+    } else {
+        categoryRecords.forEach((record, index) => {
+            const recordDiv = document.createElement('div');
+            recordDiv.className = 'record-item';
+            recordDiv.innerHTML = `
+                <div>
+                    <strong>#${index + 1}</strong> ${record.date}
+                </div>
+                <div>
+                    <span style="color: #667eea; font-weight: bold;">${record.score}分</span>
+                    <small>(${record.correct}/${record.total}) ${record.bonus > 0 ? '+' + record.bonus + '快速分' : ''}</small>
+                </div>
+            `;
+            recordsList.appendChild(recordDiv);
+        });
+    }
+}
+
+// 放棄考試
+function abandonExam() {
+    if (confirm('確定要放棄考試嗎？')) {
+        clearInterval(timer);
+        backToMenu();
+    }
+}
+
+// 再考一次
+function retakeExam() {
+    startExam(currentCategory);
+}
+
+// 返回主選單
+function backToMenu() {
+    document.getElementById('examScreen').style.display = 'none';
+    document.getElementById('resultScreen').style.display = 'none';
+    document.getElementById('recordsScreen').style.display = 'none';
+    document.getElementById('mainMenu').style.display = 'block';
+}
+
+// 洗牌函數
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+  </script>
 </body>
 </html>
