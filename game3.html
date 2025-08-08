@@ -3779,8 +3779,8 @@ async function showLeaderboard(examType) {
             return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
         });
         
-        // 只取前30名顯示
-        const topScores = scores.slice(0, 30);
+        // 只取前40名顯示
+        const topScores = scores.slice(0, 40);
         
         const modalTitle = document.getElementById('modalTitle');
         const leaderboardContent = document.getElementById('leaderboardContent');
