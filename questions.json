@@ -1,2518 +1,2588 @@
-"basic": [
-  {
-    "question": "秤重卡片多少克為單位？",
-    "options": ["500克", "300克", "600克", "800克"],
-    "correct": 2
-  },
-  {
-    "question": "旅客來時分流應該如何分？",
-    "options": ["一條線塞滿再換一條塞", "均分各線", "一律先丟3線滿了再換其他線", "一二線先放滿"],
-    "correct": 1
-  },
-  {
-    "question": "航空公司領卡何者正確？",
-    "options": ["需要航空公司主管過來才可以給卡片", "航空公司簽名就可以拿一箱卡片了", "請組長先來確認", "一箱卡換一箱空的"],
-    "correct": 3
-  },
-  {
-    "question": "哪種不需要幫忙拉紅龍？",
-    "options": ["推車的信實", "輪椅旅客", "救護車", "環宇車子"],
-    "correct": 0
-  },
-  {
-    "question": "下列哪個地方需要手檢？",
-    "options": ["洛杉磯", "仁川", "新加坡", "杜拜"],
-    "correct": 1
-  },
-  {
-    "question": "下列哪個地方需要手檢？",
-    "options": ["洛杉磯", "名古屋", "胡志明", "日本"],
-    "correct": 2
-  },
-  {
-    "question": "下列哪個地方需要手檢？",
-    "options": ["香港", "福岡", "神戶", "大阪"],
-    "correct": 0
-  },
-  {
-    "question": "下列哪個國家需要收卡？",
-    "options": ["曼谷", "福岡", "香港", "浦東"],
-    "correct": 1
-  },
-  {
-    "question": "下列哪個國家需要收卡？",
-    "options": ["廣州", "澳門", "新加坡", "釜山"],
-    "correct": 2
-  },
-  {
-    "question": "下列哪個國家需要收卡？",
-    "options": ["杜拜", "澳門", "仁川", "釜山"],
-    "correct": 0
-  },
-  {
-    "question": "中華航空代號是？",
-    "options": ["MF", "CI", "HX", "JX"],
-    "correct": 1
-  },
-  {
-    "question": "東方航空代號是？",
-    "options": ["BR", "MF", "MU", "SQ"],
-    "correct": 2
-  },
-  {
-    "question": "華信航空代號是？",
-    "options": ["AC", "MF", "SQ", "AE"],
-    "correct": 3
-  },
-  {
-    "question": "海南航空代號是？",
-    "options": ["BE", "UH", "CU", "HU"],
-    "correct": 3
-  },
-  {
-    "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-    "options": ["BR169", "BR2781", "BR62", "BR105"],
-    "correct": 2
-  },
-  {
-    "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-    "options": ["BR105", "BR398", "BR2900", "BR169"],
-    "correct": 1
-  },
-  {
-    "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-    "options": ["BR212", "BR131", "BR169", "BR2900"],
-    "correct": 0
-  },
-  {
-    "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
-    "options": ["BR868", "BR153", "BR802", "BR392"],
-    "correct": 3
-  },
-  {
-    "question": "如有看到旅客推手推車，都優先引導至幾線？",
-    "options": ["1線", "2線", "3線", "4線"],
-    "correct": 2
-  },
-  {
-    "question": "主分流早上以下哪些行為是錯誤？",
-    "options": ["清理白色棄置桶", "擦拭分流工作桌子", "查看前導棄置桶", "查看分流密錄器有沒有電量"],
-    "correct": 2
-  },
-  {
-    "question": "假設4線全滿情況「未有收卡」，主分流下列動作是錯誤？",
-    "options": ["站在前面引導旅客", "呼叫分流2支援", "打開宣導大聲公", "關閉收卡紅龍避免收卡旅客進入"],
-    "correct": 1
-  },
-  {
-    "question": "關於CD區行動電源何者錯誤？",
-    "options": ["日夜需要交接清楚", "不需要充電及回收", "需要充電及回收", "早上先確認有無電量"],
-    "correct": 2
-  },
-  {
-    "question": "駐外使節人員請問要引導至？",
-    "options": ["4線", "中間", "紅線", "綠線"],
-    "correct": 3
-  },
-  {
-    "question": "下列分流相關何者錯誤？",
-    "options": ["手推車優先引導3線", "備勤室消毒水固定A分流補充", "輪椅旅客分流需要幫忙開紅龍", "嬰兒推車走一二線"],
-    "correct": 1
-  },
-  {
-    "question": "下列分流相關何者正確？",
-    "options": ["旅客有推手推車，要攔住他們叫他們推回去", "收卡「未拿」卡片，請確認過機票，確認後再放綠線並宣導", "低風險旅客「想手檢」，一樣請他走綠線", "手檢旅客身上沒任何行李，一樣放紅線"],
-    "correct": 1
-  },
-  {
-    "question": "南方航空代號是？",
-    "options": ["ZC", "CA", "CZ", "QZ"],
-    "correct": 2
-  },
-  {
-    "question": "深圳航空代號是？",
-    "options": ["HZ", "ZH", "CZ", "HX"],
-    "correct": 1
-  },
-  {
-    "question": "釜山航空代號是？",
-    "options": ["XB", "OZ", "BX", "BR"],
-    "correct": 2
-  },
-  {
-    "question": "下列哪一個並非高風險地區？",
-    "options": ["曼谷", "馬尼拉", "寧波", "仙台"],
-    "correct": 3
-  },
-  {
-    "question": "如果遇到嬰兒車應該如何引導？",
-    "options": ["引導至3線", "走4線", "引導至1或2線", "固定走2線"],
-    "correct": 2
-  },
-  {
-    "question": "請問攝影監視器應該朝向?",
-    "options": ["朝向檢疫物棄置桶位置", "朝向手檢進入區域", "朝向分流方向", "朝向整條快速通道(綠線)"],
-    "correct": 2
-  },
-  {
-    "question": "確認公務機下列何者不正確?",
-    "options": ["WifI需要保持關閉", "基地台需要保持打開", "WifI需要保持開啟", "需要保持是手機的網路"],
-    "correct": 2
-  },
-  {
-    "question": "如果遇到剛剛已過手檢的旅客再回來買東西應該?",
-    "options": ["手檢背包行李後，走綠線", "直接走快速通關", "引導旅客至手檢", "回報是買免稅，請旅客走快速通道"],
-    "correct": 2
-  },
-  {
-    "question": "當有手上只有拿一條香菸，並無任何行李時...",
-    "options": ["開4線給旅客走過去", "請旅客走手檢區", "請旅客走快速通道(綠線)", "對講機詢問可否通過"],
-    "correct": 2
-  },
-  {
-    "question": "關於電霸與監視器何者錯誤?",
-    "options": ["確認有無顯示DC", "查看電霸是否保持通電", "按壓LED中間按鈕3秒是開機", "只需要顯示DC就好"],
-    "correct": 2
-  }
-],
-  ],
-"food1": [
+{
+  "basic": [
     {
-    question: "蘋果的英文是？",
-    options: ["apple", "april", "ample", "ankle"],
-    correct: 0
+      "question": "秤重卡片多少克為單位？",
+      "options": ["500克", "300克", "600克", "800克"],
+      "correct": 2
     },
     {
-    question: "泥土的英文是？",
-    options: ["boil", "soil", "coil", "foil"],
-    correct: 1
+      "question": "旅客來時分流應該如何分？",
+      "options": ["一條線塞滿再換一條塞", "均分各線", "一律先丟3線滿了再換其他線", "一二線先放滿"],
+      "correct": 1
     },
     {
-    question: "木頭的英文是？",
-    options: ["word", "wool", "wood", "world"],
-    correct: 2
+      "question": "航空公司領卡何者正確？",
+      "options": ["需要航空公司主管過來才可以給卡片", "航空公司簽名就可以拿一箱卡片了", "請組長先來確認", "一箱卡換一箱空的"],
+      "correct": 3
     },
     {
-    question: "雞肉的英文是？",
-    options: ["kitchen", "chicken", "children", "chosen"],
-    correct: 1
+      "question": "哪種不需要幫忙拉紅龍？",
+      "options": ["推車的信實", "輪椅旅客", "救護車", "環宇車子"],
+      "correct": 0
     },
     {
-    question: "牛肉的英文是？",
-    options: ["beef", "beer", "been", "bear"],
-    correct: 0
+      "question": "下列哪個地方需要手檢？",
+      "options": ["洛杉磯", "仁川", "新加坡", "杜拜"],
+      "correct": 1
     },
     {
-    question: "豬肉的英文是？",
-    options: ["park", "port", "pork", "part"],
-    correct: 2
+      "question": "下列哪個地方需要手檢？",
+      "options": ["洛杉磯", "名古屋", "胡志明", "日本"],
+      "correct": 2
     },
     {
-    question: "培根的英文是？",
-    options: ["beacon", "bacon", "broken", "bucket"],
-    correct: 1
+      "question": "下列哪個地方需要手檢？",
+      "options": ["香港", "福岡", "神戶", "大阪"],
+      "correct": 0
     },
     {
-    question: "火腿腸的英文是？",
-    options: ["ham sausage", "home storage", "hand savage", "head surface"],
-    correct: 0
+      "question": "下列哪個國家需要收卡？",
+      "options": ["曼谷", "福岡", "香港", "浦東"],
+      "correct": 1
     },
     {
-    question: "三明治的英文是？",
-    options: ["sandwich", "sandals", "standard", "sunlight"],
-    correct: 0
+      "question": "下列哪個國家需要收卡？",
+      "options": ["廣州", "澳門", "新加坡", "釜山"],
+      "correct": 2
     },
     {
-    question: "漢堡的英文是？",
-    options: ["hunger", "hamburger", "hamster", "hammer"],
-    correct: 1
+      "question": "下列哪個國家需要收卡？",
+      "options": ["杜拜", "澳門", "仁川", "釜山"],
+      "correct": 0
     },
     {
-    question: "糖果的英文是？",
-    options: ["candle", "cancel", "candy", "camera"],
-    correct: 2
+      "question": "中華航空代號是？",
+      "options": ["MF", "CI", "HX", "JX"],
+      "correct": 1
     },
     {
-    question: "生菜的英文是？",
-    options: ["letter", "little", "latter", "lettuce"],
-    correct: 3
+      "question": "東方航空代號是？",
+      "options": ["BR", "MF", "MU", "SQ"],
+      "correct": 2
     },
     {
-    question: "餅乾的英文是？",
-    options: ["cookie", "cooking", "corner", "copper"],
-    correct: 0
+      "question": "華信航空代號是？",
+      "options": ["AC", "MF", "SQ", "AE"],
+      "correct": 3
     },
     {
-    question: "水果的英文是？",
-    options: ["front", "fruit", "frost", "first"],
-    correct: 1
+      "question": "海南航空代號是？",
+      "options": ["BE", "UH", "CU", "HU"],
+      "correct": 3
     },
     {
-    question: "肉的英文是？",
-    options: ["meet", "meal", "meat", "mean"],
-    correct: 2
+      "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+      "options": ["BR169", "BR2781", "BR62", "BR105"],
+      "correct": 2
     },
     {
-    question: "肉乾的英文是？",
-    options: ["jerky", "jacket", "jungle", "junior"],
-    correct: 0
+      "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+      "options": ["BR105", "BR398", "BR2900", "BR169"],
+      "correct": 1
     },
     {
-    question: "肉製品的英文是？",
-    options: ["meat products", "meet problems", "main projects", "most progress"],
-    correct: 0
+      "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+      "options": ["BR212", "BR131", "BR169", "BR2900"],
+      "correct": 0
     },
     {
-    question: "新鮮的英文是？",
-    options: ["flesh", "flash", "fresh", "crash"],
-    correct: 2
+      "question": "如果是尖峰時間（4條線），機組則以抽查優先。需抽查的班機為下列何者？",
+      "options": ["BR868", "BR153", "BR802", "BR392"],
+      "correct": 3
     },
     {
-    question: "肥皂的英文是？",
-    options: ["soup", "soap", "shop", "stop"],
-    correct: 1
+      "question": "如有看到旅客推手推車，都優先引導至幾線？",
+      "options": ["1線", "2線", "3線", "4線"],
+      "correct": 2
     },
     {
-    question: "種子的英文是？",
-    options: ["seeds", "needs", "feeds", "deeds"],
-    correct: 0
+      "question": "主分流早上以下哪些行為是錯誤？",
+      "options": ["清理白色棄置桶", "擦拭分流工作桌子", "查看前導棄置桶", "查看分流密錄器有沒有電量"],
+      "correct": 2
+    },
+    {
+      "question": "假設4線全滿情況「未有收卡」，主分流下列動作是錯誤？",
+      "options": ["站在前面引導旅客", "呼叫分流2支援", "打開宣導大聲公", "關閉收卡紅龍避免收卡旅客進入"],
+      "correct": 1
+    },
+    {
+      "question": "關於CD區行動電源何者錯誤？",
+      "options": ["日夜需要交接清楚", "不需要充電及回收", "需要充電及回收", "早上先確認有無電量"],
+      "correct": 2
+    },
+    {
+      "question": "駐外使節人員請問要引導至？",
+      "options": ["4線", "中間", "紅線", "綠線"],
+      "correct": 3
+    },
+    {
+      "question": "下列分流相關何者錯誤？",
+      "options": ["手推車優先引導3線", "備勤室消毒水固定A分流補充", "輪椅旅客分流需要幫忙開紅龍", "嬰兒推車走一二線"],
+      "correct": 1
+    },
+    {
+      "question": "下列分流相關何者正確？",
+      "options": ["旅客有推手推車，要攔住他們叫他們推回去", "收卡「未拿」卡片，請確認過機票，確認後再放綠線並宣導", "低風險旅客「想手檢」，一樣請他走綠線", "手檢旅客身上沒任何行李，一樣放紅線"],
+      "correct": 1
+    },
+    {
+      "question": "南方航空代號是？",
+      "options": ["ZC", "CA", "CZ", "QZ"],
+      "correct": 2
+    },
+    {
+      "question": "深圳航空代號是？",
+      "options": ["HZ", "ZH", "CZ", "HX"],
+      "correct": 1
+    },
+    {
+      "question": "釜山航空代號是？",
+      "options": ["XB", "OZ", "BX", "BR"],
+      "correct": 2
+    },
+    {
+      "question": "下列哪一個並非高風險地區？",
+      "options": ["曼谷", "馬尼拉", "寧波", "仙台"],
+      "correct": 3
+    },
+    {
+      "question": "如果遇到嬰兒車應該如何引導？",
+      "options": ["引導至3線", "走4線", "引導至1或2線", "固定走2線"],
+      "correct": 2
+    },
+    {
+      "question": "請問攝影監視器應該朝向?",
+      "options": ["朝向檢疫物棄置桶位置", "朝向手檢進入區域", "朝向分流方向", "朝向整條快速通道(綠線)"],
+      "correct": 2
+    },
+    {
+      "question": "確認公務機下列何者不正確?",
+      "options": ["WifI需要保持關閉", "基地台需要保持打開", "WifI需要保持開啟", "需要保持是手機的網路"],
+      "correct": 2
+    },
+    {
+      "question": "如果遇到剛剛已過手檢的旅客再回來買東西應該?",
+      "options": ["手檢背包行李後，走綠線", "直接走快速通關", "引導旅客至手檢", "回報是買免稅，請旅客走快速通道"],
+      "correct": 2
+    },
+    {
+      "question": "當有手上只有拿一條香菸，並無任何行李時...",
+      "options": ["開4線給旅客走過去", "請旅客走手檢區", "請旅客走快速通道(綠線)", "對講機詢問可否通過"],
+      "correct": 2
+    },
+    {
+      "question": "關於電霸與監視器何者錯誤?",
+      "options": ["確認有無顯示DC", "查看電霸是否保持通電", "按壓LED中間按鈕3秒是開機", "只需要顯示DC就好"],
+      "correct": 2
     }
-    ],
-"food": [
-  {
-    question: "蘋果的英文是？",
-    options: ["apple", "april", "ample", "ankle"],
-    correct: 0
-  },
-  {
-    question: "香蕉的英文是？",
-    options: ["balance", "banana", "bandana", "bamboo"],
-    correct: 1
-  },
-  {
-    question: "葡萄的英文是？",
-    options: ["graph", "grasp", "grape", "grace"],
-    correct: 2
-  },
-  {
-    question: "鳳梨的英文是？",
-    options: ["pineapple", "principle", "pipeline", "pinnacle"],
-    correct: 0
-  },
-  {
-    question: "芒果的英文是？",
-    options: ["manage", "mango", "manner", "marble"],
-    correct: 1
-  },
-  {
-    question: "草莓的英文是？",
-    options: ["strategy", "strawberry", "structure", "struggle"],
-    correct: 1
-  },
-  {
-    question: "西瓜的英文是？",
-    options: ["watermelon", "waterfall", "warehouse", "wardrobe"],
-    correct: 0
-  },
-  {
-    question: "檸檬的英文是？",
-    options: ["lemon", "melon", "lesson", "legend"],
-    correct: 0
-  },
-  {
-    question: "桃子的英文是？",
-    options: ["peace", "peach", "pearl", "panel"],
-    correct: 1
-  },
-  {
-    question: "櫻桃的英文是？",
-    options: ["charity", "chamber", "cherry", "cheese"],
-    correct: 2
-  },
-  {
-    question: "奇異果的英文是？",
-    options: ["kiwi", "king", "kind", "kick"],
-    correct: 0
-  },
-  {
-    question: "梨子的英文是？",
-    options: ["pair", "pear", "park", "part"],
-    correct: 1
-  },
-  {
-    question: "藍莓的英文是？",
-    options: ["blueberry", "blueprint", "bluebird", "bluebell"],
-    correct: 0
-  },
-  {
-    question: "木瓜的英文是？",
-    options: ["papaya", "parade", "palace", "package"],
-    correct: 0
-  },
-  {
-    question: "楊桃的英文是？",
-    options: ["starfish", "starfruit", "starlight", "standard"],
-    correct: 1
-  },
-  {
-    question: "椰子的英文是？",
-    options: ["coconut", "cocoon", "cocktail", "cockpit"],
-    correct: 0
-  },
-  {
-    question: "石榴的英文是？",
-    options: ["pomegranate", "pomegranite", "pomelo", "pumpkin"],
-    correct: 0
-  },
-  {
-    question: "火龍果的英文是？",
-    options: ["dragon fly", "dragon fruit", "dragon boat", "dragon dance"],
-    correct: 1
-  },
-  {
-    question: "牛肉的英文是？",
-    options: ["beach", "beast", "beard", "beef"],
-    correct: 3
-  },
-  {
-    question: "豬肉的英文是？",
-    options: ["park", "pork", "port", "post"],
-    correct: 1
-  },
-  {
-    question: "雞肉的英文是？",
-    options: ["chicken", "kitchen", "children", "chimney"],
-    correct: 0
-  },
-  {
-    question: "羊肉的英文是？",
-    options: ["lamp", "lamb", "land", "lane"],
-    correct: 1
-  },
-  {
-    question: "火腿的英文是？",
-    options: ["hand", "hard", "ham", "hat"],
-    correct: 2
-  },
-  {
-    question: "香腸的英文是？",
-    options: ["sandwich", "sausage", "savage", "saucer"],
-    correct: 1
-  },
-  {
-    question: "培根的英文是？",
-    options: ["beacon", "become", "bacon", "basket"],
-    correct: 2
-  },
-  {
-    question: "火雞肉的英文是？",
-    options: ["turkey", "turnip", "turtle", "tunnel"],
-    correct: 0
-  },
-  {
-    question: "鴨肉的英文是？",
-    options: ["duck", "dust", "dusk", "duty"],
-    correct: 0
-  },
-  {
-    question: "鹿肉的英文是？",
-    options: ["version", "venison", "veteran", "vessel"],
-    correct: 1
-  },
-  {
-    question: "兔肉的英文是？",
-    options: ["rabbit", "racket", "radius", "random"],
-    correct: 0
-  },
-  {
-    question: "牛排的英文是？",
-    options: ["stake", "steak", "steam", "steel"],
-    correct: 1
-  },
-  {
-    question: "肉丸的英文是？",
-    options: ["meatball", "meetball", "metalball", "medalball"],
-    correct: 0
-  },
-  {
-    question: "牛腩的英文是？",
-    options: ["bracket", "blanket", "brisket", "bucket"],
-    correct: 2
-  },
-  {
-    question: "牛肋排的英文是？",
-    options: ["ribs", "rips", "rice", "rich"],
-    correct: 0
-  },
-  {
-    question: "豬排的英文是？",
-    options: ["pork ship", "pork shop", "pork chip", "pork chop"],
-    correct: 3
-  },
-  {
-    question: "雞翅的英文是？",
-    options: ["chicken wings", "chicken rings", "chicken kings", "chicken things"],
-    correct: 0
-  },
-  {
-    question: "雞胸肉的英文是？",
-    options: ["chicken beast", "chicken breast", "chicken best", "chicken blast"],
-    correct: 1
-  },
-  {
-    question: "肉鬆的英文是？",
-    options: ["pork gloss", "pork floss", "pork cross", "pork gross"],
-    correct: 1
-  },
-  {
-    question: "高麗菜的英文是？",
-    options: ["garbage", "cabbage", "baggage", "package"],
-    correct: 1
-  },
-  {
-    question: "胡蘿蔔的英文是？",
-    options: ["carpet", "carbon", "carrot", "carton"],
-    correct: 2
-  },
-  {
-    question: "番茄的英文是？",
-    options: ["tomato", "tornado", "tobacco", "torpedo"],
-    correct: 0
-  },
-  {
-    question: "黃瓜的英文是？",
-    options: ["cucumber", "customer", "computer", "culture"],
-    correct: 0
-  },
-  {
-    question: "菠菜的英文是？",
-    options: ["spinach", "spanish", "speech", "special"],
-    correct: 0
-  },
-  {
-    question: "洋蔥的英文是？",
-    options: ["ocean", "onion", "option", "organ"],
-    correct: 1
-  },
-  {
-    question: "青椒的英文是？",
-    options: ["green paper", "green pepper", "green proper", "greenpper"],
-    correct: 1
-  },
-  {
-    question: "花椰菜的英文是？",
-    options: ["cauliflower", "sunflower", "wallflower", "cornflower"],
-    correct: 0
-  },
-  {
-    question: "茄子的英文是？",
-    options: ["elephant", "eggplant", "elegant", "element"],
-    correct: 1
-  },
-  {
-    question: "地瓜的英文是？",
-    options: ["sweet potato", "sweet tomato", "sweet photo", "sweet motto"],
-    correct: 0
-  },
-  {
-    question: "糖果的英文是？",
-    options: ["candy", "candle", "cancel", "canvas"],
-    correct: 0
-  },
-  {
-    question: "肉乾的英文是？",
-    options: ["jewel", "jersey", "jelly", "jerky"],
-    correct: 3
-  },
-  {
-    question: "種子的英文是？",
-    options: ["seems", "seven", "seeds", "sense"],
-    correct: 2
-  },
-  {
-    question: "全熟的英文是？",
-    options: ["well done", "well gone", "well known", "well worn"],
-    correct: 0
-  },
-  {
-    question: "油的英文是？",
-    options: ["oil", "owl", "old", "our"],
-    correct: 0
-  },
-  {
-    question: "生菜的英文是？",
-    options: ["letter", "little", "lettuce", "listen"],
-    correct: 2
-  },
-  {
-    question: "往前的英文是？",
-    options: ["forward", "toward", "reward", "awkward"],
-    correct: 0
-  },
-  {
-    question: "檢查的英文是？",
-    options: ["check", "cheek", "chess", "chest"],
-    correct: 0
-  },
-  {
-    question: "打開的英文是？",
-    options: ["open", "opera", "often", "ocean"],
-    correct: 0
-  },
-  {
-    question: "肥皂的英文是？",
-    options: ["soap", "soup", "shop", "stop"],
-    correct: 0
-  },
-  {
-    question: "衣服的英文是？",
-    options: ["clothes", "clouds", "clocks", "clubs"],
-    correct: 0
-  },
-  {
-    question: "手機的英文是？",
-    options: ["mobile phone", "mobile home", "mobile bone", "mobile zone"],
-    correct: 0
-  },
-  {
-    question: "眼鏡的英文是？",
-    options: ["grasses", "glasses", "classes", "masses"],
-    correct: 1
-  },
-  {
-    question: "鞋子的英文是？",
-    options: ["shoes", "shows", "shops", "shots"],
-    correct: 0
-  },
-  {
-    question: "熱狗的英文是？",
-    options: ["hot dog", "hot fog", "hot log", "hot hog"],
-    correct: 0
-  },
-  {
-    question: "三明治的英文是？",
-    options: ["sandwich", "sandwish", "handwich", "bandwich"],
-    correct: 0
-  },
-  {
-    question: "餅乾的英文是？",
-    options: ["cookie", "cooker", "corner", "copper"],
-    correct: 0
-  },
-  {
-    question: "寵物餅乾的英文是？",
-    options: ["pet sweet", "pet street", "pet treat", "pet meet"],
-    correct: 2
-  },
-  {
-    question: "機票的英文是？",
-    options: ["plain ticket", "plane ticket", "plant ticket", "planet ticket"],
-    correct: 1
-  },
-  {
-    question: "入境的英文是？",
-    options: ["immigration", "imagination", "imitation", "invitation"],
-    correct: 0
-  },
-  {
-    question: "出境的英文是？",
-    options: ["emigration", "immigration", "education", "examination"],
-    correct: 0
-  },
-  {
-    question: "皮夾的英文是？",
-    options: ["winter", "water", "wallet", "wonder"],
-    correct: 2
-  },
-  {
-    question: "行李的英文是？",
-    options: ["leakage", "language", "linkage", "luggage"],
-    correct: 3
-  },
-  {
-    question: "花生的英文是？",
-    options: ["peanut", "peacock", "peasant", "pleasant"],
-    correct: 0
-  },
-  {
-    question: "玉米的英文是？",
-    options: ["coin", "core", "corn", "cord"],
-    correct: 2
-  },
-  {
-    question: "肉製品的英文是？",
-    options: ["meat products", "meet products", "neat products", "heat products"],
-    correct: 0
-  },
-  {
-    question: "果乾的英文是？",
-    options: ["tried fruit", "fried fruit", "dried fruit", "cried fruit"],
-    correct: 2
-  },
-  {
-    question: "鮮花的英文是？",
-    options: ["fresh flowers", "flesh flowers", "flash flowers", "flush flowers"],
-    correct: 0
-  },
-  {
-    question: "葉子的英文是？",
-    options: ["leaf", "beef", "deaf", "reef"],
-    correct: 0
-  },
-  {
-    question: "紅豆的英文是？",
-    options: ["red bean", "red been", "red dean", "red lean"],
-    correct: 0
-  },
-  {
-    question: "垃圾桶的英文是？",
-    options: ["trash can", "trash van", "trash pan", "trash man"],
-    correct: 0
-  },
-  {
-    question: "走道的英文是？",
-    options: ["able", "isle", "aisle", "angle"],
-    correct: 2
-  },
-  {
-    question: "左轉的英文是？",
-    options: ["turn left", "turn lift", "turn loft", "turn lost"],
-    correct: 0
-  },
-  {
-    question: "右轉的英文是？",
-    options: ["turn sight", "turn light", "turn night", "turn right"],
-    correct: 3
-  },
-  {
-    question: "直走的英文是？",
-    options: ["go street", "go stream", "go straight", "go strong"],
-    correct: 2
-  },
-  {
-    question: "機場的英文是？",
-    options: ["airpost", "airpart", "airpot", "airport"],
-    correct: 3
-  },
-  {
-    question: "登機口的英文是？",
-    options: ["gete", "gate", "hate", "late"],
-    correct: 1
-  },
-  {
-    question: "登機證的英文是？",
-    options: ["boarding bass", "boarding mass", "boarding pass", "boarding class"],
-    correct: 2
-  },
-  {
-    question: "行李箱的英文是？",
-    options: ["staircase", "showcase", "briefcase", "suitcase"],
-    correct: 3
-  },
-  {
-    question: "托運行李的英文是？",
-    options: ["checked baggage", "chicken baggage", "chosen baggage", "changed baggage"],
-    correct: 0
-  },
-  {
-    question: "手提行李的英文是？",
-    options: ["carry-on luggage", "carry-in luggage", "carry-up luggage", "carry-out luggage"],
-    correct: 0
-  },
-  {
-    question: "安檢的英文是？",
-    options: ["security check", "security cheek", "security chess", "security chest"],
-    correct: 0
-  },
-  {
-    question: "海關的英文是？",
-    options: ["costumes", "customers", "customs", "columns"],
-    correct: 2
-  },
-  {
-    question: "登機的英文是？",
-    options: ["boarding", "boating", "booking", "boxing"],
-    correct: 0
-  },
-  {
-    question: "起飛的英文是？",
-    options: ["take off", "makeup", "pickup", "backup"],
-    correct: 0
-  },
-  {
-    question: "降落的英文是？",
-    options: ["landing", "lending", "leading", "loading"],
-    correct: 0
-  },
-  {
-    question: "航班的英文是？",
-    options: ["flight", "fright", "bright", "light"],
-    correct: 0
-  },
-  {
-    question: "登機橋的英文是？",
-    options: ["jet bridge", "get bridge", "net bridge", "set bridge"],
-    correct: 0
-  },
-  {
-    question: "航空公司的英文是？",
-    options: ["hairline", "airline", "outline", "online"],
-    correct: 1
-  },
-  {
-    question: "候機室的英文是？",
-    options: ["waiting lounge", "waiting room", "waiting launch", "waiting lunch"],
-    correct: 0
-  },
-  {
-    question: "行李轉盤的英文是？",
-    options: ["baggage claim", "baggage clamp", "baggage clam", "baggage clan"],
-    correct: 0
-  },
-  {
-    question: "銀行的英文是？",
-    options: ["bank", "bark", "back", "bulk"],
-    correct: 0
-  },
-  {
-    question: "禁止錄影的英文是？",
-    options: ["no video recording", "no video recoding", "no video according", "no video rewarding"],
-    correct: 0
-  },
-  {
-    question: "禁止拍攝的英文是？",
-    options: ["no photography", "no biography", "no geography", "no typography"],
-    correct: 0
-  },
-  {
-    question: "請問有攜帶肉製品嗎?的英文是？",
-    options: ["Do you have any meat products?", "Do you have any meet products?", "Do you have any neat products?", "Do you have any heat products?"],
-    correct: 0
-  },
-  {
-    question: "卡片回收的英文是？",
-    options: ["card reciting", "card recycling", "card receiving", "card recording"],
-    correct: 1
-  },
-  {
-    question: "麻煩旁邊稍等的英文是？",
-    options: ["Please wait inside", "Please wait outside", "Please wait aside", "Please wait beside"],
-    correct: 2
-  },
-  {
-    question: "這個請拿著的英文是？",
-    options: ["Please fold this", "Please cold this", "Please told this", "Please hold this"],
-    correct: 3
-  },
-  {
-    question: "請問有帶到新鮮水果或是肉製品嗎?的英文是？",
-    options: ["Do you have flesh fruit or meet products?", "Do you have fresh fruit or meat products?", "Do you have flash fruit or neat products?", "Do you have fresh fruit or heat products?"],
-    correct: 1
-  },
-  {
-    question: "這個是生的還是熟的?的英文是？",
-    options: ["Is this row or looked?", "Is this saw or booked?", "Is this raw or cooked?", "Is this law or hooked?"],
-    correct: 2
-  },
-  {
-    question: "不好意思，請問您可以移到這邊一下嗎?的英文是？",
-    options: ["Excuse me, could you love here?", "Excuse me, could you prove here?", "Excuse me, could you remove here?", "Excuse me, could you move here?"],
-    correct: 3
-  },
-  {
-    question: "泥土的英文是？",
-    options: ["boil", "soil", "coil", "foil"],
-    correct: 1
-  },
-  {
-    question: "木頭的英文是？",
-    options: ["word", "wool", "wood", "world"],
-    correct: 2
-  }
   ],
+  "food1": [
+    {
+      "question": "蘋果的英文是？",
+      "options": ["apple", "april", "ample", "ankle"],
+      "correct": 0
+    },
+    {
+      "question": "泥土的英文是？",
+      "options": ["boil", "soil", "coil", "foil"],
+      "correct": 1
+    },
+    {
+      "question": "木頭的英文是？",
+      "options": ["word", "wool", "wood", "world"],
+      "correct": 2
+    },
+    {
+      "question": "雞肉的英文是？",
+      "options": ["kitchen", "chicken", "children", "chosen"],
+      "correct": 1
+    },
+    {
+      "question": "牛肉的英文是？",
+      "options": ["beef", "beer", "been", "bear"],
+      "correct": 0
+    },
+    {
+      "question": "豬肉的英文是？",
+      "options": ["park", "port", "pork", "part"],
+      "correct": 2
+    },
+    {
+      "question": "培根的英文是？",
+      "options": ["beacon", "bacon", "broken", "bucket"],
+      "correct": 1
+    },
+    {
+      "question": "火腿腸的英文是？",
+      "options": ["ham sausage", "home storage", "hand savage", "head surface"],
+      "correct": 0
+    },
+    {
+      "question": "三明治的英文是？",
+      "options": ["sandwich", "sandals", "standard", "sunlight"],
+      "correct": 0
+    },
+    {
+      "question": "漢堡的英文是？",
+      "options": ["hunger", "hamburger", "hamster", "hammer"],
+      "correct": 1
+    },
+    {
+      "question": "糖果的英文是？",
+      "options": ["candle", "cancel", "candy", "camera"],
+      "correct": 2
+    },
+    {
+      "question": "生菜的英文是？",
+      "options": ["letter", "little", "latter", "lettuce"],
+      "correct": 3
+    },
+    {
+      "question": "餅乾的英文是？",
+      "options": ["cookie", "cooking", "corner", "copper"],
+      "correct": 0
+    },
+    {
+      "question": "水果的英文是？",
+      "options": ["front", "fruit", "frost", "first"],
+      "correct": 1
+    },
+    {
+      "question": "肉的英文是？",
+      "options": ["meet", "meal", "meat", "mean"],
+      "correct": 2
+    },
+    {
+      "question": "肉乾的英文是？",
+      "options": ["jerky", "jacket", "jungle", "junior"],
+      "correct": 0
+    },
+    {
+      "question": "肉製品的英文是？",
+      "options": ["meat products", "meet problems", "main projects", "most progress"],
+      "correct": 0
+    },
+    {
+      "question": "新鮮的英文是？",
+      "options": ["flesh", "flash", "fresh", "crash"],
+      "correct": 2
+    },
+    {
+      "question": "肥皂的英文是？",
+      "options": ["soup", "soap", "shop", "stop"],
+      "correct": 1
+    },
+    {
+      "question": "種子的英文是？",
+      "options": ["seeds", "needs", "feeds", "deeds"],
+      "correct": 0
+    }
+  ],
+  "food": [
+    {
+      "question": "蘋果的英文是？",
+      "options": ["apple", "april", "ample", "ankle"],
+      "correct": 0
+    },
+    {
+      "question": "香蕉的英文是？",
+      "options": ["balance", "banana", "bandana", "bamboo"],
+      "correct": 1
+    },
+    {
+      "question": "葡萄的英文是？",
+      "options": ["graph", "grasp", "grape", "grace"],
+      "correct": 2
+    },
+    {
+      "question": "鳳梨的英文是？",
+      "options": ["pineapple", "principle", "pipeline", "pinnacle"],
+      "correct": 0
+    },
+    {
+      "question": "芒果的英文是？",
+      "options": ["manage", "mango", "manner", "marble"],
+      "correct": 1
+    },
+    {
+      "question": "草莓的英文是？",
+      "options": ["strategy", "strawberry", "structure", "struggle"],
+      "correct": 1
+    },
+    {
+      "question": "西瓜的英文是？",
+      "options": ["watermelon", "waterfall", "warehouse", "wardrobe"],
+      "correct": 0
+    },
+    {
+      "question": "檸檬的英文是？",
+      "options": ["lemon", "melon", "lesson", "legend"],
+      "correct": 0
+    },
+    {
+      "question": "桃子的英文是？",
+      "options": ["peace", "peach", "pearl", "panel"],
+      "correct": 1
+    },
+    {
+      "question": "櫻桃的英文是？",
+      "options": ["charity", "chamber", "cherry", "cheese"],
+      "correct": 2
+    },
+    {
+      "question": "奇異果的英文是？",
+      "options": ["kiwi", "king", "kind", "kick"],
+      "correct": 0
+    },
+    {
+      "question": "梨子的英文是？",
+      "options": ["pair", "pear", "park", "part"],
+      "correct": 1
+    },
+    {
+      "question": "藍莓的英文是？",
+      "options": ["blueberry", "blueprint", "bluebird", "bluebell"],
+      "correct": 0
+    },
+    {
+      "question": "木瓜的英文是？",
+      "options": ["papaya", "parade", "palace", "package"],
+      "correct": 0
+    },
+    {
+      "question": "楊桃的英文是？",
+      "options": ["starfish", "starfruit", "starlight", "standard"],
+      "correct": 1
+    },
+    {
+      "question": "椰子的英文是？",
+      "options": ["coconut", "cocoon", "cocktail", "cockpit"],
+      "correct": 0
+    },
+    {
+      "question": "石榴的英文是？",
+      "options": ["pomegranate", "pomegranite", "pomelo", "pumpkin"],
+      "correct": 0
+    },
+    {
+      "question": "火龍果的英文是？",
+      "options": ["dragon fly", "dragon fruit", "dragon boat", "dragon dance"],
+      "correct": 1
+    },
+    {
+      "question": "牛肉的英文是？",
+      "options": ["beach", "beast", "beard", "beef"],
+      "correct": 3
+    },
+    {
+      "question": "豬肉的英文是？",
+      "options": ["park", "pork", "port", "post"],
+      "correct": 1
+    },
+    {
+      "question": "雞肉的英文是？",
+      "options": ["chicken", "kitchen", "children", "chimney"],
+      "correct": 0
+    },
+    {
+      "question": "羊肉的英文是？",
+      "options": ["lamp", "lamb", "land", "lane"],
+      "correct": 1
+    },
+    {
+      "question": "火腿的英文是？",
+      "options": ["hand", "hard", "ham", "hat"],
+      "correct": 2
+    },
+    {
+      "question": "香腸的英文是？",
+      "options": ["sandwich", "sausage", "savage", "saucer"],
+      "correct": 1
+    },
+    {
+      "question": "培根的英文是？",
+      "options": ["beacon", "become", "bacon", "basket"],
+      "correct": 2
+    },
+    {
+      "question": "火雞肉的英文是？",
+      "options": ["turkey", "turnip", "turtle", "tunnel"],
+      "correct": 0
+    },
+    {
+      "question": "鴨肉的英文是？",
+      "options": ["duck", "dust", "dusk", "duty"],
+      "correct": 0
+    },
+    {
+      "question": "鹿肉的英文是？",
+      "options": ["version", "venison", "veteran", "vessel"],
+      "correct": 1
+    },
+    {
+      "question": "兔肉的英文是？",
+      "options": ["rabbit", "racket", "radius", "random"],
+      "correct": 0
+    },
+    {
+      "question": "牛排的英文是？",
+      "options": ["stake", "steak", "steam", "steel"],
+      "correct": 1
+    },
+    {
+      "question": "肉丸的英文是？",
+      "options": ["meatball", "meetball", "metalball", "medalball"],
+      "correct": 0
+    },
+    {
+      "question": "牛腩的英文是？",
+      "options": ["bracket", "blanket", "brisket", "bucket"],
+      "correct": 2
+    },
+    {
+      "question": "牛肋排的英文是？",
+      "options": ["ribs", "rips", "rice", "rich"],
+      "correct": 0
+    },
+    {
+      "question": "豬排的英文是？",
+      "options": ["pork ship", "pork shop", "pork chip", "pork chop"],
+      "correct": 3
+    },
+    {
+      "question": "雞翅的英文是？",
+      "options": ["chicken wings", "chicken rings", "chicken kings", "chicken things"],
+      "correct": 0
+    },
+    {
+      "question": "雞胸肉的英文是？",
+      "options": ["chicken beast", "chicken breast", "chicken best", "chicken blast"],
+      "correct": 1
+    },
+    {
+      "question": "肉鬆的英文是？",
+      "options": ["pork gloss", "pork floss", "pork cross", "pork gross"],
+      "correct": 1
+    },
+    {
+      "question": "高麗菜的英文是？",
+      "options": ["garbage", "cabbage", "baggage", "package"],
+      "correct": 1
+    },
+    {
+      "question": "胡蘿蔔的英文是？",
+      "options": ["carpet", "carbon", "carrot", "carton"],
+      "correct": 2
+    },
+    {
+      "question": "番茄的英文是？",
+      "options": ["tomato", "tornado", "tobacco", "torpedo"],
+      "correct": 0
+    },
+    {
+      "question": "黃瓜的英文是？",
+      "options": ["cucumber", "customer", "computer", "culture"],
+      "correct": 0
+    },
+    {
+      "question": "菠菜的英文是？",
+      "options": ["spinach", "spanish", "speech", "special"],
+      "correct": 0
+    },
+    {
+      "question": "洋蔥的英文是？",
+      "options": ["ocean", "onion", "option", "organ"],
+      "correct": 1
+    },
+    {
+      "question": "青椒的英文是？",
+      "options": ["green paper", "green pepper", "green proper", "greenpper"],
+      "correct": 1
+    },
+    {
+      "question": "花椰菜的英文是？",
+      "options": ["cauliflower", "sunflower", "wallflower", "cornflower"],
+      "correct": 0
+    },
+    {
+      "question": "茄子的英文是？",
+      "options": ["elephant", "eggplant", "elegant", "element"],
+      "correct": 1
+    },
+    {
+      "question": "地瓜的英文是？",
+      "options": ["sweet potato", "sweet tomato", "sweet photo", "sweet motto"],
+      "correct": 0
+    },
+    {
+      "question": "糖果的英文是？",
+      "options": ["candy", "candle", "cancel", "canvas"],
+      "correct": 0
+    },
+    {
+      "question": "肉乾的英文是？",
+      "options": ["jewel", "jersey", "jelly", "jerky"],
+      "correct": 3
+    },
+    {
+      "question": "種子的英文是？",
+      "options": ["seems", "seven", "seeds", "sense"],
+      "correct": 2
+    },
+    {
+      "question": "全熟的英文是？",
+      "options": ["well done", "well gone", "well known", "well worn"],
+      "correct": 0
+    },
+    {
+      "question": "油的英文是？",
+      "options": ["oil", "owl", "old", "our"],
+      "correct": 0
+    },
+    {
+      "question": "生菜的英文是？",
+      "options": ["letter", "little", "lettuce", "listen"],
+      "correct": 2
+    },
+    {
+      "question": "往前的英文是？",
+      "options": ["forward", "toward", "reward", "awkward"],
+      "correct": 0
+    },
+    {
+      "question": "檢查的英文是？",
+      "options": ["check", "cheek", "chess", "chest"],
+      "correct": 0
+    },
+    {
+      "question": "打開的英文是？",
+      "options": ["open", "opera", "often", "ocean"],
+      "correct": 0
+    },
+    {
+      "question": "肥皂的英文是？",
+      "options": ["soap", "soup", "shop", "stop"],
+      "correct": 0
+    },
+    {
+      "question": "衣服的英文是？",
+      "options": ["clothes", "clouds", "clocks", "clubs"],
+      "correct": 0
+    },
+    {
+      "question": "手機的英文是？",
+      "options": ["mobile phone", "mobile home", "mobile bone", "mobile zone"],
+      "correct": 0
+    },
+    {
+      "question": "眼鏡的英文是？",
+      "options": ["grasses", "glasses", "classes", "masses"],
+      "correct": 1
+    },
+    {
+      "question": "鞋子的英文是？",
+      "options": ["shoes", "shows", "shops", "shots"],
+      "correct": 0
+    },
+    {
+      "question": "熱狗的英文是？",
+      "options": ["hot dog", "hot fog", "hot log", "hot hog"],
+      "correct": 0
+    },
+    {
+      "question": "三明治的英文是？",
+      "options": ["sandwich", "sandwish", "handwich", "bandwich"],
+      "correct": 0
+    },
+    {
+      "question": "餅乾的英文是？",
+      "options": ["cookie", "cooker", "corner", "copper"],
+      "correct": 0
+    },
+    {
+      "question": "寵物餅乾的英文是？",
+      "options": ["pet sweet", "pet street", "pet treat", "pet meet"],
+      "correct": 2
+    },
+    {
+      "question": "機票的英文是？",
+      "options": ["plain ticket", "plane ticket", "plant ticket", "planet ticket"],
+      "correct": 1
+    },
+    {
+      "question": "入境的英文是？",
+      "options": ["immigration", "imagination", "imitation", "invitation"],
+      "correct": 0
+    },
+    {
+      "question": "出境的英文是？",
+      "options": ["emigration", "immigration", "education", "examination"],
+      "correct": 0
+    },
+    {
+      "question": "皮夾的英文是？",
+      "options": ["winter", "water", "wallet", "wonder"],
+      "correct": 2
+    },
+    {
+      "question": "行李的英文是？",
+      "options": ["leakage", "language", "linkage", "luggage"],
+      "correct": 3
+    },
+    {
+      "question": "花生的英文是？",
+      "options": ["peanut", "peacock", "peasant", "pleasant"],
+      "correct": 0
+    },
+    {
+      "question": "玉米的英文是？",
+      "options": ["coin", "core", "corn", "cord"],
+      "correct": 2
+    },
+    {
+      "question": "肉製品的英文是？",
+      "options": ["meat products", "meet products", "neat products", "heat products"],
+      "correct": 0
+    },
+    {
+      "question": "果乾的英文是？",
+      "options": ["tried fruit", "fried fruit", "dried fruit", "cried fruit"],
+      "correct": 2
+    },
+    {
+      "question": "鮮花的英文是？",
+      "options": ["fresh flowers", "flesh flowers", "flash flowers", "flush flowers"],
+      "correct": 0
+    },
+    {
+      "question": "葉子的英文是？",
+      "options": ["leaf", "beef", "deaf", "reef"],
+      "correct": 0
+    },
+    {
+      "question": "紅豆的英文是？",
+      "options": ["red bean", "red been", "red dean", "red lean"],
+      "correct": 0
+    },
+    {
+      "question": "垃圾桶的英文是？",
+      "options": ["trash can", "trash van", "trash pan", "trash man"],
+      "correct": 0
+    },
+    {
+      "question": "走道的英文是？",
+      "options": ["able", "isle", "aisle", "angle"],
+      "correct": 2
+    },
+    {
+      "question": "左轉的英文是？",
+      "options": ["turn left", "turn lift", "turn loft", "turn lost"],
+      "correct": 0
+    },
+    {
+      "question": "右轉的英文是？",
+      "options": ["turn sight", "turn light", "turn night", "turn right"],
+      "correct": 3
+    },
+    {
+      "question": "直走的英文是？",
+      "options": ["go street", "go stream", "go straight", "go strong"],
+      "correct": 2
+    },
+    {
+      "question": "機場的英文是？",
+      "options": ["airpost", "airpart", "airpot", "airport"],
+      "correct": 3
+    },
+    {
+      "question": "登機口的英文是？",
+      "options": ["gete", "gate", "hate", "late"],
+      "correct": 1
+    },
+    {
+      "question": "登機證的英文是？",
+      "options": ["boarding bass", "boarding mass", "boarding pass", "boarding class"],
+      "correct": 2
+    },
+    {
+      "question": "行李箱的英文是？",
+      "options": ["staircase", "showcase", "briefcase", "suitcase"],
+      "correct": 3
+    },
+    {
+      "question": "托運行李的英文是？",
+      "options": ["checked baggage", "chicken baggage", "chosen baggage", "changed baggage"],
+      "correct": 0
+    },
+    {
+      "question": "手提行李的英文是？",
+      "options": ["carry-on luggage", "carry-in luggage", "carry-up luggage", "carry-out luggage"],
+      "correct": 0
+    },
+    {
+      "question": "安檢的英文是？",
+      "options": ["security check", "security cheek", "security chess", "security chest"],
+      "correct": 0
+    },
+    {
+      "question": "海關的英文是？",
+      "options": ["costumes", "customers", "customs", "columns"],
+      "correct": 2
+    },
+    {
+      "question": "登機的英文是？",
+      "options": ["boarding", "boating", "booking", "boxing"],
+      "correct": 0
+    },
+    {
+      "question": "起飛的英文是？",
+      "options": ["take off", "makeup", "pickup", "backup"],
+      "correct": 0
+    },
+    {
+      "question": "降落的英文是？",
+      "options": ["landing", "lending", "leading", "loading"],
+      "correct": 0
+    },
+    {
+      "question": "航班的英文是？",
+      "options": ["flight", "fright", "bright", "light"],
+      "correct": 0
+    },
+    {
+      "question": "登機橋的英文是？",
+      "options": ["jet bridge", "get bridge", "net bridge", "set bridge"],
+      "correct": 0
+    },
+    {
+      "question": "航空公司的英文是？",
+      "options": ["hairline", "airline", "outline", "online"],
+      "correct": 1
+    },
+    {
+      "question": "候機室的英文是？",  
+      "options": ["waiting lounge", "waiting room", "waiting launch", "waiting lunch"],
+      "correct": 0
+    },
+    {
+      "question": "行李轉盤的英文是？",
+      "options": ["baggage claim", "baggage clamp", "baggage clam", "baggage clan"],
+      "correct": 0
+    },
+    {
+      "question": "銀行的英文是？",
+      "options": ["bank", "bark", "back", "bulk"],
+      "correct": 0
+    },
+    {
+      "question": "禁止錄影的英文是？",
+      "options": ["no video recording", "no video recoding", "no video according", "no video rewarding"],
+      "correct": 0
+    },
+    {
+      "question": "禁止拍攝的英文是？",
+      "options": ["no photography", "no biography", "no geography", "no typography"],
+      "correct": 0
+    },
+    {
+      "question": "請問有攜帶肉製品嗎?的英文是？",
+      "options": ["Do you have any meat products?", "Do you have any meet products?", "Do you have any neat products?", "Do you have any heat products?"],
+      "correct": 0
+    },
+    {
+      "question": "卡片回收的英文是？",
+      "options": ["card reciting", "card recycling", "card receiving", "card recording"],
+      "correct": 1
+    },
+    {
+      "question": "麻煩旁邊稍等的英文是？",
+      "options": ["Please wait inside", "Please wait outside", "Please wait aside", "Please wait beside"],
+      "correct": 2
+    },
+    {
+      "question": "這個請拿著的英文是？",
+      "options": ["Please fold this", "Please cold this", "Please told this", "Please hold this"],
+      "correct": 3
+    },
+    {
+      "question": "請問有帶到新鮮水果或是肉製品嗎?的英文是？",
+      "options": ["Do you have flesh fruit or meet products?", "Do you have fresh fruit or meat products?", "Do you have flash fruit or neat products?", "Do you have fresh fruit or heat products?"],
+      "correct": 1
+    },
+    {
+      "question": "這個是生的還是熟的?的英文是？",
+      "options": ["Is this row or looked?", "Is this saw or booked?", "Is this raw or cooked?", "Is this law or hooked?"],
+      "correct": 2
+    },
+    {
+      "question": "不好意思，請問您可以移到這邊一下嗎?的英文是？",
+      "options": ["Excuse me, could you love here?", "Excuse me, could you prove here?", "Excuse me, could you remove here?", "Excuse me, could you move here?"],
+      "correct": 3
+    },
+    {
+      "question": "泥土的英文是？",
+      "options": ["boil", "soil", "coil", "foil"],
+      "correct": 1
+    },
+    {
+      "question": "木頭的英文是？",
+      "options": ["word", "wool", "wood", "world"],
+      "correct": 2
+    }
+  ],
+  "foodplus": [
+    {
+      "question": "蘋果的英文是？",
+      "options": ["apple", "april", "ample", "ankle"],
+      "correct": 0
+    },
+    {
+      "question": "香蕉的英文是？",
+      "options": ["balance", "banana", "bandana", "bamboo"],
+      "correct": 1
+    },
+    {
+      "question": "葡萄的英文是？",
+      "options": ["graph", "grasp", "grape", "grace"],
+      "correct": 2
+    },
+    {
+      "question": "鳳梨的英文是？",
+      "options": ["pineapple", "principle", "pipeline", "pinnacle"],
+      "correct": 0
+    },
+    {
+      "question": "芒果的英文是？",
+      "options": ["manage", "mango", "manner", "marble"],
+      "correct": 1
+    },
+    {
+      "question": "草莓的英文是？",
+      "options": ["strategy", "strawberry", "structure", "struggle"],
+      "correct": 1
+    },
+    {
+      "question": "西瓜的英文是？",
+      "options": ["watermelon", "waterfall", "warehouse", "wardrobe"],
+      "correct": 0
+    },
+    {
+      "question": "檸檬的英文是？",
+      "options": ["lemon", "melon", "lesson", "legend"],
+      "correct": 0
+    },
+    {
+      "question": "桃子的英文是？",
+      "options": ["peace", "peach", "pearl", "panel"],
+      "correct": 1
+    },
+    {
+      "question": "櫻桃的英文是？",
+      "options": ["charity", "chamber", "cherry", "cheese"],
+      "correct": 2
+    },
+    {
+      "question": "奇異果的英文是？",
+      "options": ["kiwi", "king", "kind", "kick"],
+      "correct": 0
+    },
+    {
+      "question": "梨子的英文是？",
+      "options": ["pair", "pear", "park", "part"],
+      "correct": 1
+    },
+    {
+      "question": "藍莓的英文是？",
+      "options": ["blueberry", "blueprint", "bluebird", "bluebell"],
+      "correct": 0
+    },
+    {
+      "question": "木瓜的英文是？",
+      "options": ["papaya", "parade", "palace", "package"],
+      "correct": 0
+    },
+    {
+      "question": "楊桃的英文是？",
+      "options": ["starfish", "starfruit", "starlight", "standard"],
+      "correct": 1
+    },
+    {
+      "question": "椰子的英文是？",
+      "options": ["coconut", "cocoon", "cocktail", "cockpit"],
+      "correct": 0
+    },
+    {
+      "question": "石榴的英文是？",
+      "options": ["pomegranate", "pomegranite", "pomelo", "pumpkin"],
+      "correct": 0
+    },
+    {
+      "question": "火龍果的英文是？",
+      "options": ["dragon fly", "dragon fruit", "dragon boat", "dragon dance"],
+      "correct": 1
+    },
+    {
+      "question": "柳橙的英文是？",
+      "options": ["orange", "origin", "organ", "order"],
+      "correct": 0
+    },
+    {
+      "question": "葡萄柚的英文是？",
+      "options": ["grapefruit", "grapenut", "grapevine", "grapeshot"],
+      "correct": 0
+    },
+    {
+      "question": "酪梨的英文是？",
+      "options": ["avocado", "advocate", "average", "avenue"],
+      "correct": 0
+    },
+    {
+      "question": "荔枝的英文是？",
+      "options": ["lychee", "lucky", "luxury", "lumber"],
+      "correct": 0
+    },
+    {
+      "question": "龍眼的英文是？",
+      "options": ["longan", "longer", "london", "lonely"],
+      "correct": 0
+    },
+    {
+      "question": "百香果的英文是？",
+      "options": ["passion fruit", "fashion fruit", "nation fruit", "ration fruit"],
+      "correct": 0
+    },
+    {
+      "question": "柿子的英文是？",
+      "options": ["persimmon", "permission", "precision", "provision"],
+      "correct": 0
+    },
 
-        "foodplus": [
-        // 水果類 (25題)
-        {
-            question: "蘋果的英文是？",
-            options: ["apple", "april", "ample", "ankle"],
-            correct: 0
-        },
-        {
-            question: "香蕉的英文是？",
-            options: ["balance", "banana", "bandana", "bamboo"],
-            correct: 1
-        },
-        {
-            question: "葡萄的英文是？",
-            options: ["graph", "grasp", "grape", "grace"],
-            correct: 2
-        },
-        {
-            question: "鳳梨的英文是？",
-            options: ["pineapple", "principle", "pipeline", "pinnacle"],
-            correct: 0
-        },
-        {
-            question: "芒果的英文是？",
-            options: ["manage", "mango", "manner", "marble"],
-            correct: 1
-        },
-        {
-            question: "草莓的英文是？",
-            options: ["strategy", "strawberry", "structure", "struggle"],
-            correct: 1
-        },
-        {
-            question: "西瓜的英文是？",
-            options: ["watermelon", "waterfall", "warehouse", "wardrobe"],
-            correct: 0
-        },
-        {
-            question: "檸檬的英文是？",
-            options: ["lemon", "melon", "lesson", "legend"],
-            correct: 0
-        },
-        {
-            question: "桃子的英文是？",
-            options: ["peace", "peach", "pearl", "panel"],
-            correct: 1
-        },
-        {
-            question: "櫻桃的英文是？",
-            options: ["charity", "chamber", "cherry", "cheese"],
-            correct: 2
-        },
-        {
-            question: "奇異果的英文是？",
-            options: ["kiwi", "king", "kind", "kick"],
-            correct: 0
-        },
-        {
-            question: "梨子的英文是？",
-            options: ["pair", "pear", "park", "part"],
-            correct: 1
-        },
-        {
-            question: "藍莓的英文是？",
-            options: ["blueberry", "blueprint", "bluebird", "bluebell"],
-            correct: 0
-        },
-        {
-            question: "木瓜的英文是？",
-            options: ["papaya", "parade", "palace", "package"],
-            correct: 0
-        },
-        {
-            question: "楊桃的英文是？",
-            options: ["starfish", "starfruit", "starlight", "standard"],
-            correct: 1
-        },
-        {
-            question: "椰子的英文是？",
-            options: ["coconut", "cocoon", "cocktail", "cockpit"],
-            correct: 0
-        },
-        {
-            question: "石榴的英文是？",
-            options: ["pomegranate", "pomegranite", "pineapple", "persimmon"],
-            correct: 0
-        },
-        {
-            question: "火龍果的英文是？",
-            options: ["dragon fly", "dragon fruit", "dragon boat", "dragon dance"],
-            correct: 1
-        },
-        {
-            question: "柳橙的英文是？",
-            options: ["orange", "origin", "organ", "order"],
-            correct: 0
-        },
-        {
-            question: "葡萄柚的英文是？",
-            options: ["grapefruit", "grapenut", "grapevine", "grapeshot"],
-            correct: 0
-        },
-        {
-            question: "酪梨的英文是？",
-            options: ["avocado", "advocate", "average", "avenue"],
-            correct: 0
-        },
-        {
-            question: "荔枝的英文是？",
-            options: ["lychee", "lucky", "luxury", "lumber"],
-            correct: 0
-        },
-        {
-            question: "龍眼的英文是？",
-            options: ["longan", "longer", "london", "lonely"],
-            correct: 0
-        },
-        {
-            question: "百香果的英文是？",
-            options: ["passion fruit", "fashion fruit", "nation fruit", "ration fruit"],
-            correct: 0
-        },
-        {
-            question: "柿子的英文是？",
-            options: ["persimmon", "permission", "precision", "provision"],
-            correct: 0
-        },
+    {
+      "question": "牛肉的英文是？",
+      "options": ["beach", "beast", "beard", "beef"],
+      "correct": 3
+    },
+    {
+      "question": "豬肉的英文是？",
+      "options": ["park", "pork", "port", "post"],
+      "correct": 1
+    },
+    {
+      "question": "雞肉的英文是？",
+      "options": ["chicken", "kitchen", "children", "chimney"],
+      "correct": 0
+    },
+    {
+      "question": "羊肉的英文是？",
+      "options": ["lamp", "lamb", "land", "lane"],
+      "correct": 1
+    },
+    {
+      "question": "火腿的英文是？",
+      "options": ["hand", "hard", "ham", "hat"],
+      "correct": 2
+    },
+    {
+      "question": "香腸的英文是？",
+      "options": ["sandwich", "sausage", "savage", "saucer"],
+      "correct": 1
+    },
+    {
+      "question": "培根的英文是？",
+      "options": ["beacon", "become", "bacon", "basket"],
+      "correct": 2
+    },
+    {
+      "question": "火雞肉的英文是？",
+      "options": ["turkey", "turnip", "turtle", "tunnel"],
+      "correct": 0
+    },
+    {
+      "question": "鴨肉的英文是？",
+      "options": ["duck", "dust", "dusk", "duty"],
+      "correct": 0
+    },
+    {
+      "question": "鹿肉的英文是？",
+      "options": ["version", "venison", "veteran", "vessel"],
+      "correct": 1
+    },
+    {
+      "question": "兔肉的英文是？",
+      "options": ["rabbit", "racket", "radius", "random"],
+      "correct": 0
+    },
+    {
+      "question": "牛排的英文是？",
+      "options": ["stake", "steak", "steam", "steel"],
+      "correct": 1
+    },
+    {
+      "question": "肉丸的英文是？",
+      "options": ["meatball", "meetball", "metalball", "medalball"],
+      "correct": 0
+    },
+    {
+      "question": "牛腩的英文是？",
+      "options": ["bracket", "blanket", "brisket", "bucket"],
+      "correct": 2
+    },
+    {
+      "question": "牛肋排的英文是？",
+      "options": ["ribs", "rips", "rice", "rich"],
+      "correct": 0
+    },
+    {
+      "question": "豬排的英文是？",
+      "options": ["pork ship", "pork shop", "pork chip", "pork chop"],
+      "correct": 3
+    },
+    {
+      "question": "雞翅的英文是？",
+      "options": ["chicken wings", "chicken rings", "chicken kings", "chicken things"],
+      "correct": 0
+    },
+    {
+      "question": "雞胸肉的英文是？",
+      "options": ["chicken beast", "chicken breast", "chicken best", "chicken blast"],
+      "correct": 1
+    },
+    {
+      "question": "肉鬆的英文是？",
+      "options": ["pork gloss", "pork floss", "pork cross", "pork gross"],
+      "correct": 1
+    },
+    {
+      "question": "肉乾的英文是？",
+      "options": ["jewel", "jersey", "jelly", "jerky"],
+      "correct": 3
+    },
+    {
+      "question": "牛舌的英文是？",
+      "options": ["beef tongue", "beef young", "beef strong", "beef long"],
+      "correct": 0
+    },
+    {
+      "question": "豬腳的英文是？",
+      "options": ["pork hock", "pork hook", "pork hack", "pork hawk"],
+      "correct": 0
+    },
+    {
+      "question": "雞腿的英文是？",
+      "options": ["chicken leg", "chicken egg", "chicken bag", "chicken tag"],
+      "correct": 0
+    },
+    {
+      "question": "內臟的英文是？",
+      "options": ["offal", "awful", "offer", "after"],
+      "correct": 0
+    },
+    {
+      "question": "絞肉的英文是？",
+      "options": ["ground meat", "round meat", "sound meat", "found meat"],
+      "correct": 0
+    },
 
-        // 肉類 (25題)
-        {
-            question: "牛肉的英文是？",
-            options: ["beach", "beast", "beard", "beef"],
-            correct: 3
-        },
-        {
-            question: "豬肉的英文是？",
-            options: ["park", "pork", "port", "post"],
-            correct: 1
-        },
-        {
-            question: "雞肉的英文是？",
-            options: ["chicken", "kitchen", "children", "chimney"],
-            correct: 0
-        },
-        {
-            question: "羊肉的英文是？",
-            options: ["lamp", "lamb", "land", "lane"],
-            correct: 1
-        },
-        {
-            question: "火腿的英文是？",
-            options: ["hand", "hard", "ham", "hat"],
-            correct: 2
-        },
-        {
-            question: "香腸的英文是？",
-            options: ["sandwich", "sausage", "savage", "saucer"],
-            correct: 1
-        },
-        {
-            question: "培根的英文是？",
-            options: ["beacon", "become", "bacon", "basket"],
-            correct: 2
-        },
-        {
-            question: "火雞肉的英文是？",
-            options: ["turkey", "turnip", "turtle", "tunnel"],
-            correct: 0
-        },
-        {
-            question: "鴨肉的英文是？",
-            options: ["duck", "dust", "dusk", "duty"],
-            correct: 0
-        },
-        {
-            question: "鹿肉的英文是？",
-            options: ["version", "venison", "veteran", "vessel"],
-            correct: 1
-        },
-        {
-            question: "兔肉的英文是？",
-            options: ["rabbit", "racket", "radius", "random"],
-            correct: 0
-        },
-        {
-            question: "牛排的英文是？",
-            options: ["stake", "steak", "steam", "steel"],
-            correct: 1
-        },
-        {
-            question: "肉丸的英文是？",
-            options: ["meatball", "meetball", "metalball", "medalball"],
-            correct: 0
-        },
-        {
-            question: "牛腩的英文是？",
-            options: ["bracket", "blanket", "brisket", "bucket"],
-            correct: 2
-        },
-        {
-            question: "牛肋排的英文是？",
-            options: ["ribs", "rips", "rice", "rich"],
-            correct: 0
-        },
-        {
-            question: "豬排的英文是？",
-            options: ["pork ship", "pork shop", "pork chip", "pork chop"],
-            correct: 3
-        },
-        {
-            question: "雞翅的英文是？",
-            options: ["chicken wings", "chicken rings", "chicken kings", "chicken things"],
-            correct: 0
-        },
-        {
-            question: "雞胸肉的英文是？",
-            options: ["chicken beast", "chicken breast", "chicken best", "chicken blast"],
-            correct: 1
-        },
-        {
-            question: "肉鬆的英文是？",
-            options: ["pork gloss", "pork floss", "pork cross", "pork gross"],
-            correct: 1
-        },
-        {
-            question: "肉乾的英文是？",
-            options: ["jewel", "jersey", "jelly", "jerky"],
-            correct: 3
-        },
-        {
-            question: "牛舌的英文是？",
-            options: ["beef tongue", "beef young", "beef strong", "beef long"],
-            correct: 0
-        },
-        {
-        question: "豬腳的英文是？",
-        options: ["pork hock", "pork hook", "pork hack", "pork hawk"],
-        correct: 0
-        },
-        {
-            question: "雞腿的英文是？",
-            options: ["chicken leg", "chicken egg", "chicken bag", "chicken tag"],
-            correct: 0
-        },
-        {
-            question: "內臟的英文是？",
-            options: ["offal", "awful", "offer", "after"],
-            correct: 0
-        },
-        {
-            question: "絞肉的英文是？",
-            options: ["ground meat", "round meat", "sound meat", "found meat"],
-            correct: 0
-        },
+    {
+      "question": "高麗菜的英文是？",
+      "options": ["garbage", "cabbage", "baggage", "package"],
+      "correct": 1
+    },
+    {
+      "question": "胡蘿蔔的英文是？",
+      "options": ["carpet", "carbon", "carrot", "carton"],
+      "correct": 2
+    },
+    {
+      "question": "番茄的英文是？",
+      "options": ["tomato", "tornado", "tobacco", "torpedo"],
+      "correct": 0
+    },
+    {
+      "question": "黃瓜的英文是？",
+      "options": ["cucumber", "customer", "computer", "culture"],
+      "correct": 0
+    },
+    {
+      "question": "菠菜的英文是？",
+      "options": ["spinach", "spanish", "speech", "special"],
+      "correct": 0
+    },
+    {
+      "question": "洋蔥的英文是？",
+      "options": ["ocean", "onion", "option", "organ"],
+      "correct": 1
+    },
+    {
+      "question": "青椒的英文是？",
+      "options": ["green paper", "green pepper", "green proper", "greenpper"],
+      "correct": 1
+    },
+    {
+      "question": "花椰菜的英文是？",
+      "options": ["cauliflower", "sunflower", "wallflower", "cornflower"],
+      "correct": 0
+    },
+    {
+      "question": "茄子的英文是？",
+      "options": ["elephant", "eggplant", "elegant", "element"],
+      "correct": 1
+    },
+    {
+      "question": "地瓜的英文是？",
+      "options": ["sweet potato", "sweet tomato", "sweet photo", "sweet motto"],
+      "correct": 0
+    },
+    {
+      "question": "生菜的英文是？",
+      "options": ["letter", "little", "lettuce", "listen"],
+      "correct": 2
+    },
+    {
+      "question": "白蘿蔔的英文是？",
+      "options": ["white radish", "white rabbit", "white rapid", "white radius"],
+      "correct": 0
+    },
+    {
+      "question": "韭菜的英文是？",
+      "options": ["leek", "leak", "lick", "luck"],
+      "correct": 0
+    },
+    {
+      "question": "芹菜的英文是？",
+      "options": ["celery", "salary", "cherry", "clergy"],
+      "correct": 0
+    },
+    {
+      "question": "玉米的英文是？",
+      "options": ["coin", "core", "corn", "cord"],
+      "correct": 2
+    },
+    {
+      "question": "豌豆的英文是？",
+      "options": ["pea", "tea", "sea", "bee"],
+      "correct": 0
+    },
+    {
+      "question": "四季豆的英文是？",
+      "options": ["green bean", "green been", "green dean", "green lean"],
+      "correct": 0
+    },
+    {
+      "question": "蘆筍的英文是？",
+      "options": ["asparagus", "apparatus", "sparrow", "separate"],
+      "correct": 0
+    },
+    {
+      "question": "青花菜的英文是？",
+      "options": ["broccoli", "brooklyn", "bracket", "brother"],
+      "correct": 0
+    },
+    {
+      "question": "蘑菇的英文是？",
+      "options": ["mushroom", "bathroom", "classroom", "bedroom"],
+      "correct": 0
+    },
+    {
+      "question": "大蒜的英文是？",
+      "options": ["garlic", "garbage", "garden", "garage"],
+      "correct": 0
+    },
+    {
+      "question": "薑的英文是？",
+      "options": ["ginger", "finger", "singer", "linger"],
+      "correct": 0
+    },
+    {
+      "question": "辣椒的英文是？",
+      "options": ["chili", "child", "chair", "chain"],
+      "correct": 0
+    },
+    {
+      "question": "小白菜的英文是？",
+      "options": ["bok choy", "book boy", "box toy", "back joy"],
+      "correct": 0
+    },
+    {
+      "question": "空心菜的英文是？",
+      "options": ["water spinach", "water spanish", "water speech", "water special"],
+      "correct": 0
+    },
 
-        // 蔬菜類 (25題)
-        {
-            question: "高麗菜的英文是？",
-            options: ["garbage", "cabbage", "baggage", "package"],
-            correct: 1
-        },
-        {
-            question: "胡蘿蔔的英文是？",
-            options: ["carpet", "carbon", "carrot", "carton"],
-            correct: 2
-        },
-        {
-            question: "番茄的英文是？",
-            options: ["tomato", "tornado", "tobacco", "torpedo"],
-            correct: 0
-        },
-        {
-            question: "黃瓜的英文是？",
-            options: ["cucumber", "customer", "computer", "culture"],
-            correct: 0
-        },
-        {
-            question: "菠菜的英文是？",
-            options: ["spinach", "spanish", "speech", "special"],
-            correct: 0
-        },
-        {
-            question: "洋蔥的英文是？",
-            options: ["ocean", "onion", "option", "organ"],
-            correct: 1
-        },
-        {
-            question: "青椒的英文是？",
-            options: ["green paper", "green pepper", "green proper", "greenpper"],
-            correct: 1
-        },
-        {
-            question: "花椰菜的英文是？",
-            options: ["cauliflower", "sunflower", "wallflower", "cornflower"],
-            correct: 0
-        },
-        {
-            question: "茄子的英文是？",
-            options: ["elephant", "eggplant", "elegant", "element"],
-            correct: 1
-        },
-        {
-            question: "地瓜的英文是？",
-            options: ["sweet potato", "sweet tomato", "sweet photo", "sweet motto"],
-            correct: 0
-        },
-        {
-            question: "生菜的英文是？",
-            options: ["letter", "little", "lettuce", "listen"],
-            correct: 2
-        },
-        {
-            question: "白蘿蔔的英文是？",
-            options: ["white radish", "white rabbit", "white rapid", "white radius"],
-            correct: 0
-        },
-        {
-            question: "韭菜的英文是？",
-            options: ["leek", "leak", "lick", "luck"],
-            correct: 0
-        },
-        {
-            question: "芹菜的英文是？",
-            options: ["celery", "salary", "cherry", "clergy"],
-            correct: 0
-        },
-        {
-            question: "玉米的英文是？",
-            options: ["coin", "core", "corn", "cord"],
-            correct: 2
-        },
-        {
-            question: "豌豆的英文是？",
-            options: ["pea", "tea", "sea", "bee"],
-            correct: 0
-        },
-        {
-            question: "四季豆的英文是？",
-            options: ["green bean", "green been", "green dean", "green lean"],
-            correct: 0
-        },
-        {
-            question: "蘆筍的英文是？",
-            options: ["asparagus", "apparatus", "sparrow", "separate"],
-            correct: 0
-        },
-        {
-            question: "青花菜的英文是？",
-            options: ["broccoli", "brooklyn", "bracket", "brother"],
-            correct: 0
-        },
-        {
-            question: "蘑菇的英文是？",
-            options: ["mushroom", "bathroom", "classroom", "bedroom"],
-            correct: 0
-        },
-        {
-            question: "大蒜的英文是？",
-            options: ["garlic", "garbage", "garden", "garage"],
-            correct: 0
-        },
-        {
-            question: "薑的英文是？",
-            options: ["ginger", "finger", "singer", "linger"],
-            correct: 0
-        },
-        {
-            question: "辣椒的英文是？",
-            options: ["chili", "child", "chair", "chain"],
-            correct: 0
-        },
-        {
-            question: "小白菜的英文是？",
-            options: ["bok choy", "book boy", "box toy", "back joy"],
-            correct: 0
-        },
-        {
-            question: "空心菜的英文是？",
-            options: ["water spinach", "water spanish", "water speech", "water special"],
-            correct: 0
-        },
+    {
+      "question": "魚的英文是？",
+      "options": ["fish", "wish", "dish", "rush"],
+      "correct": 0
+    },
+    {
+      "question": "蝦子的英文是？",
+      "options": ["shrimp", "shrine", "shrink", "shrill"],
+      "correct": 0
+    },
+    {
+      "question": "螃蟹的英文是？",
+      "options": ["crab", "grab", "club", "crop"],
+      "correct": 0
+    },
+    {
+      "question": "龍蝦的英文是？",
+      "options": ["lobster", "monster", "foster", "roster"],
+      "correct": 0
+    },
+    {
+      "question": "鮭魚的英文是？",
+      "options": ["salmon", "salman", "saloon", "sample"],
+      "correct": 0
+    },
+    {
+      "question": "鮪魚的英文是？",
+      "options": ["tuna", "tune", "turn", "torn"],
+      "correct": 0
+    },
+    {
+      "question": "鯊魚的英文是？",
+      "options": ["shark", "sharp", "share", "shake"],
+      "correct": 0
+    },
+    {
+      "question": "章魚的英文是？",
+      "options": ["octopus", "obvious", "october", "occupy"],
+      "correct": 0
+    },
+    {
+      "question": "魷魚的英文是？",
+      "options": ["squid", "squad", "square", "squeeze"],
+      "correct": 0
+    },
+    {
+      "question": "牡蠣的英文是？",
+      "options": ["oyster", "sister", "mister", "blister"],
+      "correct": 0
+    },
+    {
+      "question": "蛤蜊的英文是？",
+      "options": ["clam", "calm", "claim", "climb"],
+      "correct": 0
+    },
+    {
+      "question": "扇貝的英文是？",
+      "options": ["scallop", "gallop", "wallop", "trollop"],
+      "correct": 0
+    },
+    {
+      "question": "海帶的英文是？",
+      "options": ["kelp", "help", "yelp", "whelp"],
+      "correct": 0
+    },
+    {
+      "question": "海膽的英文是？",
+      "options": ["sea urchin", "seaurchin", "seaurchan", "sea urchon"],
+      "correct": 0
+    },
+    {
+      "question": "鰻魚的英文是？",
+      "options": ["eel", "heel", "feel", "peel"],
+      "correct": 0
+    },
+    {
+      "question": "比目魚的英文是？",
+      "options": ["flounder", "founder", "rounder", "sounder"],
+      "correct": 0
+    },
+    {
+      "question": "鱈魚的英文是？",
+      "options": ["cod", "god", "nod", "rod"],
+      "correct": 0
+    },
+    {
+      "question": "鯖魚的英文是？",
+      "options": ["mackerel", "material", "maternal", "magical"],
+      "correct": 0
+    },
+    {
+      "question": "海參的英文是？",
+      "options": ["sea cucumber", "sea customer", "sea computer", "sea culture"],
+      "correct": 0
+    },
+    {
+      "question": "魚子醬的英文是？",
+      "options": ["caviar", "career", "carrier", "carver"],
+      "correct": 0
+    },
+    {
+      "question": "干貝的英文是？",
+      "options": ["dried scallop", "fried scallop", "grilled scallop", "boiled scallop"],
+      "correct": 0
+    },
+    {
+      "question": "海蜇的英文是？",
+      "options": ["jellyfish", "selfish", "shellfish", "starfish"],
+      "correct": 0
+    },
+    {
+      "question": "鮑魚的英文是？",
+      "options": ["abalone", "alone", "along", "among"],
+      "correct": 0
+    },
+    {
+      "question": "海苔的英文是？",
+      "options": ["seaweed", "seaseed", "seafood", "seabed"],
+      "correct": 0
+    },
+    {
+      "question": "生魚片的英文是？",
+      "options": ["sashimi", "tsunami", "origami", "salami"],
+      "correct": 0
+    },
+  
+    {
+      "question": "機場的英文是？",
+      "options": ["airpost", "airpart", "airpot", "airport"],
+      "correct": 3
+    },
+    {
+      "question": "登機口的英文是？",
+      "options": ["gete", "gate", "hate", "late"],
+      "correct": 1
+    },
+    {
+      "question": "登機證的英文是？",
+      "options": ["boarding bass", "boarding mass", "boarding pass", "boarding class"],
+      "correct": 2
+    },
+    {
+      "question": "行李箱的英文是？",
+      "options": ["staircase", "showcase", "briefcase", "suitcase"],
+      "correct": 3
+    },
+    {
+      "question": "托運行李的英文是？",
+      "options": ["checked baggage", "chicken baggage", "chosen baggage", "changed baggage"],
+      "correct": 0
+    },
+    {
+      "question": "手提行李的英文是？",
+      "options": ["carry-on luggage", "carry-in luggage", "carry-up luggage", "carry-out luggage"],
+      "correct": 0
+    },
+    {
+      "question": "安檢的英文是？",
+      "options": ["security check", "security cheek", "security chess", "security chest"],
+      "correct": 0
+    },
+    {
+      "question": "海關的英文是？",
+      "options": ["costumes", "customers", "customs", "columns"],
+      "correct": 2
+    },
+    {
+      "question": "登機的英文是？",
+      "options": ["boarding", "boating", "booking", "boxing"],
+      "correct": 0
+    },
+    {
+      "question": "起飛的英文是？",
+      "options": ["take off", "makeup", "pickup", "backup"],
+      "correct": 0
+    },
+    {
+      "question": "降落的英文是？",
+      "options": ["landing", "lending", "leading", "loading"],
+      "correct": 0
+    },
+    {
+      "question": "航班的英文是？",
+      "options": ["flight", "fright", "bright", "light"],
+      "correct": 0
+    },
+    {
+      "question": "登機橋的英文是？",
+      "options": ["jet bridge", "get bridge", "net bridge", "set bridge"],
+      "correct": 0
+    },
+    {
+      "question": "航空公司的英文是？",
+      "options": ["hairline", "airline", "outline", "online"],
+      "correct": 1
+    },
+    {
+      "question": "候機室的英文是？",
+      "options": ["waiting lounge", "working lounge", "walking lounge", "wedding lounge"],
+      "correct": 0
+    },
+    {
+      "question": "行李轉盤的英文是？",
+      "options": ["baggage claim", "baggage clamp", "baggage clam", "baggage clan"],
+      "correct": 0
+    },
+    {
+      "question": "護照的英文是？",
+      "options": ["passport", "password", "passcode", "passage"],
+      "correct": 0
+    },
+    {
+      "question": "簽證的英文是？",
+      "options": ["visa", "visit", "visual", "vital"],
+      "correct": 0
+    },
+    {
+      "question": "出境的英文是？",
+      "options": ["departure", "arrival", "transfer", "boarding"],
+      "correct": 0
+    },
+    {
+      "question": "入境的英文是？",
+      "options": ["arrival", "arrive", "arrow", "array"],
+      "correct": 0
+    },
+    {
+      "question": "轉機的英文是？",
+      "options": ["transfer", "transform", "transport", "translate"],
+      "correct": 0
+    },
+    {
+      "question": "延誤的英文是？",
+      "options": ["delay", "relay", "decay", "display"],
+      "correct": 0
+    },
+    {
+      "question": "取消的英文是？",
+      "options": ["cancel", "candle", "cancer", "canvas"],
+      "correct": 0
+    },
+    {
+      "question": "免稅店的英文是？",
+      "options": ["duty-free shop", "duty-tree shop", "duty-flee shop", "duty-knee shop"],
+      "correct": 0
+    },
+    {
+      "question": "檢疫的英文是？",
+      "options": ["quarantine", "guarantee", "quantity", "quality"],
+      "correct": 0
+    },
 
-        // 海鮮類 (25題)
-        {
-            question: "魚的英文是？",
-            options: ["fish", "wish", "dish", "rush"],
-            correct: 0
-        },
-        {
-            question: "蝦子的英文是？",
-            options: ["shrimp", "shrine", "shrink", "shrill"],
-            correct: 0
-        },
-        {
-            question: "螃蟹的英文是？",
-            options: ["crab", "grab", "club", "crop"],
-            correct: 0
-        },
-        {
-            question: "龍蝦的英文是？",
-            options: ["lobster", "monster", "foster", "roster"],
-            correct: 0
-        },
-        {
-            question: "鮭魚的英文是？",
-            options: ["salmon", "salman", "saloon", "sample"],
-            correct: 0
-        },
-        {
-            question: "鮪魚的英文是？",
-            options: ["tuna", "tune", "turn", "torn"],
-            correct: 0
-        },
-        {
-            question: "鯊魚的英文是？",
-            options: ["shark", "sharp", "share", "shake"],
-            correct: 0
-        },
-        {
-            question: "章魚的英文是？",
-            options: ["octopus", "obvious", "october", "occupy"],
-            correct: 0
-        },
-        {
-            question: "魷魚的英文是？",
-            options: ["squid", "squad", "square", "squeeze"],
-            correct: 0
-        },
-        {
-            question: "牡蠣的英文是？",
-            options: ["oyster", "sister", "mister", "blister"],
-            correct: 0
-        },
-        {
-            question: "蛤蜊的英文是？",
-            options: ["clam", "calm", "claim", "climb"],
-            correct: 0
-        },
-        {
-        question: "扇貝的英文是？",
-        options: ["scallop", "gallop", "wallop", "trollop"],
-        correct: 0
-        },
-        {
-        question: "海帶的英文是？",
-        options: ["kelp", "help", "yelp", "whelp"],
-        correct: 0
-        },
-        {
-            question: "海膽的英文是？",
-            options: ["sea urchin", "seaurchin", "seaurchan", "sea urchon"],
-            correct: 0
-        },
-        {
-            question: "鰻魚的英文是？",
-            options: ["eel", "heel", "feel", "peel"],
-            correct: 0
-        },
-        {
-            question: "比目魚的英文是？",
-            options: ["flounder", "founder", "rounder", "sounder"],
-            correct: 0
-        },
-        {
-            question: "鱈魚的英文是？",
-            options: ["cod", "god", "nod", "rod"],
-            correct: 0
-        },
-        {
-            question: "鯖魚的英文是？",
-            options: ["mackerel", "material", "maternal", "magical"],
-            correct: 0
-        },
-        {
-            question: "海參的英文是？",
-            options: ["sea cucumber", "sea customer", "sea computer", "sea culture"],
-            correct: 0
-        },
-        {
-            question: "魚子醬的英文是？",
-            options: ["caviar", "career", "carrier", "carver"],
-            correct: 0
-        },
-        {
-            question: "干貝的英文是？",
-            options: ["dried scallop", "fried scallop", "grilled scallop", "boiled scallop"],
-            correct: 0
-        },
-        {
-            question: "海蜇的英文是？",
-            options: ["jellyfish", "selfish", "shellfish", "starfish"],
-            correct: 0
-        },
-        {
-            question: "鮑魚的英文是？",
-            options: ["abalone", "alone", "along", "among"],
-            correct: 0
-        },
-        {
-            question: "海苔的英文是？",
-            options: ["seaweed", "seaseed", "seafood", "seabed"],
-            correct: 0
-        },
-        {
-            question: "生魚片的英文是？",
-            options: ["sashimi", "tsunami", "origami", "salami"],
-            correct: 0
-        },
-
-        // 機場相關 (25題)
-        {
-            question: "機場的英文是？",
-            options: ["airpost", "airpart", "airpot", "airport"],
-            correct: 3
-        },
-        {
-            question: "登機口的英文是？",
-            options: ["gete", "gate", "hate", "late"],
-            correct: 1
-        },
-        {
-            question: "登機證的英文是？",
-            options: ["boarding bass", "boarding mass", "boarding pass", "boarding class"],
-            correct: 2
-        },
-        {
-            question: "行李箱的英文是？",
-            options: ["staircase", "showcase", "briefcase", "suitcase"],
-            correct: 3
-        },
-        {
-            question: "托運行李的英文是？",
-            options: ["checked baggage", "chicken baggage", "chosen baggage", "changed baggage"],
-            correct: 0
-        },
-        {
-            question: "手提行李的英文是？",
-            options: ["carry-on luggage", "carry-in luggage", "carry-up luggage", "carry-out luggage"],
-            correct: 0
-        },
-        {
-            question: "安檢的英文是？",
-            options: ["security check", "security cheek", "security chess", "security chest"],
-            correct: 0
-        },
-        {
-            question: "海關的英文是？",
-            options: ["costumes", "customers", "customs", "columns"],
-            correct: 2
-        },
-        {
-            question: "登機的英文是？",
-            options: ["boarding", "boating", "booking", "boxing"],
-            correct: 0
-        },
-        {
-            question: "起飛的英文是？",
-            options: ["take off", "makeup", "pickup", "backup"],
-            correct: 0
-        },
-        {
-            question: "降落的英文是？",
-            options: ["landing", "lending", "leading", "loading"],
-            correct: 0
-        },
-        {
-            question: "航班的英文是？",
-            options: ["flight", "fright", "bright", "light"],
-            correct: 0
-        },
-        {
-            question: "登機橋的英文是？",
-            options: ["jet bridge", "get bridge", "net bridge", "set bridge"],
-            correct: 0
-        },
-        {
-            question: "航空公司的英文是？",
-            options: ["hairline", "airline", "outline", "online"],
-            correct: 1
-        },
-        {
-            question: "候機室的英文是？",
-            options: ["waiting lounge", "working lounge", "walking lounge", "wedding lounge"],
-            correct: 0
-        },
-        {
-            question: "行李轉盤的英文是？",
-            options: ["baggage claim", "baggage clamp", "baggage clam", "baggage clan"],
-            correct: 0
-        },
-        {
-            question: "護照的英文是？",
-            options: ["passport", "password", "passcode", "passage"],
-            correct: 0
-        },
-        {
-            question: "簽證的英文是？",
-            options: ["visa", "visit", "visual", "vital"],
-            correct: 0
-        },
-        {
-            question: "出境的英文是？",
-            options: ["departure", "arrival", "transfer", "boarding"],
-            correct: 0
-        },
-        {
-            question: "入境的英文是？",
-            options: ["arrival", "arrive", "arrow", "array"],
-            correct: 0
-        },
-        {
-            question: "轉機的英文是？",
-            options: ["transfer", "transform", "transport", "translate"],
-            correct: 0
-        },
-        {
-            question: "延誤的英文是？",
-            options: ["delay", "relay", "decay", "display"],
-            correct: 0
-        },
-        {
-            question: "取消的英文是？",
-            options: ["cancel", "candle", "cancer", "canvas"],
-            correct: 0
-        },
-        {
-            question: "免稅店的英文是？",
-            options: ["duty-free shop", "duty-tree shop", "duty-flee shop", "duty-knee shop"],
-            correct: 0
-        },
-        {
-            question: "檢疫的英文是？",
-            options: ["quarantine", "guarantee", "quantity", "quality"],
-            correct: 0
-        },
-
-        // 常用對話 (25題)
-        {
-            question: "請問有攜帶肉製品嗎?的英文是？",
-            options: ["Do you have any meat products?", "Do you have any meet products?", "Do you have any neat products?", "Do you have any heat products?"],
-            correct: 0
-        },
-        {
-            question: "卡片回收的英文是？",
-            options: ["card reciting", "card recycling", "card receiving", "card recording"],
-            correct: 1
-        },
-        {
-            question: "麻煩旁邊稍等的英文是？",
-            options: ["Please wait inside", "Please wait outside", "Please wait aside", "Please wait beside"],
-            correct: 2
-        },
-        {
-            question: "這個請拿著的英文是？",
-            options: ["Please fold this", "Please cold this", "Please told this", "Please hold this"],
-            correct: 3
-        },
-        {
-            question: "請問有帶到新鮮水果或是肉製品嗎?的英文是？",
-            options: ["Do you have flesh fruit or meet products?", "Do you have fresh fruit or meat products?", "Do you have flash fruit or neat products?", "Do you have fresh fruit or heat products?"],
-            correct: 1
-        },
-        {
-            question: "這個是生的還是熟的?的英文是？",
-            options: ["Is this row or looked?", "Is this saw or booked?", "Is this raw or cooked?", "Is this law or hooked?"],
-            correct: 2
-        },
-        {
-            question: "不好意思，請問您可以移到這邊一下嗎?的英文是？",
-            options: ["Excuse me, could you love here?", "Excuse me, could you prove here?", "Excuse me, could you remove here?", "Excuse me, could you move here?"],
-            correct: 3
-        },
-        {
-            question: "可以的英文是？",
-            options: ["yes", "no", "maybe", "never"],
-            correct: 0
-        },
-        {
-            question: "往前的英文是？",
-            options: ["forward", "toward", "reward", "awkward"],
-            correct: 0
-        },
-        {
-            question: "檢查的英文是？",
-            options: ["check", "cheek", "chess", "chest"],
-            correct: 0
-        },
-        {
-            question: "打開的英文是？",
-            options: ["open", "opera", "often", "ocean"],
-            correct: 0
-        },
-        {
-            question: "關閉的英文是？",
-            options: ["close", "cloth", "cloud", "clown"],
-            correct: 0
-        },
-        {
-            question: "謝謝的英文是？",
-            options: ["thank you", "think you", "thick you", "thunk you"],
-            correct: 0
-        },
-        {
-            question: "不客氣的英文是？",
-            options: ["you're welcome", "your welcome", "you welcome", "you're welcomed"],
-            correct: 0
-        },
-        {
-            question: "對不起的英文是？",
-            options: ["sorry", "worry", "hurry", "carry"],
-            correct: 0
-        },
-        {
-            question: "沒關係的英文是？",
-            options: ["no problem", "no program", "no promise", "no process"],
-            correct: 0
-        },
-        {
-            question: "請稍等的英文是？",
-            options: ["please wait", "please want", "please went", "please what"],
-            correct: 0
-        },
-
-        {
-            question: "幫助的英文是？",
-            options: ["help", "kelp", "yelp", "whelp"],
-            correct: 0
-        },
-        {
-            question: "需要的英文是？",
-            options: ["need", "feed", "seed", "deed"],
-            correct: 0
-        },
-        // 補充機場檢疫相關
-        {
-            question: "體溫檢測的英文是？",
-            options: ["temperature check", "temperature cheek", "temperature chess", "temperature chest"],
-            correct: 0
-        },
-        {
-            question: "健康申報的英文是？",
-            options: ["health declaration", "health decoration", "health demonstration", "health destination"],
-            correct: 0
-        },
-        {
-            question: "防疫措施的英文是？",
-            options: ["epidemic prevention", "epidemic promotion", "epidemic protection", "epidemic production"],
-            correct: 0
-        },
-        {
-            question: "完成的英文是？",
-            options: ["finish", "punish", "polish", "vanish"],
-            correct: 0
-        },
-        {
-            question: "開始的英文是？",
-            options: ["start", "smart", "sport", "short"],
-            correct: 0
-        },
-        {
-            question: "停止的英文是？",
-            options: ["stop", "shop", "step", "slip"],
-            correct: 0
-        },
-        {
-            question: "繼續的英文是？",
-            options: ["continue", "contain", "content", "contest"],
-            correct: 0
-        },
-        {
-            question: "完成了的英文是？",
-            options: ["done", "gone", "bone", "tone"],
-            correct: 0
-        },
-        {
-            question: "I _______ to work every day by bus.",
-            options: ["go", "goes", "going", "went"],
-            correct: 0
-        },
-        {
-            question: "She _______ finished her homework yet.",
-            options: ["hasn't", "haven't", "didn't", "don't"],
-            correct: 0
-        },
-        {
-            question: "There _______ many people at the airport today.",
-            options: ["are", "is", "was", "been"],
-            correct: 0
-        },
-        {
-            question: "I've been working here _______ five years.",
-            options: ["for", "since", "during", "from"],
-            correct: 0
-        },
-        {
-            question: "Would you like _______ coffee or tea?",
-            options: ["some", "any", "a", "an"],
-            correct: 0
-        },
-        {
-            question: "The meeting starts _______ 9 AM sharp.",
-            options: ["at", "in", "on", "by"],
-            correct: 0
-        },
-        {
-            question: "If I _______ you, I would take the job.",
-            options: ["were", "was", "am", "be"],
-            correct: 0
-        },
-        {
-            question: "She speaks English _______ than her brother.",
-            options: ["better", "good", "best", "well"],
-            correct: 0
-        },
-        {
-            question: "I _______ my keys. Can you help me find them?",
-            options: ["have lost", "lost", "lose", "am losing"],
-            correct: 0
-        },
-        {
-            question: "The report must _______ by Friday.",
-            options: ["be finished", "finish", "finished", "finishing"],
-            correct: 0
-        },
-        {
-            question: "_______ you ever been to Japan?",
-            options: ["Have", "Did", "Do", "Are"],
-            correct: 0
-        },
-        {
-            question: "I'm looking forward _______ you again.",
-            options: ["to seeing", "to see", "see", "seeing"],
-            correct: 0
-        },
-        {
-            question: "The weather is _______ hot today.",
-            options: ["extremely", "extreme", "extremes", "extremed"],
-            correct: 0
-        },
-        {
-            question: "He suggested _______ a taxi instead of walking.",
-            options: ["taking", "to take", "take", "took"],
-            correct: 0
-        },
-        {
-            question: "I wish I _______ more time to study.",
-            options: ["had", "have", "has", "having"],
-            correct: 0
-        },
-        {
-            question: "Neither John _______ Mary came to the party.",
-            options: ["nor", "or", "and", "but"],
-            correct: 0
-        },
-        {
-            question: "I _______ rather stay home tonight.",
-            options: ["would", "will", "should", "could"],
-            correct: 0
-        },
-        {
-            question: "By the time you arrive, I _______ cooking dinner.",
-            options: ["will have finished", "will finish", "finish", "finished"],
-            correct: 0
-        },
-        {
-            question: "Excuse me, _______ you have anything to declare?",
-            options: ["do", "does", "are", "is"],
-            correct: 0
-        },
-        {
-            question: "I _______ been waiting here for two hours.",
-            options: ["have", "has", "am", "was"],
-            correct: 0
-        },
-        {
-            question: "Could you please _______ your passport?",
-            options: ["showing", "to show", "show", "showed"],
-            correct: 2
-        },
-        {
-            question: "The flight _______ delayed due to bad weather yesterday.",
-            options: ["is", "are", "was", "were"],
-            correct: 2
-        },
-        {
-            question: "How long _______ you staying in Taiwan?",
-            options: ["are", "is", "do", "does"],
-            correct: 0
-        },
-        {
-            question: "Please _______ all electronic devices in the tray.",
-            options: ["put", "putting", "to put", "puts"],
-            correct: 0
-        },
-        {
-            question: "I _______ my luggage at the check-in counter.",
-            options: ["already checked", "have already checked", "already check", "am already checking"],
-            correct: 1
-        },
-        {
-            question: "_______ is your final destination?",
-            options: ["Where", "What", "When", "Why"],
-            correct: 0
-        },
-        {
-            question: "All passengers _______ go through security screening.",
-            options: ["must", "can", "may", "might"],
-            correct: 0
-        },
-        {
-            question: "The boarding gate _______ changed to B12.",
-            options: ["have been", "has been", "is being", "are being"],
-            correct: 1
-        },
-        {
-            question: "I'm sorry, but you _______ bring liquids over 100ml.",
-            options: ["can", "can't", "must", "should"],
-            correct: 1
-        },
-        {
-            question: "_______ you mind opening this bag for inspection?",
-            options: ["Would", "Could", "Should", "Must"],
-            correct: 0
-        },
-        {
-            question: "The customs officer asked me _______ I had any food items.",
-            options: ["that", "if", "what", "when"],
-            correct: 1
-        },
-        {
-            question: "My flight _______ at 3:30 PM tomorrow.",
-            options: ["departs", "depart", "departing", "departed"],
-            correct: 0
-        },
-        {
-            question: "_______ many bags are you checking in today?",
-            options: ["How", "What", "Where", "When"],
-            correct: 0
-        },
-        {
-            question: "I _______ to collect my boarding pass from the machine.",
-            options: ["need", "needs", "needing", "needed"],
-            correct: 0
-        },
-        {
-            question: "The announcement said that passengers _______ board immediately.",
-            options: ["can", "could", "should", "would"],
-            correct: 2
-        },
-        {
-            question: "_______ you traveled to any other countries recently?",
-            options: ["Have", "Has", "Do", "Did"],
-            correct: 0
-        },
-        {
-            question: "Please wait _______ your name is called.",
-            options: ["until", "while", "during", "since"],
-            correct: 0
-        },
-        {
-            question: "The security guard told us _______ in line quietly.",
-            options: ["wait", "to wait", "waiting", "waited"],
-            correct: 1
-        },
-    ],
-    "vietnamese": [
     {
-      question: "gạo(擾)請問是？",
-      options: ["米", "麵", "豆", "麥"],
-      correct: 0
+      "question": "請問有攜帶肉製品嗎?的英文是？",
+      "options": [
+        "Do you have any meat products?",
+        "Do you have any meet products?",
+        "Do you have any neat products?",
+        "Do you have any heat products?"
+      ],
+      "correct": 0
     },
     {
-      question: "kẹo(ˊㄍ一ㄠ)請問是？",
-      options: ["餅乾", "糖果", "蛋糕", "巧克力"],
-      correct: 1
+      "question": "卡片回收的英文是？",
+      "options": [
+        "card reciting",
+        "card recycling",
+        "card receiving",
+        "card recording"
+      ],
+      "correct": 1
     },
     {
-      question: "balo(ˊㄅㄚ喽)請問是？",
-      options: ["手提包", "後背包", "行李箱", "錢包"],
-      correct: 1
+      "question": "麻煩旁邊稍等的英文是？",
+      "options": [
+        "Please wait inside",
+        "Please wait outside",
+        "Please wait aside",
+        "Please wait beside"
+      ],
+      "correct": 2
     },
     {
-      question: "ký tên(ˊㄍ一 ㄉ一ㄢ ㄣ氣)請問是？",
-      options: ["寫字", "簽名", "蓋章", "填表"],
-      correct: 1
+      "question": "這個請拿著的英文是？",
+      "options": [
+        "Please fold this",
+        "Please cold this",
+        "Please told this",
+        "Please hold this"
+      ],
+      "correct": 3
     },
     {
-      question: "salad請問是？",
-      options: ["湯", "飯", "沙拉", "麵"],
-      correct: 2
+      "question": "請問有帶到新鮮水果或是肉製品嗎?的英文是？",
+      "options": [
+        "Do you have flesh fruit or meet products?",
+        "Do you have fresh fruit or meat products?",
+        "Do you have flash fruit or neat products?",
+        "Do you have fresh fruit or heat products?"
+      ],
+      "correct": 1
     },
     {
-      question: "hoa quả(花 瓜)請問是？",
-      options: ["蔬菜", "水果", "花朵", "種子"],
-      correct: 1
+      "question": "這個是生的還是熟的?的英文是？",
+      "options": [
+        "Is this row or looked?",
+        "Is this saw or booked?",
+        "Is this raw or cooked?",
+        "Is this law or hooked?"
+      ],
+      "correct": 2
     },
     {
-      question: "túi xách(dui 誰)請問是？",
-      options: ["手提袋", "塑膠袋", "紙袋", "垃圾袋"],
-      correct: 0
+      "question": "不好意思，請問您可以移到這邊一下嗎?的英文是？",
+      "options": [
+        "Excuse me, could you love here?",
+        "Excuse me, could you prove here?",
+        "Excuse me, could you remove here?",
+        "Excuse me, could you move here?"
+      ],
+      "correct": 3
     },
     {
-      question: "Hải sản(孩 商ㄣ)請問是？",
-      options: ["肉類", "蔬菜", "海鮮", "水果"],
-      correct: 2
+      "question": "可以的英文是？",
+      "options": [
+        "yes",
+        "no",
+        "maybe",
+        "never"
+      ],
+      "correct": 0
     },
     {
-      question: "thịt bò(踢 ˊㄅㄡ)請問是？",
-      options: ["豬肉", "雞肉", "牛肉", "羊肉"],
-      correct: 2
+      "question": "往前的英文是？",
+      "options": ["forward", "toward", "reward", "awkward"],
+      "correct": 0
     },
     {
-      question: "rau xanh(繞 山)請問是？",
-      options: ["紅蘿蔔", "綠色蔬菜", "白蘿蔔", "洋蔥"],
-      correct: 1
+      "question": "檢查的英文是？",
+      "options": ["check", "cheek", "chess", "chest"],
+      "correct": 0
     },
     {
-      question: "kiểm tra(ㄍ一ㄣ 渣)請問是？",
-      options: ["檢查", "登記", "申請", "填寫"],
-      correct: 0
+      "question": "打開的英文是？",
+      "options": ["open", "opera", "often", "ocean"],
+      "correct": 0
     },
     {
-      question: "tỏi(奪)請問是？",
-      options: ["洋蔥", "大蒜", "生薑", "辣椒"],
-      correct: 1
+      "question": "關閉的英文是？",
+      "options": ["close", "cloth", "cloud", "clown"],
+      "correct": 0
     },
     {
-      question: "thịt(踢)請問是？",
-      options: ["魚", "蛋", "肉", "菜"],
-      correct: 2
+      "question": "謝謝的英文是？",
+      "options": [
+        "thank you",
+        "think you",
+        "thick you",
+        "thunk you"
+      ],
+      "correct": 0
     },
     {
-      question: "trứng gà(存ㄍㄚ)請問是？",
-      options: ["鴨蛋", "鵝蛋", "雞蛋", "鵪鶉蛋"],
-      correct: 2
+      "question": "不客氣的英文是？",
+      "options": [
+        "you're welcome",
+        "your welcome",
+        "you welcome",
+        "you're welcomed"
+      ],
+      "correct": 0
     },
     {
-      question: "Được rồi(溜走ˋ一)請問是？",
-      options: ["不好", "好的", "不行", "等等"],
-      correct: 1
+      "question": "對不起的英文是？",
+      "options": ["sorry", "worry", "hurry", "carry"],
+      "correct": 0
     },
     {
-      question: "hạt giống(哈宗~)請問是？",
-      options: ["種子", "花朵", "葉子", "果實"],
-      correct: 0
+      "question": "沒關係的英文是？",
+      "options": ["no problem", "no program", "no promise", "no process"],
+      "correct": 0
     },
     {
-      question: "thịt gà(踢ㄍㄚ)請問是？",
-      options: ["牛肉", "豬肉", "雞肉", "魚肉"],
-      correct: 2
+      "question": "請稍等的英文是？",
+      "options": ["please wait", "please want", "please went", "please what"],
+      "correct": 0
     },
     {
-      question: "Đi thẳng(哩趟ng)請問是？",
-      options: ["左轉", "右轉", "直走", "後退"],
-      correct: 2
+      "question": "幫助的英文是？",
+      "options": ["help", "kelp", "yelp", "whelp"],
+      "correct": 0
     },
     {
-      question: "thịt khô(踢枯)請問是？",
-      options: ["新鮮肉", "肉乾", "冷凍肉", "罐頭肉"],
-      correct: 1
+      "question": "需要的英文是？",
+      "options": ["need", "feed", "seed", "deed"],
+      "correct": 0
+    },
+  
+    {
+      "question": "體溫檢測的英文是？",
+      "options": ["temperature check", "temperature cheek", "temperature chess", "temperature chest"],
+      "correct": 0
     },
     {
-      question: "thịt heo(踢ㄏ一ㄡ)請問是？",
-      options: ["牛肉", "豬肉", "雞肉", "羊肉"],
-      correct: 1
+      "question": "健康申報的英文是？",
+      "options": ["health declaration", "health decoration", "health demonstration", "health destination"],
+      "correct": 0
     },
     {
-      question: "mở ra(ㄇㄜ渣)請問是？",
-      options: ["關閉", "打開", "鎖住", "封住"],
-      correct: 1
+      "question": "防疫措施的英文是？",
+      "options": ["epidemic prevention", "epidemic promotion", "epidemic protection", "epidemic production"],
+      "correct": 0
+    },
+    {
+      "question": "完成的英文是？",
+      "options": ["finish", "punish", "polish", "vanish"],
+      "correct": 0
+    },
+    {
+      "question": "開始的英文是？",
+      "options": ["start", "smart", "sport", "short"],
+      "correct": 0
+    },
+    {
+      "question": "停止的英文是？",
+      "options": ["stop", "shop", "step", "slip"],
+      "correct": 0
+    },
+    {
+      "question": "繼續的英文是？",
+      "options": ["continue", "contain", "content", "contest"],
+      "correct": 0
+    },
+    {
+      "question": "完成了的英文是？",
+      "options": ["done", "gone", "bone", "tone"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ to work every day by bus.",
+      "options": ["go", "goes", "going", "went"],
+      "correct": 0
+    },
+    {
+      "question": "She _______ finished her homework yet.",
+      "options": ["hasn't", "haven't", "didn't", "don't"],
+      "correct": 0
+    },
+    {
+      "question": "There _______ many people at the airport today.",
+      "options": ["are", "is", "was", "been"],
+      "correct": 0
+    },
+    {
+      "question": "I've been working here _______ five years.",
+      "options": ["for", "since", "during", "from"],
+      "correct": 0
+    },
+    {
+      "question": "Would you like _______ coffee or tea?",
+      "options": ["some", "any", "a", "an"],
+      "correct": 0
+    },
+    {
+      "question": "The meeting starts _______ 9 AM sharp.",
+      "options": ["at", "in", "on", "by"],
+      "correct": 0
+    },
+    {
+      "question": "If I _______ you, I would take the job.",
+      "options": ["were", "was", "am", "be"],
+      "correct": 0
+    },
+    {
+      "question": "She speaks English _______ than her brother.",
+      "options": ["better", "good", "best", "well"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ my keys. Can you help me find them?",
+      "options": ["have lost", "lost", "lose", "am losing"],
+      "correct": 0
+    },
+    {
+      "question": "The report must _______ by Friday.",
+      "options": ["be finished", "finish", "finished", "finishing"],
+      "correct": 0
+    },
+    {
+      "question": "_______ you ever been to Japan?",
+      "options": ["Have", "Did", "Do", "Are"],
+      "correct": 0
+    },
+    {
+      "question": "I'm looking forward _______ you again.",
+      "options": ["to seeing", "to see", "see", "seeing"],
+      "correct": 0
+    },
+    {
+      "question": "The weather is _______ hot today.",
+      "options": ["extremely", "extreme", "extremes", "extremed"],
+      "correct": 0
+    },
+    {
+      "question": "He suggested _______ a taxi instead of walking.",
+      "options": ["taking", "to take", "take", "took"],
+      "correct": 0
+    },
+    {
+      "question": "I wish I _______ more time to study.",
+      "options": ["had", "have", "has", "having"],
+      "correct": 0
+    },
+    {
+      "question": "Neither John _______ Mary came to the party.",
+      "options": ["nor", "or", "and", "but"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ rather stay home tonight.",
+      "options": ["would", "will", "should", "could"],
+      "correct": 0
+    },
+    {
+      "question": "By the time you arrive, I _______ cooking dinner.",
+      "options": ["will have finished", "will finish", "finish", "finished"],
+      "correct": 0
+    },
+    {
+      "question": "Excuse me, _______ you have anything to declare?",
+      "options": ["do", "does", "are", "is"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ been waiting here for two hours.",
+      "options": ["have", "has", "am", "was"],
+      "correct": 0
+    },
+    {
+      "question": "Could you please _______ your passport?",
+      "options": ["showing", "to show", "show", "showed"],
+      "correct": 2
+    },
+    {
+      "question": "The flight _______ delayed due to bad weather yesterday.",
+      "options": ["is", "are", "was", "were"],
+      "correct": 2
+    },
+    {
+      "question": "How long _______ you staying in Taiwan?",
+      "options": ["are", "is", "do", "does"],
+      "correct": 0
+    },
+    {
+      "question": "Please _______ all electronic devices in the tray.",
+      "options": ["put", "putting", "to put", "puts"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ my luggage at the check-in counter.",
+      "options": ["already checked", "have already checked", "already check", "am already checking"],
+      "correct": 1
+    },
+    {
+      "question": "_______ is your final destination?",
+      "options": ["Where", "What", "When", "Why"],
+      "correct": 0
+    },
+    {
+      "question": "All passengers _______ go through security screening.",
+      "options": ["must", "can", "may", "might"],
+      "correct": 0
+    },
+    {
+      "question": "The boarding gate _______ changed to B12.",
+      "options": ["have been", "has been", "is being", "are being"],
+      "correct": 1
+    },
+    {
+      "question": "I'm sorry, but you _______ bring liquids over 100ml.",
+      "options": ["can", "can't", "must", "should"],
+      "correct": 1
+    },
+    {
+      "question": "_______ you mind opening this bag for inspection?",
+      "options": ["Would", "Could", "Should", "Must"],
+      "correct": 0
+    },
+    {
+      "question": "The customs officer asked me _______ I had any food items.",
+      "options": ["that", "if", "what", "when"],
+      "correct": 1
+    },
+    {
+      "question": "My flight _______ at 3:30 PM tomorrow.",
+      "options": ["departs", "depart", "departing", "departed"],
+      "correct": 0
+    },
+    {
+      "question": "_______ many bags are you checking in today?",
+      "options": ["How", "What", "Where", "When"],
+      "correct": 0
+    },
+    {
+      "question": "I _______ to collect my boarding pass from the machine.",
+      "options": ["need", "needs", "needing", "needed"],
+      "correct": 0
+    },
+    {
+      "question": "The announcement said that passengers _______ board immediately.",
+      "options": ["can", "could", "should", "would"],
+      "correct": 2
+    },
+    {
+      "question": "_______ you traveled to any other countries recently?",
+      "options": ["Have", "Has", "Do", "Did"],
+      "correct": 0
+    },
+    {
+      "question": "Please wait _______ your name is called.",
+      "options": ["until", "while", "during", "since"],
+      "correct": 0
+    },
+    {
+      "question": "The security guard told us _______ in line quietly.",
+      "options": ["wait", "to wait", "waiting", "waited"],
+      "correct": 1
+    }
+  ],
+  "vietnamese": [
+    {
+      "question": "gạo(擾)請問是？",
+      "options": ["米", "麵", "豆", "麥"],
+      "correct": 0
+    },
+    {
+      "question": "kẹo(ˊㄍ一ㄠ)請問是？",
+      "options": ["餅乾", "糖果", "蛋糕", "巧克力"],
+      "correct": 1
+    },
+    {
+      "question": "balo(ˊㄅㄚ喽)請問是？",
+      "options": ["手提包", "後背包", "行李箱", "錢包"],
+      "correct": 1
+    },
+    {
+      "question": "ký tên(ˊㄍ一 ㄉ一ㄢ ㄣ氣)請問是？",
+      "options": ["寫字", "簽名", "蓋章", "填表"],
+      "correct": 1
+    },
+    {
+      "question": "salad請問是？",
+      "options": ["湯", "飯", "沙拉", "麵"],
+      "correct": 2
+    },
+    {
+      "question": "hoa quả(花 瓜)請問是？",
+      "options": ["蔬菜", "水果", "花朵", "種子"],
+      "correct": 1
+    },
+    {
+      "question": "túi xách(dui 誰)請問是？",
+      "options": ["手提袋", "塑膠袋", "紙袋", "垃圾袋"],
+      "correct": 0
+    },
+    {
+      "question": "Hải sản(孩 商ㄣ)請問是？",
+      "options": ["肉類", "蔬菜", "海鮮", "水果"],
+      "correct": 2
+    },
+    {
+      "question": "thịt bò(踢 ˊㄅㄡ)請問是？",
+      "options": ["豬肉", "雞肉", "牛肉", "羊肉"],
+      "correct": 2
+    },
+    {
+      "question": "rau xanh(繞 山)請問是？",
+      "options": ["紅蘿蔔", "綠色蔬菜", "白蘿蔔", "洋蔥"],
+      "correct": 1
+    },
+    {
+      "question": "kiểm tra(ㄍ一ㄣ 渣)請問是？",
+      "options": ["檢查", "登記", "申請", "填寫"],
+      "correct": 0
+    },
+    {
+      "question": "tỏi(奪)請問是？",
+      "options": ["洋蔥", "大蒜", "生薑", "辣椒"],
+      "correct": 1
+    },
+    {
+      "question": "thịt(踢)請問是？",
+      "options": ["魚", "蛋", "肉", "菜"],
+      "correct": 2
+    },
+    {
+      "question": "trứng gà(存ㄍㄚ)請問是？",
+      "options": ["鴨蛋", "鵝蛋", "雞蛋", "鵪鶉蛋"],
+      "correct": 2
+    },
+    {
+      "question": "Được rồi(溜走ˋ一)請問是？",
+      "options": ["不好", "好的", "不行", "等等"],
+      "correct": 1
+    },
+    {
+      "question": "hạt giống(哈宗~)請問是？",
+      "options": ["種子", "花朵", "葉子", "果實"],
+      "correct": 0
+    },
+    {
+      "question": "thịt gà(踢ㄍㄚ)請問是？",
+      "options": ["牛肉", "豬肉", "雞肉", "魚肉"],
+      "correct": 2
+    },
+    {
+      "question": "Đi thẳng(哩趟ng)請問是？",
+      "options": ["左轉", "右轉", "直走", "後退"],
+      "correct": 2
+    },
+    {
+      "question": "thịt khô(踢枯)請問是？",
+      "options": ["新鮮肉", "肉乾", "冷凍肉", "罐頭肉"],
+      "correct": 1
+    },
+    {
+      "question": "thịt heo(踢ㄏ一ㄡ)請問是？",
+      "options": ["牛肉", "豬肉", "雞肉", "羊肉"],
+      "correct": 1
+    },
+    {
+      "question": "mở ra(ㄇㄜ渣)請問是？",
+      "options": ["關閉", "打開", "鎖住", "封住"],
+      "correct": 1
     }
   ],
     "korean": [
     {
-      question: "사탕(沙趟)請問是？",
-      options: ["糖果", "餅乾", "巧克力", "蛋糕"],
-      correct: 0
+      "question": "사탕(沙趟)請問是？",
+      "options": ["糖果", "餅乾", "巧克力", "蛋糕"],
+      "correct": 0
     },
     {
-      question: "쌀(塞哀)請問是？",
-      options: ["麵條", "米飯", "麵包", "餃子"],
-      correct: 1
+      "question": "쌀(塞哀)請問是？",
+      "options": ["麵條", "米飯", "麵包", "餃子"],
+      "correct": 1
     },
     {
-      question: "고기(摳ㄎ一)請問是？",
-      options: ["魚", "蛋", "肉", "菜"],
-      correct: 2
+      "question": "고기(摳ㄎ一)請問是？",
+      "options": ["魚", "蛋", "肉", "菜"],
+      "correct": 2
     },
     {
-      question: "육포(油ㄆㄡ)請問是？",
-      options: ["肉乾", "魚乾", "果乾", "菜乾"],
-      correct: 0
+      "question": "육포(油ㄆㄡ)請問是？",
+      "options": ["肉乾", "魚乾", "果乾", "菜乾"],
+      "correct": 0
     },
     {
-      question: "과일(快一)請問是？",
-      options: ["蔬菜", "水果", "肉類", "飲料"],
-      correct: 1
+      "question": "과일(快一)請問是？",
+      "options": ["蔬菜", "水果", "肉類", "飲料"],
+      "correct": 1
     },
     {
-      question: "샐러드(仙(台)搂deu)請問是？",
-      options: ["湯", "飯", "沙拉", "麵"],
-      correct: 2
+      "question": "샐러드(仙(台)搂deu)請問是？",
+      "options": ["湯", "飯", "沙拉", "麵"],
+      "correct": 2
     },
     {
-      question: "씨앗(西阿)請問是？",
-      options: ["種子", "花朵", "葉子", "根部"],
-      correct: 0
+      "question": "씨앗(西阿)請問是？",
+      "options": ["種子", "花朵", "葉子", "根部"],
+      "correct": 0
     },
     {
-      question: "핸드폰(haen deu pon)請問是？",
-      options: ["電腦", "手機", "平板", "相機"],
-      correct: 1
+      "question": "핸드폰(haen deu pon)請問是？",
+      "options": ["電腦", "手機", "平板", "相機"],
+      "correct": 1
     },
     {
-      question: "야채(壓切ㄟ)請問是？",
-      options: ["水果", "肉類", "蔬菜", "海鮮"],
-      correct: 2
+      "question": "야채(壓切ㄟ)請問是？",
+      "options": ["水果", "肉類", "蔬菜", "海鮮"],
+      "correct": 2
     },
     {
-      question: "과자(誇佳)請問是？",
-      options: ["餅乾", "糖果", "蛋糕", "麵包"],
-      correct: 0
+      "question": "과자(誇佳)請問是？",
+      "options": ["餅乾", "糖果", "蛋糕", "麵包"],
+      "correct": 0
     },
     {
-      question: "기내식(ㄍ一ㄏ一ㄋㄟ西n)請問是？",
-      options: ["機場餐廳", "飛機餐", "免稅商品", "登機證"],
-      correct: 1
+      "question": "기내식(ㄍ一ㄏ一ㄋㄟ西n)請問是？",
+      "options": ["機場餐廳", "飛機餐", "免稅商品", "登機證"],
+      "correct": 1
     },
     {
-      question: "여권(油鍋ㄣn)請問是？",
-      options: ["機票", "護照", "簽證", "身分證"],
-      correct: 1
+      "question": "여권(油鍋ㄣn)請問是？",
+      "options": ["機票", "護照", "簽證", "身分證"],
+      "correct": 1
     },
     {
-      question: "계란(ㄎ一ㄝ爛n)請問是？",
-      options: ["雞蛋", "鴨蛋", "鵝蛋", "魚卵"],
-      correct: 0
+      "question": "계란(ㄎ一ㄝ爛n)請問是？",
+      "options": ["雞蛋", "鴨蛋", "鵝蛋", "魚卵"],
+      "correct": 0
     },
     {
-      question: "소고기(搜ㄎㄡㄎ一)請問是？",
-      options: ["豬肉", "雞肉", "牛肉", "羊肉"],
-      correct: 2
+      "question": "소고기(搜ㄎㄡㄎ一)請問是？",
+      "options": ["豬肉", "雞肉", "牛肉", "羊肉"],
+      "correct": 2
     },
     {
-      question: "가방(咖棒)請問是？",
-      options: ["皮夾", "包包", "帽子", "鞋子"],
-      correct: 1
+      "question": "가방(咖棒)請問是？",
+      "options": ["皮夾", "包包", "帽子", "鞋子"],
+      "correct": 1
     },
     {
-      question: "이것(依Go)請問是？",
-      options: ["那個", "這個", "哪個", "什麼"],
-      correct: 1
+      "question": "이것(依Go)請問是？",
+      "options": ["那個", "這個", "哪個", "什麼"],
+      "correct": 1
     },
     {
-      question: "닭고기(踏ㄎㄡㄎ一)請問是？",
-      options: ["牛肉", "豬肉", "雞肉", "魚肉"],
-      correct: 2
+      "question": "닭고기(踏ㄎㄡㄎ一)請問是？",
+      "options": ["牛肉", "豬肉", "雞肉", "魚肉"],
+      "correct": 2
     },
     {
-      question: "반숙계란(潘n書ㄎㄟ爛ㄚn)請問是？",
-      options: ["生雞蛋", "半熟蛋", "全熟蛋", "炒蛋"],
-      correct: 1
+      "question": "반숙계란(潘n書ㄎㄟ爛ㄚn)請問是？",
+      "options": ["生雞蛋", "半熟蛋", "全熟蛋", "炒蛋"],
+      "correct": 1
     },
     {
-      question: "비행기표(批n ㄏ一n ㄍ一 ㄆ一ㄡ)請問是？",
-      options: ["機票", "護照", "登機證", "行李票"],
-      correct: 0
+      "question": "비행기표(批n ㄏ一n ㄍ一 ㄆ一ㄡ)請問是？",
+      "options": ["機票", "護照", "登機證", "行李票"],
+      "correct": 0
     },
     {
-      question: "돼지고기(推 機 ㄎㄡ ㄎ一)請問是？",
-      options: ["牛肉", "豬肉", "雞肉", "羊肉"],
-      correct: 1
+      "question": "돼지고기(推 機 ㄎㄡ ㄎ一)請問是？",
+      "options": ["牛肉", "豬肉", "雞肉", "羊肉"],
+      "correct": 1
     },
     {
-      question: "완숙계란(萬n 書ㄎㄟ爛ㄚn)請問是？",
-      options: ["生雞蛋", "半熟蛋", "全熟蛋", "水煮蛋"],
-      correct: 2
+      "question": "완숙계란(萬n 書ㄎㄟ爛ㄚn)請問是？",
+      "options": ["生雞蛋", "半熟蛋", "全熟蛋", "水煮蛋"],
+      "correct": 2
     },
     {
-      question: "입국심사(一不新n沙)請問是？",
-      options: ["出境檢查", "入境審查", "安全檢查", "海關檢查"],
-      correct: 1
+      "question": "입국심사(一不新n沙)請問是？",
+      "options": ["出境檢查", "入境審查", "安全檢查", "海關檢查"],
+      "correct": 1
     }
   ],
-"precheck": [
-{
-  question: "如有詢問旅客方便檢查確認時，旅客回答不方便檢查時，這時候我們應該？",
-  options: [
-    "「不好意思，我們機場規定一定要檢查。」不讓旅客離開，避免旅客遭受罰款。",
-    "「還麻煩請配合我們檢查行李。」先請旅客配合檢查。",
-    "「那如果你裡面有肉製品的話，會罰款好幾萬。」告知旅客罰款價格。",
-    "「那請問有檢查過，確定沒有帶到肉類肉製品嗎？」隨即讓旅客離開並通報拒檢。"
-  ],
-  correct: 3
-},
-{
-  question: "王小姐從日本帶回一盒點心，內含蛋糕、餅乾及肉鬆麵包，下列何者可以入境？",
-  options: ["純奶油蛋糕", "肉鬆麵包", "鳳爪", "豬肉餅乾"],
-  correct: 0
-},
-{
-  question: "下列何種寵物食品可以合法攜帶入境？",
-  options: ["未開封的生食寵物飼料", "含有肉類的寵物零食", "純素寵物餅乾", "自製的寵物鮮食"],
-  correct: 2
-},
-{
-  question: "李先生從泰國帶回一些香料，下列何者允許入境？",
-  options: ["新鮮檸檬葉", "乾燥八角", "帶根的薑黃", "新鮮蒜頭"],
-  correct: 1
-},
-{
-  question: "關於乳製品入境規定，下列敘述何者正確？",
-  options: ["開封的UHT牛奶可以入境", "保久乳可以入境", "新鮮的羊奶可以入境", "用保溫瓶裝的鮮奶可以入境"],
-  correct: 1
-},
-{
-  question: "下列何種月餅不能攜帶入境？",
-  options: ["純綠豆餡月餅", "蛋黃豆沙月餅", "云腿月餅", "純蓮蓉月餅"],
-  correct: 2
-},
-{
-  question: "複查俠哥查到旅客有攜帶到鮮花餅，下列何者正確？",
-  options: [
-    "即使看到外包裝確實寫「玫瑰鮮花餅」，但俠哥依然還要看成分。",
-    "看到外包裝寫「玫瑰鮮花餅」，俠哥把鮮花餅放回去，繼續看其他東西。",
-    "鮮花餅寫有豬油，所以要扣，不能攜帶。",
-    "請旅客到動植物櫃台詢問。"
-  ],
-  correct: 0
-},
-{
-  question: "小美從韓國帶回泡菜，下列何種泡菜可以入境？",
-  options: ["含有海鮮的泡菜", "含有新鮮蘿蔔絲泡菜", "含碎肉的泡菜", "含培根的泡菜"],
-  correct: 0
-},
-{
-  question: "以下何種中藥材不得攜帶入境？",
-  options: ["枸杞", "鹿茸", "菊花", "紅棗"],
-  correct: 1
-},
-{
-  question: "張先生從越南帶回水果類，下列何者可以入境？",
-  options: ["新鮮芒果", "裡面吃完的榴槤殼", "經過冷凍的新鮮山竹", "完整包裝的乾果"],
-  correct: 3
-},
-{
-  question: "關於蛋製品，下列何者可以入境？",
-  options: ["溫泉蛋", "生鹹鴨蛋", "茶葉蛋", "生雞蛋"],
-  correct: 2
-},
-{
-  question: "下列何種情況會被檢疫單位處以罰鍰？",
-  options: ["誠實申報並丟棄水果", "主動丟棄違規物品", "隱匿未申報的肉製品", "詢問檢疫規定如有並拋棄"],
-  correct: 2
-},
-{
-  question: "以下何種食品不能入境？",
-  options: ["糖葫蘆", "魚鬆米餅", "蜂蜜果醬", "雲腿餅乾"],
-  correct: 3
-},
-{
-  question: "關於種子類產品，下列何者正確？",
-  options: ["鹽味生花生可以入境", "發芽的綠豆可以入境", "焦糖烘培向日葵籽可以入境", "決明子用密封袋裝就可以入境"],
-  correct: 2
-},
-{
-  question: "下列哪些蛋製品需要特別注意？",
-  options: ["茶葉蛋", "茶碗蒸", "荷包蛋", "皮蛋"],
-  correct: 3
-},
-{
-  question: "查獲到糖葫蘆如何判斷正確？",
-  options: ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
-  correct: 0
-},
-{
-  question: "查獲到生米應該請旅客怎麼做？",
-  options: [
-    "生米不能攜帶，麻煩現場拋棄。",
-    "告知旅客去動植物櫃台「申報」。",
-    "告知旅客去動植物櫃台「做詢問」。",
-    "跟旅客說生米可以帶，但是要去申報。"
-  ],
-  correct: 2
-},
-{
-  question: "查獲香蕉皮如何判斷正確？",
-  options: ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
-  correct: 1
-},
-{
-  question: "查獲決明子如何判斷正確？",
-  options: ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
-  correct: 1
-},
-{
-  question: "查獲乾燥香菇如何判斷正確？",
-  options: ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
-  correct: 0
-},
-{
-  question: "查獲到無成分稻香村綜合月餅如何判斷正確？",
-  options: ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
-  correct: 2
-},
-{
-  question: "小明是前導人員，下列哪一項詢問是必要的通關問題？",
-  options: [
-    "是否攜帶現金超過一萬美金？",
-    "是否有帶新鮮水果或含肉類製品的飛機餐或麵包？",
-    "是否有購買免稅商品？",
-    "是否攜帶筆記型電腦？"
-  ],
-  correct: 1
-},
-{
-  question: "小芸在執行前導工作時，看到一對夫妻要一起通過黃線，正確處理方式為何？",
-  options: [
-    "可以允許一起通過。",
-    "告知「一位往前，第二位麻煩黃線後稍等」。",
-    "請他們走特殊通道。",
-    "視現場人潮決定。"
-  ],
-  correct: 1
-},
-{
-  question: "前導小徐收到低風險疫區卡片的旅客後，應該如何處理？",
-  options: [
-    "請旅客過X光機檢查。",
-    "收取卡片後請旅客直接往前，並告知前面人員「旅客已收卡」。",
-    "請旅客等待其他人一起通過。",
-    "要求旅客出示護照確認。"
-  ],
-  correct: 1
-},
-{
-  question: "小徐遇到旅客拒絕檢查時，首要處理方式為何？",
-  options: [
-    "直接強制檢查。",
-    "通報主管處理。",
-    "詢問是否有確認無攜帶到含肉類製品或新鮮水果、發芽種子。",
-    "請旅客離開。"
-  ],
-  correct: 2
-},
-{
-  question: "阿郎在處理檢疫物時，下列何者正確？",
-  options: ["直接丟入一般垃圾桶", "要確實分類並破壞包裝", "集中存放後統一處理", "請旅客自行處理"],
-  correct: 1
-},
-{
-  question: "小明在檢查無成分食物時，旅客很肯定無肉製品，正確的做法為何？",
-  options: [
-    "直接剝開檢查內容物。",
-    "再次警告旅客，如果下面發現有肉罰款20萬。",
-    "與旅客確認成分並告知宣導即可，必要時給予宣導單。",
-    "要求旅客撥開徹底檢查。"
-  ],
-  correct: 2
-},
-{
-  question: "阿樺遇到旅客攜帶電動行李車時，應如何處理？",
-  options: [
-    "請旅客帶著電動車往前，不過X光機，需前往手檢。",
-    "請旅客過X光機。",
-    "直接放行。",
-    "要求旅客寄存。"
-  ],
-  correct: 0
-},
-// 新增題目開始
-{
-  question: "「乾羅漢果」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「鹿茸粉」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「沒有成份的餅」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 2
-},
-{
-  question: "「八角」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「外包裝有寫UHT的香腸」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「吃進嘴巴裡的檳榔」請選出正確答案？",
-  options: ["不算檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「流心蛋黃酥」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「生魚片」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「蕎麥粉」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「120度2秒殺菌的真空肉乾」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「海藻面膜」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「完整的草莓大福」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「決明子」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「乾檳榔」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「台灣買的檳榔」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 0
-},
-{
-  question: "「雞內金脆片」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 2
-},
-{
-  question: "「酸奶」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 1
-},
-{
-  question: "「鵝肝醬」請選出正確答案？",
-  options: ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
-  correct: 2
-},
-{
-  question: "請問哪一個位置是回收檢疫物？",
-  options: ["3-1", "4-2", "4-1", "2-1"],
-  correct: 2
-},
-{
-  question: "請問循環扇遙控器固定放在哪個地方？",
-  options: ["1線盒子", "2線盒子", "3線盒子", "4線盒子"],
-  correct: 3
-},
-{
-  question: "噴消毒毯方向？",
-  options: ["面向走來的入境旅客", "不分方向", "背向走來的入境旅客", "側向走來的入境旅客"],
-  correct: 0
-},
-{
-  question: "前導遇到輪椅旅客請問等待人數要多少才接？",
-  options: ["中間輪椅人數多少，等待人數X1", "中間輪椅人數多少，等待人數X2", "中間輪椅人數多少，等待人數X3", "中間輪椅人數多少，等待人數X4"],
-  correct: 2
-}
-  ],
-  "rule": [
+    "precheck": [
     {
-      question: "1. 請問「選休」何者正確？",
-      options: [
+      "question": "如有詢問旅客方便檢查確認時，旅客回答不方便檢查時，這時候我們應該？",
+      "options": [
+        "「不好意思，我們機場規定一定要檢查。」不讓旅客離開，避免旅客遭受罰款。",
+        "「還麻煩請配合我們檢查行李。」先請旅客配合檢查。",
+        "「那如果你裡面有肉製品的話，會罰款好幾萬。」告知旅客罰款價格。",
+        "「那請問有檢查過，確定沒有帶到肉類肉製品嗎？」隨即讓旅客離開並通報拒檢。"
+      ],
+      "correct": 3
+    },
+    {
+      "question": "王小姐從日本帶回一盒點心，內含蛋糕、餅乾及肉鬆麵包，下列何者可以入境？",
+      "options": ["純奶油蛋糕", "肉鬆麵包", "鳳爪", "豬肉餅乾"],
+      "correct": 0
+    },
+    {
+      "question": "下列何種寵物食品可以合法攜帶入境？",
+      "options": ["未開封的生食寵物飼料", "含有肉類的寵物零食", "純素寵物餅乾", "自製的寵物鮮食"],
+      "correct": 2
+    },
+    {
+      "question": "李先生從泰國帶回一些香料，下列何者允許入境？",
+      "options": ["新鮮檸檬葉", "乾燥八角", "帶根的薑黃", "新鮮蒜頭"],
+      "correct": 1
+    },
+    {
+      "question": "關於乳製品入境規定，下列敘述何者正確？",
+      "options": ["開封的UHT牛奶可以入境", "保久乳可以入境", "新鮮的羊奶可以入境", "用保溫瓶裝的鮮奶可以入境"],
+      "correct": 1
+    },
+    {
+      "question": "下列何種月餅不能攜帶入境？",
+      "options": ["純綠豆餡月餅", "蛋黃豆沙月餅", "云腿月餅", "純蓮蓉月餅"],
+      "correct": 2
+    },
+    {
+      "question": "複查俠哥查到旅客有攜帶到鮮花餅，下列何者正確？",
+      "options": [
+        "即使看到外包裝確實寫「玫瑰鮮花餅」，但俠哥依然還要看成分。",
+        "看到外包裝寫「玫瑰鮮花餅」，俠哥把鮮花餅放回去，繼續看其他東西。",
+        "鮮花餅寫有豬油，所以要扣，不能攜帶。",
+        "請旅客到動植物櫃台詢問。"
+      ],
+      "correct": 0
+    },
+    {
+      "question": "小美從韓國帶回泡菜，下列何種泡菜可以入境？",
+      "options": ["含有海鮮的泡菜", "含有新鮮蘿蔔絲泡菜", "含碎肉的泡菜", "含培根的泡菜"],
+      "correct": 0
+    },
+    {
+      "question": "以下何種中藥材不得攜帶入境？",
+      "options": ["枸杞", "鹿茸", "菊花", "紅棗"],
+      "correct": 1
+    },
+    {
+      "question": "張先生從越南帶回水果類，下列何者可以入境？",
+      "options": ["新鮮芒果", "裡面吃完的榴槤殼", "經過冷凍的新鮮山竹", "完整包裝的乾果"],
+      "correct": 3
+    },
+    {
+      "question": "關於蛋製品，下列何者可以入境？",
+      "options": ["溫泉蛋", "生鹹鴨蛋", "茶葉蛋", "生雞蛋"],
+      "correct": 2
+    },
+    {
+      "question": "下列何種情況會被檢疫單位處以罰鍰？",
+      "options": ["誠實申報並丟棄水果", "主動丟棄違規物品", "隱匿未申報的肉製品", "詢問檢疫規定如有並拋棄"],
+      "correct": 2
+    },
+    {
+      "question": "以下何種食品不能入境？",
+      "options": ["糖葫蘆", "魚鬆米餅", "蜂蜜果醬", "雲腿餅乾"],
+      "correct": 3
+    },
+    {
+      "question": "關於種子類產品，下列何者正確？",
+      "options": ["鹽味生花生可以入境", "發芽的綠豆可以入境", "焦糖烘培向日葵籽可以入境", "決明子用密封袋裝就可以入境"],
+      "correct": 2
+    },
+    {
+      "question": "下列哪些蛋製品需要特別注意？",
+      "options": ["茶葉蛋", "茶碗蒸", "荷包蛋", "皮蛋"],
+      "correct": 3
+    },
+    {
+      "question": "查獲到糖葫蘆如何判斷正確？",
+      "options": ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
+      "correct": 0
+    },
+    {
+      "question": "查獲到生米應該請旅客怎麼做？",
+      "options": [
+        "生米不能攜帶，麻煩現場拋棄。",
+        "告知旅客去動植物櫃台「申報」。",
+        "告知旅客去動植物櫃台「做詢問」。",
+        "跟旅客說生米可以帶，但是要去申報。"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "查獲香蕉皮如何判斷正確？",
+      "options": ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
+      "correct": 1
+    },
+    {
+      "question": "查獲決明子如何判斷正確？",
+      "options": ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
+      "correct": 1
+    },
+    {
+      "question": "查獲乾燥香菇如何判斷正確？",
+      "options": ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
+      "correct": 0
+    },
+    {
+      "question": "查獲到無成分稻香村綜合月餅如何判斷正確？",
+      "options": ["可攜帶", "不可攜帶", "需要請旅客去檢疫櫃台詢問", "需要請旅客去檢疫櫃台申報"],
+      "correct": 2
+    },
+    {
+      "question": "小明是前導人員，下列哪一項詢問是必要的通關問題？",
+      "options": [
+        "是否攜帶現金超過一萬美金？",
+        "是否有帶新鮮水果或含肉類製品的飛機餐或麵包？",
+        "是否有購買免稅商品？",
+        "是否攜帶筆記型電腦？"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "小芸在執行前導工作時，看到一對夫妻要一起通過黃線，正確處理方式為何？",
+      "options": [
+        "可以允許一起通過。",
+        "告知「一位往前，第二位麻煩黃線後稍等」。",
+        "請他們走特殊通道。",
+        "視現場人潮決定。"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "前導小徐收到低風險疫區卡片的旅客後，應該如何處理？",
+      "options": [
+        "請旅客過X光機檢查。",
+        "收取卡片後請旅客直接往前，並告知前面人員「旅客已收卡」。",
+        "請旅客等待其他人一起通過。",
+        "要求旅客出示護照確認。"
+      ],
+      "correct": 1
+    },
+    {
+      "question": "小徐遇到旅客拒絕檢查時，首要處理方式為何？",
+      "options": [
+        "直接強制檢查。",
+        "通報主管處理。",
+        "詢問是否有確認無攜帶到含肉類製品或新鮮水果、發芽種子。",
+        "請旅客離開。"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "阿郎在處理檢疫物時，下列何者正確？",
+      "options": ["直接丟入一般垃圾桶", "要確實分類並破壞包裝", "集中存放後統一處理", "請旅客自行處理"],
+      "correct": 1
+    },
+    {
+      "question": "小明在檢查無成分食物時，旅客很肯定無肉製品，正確的做法為何？",
+      "options": [
+        "直接剝開檢查內容物。",
+        "再次警告旅客，如果下面發現有肉罰款20萬。",
+        "與旅客確認成分並告知宣導即可，必要時給予宣導單。",
+        "要求旅客撥開徹底檢查。"
+      ],
+      "correct": 2
+    },
+    {
+      "question": "阿樺遇到旅客攜帶電動行李車時，應如何處理？",
+      "options": [
+        "請旅客帶著電動車往前，不過X光機，需前往手檢。",
+        "請旅客過X光機。",
+        "直接放行。",
+        "要求旅客寄存。"
+      ],  
+      "correct": 0
+    },
+    {
+      "question": "「乾羅漢果」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「鹿茸粉」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「沒有成份的餅」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 2
+    },
+    {
+      "question": "「八角」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「外包裝有寫UHT的香腸」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「吃進嘴巴裏的檳榔」請選出正確答案？",
+      "options": ["不算檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「流心蛋黃酥」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「生魚片」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「蕎麥粉」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「120度2秒殺菌的真空肉乾」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「海藻面膜」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「完整的草莓大福」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「決明子」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「乾檳榔」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「台灣買的檳榔」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 0
+    },
+    {
+      "question": "「雞內金脆片」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 2
+    },
+    {
+      "question": "「酸奶」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 1
+    },
+    {
+      "question": "「鵝肝醬」請選出正確答案？",
+      "options": ["檢疫物", "非檢疫物", "需至檢疫櫃檯"],
+      "correct": 2
+    },
+    {
+      "question": "請問哪一個位置是回收檢疫物？",
+      "options": ["3-1", "4-2", "4-1", "2-1"],
+      "correct": 2
+    },
+    {
+      "question": "請問循環扇遙控器固定放在哪個地方？",
+      "options": ["1線盒子", "2線盒子", "3線盒子", "4線盒子"],
+      "correct": 3
+    },
+    {
+      "question": "噴消毒毯方向？",
+      "options": ["面向走來的入境旅客", "不分方向", "背向走來的入境旅客", "側向走來的入境旅客"],
+      "correct": 0
+    },
+    {
+      "question": "前導遇到輪椅旅客請問等待人數要多少才接？",
+      "options": [
+        "中間輪椅人數多少，等待人數X1",
+        "中間輪椅人數多少，等待人數X2",
+        "中間輪椅人數多少，等待人數X3",
+        "中間輪椅人數多少，等待人數X4"
+      ],
+      "correct": 2
+    }
+  ],
+    "rule": [
+    {
+      "question": "1. 請問「選休」何者正確？",
+      "options": [
         "如果當日有狀況，需要配合上班。",
         "小明選擇10號休，就一定排得到那天。",
         "如果當日太多人排同一天，就會以抽籤決定。",
         "給主管選假的意思。"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "2. 請問「預排」何者正確？",
-      options: [
+      "question": "2. 請問「預排」何者正確？",
+      "options": [
         "因人手還夠，主管預排假給你，但有狀況時需要等待通知，並支援上班。",
         "10號遇到排班，那天剛好跟朋友有約，答應對方。",
         "明天被放假，手機先關機就沒問題。",
         "預排就是多給你的「選休」。"
       ],
-      correct: 0
+      "correct": 0
     },
     {
-      question: "3. 請問廁所的代號是什麼？",
-      options: [
+      "question": "3. 請問廁所的代號是什麼？",
+      "options": [
         "兩59",
         "兩65",
         "兩95",
         "95兩"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "4. 備勤室私人物品，下列何者正確？",
-      options: [
+      "question": "4. 備勤室私人物品，下列何者正確？",
+      "options": [
         "上下班請勿亂放私人物品在桌面上，如真的太多，請放鐵架上沒關係。",
         "私人物品請勿亂放（尤其下班時），桌面要清空，椅子要歸位。",
         "椅子未歸位者，輪值分流2一天。",
         "下班後任何背包請放置物鐵架，不要都放在桌子上。"
       ],
-      correct: 1
+      "correct": 1
     },
     {
-      question: "5. 看到旅客跌倒時，應該通報？",
-      options: [
+      "question": "5. 看到旅客跌倒時，應該通報？",
+      "options": [
         "61959",
         "69991",
         "51999",
         "61999"
       ],
-      correct: 3
+      "correct": 3
     },
     {
-      question: "6. 對講機「X光」代號？",
-      options: [
+      "question": "6. 對講機「X光」代號？",
+      "options": [
         "洞倆",
         "洞么",
         "洞3",
         "洞6"
       ],
-      correct: 0
+      "correct": 0
     },
     {
-      question: "7. 對講機「組長」代號？",
-      options: [
+      "question": "7. 對講機「組長」代號？",
+      "options": [
         "洞3",
         "洞么",
         "洞7",
         "洞6"
       ],
-      correct: 3
+      "correct": 3
     },
     {
-      question: "8. 對講機「代理組長」代號？",
-      options: [
+      "question": "8. 對講機「代理組長」代號？",
+      "options": [
         "洞3",
         "洞么",
         "洞7",
         "洞6"
       ],
-      correct: 3
+      "correct": 3
     },
     {
-      question: "9. 當看到旅客受傷時，下列何者錯誤？",
-      options: [
+      "question": "9. 當看到旅客受傷時，下列何者錯誤？",
+      "options": [
         "立馬上前關心，詢問是否需要協助。",
         "立即完成手邊的複查工作後再做詢問。",
         "觀察旅客情況，必要時請通報。",
         "旅客當下可能需要休息，拿椅子先讓旅客坐著休息。"
       ],
-      correct: 1
+      "correct": 1
     },
     {
-      question: "10. 關於冰箱，下列何者錯誤？",
-      options: [
+      "question": "10. 關於冰箱，下列何者錯誤？",
+      "options": [
         "日期為2天為限",
         "必須寫上名字與當天日期",
         "日期為3天為限",
         "如超過時間會通知，沒人認領下班後會丟棄"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "11. 遺失通行證費用如何？",
-      options: [
+      "question": "11. 遺失通行證費用如何？",
+      "options": [
         "200元",
         "2000元",
         "1000元",
         "要寫檢討單"
       ],
-      correct: 1
+      "correct": 1
     },
     {
-      question: "12. 微波爐使用方式，哪個錯誤？",
-      options: [
+      "question": "12. 微波爐使用方式，哪個錯誤？",
+      "options": [
         "微波便當請直接蓋子打開放進去微波就好",
         "打開的便當請用衛生紙覆蓋",
         "使用完必須是歸0狀態才打開，切勿直接打開",
         "只要是有殼、皮和膜，都是不能直接微波的食材"
       ],
-      correct: 0
+      "correct": 0
     },
     {
-      question: "13. 關於管制區免稅店，下列何者錯誤？",
-      options: [
+      "question": "13. 關於管制區免稅店，下列何者錯誤？",
+      "options": [
         "經過免稅店，外面看看就好，不能進去",
         "可以進去詢問店員東西",
         "任何免稅店都不能進去",
         "放假出國非上班時段是旅客，所以不影響，是可以進去的"
       ],
-      correct: 1
+      "correct": 1
     },
     {
-      question: "14. 關於消毒毯工作是給哪個位置負責？",
-      options: [
+      "question": "14. 關於消毒毯工作是給哪個位置負責？",
+      "options": [
         "4線前導",
         "4線複查1",
         "4線複查2",
         "3線複查2"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "15. 請問回報手機是給哪個位置負責？",
-      options: [
+      "question": "15. 請問回報手機是給哪個位置負責？",
+      "options": [
         "1線前導",
         "1線複查2",
         "1線複查1",
         "4線複查2"
       ],
-      correct: 1
+      "correct": 1
     },
     {
-      question: "16. 請問管理百寶袋是給哪個位置負責？",
-      options: [
+      "question": "16. 請問管理百寶袋是給哪個位置負責？",
+      "options": [
         "1線前導",
         "1線複查2",
         "1線複查1",
         "4線複查2"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "17. 請問清點交接密錄器是哪個位置負責？",
-      options: [
+      "question": "17. 請問清點交接密錄器是哪個位置負責？",
+      "options": [
         "1線前導",
         "1線複查2",
         "2線複查2",
         "4線複查2"
       ],
-      correct: 2
+      "correct": 2
     },
     {
-      question: "18. 任何要給的資料一律什麼時候給？",
-      options: [
+      "question": "18. 任何要給的資料一律什麼時候給？",
+      "options": [
         "下午2點前",
         "當日下班以前都可以交",
         "3天以內上班交都可以",
         "下午3點前"
       ],
-      correct: 3
+      "correct": 3
     },
     {
-      question: "19. 關於脫換背心哪個正確？",
-      options: [
+      "question": "19. 關於脫換背心哪個正確？",
+      "options": [
         "同仁可以穿背心，A哨如果有決定穿，A哨全部都要穿",
         "如果旅客多了變熱了，前導小華可以先把背心脫掉",
         "脫換背心一律A、B、C哨各別決定",
         "脫換背心一律全部上哨同仁都要一樣"
       ],
-      correct: 3
+      "correct": 3
     },
     {
-      question: "20. 消毒毯時間下列何者正確？",
-      options: [
+      "question": "20. 消毒毯時間下列何者正確？",
+      "options": [
         "16:30",
         "15:30",
         "12:35",
         "15:00"
       ],
-      correct: 0
+      "correct": 0
+    }
+  ],
+    "範例1": [
+    {
+      "question": "蘋果的英文是？",
+      "options": ["apple", "april", "ample", "ankle"],
+      "correct": 0
+    },
+    {
+      "question": "麵包的英文是？",
+      "options": ["break", "bread", "broad", "breed"],
+      "correct": 1
+    }
+  ],
+    "範例": [
+    {
+      "question": "蘋果的英文是？",
+      "options": ["apple", "april", "ample", "ankle"],
+      "correct": 0
+    },
+    {
+      "question": "麵包的英文是？",
+      "options": ["break", "bread", "broad", "breed"],
+      "correct": 1
     }
   ]
-};
+}
