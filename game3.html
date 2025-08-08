@@ -477,7 +477,7 @@ body {
 
 <div class="challenge-item">
   <h3 class="challenge-title">初階數獨挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共5題 一題10分</p>
+  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共10題 一題10分</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
@@ -3251,7 +3251,7 @@ const examConfigs = {
   'sudoku': {
       name: '初階數獨挑戰',                    // 考試名稱
       timePerQuestion: 80,                     // 每題時間限制
-      questionCount: 5,                        // 考試總題數
+      questionCount: 10,                        // 考試總題數
       fastAnswerThreshold: 30,                 // 快速答題門檻
       questions: []                            // 題庫來源（動態生成）
   }
@@ -3312,18 +3312,20 @@ return true;
 
 // 生成數獨題目
 function generateSudokuQuestions() {
-const questions = [];
-for (let i = 0; i < 5; i++) {
+  const questions = [];
+  // 把原本的 5 改成 10題
+  for (let i = 0; i < 10; i++) {
     const { puzzle, solution } = generateSudoku();
     questions.push({
-        question: `數獨題目 ${i + 1}`,
-        puzzle: puzzle,
-        solution: solution,
-        type: 'sudoku'
+      question: `數獨題目 ${i + 1}`,
+      puzzle: puzzle,
+      solution: solution,
+      type: 'sudoku'
     });
+  }
+  return questions;
 }
-return questions;
-}
+
 
 // 🔧 修正版開始考試函數 - 關鍵修正！
 function startExam(examType) {
