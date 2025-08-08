@@ -404,8 +404,8 @@ body {
 </header>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">分流考試挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題</p>
+  <h3 class="challenge-title">⭐分流考試挑戰⭐</h3>
+  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題</p>
   <div class="challenge-actions">
       <button class="btn btn-primary" onclick="startExam('basic')">考試</button>
       <button class="btn btn-secondary" onclick="showLeaderboard('basic')">排行榜</button>
@@ -767,7 +767,6 @@ const examQuestions = {
     options: ["1線", "2線", "3線", "4線"],
     correct: 2
   },
-  // 新增題目開始
   {
     question: "主分流早上以下哪些行為是錯誤？",
     options: ["清理白色棄置桶", "擦拭分流工作桌子", "查看前導棄置桶", "查看分流密錄器有沒有電量"],
@@ -817,7 +816,38 @@ const examQuestions = {
     question: "下列哪一個並非高風險地區？",
     options: ["曼谷", "馬尼拉", "寧波", "仙台"],
     correct: 3
+  },
+  {
+    question: "如果遇到嬰兒車應該如何引導？",
+    options: ["引導至3線", "走4線", "引導至1或2線", "固定走2線"],
+    correct: 2
+  },
+  {
+    question: "請問攝影監視器應該朝向?",
+    options: ["朝向檢疫物棄置桶位置", "朝向手檢進入區域", "朝向分流方向", "朝向整條快速通道(綠線)"],
+    correct: 2
+  },
+  {
+    question: "確認公務機下列何者不正確?",
+    options: ["WifI需要保持關閉", "基地台需要保持打開", "WifI需要保持開啟", "需要保持是手機的網路"],
+    correct: 2
+  },
+  {
+    question: "如果遇到剛剛已過手檢的旅客再回來買東西應該?",
+    options: ["手檢背包行李後，走綠線", "直接走快速通關", "引導旅客至手檢", "回報是買免稅，請旅客走快速通道"],
+    correct: 2
+  },
+  {
+    question: "當有手上只有拿一條香菸，並無任何行李時...",
+    options: ["開4線給旅客走過去", "請旅客走手檢區", "請旅客走快速通道(綠線)", "對講機詢問可否通過"],
+    correct: 2
+  },
+  {
+    question: "關於電霸與監視器何者錯誤?",
+    options: ["確認有無顯示DC", "查看電霸是否保持通電", "按壓LED中間按鈕3秒是開機", "只需要顯示DC就好"],
+    correct: 2
   }
+
   ],
 "food1": [
     {
@@ -3163,9 +3193,9 @@ const examQuestions = {
 // 考試配置 - 修正題庫引用
 const examConfigs = {
   'basic': {
-      name: '分流考試挑戰',                    // 考試名稱
+      name: '⭐分流考試挑戰⭐',                    // 考試名稱
       timePerQuestion: 60,                     // 每題時間限制
-      questionCount: 10,                       // 考試總題數
+      questionCount: 15,                       // 考試總題數
       fastAnswerThreshold: 5,                  // 快速答題門檻
       questions: examQuestions['basic']        // 題庫來源
   },
@@ -3860,7 +3890,7 @@ function updateChampionDisplay(champions) {
         
         // 根據標題判斷考試類型
         let examType = '';
-        if (title.textContent.includes('分流考試挑戰')) examType = 'basic';
+        if (title.textContent.includes('⭐分流考試挑戰⭐')) examType = 'basic';
         else if (title.textContent.includes('⭐英文考試基礎版⭐')) examType = 'food1';
         else if (title.textContent.includes('⭐英文考試進階版⭐')) examType = 'food';
         else if (title.textContent.includes('⭐英文考試強化版⭐')) examType = 'foodplus';
