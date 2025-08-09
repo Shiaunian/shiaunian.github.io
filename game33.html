@@ -517,14 +517,12 @@ const firebaseConfig = {
   messagingSenderId: "336901617556",
   appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
 };
-
 // 初始化 Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 // ─── 新增：題庫宣告 & 載入函式 ─────────────────────────
 let examQuestions = {};
-
 async function loadExamQuestions() {
   try {
     const resp = await fetch('questions.json');
@@ -544,6 +542,21 @@ async function loadAllChampions() {
 }
 // ────────────────────────────────────────────────────────
 
+// ─── 考試配置 ─────────────────────────────────────────
+const examConfigs = {
+  basic:       { name:'⭐分流考試挑戰⭐',    timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
+  food1:       { name:'⭐英文考試基礎版⭐',    timePerQuestion:15, questionCount:15, fastAnswerThreshold:2.5,questions:[] },
+  food:        { name:'⭐英文考試進階版⭐',    timePerQuestion:10, questionCount:20, fastAnswerThreshold:2,  questions:[] },
+  foodplus:    { name:'⭐英文考試強化版⭐',    timePerQuestion:10, questionCount:30, fastAnswerThreshold:2.5,questions:[] },
+  precheck:    { name:'前導複查挑戰',        timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
+  rule:        { name:'規定挑戰',            timePerQuestion:60, questionCount:10, fastAnswerThreshold:5,  questions:[] },
+  korean:      { name:'🇰🇷韓語挑戰基礎版🇰🇷', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+  japanese:    { name:'🇯🇵日語挑戰基礎版🇯🇵', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+  vietnamese:  { name:'🇻🇳越南語詞彙挑戰🇻🇳', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+  sudoku:      { name:'初階數獨挑戰',        timePerQuestion:80, questionCount:10, fastAnswerThreshold:30, questions:[] }
+};
+// ────────────────────────────────────────────────────────
+
 // 全域變數
 let currentUser = null;
 let usersData = [];
@@ -553,17 +566,12 @@ let currentQuestionIndex = 0;
 let examTimer = null;
 let questionStartTime = null;
 let examStartTime = null;
-let userScores = {
-  fastAnswers: 0,
-  correctAnswers: 0
-};
+let userScores = { fastAnswers:0, correctAnswers:0 };
 
 // 工具函數：從數組中移除特定元素
 Array.prototype.remove = function(element) {
   const index = this.indexOf(element);
-  if (index > -1) {
-      this.splice(index, 1);
-  }
+  if (index > -1) this.splice(index, 1);
 };
 
 // 強制登出函數
@@ -571,201 +579,88 @@ function forceLogout(message = '登入驗證失敗，請重新登入') {
   localStorage.removeItem('t2_login');
   localStorage.removeItem('t2_login_time');
   localStorage.removeItem('t2_login_user');
+  localStorage.removeItem('t2_login_password');
   alert(message);
   window.location.href = 'index.html';
 }
 
 // 檢查登入狀態和時效
 function checkLoginStatus() {
-  const loginFlag = localStorage.getItem('t2_login');
-  const loginTime = localStorage.getItem('t2_login_time');
-  const loginUser = localStorage.getItem('t2_login_user');
-
-  if (loginFlag !== 'yes' || !loginTime || !loginUser) {
-      forceLogout('未檢測到有效登入狀態');
-      return false;
+  const flag = localStorage.getItem('t2_login');
+  const time = localStorage.getItem('t2_login_time');
+  const user = localStorage.getItem('t2_login_user');
+  if (flag!=='yes' || !time || !user) {
+    forceLogout('未檢測到有效登入狀態');
+    return false;
   }
-
-  // 檢查登入時效 (1小時)
-  const now = Date.now();
-  const loginTimeStamp = parseInt(loginTime);
-  const LIMIT = 3600000; // 1小時
-
-  if (now - loginTimeStamp > LIMIT) {
-      forceLogout('登入時間已超過1小時，請重新登入');
-      return false;
+  if (Date.now()-parseInt(time) > 3600000) {
+    forceLogout('登入時間已超過1小時，請重新登入');
+    return false;
   }
-
-  return loginUser;
+  return user;
 }
 
 // 載入用戶資料庫
 async function loadUsersData() {
   try {
-      const response = await fetch('password.json');
-      if (!response.ok) {
-          throw new Error('無法載入用戶資料庫');
-      }
-      const data = await response.json();
-      usersData = Array.isArray(data) ? data : [data];
-      return true;
-  } catch (error) {
-      console.error('載入用戶資料庫失敗:', error);
-      forceLogout('系統錯誤：無法載入用戶資料庫');
-      return false;
+    const resp = await fetch('password.json');
+    if (!resp.ok) throw new Error('無法載入用戶資料庫');
+    const data = await resp.json();
+    usersData = Array.isArray(data)? data : [data];
+    return true;
+  } catch (err) {
+    console.error('載入用戶資料庫失敗:', err);
+    forceLogout('系統錯誤：無法載入用戶資料庫');
+    return false;
   }
 }
 
-// ✅ 同時驗證用戶名和密碼，確保找到正確用戶
+// 驗證用戶
 function validateUser(username) {
-  console.log('🔍 驗證用戶:', username);
-  console.log('📊 用戶資料庫:', usersData);
-  
-  const storedPassword = localStorage.getItem('t2_login_password');
-  console.log('🔑 儲存的密碼:', storedPassword);
-  
-  const user = usersData.find(u => u.username === username && u.password === storedPassword);
-  
+  const pwd = localStorage.getItem('t2_login_password');
+  const user = usersData.find(u=>u.username===username && u.password===pwd);
   if (!user) {
-      console.error('❌ 找不到用戶:', username);
-      forceLogout('用戶帳號不存在於系統中');
-      return null;
+    console.error('用戶不存在', username);
+    forceLogout('用戶帳號不存在於系統中');
+    return null;
   }
-  
-  console.log('✅ 找到用戶:', user);
   return user;
 }
 
-// 顯示用戶歡迎訊息
+// 顯示歡迎
 function showWelcomeMessage(user) {
-  const welcomeElement = document.getElementById('currentUserWelcome');
-  const displayName = user.welcome || user._comment || user.username;
-  welcomeElement.textContent = `歡迎回來，${displayName}`;
+  const elm = document.getElementById('currentUserWelcome');
+  const name = user.welcome||user._comment||user.username;
+  elm.textContent = `歡迎回來，${name}`;
 }
 
+// 主要初始化
 async function initializePage() {
-    try {
-        // 0. 載入題庫（questions.json）
-        await loadExamQuestions();
-
-        // 🔧 【新增】把載入的題庫回寫到 examConfigs.questions
-        for (const type in examQuestions) {
-            if (examConfigs[type]) {
-                examConfigs[type].questions = examQuestions[type];
-            }
-        }
-        console.log('✅ 已更新 examConfigs.questions', examConfigs);
-
-        // 1. 檢查登入狀態
-        const loginUser = checkLoginStatus();
-        if (!loginUser) {
-            return;
-        }
-
-        // 2. 載入用戶資料庫
-        const loadSuccess = await loadUsersData();
-        if (!loadSuccess) {
-            return;
-        }
-
-        // 3. 驗證用戶是否存在於資料庫中
-        const user = validateUser(loginUser);
-        if (!user) {
-            return;
-        }
-
-        // 4. 設定當前用戶
-        currentUser = user;
-
-        // 5. 顯示歡迎訊息
-        showWelcomeMessage(user);
-
-        // 6. 顯示主要內容
-        document.getElementById('loadingScreen').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-
-        // 🏆 7. 載入所有榜首資訊
-        await loadAllChampions();
-
-    } catch (error) {
-        console.error('頁面初始化失敗:', error);
-        forceLogout('系統初始化失敗，請重新登入');
+  try {
+    await loadExamQuestions();
+    // 回寫題庫到配置
+    for (let t in examQuestions) {
+      if (examConfigs[t]) examConfigs[t].questions = examQuestions[t];
     }
-}
+    console.log('examConfigs 更新', examConfigs);
 
-// 考試配置 - 修正題庫引用
-const examConfigs = {
-  'basic': {
-    name: '⭐分流考試挑戰⭐',
-    timePerQuestion: 60,
-    questionCount: 15,
-    fastAnswerThreshold: 5,
-    questions: examQuestions['basic']
-  },
-  'food1': {
-    name: '⭐英文考試基礎版⭐',
-    timePerQuestion: 15,
-    questionCount: 15,
-    fastAnswerThreshold: 2.5,
-    questions: examQuestions['food1']
-  },
-  'food': {
-    name: '⭐英文考試進階版⭐',
-    timePerQuestion: 10,
-    questionCount: 20,
-    fastAnswerThreshold: 2,
-    questions: examQuestions['food']
-  },
-  'foodplus': {
-    name: '⭐英文考試強化版⭐',
-    timePerQuestion: 10,
-    questionCount: 30,
-    fastAnswerThreshold: 2.5,
-    questions: examQuestions['foodplus']
-  },
-  'precheck': {
-    name: '前導複查挑戰',
-    timePerQuestion: 60,
-    questionCount: 15,
-    fastAnswerThreshold: 5,
-    questions: examQuestions['precheck']
-  },
-  'rule': {
-    name: '規定挑戰',
-    timePerQuestion: 60,
-    questionCount: 10,
-    fastAnswerThreshold: 5,
-    questions: examQuestions['rule']
-  },
-  'korean': {
-    name: '🇰🇷韓語挑戰基礎版🇰🇷',
-    timePerQuestion: 12,
-    questionCount: 15,
-    fastAnswerThreshold: 3,
-    questions: examQuestions['korean']
-  },
-  'japanese': {
-    name: '🇯🇵日語挑戰基礎版🇯🇵',
-    timePerQuestion: 12,
-    questionCount: 15,
-    fastAnswerThreshold: 3,
-    questions: examQuestions['japanese']
-  },
-  'vietnamese': {
-    name: '🇻🇳越南語詞彙挑戰🇻🇳',
-    timePerQuestion: 12,
-    questionCount: 15,
-    fastAnswerThreshold: 3,
-    questions: examQuestions['vietnamese']
-  },
-  'sudoku': {
-    name: '初階數獨挑戰',
-    timePerQuestion: 80,
-    questionCount: 10,
-    fastAnswerThreshold: 30,
-    questions: []
+    const loginUser = checkLoginStatus();
+    if (!loginUser) return;
+    if (!await loadUsersData()) return;
+    const user = validateUser(loginUser);
+    if (!user) return;
+    currentUser = user;
+    showWelcomeMessage(user);
+
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+
+    await loadAllChampions();
+  } catch (err) {
+    console.error('頁面初始化失敗:', err);
+    forceLogout('系統初始化失敗，請重新登入');
   }
-};
+}
 
 // 🔧 修正版數獨生成函數
 function generateSudoku() {
