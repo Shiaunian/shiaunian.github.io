@@ -536,6 +536,12 @@ async function loadExamQuestions() {
     alert('系統錯誤：無法載入題庫檔案');
   }
 }
+
+// ─── 新增：避免 loadAllChampions 未定義錯誤 ─────────────────────────
+async function loadAllChampions() {
+  // TODO: 未來真正從 Firebase 抓排行榜資料
+  return;
+}
 // ────────────────────────────────────────────────────────
 
 // 全域變數
@@ -1122,5 +1128,6 @@ document.addEventListener('click', function(event) {
   }
 });
 </script>
+
 </body>
 </html>
