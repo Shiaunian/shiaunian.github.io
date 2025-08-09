@@ -818,37 +818,29 @@ function generateSudokuQuestions() {
   return questions;
 }
 
-// 🔧 修正版開始考試函數
 function startExam(examType) {
-  if (!currentUser) {
-      alert('請先登入');
-      return;
-  }
+  if (!currentUser) { alert('請先登入'); return; }
   const config = examConfigs[examType];
-  if (!config) {
-      alert('考試類型不存在');
-      return;
-  }
-  if (examTimer) {
-      clearInterval(examTimer);
-      examTimer = null;
-  }
+  if (!config) { alert('考試類型不存在'); return; }
+
+  // 先清計時器
+  if (examTimer) clearInterval(examTimer);
+
   currentExam = examType;
   currentQuestionIndex = 0;
   userScores = { fastAnswers: 0, correctAnswers: 0 };
   examStartTime = Date.now();
 
   if (examType === 'sudoku') {
-      currentQuestions = generateSudokuQuestions();
+    currentQuestions = generateSudokuQuestions();
   } else {
-      const allQuestions = [...config.questions];
-      currentQuestions = [];
-      for (let i = 0; i < config.questionCount; i++) {
-          if (!allQuestions.length) break;
-          const idx = Math.floor(Math.random() * allQuestions.length);
-          currentQuestions.push(allQuestions[idx]);
-          allQuestions.splice(idx, 1);
-      }
+    // ← 在這裡直接從最新的 examQuestions 取
+    const pool = [...(examQuestions[examType] || [])];
+    currentQuestions = [];
+    for (let i = 0; i < config.questionCount && pool.length; i++) {
+      const idx = Math.floor(Math.random() * pool.length);
+      currentQuestions.push(pool.splice(idx, 1)[0]);
+    }
   }
 
   showExamInterface();
