@@ -637,11 +637,18 @@ function showWelcomeMessage(user) {
   welcomeElement.textContent = `歡迎回來，${displayName}`;
 }
 
-// 主要初始化函數
 async function initializePage() {
     try {
         // 0. 載入題庫（questions.json）
         await loadExamQuestions();
+
+        // 🔧 【新增】把載入的題庫回寫到 examConfigs.questions
+        for (const type in examQuestions) {
+            if (examConfigs[type]) {
+                examConfigs[type].questions = examQuestions[type];
+            }
+        }
+        console.log('✅ 已更新 examConfigs.questions', examConfigs);
 
         // 1. 檢查登入狀態
         const loginUser = checkLoginStatus();
@@ -1089,144 +1096,7 @@ async function autoSaveScore(score) {
   }
 }
 
-// 顯示排行榜
-async function showLeaderboard(examType) {
-  try {
-    const snap = await database.ref(`scores/${examType}`).once('value');
-    const scores = [];
-    snap.forEach(c=>scores.push(c.val()));
-    scores.sort((a,b)=>{
-      if (b.score!==a.score) return b.score-a.score;
-      if ((a.totalTime||999999)!==(b.totalTime||999999)) return (a.totalTime||999999)-(b.totalTime||999999);
-      return a.timestamp-b.timestamp;
-    });
-    const top = scores.slice(0,40);
-    const titleEl = document.getElementById('modalTitle');
-    const contEl = document.getElementById('leaderboardContent');
-    titleEl.textContent = `${examConfigs[examType].name} - 排行榜`;
-    if (!top.length) {
-      contEl.innerHTML = '<div class="empty-leaderboard">暫無成績記錄</div>';
-    } else {
-      contEl.innerHTML = `
-        <div class="leaderboard-container">
-          ${top.map((s,i)=>{
-            const isFirst = i===0;
-            const sameCount = scores.filter(x=>x.score===s.score).length;
-            const bind = (isFirst&&sameCount>1)?' 🥇':'';
-            const timeDisp = s.totalTime?`${Math.floor(s.totalTime/60)}:${(s.totalTime%60).toString().padStart(2,'0')}`:'--:--';
-            return `
-              <div class="leaderboard-item ${s.username===currentUser.username?'current-user':''}">
-                <span class="rank">#${i+1}</span>
-                <span class="user-name">${s.displayName}${bind}</span>
-                <div style="text-align:right;">
-                  <div class="score">${s.score}分</div>
-                  <div style="font-size:0.8rem;color:#a0a0a0;">${timeDisp}</div>
-                </div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-    }
-    document.getElementById('leaderboardModal').style.display = 'flex';
-  } catch (e) {
-    console.error('載入排行榜失敗:', e);
-    alert('❌ 載入排行榜失敗，請稍後再試');
-  }
-}
 
-// 隱藏排行榜
-function hideLeaderboard() {
-  document.getElementById('leaderboardModal').style.display = 'none';
-}
-
-// 載入所有榜首資訊
-async function loadAllChampions() {
-  const types = ['basic','food1','food','foodplus','precheck','rule','korean','japanese','vietnamese','sudoku'];
-  const champs = {};
-  try {
-    for (const t of types) {
-      const snap = await database.ref(`scores/${t}`).once('value');
-      const arr = []; snap.forEach(c=>arr.push(c.val()));
-      if (!arr.length) continue;
-      arr.sort((a,b)=>{
-        if (b.score!==a.score) return b.score-a.score;
-        if ((a.totalTime||999999)!==(b.totalTime||999999)) return (a.totalTime||999999)-(b.totalTime||999999);
-        return a.timestamp-b.timestamp;
-      });
-      const top = arr[0];
-      const sameCount = arr.filter(x=>x.score===top.score).length;
-      champs[t] = {
-        displayName: top.displayName,
-        score: top.score,
-        timestamp: top.timestamp,
-        totalTime: top.totalTime,
-        hasMultipleSameScore: sameCount>1
-      };
-    }
-    updateChampionDisplay(champs);
-  } catch (e) {
-    console.error('載入榜首資訊失敗:', e);
-  }
-}
-
-// 更新榜首顯示
-function updateChampionDisplay(champions) {
-  document.querySelectorAll('.challenge-item').forEach(item=>{
-    const title = item.querySelector('.challenge-title').textContent;
-    const actions = item.querySelector('.challenge-actions');
-    let type = '';
-    if (title.includes('分流考試挑戰')) type='basic';
-    else if (title.includes('英文考試基礎版')) type='food1';
-    else if (title.includes('英文考試進階版')) type='food';
-    else if (title.includes('英文考試強化版')) type='foodplus';
-    else if (title.includes('前導複查挑戰')) type='precheck';
-    else if (title.includes('規定挑戰')) type='rule';
-    else if (title.includes('韓語挑戰基礎版')) type='korean';
-    else if (title.includes('日語挑戰基礎版')) type='japanese';
-    else if (title.includes('越南語詞彙挑戰')) type='vietnamese';
-    else if (title.includes('初階數獨挑戰')) type='sudoku';
-
-    let div = item.querySelector('.champion-display');
-    if (!div) {
-      div = document.createElement('div');
-      div.className = 'champion-display';
-      item.insertBefore(div, actions);
-    }
-    if (!type || !champions[type]) {
-      div.innerHTML = `
-        <div style="
-          display:flex;align-items:center;justify-content:center;
-          background:rgba(255,255,255,0.1);color:#a0a0a0;
-          padding:6px 12px;border-radius:6px;font-size:0.85rem;
-          margin-bottom:8px;border:1px dashed rgba(255,255,255,0.2);
-        ">
-          <span>🏆 暫無榜首</span>
-        </div>`;
-    } else {
-      const c = champions[type];
-      const date = new Date(c.timestamp).toLocaleDateString();
-      const bind = c.hasMultipleSameScore?' 🥇':'';
-      const timeDisp = c.totalTime?`${Math.floor(c.totalTime/60)}:${(c.totalTime%60).toString().padStart(2,'0')}`:'';
-      div.innerHTML = `
-        <div style="
-          display:flex;align-items:center;justify-content:space-between;
-          background:linear-gradient(45deg,#FFD700,#FFA500);
-          color:#000;padding:6px 12px;border-radius:6px;
-          font-size:0.85rem;font-weight:bold;margin-bottom:8px;
-          box-shadow:0 2px 4px rgba(255,215,0,0.3);
-        ">
-          <span>🏆 榜首：${c.displayName}${bind}</span>
-          <div style="text-align:right;">
-            <div>${c.score}分</div>
-            <div style="font-size:0.7rem;opacity:0.8;">
-              ${c.hasMultipleSameScore?'首綁 ':''}${date}${timeDisp?` (${timeDisp})`:''}
-            </div>
-          </div>
-        </div>`;
-    }
-  });
-}
 
 // 登出
 function logout() {
