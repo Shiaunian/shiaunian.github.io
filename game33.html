@@ -11,367 +11,365 @@
 
 <style>
 :root {
-  --bg-primary: #1a1b1e;
-  --bg-secondary: #2d2d30;
-  --primary: #7289da;
-  --primary-dark: #5c6fb1;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --success: #22c55e;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --info: #3b82f6;
+--bg-primary: #1a1b1e;
+--bg-secondary: #2d2d30;
+--primary: #7289da;
+--primary-dark: #5c6fb1;
+--text-primary: #ffffff;
+--text-secondary: #a0a0a0;
+--danger: #ef4444;
+--warning: #f59e0b;
+--success: #22c55e;
+--shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+--border-color: rgba(255, 255, 255, 0.1);
+--info: #3b82f6;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-  font-family: "微軟正黑體", Arial, sans-serif;
-  background: var(--bg-primary);
-  min-height: 100vh;
-  padding: 12px;
-  color: var(--text-primary);
+font-family: "微軟正黑體", Arial, sans-serif;
+background: var(--bg-primary);
+min-height: 100vh;
+padding: 12px;
+color: var(--text-primary);
 }
 
 .container {
-  max-width: 480px;
-  margin: 0 auto;
-  height: calc(100vh - 24px);
-  overflow-y: auto;
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
+max-width: 480px;
+margin: 0 auto;
+height: calc(100vh - 24px);
+overflow-y: auto;
+background: var(--bg-secondary);
+border-radius: 12px;
+box-shadow: var(--shadow);
 }
 
 .header {
-  background: var(--bg-secondary);
-  padding: 15px;
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+background: var(--bg-secondary);
+padding: 15px;
+border-bottom: 1px solid var(--border-color);
+position: sticky;
+top: 0;
+z-index: 100;
 }
 
 .header-title {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
 }
 
 .title-text {
-  font-size: 1.3rem;
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: space-between;
+font-size: 1.3rem;
+color: var(--text-primary);
+display: flex;
+align-items: center;
+gap: 8px;
+justify-content: space-between;
 }
 
 .user-info {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-top: 5px;
+font-size: 0.9rem;
+color: var(--text-secondary);
+margin-top: 5px;
 }
 
 .connection-status {
-  background-color: var(--success);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  margin-left: 8px;
+background-color: var(--success);
+color: white;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 0.8rem;
+margin-left: 8px;
 }
 
 .btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  flex: 1;
+padding: 8px 16px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 0.9rem;
+transition: all 0.3s ease;
+flex: 1;
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: var(--text-primary);
+background: var(--primary);
+color: var(--text-primary);
 }
 
 .btn-primary:hover {
-  background: var(--primary-dark);
+background: var(--primary-dark);
 }
 
 .btn-secondary {
-  background: var(--warning);
-  color: var(--text-primary);
+background: var(--warning);
+color: var(--text-primary);
 }
 
 .btn-danger {
-  background: var(--danger);
-  color: var(--text-primary);
+background: var(--danger);
+color: var(--text-primary);
 }
 
 .challenge-item {
-  padding: 15px;
-  border-bottom: 1px solid var(--border-color);
+padding: 15px;
+border-bottom: 1px solid var(--border-color);
 }
 
 .challenge-title {
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  margin-bottom: 8px;
+font-size: 1.1rem;
+color: var(--text-primary);
+margin-bottom: 8px;
 }
 
 .challenge-info {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  margin-bottom: 12px;
+color: var(--text-secondary);
+font-size: 0.9rem;
+margin-bottom: 12px;
 }
 
 .challenge-actions {
-  display: flex;
-  gap: 8px;
+display: flex;
+gap: 8px;
 }
 
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.7);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 1000;
 }
 
 .modal {
-  background: var(--bg-secondary);
-  width: 90%;
-  max-width: 400px;
-  max-height: 80vh;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+background: var(--bg-secondary);
+width: 90%;
+max-width: 400px;
+max-height: 80vh;
+border-radius: 12px;
+overflow: hidden;
+position: relative;
 }
 
 .modal-header {
-  padding: 15px;
-  background: var(--primary);
-  color: var(--text-primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
+padding: 15px;
+background: var(--primary);
+color: var(--text-primary);
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: sticky;
+top: 0;
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 0 8px;
+background: none;
+border: none;
+color: var(--text-primary);
+font-size: 1.5rem;
+cursor: pointer;
+padding: 0 8px;
 }
 
 .modal-content {
-  padding: 15px;
-  overflow-y: auto;
-  max-height: calc(80vh - 56px);
-  /* 🔧 新增：確保滾動條顯示 */
-  min-height: 200px; /* 設定最小高度 */
+padding: 15px;
+overflow-y: auto;
+max-height: calc(80vh - 56px);
+min-height: 200px;
 }
 
-/* 🔧 新增：確保排行榜內容可滾動 */
 .leaderboard-container {
-  max-height: calc(60vh - 100px);
-  overflow-y: auto;
-  padding-right: 5px; /* 為滾動條留空間 */
+max-height: calc(60vh - 100px);
+overflow-y: auto;
+padding-right: 5px;
 }
 
 .leaderboard-item {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--border-color);
-  transition: background-color 0.3s;
+display: flex;
+align-items: center;
+padding: 8px 12px;
+border-bottom: 1px solid var(--border-color);
+transition: background-color 0.3s;
 }
 
 .leaderboard-item.current-user {
-  background: rgba(114, 137, 218, 0.1);
-  border-left: 3px solid var(--primary);
+background: rgba(114, 137, 218, 0.1);
+border-left: 3px solid var(--primary);
 }
 
 .rank {
-  min-width: 30px;
-  font-weight: bold;
-  color: var(--primary);
+min-width: 30px;
+font-weight: bold;
+color: var(--primary);
 }
 
 .user-name {
-  flex: 1;
-  margin: 0 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+flex: 1;
+margin: 0 10px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 
 .score {
-  font-weight: bold;
-  color: var(--primary);
-  margin-left: auto;
+font-weight: bold;
+color: var(--primary);
+margin-left: auto;
 }
 
 .empty-leaderboard {
-  text-align: center;
-  padding: 20px;
-  color: var(--text-secondary);
+text-align: center;
+padding: 20px;
+color: var(--text-secondary);
 }
 
 .exam-container {
-  padding: 20px;
+padding: 20px;
 }
 
 .exam-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
 }
 
 .timer {
-  font-size: 1.2rem;
-  color: var(--primary);
+font-size: 1.2rem;
+color: var(--primary);
 }
 
 .question {
-  background: var(--bg-secondary);
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+background: var(--bg-secondary);
+padding: 20px;
+border-radius: 8px;
+margin-bottom: 20px;
 }
 
 .options {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 10px;
+margin-top: 20px;
 }
 
 .option-btn {
-  width: 100%;
-  text-align: left;
-  padding: 12px;
+width: 100%;
+text-align: left;
+padding: 12px;
 }
 
 .option-btn.correct {
-  background: var(--success);
+background: var(--success);
 }
 
 .option-btn.wrong {
-  background: var(--danger);
+background: var(--danger);
 }
 
 .exam-result {
-  text-align: center;
-  padding: 20px;
+text-align: center;
+padding: 20px;
 }
 
 .exam-result h2 {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .exam-result p {
-  margin-bottom: 10px;
+margin-bottom: 10px;
 }
 
 .exam-result button {
-  margin: 10px;
+margin: 10px;
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+background: var(--primary);
+border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+background: var(--primary-dark);
 }
 
 .sudoku-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  background: var(--border-color);
-  padding: 4px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 4px;
+background: var(--border-color);
+padding: 4px;
+border-radius: 8px;
+margin-bottom: 20px;
 }
 
 .sudoku-cell {
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--bg-primary);
-  border: none;
-  border-radius: 4px;
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  text-align: center;
-  cursor: pointer;
+width: 100%;
+aspect-ratio: 1;
+background: var(--bg-primary);
+border: none;
+border-radius: 4px;
+color: var(--text-primary);
+font-size: 1.5rem;
+text-align: center;
+cursor: pointer;
 }
 
 .sudoku-cell:disabled {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  cursor: not-allowed;
+background: var(--bg-secondary);
+color: var(--text-secondary);
+cursor: not-allowed;
 }
 
 .sudoku-cell:focus {
-  outline: 2px solid var(--primary);
+outline: 2px solid var(--primary);
 }
 
 .sudoku-cell::-webkit-inner-spin-button,
 .sudoku-cell::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+-webkit-appearance: none;
+margin: 0;
 }
 
 .loading {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-secondary);
+text-align: center;
+padding: 40px 20px;
+color: var(--text-secondary);
 }
 
 .loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid var(--primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-right: 10px;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 3px solid #f3f3f3;
+border-top: 3px solid var(--primary);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+margin-right: 10px;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -379,143 +377,143 @@ body {
 <!-- 載入中畫面 -->
 <div id="loadingScreen" class="container">
 <div class="loading">
-  <div class="loading-spinner"></div>
-  正在驗證登入狀態...
+<div class="loading-spinner"></div>
+正在驗證登入狀態...
 </div>
 </div>
 
 <!-- 主要內容 -->
 <div id="mainContent" class="container" style="display: none;">
 <header class="header">
-  <div class="header-title">
-      <div class="title-text">
-          <span>🎯</span>
-          <h1>T2日檢疫挑戰系統</h1>
-          <button class="btn btn-danger" onclick="logout()">登出</button>
-      </div>
-      <div class="user-info">
-          <span id="currentUserWelcome">歡迎回來，載入中...</span>
-          <span class="connection-status" id="connectionStatus">用戶連線中</span>
-      </div>
-  </div>
-  <div class="header-actions">
-      <button class="btn btn-primary" onclick="backToT2()">返回T2日</button>
-  </div>
+<div class="header-title">
+    <div class="title-text">
+        <span>🎯</span>
+        <h1>T2日檢疫挑戰系統</h1>
+        <button class="btn btn-danger" onclick="logout()">登出</button>
+    </div>
+    <div class="user-info">
+        <span id="currentUserWelcome">歡迎回來，載入中...</span>
+        <span class="connection-status" id="connectionStatus">用戶連線中</span>
+    </div>
+</div>
+<div class="header-actions">
+    <button class="btn btn-primary" onclick="backToT2()">返回T2日</button>
+</div>
 </header>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐分流考試挑戰⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('basic')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('basic')">排行榜</button>
-  </div>
+<h3 class="challenge-title">⭐分流考試挑戰⭐</h3>
+<p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('basic')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('basic')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐英文考試基礎版⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('food1')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('food1')">排行榜</button>
-  </div>
+<h3 class="challenge-title">⭐英文考試基礎版⭐</h3>
+<p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('food1')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('food1')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐英文考試進階版⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共20題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('food')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
-  </div>
+<h3 class="challenge-title">⭐英文考試進階版⭐</h3>
+<p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共20題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('food')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐英文考試強化版⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共30題 一題10分(有點困難)</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('foodplus')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('foodplus')">排行榜</button>
-  </div>
+<h3 class="challenge-title">⭐英文考試強化版⭐</h3>
+<p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共30題 一題10分(有點困難)</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('foodplus')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('foodplus')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">⭐前導複查挑戰⭐</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('precheck')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('precheck')">排行榜</button>
-  </div>
+<h3 class="challenge-title">⭐前導複查挑戰⭐</h3>
+<p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('precheck')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('precheck')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">規定挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('rule')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('rule')">排行榜</button>
-  </div>
+<h3 class="challenge-title">規定挑戰</h3>
+<p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('rule')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('rule')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">🇰🇷韓語挑戰基礎版🇰🇷</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('korean')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('korean')">排行榜</button>
-  </div>
+<h3 class="challenge-title">🇰🇷韓語挑戰基礎版🇰🇷</h3>
+<p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('korean')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('korean')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">🇯🇵日語挑戰基礎版🇯🇵</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('japanese')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('japanese')">排行榜</button>
-  </div>
+<h3 class="challenge-title">🇯🇵日語挑戰基礎版🇯🇵</h3>
+<p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('japanese')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('japanese')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">🇻🇳越南語詞彙挑戰🇻🇳</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('vietnamese')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('vietnamese')">排行榜</button>
-  </div>
+<h3 class="challenge-title">🇻🇳越南語詞彙挑戰🇻🇳</h3>
+<p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('vietnamese')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('vietnamese')">排行榜</button>
+</div>
 </div>
 
 <div class="challenge-item">
-  <h3 class="challenge-title">初階數獨挑戰</h3>
-  <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共10題 一題10分</p>
-  <div class="challenge-actions">
-      <button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
-      <button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
-  </div>
+<h3 class="challenge-title">初階數獨挑戰</h3>
+<p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共10題 一題10分</p>
+<div class="challenge-actions">
+    <button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
+    <button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
+</div>
 </div>
 </div>
 
 <!-- 排行榜模態視窗 -->
 <div class="modal-overlay" id="leaderboardModal">
 <div class="modal">
-  <div class="modal-header">
-      <h2 id="modalTitle">排行榜</h2>
-      <button class="close-btn" onclick="hideLeaderboard()">×</button>
-  </div>
-  <div class="modal-content" id="leaderboardContent">
-  </div>
+<div class="modal-header">
+    <h2 id="modalTitle">排行榜</h2>
+    <button class="close-btn" onclick="hideLeaderboard()">×</button>
+</div>
+<div class="modal-content" id="leaderboardContent">
+</div>
 </div>
 </div>
 
 <script>
 // Firebase 配置
 const firebaseConfig = {
-  apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
-  authDomain: "openexammodal.firebaseapp.com",
-  databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
-  projectId: "openexammodal",
-  storageBucket: "openexammodal.firebasestorage.app",
-  messagingSenderId: "336901617556",
-  appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
+apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+authDomain: "openexammodal.firebaseapp.com",
+databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
+projectId: "openexammodal",
+storageBucket: "openexammodal.firebasestorage.app",
+messagingSenderId: "336901617556",
+appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
 };
 // 初始化 Firebase
 firebase.initializeApp(firebaseConfig);
@@ -524,38 +522,45 @@ const database = firebase.database();
 // ─── 新增：題庫宣告 & 載入函式 ─────────────────────────
 let examQuestions = {};
 async function loadExamQuestions() {
-  try {
-    const resp = await fetch('questions.json');
-    if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
-    examQuestions = await resp.json();
-    console.log('✅ 題庫已載入', examQuestions);
-  } catch (err) {
-    console.error(err);
-    alert('系統錯誤：無法載入題庫檔案');
-  }
+try {
+  const resp = await fetch('questions.json');
+  if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
+  examQuestions = await resp.json();
+  console.log('✅ 題庫已載入', examQuestions);
+} catch (err) {
+  console.error(err);
+  alert('系統錯誤：無法載入題庫檔案');
+}
 }
 
-// ─── 新增：避免 loadAllChampions 未定義錯誤 ─────────────────────────
+// ─── 新增：排行榜資料載入 ─────────────────────────
+let allChampions = {};
 async function loadAllChampions() {
-  // TODO: 未來真正從 Firebase 抓排行榜資料
-  return;
+try {
+  console.log('🔄 開始載入排行榜資料...');
+  const snapshot = await database.ref('scores').once('value');
+  const data = snapshot.val();
+  allChampions = data || {};
+  console.log('✅ 排行榜資料已載入', allChampions);
+} catch (error) {
+  console.error('❌ 載入排行榜資料失敗:', error);
+  allChampions = {};
 }
-// ────────────────────────────────────────────────────────
+}
 
 // ─── 考試配置 ─────────────────────────────────────────
 const examConfigs = {
-  basic:       { name:'⭐分流考試挑戰⭐',    timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
-  food1:       { name:'⭐英文考試基礎版⭐',    timePerQuestion:15, questionCount:15, fastAnswerThreshold:2.5,questions:[] },
-  food:        { name:'⭐英文考試進階版⭐',    timePerQuestion:10, questionCount:20, fastAnswerThreshold:2,  questions:[] },
-  foodplus:    { name:'⭐英文考試強化版⭐',    timePerQuestion:10, questionCount:30, fastAnswerThreshold:2.5,questions:[] },
-  precheck:    { name:'前導複查挑戰',        timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
-  rule:        { name:'規定挑戰',            timePerQuestion:60, questionCount:10, fastAnswerThreshold:5,  questions:[] },
-  korean:      { name:'🇰🇷韓語挑戰基礎版🇰🇷', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
-  japanese:    { name:'🇯🇵日語挑戰基礎版🇯🇵', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
-  vietnamese:  { name:'🇻🇳越南語詞彙挑戰🇻🇳', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
-  sudoku:      { name:'初階數獨挑戰',        timePerQuestion:80, questionCount:10, fastAnswerThreshold:30, questions:[] }
+basic:       { name:'⭐分流考試挑戰⭐',    timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
+food1:       { name:'⭐英文考試基礎版⭐',    timePerQuestion:15, questionCount:15, fastAnswerThreshold:2.5,questions:[] },
+food:        { name:'⭐英文考試進階版⭐',    timePerQuestion:10, questionCount:20, fastAnswerThreshold:2,  questions:[] },
+foodplus:    { name:'⭐英文考試強化版⭐',    timePerQuestion:10, questionCount:30, fastAnswerThreshold:2.5,questions:[] },
+precheck:    { name:'前導複查挑戰',        timePerQuestion:60, questionCount:15, fastAnswerThreshold:5,  questions:[] },
+rule:        { name:'規定挑戰',            timePerQuestion:60, questionCount:10, fastAnswerThreshold:5,  questions:[] },
+korean:      { name:'🇰🇷韓語挑戰基礎版🇰🇷', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+japanese:    { name:'🇯🇵日語挑戰基礎版🇯🇵', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+vietnamese:  { name:'🇻🇳越南語詞彙挑戰🇻🇳', timePerQuestion:12, questionCount:15, fastAnswerThreshold:3,  questions:[] },
+sudoku:      { name:'初階數獨挑戰',        timePerQuestion:80, questionCount:10, fastAnswerThreshold:30, questions:[] }
 };
-// ────────────────────────────────────────────────────────
 
 // 全域變數
 let currentUser = null;
@@ -570,446 +575,516 @@ let userScores = { fastAnswers:0, correctAnswers:0 };
 
 // 工具函數：從數組中移除特定元素
 Array.prototype.remove = function(element) {
-  const index = this.indexOf(element);
-  if (index > -1) this.splice(index, 1);
+const index = this.indexOf(element);
+if (index > -1) this.splice(index, 1);
 };
 
 // 強制登出函數
 function forceLogout(message = '登入驗證失敗，請重新登入') {
-  localStorage.removeItem('t2_login');
-  localStorage.removeItem('t2_login_time');
-  localStorage.removeItem('t2_login_user');
-  localStorage.removeItem('t2_login_password');
-  alert(message);
-  window.location.href = 'index.html';
+localStorage.removeItem('t2_login');
+localStorage.removeItem('t2_login_time');
+localStorage.removeItem('t2_login_user');
+localStorage.removeItem('t2_login_password');
+alert(message);
+window.location.href = 'index.html';
 }
 
 // 檢查登入狀態和時效
 function checkLoginStatus() {
-  const flag = localStorage.getItem('t2_login');
-  const time = localStorage.getItem('t2_login_time');
-  const user = localStorage.getItem('t2_login_user');
-  if (flag!=='yes' || !time || !user) {
-    forceLogout('未檢測到有效登入狀態');
-    return false;
-  }
-  if (Date.now()-parseInt(time) > 3600000) {
-    forceLogout('登入時間已超過1小時，請重新登入');
-    return false;
-  }
-  return user;
+const flag = localStorage.getItem('t2_login');
+const time = localStorage.getItem('t2_login_time');
+const user = localStorage.getItem('t2_login_user');
+if (flag!=='yes' || !time || !user) {
+  forceLogout('未檢測到有效登入狀態');
+  return false;
+}
+if (Date.now()-parseInt(time) > 3600000) {
+  forceLogout('登入時間已超過1小時，請重新登入');
+  return false;
+}
+return user;
 }
 
 // 載入用戶資料庫
 async function loadUsersData() {
-  try {
-    const resp = await fetch('password.json');
-    if (!resp.ok) throw new Error('無法載入用戶資料庫');
-    const data = await resp.json();
-    usersData = Array.isArray(data)? data : [data];
-    return true;
-  } catch (err) {
-    console.error('載入用戶資料庫失敗:', err);
-    forceLogout('系統錯誤：無法載入用戶資料庫');
-    return false;
-  }
+try {
+  const resp = await fetch('password.json');
+  if (!resp.ok) throw new Error('無法載入用戶資料庫');
+  const data = await resp.json();
+  usersData = Array.isArray(data)? data : [data];
+  return true;
+} catch (err) {
+  console.error('載入用戶資料庫失敗:', err);
+  forceLogout('系統錯誤：無法載入用戶資料庫');
+  return false;
+}
 }
 
 // 驗證用戶
 function validateUser(username) {
-  const pwd = localStorage.getItem('t2_login_password');
-  const user = usersData.find(u=>u.username===username && u.password===pwd);
-  if (!user) {
-    console.error('用戶不存在', username);
-    forceLogout('用戶帳號不存在於系統中');
-    return null;
-  }
-  return user;
+const pwd = localStorage.getItem('t2_login_password');
+const user = usersData.find(u=>u.username===username && u.password===pwd);
+if (!user) {
+  console.error('用戶不存在', username);
+  forceLogout('用戶帳號不存在於系統中');
+  return null;
+}
+return user;
 }
 
 // 顯示歡迎
 function showWelcomeMessage(user) {
-  const elm = document.getElementById('currentUserWelcome');
-  const name = user.welcome||user._comment||user.username;
-  elm.textContent = `歡迎回來，${name}`;
+const elm = document.getElementById('currentUserWelcome');
+const name = user.welcome||user._comment||user.username;
+elm.textContent = `歡迎回來，${name}`;
 }
 
 // 主要初始化
 async function initializePage() {
-  try {
-    await loadExamQuestions();
-    // 回寫題庫到配置
-    for (let t in examQuestions) {
-      if (examConfigs[t]) examConfigs[t].questions = examQuestions[t];
-    }
-    console.log('examConfigs 更新', examConfigs);
-
-    const loginUser = checkLoginStatus();
-    if (!loginUser) return;
-    if (!await loadUsersData()) return;
-    const user = validateUser(loginUser);
-    if (!user) return;
-    currentUser = user;
-    showWelcomeMessage(user);
-
-    document.getElementById('loadingScreen').style.display = 'none';
-    document.getElementById('mainContent').style.display = 'block';
-
-    await loadAllChampions();
-  } catch (err) {
-    console.error('頁面初始化失敗:', err);
-    forceLogout('系統初始化失敗，請重新登入');
+try {
+  await loadExamQuestions();
+  // 回寫題庫到配置
+  for (let t in examQuestions) {
+    if (examConfigs[t]) examConfigs[t].questions = examQuestions[t];
   }
+  console.log('examConfigs 更新', examConfigs);
+
+  const loginUser = checkLoginStatus();
+  if (!loginUser) return;
+  if (!await loadUsersData()) return;
+  const user = validateUser(loginUser);
+  if (!user) return;
+  currentUser = user;
+  showWelcomeMessage(user);
+
+  document.getElementById('loadingScreen').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+
+  await loadAllChampions();
+} catch (err) {
+  console.error('頁面初始化失敗:', err);
+  forceLogout('系統初始化失敗，請重新登入');
+}
+}
+
+// ─── 新增：排行榜顯示功能 ─────────────────────────
+async function showLeaderboard(examType) {
+console.log(`🔄 顯示 ${examType} 排行榜`);
+
+// 先重新載入最新資料
+await loadAllChampions();
+
+const config = examConfigs[examType];
+if (!config) {
+  alert('考試類型不存在');
+  return;
+}
+
+const modal = document.getElementById('leaderboardModal');
+const modalTitle = document.getElementById('modalTitle');
+const content = document.getElementById('leaderboardContent');
+
+modalTitle.textContent = `${config.name} - 排行榜`;
+
+// 取得該考試類型的成績資料
+const examScores = allChampions[examType] || {};
+const scoresList = Object.values(examScores);
+
+if (scoresList.length === 0) {
+  content.innerHTML = `
+    <div class="empty-leaderboard">
+      <p>🏆 還沒有人參加過這項挑戰</p>
+      <p>成為第一個挑戰者吧！</p>
+    </div>
+  `;
+} else {
+  // 按分數排序
+  scoresList.sort((a, b) => b.score - a.score);
+  
+  let leaderboardHTML = '<div class="leaderboard-container">';
+  scoresList.forEach((record, index) => {
+    const isCurrentUser = currentUser && record.username === currentUser.username;
+    const rank = index + 1;
+    const displayName = record.displayName || record.username;
+    
+    leaderboardHTML += `
+      <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+        <div class="rank">#${rank}</div>
+        <div class="user-name">${displayName}</div>
+        <div class="score">${record.score}分</div>
+      </div>
+    `;
+  });
+  leaderboardHTML += '</div>';
+  
+  content.innerHTML = leaderboardHTML;
+}
+
+modal.style.display = 'flex';
+}
+
+// 隱藏排行榜
+function hideLeaderboard() {
+const modal = document.getElementById('leaderboardModal');
+modal.style.display = 'none';
 }
 
 // 🔧 修正版數獨生成函數
 function generateSudoku() {
-  // 創建基礎解答
-  const solution = [
-    [1, 2, 3, 4],
-    [3, 4, 1, 2],
-    [2, 1, 4, 3],
-    [4, 3, 2, 1]
-  ];
+// 創建基礎解答
+const solution = [
+  [1, 2, 3, 4],
+  [3, 4, 1, 2],
+  [2, 1, 4, 3],
+  [4, 3, 2, 1]
+];
 
-  // 隨機打亂行和列
-  for (let i = 0; i < 5; i++) {
-      const row1 = Math.floor(Math.random() * 4);
-      const row2 = Math.floor(Math.random() * 4);
-      [solution[row1], solution[row2]] = [solution[row2], solution[row1]];
-      const col1 = Math.floor(Math.random() * 4);
-      const col2 = Math.floor(Math.random() * 4);
-      for (let row = 0; row < 4; row++) {
-          [solution[row][col1], solution[row][col2]] = [solution[row][col2], solution[row][col1]];
-      }
-  }
+// 隨機打亂行和列
+for (let i = 0; i < 5; i++) {
+    const row1 = Math.floor(Math.random() * 4);
+    const row2 = Math.floor(Math.random() * 4);
+    [solution[row1], solution[row2]] = [solution[row2], solution[row1]];
+    const col1 = Math.floor(Math.random() * 4);
+    const col2 = Math.floor(Math.random() * 4);
+    for (let row = 0; row < 4; row++) {
+        [solution[row][col1], solution[row][col2]] = [solution[row][col2], solution[row][col1]];
+    }
+}
 
-  // 創建題目（移除一些數字）
-  const puzzle = solution.map(row => [...row]);
-  const cellsToRemove = 8;
-  for (let i = 0; i < cellsToRemove; i++) {
-      let row, col;
-      do {
-          row = Math.floor(Math.random() * 4);
-          col = Math.floor(Math.random() * 4);
-      } while (puzzle[row][col] === 0);
-      puzzle[row][col] = 0;
-  }
+// 創建題目（移除一些數字）
+const puzzle = solution.map(row => [...row]);
+const cellsToRemove = 8;
+for (let i = 0; i < cellsToRemove; i++) {
+    let row, col;
+    do {
+        row = Math.floor(Math.random() * 4);
+        col = Math.floor(Math.random() * 4);
+    } while (puzzle[row][col] === 0);
+    puzzle[row][col] = 0;
+}
 
-  return { puzzle, solution };
+return { puzzle, solution };
 }
 
 // 檢查數獨答案是否正確
 function checkSudokuAnswer(userAnswer, solution) {
-  for (let i = 0; i < 4; i++) {
-      for (let j = 0; j < 4; j++) {
-          if (parseInt(userAnswer[i][j]) !== solution[i][j]) {
-              return false;
-          }
-      }
-  }
-  return true;
+for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+        if (parseInt(userAnswer[i][j]) !== solution[i][j]) {
+            return false;
+        }
+    }
+}
+return true;
 }
 
 // 生成數獨題目
 function generateSudokuQuestions() {
-  const questions = [];
-  for (let i = 0; i < 10; i++) {
-    const { puzzle, solution } = generateSudoku();
-    questions.push({
-      question: `數獨題目 ${i + 1}`,
-      puzzle,
-      solution,
-      type: 'sudoku'
-    });
-  }
-  return questions;
+const questions = [];
+for (let i = 0; i < 10; i++) {
+  const { puzzle, solution } = generateSudoku();
+  questions.push({
+    question: `數獨題目 ${i + 1}`,
+    puzzle,
+    solution,
+    type: 'sudoku'
+  });
+}
+return questions;
 }
 
 function startExam(examType) {
-  if (!currentUser) { alert('請先登入'); return; }
-  const config = examConfigs[examType];
-  if (!config) { alert('考試類型不存在'); return; }
+if (!currentUser) { alert('請先登入'); return; }
+const config = examConfigs[examType];
+if (!config) { alert('考試類型不存在'); return; }
 
-  // 先清計時器
-  if (examTimer) clearInterval(examTimer);
+// 先清計時器
+if (examTimer) clearInterval(examTimer);
 
-  currentExam = examType;
-  currentQuestionIndex = 0;
-  userScores = { fastAnswers: 0, correctAnswers: 0 };
-  examStartTime = Date.now();
+currentExam = examType;
+currentQuestionIndex = 0;
+userScores = { fastAnswers: 0, correctAnswers: 0 };
+examStartTime = Date.now();
 
-  if (examType === 'sudoku') {
-    currentQuestions = generateSudokuQuestions();
-  } else {
-    // ← 在這裡直接從最新的 examQuestions 取
-    const pool = [...(examQuestions[examType] || [])];
-    currentQuestions = [];
-    for (let i = 0; i < config.questionCount && pool.length; i++) {
-      const idx = Math.floor(Math.random() * pool.length);
-      currentQuestions.push(pool.splice(idx, 1)[0]);
-    }
+if (examType === 'sudoku') {
+  currentQuestions = generateSudokuQuestions();
+} else {
+  // ← 在這裡直接從最新的 examQuestions 取
+  const pool = [...(examQuestions[examType] || [])];
+  currentQuestions = [];
+  for (let i = 0; i < config.questionCount && pool.length; i++) {
+    const idx = Math.floor(Math.random() * pool.length);
+    currentQuestions.push(pool.splice(idx, 1)[0]);
   }
+}
 
-  showExamInterface();
-  showQuestion();
+showExamInterface();
+showQuestion();
 }
 
 // 🔧 修正版顯示考試界面
 function showExamInterface() {
-  const container = document.getElementById('mainContent');
-  container.innerHTML = `
-    <div class="exam-container">
-      <div class="exam-header">
-        <h2>${examConfigs[currentExam].name}</h2>
-        <div class="timer" id="timer">00:00</div>
-      </div>
-      <div id="questionContainer"></div>
-      <div style="text-align:center; margin-top:20px;">
-        <button class="btn btn-danger" onclick="abandonExam()" style="background:#dc3545;">🚪 放棄考試</button>
-      </div>
+const container = document.getElementById('mainContent');
+container.innerHTML = `
+  <div class="exam-container">
+    <div class="exam-header">
+      <h2>${examConfigs[currentExam].name}</h2>
+      <div class="timer" id="timer">00:00</div>
     </div>
-  `;
+    <div id="questionContainer"></div>
+    <div style="text-align:center; margin-top:20px;">
+      <button class="btn btn-danger" onclick="abandonExam()" style="background:#dc3545;">🚪 放棄考試</button>
+    </div>
+  </div>
+`;
 }
 
 // 放棄考試
 function abandonExam() {
-  if (examTimer) {
-      clearInterval(examTimer);
-      examTimer = null;
-  }
-  const confirmed = confirm('🤔 確定要放棄考試嗎？\n\n⚠️ 放棄後將不會保存任何成績！');
-  if (confirmed) {
-      alert('😔 考試已放棄，返回主頁面');
-      location.reload();
-  } else {
-      startQuestionTimer();
-  }
+if (examTimer) {
+    clearInterval(examTimer);
+    examTimer = null;
+}
+const confirmed = confirm('🤔 確定要放棄考試嗎？\n\n⚠️ 放棄後將不會保存任何成績！');
+if (confirmed) {
+    alert('😔 考試已放棄，返回主頁面');
+    location.reload();
+} else {
+    startQuestionTimer();
+}
 }
 
 // 顯示題目
 function showQuestion() {
-  if (examTimer) {
-      clearInterval(examTimer);
-      examTimer = null;
-  }
-  const config = examConfigs[currentExam];
-  const question = currentQuestions[currentQuestionIndex];
-  const container = document.getElementById('questionContainer');
-  questionStartTime = Date.now();
+if (examTimer) {
+    clearInterval(examTimer);
+    examTimer = null;
+}
+const config = examConfigs[currentExam];
+const question = currentQuestions[currentQuestionIndex];
+const container = document.getElementById('questionContainer');
+questionStartTime = Date.now();
 
-  if (question.type === 'sudoku') {
-      container.innerHTML = `
-        <div class="question">
-          <h3>第 ${currentQuestionIndex+1} 題 / ${currentQuestions.length}</h3>
-          <p>${question.question}</p>
-          <div class="sudoku-grid" id="sudokuGrid"></div>
-          <button class="btn btn-primary" onclick="submitSudokuAnswer()">提交答案</button>
-          <button class="btn btn-danger" onclick="skipQuestion()">跳過</button>
-        </div>
-      `;
-      const grid = document.getElementById('sudokuGrid');
-      for (let i=0; i<4; i++){
-        for (let j=0; j<4; j++){
-          const cell = document.createElement('input');
-          cell.type = 'number'; cell.className = 'sudoku-cell';
-          cell.min='1'; cell.max='4'; cell.dataset.row=i; cell.dataset.col=j;
-          if (question.puzzle[i][j]!==0) {
-            cell.value = question.puzzle[i][j];
-            cell.disabled = true;
-          }
-          grid.appendChild(cell);
+if (question.type === 'sudoku') {
+    container.innerHTML = `
+      <div class="question">
+        <h3>第 ${currentQuestionIndex+1} 題 / ${currentQuestions.length}</h3>
+        <p>${question.question}</p>
+        <div class="sudoku-grid" id="sudokuGrid"></div>
+        <button class="btn btn-primary" onclick="submitSudokuAnswer()">提交答案</button>
+        <button class="btn btn-danger" onclick="skipQuestion()">跳過</button>
+      </div>
+    `;
+    const grid = document.getElementById('sudokuGrid');
+    for (let i=0; i<4; i++){
+      for (let j=0; j<4; j++){
+        const cell = document.createElement('input');
+        cell.type = 'number'; cell.className = 'sudoku-cell';
+        cell.min='1'; cell.max='4'; cell.dataset.row=i; cell.dataset.col=j;
+        if (question.puzzle[i][j]!==0) {
+          cell.value = question.puzzle[i][j];
+          cell.disabled = true;
         }
+        grid.appendChild(cell);
       }
-  } else {
-      const shuffled = [...question.options];
-      const correctOpt = shuffled[question.correct];
-      for (let i = shuffled.length-1; i>0; i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      const newCorrect = shuffled.indexOf(correctOpt);
-      container.innerHTML = `
-        <div class="question">
-          <h3>第 ${currentQuestionIndex+1} 題 / ${currentQuestions.length}</h3>
-          <p>${question.question}</p>
-          <div class="options">
-            ${shuffled.map((opt,idx)=>
-              `<button class="btn btn-primary option-btn" onclick="selectAnswer(${idx},${newCorrect})">${opt}</button>`
-            ).join('')}
-          </div>
+    }
+} else {
+    const shuffled = [...question.options];
+    const correctOpt = shuffled[question.correct];
+    for (let i = shuffled.length-1; i>0; i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const newCorrect = shuffled.indexOf(correctOpt);
+    container.innerHTML = `
+      <div class="question">
+        <h3>第 ${currentQuestionIndex+1} 題 / ${currentQuestions.length}</h3>
+        <p>${question.question}</p>
+        <div class="options">
+          ${shuffled.map((opt,idx)=>
+            `<button class="btn btn-primary option-btn" onclick="selectAnswer(${idx},${newCorrect})">${opt}</button>`
+          ).join('')}
         </div>
-      `;
-  }
-  startQuestionTimer();
+      </div>
+    `;
+}
+startQuestionTimer();
 }
 
 // 計時器
 function startQuestionTimer() {
-  const config = examConfigs[currentExam];
-  let timeLeft = config.timePerQuestion;
-  const timerEl = document.getElementById('timer');
-  if (!timerEl) return;
-  examTimer = setInterval(()=>{
-    const m = Math.floor(timeLeft/60);
-    const s = timeLeft%60;
-    timerEl.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;  
-    if (timeLeft<=0) {
-      clearInterval(examTimer);
-      examTimer = null;
-      timeUp();
-    }
-    timeLeft--;
-  },1000);
+const config = examConfigs[currentExam];
+let timeLeft = config.timePerQuestion;
+const timerEl = document.getElementById('timer');
+if (!timerEl) return;
+examTimer = setInterval(()=>{
+  const m = Math.floor(timeLeft/60);
+  const s = timeLeft%60;
+  timerEl.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;  
+  if (timeLeft<=0) {
+    clearInterval(examTimer);
+    examTimer = null;
+    timeUp();
+  }
+  timeLeft--;
+},1000);
 }
 
 // 選擇答案
 function selectAnswer(selectedIndex, correctIndex=null) {
-  if (examTimer) { clearInterval(examTimer); examTimer = null; }
-  const question = currentQuestions[currentQuestionIndex];
-  const config = examConfigs[currentExam];
-  const answerTime = (Date.now()-questionStartTime)/1000;
-  const actualCorrect = correctIndex!==null? correctIndex : question.correct;
-  const isCorrect = selectedIndex===actualCorrect;
-  const isFast = answerTime <= config.fastAnswerThreshold;
-  if (isCorrect) userScores.correctAnswers++;
-  if (isFast && isCorrect) userScores.fastAnswers++;
-  showAnswerFeedback(selectedIndex, actualCorrect, isCorrect);
-  setTimeout(()=> nextQuestion(), 2000);
+if (examTimer) { clearInterval(examTimer); examTimer = null; }
+const question = currentQuestions[currentQuestionIndex];
+const config = examConfigs[currentExam];
+const answerTime = (Date.now()-questionStartTime)/1000;
+const actualCorrect = correctIndex!==null? correctIndex : question.correct;
+const isCorrect = selectedIndex===actualCorrect;
+const isFast = answerTime <= config.fastAnswerThreshold;
+if (isCorrect) userScores.correctAnswers++;
+if (isFast && isCorrect) userScores.fastAnswers++;
+showAnswerFeedback(selectedIndex, actualCorrect, isCorrect);
+setTimeout(()=> nextQuestion(), 2000);
 }
 
 // 提交數獨答案
 function submitSudokuAnswer() {
-  if (examTimer) { clearInterval(examTimer); examTimer=null; }
-  const question = currentQuestions[currentQuestionIndex];
-  const config = examConfigs[currentExam];
-  const answerTime = (Date.now()-questionStartTime)/1000;
-  const userAnswer = Array(4).fill().map(()=>Array(4).fill(0));
-  document.querySelectorAll('.sudoku-cell').forEach(cell=>{
-    const r = parseInt(cell.dataset.row), c = parseInt(cell.dataset.col);
-    userAnswer[r][c] = parseInt(cell.value)||0;
-  });
-  const isCorrect = checkSudokuAnswer(userAnswer, question.solution);
-  const isFast = answerTime <= config.fastAnswerThreshold;
-  if (isCorrect) userScores.correctAnswers++;
-  if (isFast && isCorrect) userScores.fastAnswers++;
-  const container = document.getElementById('questionContainer');
-  container.innerHTML = `
-    <div class="question">
-      <h3>${isCorrect?'✅ 正確！':'❌ 錯誤！'}</h3>
-      <p>用時：${answerTime.toFixed(1)} 秒</p>
-      ${!isCorrect?'<p>正確答案已顯示在網格中</p>':''}
-      <div class="sudoku-grid" id="resultGrid"></div>
-    </div>
-  `;
-  const resultGrid = document.getElementById('resultGrid');
-  for (let i=0;i<4;i++){
-    for (let j=0;j<4;j++){
-      const cell = document.createElement('input');
-      cell.type='number'; cell.className='sudoku-cell';
-      cell.value = question.solution[i][j];
-      cell.disabled = true;
-      resultGrid.appendChild(cell);
-    }
+if (examTimer) { clearInterval(examTimer); examTimer=null; }
+const question = currentQuestions[currentQuestionIndex];
+const config = examConfigs[currentExam];
+const answerTime = (Date.now()-questionStartTime)/1000;
+const userAnswer = Array(4).fill().map(()=>Array(4).fill(0));
+document.querySelectorAll('.sudoku-cell').forEach(cell=>{
+  const r = parseInt(cell.dataset.row), c = parseInt(cell.dataset.col);
+  userAnswer[r][c] = parseInt(cell.value)||0;
+});
+const isCorrect = checkSudokuAnswer(userAnswer, question.solution);
+const isFast = answerTime <= config.fastAnswerThreshold;
+if (isCorrect) userScores.correctAnswers++;
+if (isFast && isCorrect) userScores.fastAnswers++;
+const container = document.getElementById('questionContainer');
+container.innerHTML = `
+  <div class="question">
+    <h3>${isCorrect?'✅ 正確！':'❌ 錯誤！'}</h3>
+    <p>用時：${answerTime.toFixed(1)} 秒</p>
+    ${!isCorrect?'<p>正確答案已顯示在網格中</p>':''}
+    <div class="sudoku-grid" id="resultGrid"></div>
+  </div>
+`;
+const resultGrid = document.getElementById('resultGrid');
+for (let i=0;i<4;i++){
+  for (let j=0;j<4;j++){
+    const cell = document.createElement('input');
+    cell.type='number'; cell.className='sudoku-cell';
+    cell.value = question.solution[i][j];
+    cell.disabled = true;
+    resultGrid.appendChild(cell);
   }
-  setTimeout(()=>nextQuestion(),3000);
+}
+setTimeout(()=>nextQuestion(),3000);
 }
 
 // 跳過題目
 function skipQuestion() {
-  if (examTimer) { clearInterval(examTimer); examTimer=null; }
-  nextQuestion();
+if (examTimer) { clearInterval(examTimer); examTimer=null; }
+nextQuestion();
 }
 
 // 時間到
 function timeUp() {
-  alert('⏰ 時間到！');
-  nextQuestion();
+alert('⏰ 時間到！');
+nextQuestion();
 }
 
 // 顯示答案反饋
 function showAnswerFeedback(selectedIndex, correctIndex, isCorrect) {
-  document.querySelectorAll('.option-btn').forEach((btn,idx)=>{
-    btn.disabled = true;
-    if (idx===correctIndex) btn.classList.add('correct');
-    else if (idx===selectedIndex && !isCorrect) btn.classList.add('wrong');
-  });
+document.querySelectorAll('.option-btn').forEach((btn,idx)=>{
+  btn.disabled = true;
+  if (idx===correctIndex) btn.classList.add('correct');
+  else if (idx===selectedIndex && !isCorrect) btn.classList.add('wrong');
+});
 }
 
 // 下一題
 function nextQuestion() {
-  currentQuestionIndex++;
-  if (currentQuestionIndex >= currentQuestions.length) finishExam();
-  else showQuestion();
+currentQuestionIndex++;
+if (currentQuestionIndex >= currentQuestions.length) finishExam();
+else showQuestion();
 }
 
 // 完成考試並自動保存
 async function finishExam() {
-  if (examTimer) { clearInterval(examTimer); examTimer=null; }
-  const config = examConfigs[currentExam];
-  const totalQ = currentQuestions.length;
-  const correctRate = (userScores.correctAnswers/totalQ*100).toFixed(1);
-  const fastRate = (userScores.fastAnswers/totalQ*100).toFixed(1);
-  const baseScore = userScores.correctAnswers*10;
-  const fastBonus = userScores.fastAnswers*5;
-  const totalScore = baseScore + fastBonus;
-  await autoSaveScore(totalScore);
-  const container = document.getElementById('mainContent');
-  container.innerHTML = `
-    <div class="exam-result">
-      <h2>🎉 考試完成！</h2>
-      <p>考試類型：${config.name}</p>
-      <p>正確題數：${userScores.correctAnswers} / ${totalQ}</p>
-      <p>正確率：${correctRate}%</p>
-      <p>快速答題：${userScores.fastAnswers} 題</p>
-      <p>快速答題率：${fastRate}%</p>
-      <p><strong>總分：${totalScore} 分</strong></p>
-      <p style="color:#22c55e;">✅ 成績已自動保存！</p>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
-        <button class="btn btn-secondary" onclick="restartExam()">🔄 重新考試</button>
-        <button class="btn btn-primary" onclick="showLeaderboard('${currentExam}')">📊 查看排行榜</button>
-        <button class="btn btn-danger" onclick="backToMain()">🏠 返回主頁</button>
-      </div>
+if (examTimer) { clearInterval(examTimer); examTimer=null; }
+const config = examConfigs[currentExam];
+const totalQ = currentQuestions.length;
+const correctRate = (userScores.correctAnswers/totalQ*100).toFixed(1);
+const fastRate = (userScores.fastAnswers/totalQ*100).toFixed(1);
+const baseScore = userScores.correctAnswers*10;
+const fastBonus = userScores.fastAnswers*5;
+const totalScore = baseScore + fastBonus;
+await autoSaveScore(totalScore);
+const container = document.getElementById('mainContent');
+container.innerHTML = `
+  <div class="exam-result">
+    <h2>🎉 考試完成！</h2>
+    <p>考試類型：${config.name}</p>
+    <p>正確題數：${userScores.correctAnswers} / ${totalQ}</p>
+    <p>正確率：${correctRate}%</p>
+    <p>快速答題：${userScores.fastAnswers} 題</p>
+    <p>快速答題率：${fastRate}%</p>
+    <p><strong>總分：${totalScore} 分</strong></p>
+    <p style="color:#22c55e;">✅ 成績已自動保存！</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+      <button class="btn btn-secondary" onclick="restartExam()">🔄 重新考試</button>
+      <button class="btn btn-primary" onclick="showLeaderboard('${currentExam}')">📊 查看排行榜</button>
+      <button class="btn btn-danger" onclick="backToMain()">🏠 返回主頁</button>
     </div>
-  `;
+  </div>
+`;
 }
 
 // 自動保存成績（避免同用戶重複）
 async function autoSaveScore(score) {
-  try {
-    const timestamp = Date.now();
-    const totalTime = Math.round((timestamp-examStartTime)/1000);
-    const data = {
-      username: currentUser.username,
-      displayName: currentUser._comment||currentUser.username,
-      score, examType: currentExam,
-      timestamp, totalTime,
-      correctAnswers: userScores.correctAnswers,
-      fastAnswers: userScores.fastAnswers,
-      totalQuestions: currentQuestions.length
-    };
-    await database.ref(`scores/${currentExam}/${currentUser.username}`).set(data);
-    console.log('✅ 成績已自動保存！');
-    await loadAllChampions();
-  } catch (e) {
-    console.error('自動保存成績失敗:', e);
-    alert('❌ 保存成績失敗，請稍後再試');
-  }
+try {
+  const timestamp = Date.now();
+  const totalTime = Math.round((timestamp-examStartTime)/1000);
+  const data = {
+    username: currentUser.username,
+    displayName: currentUser._comment||currentUser.username,
+    score, examType: currentExam,
+    timestamp, totalTime,
+    correctAnswers: userScores.correctAnswers,
+    fastAnswers: userScores.fastAnswers,
+    totalQuestions: currentQuestions.length
+  };
+  await database.ref(`scores/${currentExam}/${currentUser.username}`).set(data);
+  console.log('✅ 成績已自動保存！');
+  await loadAllChampions();
+} catch (e) {
+  console.error('自動保存成績失敗:', e);
+  alert('❌ 保存成績失敗，請稍後再試');
+}
 }
 
+// 重新考試
+function restartExam() {
+startExam(currentExam);
+}
 
+// 返回主頁
+function backToMain() {
+location.reload();
+}
 
 // 登出
 function logout() {
-  localStorage.removeItem('t2_login');
-  localStorage.removeItem('t2_login_time');
-  localStorage.removeItem('t2_login_user');
-  location.href = 'index.html';
+localStorage.removeItem('t2_login');
+localStorage.removeItem('t2_login_time');
+localStorage.removeItem('t2_login_user');
+location.href = 'index.html';
 }
 
 // 返回T2日
 function backToT2() {
-  location.href = 'page3.html';
+location.href = 'page3.html';
 }
 
 // 只留這一行：頁面載入時呼叫 initializePage
@@ -1017,10 +1092,10 @@ window.addEventListener('load', initializePage);
 
 // 點擊模態外部關閉
 document.addEventListener('click', function(event) {
-  const modal = document.getElementById('leaderboardModal');
-  if (event.target === modal) {
-    hideLeaderboard();
-  }
+const modal = document.getElementById('leaderboardModal');
+if (event.target === modal) {
+  hideLeaderboard();
+}
 });
 </script>
 
