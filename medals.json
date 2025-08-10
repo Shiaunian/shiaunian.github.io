@@ -1,140 +1,101 @@
 {
-"medals": {
-  "speed_master": {
-    "id": "speed_master",
-    "name": "速答大師",
-    "description": "在任一考試中獲得5次以上快速答題",
-    "icon": "⚡",
-    "rarity": "common",
-    "price": 100,
-    "unlockCondition": {
-      "type": "fast_answers",
-      "value": 5,
-      "examType": "any"
+  "medals": {
+    "speed_master": {
+      "id": "speed_master",
+      "name": "速答大師",
+      "description": "展現你的快速反應能力",
+      "icon": "⚡",
+      "rarity": "common",
+      "price": 100,
+      "color": "#f59e0b"
     },
-    "color": "#f59e0b"
+    "perfect_scorer": {
+      "id": "perfect_scorer",
+      "name": "完美主義者",
+      "description": "追求完美的象徵",
+      "icon": "💯",
+      "rarity": "rare",
+      "price": 200,
+      "color": "#8b5cf6"
+    },
+    "champion": {
+      "id": "champion",
+      "name": "榜首征服者",
+      "description": "王者風範的展現",
+      "icon": "👑",
+      "rarity": "epic",
+      "price": 500,
+      "color": "#f59e0b"
+    },
+    "multilingual": {
+      "id": "multilingual",
+      "name": "多語達人",
+      "description": "語言天賦的證明",
+      "icon": "🌍",
+      "rarity": "rare",
+      "price": 300,
+      "color": "#10b981"
+    },
+    "sudoku_genius": {
+      "id": "sudoku_genius",
+      "name": "數獨天才",
+      "description": "邏輯思維的象徵",
+      "icon": "🧩",
+      "rarity": "rare",
+      "price": 250,
+      "color": "#3b82f6"
+    },
+    "streak_warrior": {
+      "id": "streak_warrior",
+      "name": "連勝戰士",
+      "description": "堅持不懈的精神",
+      "icon": "🔥",
+      "rarity": "epic",
+      "price": 400,
+      "color": "#ef4444"
+    },
+    "total_dominator": {
+      "id": "total_dominator",
+      "name": "總分霸主",
+      "description": "至高無上的榮耀",
+      "icon": "🏆",
+      "rarity": "legendary",
+      "price": 1000,
+      "color": "#fbbf24"
+    },
+    "exam_collector": {
+      "id": "exam_collector",
+      "name": "考試收集家",
+      "description": "博學多聞的體現",
+      "icon": "📚",
+      "rarity": "epic",
+      "price": 600,
+      "color": "#a855f7"
+    },
+    "time_saver": {
+      "id": "time_saver",
+      "name": "時間管理師",
+      "description": "高效率的代表",
+      "icon": "⏰",
+      "rarity": "rare",
+      "price": 350,
+      "color": "#06b6d4"
+    },
+    "newbie": {
+      "id": "newbie",
+      "name": "新手上路",
+      "description": "踏出第一步的勇氣",
+      "icon": "🌟",
+      "rarity": "common",
+      "price": 50,
+      "color": "#84cc16"
+    }
   },
-  "perfect_scorer": {
-    "id": "perfect_scorer",
-    "name": "完美主義者",
-    "description": "獲得任一考試滿分",
-    "icon": "💯",
-    "rarity": "rare",
-    "price": 200,
-    "unlockCondition": {
-      "type": "perfect_score",
-      "examType": "any"
-    },
-    "color": "#8b5cf6"
+  "rarityColors": {
+    "common": "#84cc16",
+    "rare": "#3b82f6", 
+    "epic": "#8b5cf6",
+    "legendary": "#f59e0b"
   },
-  "champion": {
-    "id": "champion",
-    "name": "榜首征服者",
-    "description": "在任一考試中獲得榜首",
-    "icon": "👑",
-    "rarity": "epic",
-    "price": 500,
-    "unlockCondition": {
-      "type": "rank_first",
-      "examType": "any"
-    },
-    "color": "#f59e0b"
-  },
-  "multilingual": {
-    "id": "multilingual",
-    "name": "多語達人",
-    "description": "完成3種不同語言考試",
-    "icon": "🌍",
-    "rarity": "rare",
-    "price": 300,
-    "unlockCondition": {
-      "type": "complete_languages",
-      "value": 3
-    },
-    "color": "#10b981"
-  },
-  "sudoku_genius": {
-    "id": "sudoku_genius",
-    "name": "數獨天才",
-    "description": "數獨考試獲得80分以上",
-    "icon": "🧩",
-    "rarity": "rare",
-    "price": 250,
-    "unlockCondition": {
-      "type": "high_score",
-      "examType": "sudoku",
-      "value": 80
-    },
-    "color": "#3b82f6"
-  },
-  "streak_warrior": {
-    "id": "streak_warrior",
-    "name": "連勝戰士",
-    "description": "連續5天完成考試",
-    "icon": "🔥",
-    "rarity": "epic",
-    "price": 400,
-    "unlockCondition": {
-      "type": "daily_streak",
-      "value": 5
-    },
-    "color": "#ef4444"
-  },
-  "total_dominator": {
-    "id": "total_dominator",
-    "name": "總分霸主",
-    "description": "總分排行榜第一名",
-    "icon": "🏆",
-    "rarity": "legendary",
-    "price": 1000,
-    "unlockCondition": {
-      "type": "total_rank_first"
-    },
-    "color": "#fbbf24"
-  },
-  "exam_collector": {
-    "id": "exam_collector",
-    "name": "考試收集家",
-    "description": "完成所有10種考試類型",
-    "icon": "📚",
-    "rarity": "epic",
-    "price": 600,
-    "unlockCondition": {
-      "type": "complete_all_exams"
-    },
-    "color": "#a855f7"
-  },
-  "time_saver": {
-    "id": "time_saver",
-    "name": "時間管理師",
-    "description": "總考試用時少於1000秒",
-    "icon": "⏰",
-    "rarity": "rare",
-    "price": 350,
-    "unlockCondition": {
-      "type": "total_time_under",
-      "value": 1000
-    },
-    "color": "#06b6d4"
-  },
-  "newbie": {
-    "id": "newbie",
-    "name": "新手上路",
-    "description": "完成第一次考試",
-    "icon": "🌟",
-    "rarity": "common",
-    "price": 50,
-    "unlockCondition": {
-      "type": "first_exam"
-    },
-    "color": "#84cc16"
-  }
-},
-"rarityColors": {
-  "common": "#84cc16",
-  "rare": "#3b82f6", 
-  "epic": "#8b5cf6",
-  "legendary": "#f59e0b"
-},
-"maxEquippedMedals": 5
+  "maxEquippedMedals": 5
 }
