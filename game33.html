@@ -1514,7 +1514,7 @@ selectAnswer(-1); // -1 表示未作答
 }, 1000);
 }
 
-// 選擇答案
+// 選擇答案 - 修正版本
 function selectAnswer(selectedIndex) {
 clearInterval(examTimer);
 const question = currentQuestions[currentQuestionIndex];
@@ -1527,10 +1527,10 @@ if (responseTime <= config.fastAnswerThreshold) {
 userScores.fastAnswers++;
 }
 
+// 🔧 修正：只有答對才加分，不給錢
 if (isCorrect) {
 userScores.correctAnswers++;
-// 🏅 正確答題獎勵金幣
-userCurrency.coins += 2;
+// 移除：userCurrency.coins += 2; // 答對不給錢
 }
 
 // 顯示答案反饋
@@ -1542,7 +1542,172 @@ nextQuestion(isCorrect);
 }, 1500);
 }
 
-// 顯示答案反饋
+// 數獨答案檢查 - 修正版本
+function checkSudokuAnswer() {
+const cells = document.querySelectorAll('.sudoku-cell');
+const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
+const question = currentQuestions[currentQuestionIndex];
+
+// 檢查是否填完
+const isEmpty = userGrid.some(cell => cell === 0);
+if (isEmpty) return;
+
+// 檢查答案
+const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
+const responseTime = (Date.now() - questionStartTime) / 1000;
+
+clearInterval(examTimer);
+
+// 🔧 修正：只有答對才加分，不給錢
+if (isCorrect) {
+userScores.correctAnswers++;
+// 移除：userCurrency.coins += 2; // 答對不給錢
+}
+
+// 🏅 檢查快速答題
+const config = examConfigs[currentExam];
+if (responseTime <= config.fastAnswerThreshold) {
+userScores.fastAnswers++;
+}
+
+// 顯示數獨反饋
+cells.forEach(cell => cell.disabled = true);
+const feedbackDiv = document.createElement('div');
+feedbackDiv.style.cssText = `
+margin-top: 15px; 
+text-align: center; 
+font-size: 0.9rem;
+color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
+`;
+feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
+document.getElementById('questionContainer').appendChild(feedbackDiv);
+
+setTimeout(() => {
+nextQuestion(isCorrect);
+}, 1500);
+}
+
+// 🚀 效能優化：考試開始優化 - 修正版本
+function startExam(examType) {
+if (!examQuestions[examType]) {
+alert('題庫載入中，請稍後再試');
+return;
+}
+
+const config = examConfigs[examType];
+const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
+
+if (questions.length < config.questionCount) {
+alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
+return;
+}
+
+currentExam = examType;
+currentQuestions = questions;
+currentQuestionIndex = 0;
+examStartTime = Date.now();
+userScores = { fastAnswers: 0, correctAnswers: 0 };
+
+// 🔧 移除考試開始獎勵金幣
+// userCurrency.coins += 5; // 移除這行
+// saveCurrencyData(); // 移除這行
+
+showExamInterface();
+displayQuestion();
+startQuestionTimer();
+}
+
+// 顯示考試介面 - 加入棄權按鈕
+function showExamInterface() {
+const container = document.getElementById('mainContent');
+const config = examConfigs[currentExam];
+
+container.innerHTML = `
+<div class="exam-container">
+<div class="exam-header">
+<h2>${config.name}</h2>
+<div class="timer" id="timer">${config.timePerQuestion}</div>
+<button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
+</div>
+<div class="question" id="questionContainer">
+<!-- 題目將在此顯示 -->
+</div>
+<div class="exam-progress">
+<p>題目 <span id="currentQuestionNum">1</span> / ${config.questionCount}</p>
+<p>得分：<span id="currentScore">0</span> 分</p>
+</div>
+</div>
+`;
+}
+
+// 🆕 棄權功能
+function quitExam() {
+if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
+clearInterval(examTimer);
+
+// 直接返回主頁，不保存任何成績
+location.reload();
+}
+}
+
+// 結束考試 - 修正版本
+async function finishExam() {
+clearInterval(examTimer);
+const totalTime = (Date.now() - examStartTime) / 1000;
+const finalScore = userScores.correctAnswers * 10;
+const config = examConfigs[currentExam];
+
+// 🔧 修正：只有滿分才給錢
+let coinsEarned = 0;
+if (finalScore >= config.questionCount * 10) {
+// 滿分獎勵
+coinsEarned = 50; // 滿分獎勵50金幣
+userCurrency.coins += coinsEarned;
+await saveCurrencyData();
+}
+
+// 🏅 檢查勳章解鎖
+await checkMedalUnlocks(currentExam, finalScore, totalTime, userScores.fastAnswers);
+
+// 保存成績到排行榜
+await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
+
+// 顯示結果
+showExamResult(finalScore, totalTime, coinsEarned);
+
+// 🚀 效能優化：清除快取以獲取最新排行榜
+const cacheKey = `champion_${currentExam}`;
+championCache.delete(cacheKey);
+localStorage.removeItem('users_data_v1');
+localStorage.removeItem('users_data_v1_time');
+}
+
+// 顯示考試結果 - 修正版本
+function showExamResult(score, totalTime, coinsEarned) {
+const container = document.getElementById('mainContent');
+const config = examConfigs[currentExam];
+
+container.innerHTML = `
+<div class="exam-result">
+<h2>🎉 考試完成！</h2>
+<p><strong>考試類型：</strong>${config.name}</p>
+<p><strong>最終得分：</strong>${score} 分</p>
+<p><strong>正確題數：</strong>${userScores.correctAnswers} / ${config.questionCount}</p>
+<p><strong>快速答題：</strong>${userScores.fastAnswers} 題</p>
+<p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
+${coinsEarned > 0 ? 
+`<p style="color: var(--gold);"><strong>🎉 滿分獎勵：</strong>💰 ${coinsEarned}</p>` : 
+`<p style="color: var(--text-secondary);">💰 未達滿分，無金幣獎勵</p>`
+}
+<div style="margin-top: 20px;">
+<button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
+</div>
+</div>
+`;
+}
+
+// 顯示答案反饋 - 修正版本
 function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
 const options = document.querySelectorAll('.option-btn');
 const config = examConfigs[currentExam];
@@ -1567,7 +1732,7 @@ color: var(--text-secondary);
 
 let feedbackText = `回應時間: ${responseTime.toFixed(1)}秒`;
 if (responseTime <= config.fastAnswerThreshold) {
-feedbackText += ` ⚡ 快速答題！ (+2💰)`;
+feedbackText += ` ⚡ 快速答題！`;
 }
 
 feedbackDiv.innerHTML = feedbackText;
