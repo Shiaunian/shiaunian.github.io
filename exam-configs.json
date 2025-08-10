@@ -1,0 +1,102 @@
+{
+"basic": {
+  "name": "⭐分流考試挑戰⭐",
+  "timePerQuestion": 60,
+  "questionCount": 15,
+  "fastAnswerThreshold": 5,
+  "description": "每題60秒作答時間，共15題",
+  "icon": "⭐",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"food1": {
+  "name": "⭐英文考試基礎版⭐",
+  "timePerQuestion": 15,
+  "questionCount": 15,
+  "fastAnswerThreshold": 2.5,
+  "description": "每題15秒作答時間，共15題 一題10分",
+  "icon": "⭐",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"food": {
+  "name": "⭐英文考試進階版⭐",
+  "timePerQuestion": 10,
+  "questionCount": 20,
+  "fastAnswerThreshold": 2,
+  "description": "每題10秒作答時間，共20題 一題10分",
+  "icon": "⭐",
+  "difficulty": "intermediate",
+  "scorePerQuestion": 10
+},
+"foodplus": {
+  "name": "⭐英文考試強化版⭐",
+  "timePerQuestion": 10,
+  "questionCount": 30,
+  "fastAnswerThreshold": 2.5,
+  "description": "每題10秒作答時間，共30題 一題10分(有點困難)",
+  "icon": "⭐",
+  "difficulty": "advanced",
+  "scorePerQuestion": 10
+},
+"precheck": {
+  "name": "⭐前導複查挑戰⭐",
+  "timePerQuestion": 60,
+  "questionCount": 15,
+  "fastAnswerThreshold": 5,
+  "description": "每題60秒作答時間，共15題 一題10分",
+  "icon": "⭐",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"rule": {
+  "name": "規定挑戰",
+  "timePerQuestion": 60,
+  "questionCount": 10,
+  "fastAnswerThreshold": 5,
+  "description": "每題60秒作答時間，共10題 一題10分",
+  "icon": "📋",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"korean": {
+  "name": "🇰🇷韓語挑戰基礎版🇰🇷",
+  "timePerQuestion": 12,
+  "questionCount": 15,
+  "fastAnswerThreshold": 3,
+  "description": "每題12秒作答時間，共15題 一題10分",
+  "icon": "🇰🇷",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"japanese": {
+  "name": "🇯🇵日語挑戰基礎版🇯🇵",
+  "timePerQuestion": 12,
+  "questionCount": 15,
+  "fastAnswerThreshold": 3,
+  "description": "每題12秒作答時間，共15題 一題10分",
+  "icon": "🇯🇵",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"vietnamese": {
+  "name": "🇻🇳越南語詞彙挑戰🇻🇳",
+  "timePerQuestion": 12,
+  "questionCount": 15,
+  "fastAnswerThreshold": 3,
+  "description": "每題12秒作答時間，共15題 一題10分",
+  "icon": "🇻🇳",
+  "difficulty": "basic",
+  "scorePerQuestion": 10
+},
+"sudoku": {
+  "name": "初階數獨挑戰",
+  "timePerQuestion": 80,
+  "questionCount": 10,
+  "fastAnswerThreshold": 30,
+  "description": "每題80秒作答時間，共10題 一題10分",
+  "icon": "🧩",
+  "difficulty": "intermediate",
+  "scorePerQuestion": 10
+}
+}
