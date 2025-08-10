@@ -685,14 +685,14 @@ backface-visibility: hidden;
 <div>
 <span id="currentUserWelcome">歡迎回來，載入中...</span>
 <div class="user-currency">
-  <div class="currency-item">
-    <span>💰</span>
-    <span id="userCoins">0</span>
-  </div>
-  <div class="currency-item">
-    <span>💎</span>
-    <span id="userGems">0</span>
-  </div>
+<div class="currency-item">
+  <span>💰</span>
+  <span id="userCoins">0</span>
+</div>
+<div class="currency-item">
+  <span>💎</span>
+  <span id="userGems">0</span>
+</div>
 </div>
 <div class="user-medals" id="userMedals"></div>
 </div>
@@ -1428,9 +1428,9 @@ displayQuestion();
 startQuestionTimer();
 }
 
-// 顯示考試介面
+// 顯示考試介面 - 修正選擇器問題
 function showExamInterface() {
-const container = document.querySelector('.container');
+const container = document.getElementById('mainContent'); // 修正：使用正確的ID
 const config = examConfigs[currentExam];
 
 container.innerHTML = `
@@ -1682,7 +1682,7 @@ console.error('保存成績失敗:', err);
 
 // 顯示考試結果
 function showExamResult(score, totalTime) {
-const container = document.querySelector('.container');
+const container = document.getElementById('mainContent'); // 修正：使用正確的ID
 const config = examConfigs[currentExam];
 
 container.innerHTML = `
@@ -1697,174 +1697,180 @@ container.innerHTML = `
 <div style="margin-top: 20px;">
 <button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
 <button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-<button class="btn btn-primary" onclick="startExam('${currentExam}')">再次挑戰</button>
 </div>
 </div>
 `;
 }
 
-// 🏆 顯示排行榜
+// 顯示排行榜
 async function showLeaderboard(examType) {
-document.getElementById('modalTitle').textContent = `${examConfigs[examType]?.name || examType} 排行榜`;
+document.getElementById('modalTitle').textContent = `${examConfigs[examType].name} - 排行榜`;
 document.getElementById('leaderboardModal').style.display = 'flex';
 document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
 
 try {
 const snapshot = await database.ref(`leaderboard/${examType}`).orderByChild('score').once('value');
-const data = snapshot.val() || {};
+const data = snapshot.val();
 
-// 🚀 效能優化：排序優化
-const sortedUsers = Object.entries(data)
-.map(([user, scoreData]) => ({ user, ...scoreData }))
-.sort((a, b) => {
-if (b.score !== a.score) return b.score - a.score;
-return a.totalTime - b.totalTime; // 分數相同時按時間排序
-})
-.slice(0, 50); // 只顯示前50名
+if (!data) {
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>📊 暫無排行榜記錄</p>
+<p>成為第一個挑戰者吧！</p>
+</div>
+`;
+return;
+}
 
-await renderLeaderboard(sortedUsers, examType);
+// 轉換並排序資料
+const leaderboardData = Object.entries(data).map(([user, userData]) => ({
+user,
+...userData
+})).sort((a, b) => {
+// 先按分數排序，分數相同時按時間排序（時間短的排前面）
+if (b.score !== a.score) {
+return b.score - a.score;
+}
+return a.totalTime - b.totalTime;
+});
+
+// 生成排行榜HTML
+const leaderboardHTML = `
+<div class="leaderboard-container">
+${leaderboardData.map((entry, index) => {
+const isCurrentUser = entry.user === currentUser;
+const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+
+const medalDisplay = getUserMedalDisplay(entry.user);
+return `
+<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+<div class="rank">${rankIcon}</div>
+<div class="user-name">
+${entry.user}
+${medalDisplay}
+</div>
+<div class="score">${entry.score}分</div>
+</div>
+`;
+}).join('')}
+</div>
+`;
+
+document.getElementById('leaderboardContent').innerHTML = leaderboardHTML;
+
 } catch (err) {
 console.error('載入排行榜失敗:', err);
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入排行榜失敗</div>';
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>❌ 載入排行榜失敗</p>
+<p>請稍後再試</p>
+</div>
+`;
 }
 }
 
-// 🏆 顯示總分排行榜
+// 顯示總分排行榜
 async function showTotalLeaderboard() {
 document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
 document.getElementById('leaderboardModal').style.display = 'flex';
 document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
 
 try {
-const allScores = {};
-const examTypes = Object.keys(examConfigs);
+const snapshot = await database.ref('leaderboard').once('value');
+const allData = snapshot.val();
 
-// 並行載入所有考試類型的成績
-const promises = examTypes.map(async (examType) => {
-const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-const data = snapshot.val() || {};
-return { examType, data };
-});
-
-const results = await Promise.all(promises);
+if (!allData) {
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>📊 暫無總分排行榜記錄</p>
+<p>開始挑戰吧！</p>
+</div>
+`;
+return;
+}
 
 // 計算每個用戶的總分和總時間
-results.forEach(({ examType, data }) => {
-Object.entries(data).forEach(([user, scoreData]) => {
-if (!allScores[user]) {
-allScores[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
+const userTotals = {};
+Object.entries(allData).forEach(([examType, examData]) => {
+Object.entries(examData).forEach(([user, userData]) => {
+if (!userTotals[user]) {
+userTotals[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
 }
-allScores[user].totalScore += scoreData.score;
-allScores[user].totalTime += scoreData.totalTime;
-allScores[user].examCount++;
+userTotals[user].totalScore += userData.score;
+userTotals[user].totalTime += userData.totalTime;
+userTotals[user].examCount += 1;
 });
 });
 
-// 排序：總分優先，總時間次之
-const sortedUsers = Object.entries(allScores)
-.map(([user, data]) => ({ user, ...data }))
-.sort((a, b) => {
-if (b.totalScore !== a.totalScore) return b.totalScore - a.totalScore;
+// 轉換並排序資料
+const totalLeaderboardData = Object.entries(userTotals).map(([user, data]) => ({
+user,
+...data
+})).sort((a, b) => {
+// 先按總分排序，總分相同時按總時間排序
+if (b.totalScore !== a.totalScore) {
+return b.totalScore - a.totalScore;
+}
 return a.totalTime - b.totalTime;
-})
-.slice(0, 50);
-
-await renderTotalLeaderboard(sortedUsers);
-} catch (err) {
-console.error('載入總分排行榜失敗:', err);
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入總分排行榜失敗</div>';
-}
-}
-
-// 🚀 效能優化：渲染排行榜
-async function renderLeaderboard(sortedUsers, examType) {
-const fragment = document.createDocumentFragment();
-const container = document.createElement('div');
-container.className = 'leaderboard-container';
-
-if (sortedUsers.length === 0) {
-container.innerHTML = '<div class="empty-leaderboard"><p>🏆 還沒有人參加這個挑戰</p><p>成為第一個挑戰者吧！</p></div>';
-} else {
-sortedUsers.forEach((userData, index) => {
-const item = document.createElement('div');
-item.className = `leaderboard-item ${userData.user === currentUser ? 'current-user' : ''}`;
-
-// 🏅 獲取用戶勳章
-const userMedalData = usersData[userData.user]?.medals || { equipped: [] };
-const medalsHtml = userMedalData.equipped.map(medalId => {
-const medal = medalsData.medals[medalId];
-if (!medal) return '';
-return `<div class="leaderboard-medal" style="border-color: ${medal.color}; color: ${medal.color};" title="${medal.name}">${medal.icon}</div>`;
-}).join('');
-
-let rankDisplay = index + 1;
-if (index === 0) rankDisplay = '🥇';
-else if (index === 1) rankDisplay = '🥈';
-else if (index === 2) rankDisplay = '🥉';
-
-item.innerHTML = `
-<div class="rank">${rankDisplay}</div>
-<div class="user-name">
-${userData.user}
-<div class="leaderboard-medals">${medalsHtml}</div>
-</div>
-<div class="score">${userData.score}分</div>
-`;
-
-container.appendChild(item);
 });
-}
 
-fragment.appendChild(container);
-document.getElementById('leaderboardContent').innerHTML = '';
-document.getElementById('leaderboardContent').appendChild(fragment);
-}
-
-// 🚀 效能優化：渲染總分排行榜
-async function renderTotalLeaderboard(sortedUsers) {
-const fragment = document.createDocumentFragment();
-const container = document.createElement('div');
-container.className = 'leaderboard-container';
-
-if (sortedUsers.length === 0) {
-container.innerHTML = '<div class="empty-leaderboard"><p>🏆 還沒有總分記錄</p><p>開始挑戰來獲得積分吧！</p></div>';
-} else {
-sortedUsers.forEach((userData, index) => {
-const item = document.createElement('div');
-item.className = `leaderboard-item ${userData.user === currentUser ? 'current-user' : ''}`;
-
-// 🏅 獲取用戶勳章
-const userMedalData = usersData[userData.user]?.medals || { equipped: [] };
-const medalsHtml = userMedalData.equipped.map(medalId => {
-const medal = medalsData.medals[medalId];
-if (!medal) return '';
-return `<div class="leaderboard-medal" style="border-color: ${medal.color}; color: ${medal.color};" title="${medal.name}">${medal.icon}</div>`;
-}).join('');
-
-let rankDisplay = index + 1;
-if (index === 0) rankDisplay = '🥇';
-else if (index === 1) rankDisplay = '🥈';
-else if (index === 2) rankDisplay = '🥉';
-
-item.innerHTML = `
-<div class="rank">${rankDisplay}</div>
+// 生成總分排行榜HTML
+const leaderboardHTML = `
+<div class="leaderboard-container">
+${totalLeaderboardData.map((entry, index) => {
+const isCurrentUser = entry.user === currentUser;
+const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+const medalDisplay = getUserMedalDisplay(entry.user);
+return `
+<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+<div class="rank">${rankIcon}</div>
 <div class="user-name">
-${userData.user}
-<div class="leaderboard-medals">${medalsHtml}</div>
+${entry.user}
+${medalDisplay}
 </div>
 <div class="score">
-<div>${userData.totalScore}分</div>
-<div style="font-size: 0.8rem; color: var(--text-secondary);">${userData.examCount}場考試</div>
+<div>${entry.totalScore}分</div>
+<div style="font-size: 0.7rem; color: var(--text-secondary);">
+${entry.examCount}場考試 | ${entry.totalTime.toFixed(1)}秒
+</div>
+</div>
+</div>
+`;
+}).join('')}
 </div>
 `;
 
-container.appendChild(item);
-});
+document.getElementById('leaderboardContent').innerHTML = leaderboardHTML;
+
+} catch (err) {
+console.error('載入總分排行榜失敗:', err);
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>❌ 載入總分排行榜失敗</p>
+<p>請稍後再試</p>
+</div>
+`;
+}
 }
 
-fragment.appendChild(container);
-document.getElementById('leaderboardContent').innerHTML = '';
-document.getElementById('leaderboardContent').appendChild(fragment);
+// 獲取用戶勳章顯示
+function getUserMedalDisplay(username) {
+// 從Firebase獲取用戶勳章資料並顯示
+// 這裡先返回空字串，可以後續優化為實際的勳章顯示
+try {
+// 如果是當前用戶，直接使用已載入的勳章資料
+if (username === currentUser && userMedals.equipped.length > 0) {
+return `<div class="leaderboard-medals">
+${userMedals.equipped.slice(0, 3).map(medalId => {
+const medal = medalsData.medals[medalId];
+return medal ? `<div class="leaderboard-medal ${medal.rarity}" style="border-color: ${medal.color};">${medal.icon}</div>` : '';
+}).join('')}
+</div>`;
+}
+} catch (err) {
+console.error('獲取用戶勳章顯示失敗:', err);
+}
+return '';
 }
 
 // 隱藏排行榜
@@ -1872,42 +1878,39 @@ function hideLeaderboard() {
 document.getElementById('leaderboardModal').style.display = 'none';
 }
 
-// 🚀 效能優化：事件監聽器優化
-document.addEventListener('DOMContentLoaded', initializeApp);
-
-// 🚀 效能優化：鍵盤快捷鍵
-document.addEventListener('keydown', (e) => {
-if (e.key === 'Escape') {
-// ESC 鍵關閉所有模態視窗
-hideLeaderboard();
-hideShop();
-hideInventory();
-}
+// 頁面載入完成後初始化
+document.addEventListener('DOMContentLoaded', function() {
+initializeApp();
 });
 
-// 🚀 效能優化：點擊外部關閉模態視窗
-document.addEventListener('click', (e) => {
-if (e.target.classList.contains('modal-overlay')) {
-hideLeaderboard();
-hideShop();
-hideInventory();
+// 🚀 效能優化：視窗大小變化時的響應式處理
+window.addEventListener('resize', debounce(() => {
+// 可以在這裡添加響應式邏輯
+}, 250));
+
+// 🚀 效能優化：頁面可見性變化處理
+document.addEventListener('visibilitychange', function() {
+if (document.hidden) {
+// 頁面隱藏時暫停計時器
+if (examTimer) {
+clearInterval(examTimer);
+}
+} else {
+// 頁面顯示時恢復計時器
+if (currentExam && currentQuestionIndex < currentQuestions.length) {
+startQuestionTimer();
+}
 }
 });
 
 // 🚀 效能優化：防止記憶體洩漏
-window.addEventListener('beforeunload', () => {
+window.addEventListener('beforeunload', function() {
 if (examTimer) {
 clearInterval(examTimer);
 }
 championCache.clear();
 });
-
-// 🚀 效能優化：視窗大小改變時的響應
-window.addEventListener('resize', debounce(() => {
-// 響應式調整可以在這裡加入
-}, 250));
-
-console.log('🎯 T2日檢疫挑戰系統已載入完成');
 </script>
 </body>
 </html>
+
