@@ -403,8 +403,10 @@ margin-right: 10px;
 </div>
 <div class="header-actions">
 <button class="btn btn-primary" onclick="backToT2()">返回T2日</button>
+<button class="btn btn-secondary" onclick="showTotalLeaderboard()">🏆 總分排行榜</button>
 </div>
 </header>
+
 
 <div class="challenge-item">
 <h3 class="challenge-title">⭐分流考試挑戰⭐</h3>
@@ -838,14 +840,6 @@ return (a.totalTime || 999999) - (b.totalTime || 999999); // 同分時，時間�
 return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
 });
 
-// 🥇 修正首綁邏輯：找出每個分數的首綁者
-const firstBindMap = {};
-scores.forEach(score => {
-if (!firstBindMap[score.score]) {
-firstBindMap[score.score] = score.username;
-}
-});
-
 let html = '<div class="leaderboard-container">';
 scores.forEach((score, index) => {
 const isCurrentUser = score.username === currentUser.username;
@@ -853,15 +847,17 @@ const timeDisplay = score.totalTime ?
 `${Math.floor(score.totalTime / 60)}:${(score.totalTime % 60).toString().padStart(2, '0')}` : 
 '--:--';
 
-// 🏆 檢查是否為首綁（該分數的首綁者且有同分競爭者）
-const sameScoreCount = scores.filter(s => s.score === score.score).length;
-const isFirstBind = sameScoreCount > 1 && firstBindMap[score.score] === score.username;
+// 🏆 前三名特殊標記
+let rankMark = '';
+if (index === 0) rankMark = ' 🥇'; // 榜首
+else if (index === 1) rankMark = ' 🥈'; // 第二名
+else if (index === 2) rankMark = ' 🥉'; // 第三名
 
 html += `
 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
 <div class="rank">${index + 1}</div>
 <div class="user-name">
-${score.displayName}${isFirstBind ? ' 🥇' : ''}
+${score.displayName}${rankMark}
 <div style="font-size: 0.7rem; color: var(--text-secondary);">
 ${new Date(score.timestamp).toLocaleDateString()} ${timeDisplay}
 </div>
@@ -876,6 +872,107 @@ document.getElementById('leaderboardContent').innerHTML = html;
 } catch (error) {
 console.error('載入排行榜失敗:', error);
 document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入排行榜時發生錯誤</div>';
+}
+}
+
+// 🏆 新增：總分排行榜功能
+async function showTotalLeaderboard() {
+try {
+document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
+document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
+document.getElementById('leaderboardModal').style.display = 'flex';
+
+const examTypes = ['basic', 'food1', 'food', 'foodplus', 'precheck', 'rule', 'korean', 'japanese', 'vietnamese', 'sudoku'];
+const userTotals = {};
+
+// 載入所有考試類型的成績
+for (const examType of examTypes) {
+const snapshot = await database.ref(`scores/${examType}`).once('value');
+snapshot.forEach(child => {
+const score = child.val();
+if (!userTotals[score.username]) {
+userTotals[score.username] = {
+displayName: score.displayName,
+totalScore: 0,
+totalTime: 0,
+examCount: 0,
+bestScores: {}
+};
+}
+
+// 只保留每個考試類型的最高分
+if (!userTotals[score.username].bestScores[examType] || 
+score.score > userTotals[score.username].bestScores[examType].score) {
+// 如果是更高分，先扣除舊分數和時間
+if (userTotals[score.username].bestScores[examType]) {
+userTotals[score.username].totalScore -= userTotals[score.username].bestScores[examType].score;
+userTotals[score.username].totalTime -= userTotals[score.username].bestScores[examType].totalTime;
+userTotals[score.username].examCount--;
+}
+
+// 加入新的最高分
+userTotals[score.username].bestScores[examType] = {
+score: score.score,
+totalTime: score.totalTime || 0
+};
+userTotals[score.username].totalScore += score.score;
+userTotals[score.username].totalTime += score.totalTime || 0;
+userTotals[score.username].examCount++;
+}
+});
+}
+
+// 轉換為陣列並排序
+const totalScores = Object.values(userTotals).filter(user => user.examCount > 0);
+
+if (totalScores.length === 0) {
+document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">目前還沒有任何總分記錄</div>';
+return;
+}
+
+// 🏆 排序：總分 → 總時間 → 參與考試數量
+totalScores.sort((a, b) => {
+if (b.totalScore !== a.totalScore) {
+return b.totalScore - a.totalScore; // 總分高的在前
+}
+if (a.totalTime !== b.totalTime) {
+return a.totalTime - b.totalTime; // 同分時，總時間短的在前
+}
+return b.examCount - a.examCount; // 時間也相同時，參與考試多的在前
+});
+
+let html = '<div class="leaderboard-container">';
+totalScores.forEach((user, index) => {
+const isCurrentUser = user.displayName === (currentUser.welcome || currentUser._comment || currentUser.username);
+const avgTime = user.examCount > 0 ? Math.floor(user.totalTime / user.examCount) : 0;
+const totalTimeDisplay = `${Math.floor(user.totalTime / 60)}:${(user.totalTime % 60).toString().padStart(2, '0')}`;
+const avgTimeDisplay = `${Math.floor(avgTime / 60)}:${(avgTime % 60).toString().padStart(2, '0')}`;
+
+// 🏆 前三名特殊標記
+let rankMark = '';
+if (index === 0) rankMark = ' 🥇'; // 榜首
+else if (index === 1) rankMark = ' 🥈'; // 第二名
+else if (index === 2) rankMark = ' 🥉'; // 第三名
+
+html += `
+<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+<div class="rank">${index + 1}</div>
+<div class="user-name">
+${user.displayName}${rankMark}
+<div style="font-size: 0.7rem; color: var(--text-secondary);">
+參與 ${user.examCount} 項挑戰 | 總時間 ${totalTimeDisplay} | 平均 ${avgTimeDisplay}
+</div>
+</div>
+<div class="score">${user.totalScore}分</div>
+</div>
+`;
+});
+html += '</div>';
+
+document.getElementById('leaderboardContent').innerHTML = html;
+} catch (error) {
+console.error('載入總分排行榜失敗:', error);
+document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入總分排行榜時發生錯誤</div>';
 }
 }
 
@@ -924,8 +1021,20 @@ document.getElementById('mainContent').innerHTML = `
 </div>
 <div class="question" id="questionContainer">
 </div>
+<div style="margin-top: 20px; text-align: center;">
+<button class="btn btn-danger" onclick="abandonExam()" style="background: #6c757d;">放棄挑戰</button>
+</div>
 </div>
 `;
+}
+
+// 🚫 新增：放棄挑戰功能
+function abandonExam() {
+if (confirm('確定要放棄本次挑戰嗎？\n放棄後將不會記錄任何分數和時間。')) {
+clearInterval(examTimer);
+alert('已放棄挑戰，返回主頁面');
+backToMain();
+}
 }
 
 function showQuestion() {
