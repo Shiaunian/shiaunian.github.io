@@ -1249,7 +1249,7 @@ const cacheTime = localStorage.getItem(cacheKey + '_time');
 // 快取有效期 5 分鐘
 if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 300000) {
 usersData = JSON.parse(cached);
-console.log('✅ 從快取載入用戶資料');
+console.log('✅ 用戶資料已載入並快取');
 return;
 }
 
@@ -1269,6 +1269,7 @@ console.error('載入用戶資料失敗:', err);
 // 🚀 效能優化：榜首資料快取
 const championCache = new Map();
 
+// 🔧 修正：獲取榜首時不使用 orderByChild 以避免索引警告
 async function getChampion(examType) {
 // 檢查快取
 const cacheKey = `champion_${examType}`;
@@ -1278,12 +1279,22 @@ return cached.data;
 }
 
 try {
-const snapshot = await database.ref(`leaderboard/${examType}`).orderByChild('score').limitToLast(1).once('value');
+// 🔧 修正：直接獲取所有資料，然後在客戶端排序
+const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
 const data = snapshot.val();
 if (data) {
-const users = Object.keys(data);
-const champion = data[users[0]];
-const result = { user: users[0], ...champion };
+// 轉換並排序資料找出榜首
+const leaderboardData = Object.entries(data).map(([user, userData]) => ({
+user,
+...userData
+})).sort((a, b) => {
+if (b.score !== a.score) {
+return b.score - a.score;
+}
+return a.totalTime - b.totalTime;
+});
+
+const result = leaderboardData[0]; // 榜首
 
 // 快取結果
 championCache.set(cacheKey, {
@@ -1398,7 +1409,7 @@ const j = Math.floor(Math.random() * (i + 1));
 return newArray;
 }
 
-// 🚀 效能優化：考試開始優化
+// 🚀 效能優化：考試開始優化 - 修正版本
 function startExam(examType) {
 if (!examQuestions[examType]) {
 alert('題庫載入中，請稍後再試');
@@ -1419,18 +1430,14 @@ currentQuestionIndex = 0;
 examStartTime = Date.now();
 userScores = { fastAnswers: 0, correctAnswers: 0 };
 
-// 🏅 獎勵金幣 (考試開始獎勵)
-userCurrency.coins += 5;
-saveCurrencyData();
-
 showExamInterface();
 displayQuestion();
 startQuestionTimer();
 }
 
-// 顯示考試介面 - 修正選擇器問題
+// 顯示考試介面 - 加入棄權按鈕
 function showExamInterface() {
-const container = document.getElementById('mainContent'); // 修正：使用正確的ID
+const container = document.getElementById('mainContent');
 const config = examConfigs[currentExam];
 
 container.innerHTML = `
@@ -1438,6 +1445,7 @@ container.innerHTML = `
 <div class="exam-header">
 <h2>${config.name}</h2>
 <div class="timer" id="timer">${config.timePerQuestion}</div>
+<button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
 </div>
 <div class="question" id="questionContainer">
 <!-- 題目將在此顯示 -->
@@ -1448,6 +1456,16 @@ container.innerHTML = `
 </div>
 </div>
 `;
+}
+
+// 🆕 棄權功能
+function quitExam() {
+if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
+clearInterval(examTimer);
+
+// 直接返回主頁，不保存任何成績
+location.reload();
+}
 }
 
 // 顯示題目
@@ -1530,7 +1548,6 @@ userScores.fastAnswers++;
 // 🔧 修正：只有答對才加分，不給錢
 if (isCorrect) {
 userScores.correctAnswers++;
-// 移除：userCurrency.coins += 2; // 答對不給錢
 }
 
 // 顯示答案反饋
@@ -1540,6 +1557,38 @@ showAnswerFeedback(selectedIndex, question.correct, responseTime);
 setTimeout(() => {
 nextQuestion(isCorrect);
 }, 1500);
+}
+
+// 顯示答案反饋 - 修正版本
+function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
+const options = document.querySelectorAll('.option-btn');
+const config = examConfigs[currentExam];
+
+options.forEach((btn, index) => {
+btn.disabled = true;
+if (index === correctIndex) {
+btn.classList.add('correct');
+} else if (index === selectedIndex && selectedIndex !== correctIndex) {
+btn.classList.add('wrong');
+}
+});
+
+// 顯示回應時間和快速答題提示
+const feedbackDiv = document.createElement('div');
+feedbackDiv.style.cssText = `
+margin-top: 15px; 
+text-align: center; 
+font-size: 0.9rem;
+color: var(--text-secondary);
+`;
+
+let feedbackText = `回應時間: ${responseTime.toFixed(1)}秒`;
+if (responseTime <= config.fastAnswerThreshold) {
+feedbackText += ` ⚡ 快速答題！`;
+}
+
+feedbackDiv.innerHTML = feedbackText;
+document.getElementById('questionContainer').appendChild(feedbackDiv);
 }
 
 // 數獨答案檢查 - 修正版本
@@ -1561,7 +1610,6 @@ clearInterval(examTimer);
 // 🔧 修正：只有答對才加分，不給錢
 if (isCorrect) {
 userScores.correctAnswers++;
-// 移除：userCurrency.coins += 2; // 答對不給錢
 }
 
 // 🏅 檢查快速答題
@@ -1587,66 +1635,16 @@ nextQuestion(isCorrect);
 }, 1500);
 }
 
-// 🚀 效能優化：考試開始優化 - 修正版本
-function startExam(examType) {
-if (!examQuestions[examType]) {
-alert('題庫載入中，請稍後再試');
-return;
-}
+// 下一題
+function nextQuestion(wasCorrect) {
+document.getElementById('currentScore').textContent = userScores.correctAnswers * 10;
 
-const config = examConfigs[examType];
-const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
-
-if (questions.length < config.questionCount) {
-alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
-return;
-}
-
-currentExam = examType;
-currentQuestions = questions;
-currentQuestionIndex = 0;
-examStartTime = Date.now();
-userScores = { fastAnswers: 0, correctAnswers: 0 };
-
-// 🔧 移除考試開始獎勵金幣
-// userCurrency.coins += 5; // 移除這行
-// saveCurrencyData(); // 移除這行
-
-showExamInterface();
+if (currentQuestionIndex < currentQuestions.length - 1) {
+currentQuestionIndex++;
 displayQuestion();
 startQuestionTimer();
-}
-
-// 顯示考試介面 - 加入棄權按鈕
-function showExamInterface() {
-const container = document.getElementById('mainContent');
-const config = examConfigs[currentExam];
-
-container.innerHTML = `
-<div class="exam-container">
-<div class="exam-header">
-<h2>${config.name}</h2>
-<div class="timer" id="timer">${config.timePerQuestion}</div>
-<button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
-</div>
-<div class="question" id="questionContainer">
-<!-- 題目將在此顯示 -->
-</div>
-<div class="exam-progress">
-<p>題目 <span id="currentQuestionNum">1</span> / ${config.questionCount}</p>
-<p>得分：<span id="currentScore">0</span> 分</p>
-</div>
-</div>
-`;
-}
-
-// 🆕 棄權功能
-function quitExam() {
-if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
-clearInterval(examTimer);
-
-// 直接返回主頁，不保存任何成績
-location.reload();
+} else {
+finishExam();
 }
 }
 
@@ -1707,127 +1705,7 @@ ${coinsEarned > 0 ?
 `;
 }
 
-// 顯示答案反饋 - 修正版本
-function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
-const options = document.querySelectorAll('.option-btn');
-const config = examConfigs[currentExam];
-
-options.forEach((btn, index) => {
-btn.disabled = true;
-if (index === correctIndex) {
-btn.classList.add('correct');
-} else if (index === selectedIndex && selectedIndex !== correctIndex) {
-btn.classList.add('wrong');
-}
-});
-
-// 顯示回應時間和快速答題提示
-const feedbackDiv = document.createElement('div');
-feedbackDiv.style.cssText = `
-margin-top: 15px; 
-text-align: center; 
-font-size: 0.9rem;
-color: var(--text-secondary);
-`;
-
-let feedbackText = `回應時間: ${responseTime.toFixed(1)}秒`;
-if (responseTime <= config.fastAnswerThreshold) {
-feedbackText += ` ⚡ 快速答題！`;
-}
-
-feedbackDiv.innerHTML = feedbackText;
-document.getElementById('questionContainer').appendChild(feedbackDiv);
-}
-
-// 數獨答案檢查
-function checkSudokuAnswer() {
-const cells = document.querySelectorAll('.sudoku-cell');
-const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
-const question = currentQuestions[currentQuestionIndex];
-
-// 檢查是否填完
-const isEmpty = userGrid.some(cell => cell === 0);
-if (isEmpty) return;
-
-// 檢查答案
-const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-const responseTime = (Date.now() - questionStartTime) / 1000;
-
-clearInterval(examTimer);
-
-if (isCorrect) {
-userScores.correctAnswers++;
-userCurrency.coins += 2;
-}
-
-// 🏅 檢查快速答題
-const config = examConfigs[currentExam];
-if (responseTime <= config.fastAnswerThreshold) {
-userScores.fastAnswers++;
-}
-
-// 顯示數獨反饋
-cells.forEach(cell => cell.disabled = true);
-const feedbackDiv = document.createElement('div');
-feedbackDiv.style.cssText = `
-margin-top: 15px; 
-text-align: center; 
-font-size: 0.9rem;
-color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
-`;
-feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
-document.getElementById('questionContainer').appendChild(feedbackDiv);
-
-setTimeout(() => {
-nextQuestion(isCorrect);
-}, 1500);
-}
-
-// 進入下一題或結束考試
-function nextQuestion(wasCorrect) {
-// 更新分數顯示
-const currentScore = userScores.correctAnswers * 10;
-document.getElementById('currentScore').textContent = currentScore;
-
-currentQuestionIndex++;
-
-if (currentQuestionIndex >= currentQuestions.length) {
-// 考試結束
-finishExam();
-} else {
-// 下一題
-displayQuestion();
-startQuestionTimer();
-}
-}
-
-// 結束考試
-async function finishExam() {
-clearInterval(examTimer);
-const totalTime = (Date.now() - examStartTime) / 1000;
-const finalScore = userScores.correctAnswers * 10;
-
-// 🏅 完成考試獎勵金幣
-userCurrency.coins += 10;
-await saveCurrencyData();
-
-// 🏅 檢查勳章解鎖
-await checkMedalUnlocks(currentExam, finalScore, totalTime, userScores.fastAnswers);
-
-// 保存成績到排行榜
-await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
-
-// 顯示結果
-showExamResult(finalScore, totalTime);
-
-// 🚀 效能優化：清除快取以獲取最新排行榜
-const cacheKey = `champion_${currentExam}`;
-championCache.delete(cacheKey);
-localStorage.removeItem('users_data_v1');
-localStorage.removeItem('users_data_v1_time');
-}
-
-// 保存成績到排行榜
+// 🔧 修正：保存成績到排行榜 - 不使用索引查詢
 async function saveScoreToLeaderboard(examType, score, totalTime) {
 try {
 const scoreData = {
@@ -1839,203 +1717,151 @@ correctAnswers: userScores.correctAnswers
 };
 
 await database.ref(`leaderboard/${examType}/${currentUser}`).set(scoreData);
-console.log('✅ 成績已保存到排行榜');
+console.log('成績已保存到排行榜');
 } catch (err) {
 console.error('保存成績失敗:', err);
 }
 }
 
-// 顯示考試結果
-function showExamResult(score, totalTime) {
-const container = document.getElementById('mainContent'); // 修正：使用正確的ID
-const config = examConfigs[currentExam];
-
-container.innerHTML = `
-<div class="exam-result">
-<h2>🎉 考試完成！</h2>
-<p><strong>考試類型：</strong>${config.name}</p>
-<p><strong>最終得分：</strong>${score} 分</p>
-<p><strong>正確題數：</strong>${userScores.correctAnswers} / ${config.questionCount}</p>
-<p><strong>快速答題：</strong>${userScores.fastAnswers} 題</p>
-<p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
-<p><strong>獲得金幣：</strong>💰 ${5 + (userScores.correctAnswers * 2) + 10}</p>
-<div style="margin-top: 20px;">
-<button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-</div>
-</div>
-`;
-}
-
-// 顯示排行榜
+// 🔧 修正：顯示排行榜 - 不使用索引查詢
 async function showLeaderboard(examType) {
 document.getElementById('modalTitle').textContent = `${examConfigs[examType].name} - 排行榜`;
+const content = document.getElementById('leaderboardContent');
+content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
 document.getElementById('leaderboardModal').style.display = 'flex';
-document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
 
 try {
-const snapshot = await database.ref(`leaderboard/${examType}`).orderByChild('score').once('value');
+// 🔧 修正：直接獲取所有資料，避免使用 orderByChild
+const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
 const data = snapshot.val();
 
-if (!data) {
-document.getElementById('leaderboardContent').innerHTML = `
-<div class="empty-leaderboard">
-<p>📊 暫無排行榜記錄</p>
-<p>成為第一個挑戰者吧！</p>
-</div>
-`;
-return;
-}
-
+if (data) {
 // 轉換並排序資料
 const leaderboardData = Object.entries(data).map(([user, userData]) => ({
 user,
 ...userData
 })).sort((a, b) => {
-// 先按分數排序，分數相同時按時間排序（時間短的排前面）
 if (b.score !== a.score) {
 return b.score - a.score;
 }
 return a.totalTime - b.totalTime;
 });
 
-// 生成排行榜HTML
-const leaderboardHTML = `
-<div class="leaderboard-container">
-${leaderboardData.map((entry, index) => {
+const leaderboardHtml = leaderboardData.map((entry, index) => {
 const isCurrentUser = entry.user === currentUser;
-const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
+const userMedalIcons = getUserMedalIcons(entry.user);
 
-const medalDisplay = getUserMedalDisplay(entry.user);
 return `
 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">${rankIcon}</div>
+<div class="rank">#${index + 1}</div>
 <div class="user-name">
 ${entry.user}
-${medalDisplay}
+${userMedalIcons}
 </div>
 <div class="score">${entry.score}分</div>
 </div>
 `;
-}).join('')}
+}).join('');
+
+content.innerHTML = `
+<div class="leaderboard-container">
+${leaderboardHtml}
 </div>
 `;
-
-document.getElementById('leaderboardContent').innerHTML = leaderboardHTML;
-
+} else {
+content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無排行榜資料</p></div>';
+}
 } catch (err) {
 console.error('載入排行榜失敗:', err);
-document.getElementById('leaderboardContent').innerHTML = `
-<div class="empty-leaderboard">
-<p>❌ 載入排行榜失敗</p>
-<p>請稍後再試</p>
-</div>
-`;
+content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入排行榜失敗</p></div>';
 }
 }
 
-// 顯示總分排行榜
+// 🏆 顯示總分排行榜
 async function showTotalLeaderboard() {
 document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
+const content = document.getElementById('leaderboardContent');
+content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
 document.getElementById('leaderboardModal').style.display = 'flex';
-document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
 
 try {
-const snapshot = await database.ref('leaderboard').once('value');
-const allData = snapshot.val();
+// 🔧 修正：計算總分時不使用索引查詢
+const totalScores = {};
+const examTypes = Object.keys(examConfigs);
 
-if (!allData) {
-document.getElementById('leaderboardContent').innerHTML = `
-<div class="empty-leaderboard">
-<p>📊 暫無總分排行榜記錄</p>
-<p>開始挑戰吧！</p>
-</div>
-`;
-return;
-}
+// 並行獲取所有考試類型的資料
+const promises = examTypes.map(async (examType) => {
+const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
+const data = snapshot.val() || {};
 
-// 計算每個用戶的總分和總時間
-const userTotals = {};
-Object.entries(allData).forEach(([examType, examData]) => {
-Object.entries(examData).forEach(([user, userData]) => {
-if (!userTotals[user]) {
-userTotals[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
+Object.entries(data).forEach(([user, userData]) => {
+if (!totalScores[user]) {
+totalScores[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
 }
-userTotals[user].totalScore += userData.score;
-userTotals[user].totalTime += userData.totalTime;
-userTotals[user].examCount += 1;
+totalScores[user].totalScore += userData.score || 0;
+totalScores[user].totalTime += userData.totalTime || 0;
+totalScores[user].examCount++;
 });
 });
 
-// 轉換並排序資料
-const totalLeaderboardData = Object.entries(userTotals).map(([user, data]) => ({
-user,
-...data
-})).sort((a, b) => {
-// 先按總分排序，總分相同時按總時間排序
+await Promise.all(promises);
+
+// 排序總分資料
+const sortedTotalScores = Object.entries(totalScores)
+.map(([user, data]) => ({ user, ...data }))
+.sort((a, b) => {
 if (b.totalScore !== a.totalScore) {
 return b.totalScore - a.totalScore;
 }
 return a.totalTime - b.totalTime;
 });
 
-// 生成總分排行榜HTML
-const leaderboardHTML = `
-<div class="leaderboard-container">
-${totalLeaderboardData.map((entry, index) => {
+if (sortedTotalScores.length > 0) {
+const leaderboardHtml = sortedTotalScores.map((entry, index) => {
 const isCurrentUser = entry.user === currentUser;
-const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`;
-const medalDisplay = getUserMedalDisplay(entry.user);
+const userMedalIcons = getUserMedalIcons(entry.user);
+
 return `
 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">${rankIcon}</div>
+<div class="rank">#${index + 1}</div>
 <div class="user-name">
 ${entry.user}
-${medalDisplay}
+${userMedalIcons}
 </div>
-<div class="score">
-<div>${entry.totalScore}分</div>
-<div style="font-size: 0.7rem; color: var(--text-secondary);">
-${entry.examCount}場考試 | ${entry.totalTime.toFixed(1)}秒
-</div>
-</div>
+<div class="score">${entry.totalScore}分</div>
 </div>
 `;
-}).join('')}
+}).join('');
+
+content.innerHTML = `
+<div class="leaderboard-container">
+${leaderboardHtml}
 </div>
 `;
-
-document.getElementById('leaderboardContent').innerHTML = leaderboardHTML;
-
+} else {
+content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無總分排行榜資料</p></div>';
+}
 } catch (err) {
 console.error('載入總分排行榜失敗:', err);
-document.getElementById('leaderboardContent').innerHTML = `
-<div class="empty-leaderboard">
-<p>❌ 載入總分排行榜失敗</p>
-<p>請稍後再試</p>
-</div>
-`;
+content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入總分排行榜失敗</p></div>';
 }
 }
 
-// 獲取用戶勳章顯示
-function getUserMedalDisplay(username) {
-// 從Firebase獲取用戶勳章資料並顯示
-// 這裡先返回空字串，可以後續優化為實際的勳章顯示
-try {
-// 如果是當前用戶，直接使用已載入的勳章資料
-if (username === currentUser && userMedals.equipped.length > 0) {
-return `<div class="leaderboard-medals">
-${userMedals.equipped.slice(0, 3).map(medalId => {
-const medal = medalsData.medals[medalId];
-return medal ? `<div class="leaderboard-medal ${medal.rarity}" style="border-color: ${medal.color};">${medal.icon}</div>` : '';
-}).join('')}
-</div>`;
+// 🏅 獲取用戶勳章圖示
+function getUserMedalIcons(username) {
+// 從快取的用戶資料中獲取勳章
+const userData = usersData[username];
+if (!userData || !userData.medals || !userData.medals.equipped) {
+return '';
 }
-} catch (err) {
-console.error('獲取用戶勳章顯示失敗:', err);
+
+return userData.medals.equipped.map(medalId => {
+const medal = medalsData.medals[medalId];
+if (medal) {
+return `<span class="leaderboard-medal" style="border-color: ${medal.color};">${medal.icon}</span>`;
 }
 return '';
+}).join('');
 }
 
 // 隱藏排行榜
@@ -2044,38 +1870,7 @@ document.getElementById('leaderboardModal').style.display = 'none';
 }
 
 // 頁面載入完成後初始化
-document.addEventListener('DOMContentLoaded', function() {
-initializeApp();
-});
-
-// 🚀 效能優化：視窗大小變化時的響應式處理
-window.addEventListener('resize', debounce(() => {
-// 可以在這裡添加響應式邏輯
-}, 250));
-
-// 🚀 效能優化：頁面可見性變化處理
-document.addEventListener('visibilitychange', function() {
-if (document.hidden) {
-// 頁面隱藏時暫停計時器
-if (examTimer) {
-clearInterval(examTimer);
-}
-} else {
-// 頁面顯示時恢復計時器
-if (currentExam && currentQuestionIndex < currentQuestions.length) {
-startQuestionTimer();
-}
-}
-});
-
-// 🚀 效能優化：防止記憶體洩漏
-window.addEventListener('beforeunload', function() {
-if (examTimer) {
-clearInterval(examTimer);
-}
-championCache.clear();
-});
+document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
 </body>
 </html>
-
