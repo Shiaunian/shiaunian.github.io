@@ -948,57 +948,6 @@ function updateMedalDisplay() {
 }
 
 
-// 🏅 檢查勳章解鎖條件
-async function checkMedalUnlocks(examType, score, totalTime, fastAnswers) {
-const newUnlocks = [];
-
-for (const [medalId, medal] of Object.entries(medalsData.medals)) {
-if (userMedals.owned.includes(medalId)) continue;
-
-let unlocked = false;
-const condition = medal.unlockCondition;
-
-switch (condition.type) {
-case 'fast_answers':
-if (fastAnswers >= condition.value) unlocked = true;
-break;
-case 'perfect_score':
-if (score >= examConfigs[examType].questionCount * 10) unlocked = true;
-break;
-case 'high_score':
-if (condition.examType === examType && score >= condition.value) unlocked = true;
-break;
-case 'first_exam':
-unlocked = true;
-break;
-// 其他條件可以在這裡添加
-}
-
-if (unlocked) {
-newUnlocks.push(medalId);
-userMedals.owned.push(medalId);
-}
-}
-
-if (newUnlocks.length > 0) {
-await saveMedalData();
-showMedalUnlockNotification(newUnlocks);
-}
-}
-
-// 🏅 顯示勳章解鎖通知
-function showMedalUnlockNotification(medalIds) {
-medalIds.forEach(medalId => {
-const medal = medalsData.medals[medalId];
-if (medal) {
-// 簡單的通知，可以後續優化為更好的UI
-setTimeout(() => {
-alert(`🎉 恭喜解鎖勳章：${medal.icon} ${medal.name}\n${medal.description}`);
-}, 500);
-}
-});
-}
-
 // 🏅 保存勳章資料
 async function saveMedalData() {
 try {
@@ -1434,28 +1383,35 @@ return newArray;
 
 // 🚀 效能優化：考試開始優化 - 修正版本
 function startExam(examType) {
-if (!examQuestions[examType]) {
-alert('題庫載入中，請稍後再試');
-return;
-}
+    if (!examQuestions[examType]) {
+        alert('題庫載入中，請稍後再試');
+        return;
+    }
 
-const config = examConfigs[examType];
-const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
+    const config = examConfigs[examType];
+    const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
 
-if (questions.length < config.questionCount) {
-alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
-return;
-}
+    if (questions.length < config.questionCount) {
+        alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
+        return;
+    }
 
-currentExam = examType;
-currentQuestions = questions;
-currentQuestionIndex = 0;
-examStartTime = Date.now();
-userScores = { fastAnswers: 0, correctAnswers: 0 };
+    currentExam = examType;
+    currentQuestions = questions;
+    currentQuestionIndex = 0;
+    examStartTime = Date.now();
+    
+    // 🔧 修正：完整的 userScores 初始化
+    userScores = { 
+        fastAnswers: 0, 
+        correctAnswers: 0,
+        totalAnswers: 0,
+        fastCorrectAnswers: 0  // 🆕 新增：快速且答對的題目數
+    };
 
-showExamInterface();
-displayQuestion();
-startQuestionTimer();
+    showExamInterface();
+    displayQuestion();
+    startQuestionTimer();
 }
 
 // 顯示考試介面 - 加入棄權按鈕
@@ -1557,30 +1513,39 @@ selectAnswer(-1); // -1 表示未作答
 
 // 選擇答案 - 修正版本
 function selectAnswer(selectedIndex) {
-clearInterval(examTimer);
-const question = currentQuestions[currentQuestionIndex];
-const isCorrect = selectedIndex === question.correct;
-const responseTime = (Date.now() - questionStartTime) / 1000;
-const config = examConfigs[currentExam];
+    clearInterval(examTimer);
+    const question = currentQuestions[currentQuestionIndex];
+    const isCorrect = selectedIndex === question.correct;
+    const responseTime = (Date.now() - questionStartTime) / 1000;
+    const config = examConfigs[currentExam];
 
-// 🏅 檢查快速答題
-if (responseTime <= config.fastAnswerThreshold) {
-userScores.fastAnswers++;
+    userScores.totalAnswers++; // 🆕 追蹤總答題數
+
+    // 🏅 檢查快速答題
+    const isFast = responseTime <= config.fastAnswerThreshold;
+    if (isFast) {
+        userScores.fastAnswers++;
+    }
+
+    // 🔧 修正：只有答對才加分
+    if (isCorrect) {
+        userScores.correctAnswers++;
+        
+        // 🎯 只有答對且快速才計入快速正確答案
+        if (isFast) {
+            userScores.fastCorrectAnswers++;
+        }
+    }
+
+    // 顯示答案反饋
+    showAnswerFeedback(selectedIndex, question.correct, responseTime);
+
+    // 延遲後進入下一題
+    setTimeout(() => {
+        nextQuestion(isCorrect);
+    }, 1500);
 }
 
-// 🔧 修正：只有答對才加分，不給錢
-if (isCorrect) {
-userScores.correctAnswers++;
-}
-
-// 顯示答案反饋
-showAnswerFeedback(selectedIndex, question.correct, responseTime);
-
-// 延遲後進入下一題
-setTimeout(() => {
-nextQuestion(isCorrect);
-}, 1500);
-}
 
 // 顯示答案反饋 - 修正版本
 function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
@@ -1616,46 +1581,54 @@ document.getElementById('questionContainer').appendChild(feedbackDiv);
 
 // 數獨答案檢查 - 修正版本
 function checkSudokuAnswer() {
-const cells = document.querySelectorAll('.sudoku-cell');
-const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
-const question = currentQuestions[currentQuestionIndex];
+    const cells = document.querySelectorAll('.sudoku-cell');
+    const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
+    const question = currentQuestions[currentQuestionIndex];
 
-// 檢查是否填完
-const isEmpty = userGrid.some(cell => cell === 0);
-if (isEmpty) return;
+    // 檢查是否填完
+    const isEmpty = userGrid.some(cell => cell === 0);
+    if (isEmpty) return;
 
-// 檢查答案
-const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-const responseTime = (Date.now() - questionStartTime) / 1000;
+    // 檢查答案
+    const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
+    const responseTime = (Date.now() - questionStartTime) / 1000;
+    const config = examConfigs[currentExam];
 
-clearInterval(examTimer);
+    clearInterval(examTimer);
 
-// 🔧 修正：只有答對才加分，不給錢
-if (isCorrect) {
-userScores.correctAnswers++;
-}
+    userScores.totalAnswers++; // 🆕 追蹤總答題數
 
-// 🏅 檢查快速答題
-const config = examConfigs[currentExam];
-if (responseTime <= config.fastAnswerThreshold) {
-userScores.fastAnswers++;
-}
+    // 🏅 檢查快速答題
+    const isFast = responseTime <= config.fastAnswerThreshold;
+    if (isFast) {
+        userScores.fastAnswers++;
+    }
 
-// 顯示數獨反饋
-cells.forEach(cell => cell.disabled = true);
-const feedbackDiv = document.createElement('div');
-feedbackDiv.style.cssText = `
-margin-top: 15px; 
-text-align: center; 
-font-size: 0.9rem;
-color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
-`;
-feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
-document.getElementById('questionContainer').appendChild(feedbackDiv);
+    // 🔧 修正：只有答對才加分
+    if (isCorrect) {
+        userScores.correctAnswers++;
+        
+        // 🎯 只有答對且快速才計入快速正確答案
+        if (isFast) {
+            userScores.fastCorrectAnswers++;
+        }
+    }
 
-setTimeout(() => {
-nextQuestion(isCorrect);
-}, 1500);
+    // 顯示數獨反饋
+    cells.forEach(cell => cell.disabled = true);
+    const feedbackDiv = document.createElement('div');
+    feedbackDiv.style.cssText = `
+        margin-top: 15px; 
+        text-align: center; 
+        font-size: 0.9rem;
+        color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
+    `;
+    feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
+    document.getElementById('questionContainer').appendChild(feedbackDiv);
+
+    setTimeout(() => {
+        nextQuestion(isCorrect);
+    }, 1500);
 }
 
 // 下一題
@@ -1671,36 +1644,66 @@ finishExam();
 }
 }
 
-// 結束考試 - 修正版本
+// 結束考試 - 防濫用版本
 async function finishExam() {
-clearInterval(examTimer);
-const totalTime = (Date.now() - examStartTime) / 1000;
-const finalScore = userScores.correctAnswers * 10;
-const config = examConfigs[currentExam];
-
-// 🔧 修正：只有滿分才給錢
-let coinsEarned = 0;
-if (finalScore >= config.questionCount * 10) {
-// 滿分獎勵
-coinsEarned = 50; // 滿分獎勵50金幣
-userCurrency.coins += coinsEarned;
-await saveCurrencyData();
-}
-
-// 🏅 檢查勳章解鎖
-await checkMedalUnlocks(currentExam, finalScore, totalTime, userScores.fastAnswers);
-
-// 保存成績到排行榜
-await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
-
-// 顯示結果
-showExamResult(finalScore, totalTime, coinsEarned);
-
-// 🚀 效能優化：清除快取以獲取最新排行榜
-const cacheKey = `champion_${currentExam}`;
-championCache.delete(cacheKey);
-localStorage.removeItem('users_data_v1');
-localStorage.removeItem('users_data_v1_time');
+    clearInterval(examTimer);
+    const totalTime = (Date.now() - examStartTime) / 1000;
+    const finalScore = userScores.correctAnswers * 10;
+    const config = examConfigs[currentExam];
+    
+    // 🛡️ 防濫用：只有完成所有題目才給獎勵
+    if (currentQuestionIndex < config.questionCount) {
+        // 中途放棄，不給任何獎勵
+        showExamResult(finalScore, totalTime, 0, 0);
+        return;
+    }
+    
+    // 🎯 最後結算獎勵
+    let coinsEarned = 0;
+    let gemsEarned = 0;
+    let bonusMessages = [];
+    
+    // 💰 基礎獎勵：每答對一題5金幣
+    coinsEarned += userScores.correctAnswers * 5;
+    if (userScores.correctAnswers > 0) {
+        bonusMessages.push(`📝 答對${userScores.correctAnswers}題獲得${userScores.correctAnswers * 5}金幣`);
+    }
+    
+    // 🏆 滿分獎勵
+    if (finalScore >= config.questionCount * 10) {
+        const perfectBonus = config.perfectBonus || 50;
+        coinsEarned += perfectBonus;
+        gemsEarned += 1;
+        bonusMessages.push(`🏆 滿分獎勵：+${perfectBonus}金幣 +1寶石`);
+    }
+    
+    // ⚡ 快速答題獎勵：只計算答對且快速的題目
+    const fastCorrectAnswers = userScores.fastCorrectAnswers || 0; // 需要追蹤這個數據
+    if (fastCorrectAnswers >= Math.ceil(config.questionCount * 0.7)) {
+        const speedBonus = 20;
+        coinsEarned += speedBonus;
+        bonusMessages.push(`⚡ 快速答題獎勵：+${speedBonus}金幣`);
+    }
+    
+    // 💰 更新貨幣（只有完成考試才更新）
+    if (coinsEarned > 0) userCurrency.coins += coinsEarned;
+    if (gemsEarned > 0) userCurrency.gems += gemsEarned;
+    
+    if (coinsEarned > 0 || gemsEarned > 0) {
+        await saveCurrencyData();
+    }
+    
+    // 保存成績到排行榜
+    await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
+    
+    // 顯示結果
+    showExamResult(finalScore, totalTime, coinsEarned, gemsEarned, bonusMessages);
+    
+    // 清除快取
+    const cacheKey = `champion_${currentExam}`;
+    championCache.delete(cacheKey);
+    localStorage.removeItem('users_data_v1');
+    localStorage.removeItem('users_data_v1_time');
 }
 
 // 顯示考試結果 - 修正版本
