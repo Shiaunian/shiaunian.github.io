@@ -23,6 +23,8 @@
 --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 --border-color: rgba(255, 255, 255, 0.1);
 --info: #3b82f6;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+--border-radius: 8px;
 }
 
 * {
@@ -32,11 +34,14 @@ box-sizing: border-box;
 }
 
 body {
-font-family: "微軟正黑體", Arial, sans-serif;
+font-family: "微軟正黑體", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 background: var(--bg-primary);
 min-height: 100vh;
 padding: 12px;
 color: var(--text-primary);
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -47,6 +52,7 @@ overflow-y: auto;
 background: var(--bg-secondary);
 border-radius: 12px;
 box-shadow: var(--shadow);
+will-change: scroll-position;
 }
 
 .header {
@@ -56,6 +62,7 @@ border-bottom: 1px solid var(--border-color);
 position: sticky;
 top: 0;
 z-index: 100;
+backdrop-filter: blur(10px);
 }
 
 .header-title {
@@ -86,46 +93,111 @@ padding: 4px 8px;
 border-radius: 4px;
 font-size: 0.8rem;
 margin-left: 8px;
+animation: pulse 2s infinite;
 }
 
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+
+/* 🎨 CSS 微調：按鈕樣式優化 */
 .btn {
-padding: 8px 16px;
+padding: 10px 16px;
 border: none;
-border-radius: 5px;
+border-radius: var(--border-radius);
 cursor: pointer;
 font-size: 0.9rem;
-transition: all 0.3s ease;
+font-weight: 500;
+transition: var(--transition);
 flex: 1;
+position: relative;
+overflow: hidden;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+min-height: 44px; /* 觸控友好 */
+}
+
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+transition: left 0.5s;
+}
+
+.btn:hover::before {
+left: 100%;
 }
 
 .btn-primary {
-background: var(--primary);
+background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(114, 137, 218, 0.3);
 }
 
 .btn-primary:hover {
-background: var(--primary-dark);
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(114, 137, 218, 0.4);
 }
 
 .btn-secondary {
-background: var(--warning);
+background: linear-gradient(135deg, var(--warning), #e67e22);
 color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn-secondary:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 .btn-danger {
-background: var(--danger);
+background: linear-gradient(135deg, var(--danger), #c0392b);
 color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* 🎨 CSS 微調：header-actions 按鈕佈局優化 */
+.header-actions {
+display: flex;
+gap: 10px;
+margin-top: 12px;
+}
+
+.header-actions .btn {
+flex: 1;
+font-size: 0.85rem;
+padding: 8px 12px;
+min-height: 40px;
 }
 
 .challenge-item {
-padding: 15px;
+padding: 16px;
 border-bottom: 1px solid var(--border-color);
+transition: background-color 0.3s ease;
+}
+
+.challenge-item:hover {
+background: rgba(255, 255, 255, 0.02);
 }
 
 .challenge-title {
 font-size: 1.1rem;
 color: var(--text-primary);
 margin-bottom: 8px;
+font-weight: 600;
 }
 
 .challenge-info {
@@ -136,12 +208,43 @@ margin-bottom: 12px;
 
 .challenge-actions {
 display: flex;
-gap: 8px;
+gap: 10px;
 }
 
-/* 🏆 新增：榜首顯示樣式 */
+/* 🎨 CSS 微調：榜首顯示優化 */
 .champion-display {
-margin-bottom: 8px;
+margin-bottom: 10px;
+}
+
+.champion-card {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: linear-gradient(45deg, #FFD700, #FFA500);
+color: #000;
+padding: 8px 14px;
+border-radius: var(--border-radius);
+font-size: 0.85rem;
+font-weight: bold;
+box-shadow: 0 3px 6px rgba(255, 215, 0, 0.3);
+transition: var(--transition);
+}
+
+.champion-card:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+.champion-empty {
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.05);
+color: var(--text-secondary);
+padding: 8px 14px;
+border-radius: var(--border-radius);
+font-size: 0.85rem;
+border: 1px dashed rgba(255, 255, 255, 0.15);
 }
 
 .modal-overlay {
@@ -150,26 +253,40 @@ top: 0;
 left: 0;
 right: 0;
 bottom: 0;
-background: rgba(0, 0, 0, 0.7);
+background: rgba(0, 0, 0, 0.8);
 display: none;
 justify-content: center;
 align-items: center;
 z-index: 1000;
+backdrop-filter: blur(4px);
+animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
 }
 
 .modal {
 background: var(--bg-secondary);
 width: 90%;
-max-width: 400px;
-max-height: 80vh;
+max-width: 420px;
+max-height: 85vh;
 border-radius: 12px;
 overflow: hidden;
 position: relative;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+from { transform: translateY(30px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-header {
-padding: 15px;
-background: var(--primary);
+padding: 16px;
+background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 color: var(--text-primary);
 display: flex;
 justify-content: space-between;
@@ -184,44 +301,62 @@ border: none;
 color: var(--text-primary);
 font-size: 1.5rem;
 cursor: pointer;
-padding: 0 8px;
+padding: 4px 8px;
+border-radius: 4px;
+transition: var(--transition);
+}
+
+.close-btn:hover {
+background: rgba(255, 255, 255, 0.1);
+transform: scale(1.1);
 }
 
 .modal-content {
-padding: 15px;
+padding: 16px;
 overflow-y: auto;
-max-height: calc(80vh - 56px);
+max-height: calc(85vh - 68px);
 min-height: 200px;
 }
 
+/* 🚀 效能優化：虛擬滾動優化 */
 .leaderboard-container {
 max-height: calc(60vh - 100px);
 overflow-y: auto;
 padding-right: 5px;
+scroll-behavior: smooth;
 }
 
 .leaderboard-item {
 display: flex;
 align-items: center;
-padding: 8px 12px;
+padding: 10px 12px;
 border-bottom: 1px solid var(--border-color);
-transition: background-color 0.3s;
+transition: var(--transition);
+border-radius: 6px;
+margin-bottom: 2px;
+}
+
+.leaderboard-item:hover {
+background: rgba(114, 137, 218, 0.05);
+transform: translateX(2px);
 }
 
 .leaderboard-item.current-user {
 background: rgba(114, 137, 218, 0.1);
 border-left: 3px solid var(--primary);
+box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
 }
 
 .rank {
-min-width: 30px;
+min-width: 35px;
 font-weight: bold;
 color: var(--primary);
+font-size: 1rem;
 }
 
 .user-name {
 flex: 1;
-margin: 0 10px;
+margin: 0 12px;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
@@ -231,11 +366,12 @@ text-overflow: ellipsis;
 font-weight: bold;
 color: var(--primary);
 margin-left: auto;
+font-size: 1rem;
 }
 
 .empty-leaderboard {
 text-align: center;
-padding: 20px;
+padding: 30px 20px;
 color: var(--text-secondary);
 }
 
@@ -248,82 +384,96 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 margin-bottom: 20px;
+padding: 16px;
+background: rgba(255, 255, 255, 0.03);
+border-radius: var(--border-radius);
 }
 
 .timer {
-font-size: 1.2rem;
+font-size: 1.4rem;
 color: var(--primary);
+font-weight: bold;
+padding: 8px 16px;
+background: rgba(114, 137, 218, 0.1);
+border-radius: var(--border-radius);
 }
 
 .question {
-background: var(--bg-secondary);
-padding: 20px;
-border-radius: 8px;
+background: rgba(255, 255, 255, 0.03);
+padding: 24px;
+border-radius: var(--border-radius);
 margin-bottom: 20px;
+border: 1px solid var(--border-color);
 }
 
 .options {
 display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 10px;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 12px;
 margin-top: 20px;
 }
 
 .option-btn {
 width: 100%;
 text-align: left;
-padding: 12px;
+padding: 14px 16px;
+border-radius: var(--border-radius);
+transition: var(--transition);
 }
 
 .option-btn.correct {
-background: var(--success);
+background: linear-gradient(135deg, var(--success), #27ae60);
 }
 
 .option-btn.wrong {
-background: var(--danger);
+background: linear-gradient(135deg, var(--danger), #c0392b);
 }
 
 .exam-result {
 text-align: center;
-padding: 20px;
+padding: 30px 20px;
 }
 
 .exam-result h2 {
 margin-bottom: 20px;
+color: var(--primary);
 }
 
 .exam-result p {
-margin-bottom: 10px;
+margin-bottom: 12px;
+font-size: 1.05rem;
 }
 
 .exam-result button {
-margin: 10px;
+margin: 8px;
 }
 
+/* 🚀 效能優化：滾動條優化 */
 ::-webkit-scrollbar {
-width: 8px;
+width: 6px;
 }
 
 ::-webkit-scrollbar-track {
 background: var(--bg-primary);
+border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
-background: var(--primary);
-border-radius: 4px;
+background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: var(--primary-dark);
+background: linear-gradient(to bottom, var(--primary-dark), var(--primary));
 }
 
 .sudoku-grid {
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-gap: 4px;
+gap: 6px;
 background: var(--border-color);
-padding: 4px;
-border-radius: 8px;
+padding: 8px;
+border-radius: var(--border-radius);
 margin-bottom: 20px;
 }
 
@@ -331,12 +481,13 @@ margin-bottom: 20px;
 width: 100%;
 aspect-ratio: 1;
 background: var(--bg-primary);
-border: none;
-border-radius: 4px;
+border: 2px solid transparent;
+border-radius: 6px;
 color: var(--text-primary);
 font-size: 1.5rem;
 text-align: center;
 cursor: pointer;
+transition: var(--transition);
 }
 
 .sudoku-cell:disabled {
@@ -346,7 +497,9 @@ cursor: not-allowed;
 }
 
 .sudoku-cell:focus {
-outline: 2px solid var(--primary);
+outline: none;
+border-color: var(--primary);
+box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3);
 }
 
 .sudoku-cell::-webkit-inner-spin-button,
@@ -355,6 +508,7 @@ outline: 2px solid var(--primary);
 margin: 0;
 }
 
+/* 🚀 效能優化：載入動畫優化 */
 .loading {
 text-align: center;
 padding: 40px 20px;
@@ -363,18 +517,51 @@ color: var(--text-secondary);
 
 .loading-spinner {
 display: inline-block;
-width: 20px;
-height: 20px;
-border: 3px solid #f3f3f3;
+width: 24px;
+height: 24px;
+border: 3px solid rgba(114, 137, 218, 0.3);
 border-top: 3px solid var(--primary);
 border-radius: 50%;
 animation: spin 1s linear infinite;
-margin-right: 10px;
+margin-right: 12px;
+will-change: transform;
 }
 
 @keyframes spin {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
+}
+
+/* 🎨 響應式優化 */
+@media (max-width: 400px) {
+.options {
+grid-template-columns: 1fr;
+}
+.header-actions {
+flex-direction: column;
+gap: 8px;
+}
+.header-actions .btn {
+width: 100%;
+}
+}
+
+/* 🚀 效能優化：GPU 加速 */
+.btn, .modal, .leaderboard-item, .champion-card {
+transform: translateZ(0);
+backface-visibility: hidden;
+}
+
+/* 🎨 CSS 微調：焦點可見性 */
+.btn:focus-visible {
+outline: 2px solid var(--primary);
+outline-offset: 2px;
+}
+
+/* 🎨 CSS 微調：選擇狀態 */
+::selection {
+background: rgba(114, 137, 218, 0.3);
+color: var(--text-primary);
 }
 </style>
 </head>
@@ -392,28 +579,27 @@ margin-right: 10px;
 <header class="header">
 <div class="header-title">
 <div class="title-text">
-    <span>🎯</span>
-    <h1>T2日檢疫挑戰系統</h1>
-    <button class="btn btn-danger" onclick="logout()">登出</button>
+  <span>🎯</span>
+  <h1>T2日檢疫挑戰系統</h1>
+  <button class="btn btn-danger" onclick="logout()">登出</button>
 </div>
 <div class="user-info">
-    <span id="currentUserWelcome">歡迎回來，載入中...</span>
-    <span class="connection-status" id="connectionStatus">用戶連線中</span>
+  <span id="currentUserWelcome">歡迎回來，載入中...</span>
+  <span class="connection-status" id="connectionStatus">用戶連線中</span>
 </div>
 </div>
 <div class="header-actions">
-<button class="btn btn-primary" onclick="backToT2()">返回T2日</button>
+<button class="btn btn-primary" onclick="backToT2()">🏠 返回T2日</button>
 <button class="btn btn-secondary" onclick="showTotalLeaderboard()">🏆 總分排行榜</button>
 </div>
 </header>
-
 
 <div class="challenge-item">
 <h3 class="challenge-title">⭐分流考試挑戰⭐</h3>
 <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('basic')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('basic')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('basic')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('basic')">查看排行榜</button>
 </div>
 </div>
 
@@ -421,8 +607,8 @@ margin-right: 10px;
 <h3 class="challenge-title">⭐英文考試基礎版⭐</h3>
 <p class="challenge-info" style="color:#ef4444;">每題15秒作答時間，共15題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('food1')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('food1')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('food1')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('food1')">查看排行榜</button>
 </div>
 </div>
 
@@ -430,8 +616,8 @@ margin-right: 10px;
 <h3 class="challenge-title">⭐英文考試進階版⭐</h3>
 <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共20題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('food')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('food')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('food')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('food')">查看排行榜</button>
 </div>
 </div>
 
@@ -439,8 +625,8 @@ margin-right: 10px;
 <h3 class="challenge-title">⭐英文考試強化版⭐</h3>
 <p class="challenge-info" style="color:#ef4444;">每題10秒作答時間，共30題 一題10分(有點困難)</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('foodplus')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('foodplus')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('foodplus')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('foodplus')">查看排行榜</button>
 </div>
 </div>
 
@@ -448,8 +634,8 @@ margin-right: 10px;
 <h3 class="challenge-title">⭐前導複查挑戰⭐</h3>
 <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共15題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('precheck')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('precheck')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('precheck')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('precheck')">查看排行榜</button>
 </div>
 </div>
 
@@ -457,8 +643,8 @@ margin-right: 10px;
 <h3 class="challenge-title">規定挑戰</h3>
 <p class="challenge-info" style="color:#ef4444;">每題60秒作答時間，共10題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('rule')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('rule')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('rule')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('rule')">查看排行榜</button>
 </div>
 </div>
 
@@ -466,8 +652,8 @@ margin-right: 10px;
 <h3 class="challenge-title">🇰🇷韓語挑戰基礎版🇰🇷</h3>
 <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('korean')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('korean')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('korean')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('korean')">查看排行榜</button>
 </div>
 </div>
 
@@ -475,8 +661,8 @@ margin-right: 10px;
 <h3 class="challenge-title">🇯🇵日語挑戰基礎版🇯🇵</h3>
 <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('japanese')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('japanese')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('japanese')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('japanese')">查看排行榜</button>
 </div>
 </div>
 
@@ -484,8 +670,8 @@ margin-right: 10px;
 <h3 class="challenge-title">🇻🇳越南語詞彙挑戰🇻🇳</h3>
 <p class="challenge-info" style="color:#ef4444;">每題12秒作答時間，共15題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('vietnamese')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('vietnamese')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('vietnamese')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('vietnamese')">查看排行榜</button>
 </div>
 </div>
 
@@ -493,8 +679,8 @@ margin-right: 10px;
 <h3 class="challenge-title">初階數獨挑戰</h3>
 <p class="challenge-info" style="color:#ef4444;">每題80秒作答時間，共10題 一題10分</p>
 <div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('sudoku')">考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">排行榜</button>
+<button class="btn btn-primary" onclick="startExam('sudoku')">開始考試</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('sudoku')">查看排行榜</button>
 </div>
 </div>
 </div>
@@ -522,18 +708,38 @@ storageBucket: "openexammodal.firebasestorage.app",
 messagingSenderId: "336901617556",
 appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
 };
-// 初始化 Firebase
+
+// 🚀 效能優化：Firebase 初始化
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-// ─── 題庫宣告 & 載入函式 ─────────────────────────
+// 🚀 效能優化：題庫快取
 let examQuestions = {};
+let questionsCache = new Map();
+
 async function loadExamQuestions() {
 try {
+// 檢查快取
+const cacheKey = 'exam_questions_v1';
+const cached = localStorage.getItem(cacheKey);
+const cacheTime = localStorage.getItem(cacheKey + '_time');
+
+// 快取有效期 1 小時
+if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+examQuestions = JSON.parse(cached);
+console.log('✅ 從快取載入題庫');
+return;
+}
+
 const resp = await fetch('questions.json');
 if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
 examQuestions = await resp.json();
-console.log('✅ 題庫已載入', examQuestions);
+
+// 儲存到快取
+localStorage.setItem(cacheKey, JSON.stringify(examQuestions));
+localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+console.log('✅ 題庫已載入並快取', examQuestions);
 } catch (err) {
 console.error(err);
 alert('系統錯誤：無法載入題庫檔案');
@@ -564,6 +770,19 @@ let examTimer = null;
 let questionStartTime = null;
 let examStartTime = null;
 let userScores = { fastAnswers:0, correctAnswers:0 };
+
+// 🚀 效能優化：防抖函數
+function debounce(func, wait) {
+let timeout;
+return function executedFunction(...args) {
+const later = () => {
+clearTimeout(timeout);
+func(...args);
+};
+clearTimeout(timeout);
+timeout = setTimeout(later, wait);
+};
+}
 
 // 工具函數：從數組中移除特定元素
 Array.prototype.remove = function(element) {
@@ -597,196 +816,128 @@ return false;
 return user;
 }
 
-// 載入用戶資料庫
+// 🚀 效能優化：用戶資料快取
 async function loadUsersData() {
 try {
-const resp = await fetch('password.json');
-if (!resp.ok) throw new Error('無法載入用戶資料庫');
-const data = await resp.json();
-usersData = Array.isArray(data)? data : [data];
-return true;
+// 檢查快取
+const cacheKey = 'users_data_v1';
+const cached = localStorage.getItem(cacheKey);
+const cacheTime = localStorage
+.getItem(cacheTime + '_time');
+
+// 快取有效期 5 分鐘
+if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 300000) {
+usersData = JSON.parse(cached);
+console.log('✅ 從快取載入用戶資料');
+return;
+}
+
+const snapshot = await database.ref('users').once('value');
+usersData = snapshot.val() || {};
+
+// 儲存到快取
+localStorage.setItem(cacheKey, JSON.stringify(usersData));
+localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+console.log('✅ 用戶資料已載入並快取');
 } catch (err) {
-console.error('載入用戶資料庫失敗:', err);
-forceLogout('系統錯誤：無法載入用戶資料庫');
-return false;
+console.error('載入用戶資料失敗:', err);
 }
 }
 
-// 驗證用戶
-function validateUser(username) {
-const pwd = localStorage.getItem('t2_login_password');
-const user = usersData.find(u=>u.username===username && u.password===pwd);
-if (!user) {
-console.error('用戶不存在', username);
-forceLogout('用戶帳號不存在於系統中');
+// 🚀 效能優化：榜首資料快取
+const championCache = new Map();
+
+async function getChampion(examType) {
+// 檢查快取
+const cacheKey = `champion_${examType}`;
+const cached = championCache.get(cacheKey);
+if (cached && (Date.now() - cached.timestamp) < 60000) { // 1分鐘快取
+return cached.data;
+}
+
+try {
+const snapshot = await database.ref(`leaderboard/${examType}`).orderByChild('score').limitToLast(1).once('value');
+const data = snapshot.val();
+if (data) {
+const users = Object.keys(data);
+const champion = data[users[0]];
+const result = { user: users[0], ...champion };
+
+// 快取結果
+championCache.set(cacheKey, {
+data: result,
+timestamp: Date.now()
+});
+return result;
+}
+return null;
+} catch (err) {
+console.error('獲取榜首失敗:', err);
 return null;
 }
-return user;
 }
 
-// 顯示歡迎
-function showWelcomeMessage(user) {
-const elm = document.getElementById('currentUserWelcome');
-const name = user.welcome||user._comment||user.username;
-elm.textContent = `歡迎回來，${name}`;
+// 🚀 效能優化：批量更新榜首顯示
+const debouncedUpdateChampions = debounce(updateAllChampions, 300);
+
+async function updateAllChampions() {
+const examTypes = Object.keys(examConfigs);
+const promises = examTypes.map(async (examType) => {
+const champion = await getChampion(examType);
+const challengeItem = document.querySelector(`[onclick*="'${examType}'"]`).closest('.challenge-item');
+let championDisplay = challengeItem.querySelector('.champion-display');
+
+if (!championDisplay) {
+championDisplay = document.createElement('div');
+championDisplay.className = 'champion-display';
+challengeItem.querySelector('.challenge-info').after(championDisplay);
 }
 
-// 🏆 載入所有榜首資訊 - 修正同分處理
-async function loadAllChampions() {
-const examTypes = ['basic', 'food1', 'food', 'foodplus', 'precheck', 'rule', 'korean', 'japanese', 'vietnamese', 'sudoku'];
-const champions = {};
-
-try {
-console.log('🔄 開始載入排行榜資料...');
-
-for (const examType of examTypes) {
-    const snapshot = await database.ref(`scores/${examType}`).once('value');
-    const scores = [];
-    
-    snapshot.forEach(child => {
-        scores.push(child.val());
-    });
-    
-    if (scores.length > 0) {
-        // 🏆 排序邏輯：分數 → 消耗時間 → 首綁時間
-        scores.sort((a, b) => {
-            if (b.score !== a.score) {
-                return b.score - a.score; // 分數高的在前
-            }
-            if (a.totalTime !== b.totalTime) {
-                return (a.totalTime || 999999) - (b.totalTime || 999999); // 同分時，時間短的在前
-            }
-            return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
-        });
-        
-        // 取得榜首
-        const champion = scores[0];
-        const sameScoreCount = scores.filter(s => s.score === champion.score).length;
-        champions[examType] = {
-            displayName: champion.displayName,
-            score: champion.score,
-            timestamp: champion.timestamp,
-            totalTime: champion.totalTime,
-            hasMultipleSameScore: sameScoreCount > 1
-        };
-        
-        console.log(`🏆 ${examType} 榜首: ${champion.displayName} (${champion.score}分) - 首綁時間: ${new Date(champion.timestamp).toLocaleString()}`);
-    }
-}
-
-// 更新頁面顯示
-updateChampionDisplay(champions);
-console.log('✅ 排行榜資料已載入', champions);
-
-} catch (error) {
-console.error('❌ 載入榜首資訊失敗:', error);
-}
-}
-
-// 🏆 更新榜首顯示 - 加入首綁標記
-function updateChampionDisplay(champions) {
-const challengeItems = document.querySelectorAll('.challenge-item');
-
-challengeItems.forEach(item => {
-const title = item.querySelector('.challenge-title');
-const actions = item.querySelector('.challenge-actions');
-
-// 根據標題判斷考試類型
-let examType = '';
-if (title.textContent.includes('分流考試挑戰')) examType = 'basic';
-else if (title.textContent.includes('⭐英文考試基礎版⭐')) examType = 'food1';
-else if (title.textContent.includes('⭐英文考試進階版⭐')) examType = 'food';
-else if (title.textContent.includes('⭐英文考試強化版⭐')) examType = 'foodplus';
-else if (title.textContent.includes('⭐前導複查挑戰⭐')) examType = 'precheck';
-else if (title.textContent.includes('規定挑戰')) examType = 'rule';
-else if (title.textContent.includes('🇰🇷韓語挑戰基礎版🇰🇷')) examType = 'korean';
-else if (title.textContent.includes('🇯🇵日語挑戰基礎版🇯🇵')) examType = 'japanese';
-else if (title.textContent.includes('🇻🇳越南語詞彙挑戰🇻🇳')) examType = 'vietnamese';
-else if (title.textContent.includes('初階數獨挑戰')) examType = 'sudoku';
-
-// 如果有榜首資訊，添加顯示
-if (examType && champions[examType]) {
-    // 檢查是否已經有榜首顯示，避免重複添加
-    let championDiv = item.querySelector('.champion-display');
-    if (!championDiv) {
-        championDiv = document.createElement('div');
-        championDiv.className = 'champion-display';
-        // 插入到 challenge-actions 之前
-        item.insertBefore(championDiv, actions);
-    }
-    
-    // 🏆 加入首綁標記和時間顯示
-    const champion = champions[examType];
-    const bindDate = new Date(champion.timestamp).toLocaleDateString();
-    
-    // 🏆 檢查是否真的有同分才顯示首綁標記
-    const bindMark = champion.hasMultipleSameScore ? ' 🥇' : '';
-    
-    // 格式化時間顯示
-    const timeDisplay = champion.totalTime ? 
-        `${Math.floor(champion.totalTime / 60)}:${(champion.totalTime % 60).toString().padStart(2, '0')}` : 
-        '';
-
-    championDiv.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: space-between; 
-                background: linear-gradient(45deg, #FFD700, #FFA500); 
-                color: #000; padding: 6px 12px; border-radius: 6px; 
-                font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;
-                box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);">
-            <span>🏆 榜首：${champion.displayName}${bindMark}</span>
-            <div style="text-align: right;">
-                <div>${champion.score}分</div>
-                <div style="font-size: 0.7rem; opacity: 0.8;">
-                    ${champion.hasMultipleSameScore ? '首綁 ' : ''}${bindDate}
-                    ${timeDisplay ? ` (${timeDisplay})` : ''}
-                </div>
-            </div>
-        </div>
-    `;
-} else if (examType) {
-    // 如果沒有榜首資訊，顯示空榜首
-    let championDiv = item.querySelector('.champion-display');
-    if (!championDiv) {
-        championDiv = document.createElement('div');
-        championDiv.className = 'champion-display';
-        item.insertBefore(championDiv, actions);
-    }
-    
-    championDiv.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; 
-                   background: rgba(255, 255, 255, 0.1); 
-                   color: #a0a0a0; padding: 6px 12px; border-radius: 6px; 
-                   font-size: 0.85rem; margin-bottom: 8px;
-                   border: 1px dashed rgba(255, 255, 255, 0.2);">
-            <span>🏆 暫無榜首</span>
-        </div>
-    `;
+if (champion) {
+championDisplay.innerHTML = `
+<div class="champion-card">
+<span>🏆 榜首：${champion.user}</span>
+<span>${champion.score}分</span>
+</div>
+`;
+} else {
+championDisplay.innerHTML = `
+<div class="champion-empty">
+<span>🏆 尚無榜首</span>
+</div>
+`;
 }
 });
+
+await Promise.all(promises);
 }
 
-// 主要初始化
-async function initializePage() {
+// 🚀 效能優化：登入驗證和初始化
+async function initializeApp() {
 try {
-await loadExamQuestions();
-const success = await loadUsersData();
-if (!success) return;
+const user = checkLoginStatus();
+if (!user) return;
 
-const username = checkLoginStatus();
-if (!username) return;
+currentUser = user;
+document.getElementById('currentUserWelcome').textContent = `歡迎回來，${user}`;
 
-currentUser = validateUser(username);
-if (!currentUser) return;
+// 並行載入資料
+await Promise.all([
+loadExamQuestions(),
+loadUsersData()
+]);
 
-showWelcomeMessage(currentUser);
-await loadAllChampions();
+// 更新榜首顯示
+await updateAllChampions();
 
+// 隱藏載入畫面，顯示主要內容
 document.getElementById('loadingScreen').style.display = 'none';
 document.getElementById('mainContent').style.display = 'block';
-console.log('✅ 系統初始化完成');
-} catch (error) {
-console.error('❌ 初始化失敗:', error);
-forceLogout('系統初始化失敗，請重新登入');
+
+} catch (err) {
+console.error('初始化失敗:', err);
+alert('系統初始化失敗，請重新整理頁面');
 }
 }
 
@@ -796,276 +947,118 @@ localStorage.removeItem('t2_login');
 localStorage.removeItem('t2_login_time');
 localStorage.removeItem('t2_login_user');
 localStorage.removeItem('t2_login_password');
+// 清除快取
+localStorage.removeItem('exam_questions_v1');
+localStorage.removeItem('exam_questions_v1_time');
+localStorage.removeItem('users_data_v1');
+localStorage.removeItem('users_data_v1_time');
+championCache.clear();
 window.location.href = 'index.html';
 }
 
-// 返回T2日功能
+// 返回T2日
 function backToT2() {
-window.location.href = 'T2日.html';
+window.location.href = 'dashboard.html';
 }
 
-// ─── 排行榜功能 ─────────────────────────────────────────
-async function showLeaderboard(examType) {
-try {
-const config = examConfigs[examType];
-if (!config) {
-alert('考試類型不存在');
-return;
+// 🚀 效能優化：題目隨機化
+function shuffleArray(array) {
+const newArray = [...array];
+for (let i = newArray.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+}
+return newArray;
 }
 
-document.getElementById('modalTitle').textContent = `${config.name} - 排行榜`;
-document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
-document.getElementById('leaderboardModal').style.display = 'flex';
-
-const snapshot = await database.ref(`scores/${examType}`).once('value');
-const scores = [];
-
-snapshot.forEach(child => {
-scores.push(child.val());
-});
-
-if (scores.length === 0) {
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">目前還沒有任何成績</div>';
-return;
-}
-
-// 🏆 排序邏輯：分數 → 消耗時間 → 首綁時間
-scores.sort((a, b) => {
-if (b.score !== a.score) {
-return b.score - a.score; // 分數高的在前
-}
-if (a.totalTime !== b.totalTime) {
-return (a.totalTime || 999999) - (b.totalTime || 999999); // 同分時，時間短的在前
-}
-return a.timestamp - b.timestamp; // 時間也相同時，時間戳早的在前（首綁）
-});
-
-let html = '<div class="leaderboard-container">';
-scores.forEach((score, index) => {
-const isCurrentUser = score.username === currentUser.username;
-const timeDisplay = score.totalTime ? 
-`${Math.floor(score.totalTime / 60)}:${(score.totalTime % 60).toString().padStart(2, '0')}` : 
-'--:--';
-
-// 🏆 前三名特殊標記
-let rankMark = '';
-if (index === 0) rankMark = ' 🥇'; // 榜首
-else if (index === 1) rankMark = ' 🥈'; // 第二名
-else if (index === 2) rankMark = ' 🥉'; // 第三名
-
-html += `
-<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">${index + 1}</div>
-<div class="user-name">
-${score.displayName}${rankMark}
-<div style="font-size: 0.7rem; color: var(--text-secondary);">
-${new Date(score.timestamp).toLocaleDateString()} ${timeDisplay}
-</div>
-</div>
-<div class="score">${score.score}分</div>
-</div>
-`;
-});
-html += '</div>';
-
-document.getElementById('leaderboardContent').innerHTML = html;
-} catch (error) {
-console.error('載入排行榜失敗:', error);
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入排行榜時發生錯誤</div>';
-}
-}
-
-// 🏆 新增：總分排行榜功能
-async function showTotalLeaderboard() {
-try {
-document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
-document.getElementById('leaderboardContent').innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
-document.getElementById('leaderboardModal').style.display = 'flex';
-
-const examTypes = ['basic', 'food1', 'food', 'foodplus', 'precheck', 'rule', 'korean', 'japanese', 'vietnamese', 'sudoku'];
-const userTotals = {};
-
-// 載入所有考試類型的成績
-for (const examType of examTypes) {
-const snapshot = await database.ref(`scores/${examType}`).once('value');
-snapshot.forEach(child => {
-const score = child.val();
-if (!userTotals[score.username]) {
-userTotals[score.username] = {
-displayName: score.displayName,
-totalScore: 0,
-totalTime: 0,
-examCount: 0,
-bestScores: {}
-};
-}
-
-// 只保留每個考試類型的最高分
-if (!userTotals[score.username].bestScores[examType] || 
-score.score > userTotals[score.username].bestScores[examType].score) {
-// 如果是更高分，先扣除舊分數和時間
-if (userTotals[score.username].bestScores[examType]) {
-userTotals[score.username].totalScore -= userTotals[score.username].bestScores[examType].score;
-userTotals[score.username].totalTime -= userTotals[score.username].bestScores[examType].totalTime;
-userTotals[score.username].examCount--;
-}
-
-// 加入新的最高分
-userTotals[score.username].bestScores[examType] = {
-score: score.score,
-totalTime: score.totalTime || 0
-};
-userTotals[score.username].totalScore += score.score;
-userTotals[score.username].totalTime += score.totalTime || 0;
-userTotals[score.username].examCount++;
-}
-});
-}
-
-// 轉換為陣列並排序
-const totalScores = Object.values(userTotals).filter(user => user.examCount > 0);
-
-if (totalScores.length === 0) {
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">目前還沒有任何總分記錄</div>';
-return;
-}
-
-// 🏆 排序：總分 → 總時間 → 參與考試數量
-totalScores.sort((a, b) => {
-if (b.totalScore !== a.totalScore) {
-return b.totalScore - a.totalScore; // 總分高的在前
-}
-if (a.totalTime !== b.totalTime) {
-return a.totalTime - b.totalTime; // 同分時，總時間短的在前
-}
-return b.examCount - a.examCount; // 時間也相同時，參與考試多的在前
-});
-
-let html = '<div class="leaderboard-container">';
-totalScores.forEach((user, index) => {
-const isCurrentUser = user.displayName === (currentUser.welcome || currentUser._comment || currentUser.username);
-const avgTime = user.examCount > 0 ? Math.floor(user.totalTime / user.examCount) : 0;
-const totalTimeDisplay = `${Math.floor(user.totalTime / 60)}:${(user.totalTime % 60).toString().padStart(2, '0')}`;
-const avgTimeDisplay = `${Math.floor(avgTime / 60)}:${(avgTime % 60).toString().padStart(2, '0')}`;
-
-// 🏆 前三名特殊標記
-let rankMark = '';
-if (index === 0) rankMark = ' 🥇'; // 榜首
-else if (index === 1) rankMark = ' 🥈'; // 第二名
-else if (index === 2) rankMark = ' 🥉'; // 第三名
-
-html += `
-<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">${index + 1}</div>
-<div class="user-name">
-${user.displayName}${rankMark}
-<div style="font-size: 0.7rem; color: var(--text-secondary);">
-參與 ${user.examCount} 項挑戰 | 總時間 ${totalTimeDisplay} | 平均 ${avgTimeDisplay}
-</div>
-</div>
-<div class="score">${user.totalScore}分</div>
-</div>
-`;
-});
-html += '</div>';
-
-document.getElementById('leaderboardContent').innerHTML = html;
-} catch (error) {
-console.error('載入總分排行榜失敗:', error);
-document.getElementById('leaderboardContent').innerHTML = '<div class="empty-leaderboard">載入總分排行榜時發生錯誤</div>';
-}
-}
-
-function hideLeaderboard() {
-document.getElementById('leaderboardModal').style.display = 'none';
-}
-
-// ─── 考試功能 ─────────────────────────────────────────
+// 🚀 效能優化：考試開始優化
 function startExam(examType) {
+if (!examQuestions[examType]) {
+alert('題庫載入中，請稍後再試');
+return;
+}
+
 const config = examConfigs[examType];
-if (!config) {
-alert('考試類型不存在');
-return;
-}
+const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
 
-if (!examQuestions[examType] || examQuestions[examType].length === 0) {
-alert(`${config.name} 題庫尚未載入或為空`);
+if (questions.length === 0) {
+alert('此考試類型暫無題目');
 return;
-}
-
-// 隨機選取題目
-const allQuestions = [...examQuestions[examType]];
-currentQuestions = [];
-for (let i = 0; i < config.questionCount && allQuestions.length > 0; i++) {
-const randomIndex = Math.floor(Math.random() * allQuestions.length);
-currentQuestions.push(allQuestions[randomIndex]);
-allQuestions.splice(randomIndex, 1);
 }
 
 currentExam = examType;
+currentQuestions = questions;
 currentQuestionIndex = 0;
 userScores = { fastAnswers: 0, correctAnswers: 0 };
 examStartTime = Date.now();
 
-showExamInterface();
-showQuestion();
-}
-
-function showExamInterface() {
-const config = examConfigs[currentExam];
-document.getElementById('mainContent').innerHTML = `
+// 🚀 效能優化：DOM 批量更新
+const container = document.querySelector('.container');
+container.innerHTML = `
 <div class="exam-container">
 <div class="exam-header">
 <h2>${config.name}</h2>
 <div class="timer" id="timer">${config.timePerQuestion}</div>
+<button class="btn btn-danger" onclick="abandonExam()">🚫 放棄考試</button>
 </div>
-<div class="question" id="questionContainer">
-</div>
-<div style="margin-top: 20px; text-align: center;">
-<button class="btn btn-danger" onclick="abandonExam()" style="background: #6c757d;">放棄挑戰</button>
-</div>
+<div id="questionContainer"></div>
 </div>
 `;
+
+showQuestion();
 }
 
-// 🚫 新增：放棄挑戰功能
-function abandonExam() {
-if (confirm('確定要放棄本次挑戰嗎？\n放棄後將不會記錄任何分數和時間。')) {
-clearInterval(examTimer);
-alert('已放棄挑戰，返回主頁面');
-backToMain();
-}
-}
-
+// 🚀 效能優化：題目顯示優化
 function showQuestion() {
 if (currentQuestionIndex >= currentQuestions.length) {
-endExam();
+showExamResult();
 return;
 }
 
 const question = currentQuestions[currentQuestionIndex];
 const config = examConfigs[currentExam];
+const container = document.getElementById('questionContainer');
+
 questionStartTime = Date.now();
 
-let questionHTML = '';
+// 🚀 效能優化：使用 DocumentFragment
+const fragment = document.createDocumentFragment();
 
 if (currentExam === 'sudoku') {
-// 數獨題目顯示
-questionHTML = `
+// 數獨題目
+const questionDiv = document.createElement('div');
+questionDiv.className = 'question';
+questionDiv.innerHTML = `
 <h3>第 ${currentQuestionIndex + 1} 題 / ${currentQuestions.length}</h3>
 <p>${question.question}</p>
-<div class="sudoku-grid" id="sudokuGrid">
-${question.grid.map((cell, index) => 
-`<input type="number" class="sudoku-cell" min="1" max="4" 
-${cell !== 0 ? `value="${cell}" disabled` : ''} 
-data-index="${index}">`
-).join('')}
-</div>
-<button class="btn btn-primary" onclick="checkSudokuAnswer()">提交答案</button>
+<div class="sudoku-grid" id="sudokuGrid"></div>
+<button class="btn btn-primary" onclick="submitSudokuAnswer()">提交答案</button>
 `;
+fragment.appendChild(questionDiv);
+
+container.innerHTML = '';
+container.appendChild(fragment);
+
+// 生成數獨網格
+const grid = document.getElementById('sudokuGrid');
+for (let i = 0; i < 16; i++) {
+const cell = document.createElement('input');
+cell.type = 'number';
+cell.className = 'sudoku-cell';
+cell.min = '1';
+cell.max = '4';
+cell.id = `cell-${i}`;
+if (question.given && question.given[i]) {
+cell.value = question.given[i];
+cell.disabled = true;
+}
+grid.appendChild(cell);
+}
 } else {
-// 一般選擇題顯示
-questionHTML = `
+// 選擇題
+const questionDiv = document.createElement('div');
+questionDiv.className = 'question';
+questionDiv.innerHTML = `
 <h3>第 ${currentQuestionIndex + 1} 題 / ${currentQuestions.length}</h3>
 <p>${question.question}</p>
 <div class="options">
@@ -1074,17 +1067,30 @@ ${question.options.map((option, index) =>
 ).join('')}
 </div>
 `;
+fragment.appendChild(questionDiv);
+
+container.innerHTML = '';
+container.appendChild(fragment);
 }
 
-document.getElementById('questionContainer').innerHTML = questionHTML;
+startQuestionTimer();
+}
 
-// 開始倒數計時
+// 🚀 效能優化：計時器優化
+function startQuestionTimer() {
+const config = examConfigs[currentExam];
 let timeLeft = config.timePerQuestion;
-document.getElementById('timer').textContent = timeLeft;
+const timerElement = document.getElementById('timer');
 
+clearInterval(examTimer);
 examTimer = setInterval(() => {
 timeLeft--;
-document.getElementById('timer').textContent = timeLeft;
+timerElement.textContent = timeLeft;
+
+if (timeLeft <= 5) {
+timerElement.style.color = '#ef4444';
+timerElement.style.animation = 'pulse 0.5s infinite';
+}
 
 if (timeLeft <= 0) {
 clearInterval(examTimer);
@@ -1093,23 +1099,22 @@ selectAnswer(-1); // 時間到，視為答錯
 }, 1000);
 }
 
+// 選擇答案
 function selectAnswer(selectedIndex) {
 clearInterval(examTimer);
-
 const question = currentQuestions[currentQuestionIndex];
 const config = examConfigs[currentExam];
 const answerTime = (Date.now() - questionStartTime) / 1000;
+
 const isCorrect = selectedIndex === question.correct;
 const isFastAnswer = answerTime <= config.fastAnswerThreshold;
 
 if (isCorrect) {
 userScores.correctAnswers++;
-if (isFastAnswer) {
-userScores.fastAnswers++;
-}
+if (isFastAnswer) userScores.fastAnswers++;
 }
 
-// 顯示答案反饋
+// 🚀 效能優化：視覺回饋優化
 const options = document.querySelectorAll('.option-btn');
 options.forEach((btn, index) => {
 btn.disabled = true;
@@ -1126,111 +1131,320 @@ showQuestion();
 }, 1500);
 }
 
-function checkSudokuAnswer() {
+// 數獨答案提交
+function submitSudokuAnswer() {
 clearInterval(examTimer);
-
-const inputs = document.querySelectorAll('.sudoku-cell:not([disabled])');
-const userAnswer = [];
-
-inputs.forEach(input => {
-userAnswer.push(parseInt(input.value) || 0);
-});
-
 const question = currentQuestions[currentQuestionIndex];
 const config = examConfigs[currentExam];
 const answerTime = (Date.now() - questionStartTime) / 1000;
-const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(question.answer);
+
+const userAnswer = [];
+for (let i = 0; i < 16; i++) {
+const cell = document.getElementById(`cell-${i}`);
+userAnswer.push(parseInt(cell.value) || 0);
+}
+
+const isCorrect = JSON.stringify(userAnswer) === JSON.stringify(question.solution);
 const isFastAnswer = answerTime <= config.fastAnswerThreshold;
 
 if (isCorrect) {
 userScores.correctAnswers++;
-if (isFastAnswer) {
-userScores.fastAnswers++;
-}
+if (isFastAnswer) userScores.fastAnswers++;
 }
 
-// 顯示答案反饋
-inputs.forEach((input, index) => {
-if (parseInt(input.value) === question.answer[index]) {
-input.style.background = 'var(--success)';
-} else {
-input.style.background = 'var(--danger)';
-}
-input.disabled = true;
-});
+// 視覺回饋
+const grid = document.getElementById('sudokuGrid');
+grid.style.border = isCorrect ? '3px solid #22c55e' : '3px solid #ef4444';
 
 setTimeout(() => {
 currentQuestionIndex++;
 showQuestion();
-}, 2000);
+}, 1500);
 }
 
-async function endExam() {
-const config = examConfigs[currentExam];
-const totalTime = Math.floor((Date.now() - examStartTime) / 1000);
-const finalScore = userScores.correctAnswers * 10;
+// 放棄考試
+function abandonExam() {
+if (confirm('確定要放棄考試嗎？')) {
+clearInterval(examTimer);
+location.reload();
+}
+}
 
-// 保存成績到 Firebase
-const scoreData = {
-username: currentUser.username,
-displayName: currentUser.welcome || currentUser._comment || currentUser.username,
-score: finalScore,
-correctAnswers: userScores.correctAnswers,
-fastAnswers: userScores.fastAnswers,
-totalQuestions: currentQuestions.length,
-totalTime: totalTime,
-timestamp: Date.now()
-};
+// 🚀 效能優化：考試結果顯示優化
+async function showExamResult() {
+clearInterval(examTimer);
+const config = examConfigs[currentExam];
+const totalTime = Math.round((Date.now() - examStartTime) / 1000);
+const score = userScores.correctAnswers * 10;
+
+// 🚀 效能優化：並行處理成績保存和顯示
+const savePromise = saveScore(currentExam, score, totalTime, userScores.fastAnswers);
+
+const container = document.querySelector('.container');
+container.innerHTML = `
+<div class="exam-result">
+<h2>🎯 考試完成！</h2>
+<p><strong>考試項目：</strong>${config.name}</p>
+<p><strong>總分：</strong>${score} 分</p>
+<p><strong>答對題數：</strong>${userScores.correctAnswers} / ${config.questionCount}</p>
+<p><strong>快速答題：</strong>${userScores.fastAnswers} 題</p>
+<p><strong>總用時：</strong>${totalTime} 秒</p>
+<div style="margin-top: 20px;">
+<button class="btn btn-primary" onclick="location.reload()">返回挑戰列表</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
+</div>
+</div>
+`;
 
 try {
-await database.ref(`scores/${currentExam}`).push(scoreData);
+await savePromise;
 console.log('✅ 成績已保存');
-} catch (error) {
-console.error('❌ 保存成績失敗:', error);
+} catch (err) {
+console.error('❌ 成績保存失敗:', err);
+}
 }
 
-// 顯示考試結果
-showExamResult(finalScore, totalTime);
+// 🚀 效能優化：成績保存優化
+async function saveScore(examType, score, totalTime, fastAnswers) {
+try {
+const scoreData = {
+score: score,
+totalTime: totalTime,
+fastAnswers: fastAnswers,
+timestamp: Date.now(),
+date: new Date().toISOString().split('T')[0]
+};
+
+// 批量更新
+const updates = {};
+updates[`leaderboard/${examType}/${currentUser}`] = scoreData;
+updates[`users/${currentUser}/scores/${examType}`] = scoreData;
+
+await database.ref().update(updates);
+
+// 清除相關快取
+championCache.delete(`champion_${examType}`);
+localStorage.removeItem('users_data_v1');
+localStorage.removeItem('users_data_v1_time');
+
+} catch (err) {
+console.error('保存成績失敗:', err);
+throw err;
+}
 }
 
-function showExamResult(score, totalTime) {
-const config = examConfigs[currentExam];
-const minutes = Math.floor(totalTime / 60);
-const seconds = totalTime % 60;
+// 🚀 效能優化：排行榜顯示優化
+async function showLeaderboard(examType) {
+try {
+document.getElementById('modalTitle').textContent = `${examConfigs[examType].name} - 排行榜`;
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="loading">
+<div class="loading-spinner"></div>
+載入排行榜中...
+</div>
+`;
+document.getElementById('leaderboardModal').style.display = 'flex';
 
-document.getElementById('mainContent').innerHTML = `
-<div class="exam-result">
-<h2>考試完成！</h2>
-<p><strong>考試類型：</strong>${config.name}</p>
-<p><strong>最終得分：</strong>${score} 分</p>
-<p><strong>答對題數：</strong>${userScores.correctAnswers} / ${currentQuestions.length}</p>
-<p><strong>快速作答：</strong>${userScores.fastAnswers} 題</p>
-<p><strong>總用時：</strong>${minutes}:${seconds.toString().padStart(2, '0')}</p>
-<button class="btn btn-primary" onclick="restartExam()">再次挑戰</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-<button class="btn btn-danger" onclick="backToMain()">返回主頁</button>
+const snapshot = await database.ref(`leaderboard/${examType}`).orderByChild('score').once('value');
+const data = snapshot.val() || {};
+const leaderboard = Object.entries(data)
+.map(([user, score]) => ({ user, ...score }))
+.sort((a, b) => {
+if (b.score !== a.score) return b.score - a.score;
+return a.totalTime - b.totalTime;
+});
+
+displayLeaderboard(leaderboard, examType);
+} catch (err) {
+console.error('載入排行榜失敗:', err);
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>載入排行榜失敗</p>
+<p>請稍後再試</p>
 </div>
 `;
 }
+}
 
-function restartExam() {
-if (currentExam) {
-startExam(currentExam);
-} else {
-backToMain();
+// 🚀 效能優化：總分排行榜
+async function showTotalLeaderboard() {
+try {
+document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="loading">
+<div class="loading-spinner"></div>
+計算總分中...
+</div>
+`;
+document.getElementById('leaderboardModal').style.display = 'flex';
+
+// 並行載入所有排行榜資料
+const examTypes = Object.keys(examConfigs);
+const promises = examTypes.map(examType => 
+database.ref(`leaderboard/${examType}`).once('value')
+);
+
+const snapshots = await Promise.all(promises);
+const totalScores = {};
+
+// 計算總分
+snapshots.forEach((snapshot, index) => {
+const examType = examTypes[index];
+const data = snapshot.val() || {};
+
+Object.entries(data).forEach(([user, scoreData]) => {
+if (!totalScores[user]) {
+totalScores[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
+}
+totalScores[user].totalScore += scoreData.score || 0;
+totalScores[user].totalTime += scoreData.totalTime || 0;
+totalScores[user].examCount++;
+});
+});
+
+const leaderboard = Object.entries(totalScores)
+.map(([user, data]) => ({ user, ...data }))
+.sort((a, b) => {
+if (b.totalScore !== a.totalScore) return b.totalScore - a.totalScore;
+return a.totalTime - b.totalTime;
+});
+
+displayTotalLeaderboard(leaderboard);
+} catch (err) {
+console.error('載入總分排行榜失敗:', err);
+document.getElementById('leaderboardContent').innerHTML = `
+<div class="empty-leaderboard">
+<p>載入總分排行榜失敗</p>
+<p>請稍後再試</p>
+</div>
+`;
 }
 }
 
-function backToMain() {
-location.reload();
+// 🚀 效能優化：排行榜顯示函數
+function displayLeaderboard(leaderboard, examType) {
+const content = document.getElementById('leaderboardContent');
+
+if (leaderboard.length === 0) {
+content.innerHTML = `
+<div class="empty-leaderboard">
+<p>🏆 尚無挑戰記錄</p>
+<p>成為第一個挑戰者吧！</p>
+</div>
+`;
+return;
 }
 
-// 頁面載入時初始化
-window.addEventListener('load', initializePage);
+// 🚀 效能優化：使用 DocumentFragment
+const fragment = document.createDocumentFragment();
+const container = document.createElement('div');
+container.className = 'leaderboard-container';
 
-// 點擊模態視窗外部關閉
-document.getElementById('leaderboardModal').addEventListener('click', function(e) {
-if (e.target === this) {
+leaderboard.forEach((item, index) => {
+const div = document.createElement('div');
+div.className = `leaderboard-item ${item.user === currentUser ? 'current-user' : ''}`;
+
+let rankDisplay = `${index + 1}`;
+if (index === 0) rankDisplay = '🥇';
+else if (index === 1) rankDisplay = '🥈';
+else if (index === 2) rankDisplay = '🥉';
+
+// 檢查是否為首綁
+let firstBindBadge = '';
+if (index > 0 && leaderboard[index-1].score === item.score) {
+const sameScoreItems = leaderboard.filter(x => x.score === item.score);
+const fastest = sameScoreItems.reduce((min, curr) => 
+curr.totalTime < min.totalTime ? curr : min
+);
+if (item.user === fastest.user) {
+firstBindBadge = ' <span style="color:#f59e0b;">👑首綁</span>';
+}
+}
+
+div.innerHTML = `
+<div class="rank">${rankDisplay}</div>
+<div class="user-name">${item.user}${firstBindBadge}</div>
+<div class="score">${item.score}分</div>
+`;
+
+container.appendChild(div);
+});
+
+fragment.appendChild(container);
+content.innerHTML = '';
+content.appendChild(fragment);
+}
+
+function displayTotalLeaderboard(leaderboard) {
+const content = document.getElementById('leaderboardContent');
+  
+if (leaderboard.length === 0) {
+content.innerHTML = `
+<div class="empty-leaderboard">
+<p>🏆 尚無挑戰記錄</p>
+<p>開始你的第一次挑戰吧！</p>
+</div>
+`;
+return;
+}
+
+// 🚀 效能優化：使用 DocumentFragment
+const fragment = document.createDocumentFragment();
+const container = document.createElement('div');
+container.className = 'leaderboard-container';
+
+leaderboard.forEach((item, index) => {
+const div = document.createElement('div');
+div.className = `leaderboard-item ${item.user === currentUser ? 'current-user' : ''}`;
+
+let rankDisplay = `${index + 1}`;
+if (index === 0) rankDisplay = '🥇';
+else if (index === 1) rankDisplay = '🥈';
+else if (index === 2) rankDisplay = '🥉';
+
+// 檢查是否為首綁
+let firstBindBadge = '';
+if (index > 0 && leaderboard[index-1].totalScore === item.totalScore) {
+const sameScoreItems = leaderboard.filter(x => x.totalScore === item.totalScore);
+const fastest = sameScoreItems.reduce((min, curr) => 
+curr.totalTime < min.totalTime ? curr : min
+);
+if (item.user === fastest.user) {
+firstBindBadge = ' <span style="color:#f59e0b;">👑首綁</span>';
+}
+}
+
+div.innerHTML = `
+<div class="rank">${rankDisplay}</div>
+<div class="user-name">${item.user}${firstBindBadge}</div>
+<div class="score">${item.totalScore}分 (${item.examCount}項)</div>
+`;
+
+container.appendChild(div);
+});
+
+fragment.appendChild(container);
+content.innerHTML = '';
+content.appendChild(fragment);
+}
+
+function hideLeaderboard() {
+document.getElementById('leaderboardModal').style.display = 'none';
+}
+
+// 🚀 效能優化：頁面載入完成後初始化
+document.addEventListener('DOMContentLoaded', initializeApp);
+
+// 🚀 效能優化：頁面可見性變化時更新資料
+document.addEventListener('visibilitychange', () => {
+if (!document.hidden && currentUser) {
+debouncedUpdateChampions();
+}
+});
+
+// 🚀 效能優化：鍵盤快捷鍵
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
 hideLeaderboard();
 }
 });
