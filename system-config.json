@@ -1,0 +1,44 @@
+{
+"firebase": {
+  "apiKey": "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+  "authDomain": "openexammodal.firebaseapp.com",
+  "databaseURL": "https://openexammodal-default-rtdb.firebaseio.com",
+  "projectId": "openexammodal",
+  "storageBucket": "openexammodal.firebasestorage.app",
+  "messagingSenderId": "336901617556",
+  "appId": "1:336901617556:web:53f60cddf513b2ea6a4181"
+},
+"session": {
+  "loginTimeout": 3600000,
+  "storageKeys": {
+    "loginFlag": "t2_login",
+    "loginTime": "t2_login_time", 
+    "loginUser": "t2_login_user",
+    "loginPassword": "t2_login_password"
+  }
+},
+"cache": {
+  "expiry": {
+    "questions": 3600000,
+    "usersData": 300000,
+    "medals": 3600000,
+    "examConfigs": 3600000,
+    "champion": 60000
+  },
+  "keys": {
+    "questions": "exam_questions_v1",
+    "usersData": "users_data_v1", 
+    "medals": "medals_data_v1",
+    "examConfigs": "exam_configs_v1"
+  }
+},
+"ui": {
+  "maxEquippedMedals": 5,
+  "debounceDelay": 300,
+  "animationDelay": 1500
+},
+"navigation": {
+  "homePage": "index3.html",
+  "dashboardPage": "page33.html"
+}
+}
