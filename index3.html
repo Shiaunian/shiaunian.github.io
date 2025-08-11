@@ -164,7 +164,8 @@ if (Date.now() - time > LIMIT) {
   localStorage.removeItem("t2_login");
   localStorage.removeItem("t2_login_time");
   localStorage.removeItem("t2_login_user");
-  localStorage.removeItem("t2_login_password"); // ← 新增：超時也清掉密碼
+  localStorage.removeItem("t2_login_password");
+  localStorage.removeItem("t2_login_display_name"); // 🆕 新增：清除顯示名稱
   return false;
 }
 
@@ -196,11 +197,17 @@ document.getElementById('loginForm').onsubmit = function(e) {
   const user = users.find(u => u.username === uname && u.password === pwd);
 
   if (user) {
-  localStorage.setItem("t2_login", "yes");
-  localStorage.setItem("t2_login_time", Date.now().toString());
-  localStorage.setItem("t2_login_user", user.username);
-  localStorage.setItem("t2_login_password", pwd); // ★ 新增這行，記錄密碼用於驗證
-  showWelcome(user); // 登入成功後顯示歡迎訊息
+    localStorage.setItem("t2_login", "yes");
+    localStorage.setItem("t2_login_time", Date.now().toString());
+    localStorage.setItem("t2_login_user", user.username);
+    localStorage.setItem("t2_login_password", pwd);
+    
+    // 🆕 新增：保存顯示名稱
+    const displayName = user.welcome ? user.welcome.replace('歡迎', '') : (user._comment || user.username);
+    localStorage.setItem("t2_login_display_name", displayName);
+    console.log(`✅ 保存顯示名稱: ${displayName}`);
+    
+    showWelcome(user); // 登入成功後顯示歡迎訊息
   } else {
     document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
   }
