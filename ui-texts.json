@@ -1,0 +1,73 @@
+{
+"titles": {
+  "mainTitle": "T2日檢疫挑戰系統",
+  "shop": "🏪 勳章商店",
+  "inventory": "🎒 勳章背包",
+  "totalLeaderboard": "🏆 總分排行榜"
+},
+"buttons": {
+  "backToT2": "🏠 返回T2日",
+  "logout": "登出",
+  "startExam": "開始考試",
+  "viewLeaderboard": "查看排行榜",
+  "shop": "🏪 商店",
+  "inventory": "🎒 背包",
+  "quit": "棄權",
+  "buy": "購買",
+  "owned": "已擁有",
+  "returnHome": "返回主頁",
+  "close": "×"
+},
+"messages": {
+  "loading": "載入中...",
+  "loginCheck": "正在驗證登入狀態...",
+  "welcomeBack": "歡迎回來，{username}",
+  "connectionStatus": "用戶連線中",
+  "questionsLoading": "題庫載入中，請稍後再試",
+  "questionsInsufficient": "題庫題目不足！需要 {required} 題，但只有 {available} 題",
+  "quitConfirm": "確定要棄權嗎？棄權將不會獲得任何分數和獎勵。",
+  "buyConfirm": "確定要購買 {medalIcon} {medalName} 嗎？\\n價格：💰 {price}",
+  "buySuccess": "🎉 成功購買 {medalIcon} {medalName}！",
+  "insufficientFunds": "💰 金幣不足！",
+  "maxMedalsReached": "最多只能裝備 {maxMedals} 個勳章！",
+  "loginExpired": "登入時間已超過1小時，請重新登入",
+  "loginInvalid": "未檢測到有效登入狀態",
+  "systemError": "系統初始化失敗，請重新整理頁面"
+},
+"labels": {
+  "examType": "考試類型：",
+  "finalScore": "最終得分：",
+  "correctAnswers": "正確題數：",
+  "fastAnswers": "快速答題：",
+  "totalTime": "總耗時：",
+  "currentQuestion": "題目",
+  "currentScore": "得分：",
+  "responseTime": "回應時間:",
+  "champion": "🏆 榜首：",
+  "noChampion": "🏆 尚無榜首",
+  "inventoryHint": "點擊勳章裝備/卸下 (最多裝備5個)",
+  "equipped": "已裝備",
+  "sudokuHint": "填入1-4的數字，使每行每列都包含1-4",
+  "fastAnswerHint": "⚡ 快速答題！",
+  "correct": "✅ 正確！",
+  "wrong": "❌ 錯誤！"
+},
+"placeholders": {
+  "emptyInventory": "🎒 背包空空如也",
+  "emptyInventoryHint": "去商店購買一些勳章吧！",
+  "emptyLeaderboard": "🏆 尚無排行榜資料",
+  "emptyTotalLeaderboard": "🏆 尚無總分排行榜資料",
+  "leaderboardError": "❌ 載入排行榜失敗",
+  "shopLoading": "載入商店中...",
+  "inventoryLoading": "載入背包中...",
+  "leaderboardLoading": "載入排行榜中...",
+  "totalLeaderboardLoading": "載入總分排行榜中..."
+},
+"categories": {
+  "all": "全部",
+  "common": "普通", 
+  "rare": "稀有",
+  "epic": "史詩",
+  "legendary": "傳說"
+}
+}
