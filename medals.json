@@ -11,9 +11,9 @@
     },
     "perfect_scorer": {
       "id": "perfect_scorer",
-      "name": "完美主義者",
-      "description": "追求完美的象徵",
-      "icon": "💯",
+      "name": "真相追尋者",
+      "description": "強調追求真相的精神",
+      "icon": "https://i.ibb.co/j9RywPk7/image.png",
       "rarity": "rare",
       "price": 200,
       "color": "#8b5cf6"
