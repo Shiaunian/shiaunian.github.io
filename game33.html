@@ -777,1135 +777,247 @@ backface-visibility: hidden;
 </div>
 </div>
 
-<script>
-// Firebase 配置
-const firebaseConfig = {
-apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
-authDomain: "openexammodal.firebaseapp.com",
-databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
-projectId: "openexammodal",
-storageBucket: "openexammodal.firebasestorage.app",
-messagingSenderId: "336901617556",
-appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
-};
-
-// 🚀 效能優化：Firebase 初始化
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
-// 🚀 效能優化：題庫快取
-let examQuestions = {};
-let questionsCache = new Map();
-
-// 🏅 勳章系統變數
-let medalsData = {};
-let userMedals = { owned: [], equipped: [] };
-let userCurrency = { coins: 0, gems: 0 };
-
-// 📝 考試配置變數 (從JSON載入)
-let examConfigs = {};
-
-// 🏅 載入勳章資料
-async function loadMedalsData() {
-try {
-const cacheKey = 'medals_data_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-medalsData = JSON.parse(cached);
-console.log('✅ 從快取載入勳章資料');
-return;
-}
-
-const resp = await fetch('medals.json');
-if (!resp.ok) throw new Error(`載入勳章資料失敗：${resp.status}`);
-medalsData = await resp.json();
-
-localStorage.setItem(cacheKey, JSON.stringify(medalsData));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 勳章資料已載入並快取', medalsData);
-} catch (err) {
-console.error('載入勳章資料失敗:', err);
-// 提供預設勳章資料
-medalsData = {
-medals: {},
-rarityColors: {
-common: "#84cc16",
-rare: "#3b82f6", 
-epic: "#8b5cf6",
-legendary: "#f59e0b"
-},
-maxEquippedMedals: 5
-};
-}
-}
-
-// 📝 載入考試配置
-async function loadExamConfigs() {
-try {
-const cacheKey = 'exam_configs_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-examConfigs = JSON.parse(cached);
-console.log('✅ 從快取載入考試配置');
-return;
-}
-
-const resp = await fetch('exam-configs.json');
-if (!resp.ok) throw new Error(`載入考試配置失敗：${resp.status}`);
-examConfigs = await resp.json();
-
-localStorage.setItem(cacheKey, JSON.stringify(examConfigs));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 考試配置已載入並快取', examConfigs);
-} catch (err) {
-console.error('載入考試配置失敗:', err);
-alert('系統錯誤：無法載入考試配置檔案');
-}
-}
-
-// 📝 動態生成挑戰項目列表
-function renderChallengesList() {
-const challengesContainer = document.getElementById('challengesList');
-const fragment = document.createDocumentFragment();
-
-Object.entries(examConfigs).forEach(([examType, config]) => {
-const challengeItem = document.createElement('div');
-challengeItem.className = 'challenge-item';
-
-challengeItem.innerHTML = `
-<h3 class="challenge-title">${config.name}</h3>
-<p class="challenge-info" style="color:#ef4444;">${config.description}</p>
-<div class="champion-display" data-exam-type="${examType}">
-<!-- 榜首資料將在此動態載入 -->
-</div>
-<div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('${examType}')">開始考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${examType}')">查看排行榜</button>
-</div>
-`;
-
-fragment.appendChild(challengeItem);
-});
-
-challengesContainer.appendChild(fragment);
-}
-
-// 🏅 載入用戶勳章和貨幣資料
-async function loadUserMedalsAndCurrency() {
-try {
-const snapshot = await database.ref(`users/${currentUser}/medals`).once('value');
-const medalSnapshot = snapshot.val() || {};
-userMedals = {
-owned: medalSnapshot.owned || [],
-equipped: medalSnapshot.equipped || []
-};
-
-const currencySnapshot = await database.ref(`users/${currentUser}/currency`).once('value');
-userCurrency = currencySnapshot.val() || { coins: 0, gems: 0 };
-
-updateCurrencyDisplay();
-updateMedalDisplay();
-} catch (err) {
-console.error('載入用戶勳章資料失敗:', err);
-}
-}
-
-// 🏅 更新貨幣顯示
-function updateCurrencyDisplay() {
-document.getElementById('userCoins').textContent = userCurrency.coins;
-document.getElementById('userGems').textContent = userCurrency.gems;
-}
-
-// 🏅 更新勳章顯示
-function updateMedalDisplay() {
-    const medalContainer = document.getElementById('userMedals');
-    medalContainer.innerHTML = '';
-
-    userMedals.equipped.forEach(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const medalIcon = document.createElement('div');
-            medalIcon.className = `medal-icon ${medal.rarity}`;
-            medalIcon.style.borderColor = medal.color;
-            
-            // 🔧 修改這裡：判斷是 emoji 還是網址
-            if (medal.icon.startsWith('http')) {
-                medalIcon.innerHTML = `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
-            } else {
-                medalIcon.innerHTML = medal.icon;
-            }
-            
-            medalIcon.title = `${medal.name}: ${medal.description}`;
-            medalContainer.appendChild(medalIcon);
-        }
-    });
-}
-
-
-// 🏅 保存勳章資料
-async function saveMedalData() {
-try {
-await database.ref(`users/${currentUser}/medals`).set(userMedals);
-updateMedalDisplay();
-} catch (err) {
-console.error('保存勳章資料失敗:', err);
-}
-}
-
-// 🏅 保存貨幣資料
-async function saveCurrencyData() {
-try {
-await database.ref(`users/${currentUser}/currency`).set(userCurrency);
-updateCurrencyDisplay();
-} catch (err) {
-console.error('保存貨幣資料失敗:', err);
-}
-}
-
-// 🏪 顯示商店
-async function showShop() {
-document.getElementById('shopModal').style.display = 'flex';
-await renderShopItems();
-}
-
-// 🏪 隱藏商店
-function hideShop() {
-document.getElementById('shopModal').style.display = 'none';
-}
-
-// 🏪 篩選商店物品
-function filterShop(category) {
-document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-event.target.classList.add('active');
-renderShopItems(category);
-}
-
-// 🏪 渲染商店物品
-async function renderShopItems(filter = 'all') {
-const shopContainer = document.getElementById('shopItems');
-shopContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店中...</div>';
-
-const medals = Object.values(medalsData.medals);
-const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
-
-const fragment = document.createDocumentFragment();
-
-filteredMedals.forEach(medal => {
-const isOwned = userMedals.owned.includes(medal.id);
-const isEquipped = userMedals.equipped.includes(medal.id);
-const canAfford = userCurrency.coins >= medal.price;
-
-const item = document.createElement('div');
-item.className = `shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}`;
-
-// 🔧 判斷是 emoji 還是網址
-const medalIconContent = medal.icon.startsWith('http') ? 
-    `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">` : 
-    medal.icon;
-
-item.innerHTML = `
-<div class="medal-preview" style="border-color: ${medal.color};">
-${medalIconContent}
-</div>
-<div class="item-info">
-<div class="item-name" style="color: ${medal.color};">${medal.name}</div>
-<div class="item-description">${medal.description}</div>
-<div class="item-price">💰 ${medal.price}</div>
-</div>
-<div class="item-actions">
-${isOwned ? 
-'<span class="btn btn-small btn-secondary">已擁有</span>' :
-`<button class="btn btn-small btn-primary ${!canAfford ? 'disabled' : ''}" 
-onclick="buyMedal('${medal.id}')" ${!canAfford ? 'disabled' : ''}>
-購買
-</button>`
-}
-</div>
-`;
-
-fragment.appendChild(item);
-});
-
-shopContainer.innerHTML = '';
-shopContainer.appendChild(fragment);
-}
-
-// 🏪 購買勳章
-async function buyMedal(medalId) {
-const medal = medalsData.medals[medalId];
-if (!medal || userMedals.owned.includes(medalId)) return;
-
-if (userCurrency.coins < medal.price) {
-alert('💰 金幣不足！');
-return;
-}
-
-if (confirm(`確定要購買 ${medal.icon} ${medal.name} 嗎？\n價格：💰 ${medal.price}`)) {
-userCurrency.coins -= medal.price;
-userMedals.owned.push(medalId);
-
-await Promise.all([saveMedalData(), saveCurrencyData()]);
-await renderShopItems();
-alert(`🎉 成功購買 ${medal.icon} ${medal.name}！`);
-}
-}
-
-// 🎒 顯示背包
-async function showInventory() {
-document.getElementById('inventoryModal').style.display = 'flex';
-await renderInventory();
-}
-
-// 🎒 隱藏背包
-function hideInventory() {
-document.getElementById('inventoryModal').style.display = 'none';
-}
-
-// 🎒 渲染背包 - 修正版本
-async function renderInventory() {
-const inventoryGrid = document.getElementById('inventoryGrid');
-inventoryGrid.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入背包中...</div>';
-
-const fragment = document.createDocumentFragment();
-
-userMedals.owned.forEach(medalId => {
-const medal = medalsData.medals[medalId];
-if (!medal) return;
-
-const isEquipped = userMedals.equipped.includes(medalId);
-const item = document.createElement('div');
-item.className = `inventory-item ${isEquipped ? 'equipped' : ''}`;
-item.onclick = () => toggleMedalEquip(medalId);
-
-// 🔧 修改這裡：新增判斷邏輯
-const iconHtml = medal.icon.startsWith('http') ? 
-    `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
-    medal.icon;
-
-item.innerHTML = `
-<div class="inventory-medal-icon" style="color: ${medal.color};">
-${iconHtml}
-</div>
-<div class="inventory-medal-name">${medal.name}</div>
-${isEquipped ? '<div style="font-size: 0.6rem; color: var(--gold);">已裝備</div>' : ''}
-`;
-
-fragment.appendChild(item);
-});
-
-if (userMedals.owned.length === 0) {
-const emptyMsg = document.createElement('div');
-emptyMsg.className = 'empty-leaderboard';
-emptyMsg.innerHTML = '<p>🎒 背包空空如也</p><p>去商店購買一些勳章吧！</p>';
-fragment.appendChild(emptyMsg);
-}
-
-inventoryGrid.innerHTML = '';
-inventoryGrid.appendChild(fragment);
-}
-
-
-// 🎒 切換勳章裝備狀態
-async function toggleMedalEquip(medalId) {
-const isEquipped = userMedals.equipped.includes(medalId);
-
-if (isEquipped) {
-// 卸下勳章
-userMedals.equipped = userMedals.equipped.filter(id => id !== medalId);
-} else {
-// 裝備勳章
-if (userMedals.equipped.length >= medalsData.maxEquippedMedals) {
-alert(`最多只能裝備 ${medalsData.maxEquippedMedals} 個勳章！`);
-return;
-}
-userMedals.equipped.push(medalId);
-}
-
-await saveMedalData();
-await renderInventory();
-}
-
-async function loadExamQuestions() {
-try {
-// 檢查快取
-const cacheKey = 'exam_questions_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-// 快取有效期 1 小時
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-examQuestions = JSON.parse(cached);
-console.log('✅ 從快取載入題庫');
-return;
-}
-
-const resp = await fetch('questions.json');
-if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
-examQuestions = await resp.json();
-
-// 儲存到快取
-localStorage.setItem(cacheKey, JSON.stringify(examQuestions));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 題庫已載入並快取', examQuestions);
-} catch (err) {
-console.error(err);
-alert('系統錯誤：無法載入題庫檔案');
-}
-}
-
-// 全域變數
-let currentUser = null;
-let usersData = [];
-let currentExam = null;
-let currentQuestions = [];
-let currentQuestionIndex = 0;
-let examTimer = null;
-let questionStartTime = null;
-let examStartTime = null;
-let userScores = { fastAnswers:0, correctAnswers:0 };
-
-// 🚀 效能優化：防抖函數
-function debounce(func, wait) {
-let timeout;
-return function executedFunction(...args) {
-const later = () => {
-clearTimeout(timeout);
-func(...args);
-};
-clearTimeout(timeout);
-timeout = setTimeout(later, wait);
-};
-}
-
-// 工具函數：從數組中移除特定元素
-Array.prototype.remove = function(element) {
-const index = this.indexOf(element);
-if (index > -1) this.splice(index, 1);
-};
-
-// 強制登出函數
-function forceLogout(message = '登入驗證失敗，請重新登入') {
-localStorage.removeItem('t2_login');
-localStorage.removeItem('t2_login_time');
-localStorage.removeItem('t2_login_user');
-localStorage.removeItem('t2_login_password');
-alert(message);
-window.location.href = 'index.html';
-}
-
-// 檢查登入狀態和時效
-function checkLoginStatus() {
-const flag = localStorage.getItem('t2_login');
-const time = localStorage.getItem('t2_login_time');
-const user = localStorage.getItem('t2_login_user');
-if (flag!=='yes' || !time || !user) {
-forceLogout('未檢測到有效登入狀態');
-return false;
-}
-if (Date.now()-parseInt(time) > 3600000) {
-forceLogout('登入時間已超過1小時，請重新登入');
-return false;
-}
-return user;
-}
-
-// 🚀 效能優化：用戶資料快取
-async function loadUsersData() {
-try {
-// 檢查快取
-const cacheKey = 'users_data_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-// 快取有效期 5 分鐘
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 300000) {
-usersData = JSON.parse(cached);
-console.log('✅ 用戶資料已載入並快取');
-return;
-}
-
-const snapshot = await database.ref('users').once('value');
-usersData = snapshot.val() || {};
-
-// 儲存到快取
-localStorage.setItem(cacheKey, JSON.stringify(usersData));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 用戶資料已載入並快取');
-} catch (err) {
-console.error('載入用戶資料失敗:', err);
-}
-}
-
-// 🚀 效能優化：榜首資料快取
-const championCache = new Map();
-
-// 🔧 修正：獲取榜首時不使用 orderByChild 以避免索引警告
-async function getChampion(examType) {
-// 檢查快取
-const cacheKey = `champion_${examType}`;
-const cached = championCache.get(cacheKey);
-if (cached && (Date.now() - cached.timestamp) < 60000) { // 1分鐘快取
-return cached.data;
-}
-
-try {
-// 🔧 修正：直接獲取所有資料，然後在客戶端排序
-const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-const data = snapshot.val();
-if (data) {
-// 轉換並排序資料找出榜首
-const leaderboardData = Object.entries(data).map(([user, userData]) => ({
-user,
-...userData
-})).sort((a, b) => {
-if (b.score !== a.score) {
-return b.score - a.score;
-}
-return a.totalTime - b.totalTime;
-});
-
-const result = leaderboardData[0]; // 榜首
-
-// 快取結果
-championCache.set(cacheKey, {
-data: result,
-timestamp: Date.now()
-});
-return result;
-}
-return null;
-} catch (err) {
-console.error('獲取榜首失敗:', err);
-return null;
-}
-}
-
-// 🚀 效能優化：批量更新榜首顯示
-const debouncedUpdateChampions = debounce(updateAllChampions, 300);
-
-async function updateAllChampions() {
-const examTypes = Object.keys(examConfigs);
-const promises = examTypes.map(async (examType) => {
-const champion = await getChampion(examType);
-const championDisplay = document.querySelector(`[data-exam-type="${examType}"]`);
-if (!championDisplay) return;
-
-if (champion) {
-championDisplay.innerHTML = `
-<div class="champion-card">
-<span>🏆 榜首：${champion.user}</span>
-<span>${champion.score}分</span>
-</div>
-`;
-} else {
-championDisplay.innerHTML = `
-<div class="champion-empty">
-<span>🏆 尚無榜首</span>
-</div>
-`;
-}
-});
-
-await Promise.all(promises);
-}
-
-// 🚀 效能優化：登入驗證和初始化
-async function initializeApp() {
-try {
-const user = checkLoginStatus();
-if (!user) return;
-
-currentUser = user;
-document.getElementById('currentUserWelcome').textContent = `歡迎回來，${user}`;
-
-// 並行載入資料
-await Promise.all([
-loadExamQuestions(),
-loadUsersData(),
-loadMedalsData(),
-loadExamConfigs()
-]);
-
-// 載入用戶勳章和貨幣
-await loadUserMedalsAndCurrency();
-
-// 生成挑戰項目列表
-renderChallengesList();
-
-// 更新榜首顯示
-await updateAllChampions();
-
-// 隱藏載入畫面，顯示主要內容
-document.getElementById('loadingScreen').style.display = 'none';
-document.getElementById('mainContent').style.display = 'block';
-
-} catch (err) {
-console.error('初始化失敗:', err);
-alert('系統初始化失敗，請重新整理頁面');
-}
-}
-
-// 登出功能
-function logout() {
-localStorage.removeItem('t2_login');
-localStorage.removeItem('t2_login_time');
-localStorage.removeItem('t2_login_user');
-localStorage.removeItem('t2_login_password');
-// 清除快取
-localStorage.removeItem('exam_questions_v1');
-localStorage.removeItem('exam_questions_v1_time');
-localStorage.removeItem('users_data_v1');
-localStorage.removeItem('users_data_v1_time');
-localStorage.removeItem('medals_data_v1');
-localStorage.removeItem('medals_data_v1_time');
-localStorage.removeItem('exam_configs_v1');
-localStorage.removeItem('exam_configs_v1_time');
-championCache.clear();
-window.location.href = 'index.html';
-}
-
-// 返回T2日
-function backToT2() {
-window.location.href = 'dashboard.html';
-}
-
-// 🚀 效能優化：題目隨機化
-function shuffleArray(array) {
-const newArray = [...array];
-for (let i = newArray.length - 1; i > 0; i--) {
-const j = Math.floor(Math.random() * (i + 1));
-[newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-}
-return newArray;
-}
-
-// 🚀 效能優化：考試開始優化 - 修正版本
-function startExam(examType) {
-    if (!examQuestions[examType]) {
-        alert('題庫載入中，請稍後再試');
-        return;
-    }
-
-    const config = examConfigs[examType];
-    const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
-
-    if (questions.length < config.questionCount) {
-        alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
-        return;
-    }
-
-    currentExam = examType;
-    currentQuestions = questions;
-    currentQuestionIndex = 0;
-    examStartTime = Date.now();
-    
-    // 🔧 修正：完整的 userScores 初始化
-    userScores = { 
-        fastAnswers: 0, 
-        correctAnswers: 0,
-        totalAnswers: 0,
-        fastCorrectAnswers: 0  // 🆕 新增：快速且答對的題目數
-    };
-
-    showExamInterface();
-    displayQuestion();
-    startQuestionTimer();
-}
-
-// 顯示考試介面 - 加入棄權按鈕
-function showExamInterface() {
-const container = document.getElementById('mainContent');
-const config = examConfigs[currentExam];
-
-container.innerHTML = `
-<div class="exam-container">
-<div class="exam-header">
-<h2>${config.name}</h2>
-<div class="timer" id="timer">${config.timePerQuestion}</div>
-<button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
-</div>
-<div class="question" id="questionContainer">
-<!-- 題目將在此顯示 -->
-</div>
-<div class="exam-progress">
-<p>題目 <span id="currentQuestionNum">1</span> / ${config.questionCount}</p>
-<p>得分：<span id="currentScore">0</span> 分</p>
-</div>
-</div>
-`;
-}
-
-// 🆕 棄權功能
-function quitExam() {
-if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
-clearInterval(examTimer);
-
-// 直接返回主頁，不保存任何成績
-location.reload();
-}
-}
-
-// 顯示題目
-function displayQuestion() {
-const question = currentQuestions[currentQuestionIndex];
-const questionContainer = document.getElementById('questionContainer');
-const config = examConfigs[currentExam];
-
-document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
-
-if (currentExam === 'sudoku') {
-// 數獨特殊顯示
-questionContainer.innerHTML = `
-<h3>${question.question}</h3>
-<div class="sudoku-grid">
-${question.grid.map((cell, index) => 
-`<input type="number" class="sudoku-cell" 
-${cell !== 0 ? `value="${cell}" disabled` : ''} 
-min="1" max="4" 
-data-index="${index}"
-${cell === 0 ? 'onchange="checkSudokuAnswer()"' : ''}>`
-).join('')}
-</div>
-<p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
-填入1-4的數字，使每行每列都包含1-4
-</p>
-`;
-} else {
-// 一般題目顯示
-const optionsHtml = question.options.map((option, index) => 
-`<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
-).join('');
-
-questionContainer.innerHTML = `
-<h3>${question.question}</h3>
-<div class="options">
-${optionsHtml}
-</div>
-`;
-}
-
-questionStartTime = Date.now();
-}
-
-// 開始題目計時器
-function startQuestionTimer() {
-const config = examConfigs[currentExam];
-let timeLeft = config.timePerQuestion;
-const timerElement = document.getElementById('timer');
-
-examTimer = setInterval(() => {
-timeLeft--;
-timerElement.textContent = timeLeft;
-
-if (timeLeft <= 0) {
-clearInterval(examTimer);
-// 時間到，自動跳到下一題
-if (currentExam === 'sudoku') {
-nextQuestion(false);
-} else {
-selectAnswer(-1); // -1 表示未作答
-}
-}
-}, 1000);
-}
-
-// 選擇答案 - 修正版本
-function selectAnswer(selectedIndex) {
-    clearInterval(examTimer);
-    const question = currentQuestions[currentQuestionIndex];
-    const isCorrect = selectedIndex === question.correct;
-    const responseTime = (Date.now() - questionStartTime) / 1000;
-    const config = examConfigs[currentExam];
-
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
-
-    // 🏅 檢查快速答題
-    const isFast = responseTime <= config.fastAnswerThreshold;
-    if (isFast) {
-        userScores.fastAnswers++;
-    }
-
-    // 🔧 修正：只有答對才加分
-    if (isCorrect) {
-        userScores.correctAnswers++;
-        
-        // 🎯 只有答對且快速才計入快速正確答案
-        if (isFast) {
-            userScores.fastCorrectAnswers++;
-        }
-    }
-
-    // 顯示答案反饋
-    showAnswerFeedback(selectedIndex, question.correct, responseTime);
-
-    // 延遲後進入下一題
-    setTimeout(() => {
-        nextQuestion(isCorrect);
-    }, 1500);
-}
-
-
-// 顯示答案反饋 - 修正版本
-function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
-const options = document.querySelectorAll('.option-btn');
-const config = examConfigs[currentExam];
-
-options.forEach((btn, index) => {
-btn.disabled = true;
-if (index === correctIndex) {
-btn.classList.add('correct');
-} else if (index === selectedIndex && selectedIndex !== correctIndex) {
-btn.classList.add('wrong');
-}
-});
-
-// 顯示回應時間和快速答題提示
-const feedbackDiv = document.createElement('div');
-feedbackDiv.style.cssText = `
-margin-top: 15px; 
-text-align: center; 
-font-size: 0.9rem;
-color: var(--text-secondary);
-`;
-
-let feedbackText = `回應時間: ${responseTime.toFixed(1)}秒`;
-if (responseTime <= config.fastAnswerThreshold) {
-feedbackText += ` ⚡ 快速答題！`;
-}
-
-feedbackDiv.innerHTML = feedbackText;
-document.getElementById('questionContainer').appendChild(feedbackDiv);
-}
-
-// 數獨答案檢查 - 修正版本
-function checkSudokuAnswer() {
-    const cells = document.querySelectorAll('.sudoku-cell');
-    const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
-    const question = currentQuestions[currentQuestionIndex];
-
-    // 檢查是否填完
-    const isEmpty = userGrid.some(cell => cell === 0);
-    if (isEmpty) return;
-
-    // 檢查答案
-    const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-    const responseTime = (Date.now() - questionStartTime) / 1000;
-    const config = examConfigs[currentExam];
-
-    clearInterval(examTimer);
-
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
-
-    // 🏅 檢查快速答題
-    const isFast = responseTime <= config.fastAnswerThreshold;
-    if (isFast) {
-        userScores.fastAnswers++;
-    }
-
-    // 🔧 修正：只有答對才加分
-    if (isCorrect) {
-        userScores.correctAnswers++;
-        
-        // 🎯 只有答對且快速才計入快速正確答案
-        if (isFast) {
-            userScores.fastCorrectAnswers++;
-        }
-    }
-
-    // 顯示數獨反饋
-    cells.forEach(cell => cell.disabled = true);
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.style.cssText = `
-        margin-top: 15px; 
-        text-align: center; 
-        font-size: 0.9rem;
-        color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
-    `;
-    feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
-    document.getElementById('questionContainer').appendChild(feedbackDiv);
-
-    setTimeout(() => {
-        nextQuestion(isCorrect);
-    }, 1500);
-}
-
-// 下一題
-function nextQuestion(wasCorrect) {
-document.getElementById('currentScore').textContent = userScores.correctAnswers * 10;
-
-if (currentQuestionIndex < currentQuestions.length - 1) {
-currentQuestionIndex++;
-displayQuestion();
-startQuestionTimer();
-} else {
-finishExam();
-}
-}
-
-// 結束考試 - 防濫用版本
-async function finishExam() {
-    clearInterval(examTimer);
-    const totalTime = (Date.now() - examStartTime) / 1000;
-    const finalScore = userScores.correctAnswers * 10;
-    const config = examConfigs[currentExam];
-    
-    // 🛡️ 防濫用：只有完成所有題目才給獎勵
-    if (currentQuestionIndex < config.questionCount) {
-        // 中途放棄，不給任何獎勵
-        showExamResult(finalScore, totalTime, 0, 0);
-        return;
-    }
-    
-    // 🎯 最後結算獎勵
-    let coinsEarned = 0;
-    let gemsEarned = 0;
-    let bonusMessages = [];
-    
-    // 💰 基礎獎勵：每答對一題5金幣
-    coinsEarned += userScores.correctAnswers * 5;
-    if (userScores.correctAnswers > 0) {
-        bonusMessages.push(`📝 答對${userScores.correctAnswers}題獲得${userScores.correctAnswers * 5}金幣`);
-    }
-    
-    // 🏆 滿分獎勵
-    if (finalScore >= config.questionCount * 10) {
-        const perfectBonus = config.perfectBonus || 50;
-        coinsEarned += perfectBonus;
-        gemsEarned += 1;
-        bonusMessages.push(`🏆 滿分獎勵：+${perfectBonus}金幣 +1寶石`);
-    }
-    
-    // ⚡ 快速答題獎勵：只計算答對且快速的題目
-    const fastCorrectAnswers = userScores.fastCorrectAnswers || 0; // 需要追蹤這個數據
-    if (fastCorrectAnswers >= Math.ceil(config.questionCount * 0.7)) {
-        const speedBonus = 20;
-        coinsEarned += speedBonus;
-        bonusMessages.push(`⚡ 快速答題獎勵：+${speedBonus}金幣`);
-    }
-    
-    // 💰 更新貨幣（只有完成考試才更新）
-    if (coinsEarned > 0) userCurrency.coins += coinsEarned;
-    if (gemsEarned > 0) userCurrency.gems += gemsEarned;
-    
-    if (coinsEarned > 0 || gemsEarned > 0) {
-        await saveCurrencyData();
-    }
-    
-    // 保存成績到排行榜
-    await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
-    
-    // 顯示結果
-    showExamResult(finalScore, totalTime, coinsEarned, gemsEarned, bonusMessages);
-    
-    // 清除快取
-    const cacheKey = `champion_${currentExam}`;
-    championCache.delete(cacheKey);
-    localStorage.removeItem('users_data_v1');
-    localStorage.removeItem('users_data_v1_time');
-}
-
-// 顯示考試結果 - 修正版本
-function showExamResult(score, totalTime, coinsEarned) {
-const container = document.getElementById('mainContent');
-const config = examConfigs[currentExam];
-
-container.innerHTML = `
-<div class="exam-result">
-<h2>🎉 考試完成！</h2>
-<p><strong>考試類型：</strong>${config.name}</p>
-<p><strong>最終得分：</strong>${score} 分</p>
-<p><strong>正確題數：</strong>${userScores.correctAnswers} / ${config.questionCount}</p>
-<p><strong>快速答題：</strong>${userScores.fastAnswers} 題</p>
-<p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
-${coinsEarned > 0 ? 
-`<p style="color: var(--gold);"><strong>🎉 滿分獎勵：</strong>💰 ${coinsEarned}</p>` : 
-`<p style="color: var(--text-secondary);">💰 未達滿分，無金幣獎勵</p>`
-}
-<div style="margin-top: 20px;">
-<button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-</div>
-</div>
-`;
-}
-
-// 🔧 修正：保存成績到排行榜 - 不使用索引查詢
-async function saveScoreToLeaderboard(examType, score, totalTime) {
-try {
-const scoreData = {
-score: score,
-totalTime: totalTime,
-timestamp: Date.now(),
-fastAnswers: userScores.fastAnswers,
-correctAnswers: userScores.correctAnswers
-};
-
-await database.ref(`leaderboard/${examType}/${currentUser}`).set(scoreData);
-console.log('成績已保存到排行榜');
-} catch (err) {
-console.error('保存成績失敗:', err);
-}
-}
-
-// 🔧 修正：顯示排行榜 - 不使用索引查詢
-async function showLeaderboard(examType) {
-document.getElementById('modalTitle').textContent = `${examConfigs[examType].name} - 排行榜`;
-const content = document.getElementById('leaderboardContent');
-content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
-document.getElementById('leaderboardModal').style.display = 'flex';
-
-try {
-// 🔧 修正：直接獲取所有資料，避免使用 orderByChild
-const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-const data = snapshot.val();
-
-if (data) {
-// 轉換並排序資料
-const leaderboardData = Object.entries(data).map(([user, userData]) => ({
-user,
-...userData
-})).sort((a, b) => {
-if (b.score !== a.score) {
-return b.score - a.score;
-}
-return a.totalTime - b.totalTime;
-});
-
-const leaderboardHtml = leaderboardData.map((entry, index) => {
-const isCurrentUser = entry.user === currentUser;
-const userMedalIcons = getUserMedalIcons(entry.user);
-
-return `
-<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">#${index + 1}</div>
-<div class="user-name">
-${entry.user}
-${userMedalIcons}
-</div>
-<div class="score">${entry.score}分</div>
-</div>
-`;
-}).join('');
-
-content.innerHTML = `
-<div class="leaderboard-container">
-${leaderboardHtml}
-</div>
-`;
-} else {
-content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無排行榜資料</p></div>';
-}
-} catch (err) {
-console.error('載入排行榜失敗:', err);
-content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入排行榜失敗</p></div>';
-}
-}
-
-// 🏆 顯示總分排行榜
-async function showTotalLeaderboard() {
-document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
-const content = document.getElementById('leaderboardContent');
-content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
-document.getElementById('leaderboardModal').style.display = 'flex';
-
-try {
-// 🔧 修正：計算總分時不使用索引查詢
-const totalScores = {};
-const examTypes = Object.keys(examConfigs);
-
-// 並行獲取所有考試類型的資料
-const promises = examTypes.map(async (examType) => {
-const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-const data = snapshot.val() || {};
-
-Object.entries(data).forEach(([user, userData]) => {
-if (!totalScores[user]) {
-totalScores[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
-}
-totalScores[user].totalScore += userData.score || 0;
-totalScores[user].totalTime += userData.totalTime || 0;
-totalScores[user].examCount++;
-});
-});
-
-await Promise.all(promises);
-
-// 排序總分資料
-const sortedTotalScores = Object.entries(totalScores)
-.map(([user, data]) => ({ user, ...data }))
-.sort((a, b) => {
-if (b.totalScore !== a.totalScore) {
-return b.totalScore - a.totalScore;
-}
-return a.totalTime - b.totalTime;
-});
-
-if (sortedTotalScores.length > 0) {
-const leaderboardHtml = sortedTotalScores.map((entry, index) => {
-const isCurrentUser = entry.user === currentUser;
-const userMedalIcons = getUserMedalIcons(entry.user);
-
-return `
-<div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-<div class="rank">#${index + 1}</div>
-<div class="user-name">
-${entry.user}
-${userMedalIcons}
-</div>
-<div class="score">${entry.totalScore}分</div>
-</div>
-`;
-}).join('');
-
-content.innerHTML = `
-<div class="leaderboard-container">
-${leaderboardHtml}
-</div>
-`;
-} else {
-content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無總分排行榜資料</p></div>';
-}
-} catch (err) {
-console.error('載入總分排行榜失敗:', err);
-content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入總分排行榜失敗</p></div>';
-}
-}
-
-// 🏅 獲取用戶勳章圖示
-function getUserMedalIcons(username) {
-    const userData = usersData[username];
-    if (!userData || !userData.medals || !userData.medals.equipped) {
-        return '';
-    }
-
-    return userData.medals.equipped.map(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const iconContent = medal.icon.startsWith('http') ? 
-                `<img src="${medal.icon}" alt="${medal.name}" style="width: 16px; height: 16px; object-fit: contain;">` : 
-                medal.icon;
-            return `<span class="leaderboard-medal" style="border-color: ${medal.color};">${iconContent}</span>`;
-        }
-        return '';
-    }).join('');
-}
-
-
-// 隱藏排行榜
-function hideLeaderboard() {
-document.getElementById('leaderboardModal').style.display = 'none';
-}
-
-// 頁面載入完成後初始化
-document.addEventListener('DOMContentLoaded', initializeApp);
-</script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  
+  <!-- 保持你現有的所有 CSS 樣式不變 -->
+  <style>
+      /* 你現有的所有 CSS 樣式 */
+  </style>
+</head>
+<body>
+  <!-- 載入中畫面 -->
+  <div id="loadingScreen" class="container">
+      <div class="loading">
+          <div class="loading-spinner"></div>
+          <span id="loadingText">載入中...</span>
+      </div>
+  </div>
+
+  <!-- 你現有的所有 HTML 結構保持不變 -->
+  <div id="mainContent" class="container" style="display: none;">
+      <!-- ... 保持現有HTML結構 ... -->
+  </div>
+
+  <script>
+      // 🎯 配置管理器
+      class ConfigManager {
+          static configs = {};
+          
+          static async init() {
+              try {
+                  const [systemConfig, uiTexts, rewardsConfig] = await Promise.all([
+                      this.loadJSON('system-config.json'),
+                      this.loadJSON('ui-texts.json'),
+                      this.loadJSON('rewards-config.json')
+                  ]);
+                  
+                  this.configs = {
+                      system: systemConfig,
+                      ui: uiTexts,
+                      rewards: rewardsConfig
+                  };
+                  
+                  console.log('✅ 配置已載入');
+                  return this.configs;
+              } catch (err) {
+                  console.error('載入配置失敗:', err);
+                  // 提供預設配置
+                  this.configs = this.getDefaultConfigs();
+                  return this.configs;
+              }
+          }
+          
+          static async loadJSON(file) {
+              const response = await fetch(file);
+              if (!response.ok) throw new Error(`載入 ${file} 失敗`);
+              return response.json();
+          }
+          
+          static getText(path) {
+              return this.getNestedValue(this.configs.ui, path) || path;
+          }
+          
+          static getConfig(section, path) {
+              return this.getNestedValue(this.configs[section], path);
+          }
+          
+          static getNestedValue(obj, path) {
+              return path.split('.').reduce((o, p) => o && o[p], obj);
+          }
+          
+          static formatText(template, params) {
+              if (!template) return '';
+              return template.replace(/\{(\w+)\}/g, (match, key) => params[key] || match);
+          }
+          
+          static getDefaultConfigs() {
+              return {
+                  system: {
+                      firebase: {
+                          apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+                          authDomain: "openexammodal.firebaseapp.com",
+                          databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
+                          projectId: "openexammodal",
+                          storageBucket: "openexammodal.firebasestorage.app",
+                          messagingSenderId: "336901617556",
+                          appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
+                      },
+                      session: { loginTimeout: 3600000 },
+                      ui: { maxEquippedMedals: 5 }
+                  },
+                  ui: {
+                      messages: {
+                          loginCheck: "正在驗證登入狀態...",
+                          systemError: "系統初始化失敗，請重新整理頁面"
+                      }
+                  },
+                  rewards: {
+                      scoring: { pointsPerCorrect: 10, coinsPerCorrect: 5 }
+                  }
+              };
+          }
+      }
+
+      // 🎯 修改現有變數和函數
+      let currentUser = null;
+      let usersData = [];
+      let database = null;
+      let examQuestions = {};
+      let medalsData = {};
+      let userMedals = { owned: [], equipped: [] };
+      let userCurrency = { coins: 0, gems: 0 };
+      let examConfigs = {};
+
+      // 🎯 修改初始化函數
+      async function initializeApp() {
+          try {
+              // 載入配置
+              await ConfigManager.init();
+              
+              // 更新載入文字
+              document.getElementById('loadingText').textContent = 
+                  ConfigManager.getText('messages.loginCheck');
+              
+              // 檢查登入狀態
+              const user = checkLoginStatus();
+              if (!user) return;
+
+              currentUser = user;
+              
+              // 更新歡迎文字
+              const welcomeText = ConfigManager.formatText(
+                  ConfigManager.getText('messages.welcomeBack'),
+                  { username: user }
+              );
+              document.getElementById('currentUserWelcome').textContent = welcomeText;
+
+              // 初始化 Firebase
+              firebase.initializeApp(ConfigManager.getConfig('system', 'firebase'));
+              database = firebase.database();
+
+              // 載入資料
+              await Promise.all([
+                  loadExamQuestions(),
+                  loadUsersData(),
+                  loadMedalsData(),
+                  loadExamConfigs()
+              ]);
+
+              await loadUserMedalsAndCurrency();
+              renderChallengesList();
+              await updateAllChampions();
+
+              document.getElementById('loadingScreen').style.display = 'none';
+              document.getElementById('mainContent').style.display = 'block';
+
+          } catch (err) {
+              console.error('初始化失敗:', err);
+              alert(ConfigManager.getText('messages.systemError'));
+          }
+      }
+
+      // 🎯 修改登入檢查函數
+      function checkLoginStatus() {
+          const config = ConfigManager.getConfig('system', 'session');
+          const keys = ConfigManager.getConfig('system', 'session.storageKeys') || {
+              loginFlag: 't2_login',
+              loginTime: 't2_login_time',
+              loginUser: 't2_login_user',
+              loginPassword: 't2_login_password'
+          };
+          
+          const flag = localStorage.getItem(keys.loginFlag);
+          const time = localStorage.getItem(keys.loginTime);
+          const user = localStorage.getItem(keys.loginUser);
+          
+          if (flag !== 'yes' || !time || !user) {
+              forceLogout(ConfigManager.getText('messages.loginInvalid'));
+              return false;
+          }
+          
+          const timeout = config?.loginTimeout || 3600000;
+          if (Date.now() - parseInt(time) > timeout) {
+              forceLogout(ConfigManager.getText('messages.loginExpired'));
+              return false;
+          }
+          
+          return user;
+      }
+
+      // 🎯 修改強制登出函數
+      function forceLogout(message) {
+          const keys = ConfigManager.getConfig('system', 'session.storageKeys') || {
+              loginFlag: 't2_login',
+              loginTime: 't2_login_time',
+              loginUser: 't2_login_user',
+              loginPassword: 't2_login_password'
+          };
+          
+          Object.values(keys).forEach(key => localStorage.removeItem(key));
+          
+          alert(message);
+          const homePage = ConfigManager.getConfig('system', 'navigation.homePage') || 'index3.html';
+          window.location.href = homePage;
+      }
+
+      // 🎯 修改購買勳章函數
+      async function buyMedal(medalId) {
+          const medal = medalsData.medals[medalId];
+          if (!medal || userMedals.owned.includes(medalId)) return;
+
+          if (userCurrency.coins < medal.price) {
+              alert(ConfigManager.getText('messages.insufficientFunds'));
+              return;
+          }
+
+          const confirmText = ConfigManager.formatText(
+              ConfigManager.getText('messages.buyConfirm'),
+              { medalIcon: medal.icon, medalName: medal.name, price: medal.price }
+          );
+
+          if (confirm(confirmText)) {
+              userCurrency.coins -= medal.price;
+              userMedals.owned.push(medalId);
+
+              await Promise.all([saveMedalData(), saveCurrencyData()]);
+              await renderShopItems();
+              
+              const successText = ConfigManager.formatText(
+                  ConfigManager.getText('messages.buySuccess'),
+                  { medalIcon: medal.icon, medalName: medal.name }
+              );
+              alert(successText);
+          }
+      }
+
+      // 保持所有其他現有函數，只需要逐步替換文字為 ConfigManager.getText() 調用
+      
+      // 你現有的所有其他函數...
+      // (為了簡潔，這裡省略，但實際上需要保持所有現有函數)
+      
+      // 頁面載入完成後初始化
+      document.addEventListener('DOMContentLoaded', initializeApp);
+  </script>
 </body>
 </html>
