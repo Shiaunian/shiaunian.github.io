@@ -2028,12 +2028,13 @@ async function showLeaderboard(examType) {
             const leaderboardHtml = leaderboardData.map((entry, index) => {
                 const isCurrentUser = entry.user === currentUser;
                 const userMedalIcons = getUserMedalIcons(entry.user);
+                const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
 
                 return `
                 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
                     <div class="rank">#${index + 1}</div>
                     <div class="user-name">
-                        ${entry.user}
+                        ${displayName}
                         <div class="leaderboard-medals">
                             ${userMedalIcons}
                         </div>
@@ -2055,6 +2056,23 @@ async function showLeaderboard(examType) {
         console.error('載入排行榜失敗:', err);
         content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入排行榜失敗</p></div>';
     }
+}
+
+// 🏅 獲取用戶顯示名稱
+function getUserDisplayName(username) {
+    // 🔧 從 usersData 獲取用戶的顯示名稱
+    const userData = usersData[username];
+    if (userData && userData.displayName) {
+        return userData.displayName;
+    }
+    
+    // 🔧 如果沒有 displayName，嘗試從 _comment 獲取
+    if (userData && userData._comment) {
+        return userData._comment;
+    }
+    
+    // 🔧 最後回傳用戶名
+    return username;
 }
 
 // 🏆 顯示總分排行榜 - 修正版本
@@ -2105,12 +2123,13 @@ async function showTotalLeaderboard() {
             const leaderboardHtml = sortedTotalScores.map((entry, index) => {
                 const isCurrentUser = entry.user === currentUser;
                 const userMedalIcons = getUserMedalIcons(entry.user);
+                const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
 
                 return `
                 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
                     <div class="rank">#${index + 1}</div>
                     <div class="user-name">
-                        ${entry.user}
+                        ${displayName}
                         <div class="leaderboard-medals">
                             ${userMedalIcons}
                         </div>
