@@ -1067,7 +1067,7 @@ function hideInventory() {
 document.getElementById('inventoryModal').style.display = 'none';
 }
 
-// 🎒 渲染背包
+// 🎒 渲染背包 - 修正版本
 async function renderInventory() {
 const inventoryGrid = document.getElementById('inventoryGrid');
 inventoryGrid.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入背包中...</div>';
@@ -1083,9 +1083,14 @@ const item = document.createElement('div');
 item.className = `inventory-item ${isEquipped ? 'equipped' : ''}`;
 item.onclick = () => toggleMedalEquip(medalId);
 
+// 🔧 修改這裡：新增判斷邏輯
+const iconHtml = medal.icon.startsWith('http') ? 
+    `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
+    medal.icon;
+
 item.innerHTML = `
 <div class="inventory-medal-icon" style="color: ${medal.color};">
-${medal.icon}
+${iconHtml}
 </div>
 <div class="inventory-medal-name">${medal.name}</div>
 ${isEquipped ? '<div style="font-size: 0.6rem; color: var(--gold);">已裝備</div>' : ''}
@@ -1104,6 +1109,7 @@ fragment.appendChild(emptyMsg);
 inventoryGrid.innerHTML = '';
 inventoryGrid.appendChild(fragment);
 }
+
 
 // 🎒 切換勳章裝備狀態
 async function toggleMedalEquip(medalId) {
