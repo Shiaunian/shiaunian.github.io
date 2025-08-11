@@ -1,3 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T2日檢疫挑戰系統</title>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<style>
+:root {
+--bg-primary: #1a1b1e;
+--bg-secondary: #2d2d30;
+--primary: #7289da;
+--primary-dark: #5c6fb1;
+--text-primary: #ffffff;
+--text-secondary: #a0a0a0;
+--danger: #ef4444;
+--warning: #f59e0b;
+--success: #22c55e;
+--shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+--border-color: rgba(255, 255, 255, 0.1);
+--info: #3b82f6;
+--transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+--border-radius: 8px;
+--gold: #fbbf24;
+--silver: #9ca3af;
+--bronze: #d97706;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: "微軟正黑體", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+background: var(--bg-primary);
+min-height: 100vh;
+padding: 12px;
+color: var(--text-primary);
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+max-width: 480px;
+margin: 0 auto;
+height: calc(100vh - 24px);
+overflow-y: auto;
+background: var(--bg-secondary);
+border-radius: 12px;
+box-shadow: var(--shadow);
+will-change: scroll-position;
+}
+
+.header {
+background: var(--bg-secondary);
+padding: 15px;
+border-bottom: 1px solid var(--border-color);
+position: sticky;
+top: 0;
+z-index: 100;
+backdrop-filter: blur(10px);
+}
+
+.header-title {
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
+}
+
+.title-text {
+font-size: 1.3rem;
+color: var(--text-primary);
+display: flex;
+align-items: center;
+gap: 8px;
+justify-content: space-between;
+}
+
+.user-info {
+font-size: 0.9rem;
+color: var(--text-secondary);
+margin-top: 5px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.user-currency {
+display: flex;
+gap: 12px;
+align-items: center;
+}
+
+.currency-item {
+display: flex;
+align-items: center;
+gap: 4px;
+background: rgba(255, 255, 255, 0.05);
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 0.8rem;
+}
+
+.connection-status {
+background-color: var(--success);
+color: white;
+padding: 4px 8px;
+border-radius: 4px;
+font-size: 0.8rem;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.7; }
+}
+
+/* 🎨 按鈕樣式 */
+.btn {
+padding: 10px 16px;
+border: none;
+border-radius: var(--border-radius);
+cursor: pointer;
+font-size: 0.9rem;
+font-weight: 500;
+transition: var(--transition);
+flex: 1;
+position: relative;
+overflow: hidden;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+min-height: 44px;
+}
+
+.btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+transition: left 0.5s;
+}
+
+.btn:hover::before {
+left: 100%;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(114, 137, 218, 0.3);
+}
+
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(114, 137, 218, 0.4);
+}
+
+.btn-secondary {
+background: linear-gradient(135deg, var(--warning), #e67e22);
+color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.btn-secondary:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+.btn-danger {
+background: linear-gradient(135deg, var(--danger), #c0392b);
+color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.btn-shop {
+background: linear-gradient(135deg, var(--gold), #f59e0b);
+color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
+}
+
+.btn-shop:hover {
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
+}
+
+/* header-actions 按鈕佈局 */
+.header-actions {
+display: flex;
+gap: 8px;
+margin-top: 12px;
+}
+
+.header-actions .btn {
+flex: 1;
+font-size: 0.8rem;
+padding: 8px 10px;
+min-height: 36px;
+}
+
+/* 🏅 勳章顯示樣式 */
+.user-medals {
+display: flex;
+gap: 4px;
+margin-top: 8px;
+flex-wrap: wrap;
+}
+
+.medal-icon {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 28px;
+height: 28px;
+border-radius: 50%;
+font-size: 0.9rem;
+border: 2px solid;
+background: rgba(255, 255, 255, 0.1);
+transition: var(--transition);
+cursor: pointer;
+overflow: hidden; /* 🔧 新增：防止圖片溢出 */
+}
+
+.medal-icon:hover {
+transform: scale(1.1);
+}
+
+.medal-icon.common { border-color: #84cc16; }
+.medal-icon.rare { border-color: #3b82f6; }
+.medal-icon.epic { border-color: #8b5cf6; }
+.medal-icon.legendary { border-color: #f59e0b; }
+
+/* 🔧 新增：勳章圖片樣式 */
+.medal-icon img,
+.medal-preview img,
+.inventory-medal-icon img,
+.leaderboard-medal img {
+border-radius: 4px;
+display: block;
+}
+
+/* 🏪 商店樣式 */
+.shop-container {
+padding: 16px;
+}
+
+.shop-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.shop-categories {
+display: flex;
+gap: 8px;
+margin-bottom: 16px;
+}
+
+.category-btn {
+padding: 8px 16px;
+background: rgba(255, 255, 255, 0.05);
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+color: var(--text-secondary);
+cursor: pointer;
+transition: var(--transition);
+font-size: 0.85rem;
+}
+
+.category-btn.active {
+background: var(--primary);
+color: var(--text-primary);
+border-color: var(--primary);
+}
+
+.shop-items {
+display: grid;
+gap: 12px;
+}
+
+.shop-item {
+display: flex;
+align-items: center;
+padding: 12px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid var(--border-color);
+border-radius: var(--border-radius);
+transition: var(--transition);
+}
+
+.shop-item:hover {
+background: rgba(255, 255, 255, 0.05);
+transform: translateY(-1px);
+}
+
+.shop-item.owned {
+opacity: 0.6;
+border-color: var(--success);
+}
+
+.shop-item.equipped {
+border-color: var(--gold);
+background: rgba(251, 191, 36, 0.1);
+}
+
+.medal-preview {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.2rem;
+border: 2px solid;
+margin-right: 12px;
+}
+
+.item-info {
+flex: 1;
+}
+
+.item-name {
+font-weight: 600;
+margin-bottom: 4px;
+}
+
+.item-description {
+font-size: 0.8rem;
+color: var(--text-secondary);
+margin-bottom: 4px;
+}
+
+.item-price {
+font-size: 0.9rem;
+color: var(--gold);
+font-weight: 600;
+}
+
+.item-actions {
+display: flex;
+gap: 8px;
+}
+
+.btn-small {
+padding: 6px 12px;
+font-size: 0.8rem;
+min-height: 32px;
+}
+
+/* 🎒 背包樣式 */
+.inventory-container {
+padding: 16px;
+}
+
+.inventory-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+gap: 12px;
+}
+
+.inventory-item {
+aspect-ratio: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.03);
+border: 2px solid var(--border-color);
+border-radius: var(--border-radius);
+cursor: pointer;
+transition: var(--transition);
+padding: 8px;
+}
+
+.inventory-item:hover {
+background: rgba(255, 255, 255, 0.08);
+transform: translateY(-2px);
+}
+
+.inventory-item.equipped {
+border-color: var(--gold);
+background: rgba(251, 191, 36, 0.1);
+}
+
+.inventory-medal-icon {
+font-size: 1.5rem;
+margin-bottom: 4px;
+}
+
+.inventory-medal-name {
+font-size: 0.7rem;
+text-align: center;
+line-height: 1.2;
+}
+
+/* 排行榜勳章顯示 */
+.leaderboard-medals {
+display: flex;
+gap: 2px;
+margin-left: 8px;
+}
+
+.leaderboard-medal {
+width: 16px;
+height: 16px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.6rem;
+border: 1px solid;
+}
+
+/* 其他現有樣式保持不變... */
+.challenge-item {
+padding: 16px;
+border-bottom: 1px solid var(--border-color);
+transition: background-color 0.3s ease;
+}
+
+.challenge-item:hover {
+background: rgba(255, 255, 255, 0.02);
+}
+
+.challenge-title {
+font-size: 1.1rem;
+color: var(--text-primary);
+margin-bottom: 8px;
+font-weight: 600;
+}
+
+.challenge-info {
+color: var(--text-secondary);
+font-size: 0.9rem;
+margin-bottom: 12px;
+}
+
+.challenge-actions {
+display: flex;
+gap: 10px;
+}
+
+.champion-display {
+margin-bottom: 10px;
+}
+
+.champion-card {
+display: flex;
+align-items: center;
+justify-content: space-between;
+background: linear-gradient(45deg, #FFD700, #FFA500);
+color: #000;
+padding: 8px 14px;
+border-radius: var(--border-radius);
+font-size: 0.85rem;
+font-weight: bold;
+box-shadow: 0 3px 6px rgba(255, 215, 0, 0.3);
+transition: var(--transition);
+}
+
+.champion-card:hover {
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+.champion-empty {
+display: flex;
+align-items: center;
+justify-content: center;
+background: rgba(255, 255, 255, 0.05);
+color: var(--text-secondary);
+padding: 8px 14px;
+border-radius: var(--border-radius);
+font-size: 0.85rem;
+border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.8);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+backdrop-filter: blur(4px);
+animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+.modal {
+background: var(--bg-secondary);
+width: 90%;
+max-width: 420px;
+max-height: 85vh;
+border-radius: 12px;
+overflow: hidden;
+position: relative;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+from { transform: translateY(30px); opacity: 0; }
+to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+padding: 16px;
+background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+color: var(--text-primary);
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: sticky;
+top: 0;
+}
+
+.close-btn {
+background: none;
+border: none;
+color: var(--text-primary);
+font-size: 1.5rem;
+cursor: pointer;
+padding: 4px 8px;
+border-radius: 4px;
+transition: var(--transition);
+}
+
+.close-btn:hover {
+background: rgba(255, 255, 255, 0.1);
+transform: scale(1.1);
+}
+
+.modal-content {
+padding: 16px;
+overflow-y: auto;
+max-height: calc(85vh - 68px);
+min-height: 200px;
+}
+
+.leaderboard-container {
+max-height: calc(60vh - 100px);
+overflow-y: auto;
+padding-right: 5px;
+scroll-behavior: smooth;
+}
+
+.leaderboard-item {
+display: flex;
+align-items: center;
+padding: 10px 12px;
+border-bottom: 1px solid var(--border-color);
+transition: var(--transition);
+border-radius: 6px;
+margin-bottom: 2px;
+}
+
+.leaderboard-item:hover {
+background: rgba(114, 137, 218, 0.05);
+transform: translateX(2px);
+}
+
+.leaderboard-item.current-user {
+background: rgba(114, 137, 218, 0.1);
+border-left: 3px solid var(--primary);
+box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
+}
+
+.rank {
+min-width: 35px;
+font-weight: bold;
+color: var(--primary);
+font-size: 1rem;
+}
+
+.user-name {
+flex: 1;
+margin: 0 12px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+display: flex;
+align-items: center;
+}
+
+.score {
+font-weight: bold;
+color: var(--primary);
+margin-left: auto;
+font-size: 1rem;
+}
+
+.empty-leaderboard {
+text-align: center;
+padding: 30px 20px;
+color: var(--text-secondary);
+}
+
+/* 響應式設計 */
+@media (max-width: 400px) {
+.header-actions {
+flex-direction: column;
+gap: 8px;
+}
+.header-actions .btn {
+width: 100%;
+}
+.user-currency {
+flex-direction: column;
+gap: 4px;
+}
+}
+
+/* GPU 加速 */
+.btn, .modal, .leaderboard-item, .champion-card, .medal-icon {
+transform: translateZ(0);
+backface-visibility: hidden;
+}
+
+/* 其他現有樣式... */
+.exam-container { padding: 20px; }
+.exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 16px; background: rgba(255, 255, 255, 0.03); border-radius: var(--border-radius); }
+.timer { font-size: 1.4rem; color: var(--primary); font-weight: bold; padding: 8px 16px; background: rgba(114, 137, 218, 0.1); border-radius: var(--border-radius); }
+.question { background: rgba(255, 255, 255, 0.03); padding: 24px; border-radius: var(--border-radius); margin-bottom: 20px; border: 1px solid var(--border-color); }
+.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
+.option-btn { width: 100%; text-align: left; padding: 14px 16px; border-radius: var(--border-radius); transition: var(--transition); }
+.option-btn.correct { background: linear-gradient(135deg, var(--success), #27ae60); }
+.option-btn.wrong { background: linear-gradient(135deg, var(--danger), #c0392b); }
+.exam-result { text-align: center; padding: 30px 20px; }
+.exam-result h2 { margin-bottom: 20px; color: var(--primary); }
+.exam-result p { margin-bottom: 12px; font-size: 1.05rem; }
+.exam-result button { margin: 8px; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); }
+.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin-bottom: 20px; }
+.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); }
+.sudoku-cell:disabled { background: var(--bg-secondary); color: var(--text-secondary); cursor: not-allowed; }
+.sudoku-cell:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3); }
+.sudoku-cell::-webkit-inner-spin-button, .sudoku-cell::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
+.loading-spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(114, 137, 218, 0.3); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; will-change: transform; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@media (max-width: 400px) { .options { grid-template-columns: 1fr; } }
+.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+::selection { background: rgba(114, 137, 218, 0.3); color: var(--text-primary); }
+</style>
+</head>
+<body>
+<!-- 載入中畫面 -->
+<div id="loadingScreen" class="container">
+<div class="loading">
+<div class="loading-spinner"></div>
+正在驗證登入狀態...
+</div>
+</div>
+
+<!-- 主要內容 -->
+<div id="mainContent" class="container" style="display: none;">
+<header class="header">
+<div class="header-title">
+<div class="title-text">
+<span>🎯</span>
+<h1>T2日檢疫挑戰系統</h1>
+<button class="btn btn-danger" onclick="logout()">登出</button>
+</div>
+<div class="user-info">
+<div>
+<span id="currentUserWelcome">歡迎回來，載入中...</span>
+<div class="user-currency">
+<div class="currency-item">
+  <span>💰</span>
+  <span id="userCoins">0</span>
+</div>
+<div class="currency-item">
+  <span>💎</span>
+  <span id="userGems">0</span>
+</div>
+</div>
+<div class="user-medals" id="userMedals"></div>
+</div>
+<span class="connection-status" id="connectionStatus">用戶連線中</span>
+</div>
+</div>
+<div class="header-actions">
+<button class="btn btn-primary" onclick="backToT2()">🏠 返回T2日</button>
+<button class="btn btn-secondary" onclick="showTotalLeaderboard()">🏆 總分排行榜</button>
+<button class="btn btn-shop" onclick="showShop()">🏪 商店</button>
+<button class="btn btn-primary" onclick="showInventory()">🎒 背包</button>
+</div>
+</header>
+
+<!-- 挑戰項目列表 - 將動態生成 -->
+<div id="challengesList">
+<!-- 挑戰項目將在此動態生成 -->
+</div>
+</div>
+
+<!-- 🏪 商店模態視窗 -->
+<div class="modal-overlay" id="shopModal">
+<div class="modal">
+<div class="modal-header">
+<h2>🏪 勳章商店</h2>
+<button class="close-btn" onclick="hideShop()">×</button>
+</div>
+<div class="modal-content">
+<div class="shop-container">
+<div class="shop-categories">
+<button class="category-btn active" onclick="filterShop('all')">全部</button>
+<button class="category-btn" onclick="filterShop('common')">普通</button>
+<button class="category-btn" onclick="filterShop('rare')">稀有</button>
+<button class="category-btn" onclick="filterShop('epic')">史詩</button>
+<button class="category-btn" onclick="filterShop('legendary')">傳說</button>
+</div>
+<div class="shop-items" id="shopItems">
+<!-- 商店物品將在此動態生成 -->
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 🎒 背包模態視窗 -->
+<div class="modal-overlay" id="inventoryModal">
+<div class="modal">
+<div class="modal-header">
+<h2>🎒 勳章背包</h2>
+<button class="close-btn" onclick="hideInventory()">×</button>
+</div>
+<div class="modal-content">
+<div class="inventory-container">
+<p style="margin-bottom: 16px; color: var(--text-secondary);">點擊勳章裝備/卸下 (最多裝備5個)</p>
+<div class="inventory-grid" id="inventoryGrid">
+<!-- 背包物品將在此動態生成 -->
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 排行榜模態視窗 -->
+<div class="modal-overlay" id="leaderboardModal">
+<div class="modal">
+<div class="modal-header">
+<h2 id="modalTitle">排行榜</h2>
+<button class="close-btn" onclick="hideLeaderboard()">×</button>
+</div>
+<div class="modal-content" id="leaderboardContent">
+</div>
+</div>
+</div>
+
 <script>
 // Firebase 配置
 const firebaseConfig = {
