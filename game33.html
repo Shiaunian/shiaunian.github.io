@@ -1509,15 +1509,16 @@ await Promise.all(promises);
 }
 
 // 🚀 效能優化：登入驗證和初始化 - 修正版本
+// 🔧 修正：initializeApp 函數
 async function initializeApp() {
     try {
         const userInfo = checkLoginStatus();
         if (!userInfo) return;
 
-        currentUser = userInfo.username; // 用於資料庫操作
-        const displayName = userInfo.displayName; // 用於顯示
+        // 🆕 使用 displayName 作為 currentUser
+        currentUser = userInfo.displayName; // 🔧 改這裡：從 userInfo.username 改為 userInfo.displayName
+        const displayName = userInfo.displayName;
         
-        // 🔧 修正：顯示正確的用戶名稱
         document.getElementById('currentUserWelcome').textContent = `歡迎回來，${displayName}`;
 
         // 並行載入資料
@@ -2060,20 +2061,10 @@ async function showLeaderboard(examType) {
 
 // 🏅 獲取用戶顯示名稱
 function getUserDisplayName(username) {
-    // 🔧 從 usersData 獲取用戶的顯示名稱
-    const userData = usersData[username];
-    if (userData && userData.displayName) {
-        return userData.displayName;
-    }
-    
-    // 🔧 如果沒有 displayName，嘗試從 _comment 獲取
-    if (userData && userData._comment) {
-        return userData._comment;
-    }
-    
-    // 🔧 最後回傳用戶名
+    // 因為現在 username 參數本身就是 displayName，直接返回
     return username;
 }
+
 
 // 🏆 顯示總分排行榜 - 修正版本
 async function showTotalLeaderboard() {
