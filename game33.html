@@ -1373,21 +1373,30 @@ alert(message);
 window.location.href = 'index.html';
 }
 
-// 檢查登入狀態和時效
+// 檢查登入狀態和時效 - 修正版本
 function checkLoginStatus() {
-const flag = localStorage.getItem('t2_login');
-const time = localStorage.getItem('t2_login_time');
-const user = localStorage.getItem('t2_login_user');
-if (flag!=='yes' || !time || !user) {
-forceLogout('未檢測到有效登入狀態');
-return false;
+    const flag = localStorage.getItem('t2_login');
+    const time = localStorage.getItem('t2_login_time');
+    const user = localStorage.getItem('t2_login_user');
+    const displayName = localStorage.getItem('t2_login_display_name'); // 🆕 新增顯示名稱
+    
+    if (flag !== 'yes' || !time || !user) {
+        forceLogout('未檢測到有效登入狀態');
+        return false;
+    }
+    
+    if (Date.now() - parseInt(time) > 3600000) {
+        forceLogout('登入時間已超過1小時，請重新登入');
+        return false;
+    }
+    
+    // 🔧 返回包含用戶名和顯示名稱的對象
+    return {
+        username: user,
+        displayName: displayName || user // 如果沒有顯示名稱就用用戶名
+    };
 }
-if (Date.now()-parseInt(time) > 3600000) {
-forceLogout('登入時間已超過1小時，請重新登入');
-return false;
-}
-return user;
-}
+
 
 // 🚀 效能優化：用戶資料快取 - 修正版本
 async function loadUsersData() {
@@ -1499,41 +1508,45 @@ championDisplay.innerHTML = `
 await Promise.all(promises);
 }
 
-// 🚀 效能優化：登入驗證和初始化
+// 🚀 效能優化：登入驗證和初始化 - 修正版本
 async function initializeApp() {
-try {
-const user = checkLoginStatus();
-if (!user) return;
+    try {
+        const userInfo = checkLoginStatus();
+        if (!userInfo) return;
 
-currentUser = user;
-document.getElementById('currentUserWelcome').textContent = `歡迎回來，${user}`;
+        currentUser = userInfo.username; // 用於資料庫操作
+        const displayName = userInfo.displayName; // 用於顯示
+        
+        // 🔧 修正：顯示正確的用戶名稱
+        document.getElementById('currentUserWelcome').textContent = `歡迎回來，${displayName}`;
 
-// 並行載入資料
-await Promise.all([
-loadExamQuestions(),
-loadUsersData(),
-loadMedalsData(),
-loadExamConfigs()
-]);
+        // 並行載入資料
+        await Promise.all([
+            loadExamQuestions(),
+            loadUsersData(),
+            loadMedalsData(),
+            loadExamConfigs()
+        ]);
 
-// 載入用戶勳章和貨幣
-await loadUserMedalsAndCurrency();
+        // 載入用戶勳章和貨幣
+        await loadUserMedalsAndCurrency();
 
-// 生成挑戰項目列表
-renderChallengesList();
+        // 生成挑戰項目列表
+        renderChallengesList();
 
-// 更新榜首顯示
-await updateAllChampions();
+        // 更新榜首顯示
+        await updateAllChampions();
 
-// 隱藏載入畫面，顯示主要內容
-document.getElementById('loadingScreen').style.display = 'none';
-document.getElementById('mainContent').style.display = 'block';
+        // 隱藏載入畫面，顯示主要內容
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
 
-} catch (err) {
-console.error('初始化失敗:', err);
-alert('系統初始化失敗，請重新整理頁面');
+    } catch (err) {
+        console.error('初始化失敗:', err);
+        alert('系統初始化失敗，請重新整理頁面');
+    }
 }
-}
+
 
 // 登出功能
 function logout() {
@@ -1556,7 +1569,7 @@ window.location.href = 'index.html';
 
 // 返回T2日
 function backToT2() {
-window.location.href = 'dashboard.html';
+window.location.href = 'page33.html'; 
 }
 
 // 🚀 效能優化：題目隨機化
