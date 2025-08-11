@@ -186,9 +186,9 @@ document.getElementById('app').innerHTML = `
     </form>
   </div>
 `;
+// ===== 修改登入驗證邏輯 =====
 document.getElementById('loginForm').onsubmit = function(e) {
   e.preventDefault();
-  // 將輸入的帳號轉換為小寫
   const uname = document.getElementById('username').value.trim().toLowerCase();
   const pwd = document.getElementById('password').value.trim();
   document.getElementById('errorMsg').textContent = "";
@@ -197,17 +197,19 @@ document.getElementById('loginForm').onsubmit = function(e) {
   const user = users.find(u => u.username === uname && u.password === pwd);
 
   if (user) {
+    // 🆕 新增：生成唯一識別符
+    const uniqueId = user.username + user.password; // 00175126
+    const displayName = user._comment || user.username; // 念念
+    
     localStorage.setItem("t2_login", "yes");
     localStorage.setItem("t2_login_time", Date.now().toString());
-    localStorage.setItem("t2_login_user", user.username);
+    localStorage.setItem("t2_login_user", uniqueId); // 🔧 儲存唯一識別符
     localStorage.setItem("t2_login_password", pwd);
+    localStorage.setItem("t2_login_display_name", displayName); // 🔧 儲存顯示名稱
     
-    // 🆕 新增：保存顯示名稱
-    const displayName = user.welcome ? user.welcome.replace('歡迎', '') : (user._comment || user.username);
-    localStorage.setItem("t2_login_display_name", displayName);
-    console.log(`✅ 保存顯示名稱: ${displayName}`);
+    console.log(`✅ 登入成功: ${uniqueId} = ${displayName}`);
     
-    showWelcome(user); // 登入成功後顯示歡迎訊息
+    showWelcome(user);
   } else {
     document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
   }
