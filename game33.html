@@ -1819,34 +1819,53 @@ function checkSudokuAnswer() {
     }, 1500);
 }
 
-// 下一題
+// 下一題 - 修正版本
 function nextQuestion(wasCorrect) {
-document.getElementById('currentScore').textContent = userScores.correctAnswers * 10;
+    // 🔧 修正：計算包含快速答對加分的總分
+    const baseScore = userScores.correctAnswers * 10;
+    const fastBonus = userScores.fastCorrectAnswers * 5; // 快速答對額外加分
+    const currentScore = baseScore + fastBonus;
+    
+    document.getElementById('currentScore').textContent = currentScore;
 
-if (currentQuestionIndex < currentQuestions.length - 1) {
-currentQuestionIndex++;
-displayQuestion();
-startQuestionTimer();
-} else {
-finishExam();
-}
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        displayQuestion();
+        startQuestionTimer();
+    } else {
+        finishExam();
+    }
 }
 
-// 結束考試 - 防濫用版本
+
+// 結束考試 - 修正版本
 async function finishExam() {
     clearInterval(examTimer);
     const totalTime = (Date.now() - examStartTime) / 1000;
-    const finalScore = userScores.correctAnswers * 10;
     const config = examConfigs[currentExam];
     
-    // 🛡️ 防濫用：只有完成所有題目才給獎勵
-    if (currentQuestionIndex < config.questionCount) {
-        // 中途放棄，不給任何獎勵
+    // 🔧 修正：正確計算最終分數（基礎分 + 快速答對加分）
+    const baseScore = userScores.correctAnswers * 10;
+    const fastBonus = userScores.fastCorrectAnswers * 5;
+    const finalScore = baseScore + fastBonus;
+    
+    console.log(`📊 分數統計:
+    - 答對題數: ${userScores.correctAnswers}/${config.questionCount}
+    - 基礎分數: ${baseScore}分
+    - 快速答對: ${userScores.fastCorrectAnswers}題
+    - 快速加分: ${fastBonus}分
+    - 最終分數: ${finalScore}分`);
+    
+    // 🛡️ 防濫用：檢查是否完成所有題目
+    const isCompleted = (currentQuestionIndex + 1) >= config.questionCount;
+    
+    if (!isCompleted) {
+        console.log('❌ 考試未完成，不保存成績');
         showExamResult(finalScore, totalTime, 0, 0);
         return;
     }
     
-    // 🎯 最後結算獎勵
+    // 🎯 計算獎勵
     let coinsEarned = 0;
     let gemsEarned = 0;
     let bonusMessages = [];
@@ -1857,67 +1876,94 @@ async function finishExam() {
         bonusMessages.push(`📝 答對${userScores.correctAnswers}題獲得${userScores.correctAnswers * 5}金幣`);
     }
     
+    // ⚡ 快速答對獎勵：每快速答對一題額外2金幣
+    if (userScores.fastCorrectAnswers > 0) {
+        const fastCoins = userScores.fastCorrectAnswers * 2;
+        coinsEarned += fastCoins;
+        bonusMessages.push(`⚡ 快速答對${userScores.fastCorrectAnswers}題獲得額外${fastCoins}金幣`);
+    }
+    
     // 🏆 滿分獎勵
-    if (finalScore >= config.questionCount * 10) {
+    if (userScores.correctAnswers === config.questionCount) {
         const perfectBonus = config.perfectBonus || 50;
         coinsEarned += perfectBonus;
         gemsEarned += 1;
         bonusMessages.push(`🏆 滿分獎勵：+${perfectBonus}金幣 +1寶石`);
     }
     
-    // ⚡ 快速答題獎勵：只計算答對且快速的題目
-    const fastCorrectAnswers = userScores.fastCorrectAnswers || 0; // 需要追蹤這個數據
-    if (fastCorrectAnswers >= Math.ceil(config.questionCount * 0.7)) {
-        const speedBonus = 20;
-        coinsEarned += speedBonus;
-        bonusMessages.push(`⚡ 快速答題獎勵：+${speedBonus}金幣`);
-    }
-    
-    // 💰 更新貨幣（只有完成考試才更新）
+    // 💰 更新貨幣
     if (coinsEarned > 0) userCurrency.coins += coinsEarned;
     if (gemsEarned > 0) userCurrency.gems += gemsEarned;
     
-    if (coinsEarned > 0 || gemsEarned > 0) {
-        await saveCurrencyData();
+    // 🔧 修正：確保成績保存到排行榜
+    try {
+        console.log('💾 開始保存成績到排行榜...');
+        await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
+        console.log('✅ 成績保存成功');
+        
+        // 保存貨幣資料
+        if (coinsEarned > 0 || gemsEarned > 0) {
+            await saveCurrencyData();
+            console.log('💰 貨幣更新成功');
+        }
+        
+        // 清除相關快取以確保排行榜更新
+        const cacheKey = `champion_${currentExam}`;
+        championCache.delete(cacheKey);
+        localStorage.removeItem('users_data_v1');
+        localStorage.removeItem('users_data_v1_time');
+        console.log('🗑️ 快取已清除');
+        
+    } catch (error) {
+        console.error('❌ 保存成績失敗:', error);
+        alert('保存成績時發生錯誤，請檢查網路連線');
     }
-    
-    // 保存成績到排行榜
-    await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
     
     // 顯示結果
     showExamResult(finalScore, totalTime, coinsEarned, gemsEarned, bonusMessages);
-    
-    // 清除快取
-    const cacheKey = `champion_${currentExam}`;
-    championCache.delete(cacheKey);
-    localStorage.removeItem('users_data_v1');
-    localStorage.removeItem('users_data_v1_time');
 }
 
 // 顯示考試結果 - 修正版本
-function showExamResult(score, totalTime, coinsEarned) {
-const container = document.getElementById('mainContent');
-const config = examConfigs[currentExam];
+function showExamResult(score, totalTime, coinsEarned, gemsEarned, bonusMessages = []) {
+    const container = document.getElementById('mainContent');
+    const config = examConfigs[currentExam];
+    
+    // 🔧 修正：計算分數明細
+    const baseScore = userScores.correctAnswers * 10;
+    const fastBonus = userScores.fastCorrectAnswers * 5;
 
-container.innerHTML = `
-<div class="exam-result">
-<h2>🎉 考試完成！</h2>
-<p><strong>考試類型：</strong>${config.name}</p>
-<p><strong>最終得分：</strong>${score} 分</p>
-<p><strong>正確題數：</strong>${userScores.correctAnswers} / ${config.questionCount}</p>
-<p><strong>快速答題：</strong>${userScores.fastAnswers} 題</p>
-<p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
-${coinsEarned > 0 ? 
-`<p style="color: var(--gold);"><strong>🎉 滿分獎勵：</strong>💰 ${coinsEarned}</p>` : 
-`<p style="color: var(--text-secondary);">💰 未達滿分，無金幣獎勵</p>`
+    container.innerHTML = `
+    <div class="exam-result">
+        <h2>🎉 考試完成！</h2>
+        <p><strong>考試類型：</strong>${config.name}</p>
+        <div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+            <p><strong>📊 成績統計：</strong></p>
+            <p>• 答對題數：${userScores.correctAnswers} / ${config.questionCount}</p>
+            <p>• 基礎分數：${baseScore} 分</p>
+            <p>• 快速答對：${userScores.fastCorrectAnswers} 題 (+${fastBonus}分)</p>
+            <p style="color: var(--primary); font-size: 1.2rem; font-weight: bold;">
+                🏆 最終得分：${score} 分
+            </p>
+        </div>
+        <p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
+        
+        ${bonusMessages.length > 0 ? `
+        <div style="margin: 15px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+            <p><strong>🎁 獎勵明細：</strong></p>
+            ${bonusMessages.map(msg => `<p style="color: var(--success);">• ${msg}</p>`).join('')}
+            ${coinsEarned > 0 ? `<p style="color: var(--gold); font-weight: bold;">💰 總獲得金幣：${coinsEarned}</p>` : ''}
+            ${gemsEarned > 0 ? `<p style="color: var(--info); font-weight: bold;">💎 總獲得寶石：${gemsEarned}</p>` : ''}
+        </div>
+        ` : `<p style="color: var(--text-secondary);">💰 本次未獲得獎勵</p>`}
+        
+        <div style="margin-top: 20px;">
+            <button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
+            <button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
+        </div>
+    </div>
+    `;
 }
-<div style="margin-top: 20px;">
-<button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-</div>
-</div>
-`;
-}
+
 
 // 🔧 修正：保存成績到排行榜 - 不使用索引查詢
 async function saveScoreToLeaderboard(examType, score, totalTime) {
