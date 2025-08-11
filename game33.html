@@ -122,7 +122,6 @@ animation: pulse 2s infinite;
 50% { opacity: 0.7; }
 }
 
-/* 🎨 按鈕樣式 */
 .btn {
 padding: 10px 16px;
 border: none;
@@ -142,41 +141,10 @@ gap: 6px;
 min-height: 44px;
 }
 
-.btn::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-transition: left 0.5s;
-}
-
-.btn:hover::before {
-left: 100%;
-}
-
 .btn-primary {
 background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 color: var(--text-primary);
 box-shadow: 0 2px 8px rgba(114, 137, 218, 0.3);
-}
-
-.btn-primary:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(114, 137, 218, 0.4);
-}
-
-.btn-secondary {
-background: linear-gradient(135deg, var(--warning), #e67e22);
-color: var(--text-primary);
-box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-}
-
-.btn-secondary:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
 }
 
 .btn-danger {
@@ -185,9 +153,10 @@ color: var(--text-primary);
 box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
 }
 
-.btn-danger:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+.btn-secondary {
+background: linear-gradient(135deg, var(--warning), #e67e22);
+color: var(--text-primary);
+box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
 .btn-shop {
@@ -196,12 +165,6 @@ color: var(--text-primary);
 box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
 }
 
-.btn-shop:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
-}
-
-/* header-actions 按鈕佈局 */
 .header-actions {
 display: flex;
 gap: 8px;
@@ -215,7 +178,6 @@ padding: 8px 10px;
 min-height: 36px;
 }
 
-/* 🏅 勳章顯示樣式 */
 .user-medals {
 display: flex;
 gap: 4px;
@@ -235,209 +197,36 @@ border: 2px solid;
 background: rgba(255, 255, 255, 0.1);
 transition: var(--transition);
 cursor: pointer;
-overflow: hidden; /* 🔧 新增：防止圖片溢出 */
+overflow: hidden;
 }
 
-.medal-icon:hover {
-transform: scale(1.1);
-}
-
-.medal-icon.common { border-color: #84cc16; }
-.medal-icon.rare { border-color: #3b82f6; }
-.medal-icon.epic { border-color: #8b5cf6; }
-.medal-icon.legendary { border-color: #f59e0b; }
-
-/* 🔧 新增：勳章圖片樣式 */
-.medal-icon img,
-.medal-preview img,
-.inventory-medal-icon img,
-.leaderboard-medal img {
-border-radius: 4px;
-display: block;
-}
-
-/* 🏪 商店樣式 */
-.shop-container {
-padding: 16px;
-}
-
-.shop-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
-}
-
-.shop-categories {
-display: flex;
-gap: 8px;
-margin-bottom: 16px;
-}
-
-.category-btn {
-padding: 8px 16px;
-background: rgba(255, 255, 255, 0.05);
-border: 1px solid var(--border-color);
-border-radius: var(--border-radius);
-color: var(--text-secondary);
-cursor: pointer;
-transition: var(--transition);
-font-size: 0.85rem;
-}
-
-.category-btn.active {
-background: var(--primary);
-color: var(--text-primary);
-border-color: var(--primary);
-}
-
-.shop-items {
-display: grid;
-gap: 12px;
-}
-
-.shop-item {
-display: flex;
-align-items: center;
-padding: 12px;
-background: rgba(255, 255, 255, 0.03);
-border: 1px solid var(--border-color);
-border-radius: var(--border-radius);
-transition: var(--transition);
-}
-
-.shop-item:hover {
-background: rgba(255, 255, 255, 0.05);
-transform: translateY(-1px);
-}
-
-.shop-item.owned {
-opacity: 0.6;
-border-color: var(--success);
-}
-
-.shop-item.equipped {
-border-color: var(--gold);
-background: rgba(251, 191, 36, 0.1);
-}
-
-.medal-preview {
-width: 40px;
-height: 40px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.2rem;
-border: 2px solid;
-margin-right: 12px;
-}
-
-.item-info {
-flex: 1;
-}
-
-.item-name {
-font-weight: 600;
-margin-bottom: 4px;
-}
-
-.item-description {
-font-size: 0.8rem;
-color: var(--text-secondary);
-margin-bottom: 4px;
-}
-
-.item-price {
-font-size: 0.9rem;
-color: var(--gold);
-font-weight: 600;
-}
-
-.item-actions {
-display: flex;
-gap: 8px;
-}
-
-.btn-small {
-padding: 6px 12px;
-font-size: 0.8rem;
-min-height: 32px;
-}
-
-/* 🎒 背包樣式 */
-.inventory-container {
-padding: 16px;
-}
-
-.inventory-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-gap: 12px;
-}
-
-.inventory-item {
-aspect-ratio: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: rgba(255, 255, 255, 0.03);
-border: 2px solid var(--border-color);
-border-radius: var(--border-radius);
-cursor: pointer;
-transition: var(--transition);
-padding: 8px;
-}
-
-.inventory-item:hover {
-background: rgba(255, 255, 255, 0.08);
-transform: translateY(-2px);
-}
-
-.inventory-item.equipped {
-border-color: var(--gold);
-background: rgba(251, 191, 36, 0.1);
-}
-
-.inventory-medal-icon {
-font-size: 1.5rem;
-margin-bottom: 4px;
-}
-
-.inventory-medal-name {
-font-size: 0.7rem;
+.loading {
 text-align: center;
-line-height: 1.2;
+padding: 40px 20px;
+color: var(--text-secondary);
 }
 
-/* 排行榜勳章顯示 */
-.leaderboard-medals {
-display: flex;
-gap: 2px;
-margin-left: 8px;
-}
-
-.leaderboard-medal {
-width: 16px;
-height: 16px;
+.loading-spinner {
+display: inline-block;
+width: 24px;
+height: 24px;
+border: 3px solid rgba(114, 137, 218, 0.3);
+border-top: 3px solid var(--primary);
 border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 0.6rem;
-border: 1px solid;
+animation: spin 1s linear infinite;
+margin-right: 12px;
+will-change: transform;
 }
 
-/* 其他現有樣式保持不變... */
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
 .challenge-item {
 padding: 16px;
 border-bottom: 1px solid var(--border-color);
 transition: background-color 0.3s ease;
-}
-
-.challenge-item:hover {
-background: rgba(255, 255, 255, 0.02);
 }
 
 .challenge-title {
@@ -458,41 +247,6 @@ display: flex;
 gap: 10px;
 }
 
-.champion-display {
-margin-bottom: 10px;
-}
-
-.champion-card {
-display: flex;
-align-items: center;
-justify-content: space-between;
-background: linear-gradient(45deg, #FFD700, #FFA500);
-color: #000;
-padding: 8px 14px;
-border-radius: var(--border-radius);
-font-size: 0.85rem;
-font-weight: bold;
-box-shadow: 0 3px 6px rgba(255, 215, 0, 0.3);
-transition: var(--transition);
-}
-
-.champion-card:hover {
-transform: translateY(-1px);
-box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
-}
-
-.champion-empty {
-display: flex;
-align-items: center;
-justify-content: center;
-background: rgba(255, 255, 255, 0.05);
-color: var(--text-secondary);
-padding: 8px 14px;
-border-radius: var(--border-radius);
-font-size: 0.85rem;
-border: 1px dashed rgba(255, 255, 255, 0.15);
-}
-
 .modal-overlay {
 position: fixed;
 top: 0;
@@ -505,12 +259,6 @@ justify-content: center;
 align-items: center;
 z-index: 1000;
 backdrop-filter: blur(4px);
-animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
 }
 
 .modal {
@@ -522,12 +270,6 @@ border-radius: 12px;
 overflow: hidden;
 position: relative;
 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-from { transform: translateY(30px); opacity: 0; }
-to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-header {
@@ -537,8 +279,6 @@ color: var(--text-primary);
 display: flex;
 justify-content: space-between;
 align-items: center;
-position: sticky;
-top: 0;
 }
 
 .close-btn {
@@ -552,125 +292,12 @@ border-radius: 4px;
 transition: var(--transition);
 }
 
-.close-btn:hover {
-background: rgba(255, 255, 255, 0.1);
-transform: scale(1.1);
-}
-
 .modal-content {
 padding: 16px;
 overflow-y: auto;
 max-height: calc(85vh - 68px);
 min-height: 200px;
 }
-
-.leaderboard-container {
-max-height: calc(60vh - 100px);
-overflow-y: auto;
-padding-right: 5px;
-scroll-behavior: smooth;
-}
-
-.leaderboard-item {
-display: flex;
-align-items: center;
-padding: 10px 12px;
-border-bottom: 1px solid var(--border-color);
-transition: var(--transition);
-border-radius: 6px;
-margin-bottom: 2px;
-}
-
-.leaderboard-item:hover {
-background: rgba(114, 137, 218, 0.05);
-transform: translateX(2px);
-}
-
-.leaderboard-item.current-user {
-background: rgba(114, 137, 218, 0.1);
-border-left: 3px solid var(--primary);
-box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
-}
-
-.rank {
-min-width: 35px;
-font-weight: bold;
-color: var(--primary);
-font-size: 1rem;
-}
-
-.user-name {
-flex: 1;
-margin: 0 12px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-display: flex;
-align-items: center;
-}
-
-.score {
-font-weight: bold;
-color: var(--primary);
-margin-left: auto;
-font-size: 1rem;
-}
-
-.empty-leaderboard {
-text-align: center;
-padding: 30px 20px;
-color: var(--text-secondary);
-}
-
-/* 響應式設計 */
-@media (max-width: 400px) {
-.header-actions {
-flex-direction: column;
-gap: 8px;
-}
-.header-actions .btn {
-width: 100%;
-}
-.user-currency {
-flex-direction: column;
-gap: 4px;
-}
-}
-
-/* GPU 加速 */
-.btn, .modal, .leaderboard-item, .champion-card, .medal-icon {
-transform: translateZ(0);
-backface-visibility: hidden;
-}
-
-/* 其他現有樣式... */
-.exam-container { padding: 20px; }
-.exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 16px; background: rgba(255, 255, 255, 0.03); border-radius: var(--border-radius); }
-.timer { font-size: 1.4rem; color: var(--primary); font-weight: bold; padding: 8px 16px; background: rgba(114, 137, 218, 0.1); border-radius: var(--border-radius); }
-.question { background: rgba(255, 255, 255, 0.03); padding: 24px; border-radius: var(--border-radius); margin-bottom: 20px; border: 1px solid var(--border-color); }
-.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
-.option-btn { width: 100%; text-align: left; padding: 14px 16px; border-radius: var(--border-radius); transition: var(--transition); }
-.option-btn.correct { background: linear-gradient(135deg, var(--success), #27ae60); }
-.option-btn.wrong { background: linear-gradient(135deg, var(--danger), #c0392b); }
-.exam-result { text-align: center; padding: 30px 20px; }
-.exam-result h2 { margin-bottom: 20px; color: var(--primary); }
-.exam-result p { margin-bottom: 12px; font-size: 1.05rem; }
-.exam-result button { margin: 8px; }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 3px; }
-::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); }
-.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin-bottom: 20px; }
-.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); }
-.sudoku-cell:disabled { background: var(--bg-secondary); color: var(--text-secondary); cursor: not-allowed; }
-.sudoku-cell:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3); }
-.sudoku-cell::-webkit-inner-spin-button, .sudoku-cell::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
-.loading-spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(114, 137, 218, 0.3); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; will-change: transform; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@media (max-width: 400px) { .options { grid-template-columns: 1fr; } }
-.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-::selection { background: rgba(114, 137, 218, 0.3); color: var(--text-primary); }
 </style>
 </head>
 <body>
@@ -678,7 +305,7 @@ backface-visibility: hidden;
 <div id="loadingScreen" class="container">
 <div class="loading">
 <div class="loading-spinner"></div>
-正在驗證登入狀態...
+<span id="loadingText">正在初始化系統...</span>
 </div>
 </div>
 
@@ -696,17 +323,17 @@ backface-visibility: hidden;
 <span id="currentUserWelcome">歡迎回來，載入中...</span>
 <div class="user-currency">
 <div class="currency-item">
-  <span>💰</span>
-  <span id="userCoins">0</span>
+<span>💰</span>
+<span id="userCoins">0</span>
 </div>
 <div class="currency-item">
-  <span>💎</span>
-  <span id="userGems">0</span>
+<span>💎</span>
+<span id="userGems">0</span>
 </div>
 </div>
 <div class="user-medals" id="userMedals"></div>
 </div>
-<span class="connection-status" id="connectionStatus">用戶連線中</span>
+<span class="connection-status" id="connectionStatus">系統連線中</span>
 </div>
 </div>
 <div class="header-actions">
@@ -717,13 +344,27 @@ backface-visibility: hidden;
 </div>
 </header>
 
-<!-- 挑戰項目列表 - 將動態生成 -->
 <div id="challengesList">
-<!-- 挑戰項目將在此動態生成 -->
+<div class="challenge-item">
+<div class="challenge-title">🧠 智力測驗</div>
+<div class="challenge-info">測試你的邏輯思維能力</div>
+<div class="challenge-actions">
+<button class="btn btn-primary" onclick="startChallenge('iq')">開始挑戰</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('iq')">排行榜</button>
+</div>
+</div>
+<div class="challenge-item">
+<div class="challenge-title">📊 數學運算</div>
+<div class="challenge-info">挑戰你的計算能力</div>
+<div class="challenge-actions">
+<button class="btn btn-primary" onclick="startChallenge('math')">開始挑戰</button>
+<button class="btn btn-secondary" onclick="showLeaderboard('math')">排行榜</button>
+</div>
+</div>
 </div>
 </div>
 
-<!-- 🏪 商店模態視窗 -->
+<!-- 模態視窗 -->
 <div class="modal-overlay" id="shopModal">
 <div class="modal">
 <div class="modal-header">
@@ -731,23 +372,11 @@ backface-visibility: hidden;
 <button class="close-btn" onclick="hideShop()">×</button>
 </div>
 <div class="modal-content">
-<div class="shop-container">
-<div class="shop-categories">
-<button class="category-btn active" onclick="filterShop('all')">全部</button>
-<button class="category-btn" onclick="filterShop('common')">普通</button>
-<button class="category-btn" onclick="filterShop('rare')">稀有</button>
-<button class="category-btn" onclick="filterShop('epic')">史詩</button>
-<button class="category-btn" onclick="filterShop('legendary')">傳說</button>
-</div>
-<div class="shop-items" id="shopItems">
-<!-- 商店物品將在此動態生成 -->
-</div>
-</div>
+<p>商店功能開發中...</p>
 </div>
 </div>
 </div>
 
-<!-- 🎒 背包模態視窗 -->
 <div class="modal-overlay" id="inventoryModal">
 <div class="modal">
 <div class="modal-header">
@@ -755,17 +384,11 @@ backface-visibility: hidden;
 <button class="close-btn" onclick="hideInventory()">×</button>
 </div>
 <div class="modal-content">
-<div class="inventory-container">
-<p style="margin-bottom: 16px; color: var(--text-secondary);">點擊勳章裝備/卸下 (最多裝備5個)</p>
-<div class="inventory-grid" id="inventoryGrid">
-<!-- 背包物品將在此動態生成 -->
-</div>
-</div>
+<p>背包功能開發中...</p>
 </div>
 </div>
 </div>
 
-<!-- 排行榜模態視窗 -->
 <div class="modal-overlay" id="leaderboardModal">
 <div class="modal">
 <div class="modal-header">
@@ -773,251 +396,275 @@ backface-visibility: hidden;
 <button class="close-btn" onclick="hideLeaderboard()">×</button>
 </div>
 <div class="modal-content" id="leaderboardContent">
+<p>排行榜功能開發中...</p>
 </div>
 </div>
 </div>
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script>
+// 🎯 配置管理器 - 簡化版本
+class ConfigManager {
+  static configs = {};
   
-  <!-- 保持你現有的所有 CSS 樣式不變 -->
-  <style>
-      /* 你現有的所有 CSS 樣式 */
-  </style>
-</head>
-<body>
-  <!-- 載入中畫面 -->
-  <div id="loadingScreen" class="container">
-      <div class="loading">
-          <div class="loading-spinner"></div>
-          <span id="loadingText">載入中...</span>
-      </div>
-  </div>
-
-  <!-- 你現有的所有 HTML 結構保持不變 -->
-  <div id="mainContent" class="container" style="display: none;">
-      <!-- ... 保持現有HTML結構 ... -->
-  </div>
-
-  <script>
-      // 🎯 配置管理器
-      class ConfigManager {
-          static configs = {};
-          
-          static async init() {
-              try {
-                  const [systemConfig, uiTexts, rewardsConfig] = await Promise.all([
-                      this.loadJSON('system-config.json'),
-                      this.loadJSON('ui-texts.json'),
-                      this.loadJSON('rewards-config.json')
-                  ]);
-                  
-                  this.configs = {
-                      system: systemConfig,
-                      ui: uiTexts,
-                      rewards: rewardsConfig
-                  };
-                  
-                  console.log('✅ 配置已載入');
-                  return this.configs;
-              } catch (err) {
-                  console.error('載入配置失敗:', err);
-                  // 提供預設配置
-                  this.configs = this.getDefaultConfigs();
-                  return this.configs;
-              }
+  static async init() {
+      console.log('🔍 開始載入配置...');
+      
+      try {
+          // 嘗試載入外部配置檔案
+          const response = await fetch('system-config.json');
+          if (response.ok) {
+              const config = await response.json();
+              this.configs = config;
+              console.log('✅ 外部配置載入成功');
+          } else {
+              throw new Error('外部配置檔案不存在');
           }
-          
-          static async loadJSON(file) {
-              const response = await fetch(file);
-              if (!response.ok) throw new Error(`載入 ${file} 失敗`);
-              return response.json();
-          }
-          
-          static getText(path) {
-              return this.getNestedValue(this.configs.ui, path) || path;
-          }
-          
-          static getConfig(section, path) {
-              return this.getNestedValue(this.configs[section], path);
-          }
-          
-          static getNestedValue(obj, path) {
-              return path.split('.').reduce((o, p) => o && o[p], obj);
-          }
-          
-          static formatText(template, params) {
-              if (!template) return '';
-              return template.replace(/\{(\w+)\}/g, (match, key) => params[key] || match);
-          }
-          
-          static getDefaultConfigs() {
-              return {
-                  system: {
-                      firebase: {
-                          apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
-                          authDomain: "openexammodal.firebaseapp.com",
-                          databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
-                          projectId: "openexammodal",
-                          storageBucket: "openexammodal.firebasestorage.app",
-                          messagingSenderId: "336901617556",
-                          appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
-                      },
-                      session: { loginTimeout: 3600000 },
-                      ui: { maxEquippedMedals: 5 }
-                  },
-                  ui: {
-                      messages: {
-                          loginCheck: "正在驗證登入狀態...",
-                          systemError: "系統初始化失敗，請重新整理頁面"
-                      }
-                  },
-                  rewards: {
-                      scoring: { pointsPerCorrect: 10, coinsPerCorrect: 5 }
+      } catch (err) {
+          console.log('⚠️ 外部配置載入失敗，使用預設配置');
+          this.configs = this.getDefaultConfigs();
+      }
+      
+      console.log('✅ 配置管理器初始化完成', this.configs);
+      return this.configs;
+  }
+  
+  static getText(path, defaultValue = path) {
+      try {
+          return this.getNestedValue(this.configs.ui, path) || defaultValue;
+      } catch {
+          return defaultValue;
+      }
+  }
+  
+  static getConfig(section, path, defaultValue = null) {
+      try {
+          return this.getNestedValue(this.configs[section], path) || defaultValue;
+      } catch {
+          return defaultValue;
+      }
+  }
+  
+  static getNestedValue(obj, path) {
+      if (!obj || !path) return null;
+      return path.split('.').reduce((o, p) => o && o[p], obj);
+  }
+  
+  static formatText(template, params) {
+      if (!template) return '';
+      return template.replace(/\{(\w+)\}/g, (match, key) => params[key] || match);
+  }
+  
+  static getDefaultConfigs() {
+      return {
+          system: {
+              firebase: {
+                  apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+                  authDomain: "openexammodal.firebaseapp.com",
+                  databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
+                  projectId: "openexammodal",
+                  storageBucket: "openexammodal.firebasestorage.app",
+                  messagingSenderId: "336901617556",
+                  appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
+              },
+              session: { 
+                  loginTimeout: 3600000,
+                  storageKeys: {
+                      loginFlag: 't2_login',
+                      loginTime: 't2_login_time',
+                      loginUser: 't2_login_user',
+                      loginPassword: 't2_login_password'
                   }
-              };
+              },
+              ui: { maxEquippedMedals: 5 },
+              navigation: { homePage: 'index3.html' }
+          },
+          ui: {
+              messages: {
+                  loginCheck: "正在驗證登入狀態...",
+                  systemError: "系統初始化失敗，請重新整理頁面",
+                  welcomeBack: "歡迎回來，{username}！",
+                  loginInvalid: "登入狀態無效，請重新登入",
+                  loginExpired: "登入已過期，請重新登入",
+                  insufficientFunds: "金幣不足！",
+                  buyConfirm: "確定要購買 {medalIcon} {medalName} 嗎？\n價格：{price} 金幣",
+                  buySuccess: "成功購買 {medalIcon} {medalName}！"
+              }
+          },
+          rewards: {
+              scoring: { pointsPerCorrect: 10, coinsPerCorrect: 5 }
           }
-      }
+      };
+  }
+}
 
-      // 🎯 修改現有變數和函數
-      let currentUser = null;
-      let usersData = [];
-      let database = null;
-      let examQuestions = {};
-      let medalsData = {};
-      let userMedals = { owned: [], equipped: [] };
-      let userCurrency = { coins: 0, gems: 0 };
-      let examConfigs = {};
+// 🎯 全域變數
+let currentUser = null;
+let database = null;
+let userCurrency = { coins: 100, gems: 10 }; // 預設值
 
-      // 🎯 修改初始化函數
-      async function initializeApp() {
-          try {
-              // 載入配置
-              await ConfigManager.init();
-              
-              // 更新載入文字
-              document.getElementById('loadingText').textContent = 
-                  ConfigManager.getText('messages.loginCheck');
-              
-              // 檢查登入狀態
-              const user = checkLoginStatus();
-              if (!user) return;
-
-              currentUser = user;
-              
-              // 更新歡迎文字
-              const welcomeText = ConfigManager.formatText(
-                  ConfigManager.getText('messages.welcomeBack'),
-                  { username: user }
-              );
-              document.getElementById('currentUserWelcome').textContent = welcomeText;
-
-              // 初始化 Firebase
-              firebase.initializeApp(ConfigManager.getConfig('system', 'firebase'));
-              database = firebase.database();
-
-              // 載入資料
-              await Promise.all([
-                  loadExamQuestions(),
-                  loadUsersData(),
-                  loadMedalsData(),
-                  loadExamConfigs()
-              ]);
-
-              await loadUserMedalsAndCurrency();
-              renderChallengesList();
-              await updateAllChampions();
-
-              document.getElementById('loadingScreen').style.display = 'none';
-              document.getElementById('mainContent').style.display = 'block';
-
-          } catch (err) {
-              console.error('初始化失敗:', err);
-              alert(ConfigManager.getText('messages.systemError'));
-          }
-      }
-
-      // 🎯 修改登入檢查函數
-      function checkLoginStatus() {
-          const config = ConfigManager.getConfig('system', 'session');
-          const keys = ConfigManager.getConfig('system', 'session.storageKeys') || {
-              loginFlag: 't2_login',
-              loginTime: 't2_login_time',
-              loginUser: 't2_login_user',
-              loginPassword: 't2_login_password'
-          };
-          
-          const flag = localStorage.getItem(keys.loginFlag);
-          const time = localStorage.getItem(keys.loginTime);
-          const user = localStorage.getItem(keys.loginUser);
-          
-          if (flag !== 'yes' || !time || !user) {
-              forceLogout(ConfigManager.getText('messages.loginInvalid'));
-              return false;
-          }
-          
-          const timeout = config?.loginTimeout || 3600000;
-          if (Date.now() - parseInt(time) > timeout) {
-              forceLogout(ConfigManager.getText('messages.loginExpired'));
-              return false;
-          }
-          
-          return user;
-      }
-
-      // 🎯 修改強制登出函數
-      function forceLogout(message) {
-          const keys = ConfigManager.getConfig('system', 'session.storageKeys') || {
-              loginFlag: 't2_login',
-              loginTime: 't2_login_time',
-              loginUser: 't2_login_user',
-              loginPassword: 't2_login_password'
-          };
-          
-          Object.values(keys).forEach(key => localStorage.removeItem(key));
-          
-          alert(message);
-          const homePage = ConfigManager.getConfig('system', 'navigation.homePage') || 'index3.html';
-          window.location.href = homePage;
-      }
-
-      // 🎯 修改購買勳章函數
-      async function buyMedal(medalId) {
-          const medal = medalsData.medals[medalId];
-          if (!medal || userMedals.owned.includes(medalId)) return;
-
-          if (userCurrency.coins < medal.price) {
-              alert(ConfigManager.getText('messages.insufficientFunds'));
-              return;
-          }
-
-          const confirmText = ConfigManager.formatText(
-              ConfigManager.getText('messages.buyConfirm'),
-              { medalIcon: medal.icon, medalName: medal.name, price: medal.price }
-          );
-
-          if (confirm(confirmText)) {
-              userCurrency.coins -= medal.price;
-              userMedals.owned.push(medalId);
-
-              await Promise.all([saveMedalData(), saveCurrencyData()]);
-              await renderShopItems();
-              
-              const successText = ConfigManager.formatText(
-                  ConfigManager.getText('messages.buySuccess'),
-                  { medalIcon: medal.icon, medalName: medal.name }
-              );
-              alert(successText);
-          }
-      }
-
-      // 保持所有其他現有函數，只需要逐步替換文字為 ConfigManager.getText() 調用
+// 🎯 初始化應用程式
+async function initializeApp() {
+  try {
+      console.log('🚀 開始初始化應用程式...');
       
-      // 你現有的所有其他函數...
-      // (為了簡潔，這裡省略，但實際上需要保持所有現有函數)
+      // 更新載入文字
+      updateLoadingText('正在載入配置...');
       
-      // 頁面載入完成後初始化
-      document.addEventListener('DOMContentLoaded', initializeApp);
-  </script>
+      // 載入配置
+      await ConfigManager.init();
+      
+      // 更新載入文字
+      updateLoadingText(ConfigManager.getText('messages.loginCheck'));
+      
+      // 檢查登入狀態
+      const user = checkLoginStatus();
+      if (!user) return;
+
+      currentUser = user;
+      console.log('✅ 用戶驗證成功:', currentUser);
+      
+      // 更新歡迎文字
+      const welcomeText = ConfigManager.formatText(
+          ConfigManager.getText('messages.welcomeBack'),
+          { username: user }
+      );
+      document.getElementById('currentUserWelcome').textContent = welcomeText;
+
+      // 初始化 Firebase
+      updateLoadingText('正在連接資料庫...');
+      firebase.initializeApp(ConfigManager.getConfig('system', 'firebase'));
+      database = firebase.database();
+      console.log('✅ Firebase 初始化成功');
+
+      // 更新用戶資料顯示
+      updateUserDisplay();
+
+      // 隱藏載入畫面，顯示主內容
+      document.getElementById('loadingScreen').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      
+      console.log('✅ 應用程式初始化完成');
+
+  } catch (err) {
+      console.error('❌ 初始化失敗:', err);
+      updateLoadingText('初始化失敗: ' + err.message);
+      setTimeout(() => {
+          alert(ConfigManager.getText('messages.systemError'));
+      }, 1000);
+  }
+}
+
+// 🎯 輔助函數
+function updateLoadingText(text) {
+  const loadingTextEl = document.getElementById('loadingText');
+  if (loadingTextEl) {
+      loadingTextEl.textContent = text;
+  }
+  console.log('📝', text);
+}
+
+function checkLoginStatus() {
+  const keys = ConfigManager.getConfig('system', 'session.storageKeys', {
+      loginFlag: 't2_login',
+      loginTime: 't2_login_time',
+      loginUser: 't2_login_user'
+  });
+  
+  const flag = localStorage.getItem(keys.loginFlag);
+  const time = localStorage.getItem(keys.loginTime);
+  const user = localStorage.getItem(keys.loginUser);
+  
+  console.log('🔍 檢查登入狀態:', { flag, time, user });
+  
+  if (flag !== 'yes' || !time || !user) {
+      forceLogout(ConfigManager.getText('messages.loginInvalid'));
+      return false;
+  }
+  
+  const timeout = ConfigManager.getConfig('system', 'session.loginTimeout', 3600000);
+  if (Date.now() - parseInt(time) > timeout) {
+      forceLogout(ConfigManager.getText('messages.loginExpired'));
+      return false;
+  }
+  
+  return user;
+}
+
+function forceLogout(message) {
+  const keys = ConfigManager.getConfig('system', 'session.storageKeys', {
+      loginFlag: 't2_login',
+      loginTime: 't2_login_time',
+      loginUser: 't2_login_user',
+      loginPassword: 't2_login_password'
+  });
+  
+  Object.values(keys).forEach(key => localStorage.removeItem(key));
+  
+  alert(message);
+  const homePage = ConfigManager.getConfig('system', 'navigation.homePage', 'index3.html');
+  window.location.href = homePage;
+}
+
+function updateUserDisplay() {
+  document.getElementById('userCoins').textContent = userCurrency.coins;
+  document.getElementById('userGems').textContent = userCurrency.gems;
+}
+
+// 🎯 事件處理函數
+function logout() {
+  if (confirm('確定要登出嗎？')) {
+      forceLogout('已成功登出');
+  }
+}
+
+function backToT2() {
+  const homePage = ConfigManager.getConfig('system', 'navigation.homePage', 'index3.html');
+  window.location.href = homePage;
+}
+
+function startChallenge(type) {
+  alert(`開始 ${type} 挑戰！功能開發中...`);
+}
+
+function showLeaderboard(type) {
+  document.getElementById('modalTitle').textContent = `${type} 排行榜`;
+  document.getElementById('leaderboardModal').style.display = 'flex';
+}
+
+function hideLeaderboard() {
+  document.getElementById('leaderboardModal').style.display = 'none';
+}
+
+function showTotalLeaderboard() {
+  document.getElementById('modalTitle').textContent = '總分排行榜';
+  document.getElementById('leaderboardModal').style.display = 'flex';
+}
+
+function showShop() {
+  document.getElementById('shopModal').style.display = 'flex';
+}
+
+function hideShop() {
+  document.getElementById('shopModal').style.display = 'none';
+}
+
+function showInventory() {
+  document.getElementById('inventoryModal').style.display = 'flex';
+}
+
+function hideInventory() {
+  document.getElementById('inventoryModal').style.display = 'none';
+}
+
+// 🎯 頁面載入完成後初始化
+document.addEventListener('DOMContentLoaded', initializeApp);
+
+// 🎯 點擊模態視窗背景關閉
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('modal-overlay')) {
+      e.target.style.display = 'none';
+  }
+});
+</script>
 </body>
 </html>
