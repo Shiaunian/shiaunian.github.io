@@ -1,0 +1,23 @@
+{
+"scoring": {
+  "pointsPerCorrect": 10,
+  "coinsPerCorrect": 5
+},
+"bonuses": {
+  "perfectScore": {
+    "coins": 50,
+    "gems": 1
+  },
+  "speedBonus": {
+    "coins": 20,
+    "requiredRatio": 0.7
+  }
+},
+"messages": {
+  "correctAnswerBonus": "📝 答對{count}題獲得{coins}金幣",
+  "perfectBonus": "🏆 滿分獎勵：+{coins}金幣 +{gems}寶石", 
+  "speedBonus": "⚡ 快速答題獎勵：+{coins}金幣",
+  "noBonus": "💰 未達滿分，無金幣獎勵",
+  "examComplete": "🎉 考試完成！"
+}
+}
