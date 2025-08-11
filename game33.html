@@ -411,25 +411,177 @@ text-align: center;
 line-height: 1.2;
 }
 
-/* 排行榜勳章顯示 - 修正版本 */
+/* 排行榜勳章顯示 - 升級版本 */
 .leaderboard-medals {
     display: flex;
-    gap: 2px;
-    margin-top: 2px;
+    gap: 4px;
+    margin-top: 4px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .leaderboard-medal {
-    width: 16px;
-    height: 16px;
+    width: 32px;  /* 🔧 從16px增加到32px，放大兩倍 */
+    height: 32px; /* 🔧 從16px增加到32px，放大兩倍 */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.6rem;
-    border: 1px solid;
-    background: rgba(255, 255, 255, 0.05);
+    font-size: 1.2rem; /* 🔧 從0.6rem增加到1.2rem */
+    border: 2px solid; /* 🔧 從1px增加到2px，邊框更明顯 */
+    background: rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    
+    /* 🌟 新增：反光效果基礎 */
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.2) 0%, 
+        rgba(255, 255, 255, 0.05) 50%, 
+        rgba(0, 0, 0, 0.1) 100%);
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 🌟 新增：反光動畫效果 */
+.leaderboard-medal::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 70%);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+/* 🌟 新增：懸停時的反光效果 */
+.leaderboard-medal:hover::before {
+    opacity: 1;
+    animation: shine 0.6s ease-in-out;
+}
+
+.leaderboard-medal:hover {
+    transform: scale(1.1) translateY(-1px);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* 🌟 反光動畫關鍵幀 */
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* 🔧 修正：勳章內圖片樣式 */
+.leaderboard-medal img {
+    width: 24px;  /* 🔧 從12px增加到24px */
+    height: 24px; /* 🔧 從12px增加到24px */
+    object-fit: contain;
+    border-radius: 4px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.leaderboard-medal:hover img {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+/* 🌟 新增：不同稀有度的特殊效果 */
+.leaderboard-medal[data-rarity="common"] {
+    border-color: #84cc16;
+    box-shadow: 
+        0 2px 8px rgba(132, 204, 22, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-medal[data-rarity="rare"] {
+    border-color: #3b82f6;
+    box-shadow: 
+        0 2px 8px rgba(59, 130, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-medal[data-rarity="epic"] {
+    border-color: #8b5cf6;
+    box-shadow: 
+        0 2px 8px rgba(139, 92, 246, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard-medal[data-rarity="legendary"] {
+    border-color: #f59e0b;
+    box-shadow: 
+        0 2px 8px rgba(245, 158, 11, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    animation: legendaryGlow 2s ease-in-out infinite alternate;
+}
+
+/* 🌟 傳說級勳章的特殊發光效果 */
+@keyframes legendaryGlow {
+    0% {
+        box-shadow: 
+            0 2px 8px rgba(245, 158, 11, 0.4),
+            0 0 10px rgba(245, 158, 11, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 
+            0 2px 8px rgba(245, 158, 11, 0.6),
+            0 0 20px rgba(245, 158, 11, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* 🔧 調整用戶名稱區域以適應更大的勳章 */
+.user-name {
+    flex: 1;
+    margin: 0 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 40px; /* 🔧 新增：確保有足夠高度容納大勳章 */
+}
+
+/* 🔧 調整排行榜項目高度 */
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    padding: 12px; /* 🔧 從10px增加到12px */
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+    border-radius: 6px;
+    margin-bottom: 2px;
+    min-height: 60px; /* 🔧 新增：確保有足夠高度 */
 }
 
 .leaderboard-medal img {
@@ -1923,7 +2075,7 @@ async function showTotalLeaderboard() {
     }
 }
 
-// 🏅 獲取用戶勳章圖示 - 修正版本
+// 🏅 獲取用戶勳章圖示 - 升級版本
 function getUserMedalIcons(username) {
     // 🔧 修正：從 usersData 正確獲取用戶勳章資料
     const userData = usersData[username];
@@ -1935,9 +2087,14 @@ function getUserMedalIcons(username) {
         const medal = medalsData.medals[medalId];
         if (medal) {
             const iconContent = medal.icon.startsWith('http') ? 
-                `<img src="${medal.icon}" alt="${medal.name}" style="width: 12px; height: 12px; object-fit: contain; border-radius: 2px;">` : 
+                `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">` : 
                 medal.icon;
-            return `<span class="leaderboard-medal" style="border-color: ${medal.color}; background: rgba(255,255,255,0.05);" title="${medal.name}">${iconContent}</span>`;
+            return `<span class="leaderboard-medal" 
+                        style="border-color: ${medal.color};" 
+                        data-rarity="${medal.rarity}"
+                        title="${medal.name}: ${medal.description}">
+                        ${iconContent}
+                    </span>`;
         }
         return '';
     }).join('');
