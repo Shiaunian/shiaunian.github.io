@@ -314,9 +314,9 @@
     },
     "quick_thinker": {
       "id": "quick_thinker",
-      "name": "思維敏捷",
+      "name": "思維敏捷勳章",
       "description": "反應迅速的智慧之光",
-      "icon": "⚡",
+      "icon": "https://i.ibb.co/5Wxr8V5g/image.png",
       "rarity": "epic",
       "price": {
         "coins": 3800,
@@ -324,11 +324,11 @@
       },
       "color": "#8b5cf6"
     },
-    "persistence_master": {
-      "id": "persistence_master",
-      "name": "堅持不懈",
-      "description": "持之以恆的毅力象徵",
-      "icon": "🏔️",
+    "2025persistence_master": {
+      "id": "2025persistence_master",
+      "name": "2025 堅持不懈勳章",
+      "description": "永遠保持樂觀，無論失敗多少次都不放棄的精神",
+      "icon": "https://i.ibb.co/5hTfGR0C/2025.png",
       "rarity": "epic",
       "price": {
         "coins": 3500,
@@ -336,15 +336,15 @@
       },
       "color": "#8b5cf6"
     },
-    "total_dominator": {
-      "id": "total_dominator",
-      "name": "霸主",
-      "description": "至高無上的榮耀",
-      "icon": "🏆",
+    "2025Frieza": {
+      "id": "2025Frieza",
+      "name": "2025 弗利沙勳章",
+      "description": "邪惡之霸主弗利沙",
+      "icon": "https://i.ibb.co/DHTFyHWf/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 7000,
-        "gems": 5
+        "coins": 8000,
+        "gems": 10
       },
       "color": "#f59e0b"
     },
