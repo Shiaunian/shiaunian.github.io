@@ -4,7 +4,7 @@
       "id": "newbie",
       "name": "新手上路",
       "description": "踏出第一步的勇氣",
-      "icon": "https://i.ibb.co/GQkXcDxd/2025.png",
+      "icon": "🔰",
       "rarity": "common",
       "price": {
         "coins": 400,
@@ -16,10 +16,10 @@
       "id": "speed_master",
       "name": "速答大師",
       "description": "展現你的快速反應能力",
-      "icon": "https://i.ibb.co/JRGL89rL/image.png",
+      "icon": "✅",
       "rarity": "common",
       "price": {
-        "coins": 600,
+        "coins": 440,
         "gems": 0
       },
       "color": "#84cc16"
@@ -28,10 +28,10 @@
       "id": "Proud_Guy",
       "name": "得意小哥",
       "description": "擁有小筆金幣財富",
-      "icon": "https://i.ibb.co/C5pvzgWL/2025.png",
+      "icon": "⚜️",
       "rarity": "common",
       "price": {
-        "coins": 800,
+        "coins": 440,
         "gems": 0
       },
       "color": "#84cc16"
@@ -40,10 +40,10 @@
       "id": "Music_Lover",
       "name": "音樂愛好者",
       "description": "熱愛聽音樂的自己",
-      "icon": "https://i.ibb.co/23dQm9kT/2025.png",
+      "icon": "🎼",
       "rarity": "common",
       "price": {
-        "coins": 850,
+        "coins": 450,
         "gems": 0
       },
       "color": "#84cc16"
@@ -52,10 +52,10 @@
       "id": "perfect_scorer",
       "name": "真相追尋者",
       "description": "強調追求真相的精神",
-      "icon": "https://i.ibb.co/j9RywPk7/image.png",
+      "icon": "♟️",
       "rarity": "rare",
       "price": {
-        "coins": 2200,
+        "coins": 700,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -64,10 +64,10 @@
       "id": "sudoku_genius",
       "name": "數獨天才",
       "description": "邏輯思維的象徵",
-      "icon": "https://i.ibb.co/QjvyTm6B/2025.png",
+      "icon": "❔",
       "rarity": "rare",
       "price": {
-        "coins": 1250,
+        "coins": 750,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -79,7 +79,7 @@
       "icon": "🌍",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 800,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -91,7 +91,7 @@
       "icon": "⏰",
       "rarity": "rare",
       "price": {
-        "coins": 1350,
+        "coins": 850,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -103,7 +103,7 @@
       "icon": "🔥",
       "rarity": "rare",
       "price": {
-        "coins": 1400,
+        "coins": 860,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -115,7 +115,7 @@
       "icon": "♈",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -127,7 +127,7 @@
       "icon": "♉",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -139,7 +139,7 @@
       "icon": "♊",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -151,7 +151,7 @@
       "icon": "♋",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -163,7 +163,7 @@
       "icon": "♌",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -175,7 +175,7 @@
       "icon": "♍",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -187,7 +187,7 @@
       "icon": "♎",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -199,7 +199,7 @@
       "icon": "♏",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -211,7 +211,7 @@
       "icon": "♐",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -223,7 +223,7 @@
       "icon": "♑",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -235,7 +235,7 @@
       "icon": "♒",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -247,7 +247,7 @@
       "icon": "♓",
       "rarity": "rare",
       "price": {
-        "coins": 1300,
+        "coins": 900,
         "gems": 0
       },
       "color": "#3b82f6"
@@ -256,10 +256,10 @@
       "id": "champion",
       "name": "榜首征服者",
       "description": "王者風範的展現",
-      "icon": "👑",
+      "icon": "https://i.ibb.co/C5pvzgWL/2025.png",
       "rarity": "epic",
       "price": {
-        "coins": 3500,
+        "coins": 1500,
         "gems": 2
       },
       "color": "#8b5cf6"
@@ -268,10 +268,10 @@
       "id": "exam_collector",
       "name": "考試收集家",
       "description": "博學多聞的體現",
-      "icon": "📚",
+      "icon": "https://i.ibb.co/GQkXcDxd/2025.png",
       "rarity": "epic",
       "price": {
-        "coins": 3600,
+        "coins": 1600,
         "gems": 2
       },
       "color": "#8b5cf6"
@@ -280,7 +280,7 @@
       "id": "knowledge_seeker",
       "name": "知識探索者",
       "description": "永不停止學習的精神",
-      "icon": "🔍",
+      "icon": "https://i.ibb.co/j9RywPk7/image.png",
       "rarity": "epic",
       "price": {
         "coins": 3200,
@@ -355,8 +355,8 @@
       "icon": "https://i.ibb.co/WNJK3P9b/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 15000,
-        "gems": 30
+        "coins": 9000,
+        "gems": 11
       },
       "color": "#f59e0b"
     },
@@ -367,8 +367,8 @@
       "icon": "https://i.ibb.co/V0wsgSyC/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 14000,
-        "gems": 28
+        "coins": 9200,
+        "gems": 11
       },
       "color": "#f59e0b"
     },
@@ -379,8 +379,8 @@
       "icon": "https://i.ibb.co/C5FsQQSq/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 13500,
-        "gems": 27
+        "coins": 9200,
+        "gems": 11
       },
       "color": "#f59e0b"
     },
@@ -391,8 +391,8 @@
       "icon": "https://i.ibb.co/mCXjdYBK/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 12500,
-        "gems": 25
+        "coins": 9500,
+        "gems": 12
       },
       "color": "#f59e0b"
     },
@@ -403,8 +403,8 @@
       "icon": "https://i.ibb.co/PzQF6yTR/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 12000,
-        "gems": 24
+        "coins": 9500,
+        "gems": 12
       },
       "color": "#f59e0b"
     },
@@ -415,8 +415,8 @@
       "icon": "https://i.ibb.co/prfGnfGM/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 11000,
-        "gems": 22
+        "coins": 9500,
+        "gems": 12
       },
       "color": "#f59e0b"
     },
@@ -427,8 +427,8 @@
       "icon": "https://i.ibb.co/zTNhSKtk/2025.png",
       "rarity": "legendary",
       "price": {
-        "coins": 10000,
-        "gems": 20
+        "coins": 7700,
+        "gems": 8
       },
       "color": "#f59e0b"
     }
