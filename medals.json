@@ -348,11 +348,11 @@
       },
       "color": "#f59e0b"
     },
-    "invincible_symbol": {
-      "id": "invincible_symbol",
-      "name": "無敵象徵勳章",
+    "2025invincible_symbol": {
+      "id": "2025invincible_symbol",
+      "name": "2025 無敵象徵勳章",
       "description": "象徵絕對力量與不可戰勝的精神",
-      "icon": "⚔️",
+      "icon": "https://i.ibb.co/WNJK3P9b/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 15000,
@@ -360,11 +360,11 @@
       },
       "color": "#f59e0b"
     },
-    "super_nen_power": {
-      "id": "super_nen_power",
-      "name": "超念能力勳章",
+    "2025super_nen_power": {
+      "id": "2025super_nen_power",
+      "name": "2025 超念能力勳章",
       "description": "掌握超越常人的念能力者的象徵",
-      "icon": "✨",
+      "icon": "https://i.ibb.co/V0wsgSyC/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 14000,
@@ -372,11 +372,11 @@
       },
       "color": "#f59e0b"
     },
-    "nen_eye_vision": {
+    "2025nen_eye_vision": {
       "id": "nen_eye_vision",
-      "name": "念力瞳眼勳章",
+      "name": "2025 念力瞳眼勳章",
       "description": "能看透一切的神秘之眼",
-      "icon": "👁️",
+      "icon": "https://i.ibb.co/C5FsQQSq/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 13500,
@@ -384,11 +384,11 @@
       },
       "color": "#f59e0b"
     },
-    "flame_breathing": {
-      "id": "flame_breathing",
-      "name": "火之呼吸勳章",
+    "2025flame_breathing": {
+      "id": "2025flame_breathing",
+      "name": "2025 炎之呼吸勳章",
       "description": "掌握烈焰呼吸法的強者之證",
-      "icon": "🔥",
+      "icon": "https://i.ibb.co/mCXjdYBK/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 12500,
