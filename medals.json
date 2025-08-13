@@ -370,7 +370,7 @@
         "coins": 14000,
         "gems": 28
       },
-      "color": "#8b5cf6"
+      "color": "#f59e0b"
     },
     "nen_eye_vision": {
       "id": "nen_eye_vision",
@@ -382,7 +382,7 @@
         "coins": 13500,
         "gems": 27
       },
-      "color": "#3b82f6"
+      "color": "#f59e0b"
     },
     "flame_breathing": {
       "id": "flame_breathing",
@@ -394,7 +394,7 @@
         "coins": 12500,
         "gems": 25
       },
-      "color": "#ef4444"
+      "color": "#f59e0b"
     },
     "thunder_breathing": {
       "id": "thunder_breathing",
@@ -406,7 +406,7 @@
         "coins": 12000,
         "gems": 24
       },
-      "color": "#fbbf24"
+      "color": "#f59e0b"
     },
     "thunder_master": {
       "id": "thunder_master",
@@ -418,7 +418,7 @@
         "coins": 11000,
         "gems": 22
       },
-      "color": "#fbbf24"
+      "color": "#f59e0b"
     },
     "adorable_silly": {
       "id": "adorable_silly",
@@ -430,7 +430,7 @@
         "coins": 10000,
         "gems": 20
       },
-      "color": "#ec4899"
+      "color": "#f59e0b"
     }
   },
   "rarityColors": {
