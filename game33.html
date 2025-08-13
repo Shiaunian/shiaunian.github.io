@@ -833,8 +833,8 @@ backface-visibility: hidden;
 ::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 3px; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); }
-.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin: 0 auto 20px; max-width: 300px; }
-.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); appearance: textfield; -moz-appearance: textfield; -webkit-appearance: textfield; }
+.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin-bottom: 20px; }
+.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); }
 .sudoku-cell:disabled { background: var(--bg-secondary); color: var(--text-secondary); cursor: not-allowed; }
 .sudoku-cell:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3); }
 .sudoku-cell::-webkit-inner-spin-button, .sudoku-cell::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -844,7 +844,6 @@ backface-visibility: hidden;
 @media (max-width: 400px) { .options { grid-template-columns: 1fr; } }
 .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 ::selection { background: rgba(114, 137, 218, 0.3); color: var(--text-primary); }
-
 </style>
 </head>
 <body>
@@ -1386,63 +1385,33 @@ await renderInventory();
 }
 
 async function loadExamQuestions() {
-    try {
-        // 檢查快取
-        const cacheKey = 'exam_questions_v1';
-        const cached = localStorage.getItem(cacheKey);
-        const cacheTime = localStorage.getItem(cacheKey + '_time');
+try {
+// 檢查快取
+const cacheKey = 'exam_questions_v1';
+const cached = localStorage.getItem(cacheKey);
+const cacheTime = localStorage.getItem(cacheKey + '_time');
 
-        // 快取有效期 1 小時
-        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-            examQuestions = JSON.parse(cached);
-            console.log('✅ 從快取載入題庫');
-            
-            // 動態生成新的數獨題目，不使用快取的
-            examQuestions.sudoku = generateSudokuQuestions(5, 4);
-            console.log('✅ 已動態生成新的數獨題目');
-            return;
-        }
-
-        try {
-            const resp = await fetch('questions.json');
-            if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
-            examQuestions = await resp.json();
-            
-            // 動態生成數獨題目，而不使用JSON中的
-            examQuestions.sudoku = generateSudokuQuestions(10, 4);
-            console.log('✅ 已動態生成數獨題目');
-            
-            // 儲存到快取，但不包含數獨（因為每次都會重新生成）
-            const cacheData = {...examQuestions};
-            delete cacheData.sudoku; // 從快取中移除數獨，每次都重新生成
-            
-            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
-            localStorage.setItem(cacheKey + '_time', Date.now().toString());
-            
-            console.log('✅ 題庫已載入並快取', examQuestions);
-        } catch (fetchError) {
-            console.error('載入題庫文件失敗:', fetchError);
-            
-            // 如果無法加載題庫文件，使用預設題庫和動態生成的數獨
-            examQuestions = {
-                sudoku: generateSudokuQuestions(10, 4),
-                // 可以添加其他預設題庫
-            };
-            
-            console.log('⚠️ 使用預設題庫和動態生成的數獨替代', examQuestions);
-        }
-    } catch (err) {
-        console.error('題庫處理錯誤:', err);
-        
-        // 最終保底：確保至少有數獨題庫
-        if (!examQuestions) examQuestions = {};
-        // 在快取情況下
-        examQuestions.sudoku = generateSudokuQuestions(10, 4);
-        
-        console.log('⚠️ 發生錯誤，使用動態生成的數獨題庫');
-    }
+// 快取有效期 1 小時
+if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+examQuestions = JSON.parse(cached);
+console.log('✅ 從快取載入題庫');
+return;
 }
 
+const resp = await fetch('questions.json');
+if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
+examQuestions = await resp.json();
+
+// 儲存到快取
+localStorage.setItem(cacheKey, JSON.stringify(examQuestions));
+localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+console.log('✅ 題庫已載入並快取', examQuestions);
+} catch (err) {
+console.error(err);
+alert('系統錯誤：無法載入題庫檔案');
+}
+}
 
 // 全域變數
 let currentUser = null;
@@ -1725,11 +1694,6 @@ function startExam(examType) {
         fastCorrectAnswers: 0  // 🆕 新增：快速且答對的題目數
     };
 
-    // 調試輸出
-    if (examType === 'sudoku') {
-        console.log("數獨題目:", currentQuestions);
-    }
-
     showExamInterface();
     displayQuestion();
     startQuestionTimer();
@@ -1776,24 +1740,24 @@ function displayQuestion() {
 
     document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
 
-        if (currentExam === 'sudoku') {
-            // 數獨特殊顯示
-            questionContainer.innerHTML = `
-            <h3>${question.question}</h3>
-            <div class="sudoku-grid">
-            ${question.grid.map((cell, index) => 
-                `<input type="number" class="sudoku-cell" 
-                ${cell !== 0 ? `value="${cell}" disabled` : ''} 
-                min="1" max="4" 
-                data-index="${index}"
-                ${cell === 0 ? 'oninput="this.value=this.value.replace(/[^1-4]/g,\'\'); if(this.value) checkSudokuAnswer();"' : ''}>`
-            ).join('')}
-            </div>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
-            填入1-4的數字，使每行每列都包含1-4
-            </p>
-            `;
-        } else {
+    if (currentExam === 'sudoku') {
+        // 數獨特殊顯示
+        questionContainer.innerHTML = `
+        <h3>${question.question}</h3>
+        <div class="sudoku-grid">
+        ${question.grid.map((cell, index) => 
+            `<input type="number" class="sudoku-cell" 
+            ${cell !== 0 ? `value="${cell}" disabled` : ''} 
+            min="1" max="4" 
+            data-index="${index}"
+            ${cell === 0 ? 'onchange="checkSudokuAnswer()"' : ''}>`
+        ).join('')}
+        </div>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+        填入1-4的數字，使每行每列都包含1-4
+        </p>
+        `;
+    } else {
         // 一般題目顯示
         const optionsHtml = question.options.map((option, index) => 
             `<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
@@ -1906,45 +1870,30 @@ function checkSudokuAnswer() {
     const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
     const question = currentQuestions[currentQuestionIndex];
 
-    // 調試輸出
-    console.log("檢查數獨答案:");
-    console.log("用戶填寫:", userGrid);
-    console.log("正確答案:", question.solution);
-
     // 檢查是否填完
     const isEmpty = userGrid.some(cell => cell === 0);
-    if (isEmpty) {
-        console.log("數獨未填完，跳過檢查");
-        return;
-    }
+    if (isEmpty) return;
 
     // 檢查答案
-    let isCorrect = false;
-    try {
-        isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-        console.log("答案比對結果:", isCorrect);
-    } catch (error) {
-        console.error("答案比對出錯:", error);
-    }
-
+    const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
     const responseTime = (Date.now() - questionStartTime) / 1000;
     const config = examConfigs[currentExam];
 
     clearInterval(examTimer);
 
-    userScores.totalAnswers++;
+    userScores.totalAnswers++; // 🆕 追蹤總答題數
 
-    // 檢查快速答題
+    // 🏅 檢查快速答題
     const isFast = responseTime <= config.fastAnswerThreshold;
     if (isFast) {
         userScores.fastAnswers++;
     }
 
-    // 只有答對才加分
+    // 🔧 修正：只有答對才加分
     if (isCorrect) {
         userScores.correctAnswers++;
         
-        // 只有答對且快速才計入快速正確答案
+        // 🎯 只有答對且快速才計入快速正確答案
         if (isFast) {
             userScores.fastCorrectAnswers++;
         }
@@ -1985,122 +1934,6 @@ function nextQuestion(wasCorrect) {
     }
 }
 
-// 數獨生成器函數
-function generateSudoku(size = 4, difficulty = 0.5) {
-    // 創建一個空的數獨網格
-    const grid = Array(size * size).fill(0);
-    const solution = Array(size * size).fill(0);
-    
-    // 填充解決方案
-    fillSudoku(solution, size);
-    
-    // 複製解決方案到網格
-    for (let i = 0; i < solution.length; i++) {
-        grid[i] = solution[i];
-    }
-    
-    // 根據難度移除一些數字
-    const cellsToRemove = Math.floor((size * size) * difficulty);
-    let removed = 0;
-    
-    while (removed < cellsToRemove) {
-        const pos = Math.floor(Math.random() * (size * size));
-        if (grid[pos] !== 0) {
-            grid[pos] = 0;
-            removed++;
-        }
-    }
-    
-    return {
-        grid: grid,
-        solution: solution
-    };
-}
-
-// 填充數獨解決方案
-function fillSudoku(grid, size) {
-    const numbers = Array.from({length: size}, (_, i) => i + 1);
-    return fillCell(grid, 0, size, numbers);
-}
-
-// 遞歸填充單元格
-function fillCell(grid, index, size, numbers) {
-    if (index >= grid.length) {
-        return true; // 所有單元格都已填充
-    }
-    
-    // 對數字進行洗牌以獲得隨機解
-    shuffleArray(numbers);
-    
-    const row = Math.floor(index / size);
-    const col = index % size;
-    
-    for (let num of numbers) {
-        if (isValidPlacement(grid, row, col, num, size)) {
-            grid[index] = num;
-            
-            if (fillCell(grid, index + 1, size, numbers)) {
-                return true;
-            }
-            
-            grid[index] = 0; // 回溯
-        }
-    }
-    
-    return false;
-}
-
-// 檢查數字放置是否有效
-function isValidPlacement(grid, row, col, num, size) {
-    // 檢查行
-    for (let i = 0; i < size; i++) {
-        if (grid[row * size + i] === num) {
-            return false;
-        }
-    }
-    
-    // 檢查列
-    for (let i = 0; i < size; i++) {
-        if (grid[i * size + col] === num) {
-            return false;
-        }
-    }
-    
-    // 檢查子網格 (僅適用於 4x4 和 9x9)
-    if (size === 4) {
-        const boxSize = 2;
-        const boxRow = Math.floor(row / boxSize);
-        const boxCol = Math.floor(col / boxSize);
-        
-        for (let i = 0; i < boxSize; i++) {
-            for (let j = 0; j < boxSize; j++) {
-                const r = boxRow * boxSize + i;
-                const c = boxCol * boxSize + j;
-                if (grid[r * size + c] === num) {
-                    return false;
-                }
-            }
-        }
-    } else if (size === 9) {
-        const boxSize = 3;
-        const boxRow = Math.floor(row / boxSize);
-        const boxCol = Math.floor(col / boxSize);
-        
-        for (let i = 0; i < boxSize; i++) {
-            for (let j = 0; j < boxSize; j++) {
-                const r = boxRow * boxSize + i;
-                const c = boxCol * boxSize + j;
-                if (grid[r * size + c] === num) {
-                    return false;
-                }
-            }
-        }
-    }
-    
-    return true;
-}
-
-// 生成動態數獨題目
 
 // 結束考試 - 修正版本
 async function finishExam() {
