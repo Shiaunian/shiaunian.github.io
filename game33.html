@@ -1386,92 +1386,60 @@ await renderInventory();
 }
 
 async function loadExamQuestions() {
-try {
-    // 檢查快取
-    const cacheKey = 'exam_questions_v1';
-    const cached = localStorage.getItem(cacheKey);
-    const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-    // 快取有效期 1 小時
-    if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-        examQuestions = JSON.parse(cached);
-        console.log('✅ 從快取載入題庫');
-        
-        // 確保數獨題庫存在
-        if (!examQuestions.sudoku || examQuestions.sudoku.length === 0) {
-            examQuestions.sudoku = getDefaultSudokuQuestions();
-            console.log('⚠️ 從快取載入的題庫中沒有數獨題目，已添加預設數獨題目');
-        }
-        return;
-    }
-
     try {
-        const resp = await fetch('questions.json');
-        if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
-        examQuestions = await resp.json();
-        
-        // 確保數獨題庫存在
-        if (!examQuestions.sudoku || examQuestions.sudoku.length === 0) {
-            examQuestions.sudoku = getDefaultSudokuQuestions();
-            console.log('⚠️ 載入的題庫中沒有數獨題目，已添加預設數獨題目');
-        }
-        
-        // 儲存到快取
-        localStorage.setItem(cacheKey, JSON.stringify(examQuestions));
-        localStorage.setItem(cacheKey + '_time', Date.now().toString());
-        
-        console.log('✅ 題庫已載入並快取', examQuestions);
-    } catch (fetchError) {
-        console.error('載入題庫文件失敗:', fetchError);
-        
-        // 如果無法加載題庫文件，使用預設題庫
-        examQuestions = {
-            sudoku: getDefaultSudokuQuestions(),
-            // 可以添加其他預設題庫
-        };
-        
-        console.log('⚠️ 使用預設題庫替代', examQuestions);
-    }
-} catch (err) {
-    console.error('題庫處理錯誤:', err);
-    
-    // 最終保底：確保至少有數獨題庫
-    if (!examQuestions) examQuestions = {};
-    examQuestions.sudoku = getDefaultSudokuQuestions();
-    
-    console.log('⚠️ 發生錯誤，使用預設數獨題庫');
-}
-}
+        // 檢查快取
+        const cacheKey = 'exam_questions_v1';
+        const cached = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(cacheKey + '_time');
 
-// 預設數獨題目
-function getDefaultSudokuQuestions() {
-    return [
-        {
-            question: "簡單數獨 #1",
-            grid: [1,2,0,4, 0,0,2,0, 2,0,0,1, 0,1,4,0],
-            solution: [1,2,3,4, 4,3,2,1, 2,4,1,3, 3,1,4,2]
-        },
-        {
-            question: "簡單數獨 #2",
-            grid: [0,0,3,0, 3,4,0,0, 0,0,4,1, 1,0,0,0],
-            solution: [4,1,3,2, 3,4,1,2, 2,3,4,1, 1,2,3,4]
-        },
-        {
-            question: "簡單數獨 #3",
-            grid: [0,3,4,0, 4,0,0,2, 2,0,0,3, 0,2,1,0],
-            solution: [1,3,4,2, 4,1,3,2, 2,4,1,3, 3,2,1,4]
-        },
-        {
-            question: "中等數獨 #1",
-            grid: [0,0,0,4, 0,1,0,0, 0,0,2,0, 1,0,0,0],
-            solution: [2,3,1,4, 4,1,3,2, 3,4,2,1, 1,2,4,3]
-        },
-        {
-            question: "中等數獨 #2",
-            grid: [1,0,0,0, 0,0,1,0, 0,3,0,0, 0,0,0,2],
-            solution: [1,2,4,3, 3,4,1,2, 2,3,1,4, 4,1,3,2]
+        // 快取有效期 1 小時
+        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+            examQuestions = JSON.parse(cached);
+            console.log('✅ 從快取載入題庫');
+            
+            // 動態生成新的數獨題目，不使用快取的
+            examQuestions.sudoku = generateSudokuQuestions(5, 4);
+            console.log('✅ 已動態生成新的數獨題目');
+            return;
         }
-    ];
+
+        try {
+            const resp = await fetch('questions.json');
+            if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
+            examQuestions = await resp.json();
+            
+            // 動態生成數獨題目，而不使用JSON中的
+            examQuestions.sudoku = generateSudokuQuestions(5, 4);
+            console.log('✅ 已動態生成數獨題目');
+            
+            // 儲存到快取，但不包含數獨（因為每次都會重新生成）
+            const cacheData = {...examQuestions};
+            delete cacheData.sudoku; // 從快取中移除數獨，每次都重新生成
+            
+            localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+            localStorage.setItem(cacheKey + '_time', Date.now().toString());
+            
+            console.log('✅ 題庫已載入並快取', examQuestions);
+        } catch (fetchError) {
+            console.error('載入題庫文件失敗:', fetchError);
+            
+            // 如果無法加載題庫文件，使用預設題庫和動態生成的數獨
+            examQuestions = {
+                sudoku: generateSudokuQuestions(5, 4),
+                // 可以添加其他預設題庫
+            };
+            
+            console.log('⚠️ 使用預設題庫和動態生成的數獨替代', examQuestions);
+        }
+    } catch (err) {
+        console.error('題庫處理錯誤:', err);
+        
+        // 最終保底：確保至少有數獨題庫
+        if (!examQuestions) examQuestions = {};
+        examQuestions.sudoku = generateSudokuQuestions(5, 4);
+        
+        console.log('⚠️ 發生錯誤，使用動態生成的數獨題庫');
+    }
 }
 
 
@@ -2016,6 +1984,139 @@ function nextQuestion(wasCorrect) {
     }
 }
 
+// 數獨生成器函數
+function generateSudoku(size = 4, difficulty = 0.5) {
+    // 創建一個空的數獨網格
+    const grid = Array(size * size).fill(0);
+    const solution = Array(size * size).fill(0);
+    
+    // 填充解決方案
+    fillSudoku(solution, size);
+    
+    // 複製解決方案到網格
+    for (let i = 0; i < solution.length; i++) {
+        grid[i] = solution[i];
+    }
+    
+    // 根據難度移除一些數字
+    const cellsToRemove = Math.floor((size * size) * difficulty);
+    let removed = 0;
+    
+    while (removed < cellsToRemove) {
+        const pos = Math.floor(Math.random() * (size * size));
+        if (grid[pos] !== 0) {
+            grid[pos] = 0;
+            removed++;
+        }
+    }
+    
+    return {
+        grid: grid,
+        solution: solution
+    };
+}
+
+// 填充數獨解決方案
+function fillSudoku(grid, size) {
+    const numbers = Array.from({length: size}, (_, i) => i + 1);
+    return fillCell(grid, 0, size, numbers);
+}
+
+// 遞歸填充單元格
+function fillCell(grid, index, size, numbers) {
+    if (index >= grid.length) {
+        return true; // 所有單元格都已填充
+    }
+    
+    // 對數字進行洗牌以獲得隨機解
+    shuffleArray(numbers);
+    
+    const row = Math.floor(index / size);
+    const col = index % size;
+    
+    for (let num of numbers) {
+        if (isValidPlacement(grid, row, col, num, size)) {
+            grid[index] = num;
+            
+            if (fillCell(grid, index + 1, size, numbers)) {
+                return true;
+            }
+            
+            grid[index] = 0; // 回溯
+        }
+    }
+    
+    return false;
+}
+
+// 檢查數字放置是否有效
+function isValidPlacement(grid, row, col, num, size) {
+    // 檢查行
+    for (let i = 0; i < size; i++) {
+        if (grid[row * size + i] === num) {
+            return false;
+        }
+    }
+    
+    // 檢查列
+    for (let i = 0; i < size; i++) {
+        if (grid[i * size + col] === num) {
+            return false;
+        }
+    }
+    
+    // 檢查子網格 (僅適用於 4x4 和 9x9)
+    if (size === 4) {
+        const boxSize = 2;
+        const boxRow = Math.floor(row / boxSize);
+        const boxCol = Math.floor(col / boxSize);
+        
+        for (let i = 0; i < boxSize; i++) {
+            for (let j = 0; j < boxSize; j++) {
+                const r = boxRow * boxSize + i;
+                const c = boxCol * boxSize + j;
+                if (grid[r * size + c] === num) {
+                    return false;
+                }
+            }
+        }
+    } else if (size === 9) {
+        const boxSize = 3;
+        const boxRow = Math.floor(row / boxSize);
+        const boxCol = Math.floor(col / boxSize);
+        
+        for (let i = 0; i < boxSize; i++) {
+            for (let j = 0; j < boxSize; j++) {
+                const r = boxRow * boxSize + i;
+                const c = boxCol * boxSize + j;
+                if (grid[r * size + c] === num) {
+                    return false;
+                }
+            }
+        }
+    }
+    
+    return true;
+}
+
+// 生成動態數獨題目
+function generateSudokuQuestions(count = 5, size = 4) {
+    const questions = [];
+    const difficulties = [0.4, 0.45, 0.5, 0.55, 0.6]; // 不同難度級別
+    
+    for (let i = 0; i < count; i++) {
+        const difficulty = difficulties[Math.min(i, difficulties.length - 1)];
+        const sudoku = generateSudoku(size, difficulty);
+        
+        questions.push({
+            question: `${i < 2 ? '簡單' : i < 4 ? '中等' : '困難'}數獨 #${i + 1}`,
+            grid: sudoku.grid,
+            solution: sudoku.solution
+        });
+    }
+    
+    return questions;
+}
 
 // 結束考試 - 修正版本
 async function finishExam() {
