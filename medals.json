@@ -312,6 +312,54 @@
       },
       "color": "#8b5cf6"
     },
+    "Badge_001": {
+      "id": "Badge_001",
+      "name": "史詩三眼怪勳章",
+      "description": "史詩三眼怪2025",
+      "icon": "https://i.ibb.co/w5dsFY7/image.png",
+      "rarity": "epic",
+      "price": {
+        "coins": 3000,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
+    "Badge_002": {
+      "id": "Badge_002",
+      "name": "史詩呆呆獸勳章",
+      "description": "史詩呆呆獸2025",
+      "icon": "https://i.ibb.co/nNy1GYJv/image.png",
+      "rarity": "epic",
+      "price": {
+        "coins": 3000,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
+    "Badge_003": {
+      "id": "Badge_003",
+      "name": "史詩超夢勳章",
+      "description": "史詩超夢2025",
+      "icon": "https://i.ibb.co/YTF6GvBy/image.png",
+      "rarity": "epic",
+      "price": {
+        "coins": 3000,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
+    "Badge_004": {
+      "id": "Badge_004",
+      "name": "史詩耿鬼勳章",
+      "description": "史詩耿鬼2025",
+      "icon": "https://i.ibb.co/FvvMtZc/image.png",
+      "rarity": "epic",
+      "price": {
+        "coins": 3000,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
     "quick_thinker": {
       "id": "quick_thinker",
       "name": "思維敏捷勳章",
