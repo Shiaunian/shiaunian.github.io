@@ -7,7 +7,7 @@
       "icon": "https://i.ibb.co/JRGL89rL/image.png",
       "rarity": "common",
       "price": 100,
-      "color": "#f59e0b"
+      "color": "#84cc16"
     },
     "perfect_scorer": {
       "id": "perfect_scorer",
@@ -16,7 +16,7 @@
       "icon": "https://i.ibb.co/j9RywPk7/image.png",
       "rarity": "rare",
       "price": 200,
-      "color": "#8b5cf6"
+      "color": "#3b82f6"
     },
     "champion": {
       "id": "champion",
@@ -28,7 +28,7 @@
         "coins": 500,
         "gems": 2
       },
-      "color": "#f59e0b"
+      "color": "#8b5cf6"
     },
     "multilingual": {
       "id": "multilingual",
@@ -37,7 +37,7 @@
       "icon": "🌍",
       "rarity": "rare",
       "price": 300,
-      "color": "#10b981"
+      "color": "#3b82f6"
     },
     "sudoku_genius": {
       "id": "sudoku_genius",
@@ -55,7 +55,7 @@
       "icon": "🔥",
       "rarity": "epic",
       "price": 400,
-      "color": "#ef4444"
+      "color": "#8b5cf6"
     },
     "total_dominator": {
       "id": "total_dominator",
@@ -64,7 +64,7 @@
       "icon": "🏆",
       "rarity": "legendary",
       "price": 1000,
-      "color": "#fbbf24"
+      "color": "#f59e0b"
     },
     "exam_collector": {
       "id": "exam_collector",
@@ -73,7 +73,7 @@
       "icon": "📚",
       "rarity": "epic",
       "price": 600,
-      "color": "#a855f7"
+      "color": "#8b5cf6"
     },
     "time_saver": {
       "id": "time_saver",
@@ -82,7 +82,7 @@
       "icon": "⏰",
       "rarity": "rare",
       "price": 350,
-      "color": "#06b6d4"
+      "color": "#3b82f6"
     },
     "newbie": {
       "id": "newbie",
