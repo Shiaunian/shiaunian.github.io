@@ -24,7 +24,10 @@
       "description": "王者風範的展現",
       "icon": "👑",
       "rarity": "epic",
-      "price": 500,
+      "price": {
+        "coins": 500,
+        "gems": 2
+      },
       "color": "#f59e0b"
     },
     "multilingual": {
