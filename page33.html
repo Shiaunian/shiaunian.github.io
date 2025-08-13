@@ -1477,16 +1477,22 @@ function validateUser(uniqueId) {
   // 嘗試查找匹配的用戶
   const user = usersData.find(u => {
     const generatedUniqueId = u.username + u.password;
-    return generatedUniqueId === uniqueId && u.password === storedPassword;
+    return generatedUniqueId === uniqueId;
   });
   
   if (!user) {
     forceLogout('用戶帳號不存在於系統中');
     return null;
   }
+  
+  // 額外檢查密碼是否匹配（可選，因為uniqueId已包含密碼信息）
+  if (user.password !== storedPassword) {
+    forceLogout('密碼驗證失敗');
+    return null;
+  }
+  
   return user;
 }
-
 
 
   // 顯示用戶歡迎訊息
