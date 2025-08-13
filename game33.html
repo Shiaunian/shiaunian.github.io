@@ -833,17 +833,14 @@ backface-visibility: hidden;
 ::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 3px; }
 ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); }
-.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin-bottom: 20px; }
-.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); }
-.sudoku-cell:disabled { background: var(--bg-secondary); color: var(--text-secondary); cursor: not-allowed; }
-.sudoku-cell:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3); }
-.sudoku-cell::-webkit-inner-spin-button, .sudoku-cell::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
 .loading-spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(114, 137, 218, 0.3); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; will-change: transform; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @media (max-width: 400px) { .options { grid-template-columns: 1fr; } }
 .btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 ::selection { background: rgba(114, 137, 218, 0.3); color: var(--text-primary); }
+
+
 </style>
 </head>
 <body>
@@ -1740,36 +1737,17 @@ function displayQuestion() {
 
     document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
 
-    if (currentExam === 'sudoku') {
-        // 數獨特殊顯示
-        questionContainer.innerHTML = `
-        <h3>${question.question}</h3>
-        <div class="sudoku-grid">
-        ${question.grid.map((cell, index) => 
-            `<input type="number" class="sudoku-cell" 
-            ${cell !== 0 ? `value="${cell}" disabled` : ''} 
-            min="1" max="4" 
-            data-index="${index}"
-            ${cell === 0 ? 'onchange="checkSudokuAnswer()"' : ''}>`
-        ).join('')}
-        </div>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
-        填入1-4的數字，使每行每列都包含1-4
-        </p>
-        `;
-    } else {
-        // 一般題目顯示
-        const optionsHtml = question.options.map((option, index) => 
-            `<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
-        ).join('');
+    // 一般題目顯示
+    const optionsHtml = question.options.map((option, index) => 
+        `<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
+    ).join('');
 
-        questionContainer.innerHTML = `
-        <h3>${question.question}</h3>
-        <div class="options">
-        ${optionsHtml}
-        </div>
-        `;
-    }
+    questionContainer.innerHTML = `
+    <h3>${question.question}</h3>
+    <div class="options">
+    ${optionsHtml}
+    </div>
+    `;
 
     questionStartTime = Date.now();
 }
@@ -1787,14 +1765,11 @@ function startQuestionTimer() {
         if (timeLeft <= 0) {
             clearInterval(examTimer);
             // 時間到，自動跳到下一題
-            if (currentExam === 'sudoku') {
-                nextQuestion(false);
-            } else {
-                selectAnswer(-1); // -1 表示未作答
-            }
+            selectAnswer(-1); // -1 表示未作答
         }
     }, 1000);
 }
+
 
 // 選擇答案 - 修正版本
 function selectAnswer(selectedIndex) {
@@ -1862,58 +1837,6 @@ function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
 
     feedbackDiv.innerHTML = feedbackText;
     document.getElementById('questionContainer').appendChild(feedbackDiv);
-}
-
-// 數獨答案檢查 - 修正版本
-function checkSudokuAnswer() {
-    const cells = document.querySelectorAll('.sudoku-cell');
-    const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
-    const question = currentQuestions[currentQuestionIndex];
-
-    // 檢查是否填完
-    const isEmpty = userGrid.some(cell => cell === 0);
-    if (isEmpty) return;
-
-    // 檢查答案
-    const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-    const responseTime = (Date.now() - questionStartTime) / 1000;
-    const config = examConfigs[currentExam];
-
-    clearInterval(examTimer);
-
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
-
-    // 🏅 檢查快速答題
-    const isFast = responseTime <= config.fastAnswerThreshold;
-    if (isFast) {
-        userScores.fastAnswers++;
-    }
-
-    // 🔧 修正：只有答對才加分
-    if (isCorrect) {
-        userScores.correctAnswers++;
-        
-        // 🎯 只有答對且快速才計入快速正確答案
-        if (isFast) {
-            userScores.fastCorrectAnswers++;
-        }
-    }
-
-    // 顯示數獨反饋
-    cells.forEach(cell => cell.disabled = true);
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.style.cssText = `
-        margin-top: 15px; 
-        text-align: center; 
-        font-size: 0.9rem;
-        color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
-    `;
-    feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
-    document.getElementById('questionContainer').appendChild(feedbackDiv);
-
-    setTimeout(() => {
-        nextQuestion(isCorrect);
-    }, 1500);
 }
 
 // 下一題 - 修正版本
