@@ -4,9 +4,9 @@
       "id": "newbie",
       "name": "新手上路",
       "description": "踏出第一步的勇氣",
-      "icon": "🌟",
+      "icon": "https://i.ibb.co/GQkXcDxd/2025.png",
       "rarity": "common",
-      "price": 50,
+      "price": 400,
       "color": "#84cc16"
     },
     "speed_master": {
@@ -15,7 +15,25 @@
       "description": "展現你的快速反應能力",
       "icon": "https://i.ibb.co/JRGL89rL/image.png",
       "rarity": "common",
-      "price": 100,
+      "price": 600,
+      "color": "#84cc16"
+    },
+    "Proud_Guy": {
+      "id": "speed_master",
+      "name": "得意小哥",
+      "description": "擁有小筆金幣財富",
+      "icon": "https://i.ibb.co/C5pvzgWL/2025.png",
+      "rarity": "common",
+      "price": 800,
+      "color": "#84cc16"
+    },
+    "Proud_Guy": {
+      "id": "speed_master",
+      "name": "音樂愛好者",
+      "description": "熱愛聽音樂的自己",
+      "icon": "https://i.ibb.co/23dQm9kT/2025.png",
+      "rarity": "common",
+      "price": 850,
       "color": "#84cc16"
     },
     "perfect_scorer": {
