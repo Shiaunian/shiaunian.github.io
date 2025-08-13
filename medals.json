@@ -19,7 +19,7 @@
       "color": "#84cc16"
     },
     "Proud_Guy": {
-      "id": "speed_master",
+      "id": "Proud_Guy",
       "name": "得意小哥",
       "description": "擁有小筆金幣財富",
       "icon": "https://i.ibb.co/C5pvzgWL/2025.png",
@@ -27,8 +27,8 @@
       "price": 800,
       "color": "#84cc16"
     },
-    "Proud_Guy": {
-      "id": "speed_master",
+    "Music_Love": {
+      "id": "Music_Lover",
       "name": "音樂愛好者",
       "description": "熱愛聽音樂的自己",
       "icon": "https://i.ibb.co/23dQm9kT/2025.png",
