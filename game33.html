@@ -1286,7 +1286,9 @@ async function buyMedal(medalId) {
     }
     
     // 顯示確認對話框，包含所有貨幣成本
-    let confirmMessage = `確定要購買 ${medal.icon} ${medal.name} 嗎？\n`;
+    // 如果icon是網址，則使用🖼️圖示代替
+    const iconDisplay = medal.icon.startsWith('http') ? '🖼️' : medal.icon;
+    let confirmMessage = `確定要購買 ${iconDisplay} ${medal.name} 嗎？\n`;
     if (coinPrice > 0) confirmMessage += `金幣：💰 ${coinPrice}\n`;
     if (gemPrice > 0) confirmMessage += `寶石：💎 ${gemPrice}`;
     
@@ -1302,8 +1304,8 @@ async function buyMedal(medalId) {
         await Promise.all([saveMedalData(), saveCurrencyData()]);
         await renderShopItems();
         
-        // 顯示成功訊息
-        alert(`🎉 成功購買 ${medal.icon} ${medal.name}！`);
+        // 顯示成功訊息 - 同樣處理圖示顯示問題
+        alert(`🎉 成功購買 ${iconDisplay} ${medal.name}！`);
     }
 }
 
