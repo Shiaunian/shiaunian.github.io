@@ -2064,12 +2064,21 @@ async function showLeaderboard(examType) {
 }
 
 
-// 🏅 獲取用戶顯示名稱
-function getUserDisplayName(username) {
-    // 因為現在 username 參數本身就是 displayName，直接返回
-    return username;
+// 🏅 獲取用戶顯示名稱 - 修正版本
+function getUserDisplayName(userId) {
+    // 檢查 usersData 中是否有此用戶
+    if (usersData[userId] && usersData[userId].chineseName) {
+        return usersData[userId].chineseName;
+    }
+    
+    // 如果在 usersData 中找不到，則嘗試從 localStorage 中獲取
+    if (userId === currentUser && localStorage.getItem('t2_login_display_name')) {
+        return localStorage.getItem('t2_login_display_name');
+    }
+    
+    // 如果都找不到，則返回原始 userId
+    return userId;
 }
-
 
 // 🏆 顯示總分排行榜 - 修正版本
 async function showTotalLeaderboard() {
