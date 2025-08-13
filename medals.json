@@ -302,9 +302,9 @@
     },
     "night_owl": {
       "id": "night_owl",
-      "name": "夜間學者",
+      "name": "夜間學者勳章",
       "description": "深夜學習的堅持者",
-      "icon": "🦉",
+      "icon": "https://i.ibb.co/3y39n4n1/image.png",
       "rarity": "epic",
       "price": {
         "coins": 3000,
