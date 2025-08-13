@@ -288,11 +288,11 @@
       },
       "color": "#8b5cf6"
     },
-    "problem_solver": {
-      "id": "problem_solver",
-      "name": "解題高手",
-      "description": "面對難題迎刃而解",
-      "icon": "🧠",
+    "Snoopy_home": {
+      "id": "Snoopy_home",
+      "name": "草原史努比勳章",
+      "description": "史努比系列",
+      "icon": "https://i.ibb.co/M5yNgHBH/image.png",
       "rarity": "epic",
       "price": {
         "coins": 3400,
