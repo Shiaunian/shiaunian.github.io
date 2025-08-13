@@ -164,7 +164,8 @@ if (Date.now() - time > LIMIT) {
   localStorage.removeItem("t2_login");
   localStorage.removeItem("t2_login_time");
   localStorage.removeItem("t2_login_user");
-  localStorage.removeItem("t2_login_password"); // ← 新增：超時也清掉密碼
+  localStorage.removeItem("t2_login_password");
+  localStorage.removeItem("t2_login_display_name"); // 🆕 新增：清除顯示名稱
   return false;
 }
 
@@ -185,9 +186,9 @@ document.getElementById('app').innerHTML = `
     </form>
   </div>
 `;
+// ===== 修改登入驗證邏輯 =====
 document.getElementById('loginForm').onsubmit = function(e) {
   e.preventDefault();
-  // 將輸入的帳號轉換為小寫
   const uname = document.getElementById('username').value.trim().toLowerCase();
   const pwd = document.getElementById('password').value.trim();
   document.getElementById('errorMsg').textContent = "";
@@ -196,11 +197,19 @@ document.getElementById('loginForm').onsubmit = function(e) {
   const user = users.find(u => u.username === uname && u.password === pwd);
 
   if (user) {
-  localStorage.setItem("t2_login", "yes");
-  localStorage.setItem("t2_login_time", Date.now().toString());
-  localStorage.setItem("t2_login_user", user.username);
-  localStorage.setItem("t2_login_password", pwd); // ★ 新增這行，記錄密碼用於驗證
-  showWelcome(user); // 登入成功後顯示歡迎訊息
+    // 🆕 新增：生成唯一識別符
+    const uniqueId = user.username + user.password; // 00175126
+    const displayName = user._comment || user.username; // 念念
+    
+    localStorage.setItem("t2_login", "yes");
+    localStorage.setItem("t2_login_time", Date.now().toString());
+    localStorage.setItem("t2_login_user", uniqueId); // 🔧 儲存唯一識別符
+    localStorage.setItem("t2_login_password", pwd);
+    localStorage.setItem("t2_login_display_name", displayName); // 🔧 儲存顯示名稱
+    
+    console.log(`✅ 登入成功: ${uniqueId} = ${displayName}`);
+    
+    showWelcome(user);
   } else {
     document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
   }
@@ -223,7 +232,7 @@ document.getElementById('app').innerHTML = `
   </div>
 `;
 document.getElementById('goNextBtn').onclick = function() {
-  window.location.href = "page3.html";
+  window.location.href = "page33.html";
 };
 }
 
@@ -235,7 +244,7 @@ if (!isLoggedIn()) {
   return;
 }
 // 只要登入就直接跳轉主頁
-window.location.href = "page3.html";
+window.location.href = "page33.html";
 return;
 }
 
