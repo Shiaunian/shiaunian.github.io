@@ -1,5 +1,14 @@
 {
   "medals": {
+    "newbie": {
+      "id": "newbie",
+      "name": "新手上路",
+      "description": "踏出第一步的勇氣",
+      "icon": "🌟",
+      "rarity": "common",
+      "price": 50,
+      "color": "#84cc16"
+    },
     "speed_master": {
       "id": "speed_master",
       "name": "速答大師",
@@ -18,6 +27,42 @@
       "price": 200,
       "color": "#3b82f6"
     },
+    "sudoku_genius": {
+      "id": "sudoku_genius",
+      "name": "數獨天才",
+      "description": "邏輯思維的象徵",
+      "icon": "🧩",
+      "rarity": "rare",
+      "price": 250,
+      "color": "#3b82f6"
+    },
+    "multilingual": {
+      "id": "multilingual",
+      "name": "多語達人",
+      "description": "語言天賦的證明",
+      "icon": "🌍",
+      "rarity": "rare",
+      "price": 300,
+      "color": "#3b82f6"
+    },
+    "time_saver": {
+      "id": "time_saver",
+      "name": "時間管理師",
+      "description": "高效率的代表",
+      "icon": "⏰",
+      "rarity": "rare",
+      "price": 350,
+      "color": "#3b82f6"
+    },
+    "streak_warrior": {
+      "id": "streak_warrior",
+      "name": "連勝戰士",
+      "description": "堅持不懈的精神",
+      "icon": "🔥",
+      "rarity": "epic",
+      "price": 400,
+      "color": "#8b5cf6"
+    },
     "champion": {
       "id": "champion",
       "name": "榜首征服者",
@@ -30,31 +75,13 @@
       },
       "color": "#8b5cf6"
     },
-    "multilingual": {
-      "id": "multilingual",
-      "name": "多語達人",
-      "description": "語言天賦的證明",
-      "icon": "🌍",
-      "rarity": "rare",
-      "price": 300,
-      "color": "#3b82f6"
-    },
-    "sudoku_genius": {
-      "id": "sudoku_genius",
-      "name": "數獨天才",
-      "description": "邏輯思維的象徵",
-      "icon": "🧩",
-      "rarity": "rare",
-      "price": 250,
-      "color": "#3b82f6"
-    },
-    "streak_warrior": {
-      "id": "streak_warrior",
-      "name": "連勝戰士",
-      "description": "堅持不懈的精神",
-      "icon": "🔥",
+    "exam_collector": {
+      "id": "exam_collector",
+      "name": "考試收集家",
+      "description": "博學多聞的體現",
+      "icon": "📚",
       "rarity": "epic",
-      "price": 400,
+      "price": 600,
       "color": "#8b5cf6"
     },
     "total_dominator": {
@@ -65,33 +92,6 @@
       "rarity": "legendary",
       "price": 1000,
       "color": "#f59e0b"
-    },
-    "exam_collector": {
-      "id": "exam_collector",
-      "name": "考試收集家",
-      "description": "博學多聞的體現",
-      "icon": "📚",
-      "rarity": "epic",
-      "price": 600,
-      "color": "#8b5cf6"
-    },
-    "time_saver": {
-      "id": "time_saver",
-      "name": "時間管理師",
-      "description": "高效率的代表",
-      "icon": "⏰",
-      "rarity": "rare",
-      "price": 350,
-      "color": "#3b82f6"
-    },
-    "newbie": {
-      "id": "newbie",
-      "name": "新手上路",
-      "description": "踏出第一步的勇氣",
-      "icon": "🌟",
-      "rarity": "common",
-      "price": 50,
-      "color": "#84cc16"
     }
   },
   "rarityColors": {
