@@ -1469,17 +1469,24 @@
     }
   }
 
-  // 驗證用戶是否存在於資料庫中
-  function validateUser(username) {
-    // 取得儲存的密碼來進行完整驗證
-    const storedPassword = localStorage.getItem('t2_login_password');
-    const user = usersData.find(u => u.username === username && u.password === storedPassword);
-    if (!user) {
-      forceLogout('用戶帳號不存在於系統中');
-      return null;
-    }
-    return user;
+// 驗證用戶是否存在於資料庫中
+function validateUser(uniqueId) {
+  // 取得儲存的密碼來進行完整驗證
+  const storedPassword = localStorage.getItem('t2_login_password');
+  
+  // 嘗試查找匹配的用戶
+  const user = usersData.find(u => {
+    const generatedUniqueId = u.username + u.password;
+    return generatedUniqueId === uniqueId && u.password === storedPassword;
+  });
+  
+  if (!user) {
+    forceLogout('用戶帳號不存在於系統中');
+    return null;
   }
+  return user;
+}
+
 
 
   // 顯示用戶歡迎訊息
