@@ -1017,76 +1017,103 @@ maxEquippedMedals: 5
 
 // 📝 載入考試配置
 async function loadExamConfigs() {
-try {
-const cacheKey = 'exam_configs_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
+    try {
+        const cacheKey = 'exam_configs_v1';
+        const cached = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(cacheKey + '_time');
 
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-examConfigs = JSON.parse(cached);
-console.log('✅ 從快取載入考試配置');
-return;
+        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+            examConfigs = JSON.parse(cached);
+            console.log('✅ 從快取載入考試配置');
+            return;
+        }
+
+        const resp = await fetch('exam-configs.json');
+        if (!resp.ok) throw new Error(`載入考試配置失敗：${resp.status}`);
+        examConfigs = await resp.json();
+
+        localStorage.setItem(cacheKey, JSON.stringify(examConfigs));
+        localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+        console.log('✅ 考試配置已載入並快取', examConfigs);
+    } catch (err) {
+        console.error('載入考試配置失敗:', err);
+        alert('系統錯誤：無法載入考試配置檔案');
+    }
 }
 
-const resp = await fetch('exam-configs.json');
-if (!resp.ok) throw new Error(`載入考試配置失敗：${resp.status}`);
-examConfigs = await resp.json();
+// 📝 載入用戶密碼數據
+async function loadPasswordData() {
+    try {
+        const cacheKey = 'password_data_v1';
+        const cached = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(cacheKey + '_time');
 
-localStorage.setItem(cacheKey, JSON.stringify(examConfigs));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
+        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+            window.passwordData = JSON.parse(cached);
+            console.log('✅ 從快取載入用戶密碼數據');
+            return;
+        }
 
-console.log('✅ 考試配置已載入並快取', examConfigs);
-} catch (err) {
-console.error('載入考試配置失敗:', err);
-alert('系統錯誤：無法載入考試配置檔案');
-}
+        const resp = await fetch('password.json');
+        if (!resp.ok) throw new Error(`載入用戶密碼數據失敗：${resp.status}`);
+        window.passwordData = await resp.json();
+
+        localStorage.setItem(cacheKey, JSON.stringify(window.passwordData));
+        localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+        console.log('✅ 用戶密碼數據已載入並快取', window.passwordData.length, '位用戶');
+    } catch (err) {
+        console.error('載入用戶密碼數據失敗:', err);
+        window.passwordData = [];
+    }
 }
 
 // 📝 動態生成挑戰項目列表
 function renderChallengesList() {
-const challengesContainer = document.getElementById('challengesList');
-const fragment = document.createDocumentFragment();
+    const challengesContainer = document.getElementById('challengesList');
+    const fragment = document.createDocumentFragment();
 
-Object.entries(examConfigs).forEach(([examType, config]) => {
-const challengeItem = document.createElement('div');
-challengeItem.className = 'challenge-item';
+    Object.entries(examConfigs).forEach(([examType, config]) => {
+        const challengeItem = document.createElement('div');
+        challengeItem.className = 'challenge-item';
 
-challengeItem.innerHTML = `
-<h3 class="challenge-title">${config.name}</h3>
-<p class="challenge-info" style="color:#ef4444;">${config.description}</p>
-<div class="champion-display" data-exam-type="${examType}">
-<!-- 榜首資料將在此動態載入 -->
-</div>
-<div class="challenge-actions">
-<button class="btn btn-primary" onclick="startExam('${examType}')">開始考試</button>
-<button class="btn btn-secondary" onclick="showLeaderboard('${examType}')">查看排行榜</button>
-</div>
-`;
+        challengeItem.innerHTML = `
+        <h3 class="challenge-title">${config.name}</h3>
+        <p class="challenge-info" style="color:#ef4444;">${config.description}</p>
+        <div class="champion-display" data-exam-type="${examType}">
+        <!-- 榜首資料將在此動態載入 -->
+        </div>
+        <div class="challenge-actions">
+        <button class="btn btn-primary" onclick="startExam('${examType}')">開始考試</button>
+        <button class="btn btn-secondary" onclick="showLeaderboard('${examType}')">查看排行榜</button>
+        </div>
+        `;
 
-fragment.appendChild(challengeItem);
-});
+        fragment.appendChild(challengeItem);
+    });
 
-challengesContainer.appendChild(fragment);
+    challengesContainer.appendChild(fragment);
 }
 
 // 🏅 載入用戶勳章和貨幣資料
 async function loadUserMedalsAndCurrency() {
-try {
-const snapshot = await database.ref(`users/${currentUser}/medals`).once('value');
-const medalSnapshot = snapshot.val() || {};
-userMedals = {
-owned: medalSnapshot.owned || [],
-equipped: medalSnapshot.equipped || []
-};
+    try {
+        const snapshot = await database.ref(`users/${currentUser}/medals`).once('value');
+        const medalSnapshot = snapshot.val() || {};
+        userMedals = {
+            owned: medalSnapshot.owned || [],
+            equipped: medalSnapshot.equipped || []
+        };
 
-const currencySnapshot = await database.ref(`users/${currentUser}/currency`).once('value');
-userCurrency = currencySnapshot.val() || { coins: 0, gems: 0 };
+        const currencySnapshot = await database.ref(`users/${currentUser}/currency`).once('value');
+        userCurrency = currencySnapshot.val() || { coins: 0, gems: 0 };
 
-updateCurrencyDisplay();
-updateMedalDisplay();
-} catch (err) {
-console.error('載入用戶勳章資料失敗:', err);
-}
+        updateCurrencyDisplay();
+        updateMedalDisplay();
+    } catch (err) {
+        console.error('載入用戶勳章資料失敗:', err);
+    }
 }
 
 // 🏅 更新貨幣顯示
@@ -1568,9 +1595,8 @@ async function initializeApp() {
         const userInfo = checkLoginStatus();
         if (!userInfo) return;
 
-        // 🔧 修正：使用 uniqueId 作為 currentUser (Firebase key)
-        currentUser = userInfo.uniqueId; // 00175126 (用於Firebase操作)
-        const displayName = userInfo.displayName; // 念念 (用於顯示)
+        currentUser = userInfo.uniqueId;
+        const displayName = userInfo.displayName;
         
         document.getElementById('currentUserWelcome').textContent = `歡迎回來，${displayName}`;
 
@@ -1579,7 +1605,8 @@ async function initializeApp() {
             loadExamQuestions(),
             loadUsersData(),
             loadMedalsData(),
-            loadExamConfigs()
+            loadExamConfigs(),
+            loadPasswordData() // 新增：載入用戶密碼數據
         ]);
 
         // 載入用戶勳章和貨幣
@@ -2115,19 +2142,34 @@ async function showLeaderboard(examType) {
 }
 
 
-// 🏅 獲取用戶顯示名稱 - 修正版本
+// 🏅 獲取用戶顯示名稱 - 完整修正版本
 function getUserDisplayName(userId) {
-    // 檢查 usersData 中是否有此用戶
+    // 1. 檢查 usersData 中是否有此用戶的中文名稱
     if (usersData[userId] && usersData[userId].chineseName) {
         return usersData[userId].chineseName;
     }
     
-    // 如果在 usersData 中找不到，則嘗試從 localStorage 中獲取
+    // 2. 如果在 usersData 中找不到，則嘗試從 localStorage 中獲取當前用戶的顯示名稱
     if (userId === currentUser && localStorage.getItem('t2_login_display_name')) {
         return localStorage.getItem('t2_login_display_name');
     }
     
-    // 如果都找不到，則返回原始 userId
+    // 3. 如果都找不到，則嘗試從 password.json 中查找 (需要在初始化時載入)
+    if (window.passwordData) {
+        // 從 userId 中提取用戶名和密碼部分 (例如 00170128 -> 0017 和 0128)
+        const username = userId.substring(0, 4);
+        const password = userId.substring(4);
+        
+        // 查找匹配的用戶
+        const matchedUser = window.passwordData.find(user => 
+            user.username === username && user.password === password);
+        
+        if (matchedUser && matchedUser._comment) {
+            return matchedUser._comment;
+        }
+    }
+    
+    // 4. 如果還是找不到，則返回原始 userId
     return userId;
 }
 
