@@ -396,11 +396,11 @@
       },
       "color": "#f59e0b"
     },
-    "thunder_breathing": {
-      "id": "thunder_breathing",
-      "name": "雷之呼吸勳章",
+    "2025thunder_breathing": {
+      "id": "2025thunder_breathing",
+      "name": "2025 雷之呼吸勳章",
       "description": "掌握雷電呼吸法的閃電戰士",
-      "icon": "⚡",
+      "icon": "https://i.ibb.co/PzQF6yTR/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 12000,
@@ -408,11 +408,11 @@
       },
       "color": "#f59e0b"
     },
-    "thunder_master": {
-      "id": "thunder_master",
-      "name": "雷之代表勳章",
+    "2025thunder_master": {
+      "id": "2025thunder_master",
+      "name": "2025 雷之代表勳章",
       "description": "雷電之力的最高代表者",
-      "icon": "🌩️",
+      "icon": "https://i.ibb.co/prfGnfGM/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 11000,
@@ -420,11 +420,11 @@
       },
       "color": "#f59e0b"
     },
-    "adorable_silly": {
-      "id": "adorable_silly",
-      "name": "有夠呆勳章",
+    "2025adorable_silly": {
+      "id": "2025adorable_silly",
+      "name": "2025 有夠呆勳章",
       "description": "可愛呆萌的終極體現",
-      "icon": "🥴",
+      "icon": "https://i.ibb.co/zTNhSKtk/2025.png",
       "rarity": "legendary",
       "price": {
         "coins": 10000,
