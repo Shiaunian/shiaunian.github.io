@@ -42,16 +42,16 @@
       "description": "強調追求真相的精神",
       "icon": "https://i.ibb.co/j9RywPk7/image.png",
       "rarity": "rare",
-      "price": 200,
+      "price": 2200,
       "color": "#3b82f6"
     },
     "sudoku_genius": {
       "id": "sudoku_genius",
       "name": "數獨天才",
       "description": "邏輯思維的象徵",
-      "icon": "🧩",
+      "icon": "https://i.ibb.co/QjvyTm6B/2025.png",
       "rarity": "rare",
-      "price": 250,
+      "price": 1250,
       "color": "#3b82f6"
     },
     "multilingual": {
@@ -60,7 +60,7 @@
       "description": "語言天賦的證明",
       "icon": "🌍",
       "rarity": "rare",
-      "price": 300,
+      "price": 1300,
       "color": "#3b82f6"
     },
     "time_saver": {
@@ -69,7 +69,7 @@
       "description": "高效率的代表",
       "icon": "⏰",
       "rarity": "rare",
-      "price": 350,
+      "price": 1350,
       "color": "#3b82f6"
     },
     "streak_warrior": {
@@ -77,9 +77,117 @@
       "name": "連勝戰士",
       "description": "堅持不懈的精神",
       "icon": "🔥",
-      "rarity": "epic",
-      "price": 400,
-      "color": "#8b5cf6"
+      "rarity": "rare",
+      "price": 1400,
+      "color": "#3b82f6"
+    },
+    "aries": {
+      "id": "aries",
+      "name": "白羊座",
+      "description": "充滿活力與勇氣的開拓者",
+      "icon": "♈",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "taurus": {
+      "id": "taurus",
+      "name": "金牛座",
+      "description": "堅定穩重的實踐家",
+      "icon": "♉",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "gemini": {
+      "id": "gemini",
+      "name": "雙子座",
+      "description": "靈活多變的溝通者",
+      "icon": "♊",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "cancer": {
+      "id": "cancer",
+      "name": "巨蟹座",
+      "description": "富有同情心的守護者",
+      "icon": "♋",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "leo": {
+      "id": "leo",
+      "name": "獅子座",
+      "description": "自信耀眼的領導者",
+      "icon": "♌",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "virgo": {
+      "id": "virgo",
+      "name": "處女座",
+      "description": "細緻完美的分析家",
+      "icon": "♍",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "libra": {
+      "id": "libra",
+      "name": "天秤座",
+      "description": "追求平衡與和諧的調和者",
+      "icon": "♎",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "scorpio": {
+      "id": "scorpio",
+      "name": "天蠍座",
+      "description": "深沉神秘的洞察者",
+      "icon": "♏",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "sagittarius": {
+      "id": "sagittarius",
+      "name": "射手座",
+      "description": "自由奔放的探索者",
+      "icon": "♐",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "capricorn": {
+      "id": "capricorn",
+      "name": "摩羯座",
+      "description": "踏實勤奮的成就者",
+      "icon": "♑",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "aquarius": {
+      "id": "aquarius",
+      "name": "水瓶座",
+      "description": "創新獨特的思想家",
+      "icon": "♒",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
+    },
+    "pisces": {
+      "id": "pisces",
+      "name": "雙魚座",
+      "description": "富有想像力的夢想家",
+      "icon": "♓",
+      "rarity": "rare",
+      "price": 1300,
+      "color": "#3b82f6"
     },
     "champion": {
       "id": "champion",
@@ -88,7 +196,7 @@
       "icon": "👑",
       "rarity": "epic",
       "price": {
-        "coins": 500,
+        "coins": 3500,
         "gems": 2
       },
       "color": "#8b5cf6"
@@ -99,7 +207,70 @@
       "description": "博學多聞的體現",
       "icon": "📚",
       "rarity": "epic",
-      "price": 600,
+      "price": {
+        "coins": 3600,
+        "gems": 2
+      },
+      "color": "#8b5cf6"
+    },
+    "knowledge_seeker": {
+      "id": "knowledge_seeker",
+      "name": "知識探索者",
+      "description": "永不停止學習的精神",
+      "icon": "🔍",
+      "rarity": "epic",
+      "price": {
+        "coins": 3200,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
+    "problem_solver": {
+      "id": "problem_solver",
+      "name": "解題高手",
+      "description": "面對難題迎刃而解",
+      "icon": "🧠",
+      "rarity": "epic",
+      "price": {
+        "coins": 3400,
+        "gems": 2
+      },
+      "color": "#8b5cf6"
+    },
+    "night_owl": {
+      "id": "night_owl",
+      "name": "夜間學者",
+      "description": "深夜學習的堅持者",
+      "icon": "🦉",
+      "rarity": "epic",
+      "price": {
+        "coins": 3000,
+        "gems": 1
+      },
+      "color": "#8b5cf6"
+    },
+    "quick_thinker": {
+      "id": "quick_thinker",
+      "name": "思維敏捷",
+      "description": "反應迅速的智慧之光",
+      "icon": "⚡",
+      "rarity": "epic",
+      "price": {
+        "coins": 3800,
+        "gems": 2
+      },
+      "color": "#8b5cf6"
+    },
+    "persistence_master": {
+      "id": "persistence_master",
+      "name": "堅持不懈",
+      "description": "持之以恆的毅力象徵",
+      "icon": "🏔️",
+      "rarity": "epic",
+      "price": {
+        "coins": 3500,
+        "gems": 2
+      },
       "color": "#8b5cf6"
     },
     "total_dominator": {
