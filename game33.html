@@ -1159,74 +1159,125 @@ event.target.classList.add('active');
 renderShopItems(category);
 }
 
-// 🏪 渲染商店物品
+// 🏪 渲染商店物品 - 修改版本
 async function renderShopItems(filter = 'all') {
-const shopContainer = document.getElementById('shopItems');
-shopContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店中...</div>';
+    const shopContainer = document.getElementById('shopItems');
+    shopContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店中...</div>';
 
-const medals = Object.values(medalsData.medals);
-const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
+    const medals = Object.values(medalsData.medals);
+    const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
 
-const fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
 
-filteredMedals.forEach(medal => {
-const isOwned = userMedals.owned.includes(medal.id);
-const isEquipped = userMedals.equipped.includes(medal.id);
-const canAfford = userCurrency.coins >= medal.price;
+    filteredMedals.forEach(medal => {
+        const isOwned = userMedals.owned.includes(medal.id);
+        const isEquipped = userMedals.equipped.includes(medal.id);
+        
+        // 獲取價格
+        let coinPrice = 0;
+        let gemPrice = 0;
+        
+        if (typeof medal.price === 'object') {
+            coinPrice = medal.price.coins || 0;
+            gemPrice = medal.price.gems || 0;
+        } else {
+            coinPrice = medal.price;
+        }
+        
+        // 檢查是否能負擔
+        const canAffordCoins = userCurrency.coins >= coinPrice;
+        const canAffordGems = userCurrency.gems >= gemPrice;
+        const canAfford = canAffordCoins && canAffordGems;
 
-const item = document.createElement('div');
-item.className = `shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}`;
+        const item = document.createElement('div');
+        item.className = `shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}`;
 
-// 🔧 判斷是 emoji 還是網址
-const medalIconContent = medal.icon.startsWith('http') ? 
-    `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">` : 
-    medal.icon;
+        // 判斷是 emoji 還是網址
+        const medalIconContent = medal.icon.startsWith('http') ? 
+            `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">` : 
+            medal.icon;
 
-item.innerHTML = `
-<div class="medal-preview" style="border-color: ${medal.color};">
-${medalIconContent}
-</div>
-<div class="item-info">
-<div class="item-name" style="color: ${medal.color};">${medal.name}</div>
-<div class="item-description">${medal.description}</div>
-<div class="item-price">💰 ${medal.price}</div>
-</div>
-<div class="item-actions">
-${isOwned ? 
-'<span class="btn btn-small btn-secondary">已擁有</span>' :
-`<button class="btn btn-small btn-primary ${!canAfford ? 'disabled' : ''}" 
-onclick="buyMedal('${medal.id}')" ${!canAfford ? 'disabled' : ''}>
-購買
-</button>`
+        // 構建價格顯示
+        let priceDisplay = '';
+        if (coinPrice > 0) priceDisplay += `💰 ${coinPrice} `;
+        if (gemPrice > 0) priceDisplay += `💎 ${gemPrice}`;
+
+        item.innerHTML = `
+        <div class="medal-preview" style="border-color: ${medal.color};">
+        ${medalIconContent}
+        </div>
+        <div class="item-info">
+        <div class="item-name" style="color: ${medal.color};">${medal.name}</div>
+        <div class="item-description">${medal.description}</div>
+        <div class="item-price">${priceDisplay}</div>
+        </div>
+        <div class="item-actions">
+        ${isOwned ? 
+        '<span class="btn btn-small btn-secondary">已擁有</span>' :
+        `<button class="btn btn-small btn-primary ${!canAfford ? 'disabled' : ''}" 
+        onclick="buyMedal('${medal.id}')" ${!canAfford ? 'disabled' : ''}>
+        購買
+        </button>`
+        }
+        </div>
+        `;
+
+        fragment.appendChild(item);
+    });
+
+    shopContainer.innerHTML = '';
+    shopContainer.appendChild(fragment);
 }
-</div>
-`;
 
-fragment.appendChild(item);
-});
-
-shopContainer.innerHTML = '';
-shopContainer.appendChild(fragment);
-}
-
-// 🏪 購買勳章
+// 🏪 購買勳章 - 修改版本
 async function buyMedal(medalId) {
-const medal = medalsData.medals[medalId];
-if (!medal || userMedals.owned.includes(medalId)) return;
-
-if (userCurrency.coins < medal.price) {
-alert('💰 金幣不足！');
-return;
-}
-
-if (confirm(`確定要購買 ${medal.icon} ${medal.name} 嗎？\n價格：💰 ${medal.price}`)) {
-userCurrency.coins -= medal.price;
-userMedals.owned.push(medalId);
-
-await Promise.all([saveMedalData(), saveCurrencyData()]);
-await renderShopItems();
-alert(`🎉 成功購買 ${medal.icon} ${medal.name}！`);
-}
+    const medal = medalsData.medals[medalId];
+    if (!medal || userMedals.owned.includes(medalId)) return;
+    
+    // 檢查價格結構
+    let coinPrice = 0;
+    let gemPrice = 0;
+    
+    if (typeof medal.price === 'object') {
+        // 新結構：包含金幣和寶石
+        coinPrice = medal.price.coins || 0;
+        gemPrice = medal.price.gems || 0;
+    } else {
+        // 舊結構：只有金幣
+        coinPrice = medal.price;
+    }
+    
+    // 檢查用戶是否有足夠的貨幣
+    if (userCurrency.coins < coinPrice) {
+        alert('💰 金幣不足！');
+        return;
+    }
+    
+    if (userCurrency.gems < gemPrice) {
+        alert('💎 寶石不足！');
+        return;
+    }
+    
+    // 顯示確認對話框，包含所有貨幣成本
+    let confirmMessage = `確定要購買 ${medal.icon} ${medal.name} 嗎？\n`;
+    if (coinPrice > 0) confirmMessage += `金幣：💰 ${coinPrice}\n`;
+    if (gemPrice > 0) confirmMessage += `寶石：💎 ${gemPrice}`;
+    
+    if (confirm(confirmMessage)) {
+        // 扣除貨幣
+        userCurrency.coins -= coinPrice;
+        userCurrency.gems -= gemPrice;
+        
+        // 添加勳章到擁有列表
+        userMedals.owned.push(medalId);
+        
+        // 保存數據
+        await Promise.all([saveMedalData(), saveCurrencyData()]);
+        await renderShopItems();
+        
+        // 顯示成功訊息
+        alert(`🎉 成功購買 ${medal.icon} ${medal.name}！`);
+    }
 }
 
 // 🎒 顯示背包
