@@ -1409,7 +1409,7 @@ async function loadExamQuestions() {
             examQuestions = await resp.json();
             
             // 動態生成數獨題目，而不使用JSON中的
-            examQuestions.sudoku = generateSudokuQuestions(5, 4);
+            examQuestions.sudoku = generateSudokuQuestions(10, 4);
             console.log('✅ 已動態生成數獨題目');
             
             // 儲存到快取，但不包含數獨（因為每次都會重新生成）
@@ -1425,7 +1425,7 @@ async function loadExamQuestions() {
             
             // 如果無法加載題庫文件，使用預設題庫和動態生成的數獨
             examQuestions = {
-                sudoku: generateSudokuQuestions(5, 4),
+                sudoku: generateSudokuQuestions(10, 4),
                 // 可以添加其他預設題庫
             };
             
@@ -1436,7 +1436,8 @@ async function loadExamQuestions() {
         
         // 最終保底：確保至少有數獨題庫
         if (!examQuestions) examQuestions = {};
-        examQuestions.sudoku = generateSudokuQuestions(5, 4);
+        // 在快取情況下
+        examQuestions.sudoku = generateSudokuQuestions(10, 4);
         
         console.log('⚠️ 發生錯誤，使用動態生成的數獨題庫');
     }
@@ -2100,23 +2101,6 @@ function isValidPlacement(grid, row, col, num, size) {
 }
 
 // 生成動態數獨題目
-function generateSudokuQuestions(count = 5, size = 4) {
-    const questions = [];
-    const difficulties = [0.4, 0.45, 0.5, 0.55, 0.6]; // 不同難度級別
-    
-    for (let i = 0; i < count; i++) {
-        const difficulty = difficulties[Math.min(i, difficulties.length - 1)];
-        const sudoku = generateSudoku(size, difficulty);
-        
-        questions.push({
-            question: `${i < 2 ? '簡單' : i < 4 ? '中等' : '困難'}數獨 #${i + 1}`,
-            grid: sudoku.grid,
-            solution: sudoku.solution
-        });
-    }
-    
-    return questions;
-}
 
 // 結束考試 - 修正版本
 async function finishExam() {
