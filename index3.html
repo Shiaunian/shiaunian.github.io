@@ -2,2290 +2,265 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>T2日檢疫挑戰系統</title>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
+<title>T2日檢疫登入系統</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <style>
-:root {
---bg-primary: #1a1b1e;
---bg-secondary: #2d2d30;
---primary: #7289da;
---primary-dark: #5c6fb1;
---text-primary: #ffffff;
---text-secondary: #a0a0a0;
---danger: #ef4444;
---warning: #f59e0b;
---success: #22c55e;
---shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
---border-color: rgba(255, 255, 255, 0.1);
---info: #3b82f6;
---transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
---border-radius: 8px;
---gold: #fbbf24;
---silver: #9ca3af;
---bronze: #d97706;
-}
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
-body {
-font-family: "微軟正黑體", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-background: var(--bg-primary);
-min-height: 100vh;
-padding: 12px;
-color: var(--text-primary);
-line-height: 1.5;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-
-.container {
-max-width: 480px;
-margin: 0 auto;
-height: calc(100vh - 24px);
-overflow-y: auto;
-background: var(--bg-secondary);
-border-radius: 12px;
-box-shadow: var(--shadow);
-will-change: scroll-position;
-}
-
-.header {
-background: var(--bg-secondary);
-padding: 15px;
-border-bottom: 1px solid var(--border-color);
-position: sticky;
-top: 0;
-z-index: 100;
-backdrop-filter: blur(10px);
-}
-
-.header-title {
-display: flex;
-flex-direction: column;
-margin-bottom: 10px;
-}
-
-.title-text {
-font-size: 1.3rem;
-color: var(--text-primary);
-display: flex;
-align-items: center;
-gap: 8px;
-justify-content: space-between;
-}
-
-.user-info {
-font-size: 0.9rem;
-color: var(--text-secondary);
-margin-top: 5px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-}
-
-.user-currency {
-display: flex;
-gap: 12px;
-align-items: center;
-}
-
-.currency-item {
-display: flex;
-align-items: center;
-gap: 4px;
-background: rgba(255, 255, 255, 0.05);
-padding: 4px 8px;
-border-radius: 4px;
-font-size: 0.8rem;
-}
-
-.connection-status {
-background-color: var(--success);
-color: white;
-padding: 4px 8px;
-border-radius: 4px;
-font-size: 0.8rem;
-animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-0%, 100% { opacity: 1; }
-50% { opacity: 0.7; }
-}
-
-/* 🎨 按鈕樣式 */
-.btn {
-padding: 10px 16px;
-border: none;
-border-radius: var(--border-radius);
-cursor: pointer;
-font-size: 0.9rem;
-font-weight: 500;
-transition: var(--transition);
-flex: 1;
-position: relative;
-overflow: hidden;
-text-decoration: none;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 6px;
-min-height: 44px;
-}
-
-.btn::before {
-content: '';
-position: absolute;
-top: 0;
-left: -100%;
-width: 100%;
-height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-transition: left 0.5s;
-}
-
-.btn:hover::before {
-left: 100%;
-}
-
-.btn-primary {
-background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-color: var(--text-primary);
-box-shadow: 0 2px 8px rgba(114, 137, 218, 0.3);
-}
-
-.btn-primary:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(114, 137, 218, 0.4);
-}
-
-.btn-secondary {
-background: linear-gradient(135deg, var(--warning), #e67e22);
-color: var(--text-primary);
-box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-}
-
-.btn-secondary:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-}
-
-.btn-danger {
-background: linear-gradient(135deg, var(--danger), #c0392b);
-color: var(--text-primary);
-box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
-}
-
-.btn-danger:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-}
-
-.btn-shop {
-background: linear-gradient(135deg, var(--gold), #f59e0b);
-color: var(--text-primary);
-box-shadow: 0 2px 8px rgba(251, 191, 36, 0.3);
-}
-
-.btn-shop:hover {
-transform: translateY(-2px);
-box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
-}
-
-/* header-actions 按鈕佈局 */
-.header-actions {
-display: flex;
-gap: 8px;
-margin-top: 12px;
-}
-
-.header-actions .btn {
-flex: 1;
-font-size: 0.8rem;
-padding: 8px 10px;
-min-height: 36px;
-}
-
-/* 🏅 勳章顯示樣式 */
-.user-medals {
-display: flex;
-gap: 4px;
-margin-top: 8px;
-flex-wrap: wrap;
-}
-
-.medal-icon {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-width: 28px;
-height: 28px;
-border-radius: 50%;
-font-size: 0.9rem;
-border: 2px solid;
-background: rgba(255, 255, 255, 0.1);
-transition: var(--transition);
-cursor: pointer;
-overflow: hidden; /* 🔧 新增：防止圖片溢出 */
-}
-
-.medal-icon:hover {
-transform: scale(1.1);
-}
-
-.medal-icon.common { border-color: #84cc16; }
-.medal-icon.rare { border-color: #3b82f6; }
-.medal-icon.epic { border-color: #8b5cf6; }
-.medal-icon.legendary { border-color: #f59e0b; }
-
-/* 🔧 新增：勳章圖片樣式 */
-.medal-icon img,
-.medal-preview img,
-.inventory-medal-icon img,
-.leaderboard-medal img {
-border-radius: 4px;
-display: block;
-}
-
-/* 🏪 商店樣式 */
-.shop-container {
-padding: 16px;
-}
-
-.shop-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 20px;
-}
-
-.shop-categories {
-display: flex;
-gap: 8px;
-margin-bottom: 16px;
-}
-
-.category-btn {
-padding: 8px 16px;
-background: rgba(255, 255, 255, 0.05);
-border: 1px solid var(--border-color);
-border-radius: var(--border-radius);
-color: var(--text-secondary);
-cursor: pointer;
-transition: var(--transition);
-font-size: 0.85rem;
-}
-
-.category-btn.active {
-background: var(--primary);
-color: var(--text-primary);
-border-color: var(--primary);
-}
-
-.shop-items {
-display: grid;
-gap: 12px;
-}
-
-.shop-item {
-display: flex;
-align-items: center;
-padding: 12px;
-background: rgba(255, 255, 255, 0.03);
-border: 1px solid var(--border-color);
-border-radius: var(--border-radius);
-transition: var(--transition);
-}
-
-.shop-item:hover {
-background: rgba(255, 255, 255, 0.05);
-transform: translateY(-1px);
-}
-
-.shop-item.owned {
-opacity: 0.6;
-border-color: var(--success);
-}
-
-.shop-item.equipped {
-border-color: var(--gold);
-background: rgba(251, 191, 36, 0.1);
-}
-
-.medal-preview {
-width: 40px;
-height: 40px;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 1.2rem;
-border: 2px solid;
-margin-right: 12px;
-}
-
-.item-info {
-flex: 1;
-}
-
-.item-name {
-font-weight: 600;
-margin-bottom: 4px;
-}
-
-.item-description {
-font-size: 0.8rem;
-color: var(--text-secondary);
-margin-bottom: 4px;
-}
-
-.item-price {
-font-size: 0.9rem;
-color: var(--gold);
-font-weight: 600;
-}
-
-.item-actions {
-display: flex;
-gap: 8px;
-}
-
-.btn-small {
-padding: 6px 12px;
-font-size: 0.8rem;
-min-height: 32px;
-}
-
-/* 🎒 背包樣式 */
-.inventory-container {
-padding: 16px;
-}
-
-.inventory-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-gap: 12px;
-}
-
-.inventory-item {
-aspect-ratio: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: rgba(255, 255, 255, 0.03);
-border: 2px solid var(--border-color);
-border-radius: var(--border-radius);
-cursor: pointer;
-transition: var(--transition);
-padding: 8px;
-}
-
-.inventory-item:hover {
-background: rgba(255, 255, 255, 0.08);
-transform: translateY(-2px);
-}
-
-.inventory-item.equipped {
-border-color: var(--gold);
-background: rgba(251, 191, 36, 0.1);
-}
-
-.inventory-medal-icon {
-font-size: 1.5rem;
-margin-bottom: 4px;
-}
-
-.inventory-medal-name {
-font-size: 0.7rem;
-text-align: center;
-line-height: 1.2;
-}
-
-/* 排行榜勳章顯示 - 升級版本 */
-.leaderboard-medals {
-    display: flex;
-    gap: 4px;
-    margin-top: 4px;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.leaderboard-medal {
-    width: 32px;  /* 🔧 從16px增加到32px，放大兩倍 */
-    height: 32px; /* 🔧 從16px增加到32px，放大兩倍 */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem; /* 🔧 從0.6rem增加到1.2rem */
-    border: 2px solid; /* 🔧 從1px增加到2px，邊框更明顯 */
-    background: rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
+  }
+  body {
+    font-family: "微軟正黑體", Arial, sans-serif;
+    min-height: 100vh;
+  }
+  .login-box, .main-content {
+    width: 94vw; max-width: 420px;
+    margin: 7vw auto 0 auto;
+    padding: 7vw 4vw 6vw 4vw;
+    background: rgba(255,255,255,0.98);
+    border-radius: 15px;
+    box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
+    transition: box-shadow 0.3s;
     position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    
-    /* 🌟 新增：反光效果基礎 */
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.2) 0%, 
-        rgba(255, 255, 255, 0.05) 50%, 
-        rgba(0, 0, 0, 0.1) 100%);
-    box-shadow: 
-        0 2px 8px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* 🌟 新增：反光動畫效果 */
-.leaderboard-medal::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, 
-        transparent 30%, 
-        rgba(255, 255, 255, 0.4) 50%, 
-        transparent 70%);
-    transform: rotate(45deg);
-    transition: all 0.6s ease;
-    opacity: 0;
-}
-
-/* 🌟 新增：懸停時的反光效果 */
-.leaderboard-medal:hover::before {
-    opacity: 1;
-    animation: shine 0.6s ease-in-out;
-}
-
-.leaderboard-medal:hover {
-    transform: scale(1.1) translateY(-1px);
-    box-shadow: 
-        0 4px 12px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
-}
-
-/* 🌟 反光動畫關鍵幀 */
-@keyframes shine {
-    0% {
-        transform: translateX(-100%) translateY(-100%) rotate(45deg);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%) translateY(100%) rotate(45deg);
-        opacity: 0;
-    }
-}
-
-/* 🔧 修正：勳章內圖片樣式 */
-.leaderboard-medal img {
-    width: 24px;  /* 🔧 從12px增加到24px */
-    height: 24px; /* 🔧 從12px增加到24px */
-    object-fit: contain;
-    border-radius: 4px;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-
-.leaderboard-medal:hover img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) brightness(1.1);
-}
-
-/* 🌟 新增：不同稀有度的特殊效果 */
-.leaderboard-medal[data-rarity="common"] {
-    border-color: #84cc16;
-    box-shadow: 
-        0 2px 8px rgba(132, 204, 22, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-}
-
-.leaderboard-medal[data-rarity="rare"] {
-    border-color: #3b82f6;
-    box-shadow: 
-        0 2px 8px rgba(59, 130, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-}
-
-.leaderboard-medal[data-rarity="epic"] {
-    border-color: #8b5cf6;
-    box-shadow: 
-        0 2px 8px rgba(139, 92, 246, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-}
-
-.leaderboard-medal[data-rarity="legendary"] {
-    border-color: #f59e0b;
-    box-shadow: 
-        0 2px 8px rgba(245, 158, 11, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    animation: legendaryGlow 2s ease-in-out infinite alternate;
-}
-
-/* 🌟 傳說級勳章的特殊發光效果 */
-@keyframes legendaryGlow {
-    0% {
-        box-shadow: 
-            0 2px 8px rgba(245, 158, 11, 0.4),
-            0 0 10px rgba(245, 158, 11, 0.2),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    }
-    100% {
-        box-shadow: 
-            0 2px 8px rgba(245, 158, 11, 0.6),
-            0 0 20px rgba(245, 158, 11, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.5),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    }
-}
-
-/* 🔧 調整用戶名稱區域以適應更大的勳章 */
-.user-name {
-    flex: 1;
-    margin: 0 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 40px; /* 🔧 新增：確保有足夠高度容納大勳章 */
-}
-
-/* 🔧 調整排行榜項目高度 */
-.leaderboard-item {
+  }
+  .login-box h2, .main-content h2 {
+    margin-bottom: 6vw;
+    color: #263175;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
     display: flex;
     align-items: center;
-    padding: 12px; /* 🔧 從10px增加到12px */
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition);
-    border-radius: 6px;
-    margin-bottom: 2px;
-    min-height: 60px; /* 🔧 新增：確保有足夠高度 */
-}
-
-.leaderboard-medal img {
-    width: 12px;
-    height: 12px;
-    object-fit: contain;
-    border-radius: 2px;
-}
-
-.user-name {
-    flex: 1;
-    margin: 0 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    flex-direction: column;
+    gap: 10px;
     justify-content: center;
-}
-
-/* 其他現有樣式保持不變... */
-.challenge-item {
-padding: 16px;
-border-bottom: 1px solid var(--border-color);
-transition: background-color 0.3s ease;
-}
-
-.challenge-item:hover {
-background: rgba(255, 255, 255, 0.02);
-}
-
-.challenge-title {
-font-size: 1.1rem;
-color: var(--text-primary);
-margin-bottom: 8px;
-font-weight: 600;
-}
-
-.challenge-info {
-color: var(--text-secondary);
-font-size: 0.9rem;
-margin-bottom: 12px;
-}
-
-.challenge-actions {
-display: flex;
-gap: 10px;
-}
-
-.champion-display {
-margin-bottom: 10px;
-}
-
-.champion-card {
-display: flex;
-align-items: center;
-justify-content: space-between;
-background: linear-gradient(45deg, #FFD700, #FFA500);
-color: #000;
-padding: 8px 14px;
-border-radius: var(--border-radius);
-font-size: 0.85rem;
-font-weight: bold;
-box-shadow: 0 3px 6px rgba(255, 215, 0, 0.3);
-transition: var(--transition);
-}
-
-.champion-card:hover {
-transform: translateY(-1px);
-box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
-}
-
-.champion-empty {
-display: flex;
-align-items: center;
-justify-content: center;
-background: rgba(255, 255, 255, 0.05);
-color: var(--text-secondary);
-padding: 8px 14px;
-border-radius: var(--border-radius);
-font-size: 0.85rem;
-border: 1px dashed rgba(255, 255, 255, 0.15);
-}
-
-.modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.8);
-display: none;
-justify-content: center;
-align-items: center;
-z-index: 1000;
-backdrop-filter: blur(4px);
-animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
-}
-
-.modal {
-background: var(--bg-secondary);
-width: 90%;
-max-width: 420px;
-max-height: 85vh;
-border-radius: 12px;
-overflow: hidden;
-position: relative;
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-from { transform: translateY(30px); opacity: 0; }
-to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-header {
-padding: 16px;
-background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-color: var(--text-primary);
-display: flex;
-justify-content: space-between;
-align-items: center;
-position: sticky;
-top: 0;
-}
-
-.close-btn {
-background: none;
-border: none;
-color: var(--text-primary);
-font-size: 1.5rem;
-cursor: pointer;
-padding: 4px 8px;
-border-radius: 4px;
-transition: var(--transition);
-}
-
-.close-btn:hover {
-background: rgba(255, 255, 255, 0.1);
-transform: scale(1.1);
-}
-
-.modal-content {
-padding: 16px;
-overflow-y: auto;
-max-height: calc(85vh - 68px);
-min-height: 200px;
-}
-
-.leaderboard-container {
-max-height: calc(60vh - 100px);
-overflow-y: auto;
-padding-right: 5px;
-scroll-behavior: smooth;
-}
-
-.leaderboard-item {
-display: flex;
-align-items: center;
-padding: 10px 12px;
-border-bottom: 1px solid var(--border-color);
-transition: var(--transition);
-border-radius: 6px;
-margin-bottom: 2px;
-}
-
-.leaderboard-item:hover {
-background: rgba(114, 137, 218, 0.05);
-transform: translateX(2px);
-}
-
-.leaderboard-item.current-user {
-background: rgba(114, 137, 218, 0.1);
-border-left: 3px solid var(--primary);
-box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
-}
-
-.rank {
-min-width: 35px;
-font-weight: bold;
-color: var(--primary);
-font-size: 1rem;
-}
-
-.user-name {
-flex: 1;
-margin: 0 12px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-display: flex;
-align-items: center;
-}
-
-.score {
-font-weight: bold;
-color: var(--primary);
-margin-left: auto;
-font-size: 1rem;
-}
-
-.empty-leaderboard {
-text-align: center;
-padding: 30px 20px;
-color: var(--text-secondary);
-}
-
-/* 響應式設計 */
-@media (max-width: 400px) {
-.header-actions {
-flex-direction: column;
-gap: 8px;
-}
-.header-actions .btn {
-width: 100%;
-}
-.user-currency {
-flex-direction: column;
-gap: 4px;
-}
-}
-
-/* GPU 加速 */
-.btn, .modal, .leaderboard-item, .champion-card, .medal-icon {
-transform: translateZ(0);
-backface-visibility: hidden;
-}
-
-/* 其他現有樣式... */
-.exam-container { padding: 20px; }
-.exam-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 16px; background: rgba(255, 255, 255, 0.03); border-radius: var(--border-radius); }
-.timer { font-size: 1.4rem; color: var(--primary); font-weight: bold; padding: 8px 16px; background: rgba(114, 137, 218, 0.1); border-radius: var(--border-radius); }
-.question { background: rgba(255, 255, 255, 0.03); padding: 24px; border-radius: var(--border-radius); margin-bottom: 20px; border: 1px solid var(--border-color); }
-.options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 20px; }
-.option-btn { width: 100%; text-align: left; padding: 14px 16px; border-radius: var(--border-radius); transition: var(--transition); }
-.option-btn.correct { background: linear-gradient(135deg, var(--success), #27ae60); }
-.option-btn.wrong { background: linear-gradient(135deg, var(--danger), #c0392b); }
-.exam-result { text-align: center; padding: 30px 20px; }
-.exam-result h2 { margin-bottom: 20px; color: var(--primary); }
-.exam-result p { margin-bottom: 12px; font-size: 1.05rem; }
-.exam-result button { margin: 8px; }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 3px; }
-::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: linear-gradient(to bottom, var(--primary-dark), var(--primary)); }
-.sudoku-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--border-color); padding: 8px; border-radius: var(--border-radius); margin-bottom: 20px; }
-.sudoku-cell { width: 100%; aspect-ratio: 1; background: var(--bg-primary); border: 2px solid transparent; border-radius: 6px; color: var(--text-primary); font-size: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); }
-.sudoku-cell:disabled { background: var(--bg-secondary); color: var(--text-secondary); cursor: not-allowed; }
-.sudoku-cell:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 137, 218, 0.3); }
-.sudoku-cell::-webkit-inner-spin-button, .sudoku-cell::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); }
-.loading-spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(114, 137, 218, 0.3); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-right: 12px; will-change: transform; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@media (max-width: 400px) { .options { grid-template-columns: 1fr; } }
-.btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-::selection { background: rgba(114, 137, 218, 0.3); color: var(--text-primary); }
+  }
+  .login-logo {
+    font-size: 2.3rem;
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 4px #0001);
+  }
+  .login-box input {
+    width: 100%; padding: 16px 14px; margin: 0 0 4vw 0;
+    border-radius: 8px; border: 1.5px solid #bfc6e0;
+    font-size: 1.15rem; transition: border-color 0.2s, box-shadow 0.2s;
+    background: #f6f8ff;
+    outline: none;
+    box-sizing: border-box;
+  }
+  .login-box input:focus {
+    border-color: #5468e5;
+    box-shadow: 0 0 0 2px #dbe5ff;
+    background: #fff;
+  }
+  .login-box button, .logout-btn {
+    width: 100%; padding: 16px 0;
+    background: linear-gradient(90deg, #5468e5 60%, #3949ab 100%);
+    color: #fff;
+    border: none; border-radius: 8px;
+    font-size: 1.18rem; font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #5468e522;
+    transition: background 0.2s, transform 0.13s;
+    margin-top: 2vw;
+  }
+  .login-box button:hover, .logout-btn:hover {
+    background: linear-gradient(90deg, #3949ab 60%, #5468e5 100%);
+    transform: translateY(-2px) scale(1.025);
+    box-shadow: 0 4px 16px #3949ab22;
+  }
+  .logout-btn {
+    margin-top: 6vw;
+    background: linear-gradient(90deg, #e65555 60%, #b71c1c 100%);
+    box-shadow: 0 2px 8px #e6555522;
+  }
+  .logout-btn:hover {
+    background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
+  }
+  .error {
+    color: #fff;
+    background: #e65555;
+    border-radius: 6px;
+    margin: 2vw 0 0 0;
+    padding: 9px 12px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    min-height: 23px;
+    box-shadow: 0 2px 8px #e6555522;
+    transition: background 0.2s;
+  }
+  .login-notice {
+    color: #5468e5;
+    background: #e8f0ff;
+    border-radius: 6px;
+    margin: 0 0 2vw 0;
+    padding: 9px 12px;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+    box-shadow: 0 2px 8px #5468e511;
+  }
+  .copyright-floating {
+    position: fixed; right: 8px; bottom: 8px;
+    background: rgba(255,255,255,0.94); color: #8a8a8a;
+    font-size: 13px; padding: 4px 13px 4px 8px;
+    border-radius: 20px 0 20px 20px; box-shadow: 0 2px 12px #0001;
+    z-index: 9999; letter-spacing: 1px; display: flex;
+    align-items: center; gap: 5px; user-select: none; pointer-events: none;
+    font-weight: 500;
+  }
+  @media (max-width: 420px) {
+    .login-box, .main-content { padding: 7vw 3vw 6vw 3vw;}
+    .login-box h2, .main-content h2 { font-size: 1.33rem; }
+    .login-logo { font-size: 1.7rem; }
+    .copyright-floating { font-size: 11px; }
+  }
+  @media (max-width: 340px) {
+    .login-box, .main-content { padding: 3vw 1vw 3vw 1vw;}
+    .login-box h2, .main-content h2 { font-size: 1.1rem; }
+    .login-logo { font-size: 1.2rem; }
+  }
 </style>
 </head>
 <body>
-<!-- 載入中畫面 -->
-<div id="loadingScreen" class="container">
-<div class="loading">
-<div class="loading-spinner"></div>
-正在驗證登入狀態...
+<!-- 右下角浮動版權區塊 -->
+<div class="copyright-floating">
+  <span style="font-size:15px;vertical-align:middle;">&#169;</span>
+  網站架設人員 念念 此為內部重要資訊
 </div>
-</div>
-
-<!-- 主要內容 -->
-<div id="mainContent" class="container" style="display: none;">
-<header class="header">
-<div class="header-title">
-<div class="title-text">
-<span>🎯</span>
-<h1>T2日檢疫挑戰系統</h1>
-<button class="btn btn-danger" onclick="logout()">登出</button>
-</div>
-<div class="user-info">
-<div>
-<span id="currentUserWelcome">歡迎回來，載入中...</span>
-<div class="user-currency">
-<div class="currency-item">
-  <span>💰</span>
-  <span id="userCoins">0</span>
-</div>
-<div class="currency-item">
-  <span>💎</span>
-  <span id="userGems">0</span>
-</div>
-</div>
-<div class="user-medals" id="userMedals"></div>
-</div>
-<span class="connection-status" id="connectionStatus">用戶連線中</span>
-</div>
-</div>
-<div class="header-actions">
-<button class="btn btn-primary" onclick="backToT2()">🏠 返回T2日</button>
-<button class="btn btn-secondary" onclick="showTotalLeaderboard()">🏆 總分排行榜</button>
-<button class="btn btn-shop" onclick="showShop()">🏪 商店</button>
-<button class="btn btn-primary" onclick="showInventory()">🎒 背包</button>
-</div>
-</header>
-
-<!-- 挑戰項目列表 - 將動態生成 -->
-<div id="challengesList">
-<!-- 挑戰項目將在此動態生成 -->
-</div>
-</div>
-
-<!-- 🏪 商店模態視窗 -->
-<div class="modal-overlay" id="shopModal">
-<div class="modal">
-<div class="modal-header">
-<h2>🏪 勳章商店</h2>
-<button class="close-btn" onclick="hideShop()">×</button>
-</div>
-<div class="modal-content">
-<div class="shop-container">
-<div class="shop-categories">
-<button class="category-btn active" onclick="filterShop('all')">全部</button>
-<button class="category-btn" onclick="filterShop('common')">普通</button>
-<button class="category-btn" onclick="filterShop('rare')">稀有</button>
-<button class="category-btn" onclick="filterShop('epic')">史詩</button>
-<button class="category-btn" onclick="filterShop('legendary')">傳說</button>
-</div>
-<div class="shop-items" id="shopItems">
-<!-- 商店物品將在此動態生成 -->
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 🎒 背包模態視窗 -->
-<div class="modal-overlay" id="inventoryModal">
-<div class="modal">
-<div class="modal-header">
-<h2>🎒 勳章背包</h2>
-<button class="close-btn" onclick="hideInventory()">×</button>
-</div>
-<div class="modal-content">
-<div class="inventory-container">
-<p style="margin-bottom: 16px; color: var(--text-secondary);">點擊勳章裝備/卸下 (最多裝備5個)</p>
-<div class="inventory-grid" id="inventoryGrid">
-<!-- 背包物品將在此動態生成 -->
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- 排行榜模態視窗 -->
-<div class="modal-overlay" id="leaderboardModal">
-<div class="modal">
-<div class="modal-header">
-<h2 id="modalTitle">排行榜</h2>
-<button class="close-btn" onclick="hideLeaderboard()">×</button>
-</div>
-<div class="modal-content" id="leaderboardContent">
-</div>
-</div>
-</div>
-
+<div id="app"></div>
 <script>
-// Firebase 配置
-const firebaseConfig = {
-apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
-authDomain: "openexammodal.firebaseapp.com",
-databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
-projectId: "openexammodal",
-storageBucket: "openexammodal.firebasestorage.app",
-messagingSenderId: "336901617556",
-appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
-};
+let users = []; // 全域帳密清單
 
-// 🚀 效能優化：Firebase 初始化
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
-// 🚀 效能優化：題庫快取
-let examQuestions = {};
-let questionsCache = new Map();
-
-// 🏅 勳章系統變數
-let medalsData = {};
-let userMedals = { owned: [], equipped: [] };
-let userCurrency = { coins: 0, gems: 0 };
-
-// 📝 考試配置變數 (從JSON載入)
-let examConfigs = {};
-
-// 🏅 載入勳章資料
-async function loadMedalsData() {
-try {
-const cacheKey = 'medals_data_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-medalsData = JSON.parse(cached);
-console.log('✅ 從快取載入勳章資料');
-return;
-}
-
-const resp = await fetch('medals.json');
-if (!resp.ok) throw new Error(`載入勳章資料失敗：${resp.status}`);
-medalsData = await resp.json();
-
-localStorage.setItem(cacheKey, JSON.stringify(medalsData));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 勳章資料已載入並快取', medalsData);
-} catch (err) {
-console.error('載入勳章資料失敗:', err);
-// 提供預設勳章資料
-medalsData = {
-medals: {},
-rarityColors: {
-common: "#84cc16",
-rare: "#3b82f6", 
-epic: "#8b5cf6",
-legendary: "#f59e0b"
-},
-maxEquippedMedals: 5
-};
-}
-}
-
-// 📝 載入考試配置
-async function loadExamConfigs() {
-    try {
-        const cacheKey = 'exam_configs_v1';
-        const cached = localStorage.getItem(cacheKey);
-        const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-            examConfigs = JSON.parse(cached);
-            console.log('✅ 從快取載入考試配置');
-            return;
-        }
-
-        const resp = await fetch('exam-configs.json');
-        if (!resp.ok) throw new Error(`載入考試配置失敗：${resp.status}`);
-        examConfigs = await resp.json();
-
-        localStorage.setItem(cacheKey, JSON.stringify(examConfigs));
-        localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-        console.log('✅ 考試配置已載入並快取', examConfigs);
-    } catch (err) {
-        console.error('載入考試配置失敗:', err);
-        alert('系統錯誤：無法載入考試配置檔案');
-    }
-}
-
-// 📝 載入用戶密碼數據
-async function loadPasswordData() {
-    try {
-        const cacheKey = 'password_data_v1';
-        const cached = localStorage.getItem(cacheKey);
-        const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-            window.passwordData = JSON.parse(cached);
-            console.log('✅ 從快取載入用戶密碼數據');
-            return;
-        }
-
-        const resp = await fetch('password.json');
-        if (!resp.ok) throw new Error(`載入用戶密碼數據失敗：${resp.status}`);
-        window.passwordData = await resp.json();
-
-        localStorage.setItem(cacheKey, JSON.stringify(window.passwordData));
-        localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-        console.log('✅ 用戶密碼數據已載入並快取', window.passwordData.length, '位用戶');
-    } catch (err) {
-        console.error('載入用戶密碼數據失敗:', err);
-        window.passwordData = [];
-    }
-}
-
-// 📝 動態生成挑戰項目列表
-function renderChallengesList() {
-    const challengesContainer = document.getElementById('challengesList');
-    const fragment = document.createDocumentFragment();
-
-    Object.entries(examConfigs).forEach(([examType, config]) => {
-        const challengeItem = document.createElement('div');
-        challengeItem.className = 'challenge-item';
-
-        challengeItem.innerHTML = `
-        <h3 class="challenge-title">${config.name}</h3>
-        <p class="challenge-info" style="color:#ef4444;">${config.description}</p>
-        <div class="champion-display" data-exam-type="${examType}">
-        <!-- 榜首資料將在此動態載入 -->
-        </div>
-        <div class="challenge-actions">
-        <button class="btn btn-primary" onclick="startExam('${examType}')">開始考試</button>
-        <button class="btn btn-secondary" onclick="showLeaderboard('${examType}')">查看排行榜</button>
-        </div>
-        `;
-
-        fragment.appendChild(challengeItem);
-    });
-
-    challengesContainer.appendChild(fragment);
-}
-
-// 🏅 載入用戶勳章和貨幣資料
-async function loadUserMedalsAndCurrency() {
-    try {
-        const snapshot = await database.ref(`users/${currentUser}/medals`).once('value');
-        const medalSnapshot = snapshot.val() || {};
-        userMedals = {
-            owned: medalSnapshot.owned || [],
-            equipped: medalSnapshot.equipped || []
-        };
-
-        const currencySnapshot = await database.ref(`users/${currentUser}/currency`).once('value');
-        userCurrency = currencySnapshot.val() || { coins: 0, gems: 0 };
-
-        updateCurrencyDisplay();
-        updateMedalDisplay();
-    } catch (err) {
-        console.error('載入用戶勳章資料失敗:', err);
-    }
-}
-
-// 🏅 更新貨幣顯示
-function updateCurrencyDisplay() {
-document.getElementById('userCoins').textContent = userCurrency.coins;
-document.getElementById('userGems').textContent = userCurrency.gems;
-}
-
-// 🏅 更新勳章顯示
-function updateMedalDisplay() {
-    const medalContainer = document.getElementById('userMedals');
-    medalContainer.innerHTML = '';
-
-    userMedals.equipped.forEach(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const medalIcon = document.createElement('div');
-            medalIcon.className = `medal-icon ${medal.rarity}`;
-            medalIcon.style.borderColor = medal.color;
-            
-            // 🔧 修改這裡：判斷是 emoji 還是網址
-            if (medal.icon.startsWith('http')) {
-                medalIcon.innerHTML = `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
-            } else {
-                medalIcon.innerHTML = medal.icon;
-            }
-            
-            medalIcon.title = `${medal.name}: ${medal.description}`;
-            medalContainer.appendChild(medalIcon);
-        }
-    });
-}
-
-
-// 🏅 保存勳章資料
-async function saveMedalData() {
-try {
-await database.ref(`users/${currentUser}/medals`).set(userMedals);
-updateMedalDisplay();
-} catch (err) {
-console.error('保存勳章資料失敗:', err);
-}
-}
-
-// 🏅 保存貨幣資料
-async function saveCurrencyData() {
-try {
-await database.ref(`users/${currentUser}/currency`).set(userCurrency);
-updateCurrencyDisplay();
-} catch (err) {
-console.error('保存貨幣資料失敗:', err);
-}
-}
-
-// 🏪 顯示商店
-async function showShop() {
-document.getElementById('shopModal').style.display = 'flex';
-await renderShopItems();
-}
-
-// 🏪 隱藏商店
-function hideShop() {
-document.getElementById('shopModal').style.display = 'none';
-}
-
-// 🏪 篩選商店物品
-function filterShop(category) {
-document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-event.target.classList.add('active');
-renderShopItems(category);
-}
-
-// 🏪 渲染商店物品 - 修改版本
-async function renderShopItems(filter = 'all') {
-    const shopContainer = document.getElementById('shopItems');
-    shopContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店中...</div>';
-
-    const medals = Object.values(medalsData.medals);
-    const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
-
-    const fragment = document.createDocumentFragment();
-
-    filteredMedals.forEach(medal => {
-        const isOwned = userMedals.owned.includes(medal.id);
-        const isEquipped = userMedals.equipped.includes(medal.id);
-        
-        // 獲取價格
-        let coinPrice = 0;
-        let gemPrice = 0;
-        
-        if (typeof medal.price === 'object') {
-            coinPrice = medal.price.coins || 0;
-            gemPrice = medal.price.gems || 0;
-        } else {
-            coinPrice = medal.price;
-        }
-        
-        // 檢查是否能負擔
-        const canAffordCoins = userCurrency.coins >= coinPrice;
-        const canAffordGems = userCurrency.gems >= gemPrice;
-        const canAfford = canAffordCoins && canAffordGems;
-
-        const item = document.createElement('div');
-        item.className = `shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}`;
-
-        // 判斷是 emoji 還是網址
-        const medalIconContent = medal.icon.startsWith('http') ? 
-            `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">` : 
-            medal.icon;
-
-        // 構建價格顯示
-        let priceDisplay = '';
-        if (coinPrice > 0) priceDisplay += `💰 ${coinPrice} `;
-        if (gemPrice > 0) priceDisplay += `💎 ${gemPrice}`;
-
-        item.innerHTML = `
-        <div class="medal-preview" style="border-color: ${medal.color};">
-        ${medalIconContent}
-        </div>
-        <div class="item-info">
-        <div class="item-name" style="color: ${medal.color};">${medal.name}</div>
-        <div class="item-description">${medal.description}</div>
-        <div class="item-price">${priceDisplay}</div>
-        </div>
-        <div class="item-actions">
-        ${isOwned ? 
-        '<span class="btn btn-small btn-secondary">已擁有</span>' :
-        `<button class="btn btn-small btn-primary ${!canAfford ? 'disabled' : ''}" 
-        onclick="buyMedal('${medal.id}')" ${!canAfford ? 'disabled' : ''}>
-        購買
-        </button>`
-        }
-        </div>
-        `;
-
-        fragment.appendChild(item);
-    });
-
-    shopContainer.innerHTML = '';
-    shopContainer.appendChild(fragment);
-}
-
-// 🏪 購買勳章 - 修改版本
-async function buyMedal(medalId) {
-    const medal = medalsData.medals[medalId];
-    if (!medal || userMedals.owned.includes(medalId)) return;
-    
-    // 檢查價格結構
-    let coinPrice = 0;
-    let gemPrice = 0;
-    
-    if (typeof medal.price === 'object') {
-        // 新結構：包含金幣和寶石
-        coinPrice = medal.price.coins || 0;
-        gemPrice = medal.price.gems || 0;
-    } else {
-        // 舊結構：只有金幣
-        coinPrice = medal.price;
-    }
-    
-    // 檢查用戶是否有足夠的貨幣
-    if (userCurrency.coins < coinPrice) {
-        alert('💰 金幣不足！');
-        return;
-    }
-    
-    if (userCurrency.gems < gemPrice) {
-        alert('💎 寶石不足！');
-        return;
-    }
-    
-    // 顯示確認對話框，包含所有貨幣成本
-    // 如果icon是網址，則使用🖼️圖示代替
-    const iconDisplay = medal.icon.startsWith('http') ? '🖼️' : medal.icon;
-    let confirmMessage = `確定要購買 ${iconDisplay} ${medal.name} 嗎？\n`;
-    if (coinPrice > 0) confirmMessage += `金幣：💰 ${coinPrice}\n`;
-    if (gemPrice > 0) confirmMessage += `寶石：💎 ${gemPrice}`;
-    
-    if (confirm(confirmMessage)) {
-        // 扣除貨幣
-        userCurrency.coins -= coinPrice;
-        userCurrency.gems -= gemPrice;
-        
-        // 添加勳章到擁有列表
-        userMedals.owned.push(medalId);
-        
-        // 保存數據
-        await Promise.all([saveMedalData(), saveCurrencyData()]);
-        await renderShopItems();
-        
-        // 顯示成功訊息 - 同樣處理圖示顯示問題
-        alert(`🎉 成功購買 ${iconDisplay} ${medal.name}！`);
-    }
-}
-
-// 🎒 顯示背包
-async function showInventory() {
-document.getElementById('inventoryModal').style.display = 'flex';
-await renderInventory();
-}
-
-// 🎒 隱藏背包
-function hideInventory() {
-document.getElementById('inventoryModal').style.display = 'none';
-}
-
-// 🎒 渲染背包 - 修正版本
-async function renderInventory() {
-const inventoryGrid = document.getElementById('inventoryGrid');
-inventoryGrid.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入背包中...</div>';
-
-const fragment = document.createDocumentFragment();
-
-userMedals.owned.forEach(medalId => {
-const medal = medalsData.medals[medalId];
-if (!medal) return;
-
-const isEquipped = userMedals.equipped.includes(medalId);
-const item = document.createElement('div');
-item.className = `inventory-item ${isEquipped ? 'equipped' : ''}`;
-item.onclick = () => toggleMedalEquip(medalId);
-
-// 🔧 修改這裡：新增判斷邏輯
-const iconHtml = medal.icon.startsWith('http') ? 
-    `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
-    medal.icon;
-
-item.innerHTML = `
-<div class="inventory-medal-icon" style="color: ${medal.color};">
-${iconHtml}
-</div>
-<div class="inventory-medal-name">${medal.name}</div>
-${isEquipped ? '<div style="font-size: 0.6rem; color: var(--gold);">已裝備</div>' : ''}
-`;
-
-fragment.appendChild(item);
+// 讀取 password.json
+fetch('password.json')
+.then(response => response.json())
+.then(data => {
+  users = Array.isArray(data) ? data : [data];
+  // 這裡才判斷登入狀態
+  if (isLoggedIn()) {
+    showMain();
+  } else {
+    showLogin();
+  }
+})
+.catch(err => {
+  document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
+  console.error('載入 password.json 失敗:', err);
 });
 
-if (userMedals.owned.length === 0) {
-const emptyMsg = document.createElement('div');
-emptyMsg.className = 'empty-leaderboard';
-emptyMsg.innerHTML = '<p>🎒 背包空空如也</p><p>去商店購買一些勳章吧！</p>';
-fragment.appendChild(emptyMsg);
+const LIMIT = 3600000; // 1小時（毫秒）
+
+// ===== 檢查登入狀態與時效 =====
+function isLoggedIn() {
+const flag = localStorage.getItem("t2_login");
+const time = parseInt(localStorage.getItem("t2_login_time"), 10);
+if (flag !== "yes" || !time) return false;
+if (Date.now() - time > LIMIT) {
+  // 超時，清除狀態
+  localStorage.removeItem("t2_login");
+  localStorage.removeItem("t2_login_time");
+  localStorage.removeItem("t2_login_user");
+  localStorage.removeItem("t2_login_password");
+  localStorage.removeItem("t2_login_display_name"); // 🆕 新增：清除顯示名稱
+  return false;
 }
 
-inventoryGrid.innerHTML = '';
-inventoryGrid.appendChild(fragment);
+return true;
 }
 
+// ===== 顯示登入介面 =====
+function showLogin() {
+document.getElementById('app').innerHTML = `
+  <div class="login-box">
+    <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
+    <div class="login-notice">📢 提醒：帳號密碼統一後4碼</div>
+    <form id="loginForm" autocomplete="off">
+      <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
+      <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
+      <button type="submit">登入</button>
+      <div class="error" id="errorMsg"></div>
+    </form>
+  </div>
+`;
+// ===== 修改登入驗證邏輯 =====
+document.getElementById('loginForm').onsubmit = function(e) {
+  e.preventDefault();
+  const uname = document.getElementById('username').value.trim().toLowerCase();
+  const pwd = document.getElementById('password').value.trim();
+  document.getElementById('errorMsg').textContent = "";
 
-// 🎒 切換勳章裝備狀態
-async function toggleMedalEquip(medalId) {
-const isEquipped = userMedals.equipped.includes(medalId);
+  // 本地驗證帳號密碼
+  const user = users.find(u => u.username === uname && u.password === pwd);
 
-if (isEquipped) {
-// 卸下勳章
-userMedals.equipped = userMedals.equipped.filter(id => id !== medalId);
-} else {
-// 裝備勳章
-if (userMedals.equipped.length >= medalsData.maxEquippedMedals) {
-alert(`最多只能裝備 ${medalsData.maxEquippedMedals} 個勳章！`);
+  if (user) {
+    // 🆕 新增：生成唯一識別符
+    const uniqueId = user.username + user.password; // 00175126
+    const displayName = user._comment || user.username; // 念念
+    
+    localStorage.setItem("t2_login", "yes");
+    localStorage.setItem("t2_login_time", Date.now().toString());
+    localStorage.setItem("t2_login_user", uniqueId); // 🔧 儲存唯一識別符
+    localStorage.setItem("t2_login_password", pwd);
+    localStorage.setItem("t2_login_display_name", displayName); // 🔧 儲存顯示名稱
+    
+    console.log(`✅ 登入成功: ${uniqueId} = ${displayName}`);
+    
+    showWelcome(user);
+  } else {
+    document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
+  }
+};
+document.getElementById('username').oninput =
+document.getElementById('password').oninput = function() {
+  document.getElementById('errorMsg').textContent = "";
+};
+}
+
+// ===== 顯示歡迎訊息 =====
+function showWelcome(user) {
+document.getElementById('app').innerHTML = `
+  <div class="main-content" style="text-align:center;">
+    <h2>🎉 歡迎登入</h2>
+    <div style="font-size:1.2rem;margin:2vw 0 4vw 0;color:#263175;">
+      ${user.welcome || "歡迎使用本系統！"}
+    </div>
+    <button id="goNextBtn" style="padding:0.6em 2em;font-size:1.1em;">進入主頁</button>
+  </div>
+`;
+document.getElementById('goNextBtn').onclick = function() {
+  window.location.href = "page33.html";
+};
+}
+
+// ===== 登入判定 =====
+function showMain() {
+// 如果沒登入，回登入畫面
+if (!isLoggedIn()) {
+  showLogin();
+  return;
+}
+// 只要登入就直接跳轉主頁
+window.location.href = "page33.html";
 return;
 }
-userMedals.equipped.push(medalId);
+
+// ===== 定時檢查是否超時，超時自動登出 =====
+let timeoutTimer = null;
+function startTimeoutCheck() {
+if (timeoutTimer) clearInterval(timeoutTimer);
+timeoutTimer = setInterval(() => {
+  if (!isLoggedIn()) {
+    alert("登入已超時，請重新登入！");
+    showLogin();
+    clearInterval(timeoutTimer);
+  }
+}, 30000);
 }
 
-await saveMedalData();
-await renderInventory();
-}
-
-async function loadExamQuestions() {
-try {
-// 檢查快取
-const cacheKey = 'exam_questions_v1';
-const cached = localStorage.getItem(cacheKey);
-const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-// 快取有效期 1 小時
-if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-examQuestions = JSON.parse(cached);
-console.log('✅ 從快取載入題庫');
-return;
-}
-
-const resp = await fetch('questions.json');
-if (!resp.ok) throw new Error(`載入題庫失敗：${resp.status}`);
-examQuestions = await resp.json();
-
-// 儲存到快取
-localStorage.setItem(cacheKey, JSON.stringify(examQuestions));
-localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-console.log('✅ 題庫已載入並快取', examQuestions);
-} catch (err) {
-console.error(err);
-alert('系統錯誤：無法載入題庫檔案');
-}
-}
-
-// 全域變數
-let currentUser = null;
-let usersData = [];
-let currentExam = null;
-let currentQuestions = [];
-let currentQuestionIndex = 0;
-let examTimer = null;
-let questionStartTime = null;
-let examStartTime = null;
-let userScores = { fastAnswers:0, correctAnswers:0 };
-
-// 🚀 效能優化：防抖函數
-function debounce(func, wait) {
-let timeout;
-return function executedFunction(...args) {
-const later = () => {
-clearTimeout(timeout);
-func(...args);
-};
-clearTimeout(timeout);
-timeout = setTimeout(later, wait);
-};
-}
-
-// 工具函數：從數組中移除特定元素
-Array.prototype.remove = function(element) {
-const index = this.indexOf(element);
-if (index > -1) this.splice(index, 1);
-};
-
-// 強制登出函數
-function forceLogout(message = '登入驗證失敗，請重新登入') {
-localStorage.removeItem('t2_login');
-localStorage.removeItem('t2_login_time');
-localStorage.removeItem('t2_login_user');
-localStorage.removeItem('t2_login_password');
-alert(message);
-window.location.href = 'index3.html';
-}
-
-// 檢查登入狀態和時效 - 修正版本
-function checkLoginStatus() {
-    const flag = localStorage.getItem('t2_login');
-    const time = localStorage.getItem('t2_login_time');
-    const uniqueId = localStorage.getItem('t2_login_user'); // 🔧 這應該是唯一ID (00175126)
-    const displayName = localStorage.getItem('t2_login_display_name'); // 🆕 顯示名稱 (念念)
-    
-    if (flag !== 'yes' || !time || !uniqueId) {
-        forceLogout('未檢測到有效登入狀態');
-        return false;
-    }
-    
-    if (Date.now() - parseInt(time) > 3600000) {
-        forceLogout('登入時間已超過1小時，請重新登入');
-        return false;
-    }
-    
-    // 🔧 返回正確的對象結構
-    return {
-        uniqueId: uniqueId,        // 00175126 (用於Firebase)
-        displayName: displayName || uniqueId // 念念 (用於顯示)
-    };
-}
-
-
-// 🚀 效能優化：用戶資料快取 - 修正版本
-async function loadUsersData() {
-    try {
-        // 檢查快取
-        const cacheKey = 'users_data_v1';
-        const cached = localStorage.getItem(cacheKey);
-        const cacheTime = localStorage.getItem(cacheKey + '_time');
-
-        // 🔧 修正：縮短快取時間以確保勳章資料即時更新
-        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 60000) { // 改為1分鐘
-            usersData = JSON.parse(cached);
-            console.log('✅ 從快取載入用戶資料');
-            return;
-        }
-
-        const snapshot = await database.ref('users').once('value');
-        usersData = snapshot.val() || {};
-
-        // 儲存到快取
-        localStorage.setItem(cacheKey, JSON.stringify(usersData));
-        localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-        console.log('✅ 用戶資料已載入並快取', Object.keys(usersData).length, '位用戶');
-        
-        // 🔧 調試：檢查是否有勳章資料
-        Object.entries(usersData).forEach(([username, userData]) => {
-            if (userData.medals && userData.medals.equipped && userData.medals.equipped.length > 0) {
-                console.log(`👤 ${username} 裝備勳章:`, userData.medals.equipped);
-            }
-        });
-        
-    } catch (err) {
-        console.error('載入用戶資料失敗:', err);
-    }
-}
-
-
-// 🚀 效能優化：榜首資料快取
-const championCache = new Map();
-
-// 🔧 修正：獲取榜首時不使用 orderByChild 以避免索引警告
-async function getChampion(examType) {
-    // 檢查快取
-    const cacheKey = `champion_${examType}`;
-    const cached = championCache.get(cacheKey);
-    if (cached && (Date.now() - cached.timestamp) < 60000) { // 1分鐘快取
-        return cached.data;
-    }
-
-    try {
-        // 🔧 修正：直接獲取所有資料，然後在客戶端排序
-        const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-        const data = snapshot.val();
-        if (data) {
-            // 轉換並排序資料找出榜首
-            const leaderboardData = Object.entries(data).map(([user, userData]) => ({
-                user,
-                ...userData
-            })).sort((a, b) => {
-                if (b.score !== a.score) {
-                    return b.score - a.score;
-                }
-                return a.totalTime - b.totalTime;
-            });
-
-            const result = leaderboardData[0]; // 榜首
-
-            // 快取結果
-            championCache.set(cacheKey, {
-                data: result,
-                timestamp: Date.now()
-            });
-            return result;
-        }
-        return null;
-    } catch (err) {
-        console.error('獲取榜首失敗:', err);
-        return null;
-    }
-}
-
-// 🚀 效能優化：批量更新榜首顯示
-const debouncedUpdateChampions = debounce(updateAllChampions, 300);
-
-async function updateAllChampions() {
-    const examTypes = Object.keys(examConfigs);
-    const promises = examTypes.map(async (examType) => {
-        const champion = await getChampion(examType);
-        const championDisplay = document.querySelector(`[data-exam-type="${examType}"]`);
-        if (!championDisplay) return;
-
-        if (champion) {
-            // 🔧 修正：顯示榜首的顯示名稱
-            const displayName = getUserDisplayName(champion.user);
-            championDisplay.innerHTML = `
-            <div class="champion-card">
-            <span>🏆 榜首：${displayName}</span>
-            <span>${champion.score}分</span>
-            </div>
-            `;
-        } else {
-            championDisplay.innerHTML = `
-            <div class="champion-empty">
-            <span>🏆 尚無榜首</span>
-            </div>
-            `;
-        }
-    });
-
-    await Promise.all(promises);
-}
-
-// 🚀 效能優化：登入驗證和初始化 - 修正版本
-// 🔧 修正：initializeApp 函數
-async function initializeApp() {
-    try {
-        const userInfo = checkLoginStatus();
-        if (!userInfo) return;
-
-        currentUser = userInfo.uniqueId;
-        const displayName = userInfo.displayName;
-        
-        document.getElementById('currentUserWelcome').textContent = `歡迎回來，${displayName}`;
-
-        // 並行載入資料
-        await Promise.all([
-            loadExamQuestions(),
-            loadUsersData(),
-            loadMedalsData(),
-            loadExamConfigs(),
-            loadPasswordData() // 新增：載入用戶密碼數據
-        ]);
-
-        // 載入用戶勳章和貨幣
-        await loadUserMedalsAndCurrency();
-
-        // 生成挑戰項目列表
-        renderChallengesList();
-
-        // 更新榜首顯示
-        await updateAllChampions();
-
-        // 隱藏載入畫面，顯示主要內容
-        document.getElementById('loadingScreen').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-
-    } catch (err) {
-        console.error('初始化失敗:', err);
-        alert('系統初始化失敗，請重新整理頁面');
-    }
-}
-
-
-// 登出功能
-function logout() {
-    localStorage.removeItem('t2_login');
-    localStorage.removeItem('t2_login_time');
-    localStorage.removeItem('t2_login_user');
-    localStorage.removeItem('t2_login_password');
-    localStorage.removeItem('t2_login_display_name'); // 🆕 清除顯示名稱
-    // 清除快取
-    localStorage.removeItem('exam_questions_v1');
-    localStorage.removeItem('exam_questions_v1_time');
-    localStorage.removeItem('users_data_v1');
-    localStorage.removeItem('users_data_v1_time');
-    localStorage.removeItem('medals_data_v1');
-    localStorage.removeItem('medals_data_v1_time');
-    localStorage.removeItem('exam_configs_v1');
-    localStorage.removeItem('exam_configs_v1_time');
-    championCache.clear();
-    window.location.href = 'index3.html';
-}
-
-// 返回T2日
-function backToT2() {
-    window.location.href = 'page33.html'; 
-}
-
-// 🚀 效能優化：題目隨機化
-function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-}
-
-// 🚀 效能優化：考試開始優化 - 修正版本
-function startExam(examType) {
-    if (!examQuestions[examType]) {
-        alert('題庫載入中，請稍後再試');
-        return;
-    }
-
-    const config = examConfigs[examType];
-    const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
-
-    if (questions.length < config.questionCount) {
-        alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
-        return;
-    }
-
-    currentExam = examType;
-    currentQuestions = questions;
-    currentQuestionIndex = 0;
-    examStartTime = Date.now();
-    
-    // 🔧 修正：完整的 userScores 初始化
-    userScores = { 
-        fastAnswers: 0, 
-        correctAnswers: 0,
-        totalAnswers: 0,
-        fastCorrectAnswers: 0  // 🆕 新增：快速且答對的題目數
-    };
-
-    showExamInterface();
-    displayQuestion();
-    startQuestionTimer();
-}
-
-// 顯示考試介面 - 加入棄權按鈕
-function showExamInterface() {
-    const container = document.getElementById('mainContent');
-    const config = examConfigs[currentExam];
-
-    container.innerHTML = `
-    <div class="exam-container">
-    <div class="exam-header">
-    <h2>${config.name}</h2>
-    <div class="timer" id="timer">${config.timePerQuestion}</div>
-    <button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
-    </div>
-    <div class="question" id="questionContainer">
-    <!-- 題目將在此顯示 -->
-    </div>
-    <div class="exam-progress">
-    <p>題目 <span id="currentQuestionNum">1</span> / ${config.questionCount}</p>
-    <p>得分：<span id="currentScore">0</span> 分</p>
-    </div>
-    </div>
-    `;
-}
-
-// 🆕 棄權功能
-function quitExam() {
-    if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
-        clearInterval(examTimer);
-
-        // 直接返回主頁，不保存任何成績
-        location.reload();
-    }
-}
-
-// 顯示題目
-function displayQuestion() {
-    const question = currentQuestions[currentQuestionIndex];
-    const questionContainer = document.getElementById('questionContainer');
-    const config = examConfigs[currentExam];
-
-    document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
-
-    if (currentExam === 'sudoku') {
-        // 數獨特殊顯示
-        questionContainer.innerHTML = `
-        <h3>${question.question}</h3>
-        <div class="sudoku-grid">
-        ${question.grid.map((cell, index) => 
-            `<input type="number" class="sudoku-cell" 
-            ${cell !== 0 ? `value="${cell}" disabled` : ''} 
-            min="1" max="4" 
-            data-index="${index}"
-            ${cell === 0 ? 'onchange="checkSudokuAnswer()"' : ''}>`
-        ).join('')}
-        </div>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
-        填入1-4的數字，使每行每列都包含1-4
-        </p>
-        `;
-    } else {
-        // 一般題目顯示
-        const optionsHtml = question.options.map((option, index) => 
-            `<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
-        ).join('');
-
-        questionContainer.innerHTML = `
-        <h3>${question.question}</h3>
-        <div class="options">
-        ${optionsHtml}
-        </div>
-        `;
-    }
-
-    questionStartTime = Date.now();
-}
-
-// 開始題目計時器
-function startQuestionTimer() {
-    const config = examConfigs[currentExam];
-    let timeLeft = config.timePerQuestion;
-    const timerElement = document.getElementById('timer');
-
-    examTimer = setInterval(() => {
-        timeLeft--;
-        timerElement.textContent = timeLeft;
-
-        if (timeLeft <= 0) {
-            clearInterval(examTimer);
-            // 時間到，自動跳到下一題
-            if (currentExam === 'sudoku') {
-                nextQuestion(false);
-            } else {
-                selectAnswer(-1); // -1 表示未作答
-            }
-        }
-    }, 1000);
-}
-
-// 選擇答案 - 修正版本
-function selectAnswer(selectedIndex) {
-    clearInterval(examTimer);
-    const question = currentQuestions[currentQuestionIndex];
-    const isCorrect = selectedIndex === question.correct;
-    const responseTime = (Date.now() - questionStartTime) / 1000;
-    const config = examConfigs[currentExam];
-
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
-
-    // 🏅 檢查快速答題
-    const isFast = responseTime <= config.fastAnswerThreshold;
-    if (isFast) {
-        userScores.fastAnswers++;
-    }
-
-    // 🔧 修正：只有答對才加分
-    if (isCorrect) {
-        userScores.correctAnswers++;
-        
-        // 🎯 只有答對且快速才計入快速正確答案
-        if (isFast) {
-            userScores.fastCorrectAnswers++;
-        }
-    }
-
-    // 顯示答案反饋
-    showAnswerFeedback(selectedIndex, question.correct, responseTime);
-
-    // 延遲後進入下一題
-    setTimeout(() => {
-        nextQuestion(isCorrect);
-    }, 1500);
-}
-
-
-// 顯示答案反饋 - 修正版本
-function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
-    const options = document.querySelectorAll('.option-btn');
-    const config = examConfigs[currentExam];
-
-    options.forEach((btn, index) => {
-        btn.disabled = true;
-        if (index === correctIndex) {
-            btn.classList.add('correct');
-        } else if (index === selectedIndex && selectedIndex !== correctIndex) {
-            btn.classList.add('wrong');
-        }
-    });
-
-    // 顯示回應時間和快速答題提示
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.style.cssText = `
-    margin-top: 15px; 
-    text-align: center; 
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    `;
-
-    let feedbackText = `回應時間: ${responseTime.toFixed(1)}秒`;
-    if (responseTime <= config.fastAnswerThreshold) {
-        feedbackText += ` ⚡ 快速答題！`;
-    }
-
-    feedbackDiv.innerHTML = feedbackText;
-    document.getElementById('questionContainer').appendChild(feedbackDiv);
-}
-
-// 數獨答案檢查 - 修正版本
-function checkSudokuAnswer() {
-    const cells = document.querySelectorAll('.sudoku-cell');
-    const userGrid = Array.from(cells).map(cell => parseInt(cell.value) || 0);
-    const question = currentQuestions[currentQuestionIndex];
-
-    // 檢查是否填完
-    const isEmpty = userGrid.some(cell => cell === 0);
-    if (isEmpty) return;
-
-    // 檢查答案
-    const isCorrect = JSON.stringify(userGrid) === JSON.stringify(question.solution);
-    const responseTime = (Date.now() - questionStartTime) / 1000;
-    const config = examConfigs[currentExam];
-
-    clearInterval(examTimer);
-
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
-
-    // 🏅 檢查快速答題
-    const isFast = responseTime <= config.fastAnswerThreshold;
-    if (isFast) {
-        userScores.fastAnswers++;
-    }
-
-    // 🔧 修正：只有答對才加分
-    if (isCorrect) {
-        userScores.correctAnswers++;
-        
-        // 🎯 只有答對且快速才計入快速正確答案
-        if (isFast) {
-            userScores.fastCorrectAnswers++;
-        }
-    }
-
-    // 顯示數獨反饋
-    cells.forEach(cell => cell.disabled = true);
-    const feedbackDiv = document.createElement('div');
-    feedbackDiv.style.cssText = `
-        margin-top: 15px; 
-        text-align: center; 
-        font-size: 0.9rem;
-        color: ${isCorrect ? 'var(--success)' : 'var(--danger)'};
-    `;
-    feedbackDiv.innerHTML = `${isCorrect ? '✅ 正確！' : '❌ 錯誤！'} 回應時間: ${responseTime.toFixed(1)}秒`;
-    document.getElementById('questionContainer').appendChild(feedbackDiv);
-
-    setTimeout(() => {
-        nextQuestion(isCorrect);
-    }, 1500);
-}
-
-// 下一題 - 修正版本
-function nextQuestion(wasCorrect) {
-    // 🔧 修正：計算包含快速答對加分的總分
-    const baseScore = userScores.correctAnswers * 10;
-    const fastBonus = userScores.fastCorrectAnswers * 5; // 快速答對額外加分
-    const currentScore = baseScore + fastBonus;
-    
-    document.getElementById('currentScore').textContent = currentScore;
-
-    if (currentQuestionIndex < currentQuestions.length - 1) {
-        currentQuestionIndex++;
-        displayQuestion();
-        startQuestionTimer();
-    } else {
-        finishExam();
-    }
-}
-
-
-// 結束考試 - 修正版本
-async function finishExam() {
-    clearInterval(examTimer);
-    const totalTime = (Date.now() - examStartTime) / 1000;
-    const config = examConfigs[currentExam];
-    
-    // 🔧 修正：正確計算最終分數（基礎分 + 快速答對加分）
-    const baseScore = userScores.correctAnswers * 10;
-    const fastBonus = userScores.fastCorrectAnswers * 5;
-    const finalScore = baseScore + fastBonus;
-    
-    console.log(`📊 分數統計:
-    - 答對題數: ${userScores.correctAnswers}/${config.questionCount}
-    - 基礎分數: ${baseScore}分
-    - 快速答對: ${userScores.fastCorrectAnswers}題
-    - 快速加分: ${fastBonus}分
-    - 最終分數: ${finalScore}分`);
-    
-    // 🛡️ 防濫用：檢查是否完成所有題目
-    const isCompleted = (currentQuestionIndex + 1) >= config.questionCount;
-    
-    if (!isCompleted) {
-        console.log('❌ 考試未完成，不保存成績');
-        showExamResult(finalScore, totalTime, 0, 0);
-        return;
-    }
-    
-    // 🎯 計算獎勵
-    let coinsEarned = 0;
-    let gemsEarned = 0;
-    let bonusMessages = [];
-    
-    // 💰 基礎獎勵：每答對一題5金幣
-    coinsEarned += userScores.correctAnswers * 5;
-    if (userScores.correctAnswers > 0) {
-        bonusMessages.push(`📝 答對${userScores.correctAnswers}題獲得${userScores.correctAnswers * 5}金幣`);
-    }
-    
-    // ⚡ 快速答對獎勵：每快速答對一題額外2金幣
-    if (userScores.fastCorrectAnswers > 0) {
-        const fastCoins = userScores.fastCorrectAnswers * 2;
-        coinsEarned += fastCoins;
-        bonusMessages.push(`⚡ 快速答對${userScores.fastCorrectAnswers}題獲得額外${fastCoins}金幣`);
-    }
-    
-    // 🏆 滿分獎勵
-    if (userScores.correctAnswers === config.questionCount) {
-        const perfectBonus = config.perfectBonus || 50;
-        coinsEarned += perfectBonus;
-        gemsEarned += 1;
-        bonusMessages.push(`🏆 滿分獎勵：+${perfectBonus}金幣 +1寶石`);
-    }
-    
-    // 💰 更新貨幣
-    if (coinsEarned > 0) userCurrency.coins += coinsEarned;
-    if (gemsEarned > 0) userCurrency.gems += gemsEarned;
-    
-    // 🔧 修正：確保成績保存到排行榜
-    try {
-        console.log('💾 開始保存成績到排行榜...');
-        await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
-        console.log('✅ 成績保存成功');
-        
-        // 保存貨幣資料
-        if (coinsEarned > 0 || gemsEarned > 0) {
-            await saveCurrencyData();
-            console.log('💰 貨幣更新成功');
-        }
-        
-        // 清除相關快取以確保排行榜更新
-        const cacheKey = `champion_${currentExam}`;
-        championCache.delete(cacheKey);
-        localStorage.removeItem('users_data_v1');
-        localStorage.removeItem('users_data_v1_time');
-        console.log('🗑️ 快取已清除');
-        
-    } catch (error) {
-        console.error('❌ 保存成績失敗:', error);
-        alert('保存成績時發生錯誤，請檢查網路連線');
-    }
-    
-    // 顯示結果
-    showExamResult(finalScore, totalTime, coinsEarned, gemsEarned, bonusMessages);
-}
-
-// 顯示考試結果 - 修正版本
-function showExamResult(score, totalTime, coinsEarned, gemsEarned, bonusMessages = []) {
-    const container = document.getElementById('mainContent');
-    const config = examConfigs[currentExam];
-    
-    // 🔧 修正：計算分數明細
-    const baseScore = userScores.correctAnswers * 10;
-    const fastBonus = userScores.fastCorrectAnswers * 5;
-
-    container.innerHTML = `
-    <div class="exam-result">
-        <h2>🎉 考試完成！</h2>
-        <p><strong>考試類型：</strong>${config.name}</p>
-        <div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-            <p><strong>📊 成績統計：</strong></p>
-            <p>• 答對題數：${userScores.correctAnswers} / ${config.questionCount}</p>
-            <p>• 基礎分數：${baseScore} 分</p>
-            <p>• 快速答對：${userScores.fastCorrectAnswers} 題 (+${fastBonus}分)</p>
-            <p style="color: var(--primary); font-size: 1.2rem; font-weight: bold;">
-                🏆 最終得分：${score} 分
-            </p>
-        </div>
-        <p><strong>總耗時：</strong>${totalTime.toFixed(1)} 秒</p>
-        
-        ${bonusMessages.length > 0 ? `
-        <div style="margin: 15px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
-            <p><strong>🎁 獎勵明細：</strong></p>
-            ${bonusMessages.map(msg => `<p style="color: var(--success);">• ${msg}</p>`).join('')}
-            ${coinsEarned > 0 ? `<p style="color: var(--gold); font-weight: bold;">💰 總獲得金幣：${coinsEarned}</p>` : ''}
-            ${gemsEarned > 0 ? `<p style="color: var(--info); font-weight: bold;">💎 總獲得寶石：${gemsEarned}</p>` : ''}
-        </div>
-        ` : `<p style="color: var(--text-secondary);">💰 本次未獲得獎勵</p>`}
-        
-        <div style="margin-top: 20px;">
-            <button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
-            <button class="btn btn-secondary" onclick="showLeaderboard('${currentExam}')">查看排行榜</button>
-        </div>
-    </div>
-    `;
-}
-
-
-// 🔧 修正：保存成績到排行榜 - 不使用索引查詢
-async function saveScoreToLeaderboard(examType, score, totalTime) {
-    try {
-        const scoreData = {
-            score: score,
-            totalTime: totalTime,
-            timestamp: Date.now(),
-            fastAnswers: userScores.fastAnswers,
-            correctAnswers: userScores.correctAnswers
-        };
-
-        // 🔧 使用 uniqueId 作為 Firebase key
-        await database.ref(`leaderboard/${examType}/${currentUser}`).set(scoreData);
-        console.log('成績已保存到排行榜');
-    } catch (err) {
-        console.error('保存成績失敗:', err);
-    }
-}
-
-// 🔧 修正：顯示排行榜 - 強制重新載入用戶資料
-async function showLeaderboard(examType) {
-    document.getElementById('modalTitle').textContent = `${examConfigs[examType].name} - 排行榜`;
-    const content = document.getElementById('leaderboardContent');
-    content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入排行榜中...</div>';
-    document.getElementById('leaderboardModal').style.display = 'flex';
-
-    try {
-        // 🔧 強制重新載入用戶資料以獲取最新勳章狀態
-        localStorage.removeItem('users_data_v1');
-        localStorage.removeItem('users_data_v1_time');
-        await loadUsersData();
-
-        // 獲取排行榜資料
-        const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-        const data = snapshot.val();
-
-        if (data) {
-            // 轉換並排序資料
-            const leaderboardData = Object.entries(data).map(([user, userData]) => ({
-                user,
-                ...userData
-            })).sort((a, b) => {
-                if (b.score !== a.score) {
-                    return b.score - a.score;
-                }
-                return a.totalTime - b.totalTime;
-            });
-
-            const leaderboardHtml = leaderboardData.map((entry, index) => {
-                const isCurrentUser = entry.user === currentUser;
-                const userMedalIcons = getUserMedalIcons(entry.user);
-                const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
-
-                return `
-                <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-                    <div class="rank">#${index + 1}</div>
-                    <div class="user-name">
-                        ${displayName}
-                        <div class="leaderboard-medals">
-                            ${userMedalIcons}
-                        </div>
-                    </div>
-                    <div class="score">${entry.score}分</div>
-                </div>
-                `;
-            }).join('');
-
-            content.innerHTML = `
-                <div class="leaderboard-container">
-                    ${leaderboardHtml}
-                </div>
-            `;
-        } else {
-            content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無排行榜資料</p></div>';
-        }
-    } catch (err) {
-        console.error('載入排行榜失敗:', err);
-        content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入排行榜失敗</p></div>';
-    }
-}
-
-
-// 🏅 獲取用戶顯示名稱 - 完整修正版本
-function getUserDisplayName(userId) {
-    // 1. 檢查 usersData 中是否有此用戶的中文名稱
-    if (usersData[userId] && usersData[userId].chineseName) {
-        return usersData[userId].chineseName;
-    }
-    
-    // 2. 如果在 usersData 中找不到，則嘗試從 localStorage 中獲取當前用戶的顯示名稱
-    if (userId === currentUser && localStorage.getItem('t2_login_display_name')) {
-        return localStorage.getItem('t2_login_display_name');
-    }
-    
-    // 3. 如果都找不到，則嘗試從 password.json 中查找 (需要在初始化時載入)
-    if (window.passwordData) {
-        // 從 userId 中提取用戶名和密碼部分 (例如 00170128 -> 0017 和 0128)
-        const username = userId.substring(0, 4);
-        const password = userId.substring(4);
-        
-        // 查找匹配的用戶
-        const matchedUser = window.passwordData.find(user => 
-            user.username === username && user.password === password);
-        
-        if (matchedUser && matchedUser._comment) {
-            return matchedUser._comment;
-        }
-    }
-    
-    // 4. 如果還是找不到，則返回原始 userId
-    return userId;
-}
-
-// 🏆 顯示總分排行榜 - 修正版本
-async function showTotalLeaderboard() {
-    document.getElementById('modalTitle').textContent = '🏆 總分排行榜';
-    const content = document.getElementById('leaderboardContent');
-    content.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入總分排行榜中...</div>';
-    document.getElementById('leaderboardModal').style.display = 'flex';
-
-    try {
-        // 🔧 強制重新載入用戶資料以獲取最新勳章狀態
-        localStorage.removeItem('users_data_v1');
-        localStorage.removeItem('users_data_v1_time');
-        await loadUsersData();
-
-        // 計算總分
-        const totalScores = {};
-        const examTypes = Object.keys(examConfigs);
-
-        // 並行獲取所有考試類型的資料
-        const promises = examTypes.map(async (examType) => {
-            const snapshot = await database.ref(`leaderboard/${examType}`).once('value');
-            const data = snapshot.val() || {};
-
-            Object.entries(data).forEach(([user, userData]) => {
-                if (!totalScores[user]) {
-                    totalScores[user] = { totalScore: 0, totalTime: 0, examCount: 0 };
-                }
-                totalScores[user].totalScore += userData.score || 0;
-                totalScores[user].totalTime += userData.totalTime || 0;
-                totalScores[user].examCount++;
-            });
-        });
-
-        await Promise.all(promises);
-
-        // 排序總分資料
-        const sortedTotalScores = Object.entries(totalScores)
-            .map(([user, data]) => ({ user, ...data }))
-            .sort((a, b) => {
-                if (b.totalScore !== a.totalScore) {
-                    return b.totalScore - a.totalScore;
-                }
-                return a.totalTime - b.totalTime;
-            });
-
-        if (sortedTotalScores.length > 0) {
-            const leaderboardHtml = sortedTotalScores.map((entry, index) => {
-                const isCurrentUser = entry.user === currentUser;
-                const userMedalIcons = getUserMedalIcons(entry.user);
-                const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
-
-                return `
-                <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-                    <div class="rank">#${index + 1}</div>
-                    <div class="user-name">
-                        ${displayName}
-                        <div class="leaderboard-medals">
-                            ${userMedalIcons}
-                        </div>
-                    </div>
-                    <div class="score">${entry.totalScore}分</div>
-                </div>
-                `;
-            }).join('');
-
-            content.innerHTML = `
-                <div class="leaderboard-container">
-                    ${leaderboardHtml}
-                </div>
-            `;
-        } else {
-            content.innerHTML = '<div class="empty-leaderboard"><p>🏆 尚無總分排行榜資料</p></div>';
-        }
-    } catch (err) {
-        console.error('載入總分排行榜失敗:', err);
-        content.innerHTML = '<div class="empty-leaderboard"><p>❌ 載入總分排行榜失敗</p></div>';
-    }
-}
-
-// 🏅 獲取用戶勳章圖示 - 升級版本
-function getUserMedalIcons(username) {
-    // 🔧 修正：從 usersData 正確獲取用戶勳章資料
-    const userData = usersData[username];
-    if (!userData || !userData.medals || !userData.medals.equipped || userData.medals.equipped.length === 0) {
-        return '';
-    }
-
-    return userData.medals.equipped.map(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const iconContent = medal.icon.startsWith('http') ? 
-                `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">` : 
-                medal.icon;
-            return `<span class="leaderboard-medal" 
-                        style="border-color: ${medal.color};" 
-                        data-rarity="${medal.rarity}"
-                        title="${medal.name}: ${medal.description}">
-                        ${iconContent}
-                    </span>`;
-        }
-        return '';
-    }).join('');
-}
-
-
-// 隱藏排行榜
-function hideLeaderboard() {
-document.getElementById('leaderboardModal').style.display = 'none';
-}
-
-// 頁面載入完成後初始化
-document.addEventListener('DOMContentLoaded', initializeApp);
 </script>
 </body>
 </html>
