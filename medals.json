@@ -479,13 +479,87 @@
         "gems": 8
       },
       "color": "#f59e0b"
+    },
+    "Attack_on_Titan_A": {
+      "id": "ttack_on_Titan_A",
+      "name": "進撃の巨人 最終シーズン Type A",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/FLmX1P1F/Type-A.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
+    },
+    "Attack_on_Titan_B": {
+      "id": "ttack_on_Titan_B",
+      "name": "進撃の巨人 最終シーズン Type B",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/4wqVM5cc/Type-B.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
+    },
+    "Attack_on_Titan_C": {
+      "id": "ttack_on_Titan_C",
+      "name": "進撃の巨人 最終シーズン Type C",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/DPKH3kGq/Type-C.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
+    },
+    "Attack_on_Titan_D": {
+      "id": "ttack_on_Titan_D",
+      "name": "進撃の巨人 最終シーズン Type D",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/bgT9tw4w/Type-D.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
+    },
+    "Attack_on_Titan_E": {
+      "id": "ttack_on_Titan_E",
+      "name": "進撃の巨人 最終シーズン Type E",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/rK8CQFCx/Type-E.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
+    },
+    "Attack_on_Titan_F": {
+      "id": "ttack_on_Titan_F",
+      "name": "進撃の巨人 最終シーズン Type F",
+      "description": "神話級別的稀有勳章",
+      "icon": "https://i.ibb.co/Qj3n2T2s/Type-F.png",
+      "rarity": "mythic",
+      "price": {
+        "coins": 12000,
+        "gems": 20
+      },
+      "color": "#dc2626"
     }
+
   },
-  "rarityColors": {
-    "common": "#84cc16",
-    "rare": "#3b82f6", 
-    "epic": "#8b5cf6",
-    "legendary": "#f59e0b"
-  },
+ "rarityColors": {
+  "common": "#84cc16",
+  "rare": "#3b82f6", 
+  "epic": "#8b5cf6",
+  "legendary": "#f59e0b",
+  "mythic": "#dc2626"
+},
   "maxEquippedMedals": 5
 }
