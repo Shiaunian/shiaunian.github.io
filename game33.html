@@ -1696,84 +1696,65 @@ function startExam(examType) {
     startQuestionTimer();
 }
 
-// 顯示考試介面 - 加入棄權按鈕
+// 顯示考試介面 - 棄權按鈕移至底部
 function showExamInterface() {
     const container = document.getElementById('mainContent');
     const config = examConfigs[currentExam];
 
     container.innerHTML = `
     <div class="exam-container">
-    <div class="exam-header">
+    <div class="exam-header" style="text-align: center; justify-content: center;">
     <h2>${config.name}</h2>
-    <div class="timer" id="timer">${config.timePerQuestion}</div>
-    <button class="btn btn-danger" onclick="quitExam()" style="margin-left: 10px;">棄權</button>
     </div>
     <div class="question" id="questionContainer">
     <!-- 題目將在此顯示 -->
     </div>
-    <div class="exam-progress">
+    <div class="exam-progress" style="margin-bottom: 15px;">
     <p>題目 <span id="currentQuestionNum">1</span> / ${config.questionCount}</p>
     <p>得分：<span id="currentScore">0</span> 分</p>
+    <div class="timer" id="timer" style="margin: 10px auto; display: inline-block;">${config.timePerQuestion}秒</div>
     </div>
+    <button class="btn btn-danger" onclick="quitExam()" style="width: 100%; margin-top: 10px;">棄 權</button>
     </div>
     `;
 }
 
-// 改進的棄權功能 - 根據金幣數量決定扣除金額
+// 修正的棄權功能 - 修復無反應問題
 function quitExam() {
-    // 獲取當前用戶的金幣數量
-    const userData = JSON.parse(localStorage.getItem('t2_login')) || {};
-    const userCoins = userData.coins || 0;
-    
-    // 根據金幣數量決定提示內容
-    let confirmMessage = '';
-    let coinPenalty = 0;
-    
-    if (userCoins >= 300) {
-        coinPenalty = 10;
-        confirmMessage = `⚠️ 確定要棄權嗎？\n\n• 棄權將不會獲得任何分數和獎勵\n• 您目前有 ${userCoins} 金幣，棄權將扣除 ${coinPenalty} 金幣\n• 此操作無法撤銷`;
-    } else {
-        confirmMessage = `⚠️ 確定要棄權嗎？\n\n• 棄權將不會獲得任何分數和獎勵\n• 您目前金幣不足 300（當前: ${userCoins}），不會扣除金幣\n• 此操作無法撤銷`;
-    }
-    
-    // 顯示確認對話框
-    if (confirm(confirmMessage)) {
+    try {
         // 停止計時器
         clearInterval(examTimer);
         
-        // 如果需要扣除金幣
-        if (coinPenalty > 0) {
-            userData.coins = userCoins - coinPenalty;
-            localStorage.setItem('t2_login', JSON.stringify(userData));
-            
-            // 可選：更新頁面上顯示的金幣數量（如果有的話）
-            const coinsDisplay = document.getElementById('userCoins');
-            if (coinsDisplay) {
-                coinsDisplay.textContent = userData.coins;
-            }
-        }
+        // 直接顯示確認對話框，簡化邏輯
+        const confirmMessage = `⚠️ 確定要棄權嗎？\n\n• 棄權將不會獲得任何分數和獎勵\n• 此操作無法撤銷`;
         
-        // 顯示短暫的退出提示
-        const questionContainer = document.getElementById('questionContainer');
-        if (questionContainer) {
-            questionContainer.innerHTML = `
-            <div style="text-align: center; padding: 30px;">
-                <h3 style="color: var(--danger);">正在退出考試...</h3>
-                ${coinPenalty > 0 ? `<p style="color: var(--warning);">已扣除 ${coinPenalty} 金幣</p>` : ''}
-                <p style="margin-top: 10px; color: var(--text-secondary);">正在返回主頁</p>
-            </div>
-            `;
+        if (confirm(confirmMessage)) {
+            // 顯示短暫的退出提示
+            const questionContainer = document.getElementById('questionContainer');
+            if (questionContainer) {
+                questionContainer.innerHTML = `
+                <div style="text-align: center; padding: 30px;">
+                    <h3 style="color: var(--danger);">正在退出考試...</h3>
+                    <p style="margin-top: 10px; color: var(--text-secondary);">正在返回主頁</p>
+                </div>
+                `;
+            }
             
-            // 延遲一秒後返回主頁，讓用戶看到提示
+            // 延遲一秒後返回主頁
             setTimeout(() => {
-                location.reload();
+                window.location.href = window.location.href; // 強制重新載入當前頁面
             }, 1500);
         } else {
-            // 如果找不到 questionContainer，直接返回主頁
-            location.reload();
+            // 如果用戶取消，重新啟動計時器
+            startQuestionTimer();
         }
+    } catch (error) {
+        console.error("棄權功能出錯:", error);
+        alert("棄權功能出錯，將重新載入頁面");
+        window.location.reload();
     }
 }
+
 
 // 顯示題目 - 修正版本
 function displayQuestion() {
@@ -1813,15 +1794,19 @@ function displayQuestion() {
     questionStartTime = Date.now();
 }
 
-// 開始題目計時器
+// 開始題目計時器 - 修正顯示格式
 function startQuestionTimer() {
     const config = examConfigs[currentExam];
     let timeLeft = config.timePerQuestion;
     const timerElement = document.getElementById('timer');
+    
+    // 初始顯示格式
+    timerElement.textContent = `${timeLeft}秒`;
 
     examTimer = setInterval(() => {
         timeLeft--;
-        timerElement.textContent = timeLeft;
+        // 更新顯示格式
+        timerElement.textContent = `${timeLeft}秒`;
 
         if (timeLeft <= 0) {
             clearInterval(examTimer);
@@ -1830,6 +1815,7 @@ function startQuestionTimer() {
         }
     }, 1000);
 }
+
 
 
 // 選擇答案 - 修正版本
