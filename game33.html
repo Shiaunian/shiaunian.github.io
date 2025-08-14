@@ -1775,7 +1775,7 @@ function quitExam() {
     }
 }
 
-// 顯示題目
+// 顯示題目 - 修正版本
 function displayQuestion() {
     const question = currentQuestions[currentQuestionIndex];
     const questionContainer = document.getElementById('questionContainer');
@@ -1795,9 +1795,12 @@ function displayQuestion() {
         [options[i], options[j]] = [options[j], options[i]];
     }
     
-    // 生成選項HTML，使用原始索引來追蹤正確答案
-    const optionsHtml = options.map(option => 
-        `<button class="btn option-btn" onclick="selectAnswer(${option.originalIndex})">${option.text}</button>`
+    // 儲存打亂後的選項映射關係到全局變量，以便在選擇答案時使用
+    window.currentOptionsMap = options.map(option => option.originalIndex);
+    
+    // 生成選項HTML，使用新的索引位置
+    const optionsHtml = options.map((option, newIndex) => 
+        `<button class="btn option-btn" onclick="selectAnswer(${newIndex})">${option.text}</button>`
     ).join('');
 
     questionContainer.innerHTML = `
@@ -1833,30 +1836,35 @@ function startQuestionTimer() {
 function selectAnswer(selectedIndex) {
     clearInterval(examTimer);
     const question = currentQuestions[currentQuestionIndex];
-    const isCorrect = selectedIndex === question.correct;
+    
+    // 使用映射關係獲取原始索引
+    const originalSelectedIndex = window.currentOptionsMap ? window.currentOptionsMap[selectedIndex] : selectedIndex;
+    const isCorrect = originalSelectedIndex === question.correct;
+    
     const responseTime = (Date.now() - questionStartTime) / 1000;
     const config = examConfigs[currentExam];
 
-    userScores.totalAnswers++; // 🆕 追蹤總答題數
+    userScores.totalAnswers++;
 
-    // 🏅 檢查快速答題
+    // 檢查快速答題
     const isFast = responseTime <= config.fastAnswerThreshold;
     if (isFast) {
         userScores.fastAnswers++;
     }
 
-    // 🔧 修正：只有答對才加分
+    // 只有答對才加分
     if (isCorrect) {
         userScores.correctAnswers++;
         
-        // 🎯 只有答對且快速才計入快速正確答案
+        // 只有答對且快速才計入快速正確答案
         if (isFast) {
             userScores.fastCorrectAnswers++;
         }
     }
 
-    // 顯示答案反饋
-    showAnswerFeedback(selectedIndex, question.correct, responseTime);
+    // 顯示答案反饋 - 需要傳遞映射後的正確答案索引
+    const correctDisplayIndex = window.currentOptionsMap.findIndex(index => index === question.correct);
+    showAnswerFeedback(selectedIndex, correctDisplayIndex, responseTime);
 
     // 延遲後進入下一題
     setTimeout(() => {
@@ -1865,16 +1873,17 @@ function selectAnswer(selectedIndex) {
 }
 
 
-// 顯示答案反饋 - 修正版本
-function showAnswerFeedback(selectedIndex, correctIndex, responseTime) {
+
+// 顯示答案反饋 - 修正版本，使用顯示索引
+function showAnswerFeedback(selectedIndex, correctDisplayIndex, responseTime) {
     const options = document.querySelectorAll('.option-btn');
     const config = examConfigs[currentExam];
 
     options.forEach((btn, index) => {
         btn.disabled = true;
-        if (index === correctIndex) {
+        if (index === correctDisplayIndex) {
             btn.classList.add('correct');
-        } else if (index === selectedIndex && selectedIndex !== correctIndex) {
+        } else if (index === selectedIndex && selectedIndex !== correctDisplayIndex) {
             btn.classList.add('wrong');
         }
     });
