@@ -1737,9 +1737,21 @@ function displayQuestion() {
 
     document.getElementById('currentQuestionNum').textContent = currentQuestionIndex + 1;
 
-    // 一般題目顯示
-    const optionsHtml = question.options.map((option, index) => 
-        `<button class="btn option-btn" onclick="selectAnswer(${index})">${option}</button>`
+    // 創建選項陣列的副本，包含選項文字和原始索引
+    const options = question.options.map((text, index) => ({
+        text,
+        originalIndex: index
+    }));
+    
+    // 打亂選項順序
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+    }
+    
+    // 生成選項HTML，使用原始索引來追蹤正確答案
+    const optionsHtml = options.map(option => 
+        `<button class="btn option-btn" onclick="selectAnswer(${option.originalIndex})">${option.text}</button>`
     ).join('');
 
     questionContainer.innerHTML = `
