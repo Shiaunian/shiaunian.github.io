@@ -246,6 +246,7 @@ transform: scale(1.1);
 .medal-icon.rare { border-color: #3b82f6; }
 .medal-icon.epic { border-color: #8b5cf6; }
 .medal-icon.legendary { border-color: #f59e0b; }
+.medal-icon.mythic { border-color: #dc2626; }
 
 /* 🔧 新增：勳章圖片樣式 */
 .medal-icon img,
@@ -1218,6 +1219,11 @@ async function renderShopItems(filter = 'all') {
 
     const medals = Object.values(medalsData.medals);
     const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
+    console.log(`商店過濾: ${filter}, 找到 ${filteredMedals.length} 個勳章`);
+if (filter === 'mythic' || filter === 'all') {
+    const mythicCount = medals.filter(m => m.rarity === 'mythic').length;
+    console.log(`系統中有 ${mythicCount} 個神話級勳章`);
+}
 
     const fragment = document.createDocumentFragment();
 
@@ -1285,6 +1291,8 @@ async function renderShopItems(filter = 'all') {
 async function buyMedal(medalId) {
     const medal = medalsData.medals[medalId];
     if (!medal || userMedals.owned.includes(medalId)) return;
+    console.log(`嘗試購買勳章: ${medalId}`);
+    console.log(`勳章詳情:`, medal);
     
     // 檢查價格結構
     let coinPrice = 0;
