@@ -540,6 +540,14 @@ line-height: 1.2;
         inset 0 -1px 0 rgba(0, 0, 0, 0.2);
     animation: legendaryGlow 2s ease-in-out infinite alternate;
 }
+.leaderboard-medal[data-rarity="mythic"] {
+    border-color: #dc2626;
+    box-shadow: 
+        0 2px 8px rgba(220, 38, 38, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    animation: mythicGlow 2s ease-in-out infinite alternate;
+}
 
 /* 🌟 傳說級勳章的特殊發光效果 */
 @keyframes legendaryGlow {
@@ -556,6 +564,24 @@ line-height: 1.2;
             0 0 20px rgba(245, 158, 11, 0.4),
             inset 0 1px 0 rgba(255, 255, 255, 0.5),
             inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+}
+/* 神話級勳章的特殊發光效果 */
+@keyframes mythicGlow {
+    0% {
+        box-shadow: 
+            0 2px 8px rgba(220, 38, 38, 0.5),
+            0 0 15px rgba(220, 38, 38, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        box-shadow: 
+            0 2px 8px rgba(220, 38, 38, 0.7),
+            0 0 25px rgba(220, 38, 38, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.3);
     }
 }
 
@@ -908,6 +934,7 @@ backface-visibility: hidden;
 <button class="category-btn" onclick="filterShop('rare')">稀有</button>
 <button class="category-btn" onclick="filterShop('epic')">史詩</button>
 <button class="category-btn" onclick="filterShop('legendary')">傳說</button>
+<button class="category-btn" onclick="filterShop('mythic')">神話</button>
 </div>
 <div class="shop-items" id="shopItems">
 <!-- 商店物品將在此動態生成 -->
@@ -1005,7 +1032,8 @@ rarityColors: {
 common: "#84cc16",
 rare: "#3b82f6", 
 epic: "#8b5cf6",
-legendary: "#f59e0b"
+legendary: "#f59e0b",
+mythic: "#dc2626"
 },
 maxEquippedMedals: 5
 };
