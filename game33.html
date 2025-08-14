@@ -1719,13 +1719,59 @@ function showExamInterface() {
     `;
 }
 
-// 🆕 棄權功能
+// 改進的棄權功能 - 根據金幣數量決定扣除金額
 function quitExam() {
-    if (confirm('確定要棄權嗎？棄權將不會獲得任何分數和獎勵。')) {
+    // 獲取當前用戶的金幣數量
+    const userData = JSON.parse(localStorage.getItem('t2_login')) || {};
+    const userCoins = userData.coins || 0;
+    
+    // 根據金幣數量決定提示內容
+    let confirmMessage = '';
+    let coinPenalty = 0;
+    
+    if (userCoins >= 300) {
+        coinPenalty = 10;
+        confirmMessage = `⚠️ 確定要棄權嗎？\n\n• 棄權將不會獲得任何分數和獎勵\n• 您目前有 ${userCoins} 金幣，棄權將扣除 ${coinPenalty} 金幣\n• 此操作無法撤銷`;
+    } else {
+        confirmMessage = `⚠️ 確定要棄權嗎？\n\n• 棄權將不會獲得任何分數和獎勵\n• 您目前金幣不足 300（當前: ${userCoins}），不會扣除金幣\n• 此操作無法撤銷`;
+    }
+    
+    // 顯示確認對話框
+    if (confirm(confirmMessage)) {
+        // 停止計時器
         clearInterval(examTimer);
-
-        // 直接返回主頁，不保存任何成績
-        location.reload();
+        
+        // 如果需要扣除金幣
+        if (coinPenalty > 0) {
+            userData.coins = userCoins - coinPenalty;
+            localStorage.setItem('t2_login', JSON.stringify(userData));
+            
+            // 可選：更新頁面上顯示的金幣數量（如果有的話）
+            const coinsDisplay = document.getElementById('userCoins');
+            if (coinsDisplay) {
+                coinsDisplay.textContent = userData.coins;
+            }
+        }
+        
+        // 顯示短暫的退出提示
+        const questionContainer = document.getElementById('questionContainer');
+        if (questionContainer) {
+            questionContainer.innerHTML = `
+            <div style="text-align: center; padding: 30px;">
+                <h3 style="color: var(--danger);">正在退出考試...</h3>
+                ${coinPenalty > 0 ? `<p style="color: var(--warning);">已扣除 ${coinPenalty} 金幣</p>` : ''}
+                <p style="margin-top: 10px; color: var(--text-secondary);">正在返回主頁</p>
+            </div>
+            `;
+            
+            // 延遲一秒後返回主頁，讓用戶看到提示
+            setTimeout(() => {
+                location.reload();
+            }, 1500);
+        } else {
+            // 如果找不到 questionContainer，直接返回主頁
+            location.reload();
+        }
     }
 }
 
@@ -2045,24 +2091,30 @@ async function showLeaderboard(examType) {
                 return a.totalTime - b.totalTime;
             });
 
-            const leaderboardHtml = leaderboardData.map((entry, index) => {
-                const isCurrentUser = entry.user === currentUser;
-                const userMedalIcons = getUserMedalIcons(entry.user);
-                const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
+        const leaderboardHtml = leaderboardData.map((entry, index) => {
+            const isCurrentUser = entry.user === currentUser;
+            const userMedalIcons = getUserMedalIcons(entry.user);
+            const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
+            
+            // 格式化時間顯示
+            const formattedTime = entry.totalTime ? `${entry.totalTime.toFixed(1)}秒` : "N/A";
 
-                return `
-                <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
-                    <div class="rank">#${index + 1}</div>
-                    <div class="user-name">
-                        ${displayName}
-                        <div class="leaderboard-medals">
-                            ${userMedalIcons}
-                        </div>
+            return `
+            <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
+                <div class="rank">#${index + 1}</div>
+                <div class="user-name">
+                    ${displayName}
+                    <div class="leaderboard-medals">
+                        ${userMedalIcons}
                     </div>
-                    <div class="score">${entry.score}分</div>
                 </div>
-                `;
-            }).join('');
+                <div class="score-time">
+                    <div class="score">${entry.score}分</div>
+                    <div class="time" style="font-size: 0.8rem; color: var(--text-secondary);">${formattedTime}</div>
+                </div>
+            </div>
+            `;
+        }).join('');
 
             content.innerHTML = `
                 <div class="leaderboard-container">
@@ -2159,6 +2211,9 @@ async function showTotalLeaderboard() {
                 const isCurrentUser = entry.user === currentUser;
                 const userMedalIcons = getUserMedalIcons(entry.user);
                 const displayName = getUserDisplayName(entry.user); // 🆕 新增：獲取顯示名稱
+                
+                // 格式化總時間顯示
+                const formattedTime = entry.totalTime ? `${entry.totalTime.toFixed(1)}秒` : "N/A";
 
                 return `
                 <div class="leaderboard-item ${isCurrentUser ? 'current-user' : ''}">
@@ -2169,7 +2224,10 @@ async function showTotalLeaderboard() {
                             ${userMedalIcons}
                         </div>
                     </div>
-                    <div class="score">${entry.totalScore}分</div>
+                    <div class="score-time">
+                        <div class="score">${entry.totalScore}分</div>
+                        <div class="time" style="font-size: 0.8rem; color: var(--text-secondary);">${formattedTime}</div>
+                    </div>
                 </div>
                 `;
             }).join('');
@@ -2213,14 +2271,14 @@ function getUserMedalIcons(username) {
     }).join('');
 }
 
-
 // 隱藏排行榜
 function hideLeaderboard() {
-document.getElementById('leaderboardModal').style.display = 'none';
+    document.getElementById('leaderboardModal').style.display = 'none';
 }
 
 // 頁面載入完成後初始化
 document.addEventListener('DOMContentLoaded', initializeApp);
+
 </script>
 </body>
 </html>
