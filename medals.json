@@ -488,7 +488,7 @@
       "rarity": "mythic",
       "price": {
         "coins": 12000,
-        "gems": 20
+        "gems": 30
       },
       "color": "#dc2626"
     },
@@ -512,7 +512,7 @@
       "rarity": "mythic",
       "price": {
         "coins": 12000,
-        "gems": 20
+        "gems": 30
       },
       "color": "#dc2626"
     },
@@ -524,7 +524,7 @@
       "rarity": "mythic",
       "price": {
         "coins": 12000,
-        "gems": 20
+        "gems": 30
       },
       "color": "#dc2626"
     },
@@ -536,7 +536,7 @@
       "rarity": "mythic",
       "price": {
         "coins": 12000,
-        "gems": 20
+        "gems": 30
       },
       "color": "#dc2626"
     },
@@ -548,7 +548,7 @@
       "rarity": "mythic",
       "price": {
         "coins": 12000,
-        "gems": 20
+        "gems": 30
       },
       "color": "#dc2626"
     }
