@@ -90,7 +90,7 @@
   "scorePerQuestion": 10
 },
 "sudoku": {
-  "name": "初階數獨挑戰",
+  "name": "中階數獨挑戰",
   "timePerQuestion": 80,
   "questionCount": 10,
   "fastAnswerThreshold": 30,
