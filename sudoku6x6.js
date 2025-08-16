@@ -196,15 +196,10 @@ class Sudoku6x6 {
     btnReset.className = 'btn btn-secondary';
     btnReset.addEventListener('click', () => this.resetBoard());
 
-    const btnHint = document.createElement('button');
-    btnHint.textContent = '提示';
-    btnHint.className = 'btn btn-shop';
-    btnHint.style.marginLeft = '10px';
-    btnHint.addEventListener('click', () => this.giveHint());
+    // 移除提示按鈕，因為這是挑戰模式
 
     btnContainer.appendChild(btnCheck);
     btnContainer.appendChild(btnReset);
-    btnContainer.appendChild(btnHint);
 
     // 顯示計時器和錯誤計數
     const infoContainer = document.createElement('div');
@@ -373,42 +368,7 @@ class Sudoku6x6 {
     });
   }
   
-  giveHint() {
-    // 找到一個空格並填入正確答案
-    const emptyInputs = [];
-    const rows = this.container.querySelectorAll('table tr');
-    
-    rows.forEach((tr, r) => {
-      const cells = tr.querySelectorAll('td');
-      cells.forEach((td, c) => {
-        if (this.puzzle[r][c] === 0) {
-          const input = td.querySelector('input');
-          if (!input.value) {
-            emptyInputs.push({ input, row: r, col: c });
-          }
-        }
-      });
-    });
-    
-    if (emptyInputs.length === 0) {
-      alert('沒有空格需要提示！');
-      return;
-    }
-    
-    // 隨機選擇一個空格
-    const randomIndex = Math.floor(Math.random() * emptyInputs.length);
-    const { input, row, col } = emptyInputs[randomIndex];
-    
-    // 填入正確答案
-    input.value = this.solution[row][col];
-    input.style.color = 'blue';
-    input.style.fontWeight = 'bold';
-    
-    // 檢查是否完成
-    if (this.checkCompletion()) {
-      this.finishGame();
-    }
-  }
+  // 移除 giveHint 方法，因為這是挑戰模式
   
   checkCompletion() {
     const board = this.getCurrentBoard();
@@ -442,10 +402,17 @@ class Sudoku6x6 {
     
     const totalTime = (Date.now() - this.startTime) / 1000;
     
-    // 計算分數
-    // 基礎分數 100
-    // 每個錯誤 -5 分
-    // 時間獎勵：根據難度和時間計算
+    // 顯示確認界面，而不是直接計算獎勵
+    this.showSubmitConfirm(totalTime);
+  }
+  
+  showSubmitConfirm(totalTime) {
+    // 格式化時間
+    const minutes = Math.floor(totalTime / 60);
+    const seconds = Math.floor(totalTime % 60);
+    const formattedTime = `${minutes}分${seconds}秒`;
+    
+    // 計算預覽分數
     let score = 100;
     score -= this.mistakes * 5;
     
@@ -467,16 +434,67 @@ class Sudoku6x6 {
     // 確保分數不低於0
     score = Math.max(0, score);
     
-    // 調用完成回調
-    if (typeof this.onComplete === 'function') {
-      this.onComplete({
-        score,
-        totalTime,
-        mistakes: this.mistakes,
-        difficulty: this.difficulty,
-        timeBonus
-      });
-    }
+    // 創建確認界面
+    this.container.innerHTML = `
+      <div class="exam-result">
+        <h2>📋 數獨挑戰完成</h2>
+        <p><strong>難度：</strong>${this.difficulty}</p>
+        <div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+          <p><strong>📊 預覽成績：</strong></p>
+          <p>• 總分：${score} 分</p>
+          <p>• 錯誤次數：${this.mistakes} 次</p>
+          <p>• 時間獎勵：${timeBonus} 分</p>
+        </div>
+        <p><strong>總耗時：</strong>${formattedTime}</p>
+        
+        <div style="margin-top: 20px;">
+          <button class="btn btn-primary" id="submit-sudoku">提交成績</button>
+          <button class="btn btn-danger" id="cancel-sudoku">取消</button>
+        </div>
+      </div>
+    `;
+    
+    // 添加事件監聽器
+    const self = this;
+    document.getElementById('submit-sudoku').addEventListener('click', function() {
+      this.disabled = true;
+      this.textContent = '提交中...';
+      
+      // 計算最終分數
+      const totalTime = (Date.now() - self.startTime) / 1000;
+      let score = 100;
+      score -= self.mistakes * 5;
+      
+      // 時間獎勵
+      let timeBonus = 0;
+      const timeThresholds = {
+        easy: 120,
+        medium: 180,
+        hard: 300
+      };
+      
+      if (totalTime < timeThresholds[self.difficulty]) {
+        timeBonus = Math.floor((timeThresholds[self.difficulty] - totalTime) / 10);
+      }
+      
+      score += timeBonus;
+      score = Math.max(0, score);
+      
+      // 調用完成回調
+      if (typeof self.onComplete === 'function') {
+        self.onComplete({
+          score,
+          totalTime,
+          mistakes: self.mistakes,
+          difficulty: self.difficulty,
+          timeBonus
+        });
+      }
+    });
+    
+    document.getElementById('cancel-sudoku').addEventListener('click', function() {
+      location.reload(); // 重新載入頁面
+    });
   }
   
   quitGame() {
