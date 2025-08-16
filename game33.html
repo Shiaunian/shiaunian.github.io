@@ -1791,37 +1791,50 @@ function shuffleArray(array) {
 }
 
 // 🚀 效能優化：考試開始優化 - 修正版本
+// 修改後的 startExam 函數
 function startExam(examType) {
-    if (!examQuestions[examType]) {
-        alert('題庫載入中，請稍後再試');
-        return;
+  const config = examConfigs[examType];
+  
+  // 檢查是否為數獨挑戰
+  if (config.type === 'game') {
+    if (examType === 'sudoku') {
+      startSudokuChallenge(examType);
+    } else {
+      alert('此遊戲類型尚未實現');
     }
+    return;
+  }
+  
+  // 原有的考試邏輯
+  if (!examQuestions[examType]) {
+    alert('題庫載入中，請稍後再試');
+    return;
+  }
 
-    const config = examConfigs[examType];
-    const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
+  const questions = shuffleArray(examQuestions[examType]).slice(0, config.questionCount);
 
-    if (questions.length < config.questionCount) {
-        alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
-        return;
-    }
+  if (questions.length < config.questionCount) {
+    alert(`題庫題目不足！需要 ${config.questionCount} 題，但只有 ${questions.length} 題`);
+    return;
+  }
 
-    currentExam = examType;
-    currentQuestions = questions;
-    currentQuestionIndex = 0;
-    examStartTime = Date.now();
-    
-    // 🔧 修正：完整的 userScores 初始化
-    userScores = { 
-        fastAnswers: 0, 
-        correctAnswers: 0,
-        totalAnswers: 0,
-        fastCorrectAnswers: 0  // 🆕 新增：快速且答對的題目數
-    };
+  currentExam = examType;
+  currentQuestions = questions;
+  currentQuestionIndex = 0;
+  examStartTime = Date.now();
+  
+  userScores = { 
+    fastAnswers: 0, 
+    correctAnswers: 0,
+    totalAnswers: 0,
+    fastCorrectAnswers: 0
+  };
 
-    showExamInterface();
-    displayQuestion();
-    startQuestionTimer();
+  showExamInterface();
+  displayQuestion();
+  startQuestionTimer();
 }
+
 
 // 顯示考試介面 - 棄權按鈕移至底部
 function showExamInterface() {
@@ -2391,6 +2404,130 @@ function getUserMedalIcons(username) {
         }
         return '';
     }).join('');
+}
+
+// 開始數獨挑戰
+function startSudokuChallenge(examType) {
+  const config = examConfigs[examType];
+  
+  // 清空主容器並顯示數獨界面
+  const container = document.getElementById('mainContent');
+  container.innerHTML = `
+    <div class="exam-container">
+      <div class="exam-header" style="text-align: center; justify-content: center;">
+        <h2>${config.name}</h2>
+      </div>
+      <div id="sudoku-container">
+        <!-- 數獨將在此顯示 -->
+      </div>
+    </div>
+  `;
+  
+  // 初始化數獨
+  const sudoku = new Sudoku6x6('sudoku-container', config, (result) => {
+    // 完成後的回調
+    finishSudokuChallenge(examType, result);
+  });
+}
+
+// 完成數獨挑戰
+async function finishSudokuChallenge(examType, result) {
+  const config = examConfigs[examType];
+  
+  // 如果棄權，直接返回主頁
+  if (result.forfeit) {
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+    return;
+  }
+  
+  // 計算獎勵 (3倍於普通挑戰)
+  const rewardMultiplier = config.rewardMultiplier || 3;
+  let coinsEarned = Math.floor(result.score / 10) * rewardMultiplier;
+  let gemsEarned = 0;
+  
+  // 滿分獎勵
+  if (result.score >= 100) {
+    const perfectBonus = config.perfectBonus || 50;
+    coinsEarned += perfectBonus;
+    gemsEarned += 1;
+  }
+  
+  // 快速完成獎勵
+  if (result.timeBonus > 0) {
+    coinsEarned += result.timeBonus * rewardMultiplier;
+  }
+  
+  // 更新貨幣
+  userCurrency.coins += coinsEarned;
+  userCurrency.gems += gemsEarned;
+  
+  // 保存成績到排行榜
+  try {
+    await saveScoreToLeaderboard(examType, result.score, result.totalTime);
+    await saveCurrencyData();
+    
+    // 清除相關快取
+    const cacheKey = `champion_${examType}`;
+    championCache.delete(cacheKey);
+    localStorage.removeItem('users_data_v1');
+    localStorage.removeItem('users_data_v1_time');
+  } catch (error) {
+    console.error('保存成績失敗:', error);
+    alert('保存成績時發生錯誤，請檢查網路連線');
+  }
+  
+  // 顯示結果
+  showSudokuResult(examType, result, coinsEarned, gemsEarned);
+}
+
+// 顯示數獨結果
+function showSudokuResult(examType, result, coinsEarned, gemsEarned) {
+  const container = document.getElementById('mainContent');
+  const config = examConfigs[examType];
+  
+  // 格式化時間
+  const minutes = Math.floor(result.totalTime / 60);
+  const seconds = Math.floor(result.totalTime % 60);
+  const formattedTime = `${minutes}分${seconds}秒`;
+  
+  // 獎勵訊息
+  const bonusMessages = [];
+  if (result.score >= 100) {
+    bonusMessages.push(`🏆 完美通關：+${config.perfectBonus || 50}金幣 +1寶石`);
+  }
+  if (result.timeBonus > 0) {
+    bonusMessages.push(`⚡ 速度獎勵：+${result.timeBonus * (config.rewardMultiplier || 3)}金幣`);
+  }
+  
+  container.innerHTML = `
+    <div class="exam-result">
+      <h2>🎉 數獨挑戰完成！</h2>
+      <p><strong>難度：</strong>${result.difficulty}</p>
+      <div style="margin: 20px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+        <p><strong>📊 成績統計：</strong></p>
+        <p>• 總分：${result.score} 分</p>
+        <p>• 錯誤次數：${result.mistakes} 次</p>
+        <p>• 時間獎勵：${result.timeBonus} 分</p>
+      </div>
+      <p><strong>總耗時：</strong>${formattedTime}</p>
+      
+      ${bonusMessages.length > 0 ? `
+      <div style="margin: 15px 0; padding: 10px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+        <p><strong>🎁 獎勵明細：</strong></p>
+        ${bonusMessages.map(msg => `<p style="color: var(--success);">• ${msg}</p>`).join('')}
+        <p style="color: var(--gold); font-weight: bold;">💰 總獲得金幣：${coinsEarned}</p>
+        ${gemsEarned > 0 ? `<p style="color: var(--info); font-weight: bold;">💎 總獲得寶石：${gemsEarned}</p>` : ''}
+      </div>
+      ` : `<p style="color: var(--text-secondary);">💰 本次未獲得獎勵</p>`}
+      
+      <div style="margin-top: 20px;">
+        <button class="btn btn-primary" onclick="location.reload()">返回主頁</button>
+        <button class="btn btn-secondary" onclick="showLeaderboard('${examType}')">查看排行榜</button>
+      </div>
+    </div>
+  `;
 }
 
 // 隱藏排行榜
