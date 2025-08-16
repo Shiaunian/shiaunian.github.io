@@ -515,3 +515,51 @@ class Sudoku6x6 {
     }
   }
 }
+
+function initSudokuWithDifficultySelector(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) {
+    throw new Error("Container element not found");
+  }
+  
+  // 建立難度選擇區塊
+  container.innerHTML = `
+    <div id="difficulty-select-container" style="text-align:center; margin:20px;">
+      <label for="difficulty-select">選擇難度：</label>
+      <select id="difficulty-select">
+        <option value="easy">簡單</option>
+        <option value="medium" selected>中等</option>
+        <option value="hard">困難</option>
+      </select>
+      <button id="start-sudoku-btn" style="margin-left:10px;">開始遊戲</button>
+    </div>
+    <div id="sudoku-game-container"></div>
+  `;
+
+  let sudokuGame = null;
+
+  document.getElementById('start-sudoku-btn').addEventListener('click', () => {
+    const difficulty = document.getElementById('difficulty-select').value;
+
+    // 清除之前遊戲內容
+    const gameContainer = document.getElementById('sudoku-game-container');
+    gameContainer.innerHTML = '';
+
+    // 隱藏難度選擇區
+    document.getElementById('difficulty-select-container').style.display = 'none';
+
+    // 建立新遊戲
+    sudokuGame = new Sudoku6x6('sudoku-game-container', { difficulty }, (result) => {
+      console.log('遊戲完成結果：', result);
+
+      // 遊戲結束後顯示難度選擇區，方便重新開始
+      document.getElementById('difficulty-select-container').style.display = 'block';
+    });
+  });
+}
+
+// 自動初始化（如果你想進入頁面就呼叫）
+document.addEventListener('DOMContentLoaded', () => {
+  initSudokuWithDifficultySelector('your-main-container-id');
+});
+
