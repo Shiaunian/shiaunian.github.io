@@ -89,14 +89,16 @@
   "difficulty": "basic",
   "scorePerQuestion": 10
 },
-"sudoku": {
-  "name": "中階數獨挑戰",
-  "timePerQuestion": 80,
-  "questionCount": 10,
-  "fastAnswerThreshold": 30,
-  "description": "施工中....",
-  "icon": "🧩",
-  "difficulty": "intermediate",
-  "scorePerQuestion": 10
+  "sudoku": {
+    "name": "數獨挑戰",
+    "description": "測試你的邏輯思維能力，完成6x6數獨謎題",
+    "type": "game",
+    "difficulty": "medium",
+    "perfectBonus": 50,
+    "fastAnswerThreshold": 5,
+    "rewardMultiplier": 3,
+    "questionCount": 1,
+    "timePerQuestion": 300
 }
 }
+
