@@ -11,6 +11,8 @@
 
 <!-- 添加數獨挑戰腳本 -->
 <script src="sudoku6x6.js"></script>
+<!-- 添加模組化JS文件 -->
+<script src="medalInventory.js"></script>
 
 
 <style>
@@ -1219,75 +1221,20 @@ function renderChallengesList() {
 
 // 🏅 載入用戶勳章和貨幣資料
 async function loadUserMedalsAndCurrency() {
-    try {
-        const snapshot = await database.ref(`users/${currentUser}/medals`).once('value');
-        const medalSnapshot = snapshot.val() || {};
-        userMedals = {
-            owned: medalSnapshot.owned || [],
-            equipped: medalSnapshot.equipped || []
-        };
-
-        const currencySnapshot = await database.ref(`users/${currentUser}/currency`).once('value');
-        userCurrency = currencySnapshot.val() || { coins: 0, gems: 0 };
-
-        updateCurrencyDisplay();
-        updateMedalDisplay();
-    } catch (err) {
-        console.error('載入用戶勳章資料失敗:', err);
-    }
-}
-
-// 🏅 更新貨幣顯示
-function updateCurrencyDisplay() {
-document.getElementById('userCoins').textContent = userCurrency.coins;
-document.getElementById('userGems').textContent = userCurrency.gems;
-}
-
-// 🏅 更新勳章顯示
-function updateMedalDisplay() {
-    const medalContainer = document.getElementById('userMedals');
-    medalContainer.innerHTML = '';
-
-    userMedals.equipped.forEach(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const medalIcon = document.createElement('div');
-            medalIcon.className = `medal-icon ${medal.rarity}`;
-            medalIcon.style.borderColor = medal.color;
-            
-            // 🔧 修改這裡：判斷是 emoji 還是網址
-            if (medal.icon.startsWith('http')) {
-                medalIcon.innerHTML = `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">`;
-            } else {
-                medalIcon.innerHTML = medal.icon;
-            }
-            
-            medalIcon.title = `${medal.name}: ${medal.description}`;
-            medalContainer.appendChild(medalIcon);
-        }
-    });
+  try {
+    // 初始化medalInventory實例
+    window.medalInventory = new MedalInventory(database, currentUser, medalsData);
+    await window.medalInventory.loadUserData();
+    
+    // 更新UI
+    window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
+    window.medalInventory.updateMedalDisplay('userMedals');
+  } catch (err) {
+    console.error('載入用戶勳章資料失敗:', err);
+  }
 }
 
 
-// 🏅 保存勳章資料
-async function saveMedalData() {
-try {
-await database.ref(`users/${currentUser}/medals`).set(userMedals);
-updateMedalDisplay();
-} catch (err) {
-console.error('保存勳章資料失敗:', err);
-}
-}
-
-// 🏅 保存貨幣資料
-async function saveCurrencyData() {
-try {
-await database.ref(`users/${currentUser}/currency`).set(userCurrency);
-updateCurrencyDisplay();
-} catch (err) {
-console.error('保存貨幣資料失敗:', err);
-}
-}
 
 // 🏪 顯示商店
 async function showShop() {
@@ -1307,135 +1254,17 @@ event.target.classList.add('active');
 renderShopItems(category);
 }
 
-// 🏪 渲染商店物品 - 修改版本
+// 🏪 渲染商店物品 - 使用模組化方法
 async function renderShopItems(filter = 'all') {
-    const shopContainer = document.getElementById('shopItems');
-    shopContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店中...</div>';
-
-    const medals = Object.values(medalsData.medals);
-    const filteredMedals = filter === 'all' ? medals : medals.filter(medal => medal.rarity === filter);
-    console.log(`商店過濾: ${filter}, 找到 ${filteredMedals.length} 個勳章`);
-if (filter === 'mythic' || filter === 'all') {
-    const mythicCount = medals.filter(m => m.rarity === 'mythic').length;
-    console.log(`系統中有 ${mythicCount} 個神話級勳章`);
+  await window.medalInventory.renderShopItems('shopItems', filter);
 }
 
-    const fragment = document.createDocumentFragment();
 
-    filteredMedals.forEach(medal => {
-        const isOwned = userMedals.owned.includes(medal.id);
-        const isEquipped = userMedals.equipped.includes(medal.id);
-        
-        // 獲取價格
-        let coinPrice = 0;
-        let gemPrice = 0;
-        
-        if (typeof medal.price === 'object') {
-            coinPrice = medal.price.coins || 0;
-            gemPrice = medal.price.gems || 0;
-        } else {
-            coinPrice = medal.price;
-        }
-        
-        // 檢查是否能負擔
-        const canAffordCoins = userCurrency.coins >= coinPrice;
-        const canAffordGems = userCurrency.gems >= gemPrice;
-        const canAfford = canAffordCoins && canAffordGems;
-
-        const item = document.createElement('div');
-        item.className = `shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}`;
-
-        // 判斷是 emoji 還是網址
-        const medalIconContent = medal.icon.startsWith('http') ? 
-            `<img src="${medal.icon}" alt="${medal.name}" style="width: 100%; height: 100%; object-fit: contain;">` : 
-            medal.icon;
-
-        // 構建價格顯示
-        let priceDisplay = '';
-        if (coinPrice > 0) priceDisplay += `💰 ${coinPrice} `;
-        if (gemPrice > 0) priceDisplay += `💎 ${gemPrice}`;
-
-        item.innerHTML = `
-        <div class="medal-preview" style="border-color: ${medal.color};">
-        ${medalIconContent}
-        </div>
-        <div class="item-info">
-        <div class="item-name" style="color: ${medal.color};">${medal.name}</div>
-        <div class="item-description">${medal.description}</div>
-        <div class="item-price">${priceDisplay}</div>
-        </div>
-        <div class="item-actions">
-        ${isOwned ? 
-        '<span class="btn btn-small btn-secondary">已擁有</span>' :
-        `<button class="btn btn-small btn-primary ${!canAfford ? 'disabled' : ''}" 
-        onclick="buyMedal('${medal.id}')" ${!canAfford ? 'disabled' : ''}>
-        購買
-        </button>`
-        }
-        </div>
-        `;
-
-        fragment.appendChild(item);
-    });
-
-    shopContainer.innerHTML = '';
-    shopContainer.appendChild(fragment);
-}
-
-// 🏪 購買勳章 - 修改版本
+// 🏪 購買勳章 - 使用模組化方法
 async function buyMedal(medalId) {
-    const medal = medalsData.medals[medalId];
-    if (!medal || userMedals.owned.includes(medalId)) return;
-    console.log(`嘗試購買勳章: ${medalId}`);
-    console.log(`勳章詳情:`, medal);
-    
-    // 檢查價格結構
-    let coinPrice = 0;
-    let gemPrice = 0;
-    
-    if (typeof medal.price === 'object') {
-        // 新結構：包含金幣和寶石
-        coinPrice = medal.price.coins || 0;
-        gemPrice = medal.price.gems || 0;
-    } else {
-        // 舊結構：只有金幣
-        coinPrice = medal.price;
-    }
-    
-    // 檢查用戶是否有足夠的貨幣
-    if (userCurrency.coins < coinPrice) {
-        alert('💰 金幣不足！');
-        return;
-    }
-    
-    if (userCurrency.gems < gemPrice) {
-        alert('💎 寶石不足！');
-        return;
-    }
-    
-    // 顯示確認對話框，包含所有貨幣成本
-    // 如果icon是網址，則使用🖼️圖示代替
-    const iconDisplay = medal.icon.startsWith('http') ? '🖼️' : medal.icon;
-    let confirmMessage = `確定要購買 ${iconDisplay} ${medal.name} 嗎？\n`;
-    if (coinPrice > 0) confirmMessage += `金幣：💰 ${coinPrice}\n`;
-    if (gemPrice > 0) confirmMessage += `寶石：💎 ${gemPrice}`;
-    
-    if (confirm(confirmMessage)) {
-        // 扣除貨幣
-        userCurrency.coins -= coinPrice;
-        userCurrency.gems -= gemPrice;
-        
-        // 添加勳章到擁有列表
-        userMedals.owned.push(medalId);
-        
-        // 保存數據
-        await Promise.all([saveMedalData(), saveCurrencyData()]);
-        await renderShopItems();
-        
-        // 顯示成功訊息 - 同樣處理圖示顯示問題
-        alert(`🎉 成功購買 ${iconDisplay} ${medal.name}！`);
-    }
+  await window.medalInventory.buyMedal(medalId);
 }
+
 
 // 🎒 顯示背包
 async function showInventory() {
@@ -1448,68 +1277,14 @@ function hideInventory() {
 document.getElementById('inventoryModal').style.display = 'none';
 }
 
-// 🎒 渲染背包 - 修正版本
+// 🎒 渲染背包 - 使用模組化方法
 async function renderInventory() {
-const inventoryGrid = document.getElementById('inventoryGrid');
-inventoryGrid.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入背包中...</div>';
-
-const fragment = document.createDocumentFragment();
-
-userMedals.owned.forEach(medalId => {
-const medal = medalsData.medals[medalId];
-if (!medal) return;
-
-const isEquipped = userMedals.equipped.includes(medalId);
-const item = document.createElement('div');
-item.className = `inventory-item ${isEquipped ? 'equipped' : ''}`;
-item.onclick = () => toggleMedalEquip(medalId);
-
-// 🔧 修改這裡：新增判斷邏輯
-const iconHtml = medal.icon.startsWith('http') ? 
-    `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
-    medal.icon;
-
-item.innerHTML = `
-<div class="inventory-medal-icon" style="color: ${medal.color};">
-${iconHtml}
-</div>
-<div class="inventory-medal-name">${medal.name}</div>
-${isEquipped ? '<div style="font-size: 0.6rem; color: var(--gold);">已裝備</div>' : ''}
-`;
-
-fragment.appendChild(item);
-});
-
-if (userMedals.owned.length === 0) {
-const emptyMsg = document.createElement('div');
-emptyMsg.className = 'empty-leaderboard';
-emptyMsg.innerHTML = '<p>🎒 背包空空如也</p><p>去商店購買一些勳章吧！</p>';
-fragment.appendChild(emptyMsg);
+  await window.medalInventory.renderInventory('inventoryGrid');
 }
 
-inventoryGrid.innerHTML = '';
-inventoryGrid.appendChild(fragment);
-}
-
-
-// 🎒 切換勳章裝備狀態
+// 🎒 切換勳章裝備狀態 - 使用模組化方法
 async function toggleMedalEquip(medalId) {
-const isEquipped = userMedals.equipped.includes(medalId);
-
-if (isEquipped) {
-// 卸下勳章
-userMedals.equipped = userMedals.equipped.filter(id => id !== medalId);
-} else {
-// 裝備勳章
-if (userMedals.equipped.length >= medalsData.maxEquippedMedals) {
-alert(`最多只能裝備 ${medalsData.maxEquippedMedals} 個勳章！`);
-return;
-}
-userMedals.equipped.push(medalId);
-}
-
-await saveMedalData();
-await renderInventory();
+  await window.medalInventory.toggleMedalEquip(medalId, 'inventoryGrid');
 }
 
 async function loadExamQuestions() {
@@ -1719,7 +1494,6 @@ async function updateAllChampions() {
 }
 
 // 🚀 效能優化：登入驗證和初始化 - 修正版本
-// 🔧 修正：initializeApp 函數
 async function initializeApp() {
     try {
         const userInfo = checkLoginStatus();
@@ -1739,8 +1513,11 @@ async function initializeApp() {
             loadPasswordData() // 新增：載入用戶密碼數據
         ]);
 
-        // 載入用戶勳章和貨幣
-        await loadUserMedalsAndCurrency();
+        // 初始化勳章系統
+        window.medalInventory = new MedalInventory(database, currentUser, medalsData);
+        await window.medalInventory.loadUserData();
+        window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
+        window.medalInventory.updateMedalDisplay('userMedals');
 
         // 生成挑戰項目列表
         renderChallengesList();
@@ -2109,8 +1886,8 @@ async function finishExam() {
     }
     
     // 💰 更新貨幣
-    if (coinsEarned > 0) userCurrency.coins += coinsEarned;
-    if (gemsEarned > 0) userCurrency.gems += gemsEarned;
+    if (coinsEarned > 0) window.medalInventory.userCurrency.coins += coinsEarned;
+    if (gemsEarned > 0) window.medalInventory.userCurrency.gems += gemsEarned;
     
     // 🔧 修正：確保成績保存到排行榜
     try {
@@ -2118,9 +1895,9 @@ async function finishExam() {
         await saveScoreToLeaderboard(currentExam, finalScore, totalTime);
         console.log('✅ 成績保存成功');
         
-        // 保存貨幣資料
+        // 保存貨幣資料 - 使用模組的方法
         if (coinsEarned > 0 || gemsEarned > 0) {
-            await saveCurrencyData();
+            await window.medalInventory.saveCurrencyData();
             console.log('💰 貨幣更新成功');
         }
         
@@ -2385,29 +2162,29 @@ async function showTotalLeaderboard() {
     }
 }
 
-// 🏅 獲取用戶勳章圖示 - 升級版本
+// 🏅 獲取用戶勳章圖示 - 使用模組化方法
 function getUserMedalIcons(username) {
-    // 🔧 修正：從 usersData 正確獲取用戶勳章資料
-    const userData = usersData[username];
-    if (!userData || !userData.medals || !userData.medals.equipped || userData.medals.equipped.length === 0) {
-        return '';
-    }
+  // 🔧 修正：從 usersData 正確獲取用戶勳章資料
+  const userData = usersData[username];
+  if (!userData || !userData.medals || !userData.medals.equipped || userData.medals.equipped.length === 0) {
+      return '';
+  }
 
-    return userData.medals.equipped.map(medalId => {
-        const medal = medalsData.medals[medalId];
-        if (medal) {
-            const iconContent = medal.icon.startsWith('http') ? 
-                `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">` : 
-                medal.icon;
-            return `<span class="leaderboard-medal" 
-                        style="border-color: ${medal.color};" 
-                        data-rarity="${medal.rarity}"
-                        title="${medal.name}: ${medal.description}">
-                        ${iconContent}
-                    </span>`;
-        }
-        return '';
-    }).join('');
+  return userData.medals.equipped.map(medalId => {
+      const medal = medalsData.medals[medalId];
+      if (medal) {
+          const iconContent = medal.icon.startsWith('http') ? 
+              `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain; border-radius: 4px;">` : 
+              medal.icon;
+          return `<span class="leaderboard-medal" 
+                      style="border-color: ${medal.color};" 
+                      data-rarity="${medal.rarity}"
+                      title="${medal.name}: ${medal.description}">
+                      ${iconContent}
+                  </span>`;
+      }
+      return '';
+  }).join('');
 }
 
 // 開始數獨挑戰
@@ -2463,14 +2240,14 @@ async function finishSudokuChallenge(examType, result) {
     coinsEarned += result.timeBonus * rewardMultiplier;
   }
   
-  // 更新貨幣
-  userCurrency.coins += coinsEarned;
-  userCurrency.gems += gemsEarned;
+  // 更新貨幣 - 使用模組的方法
+  window.medalInventory.userCurrency.coins += coinsEarned;
+  window.medalInventory.userCurrency.gems += gemsEarned;
   
   // 保存成績到排行榜
   try {
     await saveScoreToLeaderboard(examType, result.score, result.totalTime);
-    await saveCurrencyData();
+    await window.medalInventory.saveCurrencyData(); // 使用模組的方法
     
     // 清除相關快取
     const cacheKey = `champion_${examType}`;
