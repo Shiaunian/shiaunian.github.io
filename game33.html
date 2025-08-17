@@ -13,6 +13,7 @@
 <script src="sudoku6x6.js"></script>
 <!-- 添加模組化JS文件 -->
 <script src="medalInventory.js"></script>
+<script src="shopModule.js"></script>
 
 
 <style>
@@ -1235,37 +1236,6 @@ async function loadUserMedalsAndCurrency() {
 }
 
 
-
-// 🏪 顯示商店
-async function showShop() {
-document.getElementById('shopModal').style.display = 'flex';
-await renderShopItems();
-}
-
-// 🏪 隱藏商店
-function hideShop() {
-document.getElementById('shopModal').style.display = 'none';
-}
-
-// 🏪 篩選商店物品
-function filterShop(category) {
-document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-event.target.classList.add('active');
-renderShopItems(category);
-}
-
-// 🏪 渲染商店物品 - 使用模組化方法
-async function renderShopItems(filter = 'all') {
-  await window.medalInventory.renderShopItems('shopItems', filter);
-}
-
-
-// 🏪 購買勳章 - 使用模組化方法
-async function buyMedal(medalId) {
-  await window.medalInventory.buyMedal(medalId);
-}
-
-
 // 🎒 顯示背包
 async function showInventory() {
 document.getElementById('inventoryModal').style.display = 'flex';
@@ -1513,11 +1483,15 @@ async function initializeApp() {
             loadPasswordData() // 新增：載入用戶密碼數據
         ]);
 
-        // 初始化勳章系統
+        // 在 initializeApp 函數中
         window.medalInventory = new MedalInventory(database, currentUser, medalsData);
         await window.medalInventory.loadUserData();
         window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
         window.medalInventory.updateMedalDisplay('userMedals');
+
+        // 初始化商店模組
+        window.shopModule = new ShopModule(database, currentUser, medalsData, window.medalInventory);
+
 
         // 生成挑戰項目列表
         renderChallengesList();
