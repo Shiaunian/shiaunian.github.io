@@ -376,7 +376,7 @@ createBoard() {
     });
     
     const btnHint = document.createElement('button');
-    btnHint.textContent = '提示';
+    btnHint.textContent = '測試';
     btnHint.className = 'btn btn-secondary';
     btnHint.style.marginRight = '10px';
     btnHint.style.padding = '8px 16px';
