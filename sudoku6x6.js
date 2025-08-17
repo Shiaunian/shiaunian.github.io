@@ -1,10 +1,11 @@
 class Sudoku6x6 {
-  constructor(containerId, onComplete) {
+  constructor(containerId, config, onComplete) {
     this.container = document.getElementById(containerId);
     if (!this.container) {
       throw new Error("Container element not found");
     }
     
+    this.config = config; // 保存配置信息
     this.onComplete = onComplete; // 完成後的回調函數
     this.startTime = Date.now(); // 開始時間
     this.size = 6;
@@ -14,6 +15,8 @@ class Sudoku6x6 {
     this.completed = false; // 是否完成
     this.difficulty = "medium"; // 固定難度為中等
     this.timerInterval = null; // 計時器間隔
+    this.timeBonus = 0; // 時間獎勵分數
+    this.score = 0; // 總分數
     
     // 生成隨機數獨題目和解答
     this.generateRandomPuzzle();
@@ -171,7 +174,16 @@ class Sudoku6x6 {
     this.mistakesDisplay.textContent = '錯誤: 0';
     this.mistakesDisplay.style.fontSize = '18px';
     
+    // 分數顯示
+    this.scoreDisplay = document.createElement('div');
+    this.scoreDisplay.className = 'score';
+    this.scoreDisplay.textContent = '分數: 0';
+    this.scoreDisplay.style.fontSize = '18px';
+    this.scoreDisplay.style.fontWeight = 'bold';
+    this.scoreDisplay.style.color = '#7289da';
+    
     statusDiv.appendChild(this.timerDisplay);
+    statusDiv.appendChild(this.scoreDisplay);
     statusDiv.appendChild(this.mistakesDisplay);
     this.container.appendChild(statusDiv);
     
@@ -250,6 +262,10 @@ class Sudoku6x6 {
               e.target.style.color = 'green';
               e.target.style.fontWeight = 'bold';
               
+              // 增加分數
+              this.score += 5;
+              this.updateScoreDisplay();
+              
               // 檢查是否完成
               if (this.checkCompletion()) {
                 this.finishGame();
@@ -303,6 +319,7 @@ class Sudoku6x6 {
     const btnNew = document.createElement('button');
     btnNew.textContent = '新遊戲';
     btnNew.className = 'btn btn-success';
+    btnNew.style.marginRight = '10px';
     btnNew.style.padding = '8px 16px';
     btnNew.style.backgroundColor = '#28a745';
     btnNew.style.color = 'white';
@@ -314,9 +331,25 @@ class Sudoku6x6 {
       this.newGame();
     });
     
+    // 新增放棄按鈕
+    const btnQuit = document.createElement('button');
+    btnQuit.textContent = '放棄遊戲';
+    btnQuit.className = 'btn btn-danger';
+    btnQuit.style.padding = '8px 16px';
+    btnQuit.style.backgroundColor = '#dc3545';
+    btnQuit.style.color = 'white';
+    btnQuit.style.border = 'none';
+    btnQuit.style.borderRadius = '4px';
+    btnQuit.style.cursor = 'pointer';
+    
+    btnQuit.addEventListener('click', () => {
+      this.quitGame();
+    });
+    
     btnContainer.appendChild(btnCheck);
     btnContainer.appendChild(btnHint);
     btnContainer.appendChild(btnNew);
+    btnContainer.appendChild(btnQuit);
     this.container.appendChild(btnContainer);
     
     // 添加CSS動畫
@@ -336,6 +369,11 @@ class Sudoku6x6 {
     document.head.appendChild(style);
   }
   
+  // 更新分數顯示
+  updateScoreDisplay() {
+    this.scoreDisplay.textContent = `分數: ${this.score}`;
+  }
+  
   // 開始計時器
   startTimer() {
     this.startTime = Date.now();
@@ -344,12 +382,31 @@ class Sudoku6x6 {
       const minutes = Math.floor(elapsedTime / 60).toString().padStart(2, '0');
       const seconds = (elapsedTime % 60).toString().padStart(2, '0');
       this.timerDisplay.textContent = `時間: ${minutes}:${seconds}`;
+      
+      // 計算時間獎勵（如果在5分鐘內完成，每提前30秒獲得5分獎勵）
+      const maxTime = 300; // 5分鐘
+      if (elapsedTime < maxTime) {
+        const previousBonus = this.timeBonus;
+        this.timeBonus = Math.floor((maxTime - elapsedTime) / 30) * 5;
+        
+        // 如果獎勵變化，更新顯示
+        if (previousBonus !== this.timeBonus) {
+          this.updateScoreDisplay();
+        }
+      }
     }, 1000);
   }
   
   // 更新錯誤顯示
   updateMistakesDisplay() {
     this.mistakesDisplay.textContent = `錯誤: ${this.mistakes}`;
+    
+    // 錯誤太多會扣分
+    if (this.mistakes > 0) {
+      const penaltyScore = Math.min(this.score, this.mistakes * 2);
+      this.score = Math.max(0, this.score - penaltyScore);
+      this.updateScoreDisplay();
+    }
   }
   
   // 檢查是否完成
@@ -371,8 +428,12 @@ class Sudoku6x6 {
   checkAllAnswers() {
     const inputs = this.container.querySelectorAll('input');
     let allCorrect = true;
+    let correctCount = 0;
+    let totalInputs = 0;
     
     for (const input of inputs) {
+      totalInputs++;
+      
       if (!input.value) {
         allCorrect = false;
         continue;
@@ -387,11 +448,21 @@ class Sudoku6x6 {
         allCorrect = false;
       } else {
         input.style.color = 'green';
+        correctCount++;
       }
     }
     
+    // 計算完成度並更新分數
+    const completionPercentage = (correctCount / totalInputs) * 100;
+    this.score = Math.round(completionPercentage) + this.timeBonus;
+    this.updateScoreDisplay();
+    
+    // 如果全部正確，完成遊戲
     if (allCorrect && this.checkCompletion()) {
       this.finishGame();
+    } else {
+      // 顯示完成度訊息
+      alert(`目前完成度: ${Math.round(completionPercentage)}%\n正確: ${correctCount}/${totalInputs}\n繼續加油！`);
     }
   }
   
@@ -418,9 +489,27 @@ class Sudoku6x6 {
     randomInput.style.color = 'blue';
     randomInput.style.animation = 'highlight 1s';
     
+    // 提示會扣分
+    this.score = Math.max(0, this.score - 3);
+    this.updateScoreDisplay();
+    
     // 檢查是否完成
     if (this.checkCompletion()) {
       this.finishGame();
+    }
+  }
+  
+  // 放棄遊戲
+  quitGame() {
+    if (confirm('確定要放棄這局遊戲嗎？將返回主頁面且不會記錄成績。')) {
+      clearInterval(this.timerInterval);
+      
+      // 調用完成回調函數，傳遞放棄標記
+      if (typeof this.onComplete === 'function') {
+        this.onComplete({
+          forfeit: true
+        });
+      }
     }
   }
   
@@ -435,6 +524,15 @@ class Sudoku6x6 {
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = elapsedTime % 60;
     
+    // 計算最終分數
+    // 基礎分數 + 時間獎勵 - 錯誤懲罰
+    const baseScore = 100; // 完成基礎分數
+    const timePenalty = Math.min(20, Math.floor(elapsedTime / 60) * 5); // 每分鐘扣5分，最多扣20分
+    const mistakePenalty = Math.min(30, this.mistakes * 3); // 每個錯誤扣3分，最多扣30分
+    
+    this.score = baseScore + this.timeBonus - timePenalty - mistakePenalty;
+    this.updateScoreDisplay();
+    
     // 創建完成訊息
     const messageDiv = document.createElement('div');
     messageDiv.style.marginTop = '20px';
@@ -446,25 +544,32 @@ class Sudoku6x6 {
     messageDiv.style.fontSize = '18px';
     messageDiv.style.fontWeight = 'bold';
     
-    messageDiv.textContent = `恭喜完成! 用時 ${minutes}分${seconds}秒, 錯誤次數: ${this.mistakes}`;
+    messageDiv.textContent = `恭喜完成! 用時 ${minutes}分${seconds}秒, 錯誤次數: ${this.mistakes}, 最終得分: ${this.score}`;
     this.container.appendChild(messageDiv);
     
-    // 調用完成回調函數（如果有）
+    // 調用完成回調函數
     if (typeof this.onComplete === 'function') {
       this.onComplete({
-        time: elapsedTime,
-        mistakes: this.mistakes
+        score: this.score,
+        totalTime: elapsedTime,
+        mistakes: this.mistakes,
+        timeBonus: this.timeBonus,
+        difficulty: this.difficulty
       });
     }
   }
   
   // 開始新遊戲
   newGame() {
-    clearInterval(this.timerInterval);
-    this.mistakes = 0;
-    this.completed = false;
-    this.generateRandomPuzzle();
-    this.createBoard();
-    this.startTimer();
+    if (confirm('確定要開始新遊戲嗎？當前進度將不會保存。')) {
+      clearInterval(this.timerInterval);
+      this.mistakes = 0;
+      this.completed = false;
+      this.score = 0;
+      this.timeBonus = 0;
+      this.generateRandomPuzzle();
+      this.createBoard();
+      this.startTimer();
+    }
   }
 }
