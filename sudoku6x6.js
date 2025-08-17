@@ -30,13 +30,78 @@ class Sudoku6x6 {
 
   // 生成隨機數獨題目和解答
   generateRandomPuzzle() {
+  try {
     // 先生成一個有效的完整數獨解答
     const solution = this.generateRandomSolution();
-    this.solution = solution;
+    if (!solution) {
+      throw new Error("Failed to generate solution");
+    }
+    this.solution = JSON.parse(JSON.stringify(solution)); // 使用深拷貝
     
     // 根據難度從解答中移除一些數字來創建題目
-    this.puzzle = this.createPuzzleFromSolution(solution, this.difficulty);
+    this.puzzle = this.createPuzzleFromSolution(this.solution, this.difficulty);
+    
+    // 驗證生成的題目和解答
+    this.validatePuzzle();
+  } catch (error) {
+    console.error("Error generating puzzle:", error);
+    // 使用備用方案
+    this.generateFallbackPuzzle();
   }
+}
+
+// 驗證數獨題目和解答
+validatePuzzle() {
+  // 檢查解答
+  if (!this.solution || !Array.isArray(this.solution) || this.solution.length !== this.size) {
+    throw new Error("Invalid solution structure");
+  }
+  
+  // 檢查題目
+  if (!this.puzzle || !Array.isArray(this.puzzle) || this.puzzle.length !== this.size) {
+    throw new Error("Invalid puzzle structure");
+  }
+  
+  // 檢查每一行
+  for (let r = 0; r < this.size; r++) {
+    if (!Array.isArray(this.solution[r]) || this.solution[r].length !== this.size) {
+      throw new Error(`Invalid solution row ${r}`);
+    }
+    if (!Array.isArray(this.puzzle[r]) || this.puzzle[r].length !== this.size) {
+      throw new Error(`Invalid puzzle row ${r}`);
+    }
+  }
+}
+
+// 備用方案
+generateFallbackPuzzle() {
+  console.log("Using fallback puzzle generation");
+  // 使用固定的有效解答
+  this.solution = [
+    [1, 2, 3, 4, 5, 6],
+    [4, 5, 6, 1, 2, 3],
+    [2, 3, 1, 6, 4, 5],
+    [5, 6, 4, 3, 1, 2],
+    [3, 1, 2, 5, 6, 4],
+    [6, 4, 5, 2, 3, 1]
+  ];
+  
+  // 創建簡單的題目
+  this.puzzle = JSON.parse(JSON.stringify(this.solution));
+  let removed = 0;
+  const toRemove = 20; // 移除較少的數字，確保有效
+  
+  while (removed < toRemove) {
+    const r = Math.floor(Math.random() * this.size);
+    const c = Math.floor(Math.random() * this.size);
+    
+    if (this.puzzle[r][c] !== 0) {
+      this.puzzle[r][c] = 0;
+      removed++;
+    }
+  }
+}
+
 
   // 生成隨機的完整數獨解答
   generateRandomSolution() {
@@ -152,100 +217,103 @@ class Sudoku6x6 {
     return puzzle;
   }
 
-  createBoard() {
-    this.container.innerHTML = '';
-    
-    // 創建狀態區域
-    const statusDiv = document.createElement('div');
-    statusDiv.className = 'status-container';
-    statusDiv.style.marginBottom = '10px';
-    statusDiv.style.display = 'flex';
-    statusDiv.style.justifyContent = 'space-between';
-    
-    // 計時器顯示
-    this.timerDisplay = document.createElement('div');
-    this.timerDisplay.className = 'timer';
-    this.timerDisplay.textContent = '時間: 00:00';
-    this.timerDisplay.style.fontSize = '18px';
-    
-    // 錯誤計數顯示
-    this.mistakesDisplay = document.createElement('div');
-    this.mistakesDisplay.className = 'mistakes';
-    this.mistakesDisplay.textContent = '錯誤: 0';
-    this.mistakesDisplay.style.fontSize = '18px';
-    
-    // 分數顯示
-    this.scoreDisplay = document.createElement('div');
-    this.scoreDisplay.className = 'score';
-    this.scoreDisplay.textContent = '分數: 0';
-    this.scoreDisplay.style.fontSize = '18px';
-    this.scoreDisplay.style.fontWeight = 'bold';
-    this.scoreDisplay.style.color = '#7289da';
-    
-    statusDiv.appendChild(this.timerDisplay);
-    statusDiv.appendChild(this.scoreDisplay);
-    statusDiv.appendChild(this.mistakesDisplay);
-    this.container.appendChild(statusDiv);
-    
-    // 創建數獨表格
-    const table = document.createElement('table');
-    table.style.borderCollapse = 'collapse';
-    table.style.margin = '10px auto';
-    table.style.userSelect = 'none';
+createBoard() {
+  this.container.innerHTML = '';
+  
+  // 創建狀態區域
+  const statusDiv = document.createElement('div');
+  statusDiv.className = 'status-container';
+  statusDiv.style.marginBottom = '10px';
+  statusDiv.style.display = 'flex';
+  statusDiv.style.justifyContent = 'space-between';
+  
+  // 計時器顯示
+  this.timerDisplay = document.createElement('div');
+  this.timerDisplay.className = 'timer';
+  this.timerDisplay.textContent = '時間: 00:00';
+  this.timerDisplay.style.fontSize = '18px';
+  
+  // 錯誤計數顯示
+  this.mistakesDisplay = document.createElement('div');
+  this.mistakesDisplay.className = 'mistakes';
+  this.mistakesDisplay.textContent = '錯誤: 0';
+  this.mistakesDisplay.style.fontSize = '18px';
+  
+  // 分數顯示
+  this.scoreDisplay = document.createElement('div');
+  this.scoreDisplay.className = 'score';
+  this.scoreDisplay.textContent = '分數: 0';
+  this.scoreDisplay.style.fontSize = '18px';
+  this.scoreDisplay.style.fontWeight = 'bold';
+  this.scoreDisplay.style.color = '#7289da';
+  
+  statusDiv.appendChild(this.timerDisplay);
+  statusDiv.appendChild(this.scoreDisplay);
+  statusDiv.appendChild(this.mistakesDisplay);
+  this.container.appendChild(statusDiv);
+  
+  // 創建數獨表格
+  const table = document.createElement('table');
+  table.style.borderCollapse = 'collapse';
+  table.style.margin = '10px auto';
+  table.style.userSelect = 'none';
 
-    for (let r = 0; r < this.size; r++) {
-      const tr = document.createElement('tr');
-      for (let c = 0; c < this.size; c++) {
-        const td = document.createElement('td');
-        td.style.border = '1px solid #333';
-        td.style.width = '40px';
-        td.style.height = '40px';
-        td.style.textAlign = 'center';
-        td.style.verticalAlign = 'middle';
-        td.style.fontSize = '20px';
-        td.style.fontWeight = 'bold';
-        td.style.position = 'relative';
+  for (let r = 0; r < this.size; r++) {
+    const tr = document.createElement('tr');
+    for (let c = 0; c < this.size; c++) {
+      const td = document.createElement('td');
+      td.style.border = '1px solid #333';
+      td.style.width = '40px';
+      td.style.height = '40px';
+      td.style.textAlign = 'center';
+      td.style.verticalAlign = 'middle';
+      td.style.fontSize = '20px';
+      td.style.fontWeight = 'bold';
+      td.style.position = 'relative';
 
-        // 加粗區塊邊框
-        if ((c+1) % this.subgridCols === 0 && c !== this.size -1) {
-          td.style.borderRight = '3px solid #000';
-        }
-        if ((r+1) % this.subgridRows === 0 && r !== this.size -1) {
-          td.style.borderBottom = '3px solid #000';
-        }
+      // 加粗區塊邊框
+      if ((c+1) % this.subgridCols === 0 && c !== this.size -1) {
+        td.style.borderRight = '3px solid #000';
+      }
+      if ((r+1) % this.subgridRows === 0 && r !== this.size -1) {
+        td.style.borderBottom = '3px solid #000';
+      }
 
-        if (this.puzzle[r][c] !== 0) {
-          td.textContent = this.puzzle[r][c];
-          td.style.color = '#000';
-          td.style.backgroundColor = '#ddd';
-        } else {
-          const input = document.createElement('input');
-          input.type = 'text';
-          input.maxLength = 1;
-          input.style.width = '100%';
-          input.style.height = '100%';
-          input.style.border = 'none';
-          input.style.textAlign = 'center';
-          input.style.fontSize = '20px';
-          input.style.fontWeight = 'bold';
-          input.style.backgroundColor = '#fff';
-          input.style.outline = 'none';
-          input.dataset.row = r;
-          input.dataset.col = c;
+      // 在顯示數獨格子內容時添加檢查
+      if (this.puzzle[r] && this.puzzle[r][c] !== undefined && this.puzzle[r][c] !== 0) {
+        td.textContent = this.puzzle[r][c];
+        td.style.color = '#000';
+        td.style.backgroundColor = '#ddd';
+      } else {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.maxLength = 1;
+        input.style.width = '100%';
+        input.style.height = '100%';
+        input.style.border = 'none';
+        input.style.textAlign = 'center';
+        input.style.fontSize = '20px';
+        input.style.fontWeight = 'bold';
+        input.style.backgroundColor = '#fff';
+        input.style.outline = 'none';
+        input.dataset.row = r;
+        input.dataset.col = c;
+        
+        // 即時驗證輸入
+        input.addEventListener('input', (e) => {
+          const val = e.target.value;
+          if (!/^[1-6]$/.test(val)) {
+            e.target.value = '';
+            return;
+          }
           
-          // 即時驗證輸入
-          input.addEventListener('input', (e) => {
-            const val = e.target.value;
-            if (!/^[1-6]$/.test(val)) {
-              e.target.value = '';
-              return;
-            }
-            
-            // 檢查是否正確
-            const row = parseInt(e.target.dataset.row);
-            const col = parseInt(e.target.dataset.col);
-            const num = parseInt(val);
-            
+          // 檢查是否正確
+          const row = parseInt(e.target.dataset.row);
+          const col = parseInt(e.target.dataset.col);
+          const num = parseInt(val);
+          
+          // 在檢查答案時添加檢查
+          if (this.solution[row] && this.solution[row][col] !== undefined) {
             if (num !== this.solution[row][col]) {
               // 錯誤
               e.target.style.color = 'red';
@@ -271,15 +339,21 @@ class Sudoku6x6 {
                 this.finishGame();
               }
             }
-          });
-          
-          td.appendChild(input);
-        }
-        tr.appendChild(td);
+          } else {
+            console.error(`Invalid solution value at [${row}][${col}]`);
+            // 處理錯誤情況
+            e.target.style.color = 'orange';
+            e.target.value = '?';
+          }
+        });
+        
+        td.appendChild(input);
       }
-      table.appendChild(tr);
+      tr.appendChild(td);
     }
-    this.container.appendChild(table);
+    table.appendChild(tr);
+  }
+  this.container.appendChild(table);
 
     // 建立按鈕區
     const btnContainer = document.createElement('div');
