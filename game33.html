@@ -1222,17 +1222,50 @@ function renderChallengesList() {
 
 // 🏅 載入用戶勳章和貨幣資料
 async function loadUserMedalsAndCurrency() {
-  try {
-    // 初始化medalInventory實例
+    try {
+    // 在 initializeApp 函數中
     window.medalInventory = new MedalInventory(database, currentUser, medalsData);
     await window.medalInventory.loadUserData();
-    
-    // 更新UI
     window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
     window.medalInventory.updateMedalDisplay('userMedals');
+
+    // 初始化商店模組
+    window.shopModule = new ShopModule(database, currentUser, medalsData, window.medalInventory);
+
   } catch (err) {
     console.error('載入用戶勳章資料失敗:', err);
   }
+}
+
+
+
+// 🏪 顯示商店
+async function showShop() {
+  await window.shopModule.showShop();
+}
+
+// 🏪 隱藏商店
+function hideShop() {
+  window.shopModule.hideShop();
+}
+
+
+// 🏪 篩選商店物品
+function filterShop(category, event) {
+  window.shopModule.filterShop(category, event);
+}
+
+
+
+// 🏪 渲染商店物品 - 使用模組化方法
+async function renderShopItems(filter = 'all') {
+  await window.shopModule.renderShopItems(filter);
+}
+
+
+// 🏪 購買勳章 - 使用模組化方法
+async function buyMedal(medalId) {
+  await window.shopModule.buyMedal(medalId);
 }
 
 
@@ -1483,15 +1516,11 @@ async function initializeApp() {
             loadPasswordData() // 新增：載入用戶密碼數據
         ]);
 
-        // 在 initializeApp 函數中
+        // 初始化勳章系統
         window.medalInventory = new MedalInventory(database, currentUser, medalsData);
         await window.medalInventory.loadUserData();
         window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
         window.medalInventory.updateMedalDisplay('userMedals');
-
-        // 初始化商店模組
-        window.shopModule = new ShopModule(database, currentUser, medalsData, window.medalInventory);
-
 
         // 生成挑戰項目列表
         renderChallengesList();
@@ -1527,7 +1556,7 @@ function logout() {
     localStorage.removeItem('exam_configs_v1');
     localStorage.removeItem('exam_configs_v1_time');
     championCache.clear();
-    window.location.href = 'index.html';
+    window.location.href = 'index3.html';
 }
 
 // 返回T2日
