@@ -1242,13 +1242,31 @@ async function loadUserMedalsAndCurrency() {
 // 🏪 顯示商店
 async function showShop() {
   console.log('調用顯示商店函數');
+  console.log('商店模組狀態:', window.shopModule);
+  
   if (!window.shopModule) {
     console.error('商店模組未初始化');
-    alert('商店模組載入失敗，請重新整理頁面');
-    return;
+    
+    // 嘗試重新初始化商店模組
+    try {
+      console.log('嘗試重新初始化商店模組...');
+      window.shopModule = new ShopModule(database, currentUser, medalsData, window.medalInventory);
+      console.log('商店模組重新初始化成功');
+    } catch (error) {
+      console.error('商店模組重新初始化失敗:', error);
+      alert('商店模組載入失敗，請重新整理頁面');
+      return;
+    }
   }
-  await window.shopModule.showShop();
+  
+  try {
+    await window.shopModule.showShop();
+  } catch (error) {
+    console.error('顯示商店時發生錯誤:', error);
+    alert('顯示商店時發生錯誤，請重新整理頁面');
+  }
 }
+
 
 // 🏪 隱藏商店
 function hideShop() {
