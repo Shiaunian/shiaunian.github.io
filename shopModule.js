@@ -1,4 +1,4 @@
-// shopModule.js - 修正版
+// shopModule.js - 完整修正版
 class ShopModule {
   constructor(database, currentUser, medalsData, medalInventory) {
     this.database = database;
@@ -12,6 +12,9 @@ class ShopModule {
     this.filterShop = this.filterShop.bind(this);
     this.renderShopItems = this.renderShopItems.bind(this);
     this.buyMedal = this.buyMedal.bind(this);
+    
+    // 將實例保存到全局變量，以便從HTML元素的onclick事件中訪問
+    window.shopInstance = this;
     
     console.log('ShopModule 已初始化');
   }
@@ -104,6 +107,9 @@ class ShopModule {
         return;
       }
       
+      // 檢查用戶貨幣資料
+      console.log('用戶貨幣資料:', this.medalInventory.userCurrency);
+      
       // 過濾勳章
       const filteredMedals = Object.entries(this.medalsData.medals)
         .filter(([id, medal]) => {
@@ -127,8 +133,10 @@ class ShopModule {
             return rarityOrder[medalB.rarity] - rarityOrder[medalA.rarity];
           }
           
-          // 價格排序
-          return medalB.price - medalA.price;
+          // 價格排序 (確保使用 price.coins)
+          const priceA = medalA.price.coins || medalA.price;
+          const priceB = medalB.price.coins || medalB.price;
+          return priceB - priceA;
         });
       
       if (filteredMedals.length === 0) {
@@ -136,40 +144,40 @@ class ShopModule {
         return;
       }
       
-    // 在 renderShopItems 函數中修改按鈕的 onclick 事件
-    const shopItemsHtml = filteredMedals.map(([id, medal]) => {
-    const isOwned = this.medalInventory.userMedals.owned.includes(id);
-    const isEquipped = this.medalInventory.userMedals.equipped.includes(id);
-    
-    // 修正這裡 - 使用 medal.price.coins 而不是 medal.price
-    const canAfford = this.medalInventory.userCurrency.coins >= medal.price.coins;
-    
-    const iconContent = medal.icon.startsWith('http') ? 
-        `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
-        medal.icon;
-    
-    return `
-        <div class="shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}">
-        <div class="medal-preview" style="border-color: ${medal.color};">${iconContent}</div>
-        <div class="item-info">
-            <div class="item-name">${medal.name}</div>
-            <div class="item-description">${medal.description}</div>
-            <div class="item-price">💰 ${medal.price.coins} 金幣</div>
-        </div>
-        <div class="item-actions">
-            ${isOwned ? 
-            `<button class="btn btn-small btn-secondary" disabled>已擁有</button>` : 
-            `<button class="btn btn-small ${canAfford ? 'btn-primary' : 'btn-danger'}" 
-                    onclick="window.shopInstance.buyMedal('${id}')" 
-                    ${!canAfford ? 'disabled' : ''}>
-                ${canAfford ? '購買' : '金幣不足'}
-            </button>`
-            }
-        </div>
-        </div>
-    `;
-    }).join('');
-
+      // 在 renderShopItems 函數中修改按鈕的 onclick 事件
+      const shopItemsHtml = filteredMedals.map(([id, medal]) => {
+        const isOwned = this.medalInventory.userMedals.owned.includes(id);
+        const isEquipped = this.medalInventory.userMedals.equipped.includes(id);
+        
+        // 處理價格格式，支持兩種可能的格式
+        const price = medal.price.coins !== undefined ? medal.price.coins : medal.price;
+        const canAfford = this.medalInventory.userCurrency.coins >= price;
+        
+        const iconContent = medal.icon.startsWith('http') ? 
+          `<img src="${medal.icon}" alt="${medal.name}" style="width: 24px; height: 24px; object-fit: contain;">` : 
+          medal.icon;
+        
+        return `
+          <div class="shop-item ${isOwned ? 'owned' : ''} ${isEquipped ? 'equipped' : ''}">
+            <div class="medal-preview" style="border-color: ${medal.color};">${iconContent}</div>
+            <div class="item-info">
+              <div class="item-name">${medal.name}</div>
+              <div class="item-description">${medal.description}</div>
+              <div class="item-price">💰 ${price} 金幣</div>
+            </div>
+            <div class="item-actions">
+              ${isOwned ? 
+                `<button class="btn btn-small btn-secondary" disabled>已擁有</button>` : 
+                `<button class="btn btn-small ${canAfford ? 'btn-primary' : 'btn-danger'}" 
+                        onclick="window.shopInstance.buyMedal('${id}')" 
+                        ${!canAfford ? 'disabled' : ''}>
+                  ${canAfford ? '購買' : '金幣不足'}
+                </button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
       
       shopItemsContainer.innerHTML = shopItemsHtml;
       
@@ -179,34 +187,38 @@ class ShopModule {
     }
   }
 
-// 購買勳章
-async buyMedal(medalId) {
-  try {
-    const medal = this.medalsData.medals[medalId];
-        if (!medal) {
+  // 購買勳章
+  async buyMedal(medalId) {
+    try {
+      console.log('嘗試購買勳章:', medalId);
+      const medal = this.medalsData.medals[medalId];
+      if (!medal) {
         alert('找不到此勳章');
         return;
-        }
+      }
       
-    // 檢查是否已擁有
-        if (this.medalInventory.userMedals.owned.includes(medalId)) {
+      // 檢查是否已擁有
+      if (this.medalInventory.userMedals.owned.includes(medalId)) {
         alert(`你已經擁有 ${medal.name} 勳章`);
         return;
-        }
+      }
+      
+      // 處理價格格式，支持兩種可能的格式
+      const price = medal.price.coins !== undefined ? medal.price.coins : medal.price;
       
       // 檢查金幣是否足夠
-        if (this.medalInventory.userCurrency.coins < medal.price.coins) {
-        alert(`金幣不足！需要 ${medal.price.coins} 金幣`);
+      if (this.medalInventory.userCurrency.coins < price) {
+        alert(`金幣不足！需要 ${price} 金幣`);
         return;
-        }
+      }
       
-    // 確認購買
-    if (!confirm(`確定要購買 ${medal.name} 勳章嗎？\n價格：${medal.price.coins} 金幣`)) {
-      return;
-    }
+      // 確認購買
+      if (!confirm(`確定要購買 ${medal.name} 勳章嗎？\n價格：${price} 金幣`)) {
+        return;
+      }
       
-    // 扣除金幣 - 同樣修正這裡
-    this.medalInventory.userCurrency.coins -= medal.price.coins;
+      // 扣除金幣
+      this.medalInventory.userCurrency.coins -= price;
       
       // 添加勳章到用戶擁有列表
       this.medalInventory.userMedals.owned.push(medalId);
