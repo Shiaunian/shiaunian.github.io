@@ -1241,25 +1241,40 @@ async function loadUserMedalsAndCurrency() {
 
 // 🏪 顯示商店
 async function showShop() {
+  console.log('調用顯示商店函數');
+  if (!window.shopModule) {
+    console.error('商店模組未初始化');
+    alert('商店模組載入失敗，請重新整理頁面');
+    return;
+  }
   await window.shopModule.showShop();
 }
 
 // 🏪 隱藏商店
 function hideShop() {
-  window.shopModule.hideShop();
+  console.log('調用隱藏商店函數');
+  if (window.shopModule) {
+    window.shopModule.hideShop();
+  }
 }
 
 
 // 🏪 篩選商店物品
-function filterShop(category, event) {
-  window.shopModule.filterShop(category, event);
+function filterShop(category) {
+  console.log('調用篩選商店函數:', category);
+  if (window.shopModule) {
+    window.shopModule.filterShop(category);
+  }
 }
 
 
 
-// 🏪 渲染商店物品 - 使用模組化方法
-async function renderShopItems(filter = 'all') {
-  await window.shopModule.renderShopItems(filter);
+// 🏪 購買勳章
+async function buyMedal(medalId) {
+  console.log('調用購買勳章函數:', medalId);
+  if (window.shopModule) {
+    await window.shopModule.buyMedal(medalId);
+  }
 }
 
 
