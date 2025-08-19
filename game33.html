@@ -1274,13 +1274,10 @@ async function buyMedal(medalId) {
   console.log('調用購買勳章函數:', medalId);
   if (window.shopModule) {
     await window.shopModule.buyMedal(medalId);
+  } else {
+    console.error('商店模組未初始化，無法購買勳章');
+    alert('商店模組未初始化，請重新整理頁面');
   }
-}
-
-
-// 🏪 購買勳章 - 使用模組化方法
-async function buyMedal(medalId) {
-  await window.shopModule.buyMedal(medalId);
 }
 
 
@@ -1536,6 +1533,10 @@ async function initializeApp() {
         await window.medalInventory.loadUserData();
         window.medalInventory.updateCurrencyDisplay('userCoins', 'userGems');
         window.medalInventory.updateMedalDisplay('userMedals');
+        
+        // 初始化商店模組 - 確保在這裡初始化
+        window.shopModule = new ShopModule(database, currentUser, medalsData, window.medalInventory);
+        console.log('商店模組初始化完成:', window.shopModule);
 
         // 生成挑戰項目列表
         renderChallengesList();
@@ -1552,6 +1553,7 @@ async function initializeApp() {
         alert('系統初始化失敗，請重新整理頁面');
     }
 }
+
 
 
 // 登出功能
