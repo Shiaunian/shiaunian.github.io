@@ -1,43 +1,107 @@
-// shopModule.js
+// shopModule.js - 修正版
 class ShopModule {
   constructor(database, currentUser, medalsData, medalInventory) {
     this.database = database;
     this.currentUser = currentUser;
     this.medalsData = medalsData;
-    this.medalInventory = medalInventory; // 引用medalInventory實例以使用其方法
+    this.medalInventory = medalInventory;
+    
+    // 綁定方法到實例，確保 this 指向正確
+    this.showShop = this.showShop.bind(this);
+    this.hideShop = this.hideShop.bind(this);
+    this.filterShop = this.filterShop.bind(this);
+    this.renderShopItems = this.renderShopItems.bind(this);
+    this.buyMedal = this.buyMedal.bind(this);
+    
+    console.log('ShopModule 已初始化');
   }
 
   // 顯示商店
   async showShop() {
-    document.getElementById('shopModal').style.display = 'flex';
-    await this.renderShopItems();
+    console.log('嘗試顯示商店...');
+    try {
+      const shopModal = document.getElementById('shopModal');
+      if (!shopModal) {
+        console.error('找不到商店模態視窗元素');
+        alert('商店載入失敗，請重新整理頁面');
+        return;
+      }
+      
+      shopModal.style.display = 'flex';
+      console.log('商店模態視窗已顯示');
+      
+      // 重置分類按鈕狀態
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.textContent.trim() === '全部') {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      await this.renderShopItems('all');
+    } catch (error) {
+      console.error('顯示商店時發生錯誤:', error);
+      alert('顯示商店時發生錯誤，請重新整理頁面');
+    }
   }
 
   // 隱藏商店
   hideShop() {
-    document.getElementById('shopModal').style.display = 'none';
+    try {
+      const shopModal = document.getElementById('shopModal');
+      if (shopModal) {
+        shopModal.style.display = 'none';
+        console.log('商店模態視窗已隱藏');
+      }
+    } catch (error) {
+      console.error('隱藏商店時發生錯誤:', error);
+    }
   }
 
   // 篩選商店物品
-  filterShop(category, event) {
-    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) {
-      event.target.classList.add('active');
+  filterShop(category) {
+    try {
+      console.log('篩選商店物品:', category);
+      // 更新按鈕狀態
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        if (btn.textContent.trim().toLowerCase() === category || 
+           (btn.textContent.trim() === '全部' && category === 'all')) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      this.renderShopItems(category);
+    } catch (error) {
+      console.error('篩選商店物品時發生錯誤:', error);
     }
-    this.renderShopItems(category);
   }
 
   // 渲染商店物品
   async renderShopItems(filter = 'all') {
-    const shopItemsContainer = document.getElementById('shopItems');
-    if (!shopItemsContainer) return;
-    
-    shopItemsContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店物品中...</div>';
-    
     try {
+      console.log('渲染商店物品:', filter);
+      const shopItemsContainer = document.getElementById('shopItems');
+      if (!shopItemsContainer) {
+        console.error('找不到商店物品容器元素');
+        return;
+      }
+      
+      shopItemsContainer.innerHTML = '<div class="loading"><div class="loading-spinner"></div>載入商店物品中...</div>';
+      
       // 確保medalInventory已經載入用戶資料
-      if (!this.medalInventory.userMedals) {
+      if (!this.medalInventory.userMedals || !this.medalInventory.userMedals.owned) {
+        console.log('重新載入用戶勳章資料');
         await this.medalInventory.loadUserData();
+      }
+      
+      // 檢查 medalsData 是否有效
+      if (!this.medalsData || !this.medalsData.medals) {
+        console.error('勳章資料無效:', this.medalsData);
+        shopItemsContainer.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--danger);">勳章資料載入失敗，請重新整理頁面</p>';
+        return;
       }
       
       // 過濾勳章
@@ -93,7 +157,7 @@ class ShopModule {
               ${isOwned ? 
                 `<button class="btn btn-small btn-secondary" disabled>已擁有</button>` : 
                 `<button class="btn btn-small ${canAfford ? 'btn-primary' : 'btn-danger'}" 
-                         onclick="shopModule.buyMedal('${id}')" 
+                         onclick="buyMedal('${id}')" 
                          ${!canAfford ? 'disabled' : ''}>
                    ${canAfford ? '購買' : '金幣不足'}
                  </button>`
@@ -149,7 +213,7 @@ class ShopModule {
       }
       
       // 保存更新
-      await this.medalInventory.saveUserMedals();
+      await this.medalInventory.saveMedalData();
       await this.medalInventory.saveCurrencyData();
       
       // 更新UI
