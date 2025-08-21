@@ -375,21 +375,6 @@ createBoard() {
       this.checkAllAnswers();
     });
     
-    const btnHint = document.createElement('button');
-    btnHint.textContent = '測試';
-    btnHint.className = 'btn btn-secondary';
-    btnHint.style.marginRight = '10px';
-    btnHint.style.padding = '8px 16px';
-    btnHint.style.backgroundColor = '#6c757d';
-    btnHint.style.color = 'white';
-    btnHint.style.border = 'none';
-    btnHint.style.borderRadius = '4px';
-    btnHint.style.cursor = 'pointer';
-    
-    btnHint.addEventListener('click', () => {
-      this.giveHint();
-    });
-    
     const btnNew = document.createElement('button');
     btnNew.textContent = '新遊戲';
     btnNew.className = 'btn btn-success';
@@ -421,7 +406,6 @@ createBoard() {
     });
     
     btnContainer.appendChild(btnCheck);
-    btnContainer.appendChild(btnHint);
     btnContainer.appendChild(btnNew);
     btnContainer.appendChild(btnQuit);
     this.container.appendChild(btnContainer);
@@ -540,38 +524,6 @@ createBoard() {
     }
   }
   
-  // 提供提示
-  giveHint() {
-    // 找到一個空白或錯誤的格子
-    const inputs = Array.from(this.container.querySelectorAll('input'));
-    const emptyOrWrongInputs = inputs.filter(input => {
-      if (!input.value) return true;
-      
-      const row = parseInt(input.dataset.row);
-      const col = parseInt(input.dataset.col);
-      return parseInt(input.value) !== this.solution[row][col];
-    });
-    
-    if (emptyOrWrongInputs.length === 0) return;
-    
-    // 隨機選擇一個格子提供提示
-    const randomInput = emptyOrWrongInputs[Math.floor(Math.random() * emptyOrWrongInputs.length)];
-    const row = parseInt(randomInput.dataset.row);
-    const col = parseInt(randomInput.dataset.col);
-    
-    randomInput.value = this.solution[row][col];
-    randomInput.style.color = 'blue';
-    randomInput.style.animation = 'highlight 1s';
-    
-    // 提示會扣分
-    this.score = Math.max(0, this.score - 3);
-    this.updateScoreDisplay();
-    
-    // 檢查是否完成
-    if (this.checkCompletion()) {
-      this.finishGame();
-    }
-  }
   
   // 放棄遊戲
   quitGame() {
