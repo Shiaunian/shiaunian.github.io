@@ -253,14 +253,18 @@ transform: scale(1.1);
 .medal-icon.legendary { border-color: #f59e0b; }
 .medal-icon.mythic { border-color: #dc2626; }
 
-/* 🔧 新增：勳章圖片樣式 */
+/* 🔧 新增：勳章圖片樣式（修正為容器滿版，避免位移/裁切） */
 .medal-icon img,
 .medal-preview img,
 .inventory-medal-icon img,
 .leaderboard-medal img {
-border-radius: 4px;
-display: block;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 保持比例不變形 */
 }
+
 
 /* 🏪 商店樣式 */
 .shop-container {
@@ -417,14 +421,15 @@ text-align: center;
 line-height: 1.2;
 }
 
-/* 排行榜勳章顯示 - 升級版本 */
+/* 統一：名字與勳章同一排、不要被 margin 推到下一行 */
 .leaderboard-medals {
     display: flex;
     gap: 4px;
-    margin-top: 4px;
+    margin-top: 0;
     flex-wrap: wrap;
     align-items: center;
 }
+
 
 .leaderboard-medal {
     width: 32px;  /* 🔧 從16px增加到32px，放大兩倍 */
@@ -499,15 +504,16 @@ line-height: 1.2;
     }
 }
 
-/* 🔧 修正：勳章內圖片樣式 */
+/* 🔧 修正：勳章內圖片樣式（改為容器滿版，不再固定 30px） */
 .leaderboard-medal img {
-    width: 30px;  /* 🔧 從12px增加到24px */
-    height: 30px; /* 🔧 從12px增加到24px */
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     border-radius: 4px;
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
+
 
 .leaderboard-medal:hover img {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) brightness(1.1);
@@ -682,17 +688,20 @@ line-height: 1.2;
     z-index: 1;
 }
 
+/* 統一版 user-name：名字與勳章同一排，支援收縮 */
 .user-name {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;             /* 🔧 讓文字在窄螢幕能正確縮排，不把勳章擠掉 */
     margin: 0 12px;
     display: flex;
-    flex-direction: row;      /* 🔧 改成 row → 名字和勳章同一排 */
+    flex-direction: row;
     align-items: center;
-    gap: 8px;                 /* 🔧 名字和勳章的間距 */
+    gap: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 
 .leaderboard-medals {
     display: flex;
@@ -702,17 +711,6 @@ line-height: 1.2;
     align-items: center;
 }
 
-
-.user-name {
-    flex: 1;
-    margin: 0 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 /* 其他現有樣式保持不變... */
 .challenge-item {
@@ -886,15 +884,6 @@ color: var(--primary);
 font-size: 1rem;
 }
 
-.user-name {
-flex: 1;
-margin: 0 12px;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-display: flex;
-align-items: center;
-}
 
 .score {
 font-weight: bold;
@@ -909,19 +898,55 @@ padding: 30px 20px;
 color: var(--text-secondary);
 }
 
-/* 響應式設計 */
 @media (max-width: 400px) {
-.header-actions {
-flex-direction: column;
-gap: 8px;
-}
-.header-actions .btn {
-width: 100%;
-}
-.user-currency {
-flex-direction: column;
-gap: 4px;
-}
+  .header-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .header-actions .btn {
+    width: 100%;
+  }
+  .user-currency {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* 🔧 手機：排行榜勳章縮小，避免擠爆、位移 */
+  .leaderboard-medal {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+  .leaderboard-medals {
+    gap: 2px;
+  }
+  .leaderboard-medal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 🔧 手機：名字區可壓縮，避免把勳章擠出畫面 */
+  .user-name {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  /* 🔧 手機：商店項目允許換行，避免圖被吃掉 */
+  .shop-item {
+    flex-wrap: wrap;
+  }
+  .medal-preview {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+
+  /* 🔧 手機：Modal 寬度更彈性，避免左右被裁掉 */
+  .modal {
+    width: 96%;
+    max-width: 420px;
+  }
 }
 
 /* GPU 加速 */
