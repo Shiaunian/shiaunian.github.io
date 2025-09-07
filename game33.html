@@ -2198,9 +2198,8 @@ async function showTotalLeaderboard() {
     }
 }
 
-// 🏅 獲取用戶勳章圖示 - 使用模組化方法
+// 🏅 獲取用戶勳章圖示 - 修正版（改用 <img> 顯示）
 function getUserMedalIcons(username) {
-  // 🔧 修正：從 usersData 正確獲取用戶勳章資料
   const userData = usersData[username];
   if (!userData || !userData.medals || !userData.medals.equipped || userData.medals.equipped.length === 0) {
       return '';
@@ -2209,18 +2208,17 @@ function getUserMedalIcons(username) {
   return userData.medals.equipped.map(medalId => {
       const medal = medalsData.medals[medalId];
       if (medal) {
-          const iconContent = medal.icon.startsWith('http') ? 
-              medal.icon;
           return `<span class="leaderboard-medal" 
                       style="border-color: ${medal.color};" 
                       data-rarity="${medal.rarity}"
                       title="${medal.name}: ${medal.description}">
-                      ${iconContent}
+                      <img src="${medal.icon}" alt="${medal.name}" />
                   </span>`;
       }
       return '';
   }).join('');
 }
+
 
 // 開始數獨挑戰
 function startSudokuChallenge(examType) {
