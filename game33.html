@@ -131,6 +131,7 @@ animation: pulse 2s infinite;
 
 /* 🎨 按鈕樣式 */
 .btn {
+
 padding: 3px 15px;
 border: none;
 border-radius: var(--border-radius);
@@ -1115,83 +1116,43 @@ let userCurrency = { coins: 0, gems: 0 };
 // 📝 考試配置變數 (從JSON載入)
 let examConfigs = {};
 
-// 🏅 載入勳章資料（加入行動端格式相容處理：AVIF / WebP → PNG/JPG 後備）
+// 🏅 載入勳章資料
 async function loadMedalsData() {
-  try {
-    var cacheKey = 'medals_data_v1';
-    var cached = localStorage.getItem(cacheKey);
-    var cacheTime = localStorage.getItem(cacheKey + '_time');
+try {
+const cacheKey = 'medals_data_v1';
+const cached = localStorage.getItem(cacheKey);
+const cacheTime = localStorage.getItem(cacheKey + '_time');
 
-    if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
-      medalsData = JSON.parse(cached);
-      console.log('✅ 從快取載入勳章資料');
-      return;
-    }
-
-    var resp = await fetch('medals.json');
-    if (!resp.ok) throw new Error('載入勳章資料失敗：' + resp.status);
-    medalsData = await resp.json();
-
-    // 檢測瀏覽器是否支援 AVIF / WebP（同步流程中以 Promise 方式完成）
-    function testFormat(dataUri) {
-      return new Promise(function(resolve) {
-        var img = new Image();
-        img.onload = function() { resolve(true); };
-        img.onerror = function() { resolve(false); };
-        img.src = dataUri;
-      });
-    }
-
-    var avifData = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAG1pZjFhdmlmAAAAAA==';
-    var webpData = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBgAAAAwAQCdASoEAAQAAVAfJaQAA3AA/v8AAA==';
-
-    var avifOK = await testFormat(avifData);
-    var webpOK = await testFormat(webpData);
-
-    // 將不支援的格式改用 .png（或 .jpg）後備
-    try {
-      if (medalsData && medalsData.medals) {
-        var keys = Object.keys(medalsData.medals);
-        for (var i = 0; i < keys.length; i++) {
-          var k = keys[i];
-          var m = medalsData.medals[k];
-          if (m && m.icon && typeof m.icon === 'string') {
-            var icon = m.icon;
-            var lower = icon.toLowerCase();
-
-            if (!avifOK && lower.indexOf('.avif') > -1) {
-              m.icon = icon.replace(/\.avif(\?.*)?$/i, '.png$1');
-            } else if (!webpOK && lower.indexOf('.webp') > -1) {
-              m.icon = icon.replace(/\.webp(\?.*)?$/i, '.png$1');
-            }
-          }
-        }
-      }
-    } catch (e) {
-      console.warn('格式後備處理時發生警告：', e);
-    }
-
-    localStorage.setItem(cacheKey, JSON.stringify(medalsData));
-    localStorage.setItem(cacheKey + '_time', Date.now().toString());
-
-    console.log('✅ 勳章資料已載入並快取', medalsData);
-  } catch (err) {
-    console.error('載入勳章資料失敗:', err);
-    // 提供預設勳章資料
-    medalsData = {
-      medals: {},
-      rarityColors: {
-        common: "#84cc16",
-        rare: "#3b82f6",
-        epic: "#8b5cf6",
-        legendary: "#f59e0b",
-        mythic: "#dc2626"
-      },
-      maxEquippedMedals: 5
-    };
-  }
+if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 3600000) {
+medalsData = JSON.parse(cached);
+console.log('✅ 從快取載入勳章資料');
+return;
 }
 
+const resp = await fetch('medals.json');
+if (!resp.ok) throw new Error(`載入勳章資料失敗：${resp.status}`);
+medalsData = await resp.json();
+
+localStorage.setItem(cacheKey, JSON.stringify(medalsData));
+localStorage.setItem(cacheKey + '_time', Date.now().toString());
+
+console.log('✅ 勳章資料已載入並快取', medalsData);
+} catch (err) {
+console.error('載入勳章資料失敗:', err);
+// 提供預設勳章資料
+medalsData = {
+medals: {},
+rarityColors: {
+common: "#84cc16",
+rare: "#3b82f6", 
+epic: "#8b5cf6",
+legendary: "#f59e0b",
+mythic: "#dc2626"
+},
+maxEquippedMedals: 5
+};
+}
+}
 
 // 📝 載入考試配置
 async function loadExamConfigs() {
@@ -2254,52 +2215,26 @@ async function showTotalLeaderboard() {
     }
 }
 
-// 🏅 獲取用戶勳章圖示（加入行動端圖片後備：.avif/.webp → .png → .jpg → 透明佔位）
+// 🏅 獲取用戶勳章圖示 - 修正版（改用 <img> 顯示）
 function getUserMedalIcons(username) {
-  var userData = usersData[username];
+  const userData = usersData[username];
   if (!userData || !userData.medals || !userData.medals.equipped || userData.medals.equipped.length === 0) {
-    return '';
+      return '';
   }
 
-  // 透明 1x1 佔位圖，最後防呆
-  var blank = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-
-  function buildImgTag(src, altText) {
-    // onerror：先把 .avif/.webp 換 .png；再失敗換 .jpg；再失敗用透明佔位
-    var onErr = "if(!this.dataset.step){this.dataset.step='1';this.src=this.src.replace(/\\.(avif|webp)(\\?.*)?$/i,'.png$2');}" +
-                "else if(this.dataset.step==='1'){this.dataset.step='2';this.src=this.src.replace(/\\.(png)(\\?.*)?$/i,'.jpg$2');}" +
-                "else{this.onerror=null;this.src='" + blank + "';}";
-
-    // referrerpolicy 可避免部分外部圖源在行動端阻擋
-    return '<img src="' + src + '" alt="' + (altText || '') + '" ' +
-           'referrerpolicy="no-referrer" loading="eager" decoding="async" ' +
-           'onerror="' + onErr + '" />';
-  }
-
-  var htmlParts = [];
-  var equipped = userData.medals.equipped;
-  for (var i = 0; i < equipped.length; i++) {
-    var medalId = equipped[i];
-    var medal = medalsData.medals && medalsData.medals[medalId] ? medalsData.medals[medalId] : null;
-    if (medal) {
-      var color = medal.color || '#999';
-      var rarity = medal.rarity || '';
-      var name = medal.name || '';
-      var desc = medal.description || '';
-      var icon = medal.icon || blank;
-
-      var imgTag = buildImgTag(icon, name);
-
-      htmlParts.push(
-        '<span class="leaderboard-medal" style="border-color: ' + color + ';" data-rarity="' + rarity + '" title="' + name + ': ' + desc + '">' +
-          imgTag +
-        '</span>'
-      );
-    }
-  }
-  return htmlParts.join('');
+  return userData.medals.equipped.map(medalId => {
+      const medal = medalsData.medals[medalId];
+      if (medal) {
+          return `<span class="leaderboard-medal" 
+                      style="border-color: ${medal.color};" 
+                      data-rarity="${medal.rarity}"
+                      title="${medal.name}: ${medal.description}">
+                      <img src="${medal.icon}" alt="${medal.name}" />
+                  </span>`;
+      }
+      return '';
+  }).join('');
 }
-
 
 
 // 開始數獨挑戰
