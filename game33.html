@@ -682,29 +682,24 @@ line-height: 1.2;
     z-index: 1;
 }
 
-/* 🔧 調整用戶名稱區域以適應更大的勳章 */
 .user-name {
     flex: 1;
     margin: 0 12px;
+    display: flex;
+    flex-direction: row;      /* 🔧 改成 row → 名字和勳章同一排 */
+    align-items: center;
+    gap: 8px;                 /* 🔧 名字和勳章的間距 */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 40px; /* 🔧 新增：確保有足夠高度容納大勳章 */
 }
 
-/* 🔧 調整排行榜項目高度 */
-.leaderboard-item {
+.leaderboard-medals {
     display: flex;
+    gap: 4px;
+    margin-top: 0;            /* 🔧 取消向下推 */
+    flex-wrap: wrap;
     align-items: center;
-    padding: 12px; /* 🔧 從10px增加到12px */
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition);
-    border-radius: 6px;
-    margin-bottom: 2px;
-    min-height: 60px; /* 🔧 新增：確保有足夠高度 */
 }
 
 
