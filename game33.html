@@ -2210,7 +2210,6 @@ function getUserMedalIcons(username) {
       const medal = medalsData.medals[medalId];
       if (medal) {
           const iconContent = medal.icon.startsWith('http') ? 
-              `<img src="${medal.icon}" alt="${medal.name}" style="width: 27px; height: 27px; object-fit: contain; border-radius: 4px;">` : 
               medal.icon;
           return `<span class="leaderboard-medal" 
                       style="border-color: ${medal.color};" 
