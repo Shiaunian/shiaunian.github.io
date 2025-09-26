@@ -1,266 +1,206 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<title>T2日檢疫登入系統</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: linear-gradient(135deg, #e3e9ff 0%, #f7f7f7 100%);
-  }
-  body {
-    font-family: "微軟正黑體", Arial, sans-serif;
-    min-height: 100vh;
-  }
-  .login-box, .main-content {
-    width: 94vw; max-width: 420px;
-    margin: 7vw auto 0 auto;
-    padding: 7vw 4vw 6vw 4vw;
-    background: rgba(255,255,255,0.98);
-    border-radius: 15px;
-    box-shadow: 0 6px 24px 0 rgba(58,85,170,0.10), 0 1.5px 8px 0 #0001;
-    transition: box-shadow 0.3s;
-    position: relative;
-  }
-  .login-box h2, .main-content h2 {
-    margin-bottom: 6vw;
-    color: #263175;
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-  }
-  .login-logo {
-    font-size: 2.3rem;
-    vertical-align: middle;
-    filter: drop-shadow(0 2px 4px #0001);
-  }
-  .login-box input {
-    width: 100%; padding: 16px 14px; margin: 0 0 4vw 0;
-    border-radius: 8px; border: 1.5px solid #bfc6e0;
-    font-size: 1.15rem; transition: border-color 0.2s, box-shadow 0.2s;
-    background: #f6f8ff;
-    outline: none;
-    box-sizing: border-box;
-  }
-  .login-box input:focus {
-    border-color: #5468e5;
-    box-shadow: 0 0 0 2px #dbe5ff;
-    background: #fff;
-  }
-  .login-box button, .logout-btn {
-    width: 100%; padding: 16px 0;
-    background: linear-gradient(90deg, #5468e5 60%, #3949ab 100%);
-    color: #fff;
-    border: none; border-radius: 8px;
-    font-size: 1.18rem; font-weight: 600;
-    letter-spacing: 1px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px #5468e522;
-    transition: background 0.2s, transform 0.13s;
-    margin-top: 2vw;
-  }
-  .login-box button:hover, .logout-btn:hover {
-    background: linear-gradient(90deg, #3949ab 60%, #5468e5 100%);
-    transform: translateY(-2px) scale(1.025);
-    box-shadow: 0 4px 16px #3949ab22;
-  }
-  .logout-btn {
-    margin-top: 6vw;
-    background: linear-gradient(90deg, #e65555 60%, #b71c1c 100%);
-    box-shadow: 0 2px 8px #e6555522;
-  }
-  .logout-btn:hover {
-    background: linear-gradient(90deg, #b71c1c 60%, #e65555 100%);
-  }
-  .error {
-    color: #fff;
-    background: #e65555;
-    border-radius: 6px;
-    margin: 2vw 0 0 0;
-    padding: 9px 12px;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    min-height: 23px;
-    box-shadow: 0 2px 8px #e6555522;
-    transition: background 0.2s;
-  }
-  .login-notice {
-    color: #5468e5;
-    background: #e8f0ff;
-    border-radius: 6px;
-    margin: 0 0 2vw 0;
-    padding: 9px 12px;
-    font-size: 0.95rem;
-    letter-spacing: 0.5px;
-    text-align: center;
-    box-shadow: 0 2px 8px #5468e511;
-  }
-  .copyright-floating {
-    position: fixed; right: 8px; bottom: 8px;
-    background: rgba(255,255,255,0.94); color: #8a8a8a;
-    font-size: 13px; padding: 4px 13px 4px 8px;
-    border-radius: 20px 0 20px 20px; box-shadow: 0 2px 12px #0001;
-    z-index: 9999; letter-spacing: 1px; display: flex;
-    align-items: center; gap: 5px; user-select: none; pointer-events: none;
-    font-weight: 500;
-  }
-  @media (max-width: 420px) {
-    .login-box, .main-content { padding: 7vw 3vw 6vw 3vw;}
-    .login-box h2, .main-content h2 { font-size: 1.33rem; }
-    .login-logo { font-size: 1.7rem; }
-    .copyright-floating { font-size: 11px; }
-  }
-  @media (max-width: 340px) {
-    .login-box, .main-content { padding: 3vw 1vw 3vw 1vw;}
-    .login-box h2, .main-content h2 { font-size: 1.1rem; }
-    .login-logo { font-size: 1.2rem; }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>T2日動植物檢疫登入系統</title>
+  <style>
+    :root {
+        --brand: #4b4e8a;
+        --bg: #f4f5fa;
+        --card: #ffffff;
+        --muted: #a3a6b3;
+        --input: #e9ecf4;
+        --radius: 16px;
+        --title-size: 23px;
+        --tip-size: 15px;
+        --input-width: 95%;
+        --input-height: 41px;
+        --btn-height: 47px;
+    }
+
+    body{
+      margin:0; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      background:#555;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC","PingFang TC","Helvetica Neue",Arial,"Microsoft JhengHei",sans-serif;
+    }
+    .phone {
+        width: min(420px, 94vw);
+        background: var(--card);
+        border-radius: 28px;
+        box-shadow: 0 6px 22px rgba(0,0,0,.25);
+        padding: 141px 15px 146px;
+    }
+
+    .title-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        color: var(--brand);
+        font-weight: 800;
+        font-size: var(--title-size);
+        margin: -55px 18px 54px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .title-row img{width:22px;height:22px;}
+
+    /* 提醒列 */
+    .tip-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #c8cce1;
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin: 6px 6px 18px;
+        color: #2f3161;
+        font-weight: 700;
+        font-size: var(--tip-size);
+        justify-content: center;
+    }
+    .tip-row img{width:20px;height:20px;}
+
+    /* 輸入框 */
+    .field {
+        background: var(--input);
+        border-radius: 14px;
+        margin: 7px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--input-width);
+        height: var(--input-height);
+        padding: -1px 12px;
+    }
+    .field input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        font-size: 17px;
+
+        padding-left: 8px;  /* ✅ 輸入文字與placeholder向右縮排 */
+    }
+    .field input::placeholder{ color:#7d8191; }
+
+    .hint{
+      color:#222; margin:18px 10px 6px;
+      line-height:1.6;
+      font-size:14px;
+      display: flex
+    }
+
+    /* 按鈕 */
+    .btn {
+        display: block;
+        width: 90%;
+        height: var(--btn-height);
+        margin: 75px 18px -6px;
+        background: var(--brand);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: .2em;
+        cursor: pointer;
+    }
+    .btn:active{ transform:scale(.98); }
+
+    .msg{ margin:14px 8px 0; font-weight:700; min-height:1.5em;}
+    .msg.ok{ color:#0f7a3b; }
+    .msg.err{ color:#b00020; }
+  </style>
 </head>
 <body>
-<!-- 右下角浮動版權區塊 -->
-<div class="copyright-floating">
-  <span style="font-size:15px;vertical-align:middle;">&#169;</span>
-  網站架設人員 念念 此為內部重要資訊
-</div>
-<div id="app"></div>
-<script>
-let users = []; // 全域帳密清單
-
-// 讀取 password.json
-fetch('password.json')
-.then(response => response.json())
-.then(data => {
-  users = Array.isArray(data) ? data : [data];
-  // 這裡才判斷登入狀態
-  if (isLoggedIn()) {
-    showMain();
-  } else {
-    showLogin();
-  }
-})
-.catch(err => {
-  document.getElementById('app').innerHTML = `<div style="color:red;">載入帳密失敗，請聯絡管理員！</div>`;
-  console.error('載入 password.json 失敗:', err);
-});
-
-const LIMIT = 3600000; // 1小時（毫秒）
-
-// ===== 檢查登入狀態與時效 =====
-function isLoggedIn() {
-const flag = localStorage.getItem("t2_login");
-const time = parseInt(localStorage.getItem("t2_login_time"), 10);
-if (flag !== "yes" || !time) return false;
-if (Date.now() - time > LIMIT) {
-  // 超時，清除狀態
-  localStorage.removeItem("t2_login");
-  localStorage.removeItem("t2_login_time");
-  localStorage.removeItem("t2_login_user");
-  localStorage.removeItem("t2_login_password");
-  localStorage.removeItem("t2_login_display_name"); // 🆕 新增：清除顯示名稱
-  return false;
-}
-
-return true;
-}
-
-// ===== 顯示登入介面 =====
-function showLogin() {
-document.getElementById('app').innerHTML = `
-  <div class="login-box">
-    <h2><span class="login-logo">🦠</span>T2日檢疫登入系統</h2>
-    <div class="login-notice">📢 提醒：帳號密碼統一後4碼</div>
-    <form id="loginForm" autocomplete="off">
-      <input type="text" id="username" placeholder="帳號" autocomplete="username" required>
-      <input type="password" id="password" placeholder="密碼" autocomplete="current-password" required>
-      <button type="submit">登入</button>
-      <div class="error" id="errorMsg"></div>
-    </form>
-  </div>
-`;
-// ===== 修改登入驗證邏輯 =====
-document.getElementById('loginForm').onsubmit = function(e) {
-  e.preventDefault();
-  const uname = document.getElementById('username').value.trim().toLowerCase();
-  const pwd = document.getElementById('password').value.trim();
-  document.getElementById('errorMsg').textContent = "";
-
-  // 本地驗證帳號密碼
-  const user = users.find(u => u.username === uname && u.password === pwd);
-
-  if (user) {
-    // 🆕 新增：生成唯一識別符
-    const uniqueId = user.username + user.password; // 00175126
-    const displayName = user._comment || user.username; // 念念
-    
-    localStorage.setItem("t2_login", "yes");
-    localStorage.setItem("t2_login_time", Date.now().toString());
-    localStorage.setItem("t2_login_user", uniqueId); // 🔧 儲存唯一識別符
-    localStorage.setItem("t2_login_password", pwd);
-    localStorage.setItem("t2_login_display_name", displayName); // 🔧 儲存顯示名稱
-    
-    console.log(`✅ 登入成功: ${uniqueId} = ${displayName}`);
-    
-    showWelcome(user);
-  } else {
-    document.getElementById('errorMsg').textContent = "帳號或密碼錯誤！";
-  }
-};
-document.getElementById('username').oninput =
-document.getElementById('password').oninput = function() {
-  document.getElementById('errorMsg').textContent = "";
-};
-}
-
-// ===== 顯示歡迎訊息 =====
-function showWelcome(user) {
-document.getElementById('app').innerHTML = `
-  <div class="main-content" style="text-align:center;">
-    <h2>🎉 歡迎登入</h2>
-    <div style="font-size:1.2rem;margin:2vw 0 4vw 0;color:#263175;">
-      ${user.welcome || "歡迎使用本系統！"}
+  <main class="phone">
+    <div class="title-row">
+      <img src="https://cdn.jsdelivr.net/gh/tabler/tabler-icons/icons/world-www.svg" alt="icon"/>
+      <h1 style="margin:0;font-size:inherit;">T2日動植物檢疫登入系統</h1>
     </div>
-    <button id="goNextBtn" style="padding:0.6em 2em;font-size:1.1em;">進入主頁</button>
-  </div>
-`;
-document.getElementById('goNextBtn').onclick = function() {
-  window.location.href = "page33.html";
-};
-}
 
-// ===== 登入判定 =====
-function showMain() {
-// 如果沒登入，回登入畫面
-if (!isLoggedIn()) {
-  showLogin();
-  return;
-}
-// 只要登入就直接跳轉主頁
-window.location.href = "page33.html";
-return;
-}
+    <div class="tip-row">
+      <img src="https://cdn.jsdelivr.net/gh/tabler/tabler-icons/icons/info-circle.svg" alt="提醒" />
+      <div>提醒：帳號密碼統一後四碼</div>
+    </div>
 
-// ===== 定時檢查是否超時，超時自動登出 =====
-let timeoutTimer = null;
-function startTimeoutCheck() {
-if (timeoutTimer) clearInterval(timeoutTimer);
-timeoutTimer = setInterval(() => {
-  if (!isLoggedIn()) {
-    alert("登入已超時，請重新登入！");
-    showLogin();
-    clearInterval(timeoutTimer);
-  }
-}, 30000);
-}
+    <label class="field">
+      <input id="account" placeholder="帳號：身分證" />
+    </label>
 
-</script>
+    <label class="field">
+      <input id="password" type="password" placeholder="密碼：生日" />
+    </label>
+
+    <p class="hint">請各位同仁輸入後四碼。</p>
+
+    <button id="loginBtn" class="btn">登入</button>
+    <div id="msg" class="msg"></div>
+  </main>
+
+  <script src="password.js"></script>
+  <script>
+    const ACCOUNTS = (window.ACCOUNTS && Array.isArray(window.ACCOUNTS)) ? window.ACCOUNTS : [];
+    const accountEl = document.getElementById('account');
+    const passwordEl = document.getElementById('password');
+    const loginBtn  = document.getElementById('loginBtn');
+    const msgEl     = document.getElementById('msg');
+
+    loginBtn.addEventListener('click', login);
+
+    function saveBindingAndGoMain(user, pwd, name, welcome){
+      try{
+        var binding = user + pwd + '=' + (name || '');
+        // ✅ 改成主頁讀得懂的 Key
+        localStorage.setItem('t2_user_bind', binding);
+        localStorage.setItem('t2_user_name', name || '');
+        localStorage.setItem('t2_user_acc', user);
+
+        // （可選）為相容舊版，順手也寫入舊 key，不影響主頁
+        localStorage.setItem('binding', binding);
+        localStorage.setItem('displayName', name || '');
+        localStorage.setItem('welcomeText', welcome || '');
+      }catch(e){}
+      window.location.href = 'main.html';
+    }
+
+    function login(){
+      const acc = accountEl.value.trim();
+      const pwd = passwordEl.value.trim();
+      msgEl.className='msg';
+      if(!acc || !pwd){
+        msgEl.textContent='請輸入帳號與密碼';
+        msgEl.classList.add('err');
+        return;
+      }
+      var hit = null;
+      for(var i=0;i<ACCOUNTS.length;i++){
+        var x = ACCOUNTS[i];
+        if(x.username===acc && x.password===pwd){ hit = x; break; }
+      }
+      if(hit){
+        // 顯示提示（停留極短時間就會跳頁）
+        msgEl.textContent = hit.welcome || ('歡迎 ' + (hit._comment || ''));
+        msgEl.classList.add('ok');
+
+        // 特別處理需求：如果是 0017 / 5126，建立 00175126=念念 綁定
+        if(acc==='0017' && pwd==='5126'){
+          saveBindingAndGoMain(acc, pwd, '念念', '歡迎念念');
+          return;
+        }
+
+        // 其他使用者一般處理：用 _comment 當顯示名稱
+        saveBindingAndGoMain(acc, pwd, (hit._comment || ''), (hit.welcome || ''));
+      }else{
+        msgEl.textContent='帳號或密碼錯誤';
+        msgEl.classList.add('err');
+      }
+    }
+  </script>
+
 </body>
 </html>
