@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>T2主頁面</title>
+  <style>
+    :root {
+        --brand: #4b4e8a;
+        --bg: #f4f5fa;
+        --card: #ffffff;
+        --muted: #a3a6b3;
+        --input: #e9ecf4;
+        --radius: 16px;
+        --title-size: 23px;
+        --btn-height: 47px;
+
+        /* ↓↓↓ 新增：統一管控字級 ↓↓↓ */
+        --title-font-size: var(--title-size); /* 主畫面大標（沿用你的 --title-size） */
+        --modal-title-font-size: 25px;       /* Modal 頂部標題 */
+        --subtitle-font-size: 18px;          /* 區塊副標題（含面板 h2 / .section-title） */
+        --content-font-size: 15px;           /* 一般內容（.note / .notice-item / 跑馬燈） */
+        
+    }
+
+    body{
+      margin:0; height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      background:#555;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC","PingFang TC","Helvetica Neue",Arial,"Microsoft JhengHei",sans-serif;
+    }
+    .phone {
+        width: min(420px, 94vw);
+        background: var(--card);
+        border-radius: 0px;
+        box-shadow: 0 6px 22px rgba(0,0,0,.25);
+        padding: 62px 7px 44px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        position: relative;
+    }
+    .title-row {
+        display:flex; justify-content:center; gap:10px; color:var(--brand);
+        font-weight:800; font-size:var(--title-font-size); text-align:center; align-items:center;
+        margin: 0 12px 6px;
+    }
+
+    .title-row img{width:22px;height:22px;}
+    .welcome {
+      text-align: center;
+      font-weight: 800;
+      color: #0f7a3b;
+      margin: -4px 0 -3px;
+    }
+    /* 跑馬燈 */
+    .marquee {
+    margin: 12px 6px;
+    background: #c8cce1;
+    border-radius: 12px;
+    padding: 4px 10px;
+    color: #2f3161;
+    font-weight: 700;
+    height: 17px;
+    line-height: 18px;
+    }
+    .marquee marquee {
+    width: 100%;
+    font-size: var(--content-font-size);
+    }
+
+
+
+    /* 功能鈕 */
+    .grid {
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin: -5px 6px;
+    }
+    .btn {
+      display:flex; align-items:center; justify-content:center;
+      height: var(--btn-height);
+      background: var(--brand); color:#fff; border:none; border-radius:14px;
+      font-size:18px; font-weight:800; letter-spacing:.2em; cursor:pointer;
+      height: 33px; /* 直接指定 */
+    }
+    .btn:active{ transform:scale(.98); }
+    /* 按鈕顏色群組（依你截圖） */
+    .btn-rule { background:#b73a3a; }                              /* 紅：規定 */
+    .btn-check { background:#2f6b2f; }                             /* 綠：檢疫物 */
+    .btn-link  { background:#d68b2f; }                             /* 橘：連結 */
+    .btn-flow, .btn-guide, .btn-review, .btn-xray { background:#2f3161; } /* 藍：分流/前導/複查/X光 */
+    .btn-challenge { background:#c7a64a; color:#fff; }             /* 金：動植物大挑戰 */
+    .btn-logout    { background:#a12a5e; color:#fff; }             /* 紫紅：登出 */
+
+    /* 最新公告區 */
+    .panel {
+      margin: 10px 6px 8px;
+      background:#9aabf0;
+      border:1px solid #e3e6f2;
+      border-radius:14px;
+      padding:10px 12px;
+    }
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: var(--subtitle-font-size);
+      color: #2f3161;
+      text-align: center;
+    }
+
+    .notice-box{
+      height: 260px;
+      overflow: auto;
+      background:#fff; border:1px solid #e3e6f2; border-radius:10px; padding:8px;
+    }
+
+    .notice-item{
+      padding:6px 4px; border-bottom:1px dashed #e3e6f2; font-size: var(--content-font-size); color:#333;
+    }
+
+    .notice-item:last-child{ border-bottom:none; }
+
+    /* 底部兩顆 */
+    .footer-actions{
+      display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin: 10px 6px 4px;
+    }
+    .btn.secondary{ background:#6c6e9e; }
+    .hidden{ display:none; }
+
+    /* ====== 彈窗（手機優先） ====== */
+    .modal-overlay{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 5px;
+      z-index: 999;
+    }
+    .modal-overlay.active{ display:flex; }
+    .modal{
+      width: min(420px, 94vw);
+      max-height: 93vh;
+      background: #f7f8fe;
+      border-radius: 18px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.35);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      border: 1px solid #dfe2f2;
+    }
+    .modal-header{
+      position: relative;
+      padding: 10px 40px 8px;
+      background: #e7e9f6;
+      color:#2f3161;
+      font-weight: 800;
+      text-align: center;
+      font-size: var(--modal-title-font-size);
+      letter-spacing: .1em;
+    }
+
+    .modal-close{
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      width: 34px; height: 34px; border-radius: 999px; border:none; cursor:pointer;
+      background: #2f3161; color:#fff; font-size:20px; font-weight:900; line-height:34px;
+    }
+    .modal-body{
+      padding: 8px 12px 10px;
+      background:#fff;
+      overflow:auto;
+    }
+
+    .tag {
+    display: inline-block;
+    background: #c93f3f;
+    color: #fff;
+    padding: 1px 5px;
+    border-radius: 8px;
+    font-weight: 800;
+    margin: 2px 0 2px;
+    font-size: 13px;
+    }
+
+    .tag.green{ background:#2f6b2f; }
+    .tag.orange{ background:#d68b2f; }
+    .section-title{
+      text-align:center; font-weight:900; letter-spacing:.2em; color:#2f3161; margin:8px 0 12px;
+      font-size: var(--subtitle-font-size);
+    }
+
+    .note{
+      color:#333; line-height:1.7; margin: 4px 0 8px; font-size: var(--content-font-size);
+    }
+
+    .hr{ border:0; border-top:1px dashed #dfe2f2; margin:12px 0; }
+    .list{ padding-left: 1em; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* ===== 圖片檢視器（通用） ===== */
+    .viewer-overlay{
+      position:fixed; inset:0; background:rgba(0,0,0,.45);
+      display:none; align-items:center; justify-content:center;
+      padding:10px; z-index:1000;
+    }
+    .viewer-overlay.active{ display:flex; }
+    .viewer{
+      width:min(420px,94vw); height:min(86vh,94vh);
+      background:#fff; border:1px solid #8ca0d1; border-radius:18px; overflow:hidden;
+      display:flex; flex-direction:column; box-shadow:0 8px 26px rgba(0,0,0,.35);
+    }
+    .viewer-header{
+      position:relative; background:#e7ecf7; color:#2f3161; font-weight:800;
+      padding:10px 48px 8px; border-bottom:1px solid #8ca0d1; font-size:var(--modal-title-font-size);
+    }
+    .viewer-close{
+      position:absolute; right:10px; top:50%; transform:translateY(-50%);
+      width:36px; height:36px; border-radius:999px; border:1px solid #8ca0d1; background:#2f3161; color:#fff;
+      font-weight:900; font-size:20px; line-height:34px; cursor:pointer;
+    }
+    .viewer-body{
+      position:relative; flex:1; background:#fafbff; touch-action:none; /* 允許自處理手勢 */
+    }
+    .viewer-canvas{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(1);
+      will-change:transform; user-select:none; -webkit-user-drag:none;
+      max-width:100%; max-height:100%;
+    }
+    .viewer-dots{
+      display:flex; gap:12px; justify-content:center; align-items:center;
+      padding:10px 0 6px; border-top:1px solid #8ca0d1; background:#fff;
+    }
+    .viewer-dot{
+      width:14px; height:14px; border-radius:999px; background:#2f3161; opacity:.35; border:2px solid #8ca0d1;
+    }
+    .viewer-dot.active{ opacity:1; }
+    .viewer-help{
+      text-align:center; font-size:12px; color:#111; padding:4px 0 8px;
+    }
+
+    /* 小型「查看」按鈕（可放在任何段落） */
+    .view-btn{
+      display:inline-block; margin-left:6px; padding:2px 8px;
+      background:#2f3161; color:#fff; border:1px solid #8ca0d1; border-radius:10px;
+      font-size:12px; font-weight:800; letter-spacing:.1em; cursor:pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <main class="phone">
+    <div class="title-row">
+      <img src="https://cdn.jsdelivr.net/gh/tabler/tabler-icons/icons/home.svg" alt="home"/>
+      <h1 style="margin:0;font-size:inherit;">T2主頁面</h1>
+    </div>
+    <div id="welcome" class="welcome">歡迎登入</div>
+
+    <div class="marquee">
+      <marquee behavior="scroll" direction="left" scrollamount="4">【系統公告】查驗流程請依照最新規定執行；X光檢查注意安全；若有異常立即通報班長。</marquee>
+    </div>
+
+    <div class="grid">
+      <button class="btn btn-rule">規定</button>
+      <button class="btn btn-check">檢疫物</button>
+      <button class="btn btn-link">連結</button>
+      <button class="btn btn-flow">分流</button>
+      <button class="btn btn-guide">前導</button>
+      <button class="btn btn-review">複查</button>
+      <button class="btn btn-xray">X光</button>
+      <button class="btn" disabled>　</button>
+      <button class="btn" disabled>　</button>
+    </div>
+
+
+    <section class="panel">
+      <h2>最新公告</h2>
+      <div class="notice-box" id="notices">
+        <div class="notice-item">2025-09-26 新進人員須知：群組公告任何訊息，務必確實閱覽並回覆<span style="color:#c93f3f;">貼圖表示已讀</span>。</div>
+        <div class="notice-item">2025-09-26 上下班打卡：上下班不使用實體卡片，改iBeacon 簽到離退操作方式參考"規定"，記得要開藍芽及定位。</div>
+        <div class="notice-item">2025-09-16 2025-09-26 肉品採樣檢驗：蒐集肉品採樣只要<span style="color:#c93f3f;">純豬肉</span>！！！<span style="color:#c93f3f;">豬+魚、豬+雞之類</span>的混合肉都不用搜集。</div>
+        <div class="notice-item">2025-09-26 檢疫物登記本：檢疫物登記本務必撰<span style="color:#c93f3f;">寫清楚工整</span>，以便長官視察。</div>
+      </div>
+    </section>
+
+    <div class="footer-actions">
+      <button id="challengeBtn" class="btn btn-challenge">動植物大挑戰</button>
+      <button id="logoutBtn" class="btn btn-logout">登出</button>
+    </div>
+
+    <!-- ====== 規定 Modal ====== -->
+    <div id="modal-rule" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="ruleTitle">
+        <div class="modal-header">
+          <span id="ruleTitle">規定</span>
+          <button class="modal-close" data-close="modal-rule">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="section-title">重要規定</div>
+          <div class="tag">【通行證公務門】</div>
+          <p class="note">公務門進出，切記要注意門有沒有關好，沒關好會是嚴重缺失。</p>
+          <p class="note">在管制區應將通行證佩掛在正面腰部以上之明顯處，不得逾期、越區、冒用、轉借他人及從事與職務不符活動，<span style="color:#c93f3f;">違者暫停權限1-6個月</span>，重則撤銷通行證。</p>
+          <p class="note">機場證件遺失通行證，需通報航警局勤指中心 電話:<span style="color:#c93f3f;">03-3982177</span>。遺失通行證費用為<span style="color:#c93f3f;">2000元</span>。</p>
+          <p class="note"><span style="color:#c93f3f;">注意：</span><span style="color:#272cd0;">出國須繳交通行證至主任辦公室，歸國後取回。上班未帶證件者，下班後證件需放置主任辦公室一週。</span></p>
+
+          <div class="tag">【休假須知】</div>
+          <p class="note">跨月排假<span style="color:#c93f3f;">務必符合勞基法</span>，跨月天數照算，我們沒有歸零。</p>
+          <p class="note">切忌臨時缺勤！！！除天災人禍，臨時請假應<span style="color:#c93f3f;">先找當日休假同仁協調代班或調換班</span>，雙方確認後，雙方都須告知當日值班主管。</p>
+          <p class="note"></p>遲到未參與勤教(07:13之後) 修正取消次月必休2天。</p>
+          <p class="note"><span style="color:#c93f3f;">7:30以前</span> 修正取消次月必休2天選休2天。</p>
+          <p class="note"><span style="color:#c93f3f;">8:00以前</span> 修正取消次月必休2天選休4天。</p>
+          <p class="note"><span style="color:#c93f3f;">8:00以後</span> 修正取消次月必休2天選休6天。</p>
+          <p class="note"><span style="color:#c93f3f;">應到班而未到班將依規定輪值15天的A分流2或是清運，且2個月不得選假</span>。</p>
+          <p class="note">如果當日休假是本來沒有劃休的假，屬於預排假，<span style="color:#c93f3f;">請隨時注意訊息，假設臨時有同事沒辦法來上班</span>，需要支援出勤。</p>
+
+          <div class="tag">【辦公室】</div>
+          <p class="note">二處辦公室是高幹及其他單位使用區域，未告知主管、未經同意不得隨意進出任意使用。</p>
+
+          <div class="tag">【上下班打卡】</div>
+          <p class="note">上下班不使用實體卡片，改 iBeacon 簽到離退操作方式參考圖片，記得要開藍芽及定位。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="iBeacon 簽到離退操作"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B801_tfjd8l.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B802_lm2va4.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B803_kpijji.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B804_pdb9fk.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B805_el7wtv.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B806_jlwgu3.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B807_ehpxif.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B808_xyhwe6.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B809_c4ozfn.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B810_kbkd03.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422095/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B811_tftzz3.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B812_nq7wf4.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422095/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B813_hdej7g.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B814_wsmgdd.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B815_pal6yq.jpg,">
+              查看
+            </button>
+          </p>
+
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="tag">【群組分類】</div>
+          <p class="note"><b>T2日班群組</b>（用於重要事項每日都要看的大群）</p>
+          <p class="note">再次提醒主管在群組發的任何重要事項，請仔細閱讀並且<span style="color:#c93f3f;">點個貼圖確認</span>有收到訊息。</p>
+          <p class="note"><b>群組大小事</b>（如有訂便當都會在這裡統一訂）</p>
+
+          <div class="tag">【主管聯繫】</div>
+          <p class="note">新進同仁務必加入主管 Line，任何問題若有疑問請找主管討論。</p>
+          <p class="note">有任何工作上問題需當日值班主管協助，盡可能在<span style="color:#c93f3f;">上班時間詢問</span>，或晚上十點以前，切勿凌晨或休假時間傳訊息給主管。</p>
+
+          <div class="tag">【資料繳交時間】</div>
+          <p class="note">需交給主管的資料請於<span style="color:#c93f3f;">當日下午三點前繳交</span>，超過下午三點者，於隔天繳交，<span style="color:#c93f3f;">下午三點後一律不收件</span>！！！如隔日休假，<span style="color:#1765ca;">可交代同仁代為繳交</span>。</p>
+          <p class="note">每月繳交時數表請按照序號擺放（序號請參考每月假表）。</p>
+
+          <div class="tag">【備勤室使用規定】</div>
+          <p class="note">私人物品請勿隨意放置，離開前桌面東西未清，椅子未歸位者備勤室輪值分流2（2天）。</p>
+          <p class="note">備勤室外的工業用電風扇應移至正確位置，公共區域請大家共同維護。</p>
+            <button type="button" class="view-btn"
+              data-viewer-title="工業用電風扇"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760285/%E4%BC%91%E6%81%AF%E5%AE%A4%E5%A4%96%E9%9D%A2%E9%9B%BB%E9%A2%A8%E6%89%87_o37skt.jpg,">
+              查看
+            </button>
+          </p>
+          <p class="note">B哨打掃備勤室分配"請參閱備勤室公佈欄"，完成請找各線 X 光驗收。</p>
+
+          <div class="tag">【置物櫃管理】</div>
+          <p class="note">主管指派置物櫃後，會給予櫃子磁鐵填寫姓名（費用25元）。</p>
+          <p class="note">嚴禁在置物櫃上<span style="color:#c93f3f;">張貼貼紙</span>，若有人員離職會做適當的調整。</p>
+
+          <div class="tag">【微波爐使用規定】</div>
+          <p class="note">微波食物如無蓋子，需用濕衛生紙覆蓋，避免濺射。</p>
+          <p class="note">為延長微波爐壽命，使用完必須是歸 0 狀態，才打開，切勿直接打開。</p>
+
+          <div class="tag">【冰箱使用規定】</div>
+          <p class="note">需在物品上貼標籤註明"姓名+當天日期"，存放規定請詳閱冰箱上貼的公告。</p>
+          <p class="note">打掃冰箱同仁會檢查日期，過期或未記名品項會公告在群組供認領，無人認領者當日丟棄。</p>
+
+          <div class="tag">【制服送洗】</div>
+          <p class="note">包月金額為 250 元／月，包月洗衣為襯衫、長褲及背心（每月 1 件／次）。</p>
+          <p class="note">本單位於<span style="color:#c93f3f;">每週一、三、五 11:00</span> 左右收送（請提早將送洗衣物投入）。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 檢疫物 Modal ====== -->
+    <div id="modal-check" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="checkTitle">
+        <div class="modal-header">
+          <span id="checkTitle">檢疫物</span>
+          <button class="modal-close" data-close="modal-check">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="section-title">勤務須知</div>
+          <p class="note">請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，若依舊無法判定就是請旅客至檢疫櫃檯詢問。</p>
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="tag green">【蛋類】</div>
+          <p class="note"><span style="color:#c93f3f;">鴨蛋、鵝蛋、煮過的皮蛋</span>請旅客下去櫃台詢問，如是雞蛋自行判定，生鮮或半熟蛋類不可攜帶。</p>
+          <div role="region" aria-label="禽鳥蛋 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E7%9A%AE%E8%9B%8B_x2e6f2.jpg" alt="蛋範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E9%B9%B9%E8%9B%8B_kmcorb.jpg" alt="蛋範例2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E6%BA%8F%E5%BF%83%E8%9B%8B_i3fz4f.jpg" alt="蛋範例3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          </div>
+
+          <div class="tag green">【牛奶】</div>
+          <p class="note">保久乳、調味乳通常可以常溫保存 6 個月以上，可以攜帶。</p>
+          <p class="note">鮮奶通常需要全程冷藏保存，只有經過 UHT 超高溫瞬間殺菌（120-130 度／2-5 秒）才可以攜帶入境。</p>
+          <div role="region" aria-label="牛奶 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758763829/UHT%E8%B6%85%E9%AB%98%E6%BA%AB%E6%BB%85%E8%8F%8C_segikl.jpg" alt="牛奶範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          </div>
+
+          <div class="tag green">【堅果/松果】</div>
+          <p class="note">堅果類（如花生、核桃、芝麻等等）向旅客口頭確認即可，要手指指一下詢問物，向監視器表示我們有確實宣導，跟旅客說生的不能攜帶，但熟的可以。</p>
+          <p class="note">松果全過（除非看的出來有明顯沙土，可請旅客至櫃台詢問；太誇張的建議拋棄）。</p>
+
+
+          <div class="tag green">【穀物】</div>
+          <p class="note">小米可以攜帶入境，其餘穀物類若已經過烹飪或任何加工處理，屬於即食的都可以攜帶入境。</p>
+          <p class="note">白米、黎麥、蕎麥等等，需要烹飪後才能食用的穀物，需請旅客至檢疫櫃檯確認。</p>
+          <div role="region" aria-label="堅果與松果 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E7%99%BD%E7%B1%B3_j9b6vu.jpg" alt="堅果松果範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E8%95%8E%E9%BA%A5_jbghja.jpg" alt="堅果松果範例2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%BB%8E%E9%BA%A5_n7t6tb.jpg" alt="堅果松果範例3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%AB%98%E7%B2%B1_rhylsy.jpg" alt="堅果松果範例4" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          </div>
+
+          <div class="tag green">【水果蛋糕/大福】</div>
+          <p class="note">只要肉眼看得見有生鮮的植物產品就是不行，如果只有一點點，可以請旅客現場吃掉；如量多建議旅客拋棄。</p>
+
+          <div class="tag green">【乾燥果實】</div>
+          <p class="note">草果、羅望子、乾辣椒、龍眼乾...等果乾類，只要它是果實類「夠乾燥」就可以，就算裡面有籽也沒關係。</p>
+
+          <div class="tag green">【罐頭及加工食品】</div>
+          <p class="note">速食麵、粥、米粉、粉條類商品，如為明顯可見肉塊（如雞爪、半熟蛋、火腿腸...等檢疫物），就請旅客拆開包裝主動棄置檢疫物，只需要丟掉不能帶的東西就好！！！</p>
+          <p class="note">一般常見傳統罐頭包裝，如馬口鐵、玻璃罐等，包裝應完全密閉，經商業滅菌且可於常溫保存。若非典型罐頭商品，如真空包、滅菌袋、軟袋...等，外包裝有註明【罐頭】，即可判定為罐頭。</p>
+
+          <div class="tag green">【特殊狀況食物】</div>
+          <p class="note">如果遇到鵝肝醬請旅客至六號櫃台詢問，先不要扣下來。</p>
+          <p class="note">泰國的露楚是由綠豆沙做成水果形狀的甜品，可以攜帶。但請注意上面是否插有新鮮葉子，新鮮葉子需拔掉並丟棄。</p>
+          <p class="note">燕窩須注意是否帶有<span style="color:#c93f3f;">羽毛或血液</span>，若非完全乾淨的燕窩，禁止攜帶入境。</p>
+          <p class="note">雞內金是指雞胗（砂囊）內壁的乾燥薄膜，常見於中藥材或食品中。若只是加在食品成分裡，並非整塊肉眼可見的雞內金可攜帶入境。</p>
+          <p class="note">牛糞餅（又稱牛糞乾、牛糞塊）屬於動物來源產品，禁止攜帶入境。</p>
+          <p class="note">若「桃酥」成分含肉粉鬆，請旅客至櫃檯詢問，實體多半看不到明顯肉鬆，有機會放行。</p>
+          <div role="region" aria-label="特殊狀況食物" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E9%B5%9D%E8%82%9D%E9%86%AC_ypvdhd.jpg" alt="特殊狀況食物1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9C%B2%E8%99%95_houzvc.jpg" alt="特殊狀況食物2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%87%95%E7%AA%A9_gvgste.jpg" alt="特殊狀況食物3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9B%9E%E5%85%A7%E9%87%91_eexfhi.jpg" alt="特殊狀況食物4" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%89%9B%E7%B3%9E%E9%A4%85_hdcmlg.jpg" alt="特殊狀況食物5" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E6%A1%83%E9%85%A5_cbykrv.jpg" alt="特殊狀況食物6" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          </div>
+ 
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 連結 Modal ====== -->
+    <div id="modal-link" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="linkTitle">
+        <div class="modal-header">
+          <span id="linkTitle">連結</span>
+          <button class="modal-close" data-close="modal-link">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="section-title">相關連結</div>
+          <p class="note"><a href="https://www.youtube.com/watch?v=NLZt2fc13gM" target="_blank" rel="noopener">前導作業影片示範</a></p>
+          <p class="note"><a href="https://docs.google.com/forms/d/e/1FAIpQLSewahYZY_LtTjzEF3FIJTER5rpwNNJA-NIi-Z4C0jL6Aw67Kw/closedform?pli=1" target="_blank" rel="noopener">T2日緊急連絡人資料填寫</a></p>
+
+          <hr class="hr" />
+          <div class="section-title">語言學習</div>
+          <p class="note"><a href="https://www.youtube.com/watch?v=_QT9WavEdJ0&feature=youtu.be" target="_blank" rel="noopener">英語 檢疫常用句與單字</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=zetV0h91fWw" target="_blank" rel="noopener">英語 方向指引 檢疫與入境規範</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=R0BsrVctClM&feature=youtu.be" target="_blank" rel="noopener">日語 檢疫常用句與單字</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=JLo0Ztq44D0" target="_blank" rel="noopener">韓語 檢疫常用句與單字</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=vhGPw-1Ot2o" target="_blank" rel="noopener">越語 檢疫常用句與單字</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=sJgVxPrJPB4" target="_blank" rel="noopener">泰語 檢疫常用句與單字</a></p>
+          <p class="note"><a href="https://www.youtube.com/watch?v=HhtYZRM2PXQ" target="_blank" rel="noopener">粵語 檢疫常用句與單字</a></p>
+          <p class="note">其他後續再補充....</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== 分流 / 前導 / 複查 / X光 Modal（占位，內文待補） ====== -->
+    <div id="modal-flow" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="flowTitle">
+        <div class="modal-header"><span id="flowTitle">分流</span><button class="modal-close" data-close="modal-flow">X</button></div>
+        <div class="modal-body">
+          <div class="section-title">勤務須知</div>
+
+          <div class="tag">【分流要點】</div>
+          <p class="note">1.引導旅客時，務必將旅客平均分散；收卡時，<span style="color:#c93f3f;">一個一個收</span>，避免漏收卡片。</p>
+          <p class="note">2.務必熟知當下要接的班機，遇到一航迷路的旅客給予正確引導。</p>
+          <p class="note">3.航空公司換卡時，請親自點交，<span style="color:#c93f3f;">一箱換一箱</span>，沒有蓋子換沒有蓋子；如果正在忙就請他們待會再來領卡。</p>
+          <p class="note">4.如遇到須開中間道的情況，一律先用無線電告知同仁後再拉紅龍；除了電動車及收卡的旅客，中間道一律等前一組離開或站定位再放下一組。</p>
+          <p class="note">5.推嬰兒車的旅客請他們<span style="color:#c93f3f;">走1、2線，雙人嬰兒車走中間</span>。</p>
+          <p class="note">6.行李推車請走3線；如果丟在我們的工作區，請旅客把車推走，不需要特地攔下。</p>
+          <p class="note">7.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。</p>
+          <p class="note">8.如非疫區國家的旅客未持卡，<span style="color:#c93f3f;">確認機票即可</span>。</p>
+          <p class="note">9.如轉機旅客沒有要先入境，請將旅客引導至最近的轉機安檢。</p>
+          <p class="note">10.分流2在引導旅客的同時，請協助分流確認未持卡旅客的機票並引導到正確的通道。</p>
+          <p class="note">11.分流2屬於機動，如不須到分流區引導旅客，則在線上支援各線複查。</p>
+          <p class="note">12.分流引導旅客一律使用小蜜蜂，充電只要拔主機就好繩子不用拆，擺放位置請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="擺放位置"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758595155/%E5%B0%8F%E8%9C%9C%E8%9C%82_ekzeyn.jpg">
+              查看
+            </button>
+
+          <div class="tag">【機組人員】離峰-3條線／尖峰-4條線</div>
+          <p class="note">離峰時段：疫區機組需手檢，如線內旅客過多，詢問機組是否可以走四線，務必收到回覆再放。</p>
+          <p class="note">尖峰時段：抽查班機<span style="color:#c93f3f;">BR62、BR398、BR212、BR392</span>。優先挑選三位外籍機組，如沒有外籍機組再改以本國機組員作代替。</p>
+          <p class="note">其餘的班機直接放行走綠色通道，請機長跟組員宣導不要帶到任何違規動植物產品。</p>
+
+          <div class="tag">【代號說明】</div>
+          <p class="note">兩九五=上廁所　拐拐=走中間道的旅客　八八八=貴賓</p>
+          <p class="note">所有貴賓仍依非洲豬瘟高低風險國家規定，如有高官指示特殊禮遇會事前告知。現場除了外交部、國安局、航警局協助配合，其他必須先告知幹部。</p>
+
+          <div class="tag">【機場工作人員】</div>
+          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+          <p class="note">入境並持外交部發的工作證，視同持卡旅客引導綠線。外交部工作證請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="工作證"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E5%A4%96%E4%BA%A4%E9%83%A8%E5%B7%A5%E4%BD%9C%E8%AD%89_zrx3wh.jpg">
+              查看
+            </button>
+
+          <div class="tag">【危機應對】</div>
+          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          <p class="note">旅客或機組拒檢時，詢問航班並使用阿拉伯數字做紀錄，直接放行綠線即可。</p>
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="tag">【換哨下哨交接】</div>
+          <p class="note">換哨下哨務必清空分流的白色檢疫桶、交接卡片。</p>
+          <p class="note">分流之間換哨時，應交接清楚有異動的班機。</p>
+
+          <div class="tag">【分流整潔】</div>
+          <p class="note">棄置桶裡的檢疫物八分滿時，使用<span style="color:#c93f3f;">透明垃圾袋</span>放在旁邊替代。</p>
+          <p class="note">分流區紅龍請遵照各區標準擺放請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="CD紅龍擺放位置"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE01_azg2ut.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE02_lih1ds.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE03_yw8qvj.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE04_y5df4a.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE05_spdx8v.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760258/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE06_kuy8ls.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE07_yjtni2.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760255/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE08_vngicc.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE09_sn4fvp.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE10_fcvlxy.jpg,">
+              查看
+            </button>
+          </p>
+
+          <p class="note">每一哨下哨備勤室由分流噴消毒水，備勤室消毒水固定交由B哨分流補充，低位線請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="分流噴消毒水"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E6%B6%88%E6%AF%92%E6%B0%B4%E4%BD%8E%E4%BD%8D%E7%B7%9A_c0nawn.jpg">
+              查看
+            </button>
+
+
+          <div class="tag">【分流2整潔】</div>
+          <p class="note">C區跟D區後方的檢疫物棄置桶，由分流2清潔。</p>
+          <p class="note">固定每一個禮拜一的<span style="color:#c93f3f;">A哨分流2</span>，要清兩邊電風扇。</p>
+
+          <div class="tag">【UA簽收單】</div>
+          <p class="note">每月識別卡更換顏色，只要月底最後一天或月初第一天簽收單跟卡片會放在分流，有碰到UA換卡的話，記得叫他們簽單子。</p>
+
+          <div class="tag">【確認公務機及電Bar】</div>
+          <p class="note">每天早上確認一下手機WiFi有沒有關閉，基地台保持開啟、手機網路保持開啟、電Bar供應有無顯示DC，如無顯示請壓DC按鈕3秒開啟。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="電Bar操作說明"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8_bmofn3.jpg">
+              查看
+            </button>
+          <div class="tag">【分流充電項目】</div>
+          <p class="note">公務機*1、分流用大聲公*1、小蜜蜂*1、分流用無線電*2、行動電源*1<span style="color:#c93f3f;">(僅D區)</span></p>
+          <p class="note">注：D區行動電源需<span style="color:#c93f3f;">與夜班交接</span>；C區使用<span style="color:#1e88e5;">電Bar充電</span>，如沒電請回報主管更換</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-guide" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+        <div class="modal-header"><span id="guideTitle">前導</span><button class="modal-close" data-close="modal-guide">X</button></div>
+        <div class="modal-body">
+          <div class="section-title">勤務須知</div>
+
+          <p class="note">1.嚴守旅客的安全，一次接一位旅客，請下一位旅客至黃線(4線為最後一根圓柱)後稍等。注意旅客<span style="color:#c93f3f;">不要撞到桌角</span>，尤其是小朋友。行動不便者，可由家屬協助放行李。如旅客提不動行李，應協助旅客搬行李。</p>
+          <p class="note">2.有任何情況(如已收卡、骨灰、包包未過X光、包內有食物等)請告知X光；如X光回報任何事項，<span style="color:#c93f3f;">請答覆讓雙方都知道</span>。</p>
+          <p class="note">3.前導碰到繫在皮帶上的腰包，一律請旅客向前，<span style="color:#c93f3f;">告知X光由複查手檢</span>。</p>
+          <p class="note">4.如旅客行李沒有拉鍊，大開口朝自己，底部先進X光。</p>
+          <p class="note">5.兩位旅客的行李中間須放置空盆，避免混淆。另外，盆子須及時補充，以防倒塌。</p>
+          <p class="note">6.遇到旅客抱骨灰罈，確認文件後，告知X光「旅客手中是家人，已看過證明」，其他行李一樣過X光。</p>
+          <p class="note">7.若旅客有攜帶寵物，寵物無需過Ｘ光機，有證明請旅客<span style="color:#c93f3f;">出示證明</span>，沒有證明請旅客向前走，無論如何都要告知X光<span style="color:#c93f3f;">「旅客手上有寵物」</span>。</p>
+          <p class="note">8.務必注意旅客的行李箱會有吊牌吊飾等等，把手朝X光，不要讓旅客的吊牌吊飾碰到輸送帶；如掛繩過長，請<span style="color:#c93f3f;">事先告知X光</span>。</p>
+          <p class="note">9.遇到電動行李箱，請旅客關閉電源往前走，告知X光並由複查手檢。</p>
+
+          <div class="tag">【1線前導】</div>
+          <p class="note">只要有開線就需播放大聲公宣導。</p>
+          <p class="note">如機組人員走3位，由1線前導接；整組機組則與2線前導一起接。(行李順序為<span style="color:#c93f3f;">大中小</span>)</p>
+          <p class="note">電動車經過時，如果排隊旅客超過5位，從電動車完全靜止開始算起，接3位再開線放行電動車，如果少於5位，全部接完再開線放行。</p>
+          <p class="note">與2線前導配合，互相支援(如拐拐、電動車等等)，避免旅客堵塞。</p>
+
+          <div class="tag">【2線前導】</div>
+          <p class="note">中間道的旅客，由<span style="color:#c93f3f;">2線前導接</span>；如有<span style="color:#c93f3f;">4X或是主管站在</span>中間，交給4X或是主管即可。</p>
+          <p class="note">整組機組與1線前導一起接(行李按照大中小順序擺放)；如機組只有3人，由1線前導接。</p>
+          <p class="note">中間道的輪椅<span style="color:#c93f3f;">總人數*3</span>為須等待人數；電動車經過時，如果排隊旅客<span style="color:#1765ca;">超過5位</span>，從電動車完全<span style="color:#c93f3f;">靜止開始算起，接3位再開線放行電動車</span>，如果少於5位，全部接完再開線放行。</p>
+
+          <div class="tag">【機場工作人員】</div>
+          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+
+          <div class="tag">【危機應對】</div>
+          <p class="note">看到有旅客受傷就立馬<span style="color:#c93f3f;">通報61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          <p class="note">旅客或機組拒檢時，詢問航班並回報X光，直接放行即可。</p>
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="tag">【C.D紅龍整理】</div>
+          <p class="note">C.D區紅龍擺放標準請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="CD紅龍擺放位置"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE01_azg2ut.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE02_lih1ds.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE03_yw8qvj.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE04_y5df4a.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE05_spdx8v.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760258/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE06_kuy8ls.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE07_yjtni2.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760255/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE08_vngicc.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE09_sn4fvp.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE10_fcvlxy.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【3線前導】</div>
+          <p class="note">早上勤教，麻煩<span style="color:#c93f3f;">A哨3線前導</span>推手推車上D區。</p>
+
+          <div class="tag">【4線前導】</div>
+          <p class="note">手檢航班結束，<span style="color:#c93f3f;">4線前導</span>負責巡視花台整潔。</p>
+          <p class="note">CD區4線電風扇下班前由<span style="color:#c93f3f;">4線前導</span>負責歸位。</p>
+
+          <div class="tag">【換哨下哨交接】</div>
+          <p class="note">換哨／下哨時<span style="color:#c93f3f;">處理檢疫物</span>，清理垃圾至指定棄置桶。</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="modal-review" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+        <div class="modal-header"><span id="reviewTitle">複查</span><button class="modal-close" data-close="modal-review">X</button></div>
+        <div class="modal-body">
+          <div class="section-title">勤務須知</div>
+
+          <p class="note">1.隨時注意X光是否通知需要檢查，如果需要請第一時間詢問旅客是否方便受檢；如果旅客不願意檢查，以<span style="color:#c93f3f;">口頭及傳單宣導</span>。</p>
+          <p class="note">2.接到旅客行李要檢查時，請等全部行李到齊後，再全部一起往最後一張桌子移動。旅客及協勤<span style="color:#c93f3f;">一對一檢查</span>，若非需要幫助，無關人等請離。</p>
+          <p class="note">3.不同旅客的行李之間請保持距離，避免旅客拿錯行李。</p>
+          <p class="note">4.如果X光同仁把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「<span style="color:#c93f3f;">請問裡面沒有帶到含肉製品、新鮮水果嗎？</span>」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</p>
+          <p class="note">5.如有查獲不確定或無法判斷的東西，先詢問身邊的同事，如果現場都沒有人可以判定，請旅客把東西拿到檢疫櫃檯詢問。如旅客自願拋棄，需請旅客簽名後在檢疫物登記本上註明。</p>
+          <p class="note">6.丟檢疫物要確實<span style="color:#c93f3f;">分類跟破壞包裝</span>。</p>
+          <p class="note">7.第二、三位以後的複查請勿擋到桌子，避免複查第一位要檢查時擋住作業動線。</p>
+          <p class="note">8.一律由複查排隊最後一位來搬盆子，請勿把盆子疊太高。</p>
+          <p class="note">9.務必記住在旅客面前才能觸碰旅客的行李，檢查一位旅客就要換一次手扒雞手套，並且需在<span style="color:#c93f3f;">旅客面前更換</span>。</p>
+          <p class="note">10.如果遇到食物沒有成份<span style="color:#c93f3f;">不要剝開看</span>，跟旅客確認成分並宣導就好。</p>
+          <p class="note">11.拐拐旅客行李一律由接的人拉到最後，如果<span style="color:#c93f3f;">超過3件以上</span>再由下一位接手。每個人都有兩次的機會！！！未落實者收假一天。</p>
+          <p class="note">12.旅客有任何狀況請回報給X光(如拒檢、回頭處理檢疫物、轉機等等)。</p>
+          <p class="note">13.遇到電動車，如果旅客快檢查完或是正在收拾行李，協助旅客處理完讓旅客先走；如果才剛要打開檢查，則請旅客迴避車輛。</p>
+          <p class="note">14.自己接的旅客，空盆自己收，<span style="color:#c93f3f;">不要留給下一位複查</span>。</p>
+
+          <div class="tag">【機場工作人員】</div>
+          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+
+          <div class="tag">【危機應對】</div>
+          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          <p class="note">旅客或機組拒檢時，詢問<span style="color:#c93f3f;">航班，執行行政宣導、提供宣導單後回報給X光</span>，直接放行即可。</p>
+          <p class="note">如確認旅客行李裡面有檢疫物，旅客依然堅持不是，執行行政宣導、提供宣導單後，記下旅客特徵及航班，並回報給X光及主管。</p>
+          <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（"消毒桶"那張桌子）填寫意見單。</p>
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="tag">【C.D紅龍整理】</div>
+          <p class="note">C.D區紅龍擺放標準請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="CD紅龍擺放位置"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE01_azg2ut.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE02_lih1ds.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE03_yw8qvj.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE04_y5df4a.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE05_spdx8v.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760258/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE06_kuy8ls.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE07_yjtni2.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760255/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE08_vngicc.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE09_sn4fvp.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE10_fcvlxy.jpg,">
+              查看
+            </button>
+          </p>
+        
+
+          <div class="tag">【1線複一】</div>
+          <p class="note">1-1負責擺放及回收百寶袋，如果1-1不在現場請同線的同仁幫忙注意一下。</p>
+          <p class="note">「分流1跟2」的對講機都交給分流充電。</p>
+          <p class="note">每天下班收百寶袋的時候，翻譯機跟1.2線前導的對講機，需要「<span style="color:#c93f3f;">連主機跟線</span>」一起收回。</p>
+
+          <div class="tag">【1線複二】</div>
+          <p class="note">上哨不能攜帶手機，1-2在每次上哨前記得在群組回報手機，如果主管在現場就直接跟主管報備。請勿放錯，點錯手機，違者值勤分流2。</p>
+
+          <div class="tag">【3線複查】</div>
+          <p class="note">如4線要接機組，請3線最後一位複查協助前導；如果都沒空，X光依現場狀況處理。</p>
+
+          <div class="tag">【4線複一】</div>
+          <p class="note">4-1運送檢疫物至檢疫櫃檯，請於A.B班12:30先整理檢疫物。</p>
+
+          <div class="tag">【4線複二】</div>
+          <p class="note">噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</p>
+          <p class="note">消毒毯時間為<span style="color:#c93f3f;">雙數30分</span>麻煩請由各哨4-2執行(如4-2不在由4-1)。</p>
+          <p class="note">消毒水自己噴，自己關公務機。提醒：如果大家都在哨上，就請X光協助關鈴聲。</p>
+          <p class="note">C區噴完消毒水，務必記得簽名！！！避免罰款。</p>
+
+          <div class="tag">【換哨下哨交接】</div>
+          <p class="note">換哨要交接<span style="color:#c93f3f;">剪刀、膠帶</span>。</p>
+          <p class="note">換哨下哨要清空手套桶。</p>
+          <p class="note">4-2與夜班交接循環扇遙控器(<span style="color:#c93f3f;">四線後方的收納盒</span>)。</p>
+
+          <div class="tag">【移民署公務門】</div>
+          <p class="note">帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，人數多就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="modal-xray" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="xrayTitle">
+        <div class="modal-header"><span id="xrayTitle">X光</span><button class="modal-close" data-close="modal-xray">X</button></div>
+        <div class="modal-body">
+          <div class="section-title">勤務須知</div>
+
+          <p class="note">1.桌上有空盆第一件事就是<span style="color:#c93f3f;">收空盆</span>，如果有空就協助搬盆。</p>
+          <p class="note">2.小心拉旅客的行李，以防刮傷旅客的行李。</p>
+          <p class="note">4.X光跟前導要互相配合，任何一方要告知任何事，例如拐拐或是包包有食物等等，<span style="color:#c93f3f;">雙方都要回應一下</span>，確認彼此有收到訊息。</p>
+
+          <div class="tag">【肉品採樣】</div>
+          <p class="note">每日2-3件，4線X光負責記錄<span style="color:#c93f3f;">日期、地區、航班</span>；標籤及10號夾鏈袋暫存4線檢疫桶。</p>
+
+          <div class="tag">【機場工作人員】</div>
+          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道</p>
+
+          <div class="tag">【危機應對】</div>
+          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          <p class="note">旅客或機組拒檢時，詢問航班並回報給分流做紀錄，直接放行即可。</p>
+
+          <hr class="hr" />
+          <div class="section-title">重要事項</div>
+
+          <div class="tag">【C.D紅龍整理】</div>
+          <p class="note">C.D區紅龍擺放標準請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="CD紅龍擺放位置"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE01_azg2ut.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE02_lih1ds.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE03_yw8qvj.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE04_y5df4a.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE05_spdx8v.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760258/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE06_kuy8ls.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE07_yjtni2.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760255/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE08_vngicc.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE09_sn4fvp.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE10_fcvlxy.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【B哨下班清消】</div>
+          <p class="note">打掃由各線X光落實檢查/監督(請參閱備勤室公佈欄)。</p>
+          <p class="note">重點檢查/監督：A2分流：微波爐下<span style="color:#c93f3f;">三個櫃子都要確認</span>。</p>
+          <p class="note">3線檢查重點：督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭；冰箱裡門旁與底部抽屜，檢查是否有擦拭。</p>
+          <p class="note">4線檢查重點：手機架、門旁邊鏡子，確認是否有擦拭。</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ===== 通用 圖片檢視器（所有查看鈕共用） ===== -->
+    <div id="viewer" class="viewer-overlay" aria-hidden="true">
+      <div class="viewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+        <div class="viewer-header">
+          <span id="viewerTitle">圖片名稱</span>
+          <button class="viewer-close" type="button" data-close="viewer">X</button>
+        </div>
+        <div class="viewer-body" id="viewerBody">
+          <img id="viewerImg" class="viewer-canvas" alt="圖像" src="">
+        </div>
+        <div class="viewer-dots" id="viewerDots"></div>
+        <div class="viewer-help">左右滑動切換｜雙指縮放</div>
+      </div>
+    </div>
+  </main>
+
+
+  <script src="password.js"></script>
+  <script>
+    (function(){
+      var name = localStorage.getItem('t2_user_name') || '';
+      var bind = localStorage.getItem('t2_user_bind') || '';
+      var acc  = localStorage.getItem('t2_user_acc')  || '';
+      if(!name || !bind){
+        window.location.replace('T2日動植物檢疫登入系統.html');
+        return;
+      }
+
+      // ===== 即時偵測：帳號是否仍存在（初次 + 週期 + 回前景立即檢查） =====
+      function checkAlive(){
+        var accounts = (window.ACCOUNTS && Array.isArray(window.ACCOUNTS)) ? window.ACCOUNTS : [];
+        var alive = false;
+        for(var i=0;i<accounts.length;i++){
+          if(accounts[i].username === acc){ alive = true; break; }
+        }
+        if(!alive){
+          try{
+            localStorage.removeItem('t2_user_bind');
+            localStorage.removeItem('t2_user_name');
+            localStorage.removeItem('t2_user_acc');
+          }catch(e){}
+          window.location.replace('T2日動植物檢疫登入系統.html');
+        }
+      }
+
+      // 先做一次檢查
+      checkAlive();
+
+      // 週期性重新載入帳號名單後再檢查（3 秒一次）；http/https 用 fetch，file:// 用 <script>
+      var RELOAD_ID = 'acc_reload_script';
+      var CAN_HTTP = (location.protocol === 'http:' || location.protocol === 'https:');
+      function reloadAccountsAndCheck(){
+        if (CAN_HTTP && window.fetch) {
+          fetch('password.js?ts=' + Date.now(), {cache: 'no-store'})
+            .then(function(r){ return r.text(); })
+            .then(function(txt){
+              try{
+                var m = txt.match(/window\.ACCOUNTS\s*=\s*(\[[\s\S]*?\]);/);
+                if(m && m[1]){
+                  /* eslint-disable no-eval */
+                  window.ACCOUNTS = eval(m[1]);
+                }
+              }catch(e){}
+            })
+            .finally(function(){ checkAlive(); });
+        } else {
+          // 清掉上一個注入的 script（避免越疊越多）
+          try{
+            var old = document.getElementById(RELOAD_ID);
+            if(old && old.parentNode){ old.parentNode.removeChild(old); }
+          }catch(e){}
+          var s = document.createElement('script');
+          s.id = RELOAD_ID;
+          s.src = CAN_HTTP ? ('password.js?ts=' + Date.now()) : 'password.js';
+          s.onload = function(){ checkAlive(); };
+          document.head.appendChild(s);
+        }
+      }
+      setInterval(reloadAccountsAndCheck, 3000);
+
+      // 視窗聚焦或頁籤回前景 / 其他分頁 storage 變動 時，立即重載並檢查
+      window.addEventListener('focus', reloadAccountsAndCheck);
+      document.addEventListener('visibilitychange', function(){
+        if(!document.hidden){ reloadAccountsAndCheck(); }
+      });
+      window.addEventListener('storage', function(){ reloadAccountsAndCheck(); });
+
+
+      var welcomeEl = document.getElementById('welcome');
+      welcomeEl.textContent = '歡迎登入 ' + name;
+      console.log('UserBind=', bind);
+
+
+
+      // ====== 登出 / 大挑戰（原功能保留） ======
+      document.getElementById('logoutBtn').addEventListener('click', function(){
+        try{
+          localStorage.removeItem('t2_user_bind');
+          localStorage.removeItem('t2_user_name');
+          localStorage.removeItem('t2_user_acc');
+        }catch(e){}
+        window.location.replace('T2日動植物檢疫登入系統.html');
+      });
+      document.getElementById('challengeBtn').addEventListener('click', function(){
+        alert('前往動植物大挑戰！(開發中)');
+      });
+
+      // ====== Modal 開關工具（原有） ======
+      function openModal(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+        el.classList.add('active');
+        el.setAttribute('aria-hidden','false');
+      }
+      function closeModal(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+        if (document.activeElement && el.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+        el.classList.remove('active');
+        el.setAttribute('aria-hidden','true');
+      }
+      
+      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray']
+        .forEach(function(mid){
+          var el = document.getElementById(mid);
+          if(!el) return;
+          el.addEventListener('click', function(e){
+            if(e.target === el){ closeModal(mid); }
+          });
+          var btn = el.querySelector('.modal-close');
+          if(btn){
+            btn.addEventListener('click', function(){ closeModal(mid); });
+          }
+        });
+
+      var map = [
+        { btn: '.btn-rule',   modal: 'modal-rule'  },
+        { btn: '.btn-check',  modal: 'modal-check' },
+        { btn: '.btn-link',   modal: 'modal-link'  },
+        { btn: '.btn-flow',   modal: 'modal-flow'  },
+        { btn: '.btn-guide',  modal: 'modal-guide' },
+        { btn: '.btn-review', modal: 'modal-review'},
+        { btn: '.btn-xray',   modal: 'modal-xray'  }
+      ];
+      for(var i=0;i<map.length;i++){
+        var b = document.querySelector(map[i].btn);
+        if(b){
+          (function(mid){
+            b.addEventListener('click', function(){ openModal(mid); });
+          })(map[i].modal);
+        }
+      }
+
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape'){
+          var ids = ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','viewer'];
+          for(var i=0;i<ids.length;i++){ hideOverlay(ids[i]); }
+        }
+      });
+
+      // ====== 通用 圖片檢視器 ======
+      var viewerEl = document.getElementById('viewer');
+      var viewerTitle = document.getElementById('viewerTitle');
+      var viewerImg = document.getElementById('viewerImg');
+      var viewerDots = document.getElementById('viewerDots');
+      var viewerBody = document.getElementById('viewerBody');
+
+      var imgs = [];     // 圖片清單
+      var idx = 0;       // 目前索引
+      var startX = 0;    // 滑動起點
+      var startY = 0;
+      var dragging = false;
+
+      var initDist = 0;  // 雙指距離
+      var scale = 1;     // 縮放比例
+      var baseScale = 1;
+
+      function showOverlay(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+        el.classList.add('active');
+        el.setAttribute('aria-hidden','false');
+      }
+      function hideOverlay(id){
+        var el = document.getElementById(id);
+        if(!el) return;
+        if (document.activeElement && el.contains(document.activeElement)) {
+          document.activeElement.blur();
+        }
+        el.classList.remove('active');
+        el.setAttribute('aria-hidden','true');
+      }
+
+      function setImage(i){
+        if(i<0 || i>=imgs.length) return;
+        idx = i;
+        viewerImg.src = imgs[idx];
+        resetZoom();
+        renderDots();
+      }
+
+      function renderDots(){
+        viewerDots.innerHTML = '';
+        for(var i=0;i<imgs.length;i++){
+          var d = document.createElement('div');
+          d.className = 'viewer-dot' + (i===idx ? ' active' : '');
+          (function(pos){
+            d.addEventListener('click', function(){ setImage(pos); });
+          })(i);
+          viewerDots.appendChild(d);
+        }
+      }
+
+
+      function resetZoom(){
+        scale = 1; baseScale = 1;
+        viewerImg.style.transform = 'translate(-50%,-50%) scale(1)';
+      }
+
+      // 開啟檢視器（由查看按鈕觸發）
+      function openViewer(title, listCsv){
+        imgs = [];
+        idx = 0;
+        if(listCsv){
+          var parts = listCsv.split(',');
+          for(var i=0;i<parts.length;i++){
+            var u = parts[i].trim();
+            if(u){ imgs.push(u); }
+          }
+        }
+        if(imgs.length===0) return;
+        viewerTitle.textContent = title || '圖片';
+        setImage(0);
+        showOverlay('viewer');
+      }
+
+      // 關閉檢視器
+      var closeBtn = document.querySelector('.viewer-close');
+      if(closeBtn){
+        closeBtn.addEventListener('click', function(){ hideOverlay('viewer'); });
+      }
+      viewerEl.addEventListener('click', function(e){
+        if(e.target === viewerEl){ hideOverlay('viewer'); }
+      });
+
+      // 觸控：滑動切換、雙指縮放
+      viewerBody.addEventListener('touchstart', function(e){
+        if(e.touches.length===1){
+          dragging = true;
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }else if(e.touches.length===2){
+          dragging = false;
+          var dx = e.touches[0].clientX - e.touches[1].clientX;
+          var dy = e.touches[0].clientY - e.touches[1].clientY;
+          initDist = Math.sqrt(dx*dx + dy*dy);
+          baseScale = scale;
+        }
+      }, {passive:true});
+
+      viewerBody.addEventListener('touchmove', function(e){
+        if(e.touches.length===2){
+          var dx = e.touches[0].clientX - e.touches[1].clientX;
+          var dy = e.touches[0].clientY - e.touches[1].clientY;
+          var dist = Math.sqrt(dx*dx + dy*dy);
+          var factor = dist / (initDist || 1);
+          scale = baseScale * factor;
+          if(scale < 1) scale = 1;
+          if(scale > 3) scale = 3;
+          viewerImg.style.transform = 'translate(-50%,-50%) scale(' + scale + ')';
+        }
+      }, {passive:true});
+
+      viewerBody.addEventListener('touchend', function(e){
+        if(dragging){
+          var endX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : startX;
+          var endY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : startY;
+          var dx = endX - startX;
+          var dy = endY - startY;
+          if(Math.abs(dx) > 40 && Math.abs(dy) < 60 && scale===1){
+            if(dx < 0 && idx < imgs.length-1){ setImage(idx+1); }
+            else if(dx > 0 && idx > 0){ setImage(idx-1); }
+          }
+        }
+        dragging = false;
+      });
+
+      // 鍵盤左右切換（桌面）
+      document.addEventListener('keydown', function(e){
+        if(viewerEl.classList.contains('active')){
+          if(e.key === 'ArrowRight' && idx < imgs.length-1){ setImage(idx+1); }
+          if(e.key === 'ArrowLeft'  && idx > 0){ setImage(idx-1); }
+        }
+      });
+
+      // 事件委派：所有 .view-btn 都能啟動檢視器
+      document.body.addEventListener('click', function(e){
+        var t = e.target;
+        if(t && t.classList && t.classList.contains('view-btn')){
+          var title = t.getAttribute('data-viewer-title') || '圖片';
+          var list = t.getAttribute('data-viewer-images') || '';
+          openViewer(title, list);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
