@@ -37,7 +37,7 @@
         padding: 62px 7px 44px;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 0px;
         position: relative;
     }
     .title-row {
@@ -246,13 +246,13 @@
 <body>
   <main class="phone">
     <div class="title-row">
-      <img src="https://cdn.jsdelivr.net/gh/tabler/tabler-icons/icons/home.svg" alt="home"/>
+      <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758859484/%E6%A8%99%E9%A1%8C%E5%9C%96%E7%A4%BA-%E8%B1%AC%E9%BC%BB%E7%B4%99_ppobop.png" alt="home"/>
       <h1 style="margin:0;font-size:inherit;">T2主頁面</h1>
     </div>
     <div id="welcome" class="welcome">歡迎登入</div>
 
     <div class="marquee">
-      <marquee behavior="scroll" direction="left" scrollamount="4">【系統公告】查驗流程請依照最新規定執行；X光檢查注意安全；若有異常立即通報班長。</marquee>
+      <marquee behavior="scroll" direction="left" scrollamount="4">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</marquee>
     </div>
 
     <div class="grid">
@@ -270,11 +270,52 @@
 
     <section class="panel">
       <h2>最新公告</h2>
+
       <div class="notice-box" id="notices">
-        <div class="notice-item">2025-09-18 早班會議：新增檢疫物清單第3版。</div>
-        <div class="notice-item">2025-09-17 X光機年檢完成，使用前請再次自檢。</div>
-        <div class="notice-item">2025-09-16 教育訓練開課，請至學習平台報名。</div>
-        <div class="notice-item">2025-09-15 系統更新：登入流程優化，主頁新增跑馬燈與公告滾動。</div>
+          <div class="note">2025-10-01 本單位系統放置手機主頁面方法請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="加入手機主畫面教學"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278674/%E6%AD%A5%E9%A9%9F1_ghthx3.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278674/%E6%AD%A5%E9%A9%9F2_yrsnry.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278674/%E6%AD%A5%E9%A9%9F3_zl1kow.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278675/%E6%AD%A5%E9%A9%9F4_td6myo.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278675/%E6%AD%A5%E9%A9%9F5_glsm1u.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278674/%E6%AD%A5%E9%A9%9F6_vuztad.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759278674/%E6%AD%A5%E9%A9%9F7_atdflp.jpg,">
+              查看
+            </button>
+          </div>
+
+        <div class="notice-item">2025-09-30 上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。注意分流2、3千萬不要定點站立。<span style="color:#c93f3f;">注意分流2、3千萬不要定點站立</span>。
+            <button type="button" class="view-btn"
+              data-viewer-title="各哨時間表"
+              data-viewer-images="https://res.cloudinary.com/dzj7ghbf6/image/upload/v1759635950/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A8_b1qvob.jpg">
+              時間表
+            </button>
+          </div>
+
+        <div class="notice-item">2025-10-07 如旅客行李沒有拉鍊，開口大的朝自己，開口小的朝X光，<span style="color:#c93f3f;">注意有沒有貴重物品，提醒X光同仁</span>。
+            <button type="button" class="view-btn"
+              data-viewer-title="開口範例"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%95_unwnzl.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%9501_zutaml.jpg,">
+              開口範例
+            </button>
+          </div>
+
+        <div class="notice-item">2025-10-07 C區檢疫桶旁的灰色櫃子<span style="color:#c93f3f;">由分流2負責清理</span>。
+            <button type="button" class="view-btn"
+              data-viewer-title="灰色櫃子"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1759809221/%E5%A4%A7%E9%95%B7%E6%AB%83_mfxexh.jpg">
+              灰色櫃子
+            </button>
+          </div>
+        <div class="notice-item">2025-10-07 CD區電風扇每周一由各哨分流2清理；備勤室電風扇由C哨分流2清理。如有懲罰的分流2，則。<span style="color:#c93f3f;">全數由懲罰人員負責</span>。</div>
+      </div>
+
+        <div class="notice-item">新進人員須知：群組公告任何訊息，務必確實閱覽並回覆<span style="color:#c93f3f;">貼圖表示已讀</span>。</div>
       </div>
     </section>
 
@@ -299,33 +340,23 @@
           <p class="note"><span style="color:#c93f3f;">注意：</span><span style="color:#272cd0;">出國須繳交通行證至主任辦公室，歸國後取回。上班未帶證件者，下班後證件需放置主任辦公室一週。</span></p>
 
           <div class="tag">【休假須知】</div>
-          <p class="note">跨月排假<span style="color:#c93f3f;">務必符合勞基法</span>，跨越天數照算，我們沒有歸零。</p>
+          <p class="note">跨月排假<span style="color:#c93f3f;">務必符合勞基法</span>，跨月天數照算，我們沒有歸零。</p>
           <p class="note">切忌臨時缺勤！！！除天災人禍，臨時請假應<span style="color:#c93f3f;">先找當日休假同仁協調代班或調換班</span>，雙方確認後，雙方都須告知當日值班主管。</p>
+          <p class="note"></p>遲到未參與勤教(07:13之後) 修正取消次月必休2天。</p>
+          <p class="note"><span style="color:#c93f3f;">7:30以前</span> 修正取消次月必休2天選休2天。</p>
+          <p class="note"><span style="color:#c93f3f;">8:00以前</span> 修正取消次月必休2天選休4天。</p>
+          <p class="note"><span style="color:#c93f3f;">8:00以後</span> 修正取消次月必休2天選休6天。</p>
+          <p class="note"><span style="color:#c93f3f;">應到班而未到班將依規定輪值15天的A分流2或是清運，且2個月不得選假</span>。</p>
           <p class="note">如果當日休假是本來沒有劃休的假，屬於預排假，<span style="color:#c93f3f;">請隨時注意訊息，假設臨時有同事沒辦法來上班</span>，需要支援出勤。</p>
 
           <div class="tag">【辦公室】</div>
-          <p class="note">二處辦公室是高幹及他單位使用區域，未告知主管、未經同意不得隨意進出任意使用。</p>
+          <p class="note">二處辦公室是高幹及其他單位使用區域，未告知主管、未經同意不得隨意進出任意使用。</p>
 
           <div class="tag">【上下班打卡】</div>
-          <p class="note">上下班不使用實體卡片，改 iBeacon 簽到離退操作方式參考圖片，記得要開藍芽及定位。<span class="mono"></span>
+          <p class="note">上下班使用人臉辨識。<span class="mono"></span>
             <button type="button" class="view-btn"
-              data-viewer-title="iBeacon 簽到離退操作"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B801_tfjd8l.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B802_lm2va4.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B803_kpijji.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B804_pdb9fk.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B805_el7wtv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B806_jlwgu3.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B807_ehpxif.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B808_xyhwe6.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420964/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B809_c4ozfn.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758420965/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B810_kbkd03.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422095/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B811_tftzz3.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B812_nq7wf4.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422095/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B813_hdej7g.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B814_wsmgdd.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758422096/iBeacon_%E7%B0%BD%E5%88%B0%E9%9B%A2%E9%80%80%E6%95%99%E5%AD%B815_pal6yq.jpg,">
+              data-viewer-title="使用人臉辨識"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1759027394/%E4%BA%BA%E8%87%89%E8%BE%A8%E8%AD%98%E6%89%93%E5%8D%A1%E7%95%AB%E9%9D%A2_w27zsp.jpg,">
               查看
             </button>
           </p>
@@ -350,7 +381,14 @@
           <div class="tag">【備勤室使用規定】</div>
           <p class="note">私人物品請勿隨意放置，離開前桌面東西未清，椅子未歸位者備勤室輪值分流2（2天）。</p>
           <p class="note">備勤室外的工業用電風扇應移至正確位置，公共區域請大家共同維護。</p>
-          <p class="note">B 哨打掃備勤室，完成請找各線 X 光驗收。</p>
+            <button type="button" class="view-btn"
+              data-viewer-title="工業用電風扇"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760285/%E4%BC%91%E6%81%AF%E5%AE%A4%E5%A4%96%E9%9D%A2%E9%9B%BB%E9%A2%A8%E6%89%87_o37skt.jpg,">
+              查看
+            </button>
+          </p>
+          <p class="note">B哨打掃備勤室分配"請參閱備勤室公佈欄"，完成請找各線 X 光驗收。</p>
 
           <div class="tag">【置物櫃管理】</div>
           <p class="note">主管指派置物櫃後，會給予櫃子磁鐵填寫姓名（費用25元）。</p>
@@ -361,11 +399,11 @@
           <p class="note">為延長微波爐壽命，使用完必須是歸 0 狀態，才打開，切勿直接打開。</p>
 
           <div class="tag">【冰箱使用規定】</div>
-          <p class="note">需在物品上貼標籤註明請參考圖片，存放規定請詳閱冰箱上貼的公告。<span class="mono">（新增介面）</span></p>
+          <p class="note">需在物品上貼標籤註明"姓名+當天日期"，存放規定請詳閱冰箱上貼的公告。</p>
           <p class="note">打掃冰箱同仁會檢查日期，過期或未記名品項會公告在群組供認領，無人認領者當日丟棄。</p>
 
           <div class="tag">【制服送洗】</div>
-          <p class="note">包月金額為 250 元／月，包月洗衣為襯衫、長褲及背心（每月 1 件／次）。</p>
+          <p class="note">包月金額為 300 元／月，包月洗衣為襯衫、長褲及背心（每月 1 件／次）。</p>
           <p class="note">本單位於<span style="color:#c93f3f;">每週一、三、五 11:00</span> 左右收送（請提早將送洗衣物投入）。</p>
         </div>
       </div>
@@ -432,6 +470,15 @@
           <p class="note">雞內金是指雞胗（砂囊）內壁的乾燥薄膜，常見於中藥材或食品中。若只是加在食品成分裡，並非整塊肉眼可見的雞內金可攜帶入境。</p>
           <p class="note">牛糞餅（又稱牛糞乾、牛糞塊）屬於動物來源產品，禁止攜帶入境。</p>
           <p class="note">若「桃酥」成分含肉粉鬆，請旅客至櫃檯詢問，實體多半看不到明顯肉鬆，有機會放行。</p>
+          <div role="region" aria-label="特殊狀況食物" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E9%B5%9D%E8%82%9D%E9%86%AC_ypvdhd.jpg" alt="特殊狀況食物1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9C%B2%E8%99%95_houzvc.jpg" alt="特殊狀況食物2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%87%95%E7%AA%A9_gvgste.jpg" alt="特殊狀況食物3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9B%9E%E5%85%A7%E9%87%91_eexfhi.jpg" alt="特殊狀況食物4" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%89%9B%E7%B3%9E%E9%A4%85_hdcmlg.jpg" alt="特殊狀況食物5" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E6%A1%83%E9%85%A5_cbykrv.jpg" alt="特殊狀況食物6" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          </div>
+ 
         </div>
       </div>
     </div>
@@ -487,7 +534,12 @@
               data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758595155/%E5%B0%8F%E8%9C%9C%E8%9C%82_ekzeyn.jpg">
               查看
             </button>
-
+          <p class="note">13.C區檢疫桶旁的灰色櫃子<span style="color:#c93f3f;">由分流2負責清理</span>。
+            <button type="button" class="view-btn"
+              data-viewer-title="灰色櫃子"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1759809221/%E5%A4%A7%E9%95%B7%E6%AB%83_mfxexh.jpg">
+              查看
+            </button>
           <div class="tag">【機組人員】離峰-3條線／尖峰-4條線</div>
           <p class="note">離峰時段：疫區機組需手檢，如線內旅客過多，詢問機組是否可以走四線，務必收到回覆再放。</p>
           <p class="note">尖峰時段：抽查班機<span style="color:#c93f3f;">BR62、BR398、BR212、BR392</span>。優先挑選三位外籍機組，如沒有外籍機組再改以本國機組員作代替。</p>
@@ -499,7 +551,12 @@
 
           <div class="tag">【機場工作人員】</div>
           <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
-          <p class="note">入境並持外交部發的工作證，視同持卡旅客引導綠線。外交部工作證請參考圖片。"新增介面"</p>
+          <p class="note">入境並持外交部發的工作證，視同持卡旅客引導綠線。外交部工作證請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="工作證"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E5%A4%96%E4%BA%A4%E9%83%A8%E5%B7%A5%E4%BD%9C%E8%AD%89_zrx3wh.jpg">
+              查看
+            </button>
 
           <div class="tag">【危機應對】</div>
           <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
@@ -514,7 +571,24 @@
 
           <div class="tag">【分流整潔】</div>
           <p class="note">棄置桶裡的檢疫物八分滿時，使用<span style="color:#c93f3f;">透明垃圾袋</span>放在旁邊替代。</p>
-          <p class="note">分流區紅龍請遵照各區標準擺放請參考圖片。"新增介面"</p>
+          <p class="note">分流區紅龍請遵照各區標準擺放請參考圖片。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="CD紅龍擺放位置"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE01_azg2ut.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE02_lih1ds.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE03_yw8qvj.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE04_y5df4a.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE05_spdx8v.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760258/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE06_kuy8ls.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760256/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE07_yjtni2.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760255/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE08_vngicc.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE09_sn4fvp.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1758760254/CD%E5%8D%80%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE10_fcvlxy.jpg,">
+              查看
+            </button>
+          </p>
+
           <p class="note">每一哨下哨備勤室由分流噴消毒水，備勤室消毒水固定交由B哨分流補充，低位線請參考圖片。<span class="mono"></span>
             <button type="button" class="view-btn"
               data-viewer-title="分流噴消毒水"
@@ -642,7 +716,7 @@
           <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
           <p class="note">旅客或機組拒檢時，詢問<span style="color:#c93f3f;">航班，執行行政宣導、提供宣導單後回報給X光</span>，直接放行即可。</p>
           <p class="note">如確認旅客行李裡面有檢疫物，旅客依然堅持不是，執行行政宣導、提供宣導單後，記下旅客特徵及航班，並回報給X光及主管。</p>
-          <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（檢疫物桶那張桌子）填寫意見單。</p>
+          <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（"消毒桶"那張桌子）填寫意見單。</p>
 
           <hr class="hr" />
           <div class="section-title">注意事項</div>
@@ -742,7 +816,7 @@
           </p>
 
           <div class="tag">【B哨下班清消】</div>
-          <p class="note">打掃由各線X光落實檢查/監督(打掃區域請參考圖片)。"新增介面"</p>
+          <p class="note">打掃由各線X光落實檢查/監督(請參閱備勤室公佈欄)。</p>
           <p class="note">重點檢查/監督：A2分流：微波爐下<span style="color:#c93f3f;">三個櫃子都要確認</span>。</p>
           <p class="note">3線檢查重點：督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭；冰箱裡門旁與底部抽屜，檢查是否有擦拭。</p>
           <p class="note">4線檢查重點：手機架、門旁邊鏡子，確認是否有擦拭。</p>
@@ -855,7 +929,7 @@
         window.location.replace('T2日動植物檢疫登入系統.html');
       });
       document.getElementById('challengeBtn').addEventListener('click', function(){
-        alert('前往動植物大挑戰！(示意)');
+        alert('前往動植物大挑戰！(開發中)');
       });
 
       // ====== Modal 開關工具（原有） ======
