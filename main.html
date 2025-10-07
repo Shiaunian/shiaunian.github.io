@@ -1003,6 +1003,11 @@
       var initDist = 0;  // 雙指距離
       var scale = 1;     // 縮放比例
       var baseScale = 1;
+      var offsetX = 0;   // 放大後平移 X（px）
+      var offsetY = 0;   // 放大後平移 Y（px）
+      var panStartX = 0; // 單指拖移用（起點 - offsetX）
+      var panStartY = 0; // 單指拖移用（起點 - offsetY）
+
 
       function showOverlay(id){
         var el = document.getElementById(id);
@@ -1043,8 +1048,10 @@
 
       function resetZoom(){
         scale = 1; baseScale = 1;
-        viewerImg.style.transform = 'translate(-50%,-50%) scale(1)';
+        offsetX = 0; offsetY = 0;
+        viewerImg.style.transform = 'translate(-50%,-50%) translate(0px,0px) scale(1)';
       }
+
 
       // 開啟檢視器（由查看按鈕觸發）
       function openViewer(title, listCsv){
@@ -1072,12 +1079,17 @@
         if(e.target === viewerEl){ hideOverlay('viewer'); }
       });
 
-      // 觸控：滑動切換、雙指縮放
+      // 觸控：滑動切換、雙指縮放＋放大後拖移
       viewerBody.addEventListener('touchstart', function(e){
         if(e.touches.length===1){
           dragging = true;
           startX = e.touches[0].clientX;
           startY = e.touches[0].clientY;
+          // 若已放大，準備拖移（記錄相對起點）
+          if(scale > 1){
+            panStartX = startX - offsetX;
+            panStartY = startY - offsetY;
+          }
         }else if(e.touches.length===2){
           dragging = false;
           var dx = e.touches[0].clientX - e.touches[1].clientX;
@@ -1086,6 +1098,7 @@
           baseScale = scale;
         }
       }, {passive:true});
+
 
       viewerBody.addEventListener('touchmove', function(e){
         if(e.touches.length===2){
@@ -1096,9 +1109,18 @@
           scale = baseScale * factor;
           if(scale < 1) scale = 1;
           if(scale > 3) scale = 3;
-          viewerImg.style.transform = 'translate(-50%,-50%) scale(' + scale + ')';
+          // 縮放時保留目前平移
+          viewerImg.style.transform = 'translate(-50%,-50%) translate(' + offsetX + 'px,' + offsetY + 'px) scale(' + scale + ')';
+        } else if(e.touches.length===1 && scale > 1){
+          // 放大後：單指拖移
+          var curX = e.touches[0].clientX;
+          var curY = e.touches[0].clientY;
+          offsetX = curX - panStartX;
+          offsetY = curY - panStartY;
+          viewerImg.style.transform = 'translate(-50%,-50%) translate(' + offsetX + 'px,' + offsetY + 'px) scale(' + scale + ')';
         }
       }, {passive:true});
+
 
       viewerBody.addEventListener('touchend', function(e){
         if(dragging){
