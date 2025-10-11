@@ -88,8 +88,10 @@
     .btn-check { background:#2f6b2f; }                             /* 綠：檢疫物 */
     .btn-link  { background:#d68b2f; }                             /* 橘：連結 */
     .btn-flow, .btn-guide, .btn-review, .btn-xray { background:#2f3161; } /* 藍：分流/前導/複查/X光 */
+    .btn-tutorial { background:#2b2b2b; color:#fff; }              /* 黑灰：教程 */
     .btn-challenge { background:#c7a64a; color:#fff; }             /* 金：動植物大挑戰 */
     .btn-logout    { background:#a12a5e; color:#fff; }             /* 紫紅：登出 */
+
 
     /* 最新公告區 */
     .panel {
@@ -263,7 +265,7 @@
       <button class="btn btn-guide">前導</button>
       <button class="btn btn-review">複查</button>
       <button class="btn btn-xray">X光</button>
-      <button class="btn" disabled>　</button>
+      <button class="btn btn-tutorial">教程</button>
       <button class="btn" disabled>　</button>
     </div>
 
@@ -272,6 +274,9 @@
       <h2>最新公告</h2>
 
       <div class="notice-box" id="notices">
+        
+        <div class="notice-item">2025-10-08 即日起C、D區4線全開，人流超過左右2邊免稅店，視狀況主分、分2、3立刻通報檢疫櫃檯告知：啟動666，於分流拒檢欄註明撥打時間，屆時防檢櫃檯會請助理上來協助。</div>
+
           <div class="note">2025-10-01 本單位系統放置手機主頁面方法請參考圖片。<span class="mono"></span>
             <button type="button" class="view-btn"
               data-viewer-title="加入手機主畫面教學"
@@ -290,8 +295,10 @@
         <div class="notice-item">2025-09-30 上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。注意分流2、3千萬不要定點站立。<span style="color:#c93f3f;">注意分流2、3千萬不要定點站立</span>。
             <button type="button" class="view-btn"
               data-viewer-title="各哨時間表"
-              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1759534543/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A8_vivijg.jpg">
-              時間表
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760062227/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A801_nw5z9h.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760058312/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A8_sbaqh9.jpg,">
+              查看
             </button>
           </div>
 
@@ -509,7 +516,85 @@
       </div>
     </div>
 
-    <!-- ====== 分流 / 前導 / 複查 / X光 Modal（占位，內文待補） ====== -->
+<!-- ====== 分流 / 前導 / 複查 / X光 Modal（占位，內文待補） ====== -->
+    <div id="modal-tutorial" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
+        <div class="modal-header"><span id="tutorialTitle">教程</span><button class="modal-close" data-close="modal-tutorial">X</button></div>
+        <div class="modal-body">
+          <div class="section-title">步驟與流程</div>
+          <p class="note">這裡放各項目的教程，包含流程說明、注意事項與參考圖片。</p>
+
+          <div class="tag">【勤教位置圖】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="勤教位置圖"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760146600/%E4%B8%8A%E4%B8%8B%E7%8F%AD%E5%8B%A4%E6%95%99%E4%BD%8D%E7%BD%AE%E5%9C%96_kd0mvg.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【離職申請書範例】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="離職申請書範例"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760143439/%E9%9B%A2%E8%81%B7%E7%94%B3%E8%AB%8B%E6%9B%B8%E7%AF%84%E4%BE%8B_fbcsey.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【請假單範例】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="請假單範例"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760143438/%E8%AB%8B%E5%81%87%E5%96%AE%E7%AF%84%E4%BE%8B_kiamuj.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【時數表範例】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="時數表範例"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760143438/%E6%99%82%E6%95%B8%E8%A1%A8%E7%AF%84%E4%BE%8B_hyvp5y.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【清運紀錄表範例】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="清運紀錄表範例"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760143437/%E6%B8%85%E9%81%8B%E7%B4%80%E9%8C%84%E8%A1%A8%E7%AF%84%E4%BE%8B01_vbxopt.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760143438/%E6%B8%85%E9%81%8B%E7%B4%80%E9%8C%84%E8%A1%A8%E7%AF%84%E4%BE%8B02_sjoxyk.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【薪資證明書範例】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="薪資證明書範例"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760143437/%E8%96%AA%E8%B3%87%E8%AD%89%E6%98%8E%E6%9B%B8%E7%AF%84%E4%BE%8B_j9lu8f.jpg,">
+              查看
+            </button>
+          </p>
+
+          <div class="tag">【各哨正常時間表】</div>
+          <p class="note">
+            <button type="button" class="view-btn"
+              data-viewer-title="各哨正常時間表"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760058312/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A8_sbaqh9.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1760062227/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A801_nw5z9h.jpg,">
+              查看
+            </button>
+          </p>
+
+        </div>
+      </div>
+    </div>
+
     <div id="modal-flow" class="modal-overlay" aria-hidden="true">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="flowTitle">
         <div class="modal-header"><span id="flowTitle">分流</span><button class="modal-close" data-close="modal-flow">X</button></div>
@@ -548,6 +633,13 @@
           <div class="tag">【代號說明】</div>
           <p class="note">兩九五=上廁所　拐拐=走中間道的旅客　八八八=貴賓</p>
           <p class="note">所有貴賓仍依非洲豬瘟高低風險國家規定，如有高官指示特殊禮遇會事前告知。現場除了外交部、國安局、航警局協助配合，其他必須先告知幹部。</p>
+
+          <p class="note"><span style="color:#c93f3f;">對講機代號</span>。
+            <button type="button" class="view-btn"
+              data-viewer-title="代號圖表"
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760052691/%E5%B0%8D%E8%AC%9B%E6%A9%9F%E5%91%BC%E5%8F%AB%E8%AA%AA%E6%98%8E_z6ni6h.jpg">
+              代號圖表
+            </button>
 
           <div class="tag">【機場工作人員】</div>
           <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
@@ -633,6 +725,17 @@
           <p class="note">7.若旅客有攜帶寵物，寵物無需過Ｘ光機，有證明請旅客<span style="color:#c93f3f;">出示證明</span>，沒有證明請旅客向前走，無論如何都要告知X光<span style="color:#c93f3f;">「旅客手上有寵物」</span>。</p>
           <p class="note">8.務必注意旅客的行李箱會有吊牌吊飾等等，把手朝X光，不要讓旅客的吊牌吊飾碰到輸送帶；如掛繩過長，請<span style="color:#c93f3f;">事先告知X光</span>。</p>
           <p class="note">9.遇到電動行李箱，請旅客關閉電源往前走，告知X光並由複查手檢。</p>
+       
+          <div class="tag">【袋子開口方向】</div>
+          <p class="note">如旅客行李沒有拉鍊，開口大的朝自己，開口小的朝X光，注意有沒有貴重物品，提醒X光同仁。<span class="mono"></span>
+            <button type="button" class="view-btn"
+              data-viewer-title="查看範例"
+              data-viewer-images="
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%95_unwnzl.jpg,
+              https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%9501_zutaml.jpg,">
+              查看
+            </button>
+          </p>
 
           <div class="tag">【1線前導】</div>
           <p class="note">只要有開線就需播放大聲公宣導。</p>
@@ -887,7 +990,7 @@
                   /* eslint-disable no-eval */
                   window.ACCOUNTS = eval(m[1]);
                 }
-              }catch(e){}
+              }catch(e){} 
             })
             .finally(function(){ checkAlive(); });
         } else {
@@ -949,7 +1052,7 @@
         el.setAttribute('aria-hidden','true');
       }
       
-      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray']
+      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-tutorial']
         .forEach(function(mid){
           var el = document.getElementById(mid);
           if(!el) return;
@@ -962,6 +1065,7 @@
           }
         });
 
+
       var map = [
         { btn: '.btn-rule',   modal: 'modal-rule'  },
         { btn: '.btn-check',  modal: 'modal-check' },
@@ -969,8 +1073,10 @@
         { btn: '.btn-flow',   modal: 'modal-flow'  },
         { btn: '.btn-guide',  modal: 'modal-guide' },
         { btn: '.btn-review', modal: 'modal-review'},
-        { btn: '.btn-xray',   modal: 'modal-xray'  }
+        { btn: '.btn-xray',   modal: 'modal-xray'  },
+        { btn: '.btn-tutorial', modal: 'modal-tutorial' }
       ];
+
       for(var i=0;i<map.length;i++){
         var b = document.querySelector(map[i].btn);
         if(b){
