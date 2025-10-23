@@ -996,6 +996,7 @@
   </main>
 
 
+
   <script src="password.js"></script>
   <script>
     (function(){
@@ -1193,16 +1194,7 @@
         renderDots();
       }
 
-      function showOverlay(id){
-        var el = document.getElementById(id);
-        if(!id) return;
-        el.classList.add('active');
-        el.setAttribute('aria-hiddn','false');
-      }
-
-      function hideOverlay(id){
-        var el = document.getElementById(id)
-      }
+  
 
       function renderDots(){
         viewerDots.innerHTML = '';
