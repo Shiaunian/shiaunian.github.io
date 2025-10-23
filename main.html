@@ -311,7 +311,6 @@
       </div>
 
 
-
       
         <div class="notice-item">新進人員須知：群組公告任何訊息，務必確實閱覽並回覆<span style="color:#c93f3f;">貼圖表示已讀</span>。</div>
 
@@ -574,7 +573,7 @@
           <p class="note">
             <button type="button" class="view-btn"
               data-viewer-title="請假單範例"
-              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1760143438/%E8%AB%8B%E5%81%87%E5%96%AE%E7%AF%84%E4%BE%8B_kiamuj.jpg,">
+              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1761118890/%E8%AB%8B%E5%81%87%E5%96%AE%E7%AF%84%E4%BE%8B_ii4pes.jpg,">
               查看
             </button>
           </p>
@@ -1025,6 +1024,7 @@
         }
       }
 
+
       // 先做一次檢查
       checkAlive();
 
@@ -1138,6 +1138,8 @@
         }
       }
 
+      
+
       document.addEventListener('keydown', function(e){
         if(e.key === 'Escape'){
           var ids = ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','viewer'];
@@ -1189,6 +1191,17 @@
         viewerImg.src = imgs[idx];
         resetZoom();
         renderDots();
+      }
+
+      function showOverlay(id){
+        var el = document.getElementById(id);
+        if(!id) return;
+        el.classList.add('active');
+        el.setAttribute('aria-hiddn','false');
+      }
+
+      function hideOverlay(id){
+        var el = document.getElementById(id)
       }
 
       function renderDots(){
