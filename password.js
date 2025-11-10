@@ -82,8 +82,10 @@ window.ACCOUNTS = [
   {"username":"9815","password":"0220","_comment":"陳明君","welcome":"歡迎陳明君"},
   {"username":"4699","password":"1013","_comment":"吳嘉玹","welcome":"歡迎吳嘉玹"},
   {"username":"3583","password":"1025","_comment":"陳維彥","welcome":"歡迎陳維彥"},
+  {"username":"5976","password":"0910","_comment":"李孟翰","welcome":"歡迎李孟翰"},
   {"username":"2685","password":"0219","_comment":"陳博宇","welcome":"歡迎陳博宇"}
 ];
+
 
 
 
