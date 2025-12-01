@@ -46,10 +46,8 @@ window.ACCOUNTS = [
   {"username":"3528","password":"0112","_comment":"陳愷翎","welcome":"歡迎陳愷翎"},
   {"username":"1668","password":"1114","_comment":"蔡博超","welcome":"歡迎蔡博超"},
   {"username":"8797","password":"1018","_comment":"邱韋寧","welcome":"歡迎邱韋寧"},
-  {"username":"2204","password":"1012","_comment":"葉采蓁","welcome":"歡迎葉采蓁"},
   {"username":"2503","password":"0821","_comment":"吳宗翰","welcome":"歡迎吳宗翰"},
   {"username":"3531","password":"0108","_comment":"陳欣茹","welcome":"歡迎陳欣茹"},
-  {"username":"6576","password":"1105","_comment":"顏素玲","welcome":"歡迎顏素玲"},
   {"username":"6067","password":"0116","_comment":"林鈺珈","welcome":"歡迎林鈺珈"},
   {"username":"9177","password":"0929","_comment":"林昱程","welcome":"歡迎林昱程"},
   {"username":"7681","password":"0122","_comment":"武清享","welcome":"歡迎武清享"},
@@ -76,9 +74,7 @@ window.ACCOUNTS = [
   {"username":"2839","password":"1215","_comment":"黃彥翔","welcome":"歡迎黃彥翔"},
   {"username":"2702","password":"0905","_comment":"黃暐傑","welcome":"歡迎黃暐傑"},
   {"username":"6808","password":"0320","_comment":"莊庭瑄","welcome":"歡迎莊庭瑄"},
-  {"username":"0528","password":"0326","_comment":"劉文華","welcome":"歡迎劉文華"},
   {"username":"3044","password":"0904","_comment":"張燕雯","welcome":"歡迎張燕雯"},
-  {"username":"4963","password":"0306","_comment":"丁毓璋","welcome":"歡迎丁毓璋"},
   {"username":"9815","password":"0220","_comment":"陳明君","welcome":"歡迎陳明君"},
   {"username":"4699","password":"1013","_comment":"吳嘉玹","welcome":"歡迎吳嘉玹"},
   {"username":"3583","password":"1025","_comment":"陳維彥","welcome":"歡迎陳維彥"},
@@ -88,6 +84,7 @@ window.ACCOUNTS = [
   {"username":"1720","password":"0114","_comment":"涂瓊文","welcome":"歡迎涂瓊文"},
   {"username":"6624","password":"0102","_comment":"李秀貞","welcome":"歡迎李秀貞"}
 ];
+
 
 
 
