@@ -1228,7 +1228,7 @@
 
           for(var i=0;i<list.length;i++){
             var row = list[i] || {};
-            var cls = (row.acc === acc) ? ' class="me-row"' : '';
+            var cls = (row.userKey === userKey) ? ' class="me-row"' : '';
             html += '<tr'+cls+'>';
             html += '<td>' + (i+1) + '</td>';
             html += '<td>' + (row.name || '-') + '</td>';
@@ -1443,11 +1443,14 @@
           return;
         }
         // ✅ 改存 Firebase（跨裝置排行榜）
-      var path = 'challengeRank/' + lastResult.categoryId + '/' + acc;
+      var userKey = acc + '|' + pwd;   // 讓同 acc 不同密碼的人也不會互蓋
+      var path = 'challengeRank/' + lastResult.categoryId + '/' + userKey;
+
 
       db.ref(path).set({
         name: name,
         acc: acc,
+        userKey: userKey,
         score: lastResult.score,
         timeMs: lastResult.timeMs,
         updatedAt: Date.now()
