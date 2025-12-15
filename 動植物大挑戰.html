@@ -1174,6 +1174,32 @@
       }
 
 
+      // ===== 從 Firebase 讀取排行榜（依 categoryId）=====
+      function fetchRankListFromFirebase(categoryId, cb){
+        if(!categoryId){ cb([]); return; }
+        db.ref('challengeRank/' + categoryId).once('value')
+          .then(function(snap){
+            var val = snap.val() || {};
+            var list = Object.keys(val).map(function(k){
+              return val[k];
+            });
+
+            // 排序：分數高優先；同分時間短優先
+            list.sort(function(a,b){
+              a = a || {}; b = b || {};
+              var as = Number(a.score||0), bs = Number(b.score||0);
+              if(as !== bs) return bs - as;
+              return Number(a.timeMs||0) - Number(b.timeMs||0);
+            });
+
+            cb(list);
+          })
+          .catch(function(err){
+            console && console.warn && console.warn('fetch rank error', err);
+            cb([]);
+          });
+      }
+
       // ===== 排行榜 =====
       function renderRank(categoryId){
         rankModalBody.innerHTML = '';
@@ -1182,87 +1208,78 @@
           rankModalBody.innerHTML = '<div class="rank-empty">請先選擇挑戰項目，再查看排行榜。</div>';
           return;
         }
+
         var meta = CATEGORY_META[categoryId];
         rankModalTitle.textContent = '排行榜：' + meta.label;
 
-        var data = loadRankData();
-        var list = (data.categories[categoryId] || []).slice(); // 這裡每一個 category 都獨立一個榜單
+        // ✅ 改讀 Firebase
+        rankModalBody.innerHTML = '<div class="rank-empty">讀取中...</div>';
 
-        if(!list.length){
-          rankModalBody.innerHTML = '<div class="rank-empty">目前尚無成績紀錄。</div>';
-          return;
-        }
-
-        list.sort(function(a,b){
-          if(a.score !== b.score){
-            return b.score - a.score;
+        fetchRankListFromFirebase(categoryId, function(list){
+          if(!list.length){
+            rankModalBody.innerHTML = '<div class="rank-empty">目前尚無成績紀錄。</div>';
+            return;
           }
-          return a.timeMs - b.timeMs;
+
+          var html = '';
+          html += '<table class="rank-table"><thead><tr>';
+          html += '<th>名次</th><th>姓名</th><th>分數</th><th>完成時間</th>';
+          html += '</tr></thead><tbody>';
+
+          for(var i=0;i<list.length;i++){
+            var row = list[i] || {};
+            var cls = (row.acc === acc) ? ' class="me-row"' : '';
+            html += '<tr'+cls+'>';
+            html += '<td>' + (i+1) + '</td>';
+            html += '<td>' + (row.name || '-') + '</td>';
+            html += '<td>' + (row.score || 0) + '分</td>';
+            html += '<td>' + formatDuration(row.timeMs || 0) + '</td>';
+            html += '</tr>';
+          }
+
+          html += '</tbody></table>';
+          rankModalBody.innerHTML = html;
         });
-
-        var html = '';
-        html += '<table class="rank-table"><thead><tr>';
-        html += '<th>名次</th><th>姓名</th><th>分數</th><th>完成時間</th>';
-        html += '</tr></thead><tbody>';
-
-        for(var i=0;i<list.length;i++){
-          var row = list[i];
-          var cls = (row.name === name) ? ' class="me-row"' : '';
-          html += '<tr'+cls+'>';
-          html += '<td>' + (i+1) + '</td>';
-          html += '<td>' + (row.name || '-') + '</td>';
-          html += '<td>' + row.score + '分</td>';
-          html += '<td>' + formatDuration(row.timeMs) + '</td>';
-          html += '</tr>';
-        }
-
-        html += '</tbody></table>';
-        rankModalBody.innerHTML = html;
       }
 
-            // ===== 顯示目前挑戰項目 Top 3 =====
-      function updateTop3Box(categoryId){
-        if(!top3Box){ return; }
-        top3Box.innerHTML = '';
 
-        if(!categoryId || !CATEGORY_META[categoryId]){
-          top3Box.innerHTML =
-            '<div class="top3-empty">請先選擇挑戰項目，將顯示該項目前 3 名成績。</div>';
-          return;
-        }
+       // ===== 顯示目前挑戰項目 Top 3 =====
+        function updateTop3Box(categoryId){
+          if(!top3Box){ return; }
+          top3Box.innerHTML = '';
 
-        var data = loadRankData();
-        var list = (data.categories[categoryId] || []).slice();
-
-        if(!list.length){
-          top3Box.innerHTML =
-            '<div class="top3-empty">目前尚無排行榜紀錄，完成挑戰並儲存成績後會顯示前 3 名。</div>';
-          return;
-        }
-
-        list.sort(function(a,b){
-          if(a.score !== b.score){
-            return b.score - a.score;
+          if(!categoryId || !CATEGORY_META[categoryId]){
+            top3Box.innerHTML = '<div class="top3-empty">請先選擇挑戰項目，將顯示該項目前 3 名成績。</div>';
+            return;
           }
-          return a.timeMs - b.timeMs;
-        });
 
-        var max = Math.min(3, list.length);
-        var medals = ['🥇','🥈','🥉'];
+          // ✅ 改讀 Firebase
+          top3Box.innerHTML = '<div class="top3-empty">讀取前 3 名中...</div>';
 
-        var html = '<div class="top3-title">本項目前三名</div>';
-        html += '<div class="top3-list">';
-        for(var i=0;i<max;i++){
-          var row = list[i];
-          html += '<div class="top3-item">';
-          html +=   '<span>' + medals[i] + ' ' + (row.name || '-') + '</span>';
-          html +=   '<span class="score">' + row.score + '分 / ' + formatDuration(row.timeMs) + '</span>';
-          html += '</div>';
+          fetchRankListFromFirebase(categoryId, function(list){
+            if(!list.length){
+              top3Box.innerHTML = '<div class="top3-empty">目前尚無排行榜紀錄，完成挑戰並儲存成績後會顯示前 3 名。</div>';
+              return;
+            }
+
+            var max = Math.min(3, list.length);
+            var medals = ['🥇','🥈','🥉'];
+
+            var html = '<div class="top3-title">本項目前三名</div>';
+            html += '<div class="top3-list">';
+            for(var i=0;i<max;i++){
+              var row = list[i] || {};
+              html += '<div class="top3-item">';
+              html +=   '<span>' + medals[i] + ' ' + (row.name || '-') + '</span>';
+              html +=   '<span class="score">' + (row.score || 0) + '分 / ' + formatDuration(row.timeMs || 0) + '</span>';
+              html += '</div>';
+            }
+            html += '</div>';
+
+            top3Box.innerHTML = html;
+          });
         }
-        html += '</div>';
 
-        top3Box.innerHTML = html;
-      }
 
 
       // ===== 事件：切換 mode =====
