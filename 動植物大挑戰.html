@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>動植物大挑戰</title>
+  <style>
+    :root {
+      --brand: #4b4e8a;
+      --bg: #f4f5fa;
+      --card: #ffffff;
+      --muted: #a3a6b3;
+      --input: #e9ecf4;
+      --radius: 16px;
+      --title-size: 23px;
+      --btn-height: 46px;
+    }
+
+    body{
+      margin:0;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#555;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC","PingFang TC","Helvetica Neue",Arial,"Microsoft JhengHei",sans-serif;
+    }
+
+    .phone {
+      width: min(420px, 94vw);
+      background: var(--card);
+      border-radius: 0;
+      box-shadow: 0 6px 22px rgba(0,0,0,.25);
+      padding: 18px 10px 46px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .title-row {
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      color:var(--brand);
+      font-weight:800;
+      font-size:var(--title-size);
+      text-align:center;
+      align-items:center;
+      margin: 0 12px 4px;
+    }
+
+    .title-row img{width:22px;height:22px;}
+
+    .user-bar{
+      margin: 0 8px 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background:#e4f5ec;
+      color:#0f7a3b;
+      font-weight:700;
+      font-size: 14px;
+      text-align:center;
+    }
+
+    .section{
+      margin: 0 6px;
+      padding: 10px 10px 8px;
+      border-radius: 14px;
+      background:#eef0ff;
+      border:1px solid #d8dcff;
+    }
+    .section-title{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:800;
+      color:#2f3161;
+      text-align:center;
+      letter-spacing:.15em;
+    }
+    .section-desc{
+      margin:0 0 8px;
+      font-size:14px;
+      color:#333;
+      text-align:center;
+      line-height:1.5;
+    }
+
+    .mode-toggle{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:4px;
+    }
+    .pill-btn{
+      border:none;
+      border-radius:999px;
+      padding:8px 4px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:.15em;
+      background:#d0d3f2;
+      color:#2f3161;
+      cursor:pointer;
+    }
+    .pill-btn.active{
+      background:#ba004c;
+      color:#fff;
+    }
+
+    .work-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin-top:8px;
+    }
+    .work-btn{
+      border:none;
+      border-radius:14px;
+      padding:8px 4px;
+      font-size:14px;
+      font-weight:800;
+      background:#2f3161;
+      color:#fff;
+      letter-spacing:.15em;
+      cursor:pointer;
+      min-height:38px;
+    }
+    .work-btn.active{
+      background:#c7a64a;
+      color:#fff;
+    }
+
+    .lang-wrap{
+      margin-top:8px;
+    }
+    .lang-row{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+      margin-bottom:6px;
+    }
+    .lang-label{
+      font-weight:800;
+      color:#2f3161;
+      min-width:62px;
+      font-size:14px;
+      display:flex;
+      align-items:center;
+    }
+    .level-btn{
+      border:none;
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:14px;
+      background:#d0d3f2;
+      color:#2f3161;
+      cursor:pointer;
+    }
+    .level-btn.active{
+      background:#c7a64a;
+      color:#fff;
+    }
+
+    .current-choice{
+      margin-top:6px;
+      font-size:14px;
+      text-align:center;
+      color:#444;
+    }
+
+    /* 狀態區 */
+    .status-card{
+      margin: 2px 6px 0;
+      padding: 8px 10px 10px;
+      border-radius: 14px;
+      background:#f7f7ff;
+      border:1px solid #dfe2ff;
+    }
+    .status-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:14px;
+      color:#2f3161;
+      margin-bottom:4px;
+    }
+    .status-row span{font-weight:700;}
+
+    .status-actions{
+      margin-top:4px;
+      display:flex;
+      gap:8px;
+    }
+
+    .btn-main,
+    .btn-secondary{
+      border:none;
+      border-radius:14px;
+      padding:8px 10px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:.15em;
+      cursor:pointer;
+      flex:1;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .btn-main{
+      background:#2f3161;
+      color:#fff;
+    }
+    .btn-main:disabled{
+      opacity:.4;
+      cursor:default;
+    }
+    .btn-secondary{
+      background:#6c6e9e;
+      color:#fff;
+    }
+
+    .hint-text{
+      font-size:12px;
+      color:#777;
+      margin-top:4px;
+      text-align:center;
+    }
+
+    /* 底部返回 */
+    .footer-actions{
+      margin: 8px 6px 0;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .btn-back{
+      flex:1;
+      border:none;
+      border-radius:14px;
+      padding:8px 6px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:.15em;
+      background:#6c6e9e;
+      color:#fff;
+      cursor:pointer;
+      text-align:center;
+    }
+    .btn-back.secondary{
+      background:#a12a5e;
+    }
+
+    /* ===== 通用彈出視窗 ===== */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .modal-overlay.show{
+      display:flex;
+    }
+    .modal-card{
+      width:min(380px, 94vw);
+      max-height:82vh;
+      background:#ffffff;
+      border-radius:20px;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+      padding:10px 12px 12px;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      margin-bottom:4px;
+      gap:8px;
+    }
+    .modal-header-left{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .modal-title{
+      font-size:15px;
+      font-weight:800;
+      color:#2f3161;
+    }
+    .modal-sub{
+      font-size:12px;
+      color:#777;
+    }
+    .modal-close{
+      border:none;
+      background:transparent;
+      font-size:18px;
+      line-height:1;
+      cursor:pointer;
+      color:#666;
+    }
+    .modal-body{
+      font-size:14px;
+      color:#222;
+      margin-top:4px;
+      overflow:auto;
+      padding-right:2px;
+    }
+    .modal-footer{
+      margin-top:8px;
+      display:flex;
+      gap:8px;
+      justify-content:flex-end;
+    }
+
+    /* 題目內容卡片 */
+    .question-card{
+      border-radius:14px;
+      background:#f5f6ff;
+      padding:8px 8px 10px;
+      border:1px solid #e0e3ff;
+    }
+    .question-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:12px;
+      color:#555;
+      margin-bottom:4px;
+    }
+    .question-badge{
+      padding:2px 8px;
+      border-radius:999px;
+      background:#2f3161;
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+    }
+    .question-text{
+      line-height:1.6;
+      margin-bottom:8px;
+      font-size:14px;
+      color:#222;
+    }
+    .question-media-box{
+      margin-bottom:8px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#ddd;
+      max-height:200px;
+    }
+    .question-media-box img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:cover;
+    }
+
+    .modal-options{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-top:4px;
+    }
+    .option-btn{
+      border:none;
+      border-radius:12px;
+      padding:8px 10px;
+      font-size:14px;
+      text-align:left;
+      background:#e2e4ff;
+      color:#222;
+      cursor:pointer;
+      transition:background .15s, transform .05s;
+    }
+    .option-btn:active{
+      transform:scale(0.98);
+    }
+    .option-btn.correct{
+      background:#d6f5dc;
+      border:1px solid #46a663;
+    }
+    .option-btn.wrong{
+      background:#ffd6d6;
+      border:1px solid #d94a4a;
+    }
+
+    /* 排行榜表格（在彈窗裡用） */
+    .rank-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:13px;
+      margin-top:4px;
+    }
+    .rank-table th,
+    .rank-table td{
+      padding:3px 4px;
+      border-bottom:1px dashed #f1e0a8;
+      text-align:left;
+      white-space:nowrap;
+    }
+    .rank-table th{
+      font-weight:800;
+      color:#5b4b18;
+    }
+    .rank-empty{
+      font-size:13px;
+      color:#666;
+      text-align:center;
+      margin-top:4px;
+    }
+    .me-row{
+      background:#fff4c1;
+    }
+
+    /* 開始作答按鈕狀態 */
+    .btn-main.locked {
+      background: #2b2b2b !important;
+      color: #888 !important;
+      cursor: not-allowed !important;
+    }
+
+    .btn-main.ready {
+      background: #c62828 !important;
+      color: #fff !important;
+    }
+
+        /* 每個挑戰項目當前前 3 名顯示區塊 */
+    .top3-box{
+      margin-top:6px;
+      padding:6px 8px;
+      border-radius:12px;
+      border:1px solid #f9d98b;
+      background:linear-gradient(135deg,#fff7e0,#ffe8b3);
+      font-size:12px;
+      color:#5a4305;
+      animation: top3Pop .35s ease-out;
+    }
+    .top3-title{
+      font-weight:800;
+      margin-bottom:3px;
+    }
+    .top3-list{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .top3-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:12px;
+    }
+    .top3-item span.score{
+      font-weight:700;
+    }
+    .top3-empty{
+      font-size:12px;
+      color:#777;
+      text-align:center;
+    }
+    @keyframes top3Pop{
+      0%{ transform:translateY(6px); opacity:0; }
+      100%{ transform:translateY(0); opacity:1; }
+    }
+    
+    /* 語音播放按鈕 */
+    .audio-btn{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      padding:3px 8px;
+      margin-top:4px;
+      border:none;
+      border-radius:999px;
+      background:#ff7043;
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .audio-btn.small{
+      padding:2px 6px;
+      font-size:11px;
+      margin-left:6px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <main class="phone">
+    <div class="title-row">
+      <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758859484/%E6%A8%99%E9%A1%8C%E5%9C%96%E7%A4%BA-%E8%B1%AC%E9%BC%BB%E7%B4%99_ppobop.png" alt="icon">
+      <h1 style="margin:0;font-size:inherit;">動植物大挑戰</h1>
+    </div>
+
+    <div id="userBar" class="user-bar">目前登入：－</div>
+
+    <!-- 類型選擇 -->
+    <section class="section">
+      <h2 class="section-title">選擇挑戰類型</h2>
+      <p class="section-desc">
+        先選 <b>工作挑戰</b> 或 <b>語言挑戰</b>，再選子項目後即可開始測驗。<br>
+        每次隨機從題庫抽出最多 20 題，題目一題一題彈出作答，滿分 100 分。
+      </p>
+
+      <div class="mode-toggle">
+        <button id="modeWork" class="pill-btn">工作挑戰</button>
+        <button id="modeLang" class="pill-btn">語言挑戰</button>
+      </div>
+
+      <!-- 工作挑戰 -->
+      <div id="workPanel" style="display:none;">
+        <div class="work-grid">
+          <button class="work-btn" data-category="work-pre">前導挑戰</button>
+          <button class="work-btn" data-category="work-review">複查挑戰</button>
+          <button class="work-btn" data-category="work-flow">分流挑戰</button>
+          <button class="work-btn" data-category="work-rule">規定挑戰</button>
+        </div>
+      </div>
+
+      <!-- 語言挑戰 -->
+      <div id="langPanel" style="display:none;">
+        <div class="lang-wrap">
+          <div class="lang-row">
+            <div class="lang-label">英文</div>
+              <button class="level-btn" data-category="lang-en-quarantine">檢疫</button>
+              <button class="level-btn" data-category="lang-en-beginner">初級</button>
+              <button class="level-btn" data-category="lang-en-middle">中級</button>
+              <button class="level-btn" data-category="lang-en-advanced">高級</button>
+           </div>
+
+          <div class="lang-row">
+            <div class="lang-label">韓文</div>
+              <button class="level-btn" data-category="lang-kr-quarantine">檢疫</button>
+              <button class="level-btn" data-category="lang-kr-beginner">初級</button>
+              <button class="level-btn" data-category="lang-kr-middle">中級</button>
+              <button class="level-btn" data-category="lang-kr-advanced">高級</button>
+          </div>
+
+          <div class="lang-row">
+            <div class="lang-label">越南</div>
+              <button class="level-btn" data-category="lang-vn-quarantine">檢疫</button>
+              <button class="level-btn" data-category="lang-vn-beginner">初級</button>
+              <button class="level-btn" data-category="lang-vn-middle">中級</button>
+              <button class="level-btn" data-category="lang-vn-advanced">高級</button>
+          </div>
+
+          <div class="lang-row">
+            <div class="lang-label">日語</div>
+              <button class="level-btn" data-category="lang-jp-quarantine">檢疫</button>
+              <button class="level-btn" data-category="lang-jp-beginner">初級</button>
+              <button class="level-btn" data-category="lang-jp-middle">中級</button>
+              <button class="level-btn" data-category="lang-jp-advanced">高級</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="currentChoice" class="current-choice">尚未選擇挑戰項目。</div>
+    </section>
+
+    <!-- 狀態 + 操作 -->
+      <section class="status-card">
+        <div class="status-row">
+          <span id="statusText">尚未開始測驗</span>
+          <span id="timerText">時間：0分0秒</span>
+        </div>
+        <div class="status-actions">
+          <button id="startBtn" class="btn-main">開始作答</button>
+          <button id="viewRankBtn" class="btn-secondary">查看排行榜</button>
+        </div>
+        <!-- 這裡是各項目前三名 -->
+        <div id="top3Box" class="top3-box"></div>
+
+        <div class="hint-text">
+          作答中「開始作答」按鈕會鎖住，無法重新點擊。完成後可選擇是否儲存成績到排行榜。
+        </div>
+      </section>
+
+    <!-- 底部 -->
+    <div class="footer-actions">
+      <button id="backMainBtn" class="btn-back">返回主頁</button>
+      <button id="logoutBtn" class="btn-back secondary">登出</button>
+    </div>
+  </main>
+    <!-- 共用語音播放器 -->
+  <audio id="qaAudio"></audio>
+
+
+  <!-- ===== 題目彈出視窗 ===== -->
+  <div id="questionModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-title" id="questionModalTitle">題目</div>
+          <div class="modal-sub" id="questionModalTimer">作答時間：0分0秒</div>
+        </div>
+        <button id="questionModalClose" class="modal-close" title="放棄本次作答">×</button>
+      </div>
+      <div class="modal-body" id="questionModalBody">
+        <!-- 題目與選項會動態塞進來 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 成績彈出視窗（詢問是否儲存） ===== -->
+  <div id="resultModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-title">本次挑戰成績</div>
+        </div>
+        <button id="resultModalClose" class="modal-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="resultText" style="line-height:1.7;"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="viewWrongBtn" class="btn-main" style="flex:1;background:#c62828;color:#fff;">
+          查看錯誤
+        </button>
+        <button id="noSaveResultBtn" class="btn-secondary" style="flex:1;">不儲存</button>
+        <button id="saveResultBtn" class="btn-main" style="flex:1;">儲存到排行榜</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 排行榜彈出視窗 ===== -->
+  <div id="rankModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-title" id="rankModalTitle">排行榜</div>
+        </div>
+        <button id="rankModalClose" class="modal-close">×</button>
+      </div>
+      <div class="modal-body" id="rankModalBody">
+        <!-- 排行榜表格會動態塞進來 -->
+      </div>
+    </div>
+  </div>
+
+    <!-- ===== 本次錯誤題目檢視視窗 ===== -->
+  <div id="wrongModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-title">本次錯誤題目</div>
+          <div class="modal-sub">僅顯示這一次挑戰答錯的題目，方便複習。</div>
+        </div>
+        <button id="wrongModalClose" class="modal-close">×</button>
+      </div>
+      <div class="modal-body" id="wrongModalBody">
+        <!-- 錯誤題目會動態塞進來 -->
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!-- 共用播放函式（給題目按鈕用） -->
+  <script>
+    window.playAudio = function(src){
+      var audio = document.getElementById('qaAudio');
+      if(!audio) return;
+      // 若換了新來源就重新指定
+      if(audio.src.indexOf(src) === -1){
+        audio.src = src;
+      }
+      audio.currentTime = 0;
+      audio.play().catch(function(e){
+        console && console.warn && console.warn('audio play error', e);
+      });
+    };
+  </script>
+
+  <!-- 題庫外部檔案 -->
+  <script src="challenge-questions.js"></script>
+
+  <script>
+    (function(){
+      // ===== 讀取 main / index 存的登入資訊 =====
+      var name = localStorage.getItem('t2_user_name') || '';
+      var bind = localStorage.getItem('t2_user_bind') || '';
+      var acc  = localStorage.getItem('t2_user_acc')  || '';
+      var pwd  = localStorage.getItem('t2_user_pwd')  || '';
+
+      if(!name || !bind || !acc || !pwd || bind.indexOf(acc + pwd) !== 0){
+        window.location.replace('T2日動植物檢疫登入系統.html');
+        return;
+      }
+
+      document.getElementById('userBar').textContent = '目前登入：' + name;
+
+    // ===== 類別定義 =====
+    var CATEGORY_META = {
+      'work-pre':        { group:'工作挑戰', label:'前導挑戰' },
+      'work-review':     { group:'工作挑戰', label:'複查挑戰' },
+      'work-flow':       { group:'工作挑戰', label:'分流挑戰' },
+      'work-rule':       { group:'工作挑戰', label:'規定挑戰' },
+
+      // ===== 語言挑戰（加入檢疫）=====
+      'lang-en-quarantine': { group:'語言挑戰', label:'英文 檢疫' },
+      'lang-en-beginner':   { group:'語言挑戰', label:'英文 初級' },
+      'lang-en-middle':     { group:'語言挑戰', label:'英文 中級' },
+      'lang-en-advanced':   { group:'語言挑戰', label:'英文 高級' },
+
+      'lang-kr-quarantine': { group:'語言挑戰', label:'韓文 檢疫' },
+      'lang-kr-beginner':   { group:'語言挑戰', label:'韓文 初級' },
+      'lang-kr-middle':     { group:'語言挑戰', label:'韓文 中級' },
+      'lang-kr-advanced':   { group:'語言挑戰', label:'韓文 高級' },
+
+      'lang-vn-quarantine': { group:'語言挑戰', label:'越南 檢疫' },
+      'lang-vn-beginner':   { group:'語言挑戰', label:'越南 初級' },
+      'lang-vn-middle':     { group:'語言挑戰', label:'越南 中級' },
+      'lang-vn-advanced':   { group:'語言挑戰', label:'越南 高級' },
+
+      'lang-jp-quarantine': { group:'語言挑戰', label:'日語 檢疫' },
+      'lang-jp-beginner':   { group:'語言挑戰', label:'日語 初級' },
+      'lang-jp-middle':     { group:'語言挑戰', label:'日語 中級' },
+      'lang-jp-advanced':   { group:'語言挑戰', label:'日語 高級' }
+    };
+
+
+      // 題庫
+      var QUESTION_BANK = window.QUESTION_BANK || {};
+      var RANK_KEY = 't2_challenge_rank_v1';
+
+      // ===== DOM =====
+      var modeWorkBtn = document.getElementById('modeWork');
+      var modeLangBtn = document.getElementById('modeLang');
+      var workPanel   = document.getElementById('workPanel');
+      var langPanel   = document.getElementById('langPanel');
+      var currentChoiceEl = document.getElementById('currentChoice');
+      var statusText  = document.getElementById('statusText');
+      var timerText   = document.getElementById('timerText');
+      var startBtn    = document.getElementById('startBtn');
+      var viewRankBtn = document.getElementById('viewRankBtn');
+      var backMainBtn = document.getElementById('backMainBtn');
+      var logoutBtn   = document.getElementById('logoutBtn');
+
+      var questionModal      = document.getElementById('questionModal');
+      var questionModalTitle = document.getElementById('questionModalTitle');
+      var questionModalBody  = document.getElementById('questionModalBody');
+      var questionModalClose = document.getElementById('questionModalClose');
+      var questionModalTimer = document.getElementById('questionModalTimer');
+
+      var resultModal        = document.getElementById('resultModal');
+      var resultModalClose   = document.getElementById('resultModalClose');
+      var resultTextEl       = document.getElementById('resultText');
+      var saveResultBtn      = document.getElementById('saveResultBtn');
+      var noSaveResultBtn    = document.getElementById('noSaveResultBtn');
+      var viewWrongBtn       = document.getElementById('viewWrongBtn');
+
+      var rankModal          = document.getElementById('rankModal');
+      var rankModalTitle     = document.getElementById('rankModalTitle');
+      var rankModalBody      = document.getElementById('rankModalBody');
+      var rankModalClose     = document.getElementById('rankModalClose');
+
+      // 顯示各項目前三名
+      var top3Box            = document.getElementById('top3Box');
+
+      // 本次錯誤題目檢視
+      var wrongModal         = document.getElementById('wrongModal');
+      var wrongModalBody     = document.getElementById('wrongModalBody');
+      var wrongModalClose    = document.getElementById('wrongModalClose');
+
+
+      // ===== 狀態 =====
+      var currentCategory = null;
+      var examQuestions = [];
+      var currentIndex = 0;
+      var correctCount = 0;
+      var examStartTime = null;
+      var timerId = null;
+      var examInProgress = false;
+      var lastResult = null;
+      var lastExamDetail = null; // 存這次每一題的作答紀錄
+
+
+      // ===== 工具 =====
+      function setMode(mode){
+        if(mode === 'work'){
+          modeWorkBtn.classList.add('active');
+          modeLangBtn.classList.remove('active');
+          workPanel.style.display = 'block';
+          langPanel.style.display = 'none';
+        }else if(mode === 'lang'){
+          modeLangBtn.classList.add('active');
+          modeWorkBtn.classList.remove('active');
+          workPanel.style.display = 'none';
+          langPanel.style.display = 'block';
+        }
+      }
+
+      function updateCurrentChoice(){
+        if(!currentCategory || !CATEGORY_META[currentCategory]){
+          currentChoiceEl.textContent = '尚未選擇挑戰項目。';
+          if(typeof updateTop3Box === 'function'){
+            updateTop3Box(null);
+          }
+          return;
+        }
+        var meta = CATEGORY_META[currentCategory];
+        currentChoiceEl.textContent = '目前挑戰：' + meta.group + ' - ' + meta.label;
+
+        if(typeof updateTop3Box === 'function'){
+          updateTop3Box(currentCategory);
+        }
+      }
+
+
+      function updateStartButtonState(){
+        if(!currentCategory){
+          startBtn.classList.add('locked');
+          startBtn.classList.remove('ready');
+          return;
+        }
+        var bank = QUESTION_BANK[currentCategory] || [];
+        if(bank.length >= 20){
+          startBtn.classList.remove('locked');
+          startBtn.classList.add('ready');
+        } else {
+          startBtn.classList.add('locked');
+          startBtn.classList.remove('ready');
+        }
+      }
+
+      function shuffle(arr){
+        for(var i=arr.length-1;i>0;i--){
+          var j = Math.floor(Math.random() * (i+1));
+          var tmp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = tmp;
+        }
+        return arr;
+      }
+
+      function formatDuration(ms){
+        var sec = Math.floor(ms / 1000);
+        if(sec < 0){ sec = 0; }
+        var m = Math.floor(sec / 60);
+        var s = sec % 60;
+        return m + '分' + s + '秒';
+      }
+
+      function loadRankData(){
+        try{
+          var raw = localStorage.getItem(RANK_KEY);
+          if(!raw){ return { categories:{} }; }
+          var obj = JSON.parse(raw);
+          if(!obj || typeof obj !== 'object'){ return { categories:{} }; }
+          if(!obj.categories || typeof obj.categories !== 'object'){
+            obj.categories = {};
+          }
+          return obj;
+        }catch(e){
+          return { categories:{} };
+        }
+      }
+
+      function saveRankData(data){
+        try{
+          localStorage.setItem(RANK_KEY, JSON.stringify(data));
+        }catch(e){}
+      }
+
+      function stopTimer(){
+        if(timerId){
+          clearInterval(timerId);
+          timerId = null;
+        }
+      }
+
+      function resetExamState(){
+        stopTimer();
+        examStartTime = null;
+        examQuestions = [];
+        currentIndex = 0;
+        correctCount = 0;
+        examInProgress = false;
+        lastResult = null;
+        statusText.textContent = '尚未開始測驗';
+        timerText.textContent = '時間：0分0秒';
+        if(questionModalTimer){
+          questionModalTimer.textContent = '作答時間：0分0秒';
+        }
+        startBtn.disabled = false;
+        startBtn.textContent = '開始作答';
+      }
+
+      function openModal(el){
+        if(el){ el.classList.add('show'); }
+      }
+      function closeModal(el){
+        if(el){ el.classList.remove('show'); }
+      }
+
+      function refreshCategoryButtons() {
+        var allBtns = document.querySelectorAll('[data-category]');
+        allBtns.forEach(function(btn){
+          var cat = btn.getAttribute('data-category');
+          var bank = QUESTION_BANK[cat] || [];
+          if(bank.length < 20){
+            btn.style.display = 'none';
+          } else {
+            btn.style.display = 'inline-block';
+          }
+        });
+      }
+
+      // ===== 建立考卷 =====
+      function buildExamFromBank(categoryId){
+        var bank = QUESTION_BANK[categoryId] || [];
+        if(!bank.length){ return null; }
+        var pool = shuffle(bank.slice());
+        var count = pool.length >= 20 ? 20 : pool.length;
+        var result = [];
+        for(var i=0;i<count;i++){
+          var raw = pool[i];
+          var opts = (raw.options || []).map(function(text, idx){
+            return {
+              text: text,
+              correct: (idx === raw.answer)
+            };
+          });
+          shuffle(opts);
+          result.push({
+            text: raw.text,
+            image: raw.image || '',
+            options: opts,
+            userIndex: null,   // 使用者選了哪一個 index
+            isCorrect: null    // 這題有沒有答對
+          });
+        }
+        return result;
+      }
+
+
+      // ===== 題目彈窗 =====
+      function showCurrentQuestion(){
+        if(!examQuestions.length || currentIndex >= examQuestions.length){
+          finishExam();
+          return;
+        }
+        var q = examQuestions[currentIndex];
+        var total = examQuestions.length;
+        var letters = ['A','B','C','D','E','F'];
+
+        questionModalTitle.textContent = '第 ' + (currentIndex+1) + ' 題 / 共 ' + total + ' 題';
+
+        var html = '';
+        html += '<div class="question-card">';
+        html +=   '<div class="question-meta">';
+        html +=     '<span class="question-badge">題目 ' + (currentIndex+1) + '</span>';
+        html +=     '<span>共 ' + total + ' 題</span>';
+        html +=   '</div>';
+        if(q.image){
+          html += '<div class="question-media-box"><img src="'+ q.image +'" alt="question image"></div>';
+        }
+        html +=   '<div class="question-text">' + q.text + '</div>';
+        html +=   '<div class="modal-options">';
+        for(var i=0;i<q.options.length;i++){
+          var opt = q.options[i];
+          var letter = letters[i] || '';
+          html += '<button class="option-btn" data-index="'+i+'">'
+               + (letter ? (letter + '. ') : '')
+               + opt.text
+               + '</button>';
+        }
+        html +=   '</div>';
+        html += '</div>';
+
+        questionModalBody.innerHTML = html;
+
+        var btns = questionModalBody.querySelectorAll('.option-btn');
+        for(var j=0;j<btns.length;j++){
+          (function(idx){
+            btns[idx].addEventListener('click', function(){
+              if(!examInProgress){ return; }
+
+              var qNow = examQuestions[currentIndex];
+              var buttons = btns;
+
+              // 紀錄這題使用者選了哪個 & 有沒有答對
+              qNow.userIndex = idx;
+              qNow.isCorrect = !!qNow.options[idx].correct;
+
+              // 先全部 disable
+              for(var b=0;b<buttons.length;b++){
+                buttons[b].disabled = true;
+              }
+
+              // 標出正確答案
+              for(var k=0;k<qNow.options.length;k++){
+                if(qNow.options[k].correct){
+                  buttons[k].classList.add('correct');
+                }
+              }
+
+              // 標記使用者選的
+              if(!qNow.options[idx].correct){
+                this.classList.add('wrong');
+              }else{
+                correctCount++;
+              }
+
+              // 0.6 秒後進入下一題
+              setTimeout(function(){
+                currentIndex++;
+                if(currentIndex < examQuestions.length){
+                  showCurrentQuestion();
+                }else{
+                  closeModal(questionModal);
+                  finishExam();
+                }
+              }, 600);
+            });
+          })(j);
+        }
+
+
+        openModal(questionModal);
+      }
+
+      // ===== 完成考試 =====
+      function finishExam(){
+        if(!examInProgress || !examStartTime){
+          resetExamState();
+          return;
+        }
+        stopTimer();
+        examInProgress = false;
+
+        var usedMs = Date.now() - examStartTime;
+        var total = examQuestions.length || 1;
+        var score = Math.round((correctCount / total) * 100);
+        if(score < 0){ score = 0; }
+        if(score > 100){ score = 100; }
+
+        // ✅ 存本次成績（給「儲存到排行榜」按鈕用）
+        lastResult = {
+          categoryId: currentCategory,
+          score: score,
+          timeMs: usedMs
+        };
+
+
+        var title = '本次挑戰';
+        if(currentCategory && CATEGORY_META[currentCategory]){
+          title = CATEGORY_META[currentCategory].label;
+        }
+
+        statusText.textContent = '已完成：' + title + '｜答對 ' + correctCount + ' / ' + total + ' 題';
+        timerText.textContent = '時間：' + formatDuration(usedMs);
+        if(questionModalTimer){
+          questionModalTimer.textContent = '作答時間：' + formatDuration(usedMs);
+        }
+
+        // 存這一次完整的題目 + 作答記錄，給「查看錯誤」用
+        lastExamDetail = {
+          categoryId: currentCategory,
+          questions: examQuestions.slice()
+        };
+
+
+        startBtn.disabled = false;
+        startBtn.textContent = '重新作答';
+
+        var msg = '';
+        msg += '<div><b>' + title + '</b></div>';
+        msg += '<div>本次成績：<b>' + score + ' 分</b></div>';
+        msg += '<div>答對題數：' + correctCount + ' / ' + total + '</div>';
+        msg += '<div>完成時間：' + formatDuration(usedMs) + '</div>';
+        msg += '<div style="margin-top:6px;font-size:13px;color:#555;">';
+        msg += '是否要將本次成績儲存到排行榜？若已存在同名使用者，會以本次成績覆蓋。';
+        msg += '</div>';
+
+        resultTextEl.innerHTML = msg;
+        openModal(resultModal);
+      }
+
+            // ===== 本次錯誤題目檢視 =====
+      if(wrongModalClose){
+        wrongModalClose.addEventListener('click', function(){
+          closeModal(wrongModal);
+        });
+      }
+
+      if(viewWrongBtn){
+        viewWrongBtn.addEventListener('click', function(){
+          if(!lastExamDetail || !lastExamDetail.questions || !lastExamDetail.questions.length){
+            alert('目前沒有可檢視的錯誤題目，請先完成一次挑戰。');
+            return;
+          }
+
+          var qs = lastExamDetail.questions;
+          var wrongList = qs.filter(function(q){ return q.isCorrect === false; });
+
+          var html = '';
+          if(!wrongList.length){
+            html += '<div class="top3-empty">本次全部答對，沒有錯誤題目！</div>';
+          }else{
+            html += '<div style="font-size:13px;color:#555;margin-bottom:6px;">以下是本次作答錯誤的題目，方便你之後複習：</div>';
+            var letters = ['A','B','C','D','E','F'];
+            for(var i=0;i<wrongList.length;i++){
+              var q = wrongList[i];
+              var qIdx = qs.indexOf(q);
+              var userIdx = (typeof q.userIndex === 'number') ? q.userIndex : -1;
+              var correctIdx = -1;
+              for(var k=0;k<q.options.length;k++){
+                if(q.options[k].correct){
+                  correctIdx = k;
+                  break;
+                }
+              }
+
+              html += '<div class="question-card" style="margin-bottom:8px;">';
+              html +=   '<div class="question-meta">';
+              html +=     '<span class="question-badge">第 ' + (qIdx+1) + ' 題</span>';
+              html +=     '<span>你的答案 vs 正確答案</span>';
+              html +=   '</div>';
+
+              if(q.image){
+                html += '<div class="question-media-box"><img src="'+ q.image +'" alt=""></div>';
+              }
+
+              html +=   '<div class="question-text">' + q.text + '</div>';
+              html +=   '<div style="font-size:13px;line-height:1.6;margin-top:4px;">';
+
+              if(userIdx >= 0 && q.options[userIdx]){
+                html += '<div>你的答案：<span style="color:#c62828;font-weight:700;">'
+                     + (letters[userIdx] || '') + ' ' + q.options[userIdx].text + '</span></div>';
+              }else{
+                html += '<div>你的答案：<span style="color:#c62828;">（未作答）</span></div>';
+              }
+
+              if(correctIdx >= 0 && q.options[correctIdx]){
+                html += '<div>正確答案：<span style="color:#2e7d32;font-weight:700;">'
+                     + (letters[correctIdx] || '') + ' ' + q.options[correctIdx].text + '</span></div>';
+              }
+
+              html +=   '</div>';
+              html += '</div>';
+            }
+          }
+
+          wrongModalBody.innerHTML = html;
+
+          // 關掉成績視窗，開錯題視窗
+          closeModal(resultModal);
+          openModal(wrongModal);
+        });
+      }
+
+
+      // ===== 排行榜 =====
+      function renderRank(categoryId){
+        rankModalBody.innerHTML = '';
+        if(!categoryId || !CATEGORY_META[categoryId]){
+          rankModalTitle.textContent = '排行榜';
+          rankModalBody.innerHTML = '<div class="rank-empty">請先選擇挑戰項目，再查看排行榜。</div>';
+          return;
+        }
+        var meta = CATEGORY_META[categoryId];
+        rankModalTitle.textContent = '排行榜：' + meta.label;
+
+        var data = loadRankData();
+        var list = (data.categories[categoryId] || []).slice(); // 這裡每一個 category 都獨立一個榜單
+
+        if(!list.length){
+          rankModalBody.innerHTML = '<div class="rank-empty">目前尚無成績紀錄。</div>';
+          return;
+        }
+
+        list.sort(function(a,b){
+          if(a.score !== b.score){
+            return b.score - a.score;
+          }
+          return a.timeMs - b.timeMs;
+        });
+
+        var html = '';
+        html += '<table class="rank-table"><thead><tr>';
+        html += '<th>名次</th><th>姓名</th><th>分數</th><th>完成時間</th>';
+        html += '</tr></thead><tbody>';
+
+        for(var i=0;i<list.length;i++){
+          var row = list[i];
+          var cls = (row.name === name) ? ' class="me-row"' : '';
+          html += '<tr'+cls+'>';
+          html += '<td>' + (i+1) + '</td>';
+          html += '<td>' + (row.name || '-') + '</td>';
+          html += '<td>' + row.score + '分</td>';
+          html += '<td>' + formatDuration(row.timeMs) + '</td>';
+          html += '</tr>';
+        }
+
+        html += '</tbody></table>';
+        rankModalBody.innerHTML = html;
+      }
+
+            // ===== 顯示目前挑戰項目 Top 3 =====
+      function updateTop3Box(categoryId){
+        if(!top3Box){ return; }
+        top3Box.innerHTML = '';
+
+        if(!categoryId || !CATEGORY_META[categoryId]){
+          top3Box.innerHTML =
+            '<div class="top3-empty">請先選擇挑戰項目，將顯示該項目前 3 名成績。</div>';
+          return;
+        }
+
+        var data = loadRankData();
+        var list = (data.categories[categoryId] || []).slice();
+
+        if(!list.length){
+          top3Box.innerHTML =
+            '<div class="top3-empty">目前尚無排行榜紀錄，完成挑戰並儲存成績後會顯示前 3 名。</div>';
+          return;
+        }
+
+        list.sort(function(a,b){
+          if(a.score !== b.score){
+            return b.score - a.score;
+          }
+          return a.timeMs - b.timeMs;
+        });
+
+        var max = Math.min(3, list.length);
+        var medals = ['🥇','🥈','🥉'];
+
+        var html = '<div class="top3-title">本項目前三名</div>';
+        html += '<div class="top3-list">';
+        for(var i=0;i<max;i++){
+          var row = list[i];
+          html += '<div class="top3-item">';
+          html +=   '<span>' + medals[i] + ' ' + (row.name || '-') + '</span>';
+          html +=   '<span class="score">' + row.score + '分 / ' + formatDuration(row.timeMs) + '</span>';
+          html += '</div>';
+        }
+        html += '</div>';
+
+        top3Box.innerHTML = html;
+      }
+
+
+      // ===== 事件：切換 mode =====
+      modeWorkBtn.addEventListener('click', function(){
+        setMode('work');
+      });
+      modeLangBtn.addEventListener('click', function(){
+        setMode('lang');
+      });
+      setMode('work');
+      
+      // 初始化：依照題庫數量隱藏未滿 20 題的項目，並更新開始作答按鈕 & Top3
+      refreshCategoryButtons();
+      updateStartButtonState();
+      updateCurrentChoice();
+
+
+      // 工作挑戰
+      var workBtns = workPanel.querySelectorAll('.work-btn');
+      for (var i = 0; i < workBtns.length; i++) {
+        workBtns[i].addEventListener('click', function () {
+          // 清除工作挑戰按鈕 active 樣式
+          for (var k = 0; k < workBtns.length; k++) {
+            workBtns[k].classList.remove('active');
+          }
+          this.classList.add('active');
+
+          // 設定目前挑戰類別
+          currentCategory = this.getAttribute('data-category');
+
+          // 清除語言挑戰的按鈕樣式
+          var lvlBtns = langPanel.querySelectorAll('.level-btn');
+          for (var k2 = 0; k2 < lvlBtns.length; k2++) {
+            lvlBtns[k2].classList.remove('active');
+          }
+
+          // 重置考試狀態
+          resetExamState();
+
+          // 更新目前挑戰文字
+          updateCurrentChoice();
+
+          // 更新開始作答按鈕狀態（暗色 / 紅底）
+          if (typeof updateStartButtonState === 'function') {
+            updateStartButtonState();
+          }
+        });
+      }
+
+
+      // 語言挑戰
+      var levelBtns = langPanel.querySelectorAll('.level-btn');
+      for (var j = 0; j < levelBtns.length; j++) {
+        levelBtns[j].addEventListener('click', function () {
+          // 清除語言等級 active 樣式
+          for (var k = 0; k < levelBtns.length; k++) {
+            levelBtns[k].classList.remove('active');
+          }
+          this.classList.add('active');
+
+          // 設定目前挑戰類別
+          currentCategory = this.getAttribute('data-category');
+
+          // 清除工作挑戰 active 樣式
+          for (var k2 = 0; k2 < workBtns.length; k2++) {
+            workBtns[k2].classList.remove('active');
+          }
+
+          // 重置考試狀態
+          resetExamState();
+
+          // 更新目前挑戰文字
+          updateCurrentChoice();
+
+          // 更新開始作答按鈕狀態（暗色 / 紅底）
+          if (typeof updateStartButtonState === 'function') {
+            updateStartButtonState();
+          }
+        });
+      }
+
+
+      // ===== 開始作答 =====
+      startBtn.addEventListener('click', function(){
+        if(examInProgress){
+          return;
+        }
+        if(!currentCategory || !CATEGORY_META[currentCategory]){
+          alert('請先選擇挑戰類型與子項目。');
+          return;
+        }
+        var bank = QUESTION_BANK[currentCategory] || [];
+        if(!bank.length){
+          alert('這個挑戰目前尚未設定題目，請之後再試試，或由管理員新增題庫。');
+          return;
+        }
+
+        var exam = buildExamFromBank(currentCategory);
+        if(!exam || !exam.length){
+          alert('本挑戰沒有可用題目。');
+          return;
+        }
+
+        examQuestions = exam;
+        currentIndex = 0;
+        correctCount = 0;
+        examStartTime = Date.now();
+        examInProgress = true;
+        lastResult = null;
+
+        statusText.textContent = '作答中（共 ' + examQuestions.length + ' 題）';
+        timerText.textContent = '時間：0分0秒';
+        if(questionModalTimer){
+          questionModalTimer.textContent = '作答時間：0分0秒';
+        }
+
+        stopTimer();
+        timerId = setInterval(function(){
+          if(!examStartTime){
+            timerText.textContent = '時間：0分0秒';
+            if(questionModalTimer){
+              questionModalTimer.textContent = '作答時間：0分0秒';
+            }
+            return;
+          }
+          var diff = Date.now() - examStartTime;
+          var txt = formatDuration(diff);
+          timerText.textContent = '時間：' + txt;
+          if(questionModalTimer){
+            questionModalTimer.textContent = '作答時間：' + txt;
+          }
+        }, 500);
+
+        startBtn.disabled = true;
+        startBtn.textContent = '作答中...';
+
+        showCurrentQuestion();
+      });
+
+      // 題目彈窗右上角 X：放棄作答
+      questionModalClose.addEventListener('click', function(){
+        if(examInProgress){
+          var sure = confirm('確定要中止本次作答嗎？已作答的題目將不會計分。');
+          if(!sure){ return; }
+        }
+        closeModal(questionModal);
+        resetExamState();
+      });
+
+      // 成績彈窗
+      resultModalClose.addEventListener('click', function(){
+        closeModal(resultModal);
+      });
+      noSaveResultBtn.addEventListener('click', function(){
+        closeModal(resultModal);
+      });
+
+      saveResultBtn.addEventListener('click', function(){
+        if(!lastResult || !lastResult.categoryId){
+          alert('目前沒有可儲存的成績。');
+          return;
+        }
+        var data = loadRankData();
+        if(!data.categories[lastResult.categoryId]){
+          data.categories[lastResult.categoryId] = [];
+        }
+        var list = data.categories[lastResult.categoryId];
+
+        var found = false;
+        for(var i=0;i<list.length;i++){
+          if(list[i].name === name){
+            list[i].score = lastResult.score;
+            list[i].timeMs = lastResult.timeMs;
+            list[i].updatedAt = Date.now();
+            found = true;
+            break;
+          }
+        }
+        if(!found){
+          list.push({
+            name: name,
+            score: lastResult.score,
+            timeMs: lastResult.timeMs,
+            updatedAt: Date.now()
+          });
+        }
+
+        list.sort(function(a,b){
+          if(a.score !== b.score){
+            return b.score - a.score;
+          }
+          return a.timeMs - b.timeMs;
+        });
+        data.categories[lastResult.categoryId] = list;
+        saveRankData(data);
+
+        alert('已儲存成績到排行榜。');
+                saveRankData(data);
+
+        if(typeof updateTop3Box === 'function'){
+          updateTop3Box(lastResult.categoryId);
+        }
+
+        alert('已儲存到排行榜');
+        closeModal(resultModal);
+
+        closeModal(resultModal);
+      });
+
+      // 查看排行榜
+      viewRankBtn.addEventListener('click', function(){
+        if(!currentCategory || !CATEGORY_META[currentCategory]){
+          alert('請先選擇挑戰項目。');
+          return;
+        }
+        renderRank(currentCategory);
+        openModal(rankModal);
+      });
+
+      rankModalClose.addEventListener('click', function(){
+        closeModal(rankModal);
+      });
+
+      // 返回主頁 / 登出
+      backMainBtn.addEventListener('click', function(){
+        window.location.href = 'main.html';
+      });
+
+      logoutBtn.addEventListener('click', function(){
+        try{
+          localStorage.removeItem('t2_user_bind');
+          localStorage.removeItem('t2_user_name');
+          localStorage.removeItem('t2_user_acc');
+        }catch(e){}
+        window.location.replace('index.html');
+      });
+
+      // 初始化
+      resetExamState();
+      updateCurrentChoice();
+      refreshCategoryButtons();
+      setMode('work');
+    })();
+  </script>
+</body>
+</html>
