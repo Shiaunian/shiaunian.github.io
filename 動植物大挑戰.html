@@ -681,6 +681,21 @@
 
   <!-- 題庫外部檔案 -->
   <script src="challenge-questions.js"></script>
+  <!-- Firebase (compat 版，適合純 html 不用 import) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+    authDomain: "openexammodal.firebaseapp.com",
+    databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
+    projectId: "openexammodal",
+    storageBucket: "openexammodal.firebasestorage.app",
+    messagingSenderId: "336901617556",
+    appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
+  });
+  var db = firebase.database();
+</script>
 
   <script>
     (function(){
@@ -1410,52 +1425,27 @@
           alert('目前沒有可儲存的成績。');
           return;
         }
-        var data = loadRankData();
-        if(!data.categories[lastResult.categoryId]){
-          data.categories[lastResult.categoryId] = [];
-        }
-        var list = data.categories[lastResult.categoryId];
+        // ✅ 改存 Firebase（跨裝置排行榜）
+      var path = 'challengeRank/' + lastResult.categoryId + '/' + acc;
 
-        var found = false;
-        for(var i=0;i<list.length;i++){
-          if(list[i].name === name){
-            list[i].score = lastResult.score;
-            list[i].timeMs = lastResult.timeMs;
-            list[i].updatedAt = Date.now();
-            found = true;
-            break;
-          }
-        }
-        if(!found){
-          list.push({
-            name: name,
-            score: lastResult.score,
-            timeMs: lastResult.timeMs,
-            updatedAt: Date.now()
-          });
-        }
+      db.ref(path).set({
+        name: name,
+        acc: acc,
+        score: lastResult.score,
+        timeMs: lastResult.timeMs,
+        updatedAt: Date.now()
+      }).then(function () {
+        alert('已儲存到排行榜（雲端）');
 
-        list.sort(function(a,b){
-          if(a.score !== b.score){
-            return b.score - a.score;
-          }
-          return a.timeMs - b.timeMs;
-        });
-        data.categories[lastResult.categoryId] = list;
-        saveRankData(data);
-
-        alert('已儲存成績到排行榜。');
-                saveRankData(data);
-
-        if(typeof updateTop3Box === 'function'){
+        if (typeof updateTop3Box === 'function') {
           updateTop3Box(lastResult.categoryId);
         }
 
-        alert('已儲存到排行榜');
         closeModal(resultModal);
-
-        closeModal(resultModal);
+      }).catch(function (err) {
+        alert('儲存失敗：' + err);
       });
+    });
 
       // 查看排行榜
       viewRankBtn.addEventListener('click', function(){
