@@ -16,19 +16,10 @@ window.QUESTION_BANK = {
 
   'work-pre': [
     {
-      // 題目本身的語音播放按鈕
       text: "下列何者不需要進X光機掃描？",
-      audio: "audio/work-pre-q1-q.mp3",
-      // 每個選項各有一顆小播放鍵
-    options: [
-      { text:"行李箱", audio:"audio/草莓.mp3" },
-      { text:"隨身包", audio:"audio/草莓.mp3" },
-      { text:"電動車", audio:"audio/work-pre-q1-c.mp3" },
-      { text:"免稅袋", audio:"audio/work-pre-q1-d.mp3" }
-    ],
+      options: ['行李箱', '隨身包', '電動車', '免稅袋'],
       answer: 2
     },
-
     {
       text: '下列何者不需要進X光機掃描?',
       options: ['行李箱', '嬰兒車', '護照', '免稅袋'],
