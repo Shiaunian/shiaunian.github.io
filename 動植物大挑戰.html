@@ -984,6 +984,7 @@
           finishExam();
           return;
         }
+
         var q = examQuestions[currentIndex];
         var total = examQuestions.length;
         var letters = ['A','B','C','D','E','F'];
@@ -996,24 +997,53 @@
         html +=     '<span class="question-badge">題目 ' + (currentIndex+1) + '</span>';
         html +=     '<span>共 ' + total + ' 題</span>';
         html +=   '</div>';
+
         if(q.image){
           html += '<div class="question-media-box"><img src="'+ q.image +'" alt="question image"></div>';
         }
-        html +=   '<div class="question-text">' + q.text + '</div>';
-        html +=   '<div class="modal-options">';
-        for(var i=0;i<q.options.length;i++){
-          var opt = q.options[i];
-          var letter = letters[i] || '';
-          html += '<button class="option-btn" data-index="'+i+'">'
-               + (letter ? (letter + '. ') : '')
-               + opt.text
-               + '</button>';
+
+        // 題目列：文字 + 圓形播放鍵
+        html += '<div class="question-row">';
+        html +=   '<div class="question-text">' + (q.text || '') + '</div>';
+        if(q.audio){
+          html += '<button type="button" class="audio-btn circle" onclick="playAudio(\''+ q.audio +'\')">▶</button>';
         }
-        html +=   '</div>';
+        html += '</div>';
+
+        // 選項列：選項按鈕 + 小圓形播放鍵（點播放不作答）
+        html += '<div class="modal-options">';
+        for(var i=0;i<q.options.length;i++){
+          var opt = q.options[i] || {};
+          var letter = letters[i] || '';
+
+          html += '<div class="option-row">';
+          html +=   '<button class="option-btn" data-index="'+i+'">'
+              + (letter ? (letter + '. ') : '')
+              + (opt.text || '')
+              + '</button>';
+
+          if(opt.audio){
+            html += '<button type="button" class="audio-btn circle small opt-audio" data-audio="'+ opt.audio +'" title="播放">▶</button>';
+          }
+
+          html += '</div>';
+        }
+        html += '</div>';
         html += '</div>';
 
         questionModalBody.innerHTML = html;
 
+        // 小播放鍵：只播放，不觸發作答
+        var audioBtns = questionModalBody.querySelectorAll('.opt-audio');
+        for(var t=0;t<audioBtns.length;t++){
+          audioBtns[t].addEventListener('click', function(e){
+            e.stopPropagation();
+            var src = this.getAttribute('data-audio');
+            if(src){ playAudio(src); }
+          });
+        }
+
+        // 作答按鈕（只綁 option-btn，不綁播放鍵）
         var btns = questionModalBody.querySelectorAll('.option-btn');
         for(var j=0;j<btns.length;j++){
           (function(idx){
@@ -1025,22 +1055,22 @@
 
               // 紀錄這題使用者選了哪個 & 有沒有答對
               qNow.userIndex = idx;
-              qNow.isCorrect = !!qNow.options[idx].correct;
+              qNow.isCorrect = !!(qNow.options[idx] && qNow.options[idx].correct);
 
-              // 先全部 disable
+              // 先全部 disable（只 disable 選項按鈕）
               for(var b=0;b<buttons.length;b++){
                 buttons[b].disabled = true;
               }
 
-              // 標出正確答案
+              // 標出正確答案（在選項按鈕上加 class）
               for(var k=0;k<qNow.options.length;k++){
-                if(qNow.options[k].correct){
+                if(qNow.options[k] && qNow.options[k].correct){
                   buttons[k].classList.add('correct');
                 }
               }
 
               // 標記使用者選的
-              if(!qNow.options[idx].correct){
+              if(!(qNow.options[idx] && qNow.options[idx].correct)){
                 this.classList.add('wrong');
               }else{
                 correctCount++;
@@ -1059,7 +1089,6 @@
             });
           })(j);
         }
-
 
         openModal(questionModal);
       }
