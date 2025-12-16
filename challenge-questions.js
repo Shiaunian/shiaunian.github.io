@@ -17,14 +17,15 @@ window.QUESTION_BANK = {
   'work-pre': [
     {
       // 題目本身的語音播放按鈕
-      text: "下列何者不需要進X光機掃描？<br><button type=\"button\" class=\"audio-btn\" onclick=\"playAudio('audio/work-pre-q1-q.mp3')\">🔊 播放題目</button>",
+      text: "下列何者不需要進X光機掃描？",
+      audio: "audio/work-pre-q1-q.mp3",
       // 每個選項各有一顆小播放鍵
-      options: [
-        "行李箱 <button type=\"button\" class=\"audio-btn small\" onclick=\"playAudio('audio/草莓.mp3')\">🔊</button>",
-        "隨身包 <button type=\"button\" class=\"audio-btn small\" onclick=\"playAudio('audio/草莓.mp3')\">🔊</button>",
-        "電動車 <button type=\"button\" class=\"audio-btn small\" onclick=\"playAudio('audio/work-pre-q1-c.mp3')\">🔊</button>",
-        "免稅袋 <button type=\"button\" class=\"audio-btn small\" onclick=\"playAudio('audio/work-pre-q1-d.mp3')\">🔊</button>"
-      ],
+    options: [
+      { text:"行李箱", audio:"audio/草莓.mp3" },
+      { text:"隨身包", audio:"audio/草莓.mp3" },
+      { text:"電動車", audio:"audio/work-pre-q1-c.mp3" },
+      { text:"免稅袋", audio:"audio/work-pre-q1-d.mp3" }
+    ],
       answer: 2
     },
 
