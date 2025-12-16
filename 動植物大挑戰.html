@@ -467,26 +467,32 @@
       100%{ transform:translateY(0); opacity:1; }
     }
     
-    /* 語音播放按鈕 */
+    /* 語音播放按鈕：圓形 icon，貼在文字旁邊 */
     .audio-btn{
       display:inline-flex;
       align-items:center;
-      gap:4px;
-      padding:3px 8px;
-      margin-top:4px;
+      justify-content:center;
+      width:22px;
+      height:22px;
+      padding:0;
+      margin:0 0 0 6px;   /* 只留左邊距，避免掉到下一行的視覺感 */
       border:none;
-      border-radius:999px;
+      border-radius:50%;
       background:#ff7043;
       color:#fff;
       font-size:12px;
-      font-weight:700;
+      font-weight:800;
       cursor:pointer;
+      vertical-align:middle;
+      flex:0 0 auto;
     }
     .audio-btn.small{
-      padding:2px 6px;
+      width:18px;
+      height:18px;
       font-size:11px;
       margin-left:6px;
     }
+
 
 
 
@@ -939,12 +945,25 @@
         var result = [];
         for(var i=0;i<count;i++){
           var raw = pool[i];
-          var opts = (raw.options || []).map(function(text, idx){
+          var opts = (raw.options || []).map(function(opt, idx){
+            // 舊格式：options 是字串陣列（相容）
+            if(typeof opt === 'string'){
+              return {
+                text: opt,
+                audio: '',
+                correct: (idx === raw.answer)
+              };
+            }
+
+            // 新格式：options 是 { text, audio }
+            opt = opt || {};
             return {
-              text: text,
+              text: String(opt.text || ''),
+              audio: String(opt.audio || ''),
               correct: (idx === raw.answer)
             };
           });
+
           shuffle(opts);
           result.push({
             text: raw.text,
