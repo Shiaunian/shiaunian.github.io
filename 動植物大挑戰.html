@@ -967,6 +967,7 @@
           shuffle(opts);
           result.push({
             text: raw.text,
+            audio: raw.audio || '',   // ★ 新增：題目音檔
             image: raw.image || '',
             options: opts,
             userIndex: null,   // 使用者選了哪一個 index
