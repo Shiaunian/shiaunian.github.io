@@ -525,7 +525,7 @@
       width: 22px;
       height: 22px;
       padding: 0;
-      margin: 0 0 0 6px;
+      margin: 0 0 0 6px;   /* 只留左邊距，避免掉到下一行的視覺感 */
       border: none;
       border-radius: 50%;
       background: #ff7043;
@@ -1560,6 +1560,11 @@
         }).catch(function(err){
           alert('儲存失敗：' + err);
         });
+      });
+
+      // 新增：不儲存按鈕點擊時關閉視窗
+      noSaveResultBtn.addEventListener('click', function(){
+        closeModal(resultModal);
       });
 
       // 查看排行榜
