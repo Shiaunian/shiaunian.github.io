@@ -16,14 +16,14 @@
       --btn-height: 46px;
     }
 
-    body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#555;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,"Noto Sans TC","PingFang TC","Helvetica Neue",Arial,"Microsoft JhengHei",sans-serif;
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #555;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
     }
 
     .phone {
@@ -39,381 +39,425 @@
     }
 
     .title-row {
-      display:flex;
-      justify-content:center;
-      gap:10px;
-      color:var(--brand);
-      font-weight:800;
-      font-size:var(--title-size);
-      text-align:center;
-      align-items:center;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      color: var(--brand);
+      font-weight: 800;
+      font-size: var(--title-size);
+      text-align: center;
+      align-items: center;
       margin: 0 12px 4px;
     }
 
-    .title-row img{width:22px;height:22px;}
+    .title-row img {
+      width: 22px;
+      height: 22px;
+    }
 
-    .user-bar{
+    .user-bar {
       margin: 0 8px 6px;
       padding: 6px 10px;
       border-radius: 999px;
-      background:#e4f5ec;
-      color:#0f7a3b;
-      font-weight:700;
+      background: #e4f5ec;
+      color: #0f7a3b;
+      font-weight: 700;
       font-size: 14px;
-      text-align:center;
+      text-align: center;
     }
 
-    .section{
+    .section {
       margin: 0 6px;
       padding: 10px 10px 8px;
       border-radius: 14px;
-      background:#eef0ff;
-      border:1px solid #d8dcff;
-    }
-    .section-title{
-      margin:0 0 6px;
-      font-size:18px;
-      font-weight:800;
-      color:#2f3161;
-      text-align:center;
-      letter-spacing:.15em;
-    }
-    .section-desc{
-      margin:0 0 8px;
-      font-size:14px;
-      color:#333;
-      text-align:center;
-      line-height:1.5;
+      background: #eef0ff;
+      border: 1px solid #d8dcff;
     }
 
-    .mode-toggle{
-      display:grid;
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #2f3161;
+      text-align: center;
+      letter-spacing: .15em;
+    }
+
+    .section-desc {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .mode-toggle {
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      gap:8px;
-      margin-top:4px;
-    }
-    .pill-btn{
-      border:none;
-      border-radius:999px;
-      padding:8px 4px;
-      font-size:15px;
-      font-weight:800;
-      letter-spacing:.15em;
-      background:#d0d3f2;
-      color:#2f3161;
-      cursor:pointer;
-    }
-    .pill-btn.active{
-      background:#ba004c;
-      color:#fff;
+      gap: 8px;
+      margin-top: 4px;
     }
 
-    .work-grid{
-      display:grid;
+    .pill-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 4px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      background: #d0d3f2;
+      color: #2f3161;
+      cursor: pointer;
+    }
+
+    .pill-btn.active {
+      background: #ba004c;
+      color: #fff;
+    }
+
+    .work-grid {
+      display: grid;
       grid-template-columns: 1fr 1fr;
-      gap:8px;
-      margin-top:8px;
-    }
-    .work-btn{
-      border:none;
-      border-radius:14px;
-      padding:8px 4px;
-      font-size:14px;
-      font-weight:800;
-      background:#2f3161;
-      color:#fff;
-      letter-spacing:.15em;
-      cursor:pointer;
-      min-height:38px;
-    }
-    .work-btn.active{
-      background:#c7a64a;
-      color:#fff;
+      gap: 8px;
+      margin-top: 8px;
     }
 
-    .lang-wrap{
-      margin-top:8px;
-    }
-    .lang-row{
-      display:flex;
-      gap:6px;
-      flex-wrap:wrap;
-      margin-bottom:6px;
-    }
-    .lang-label{
-      font-weight:800;
-      color:#2f3161;
-      min-width:62px;
-      font-size:14px;
-      display:flex;
-      align-items:center;
-    }
-    .level-btn{
-      border:none;
-      border-radius:999px;
-      padding:4px 10px;
-      font-size:14px;
-      background:#d0d3f2;
-      color:#2f3161;
-      cursor:pointer;
-    }
-    .level-btn.active{
-      background:#c7a64a;
-      color:#fff;
+    .work-btn {
+      border: none;
+      border-radius: 14px;
+      padding: 8px 4px;
+      font-size: 14px;
+      font-weight: 800;
+      background: #2f3161;
+      color: #fff;
+      letter-spacing: .15em;
+      cursor: pointer;
+      min-height: 38px;
     }
 
-    .current-choice{
-      margin-top:6px;
-      font-size:14px;
-      text-align:center;
-      color:#444;
+    .work-btn.active {
+      background: #c7a64a;
+      color: #fff;
+    }
+
+    .lang-wrap {
+      margin-top: 8px;
+    }
+
+    .lang-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .lang-label {
+      font-weight: 800;
+      color: #2f3161;
+      min-width: 62px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .level-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 14px;
+      background: #d0d3f2;
+      color: #2f3161;
+      cursor: pointer;
+    }
+
+    .level-btn.active {
+      background: #c7a64a;
+      color: #fff;
+    }
+
+    .current-choice {
+      margin-top: 6px;
+      font-size: 14px;
+      text-align: center;
+      color: #444;
     }
 
     /* 狀態區 */
-    .status-card{
+    .status-card {
       margin: 2px 6px 0;
       padding: 8px 10px 10px;
       border-radius: 14px;
-      background:#f7f7ff;
-      border:1px solid #dfe2ff;
+      background: #f7f7ff;
+      border: 1px solid #dfe2ff;
     }
-    .status-row{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:14px;
-      color:#2f3161;
-      margin-bottom:4px;
-    }
-    .status-row span{font-weight:700;}
 
-    .status-actions{
-      margin-top:4px;
-      display:flex;
-      gap:8px;
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #2f3161;
+      margin-bottom: 4px;
+    }
+
+    .status-row span {
+      font-weight: 700;
+    }
+
+    .status-actions {
+      margin-top: 4px;
+      display: flex;
+      gap: 8px;
     }
 
     .btn-main,
-    .btn-secondary{
-      border:none;
-      border-radius:14px;
-      padding:8px 10px;
-      font-size:15px;
-      font-weight:800;
-      letter-spacing:.15em;
-      cursor:pointer;
-      flex:1;
-      text-align:center;
-      white-space:nowrap;
-    }
-    .btn-main{
-      background:#2f3161;
-      color:#fff;
-    }
-    .btn-main:disabled{
-      opacity:.4;
-      cursor:default;
-    }
-    .btn-secondary{
-      background:#6c6e9e;
-      color:#fff;
+    .btn-secondary {
+      border: none;
+      border-radius: 14px;
+      padding: 8px 10px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
     }
 
-    .hint-text{
-      font-size:12px;
-      color:#777;
-      margin-top:4px;
-      text-align:center;
+    .btn-main {
+      background: #2f3161;
+      color: #fff;
+    }
+
+    .btn-main:disabled {
+      opacity: .4;
+      cursor: default;
+    }
+
+    .btn-secondary {
+      background: #6c6e9e;
+      color: #fff;
+    }
+
+    .hint-text {
+      font-size: 12px;
+      color: #777;
+      margin-top: 4px;
+      text-align: center;
     }
 
     /* 底部返回 */
-    .footer-actions{
+    .footer-actions {
       margin: 8px 6px 0;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
     }
-    .btn-back{
-      flex:1;
-      border:none;
-      border-radius:14px;
-      padding:8px 6px;
-      font-size:15px;
-      font-weight:800;
-      letter-spacing:.15em;
-      background:#6c6e9e;
-      color:#fff;
-      cursor:pointer;
-      text-align:center;
+
+    .btn-back {
+      flex: 1;
+      border: none;
+      border-radius: 14px;
+      padding: 8px 6px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      background: #6c6e9e;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
     }
-    .btn-back.secondary{
-      background:#a12a5e;
+
+    .btn-back.secondary {
+      background: #a12a5e;
     }
 
     /* ===== 通用彈出視窗 ===== */
-    .modal-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.45);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
     }
-    .modal-overlay.show{
-      display:flex;
+
+    .modal-overlay.show {
+      display: flex;
     }
-    .modal-card{
-      width:min(380px, 94vw);
-      max-height:82vh;
-      background:#ffffff;
-      border-radius:20px;
-      box-shadow:0 8px 24px rgba(0,0,0,.35);
-      padding:10px 12px 12px;
-      display:flex;
-      flex-direction:column;
+
+    .modal-card {
+      width: min(380px, 94vw);
+      max-height: 82vh;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+      padding: 10px 12px 12px;
+      display: flex;
+      flex-direction: column;
     }
-    .modal-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      margin-bottom:4px;
-      gap:8px;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px;
+      gap: 8px;
     }
-    .modal-header-left{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
+
+    .modal-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .modal-title{
-      font-size:15px;
-      font-weight:800;
-      color:#2f3161;
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #2f3161;
     }
-    .modal-sub{
-      font-size:12px;
-      color:#777;
+
+    .modal-sub {
+      font-size: 12px;
+      color: #777;
     }
-    .modal-close{
-      border:none;
-      background:transparent;
-      font-size:18px;
-      line-height:1;
-      cursor:pointer;
-      color:#666;
+
+    .modal-close {
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      color: #666;
     }
-    .modal-body{
-      font-size:14px;
-      color:#222;
-      margin-top:4px;
-      overflow:auto;
-      padding-right:2px;
+
+    .modal-body {
+      font-size: 14px;
+      color: #222;
+      margin-top: 4px;
+      overflow: auto;
+      padding-right: 2px;
     }
-    .modal-footer{
-      margin-top:8px;
-      display:flex;
-      gap:8px;
-      justify-content:flex-end;
+
+    .modal-footer {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
     }
 
     /* 題目內容卡片 */
-    .question-card{
-      border-radius:14px;
-      background:#f5f6ff;
-      padding:8px 8px 10px;
-      border:1px solid #e0e3ff;
-    }
-    .question-meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:12px;
-      color:#555;
-      margin-bottom:4px;
-    }
-    .question-badge{
-      padding:2px 8px;
-      border-radius:999px;
-      background:#2f3161;
-      color:#fff;
-      font-size:11px;
-      font-weight:700;
-    }
-    .question-text{
-      line-height:1.6;
-      margin-bottom:8px;
-      font-size:14px;
-      color:#222;
-    }
-    .question-media-box{
-      margin-bottom:8px;
-      border-radius:10px;
-      overflow:hidden;
-      background:#ddd;
-      max-height:200px;
-    }
-    .question-media-box img{
-      width:100%;
-      height:auto;
-      display:block;
-      object-fit:cover;
+    .question-card {
+      border-radius: 14px;
+      background: #f5f6ff;
+      padding: 8px 8px 10px;
+      border: 1px solid #e0e3ff;
     }
 
-    .modal-options{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      margin-top:4px;
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 4px;
     }
-    .option-btn{
-      border:none;
-      border-radius:12px;
-      padding:8px 10px;
-      font-size:14px;
-      text-align:left;
-      background:#e2e4ff;
-      color:#222;
-      cursor:pointer;
-      transition:background .15s, transform .05s;
+
+    .question-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #2f3161;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
     }
-    .option-btn:active{
-      transform:scale(0.98);
+
+    .question-text {
+      line-height: 1.6;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #222;
     }
-    .option-btn.correct{
-      background:#d6f5dc;
-      border:1px solid #46a663;
+
+    .question-media-box {
+      margin-bottom: 8px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ddd;
+      max-height: 200px;
     }
-    .option-btn.wrong{
-      background:#ffd6d6;
-      border:1px solid #d94a4a;
+
+    .question-media-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .modal-options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .option-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 8px 10px;
+      font-size: 14px;
+      text-align: left;
+      background: #e2e4ff;
+      color: #222;
+      cursor: pointer;
+      transition: background .15s, transform .05s;
+    }
+
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+
+    .option-btn.correct {
+      background: #d6f5dc;
+      border: 1px solid #46a663;
+    }
+
+    .option-btn.wrong {
+      background: #ffd6d6;
+      border: 1px solid #d94a4a;
     }
 
     /* 排行榜表格（在彈窗裡用） */
-    .rank-table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:13px;
-      margin-top:4px;
+    .rank-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 4px;
     }
+
     .rank-table th,
-    .rank-table td{
-      padding:3px 4px;
-      border-bottom:1px dashed #f1e0a8;
-      text-align:left;
-      white-space:nowrap;
+    .rank-table td {
+      padding: 3px 4px;
+      border-bottom: 1px dashed #f1e0a8;
+      text-align: left;
+      white-space: nowrap;
     }
-    .rank-table th{
-      font-weight:800;
-      color:#5b4b18;
+
+    .rank-table th {
+      font-weight: 800;
+      color: #5b4b18;
     }
-    .rank-empty{
-      font-size:13px;
-      color:#666;
-      text-align:center;
-      margin-top:4px;
+
+    .rank-empty {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin-top: 4px;
     }
-    .me-row{
-      background:#fff4c1;
+
+    .me-row {
+      background: #fff4c1;
     }
 
     /* 開始作答按鈕狀態 */
@@ -428,74 +472,77 @@
       color: #fff !important;
     }
 
-        /* 每個挑戰項目當前前 3 名顯示區塊 */
-    .top3-box{
-      margin-top:6px;
-      padding:6px 8px;
-      border-radius:12px;
-      border:1px solid #f9d98b;
-      background:linear-gradient(135deg,#fff7e0,#ffe8b3);
-      font-size:12px;
-      color:#5a4305;
+    /* 每個挑戰項目當前前 3 名顯示區塊 */
+    .top3-box {
+      margin-top: 6px;
+      padding: 6px 8px;
+      border-radius: 12px;
+      border: 1px solid #f9d98b;
+      background: linear-gradient(135deg,#fff7e0,#ffe8b3);
+      font-size: 12px;
+      color: #5a4305;
       animation: top3Pop .35s ease-out;
     }
-    .top3-title{
-      font-weight:800;
-      margin-bottom:3px;
+
+    .top3-title {
+      font-weight: 800;
+      margin-bottom: 3px;
     }
-    .top3-list{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
+
+    .top3-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .top3-item{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:12px;
+
+    .top3-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
     }
-    .top3-item span.score{
-      font-weight:700;
+
+    .top3-item span.score {
+      font-weight: 700;
     }
-    .top3-empty{
-      font-size:12px;
-      color:#777;
-      text-align:center;
+
+    .top3-empty {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
     }
-    @keyframes top3Pop{
-      0%{ transform:translateY(6px); opacity:0; }
-      100%{ transform:translateY(0); opacity:1; }
+
+    @keyframes top3Pop {
+      0% { transform: translateY(6px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
-    
+
     /* 語音播放按鈕：圓形 icon，貼在文字旁邊 */
-    .audio-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:22px;
-      height:22px;
-      padding:0;
-      margin:0 0 0 6px;   /* 只留左邊距，避免掉到下一行的視覺感 */
-      border:none;
-      border-radius:50%;
-      background:#ff7043;
-      color:#fff;
-      font-size:12px;
-      font-weight:800;
-      cursor:pointer;
-      vertical-align:middle;
-      flex:0 0 auto;
-    }
-    .audio-btn.small{
-      width:18px;
-      height:18px;
-      font-size:11px;
-      margin-left:6px;
+    .audio-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      margin: 0 0 0 6px;
+      border: none;
+      border-radius: 50%;
+      background: #ff7043;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      vertical-align: middle;
+      flex: 0 0 auto;
     }
 
-
-
-
+    .audio-btn.small {
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      margin-left: 6px;
+    }
   </style>
 </head>
 <body>
@@ -535,34 +582,34 @@
         <div class="lang-wrap">
           <div class="lang-row">
             <div class="lang-label">英文</div>
-              <button class="level-btn" data-category="lang-en-quarantine">檢疫</button>
-              <button class="level-btn" data-category="lang-en-beginner">初級</button>
-              <button class="level-btn" data-category="lang-en-middle">中級</button>
-              <button class="level-btn" data-category="lang-en-advanced">高級</button>
-           </div>
+            <button class="level-btn" data-category="lang-en-quarantine">檢疫</button>
+            <button class="level-btn" data-category="lang-en-beginner">初級</button>
+            <button class="level-btn" data-category="lang-en-middle">中級</button>
+            <button class="level-btn" data-category="lang-en-advanced">高級</button>
+          </div>
 
           <div class="lang-row">
             <div class="lang-label">韓文</div>
-              <button class="level-btn" data-category="lang-kr-quarantine">檢疫</button>
-              <button class="level-btn" data-category="lang-kr-beginner">初級</button>
-              <button class="level-btn" data-category="lang-kr-middle">中級</button>
-              <button class="level-btn" data-category="lang-kr-advanced">高級</button>
+            <button class="level-btn" data-category="lang-kr-quarantine">檢疫</button>
+            <button class="level-btn" data-category="lang-kr-beginner">初級</button>
+            <button class="level-btn" data-category="lang-kr-middle">中級</button>
+            <button class="level-btn" data-category="lang-kr-advanced">高級</button>
           </div>
 
           <div class="lang-row">
             <div class="lang-label">越南</div>
-              <button class="level-btn" data-category="lang-vn-quarantine">檢疫</button>
-              <button class="level-btn" data-category="lang-vn-beginner">初級</button>
-              <button class="level-btn" data-category="lang-vn-middle">中級</button>
-              <button class="level-btn" data-category="lang-vn-advanced">高級</button>
+            <button class="level-btn" data-category="lang-vn-quarantine">檢疫</button>
+            <button class="level-btn" data-category="lang-vn-beginner">初級</button>
+            <button class="level-btn" data-category="lang-vn-middle">中級</button>
+            <button class="level-btn" data-category="lang-vn-advanced">高級</button>
           </div>
 
           <div class="lang-row">
             <div class="lang-label">日語</div>
-              <button class="level-btn" data-category="lang-jp-quarantine">檢疫</button>
-              <button class="level-btn" data-category="lang-jp-beginner">初級</button>
-              <button class="level-btn" data-category="lang-jp-middle">中級</button>
-              <button class="level-btn" data-category="lang-jp-advanced">高級</button>
+            <button class="level-btn" data-category="lang-jp-quarantine">檢疫</button>
+            <button class="level-btn" data-category="lang-jp-beginner">初級</button>
+            <button class="level-btn" data-category="lang-jp-middle">中級</button>
+            <button class="level-btn" data-category="lang-jp-advanced">高級</button>
           </div>
         </div>
       </div>
@@ -571,22 +618,22 @@
     </section>
 
     <!-- 狀態 + 操作 -->
-      <section class="status-card">
-        <div class="status-row">
-          <span id="statusText">尚未開始測驗</span>
-          <span id="timerText">時間：0分0秒</span>
-        </div>
-        <div class="status-actions">
-          <button id="startBtn" class="btn-main">開始作答</button>
-          <button id="viewRankBtn" class="btn-secondary">查看排行榜</button>
-        </div>
-        <!-- 這裡是各項目前三名 -->
-        <div id="top3Box" class="top3-box"></div>
+    <section class="status-card">
+      <div class="status-row">
+        <span id="statusText">尚未開始測驗</span>
+        <span id="timerText">時間：0分0秒</span>
+      </div>
+      <div class="status-actions">
+        <button id="startBtn" class="btn-main">開始作答</button>
+        <button id="viewRankBtn" class="btn-secondary">查看排行榜</button>
+      </div>
+      <!-- 這裡是各項目前三名 -->
+      <div id="top3Box" class="top3-box"></div>
 
-        <div class="hint-text">
-          作答中「開始作答」按鈕會鎖住，無法重新點擊。完成後可選擇是否儲存成績到排行榜。
-        </div>
-      </section>
+      <div class="hint-text">
+        作答中「開始作答」按鈕會鎖住，無法重新點擊。完成後可選擇是否儲存成績到排行榜。
+      </div>
+    </section>
 
     <!-- 底部 -->
     <div class="footer-actions">
@@ -594,9 +641,9 @@
       <button id="logoutBtn" class="btn-back secondary">登出</button>
     </div>
   </main>
-    <!-- 共用語音播放器 -->
-  <audio id="qaAudio"></audio>
 
+  <!-- 共用語音播放器 -->
+  <audio id="qaAudio"></audio>
 
   <!-- ===== 題目彈出視窗 ===== -->
   <div id="questionModal" class="modal-overlay">
@@ -651,7 +698,7 @@
     </div>
   </div>
 
-    <!-- ===== 本次錯誤題目檢視視窗 ===== -->
+  <!-- ===== 本次錯誤題目檢視視窗 ===== -->
   <div id="wrongModal" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
@@ -667,8 +714,6 @@
     </div>
   </div>
 
-
-  
   <!-- 共用播放函式（給題目按鈕用） -->
   <script>
     window.playAudio = function(src){
@@ -687,21 +732,22 @@
 
   <!-- 題庫外部檔案 -->
   <script src="challenge-questions.js"></script>
+
   <!-- Firebase (compat 版，適合純 html 不用 import) -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script>
-  firebase.initializeApp({
-    apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
-    authDomain: "openexammodal.firebaseapp.com",
-    databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
-    projectId: "openexammodal",
-    storageBucket: "openexammodal.firebasestorage.app",
-    messagingSenderId: "336901617556",
-    appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
-  });
-  var db = firebase.database();
-</script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyBVC5zJl6LCKFrsdN7_JkVsZHmqALuixwE",
+      authDomain: "openexammodal.firebaseapp.com",
+      databaseURL: "https://openexammodal-default-rtdb.firebaseio.com",
+      projectId: "openexammodal",
+      storageBucket: "openexammodal.firebasestorage.app",
+      messagingSenderId: "336901617556",
+      appId: "1:336901617556:web:53f60cddf513b2ea6a4181"
+    });
+    var db = firebase.database();
+  </script>
 
   <script>
     (function(){
@@ -719,35 +765,34 @@
 
       document.getElementById('userBar').textContent = '目前登入：' + name;
 
-    // ===== 類別定義 =====
-    var CATEGORY_META = {
-      'work-pre':        { group:'工作挑戰', label:'前導挑戰' },
-      'work-review':     { group:'工作挑戰', label:'複查挑戰' },
-      'work-flow':       { group:'工作挑戰', label:'分流挑戰' },
-      'work-rule':       { group:'工作挑戰', label:'規定挑戰' },
+      // ===== 類別定義 =====
+      var CATEGORY_META = {
+        'work-pre':        { group:'工作挑戰', label:'前導挑戰' },
+        'work-review':     { group:'工作挑戰', label:'複查挑戰' },
+        'work-flow':       { group:'工作挑戰', label:'分流挑戰' },
+        'work-rule':       { group:'工作挑戰', label:'規定挑戰' },
 
-      // ===== 語言挑戰（加入檢疫）=====
-      'lang-en-quarantine': { group:'語言挑戰', label:'英文 檢疫' },
-      'lang-en-beginner':   { group:'語言挑戰', label:'英文 初級' },
-      'lang-en-middle':     { group:'語言挑戰', label:'英文 中級' },
-      'lang-en-advanced':   { group:'語言挑戰', label:'英文 高級' },
+        // ===== 語言挑戰（加入檢疫）=====
+        'lang-en-quarantine': { group:'語言挑戰', label:'英文 檢疫' },
+        'lang-en-beginner':   { group:'語言挑戰', label:'英文 初級' },
+        'lang-en-middle':     { group:'語言挑戰', label:'英文 中級' },
+        'lang-en-advanced':   { group:'語言挑戰', label:'英文 高級' },
 
-      'lang-kr-quarantine': { group:'語言挑戰', label:'韓文 檢疫' },
-      'lang-kr-beginner':   { group:'語言挑戰', label:'韓文 初級' },
-      'lang-kr-middle':     { group:'語言挑戰', label:'韓文 中級' },
-      'lang-kr-advanced':   { group:'語言挑戰', label:'韓文 高級' },
+        'lang-kr-quarantine': { group:'語言挑戰', label:'韓文 檢疫' },
+        'lang-kr-beginner':   { group:'語言挑戰', label:'韓文 初級' },
+        'lang-kr-middle':     { group:'語言挑戰', label:'韓文 中級' },
+        'lang-kr-advanced':   { group:'語言挑戰', label:'韓文 高級' },
 
-      'lang-vn-quarantine': { group:'語言挑戰', label:'越南 檢疫' },
-      'lang-vn-beginner':   { group:'語言挑戰', label:'越南 初級' },
-      'lang-vn-middle':     { group:'語言挑戰', label:'越南 中級' },
-      'lang-vn-advanced':   { group:'語言挑戰', label:'越南 高級' },
+        'lang-vn-quarantine': { group:'語言挑戰', label:'越南 檢疫' },
+        'lang-vn-beginner':   { group:'語言挑戰', label:'越南 初級' },
+        'lang-vn-middle':     { group:'語言挑戰', label:'越南 中級' },
+        'lang-vn-advanced':   { group:'語言挑戰', label:'越南 高級' },
 
-      'lang-jp-quarantine': { group:'語言挑戰', label:'日語 檢疫' },
-      'lang-jp-beginner':   { group:'語言挑戰', label:'日語 初級' },
-      'lang-jp-middle':     { group:'語言挑戰', label:'日語 中級' },
-      'lang-jp-advanced':   { group:'語言挑戰', label:'日語 高級' }
-    };
-
+        'lang-jp-quarantine': { group:'語言挑戰', label:'日語 檢疫' },
+        'lang-jp-beginner':   { group:'語言挑戰', label:'日語 初級' },
+        'lang-jp-middle':     { group:'語言挑戰', label:'日語 中級' },
+        'lang-jp-advanced':   { group:'語言挑戰', label:'日語 高級' }
+      };
 
       // 題庫
       var QUESTION_BANK = window.QUESTION_BANK || {};
@@ -792,7 +837,6 @@
       var wrongModalBody     = document.getElementById('wrongModalBody');
       var wrongModalClose    = document.getElementById('wrongModalClose');
 
-
       // ===== 狀態 =====
       var currentCategory = null;
       var examQuestions = [];
@@ -803,7 +847,6 @@
       var examInProgress = false;
       var lastResult = null;
       var lastExamDetail = null; // 存這次每一題的作答紀錄
-
 
       // ===== 工具 =====
       function setMode(mode){
@@ -835,7 +878,6 @@
           updateTop3Box(currentCategory);
         }
       }
-
 
       function updateStartButtonState(){
         if(!currentCategory){
@@ -977,7 +1019,6 @@
         return result;
       }
 
-
       // ===== 題目彈窗 =====
       function showCurrentQuestion(){
         if(!examQuestions.length || currentIndex >= examQuestions.length){
@@ -1115,7 +1156,6 @@
           timeMs: usedMs
         };
 
-
         var title = '本次挑戰';
         if(currentCategory && CATEGORY_META[currentCategory]){
           title = CATEGORY_META[currentCategory].label;
@@ -1133,7 +1173,6 @@
           questions: examQuestions.slice()
         };
 
-
         startBtn.disabled = false;
         startBtn.textContent = '重新作答';
 
@@ -1150,7 +1189,7 @@
         openModal(resultModal);
       }
 
-            // ===== 本次錯誤題目檢視 =====
+      // ===== 本次錯誤題目檢視 =====
       if(wrongModalClose){
         wrongModalClose.addEventListener('click', function(){
           closeModal(wrongModal);
@@ -1223,7 +1262,6 @@
         });
       }
 
-
       // ===== 從 Firebase 讀取排行榜（依 categoryId）=====
       function fetchRankListFromFirebase(categoryId, cb){
         if(!categoryId){ cb([]); return; }
@@ -1292,45 +1330,42 @@
         });
       }
 
+      // ===== 顯示目前挑戰項目 Top 3 =====
+      function updateTop3Box(categoryId){
+        if(!top3Box){ return; }
+        top3Box.innerHTML = '';
 
-       // ===== 顯示目前挑戰項目 Top 3 =====
-        function updateTop3Box(categoryId){
-          if(!top3Box){ return; }
-          top3Box.innerHTML = '';
+        if(!categoryId || !CATEGORY_META[categoryId]){
+          top3Box.innerHTML = '<div class="top3-empty">請先選擇挑戰項目，將顯示該項目前 3 名成績。</div>';
+          return;
+        }
 
-          if(!categoryId || !CATEGORY_META[categoryId]){
-            top3Box.innerHTML = '<div class="top3-empty">請先選擇挑戰項目，將顯示該項目前 3 名成績。</div>';
+        // ✅ 改讀 Firebase
+        top3Box.innerHTML = '<div class="top3-empty">讀取前 3 名中...</div>';
+
+        fetchRankListFromFirebase(categoryId, function(list){
+          if(!list.length){
+            top3Box.innerHTML = '<div class="top3-empty">目前尚無排行榜紀錄，完成挑戰並儲存成績後會顯示前 3 名。</div>';
             return;
           }
 
-          // ✅ 改讀 Firebase
-          top3Box.innerHTML = '<div class="top3-empty">讀取前 3 名中...</div>';
+          var max = Math.min(3, list.length);
+          var medals = ['🥇','🥈','🥉'];
 
-          fetchRankListFromFirebase(categoryId, function(list){
-            if(!list.length){
-              top3Box.innerHTML = '<div class="top3-empty">目前尚無排行榜紀錄，完成挑戰並儲存成績後會顯示前 3 名。</div>';
-              return;
-            }
-
-            var max = Math.min(3, list.length);
-            var medals = ['🥇','🥈','🥉'];
-
-            var html = '<div class="top3-title">本項目前三名</div>';
-            html += '<div class="top3-list">';
-            for(var i=0;i<max;i++){
-              var row = list[i] || {};
-              html += '<div class="top3-item">';
-              html +=   '<span>' + medals[i] + ' ' + (row.name || '-') + '</span>';
-              html +=   '<span class="score">' + (row.score || 0) + '分 / ' + formatDuration(row.timeMs || 0) + '</span>';
-              html += '</div>';
-            }
+          var html = '<div class="top3-title">本項目前三名</div>';
+          html += '<div class="top3-list">';
+          for(var i=0;i<max;i++){
+            var row = list[i] || {};
+            html += '<div class="top3-item">';
+            html +=   '<span>' + medals[i] + ' ' + (row.name || '-') + '</span>';
+            html +=   '<span class="score">' + (row.score || 0) + '分 / ' + formatDuration(row.timeMs || 0) + '</span>';
             html += '</div>';
+          }
+          html += '</div>';
 
-            top3Box.innerHTML = html;
-          });
-        }
-
-
+          top3Box.innerHTML = html;
+        });
+      }
 
       // ===== 事件：切換 mode =====
       modeWorkBtn.addEventListener('click', function(){
@@ -1345,7 +1380,6 @@
       refreshCategoryButtons();
       updateStartButtonState();
       updateCurrentChoice();
-
 
       // 工作挑戰
       var workBtns = workPanel.querySelectorAll('.work-btn');
@@ -1379,7 +1413,6 @@
         });
       }
 
-
       // 語言挑戰
       var levelBtns = langPanel.querySelectorAll('.level-btn');
       for (var j = 0; j < levelBtns.length; j++) {
@@ -1410,7 +1443,6 @@
           }
         });
       }
-
 
       // ===== 開始作答 =====
       startBtn.addEventListener('click', function(){
@@ -1484,35 +1516,51 @@
         closeModal(resultModal);
       });
 
-saveResultBtn.addEventListener('click', function(){
-  if(!lastResult || !lastResult.categoryId){
-    alert('目前沒有可儲存的成績。');
-    return;
-  }
-
-      // ✅ 使用外層已宣告的 userKey（避免排行榜空白）
-      var path = 'challengeRank/' + lastResult.categoryId + '/' + userKey;
-
-      db.ref(path).set({
-        name: name,
-        acc: acc,
-        userKey: userKey,
-        score: lastResult.score,
-        timeMs: lastResult.timeMs,
-        updatedAt: Date.now()
-      }).then(function () {
-        alert('已儲存到排行榜（雲端）');
-
-        if (typeof updateTop3Box === 'function') {
-          updateTop3Box(lastResult.categoryId);
+      saveResultBtn.addEventListener('click', function(){
+        if(!lastResult || !lastResult.categoryId){
+          alert('目前沒有可儲存的成績。');
+          return;
         }
 
-        closeModal(resultModal);
-      }).catch(function (err) {
-        alert('儲存失敗：' + err);
-      });
-    });
+        // ✅ 同名覆蓋：用「名字(正規化後)」當排行榜 key
+        function normNameKey(n){
+          n = String(n || '').trim();
+          n = n.replace(/\u3000/g,' ').replace(/\s+/g,' ');
+          n = n.toLowerCase(); // 如果你想區分大小寫，把這行刪掉
+          // Firebase key 不能含 . # $ [ ] /
+          n = n.replace(/[.#$\[\]\/]/g,'_');
+          return encodeURIComponent(n);
+        }
 
+        var nameKey = normNameKey(name);
+        if(!nameKey){
+          alert('名稱不可為空白。');
+          return;
+        }
+
+        // ✅ 用 nameKey 當 key：同名會直接覆蓋舊資料（不會新增第二筆）
+        var path = 'challengeRank/' + lastResult.categoryId + '/' + nameKey;
+
+        db.ref(path).set({
+          name: name,          // 顯示用原名
+          nameKey: nameKey,    // 方便除錯/查詢
+          acc: acc,
+          userKey: userKey,    // 仍保留你原本的 userKey
+          score: lastResult.score,
+          timeMs: lastResult.timeMs,
+          updatedAt: Date.now()
+        }).then(function(){
+          alert('已儲存到排行榜（雲端，同名會覆蓋舊紀錄）');
+
+          if(typeof updateTop3Box === 'function'){
+            updateTop3Box(lastResult.categoryId);
+          }
+
+          closeModal(resultModal);
+        }).catch(function(err){
+          alert('儲存失敗：' + err);
+        });
+      });
 
       // 查看排行榜
       viewRankBtn.addEventListener('click', function(){
@@ -1538,6 +1586,7 @@ saveResultBtn.addEventListener('click', function(){
           localStorage.removeItem('t2_user_bind');
           localStorage.removeItem('t2_user_name');
           localStorage.removeItem('t2_user_acc');
+          localStorage.removeItem('t2_user_pwd'); // ✅ 補上，避免殘留
         }catch(e){}
         window.location.replace('index.html');
       });
