@@ -704,6 +704,7 @@
       var bind = localStorage.getItem('t2_user_bind') || '';
       var acc  = localStorage.getItem('t2_user_acc')  || '';
       var pwd  = localStorage.getItem('t2_user_pwd')  || '';
+      var userKey = acc + '|' + pwd;   // ★ 新增：給排行榜用
 
       if(!name || !bind || !acc || !pwd || bind.indexOf(acc + pwd) !== 0){
         window.location.replace('T2日動植物檢疫登入系統.html');
@@ -1433,19 +1434,15 @@
       resultModalClose.addEventListener('click', function(){
         closeModal(resultModal);
       });
-      noSaveResultBtn.addEventListener('click', function(){
-        closeModal(resultModal);
-      });
 
-      saveResultBtn.addEventListener('click', function(){
-        if(!lastResult || !lastResult.categoryId){
-          alert('目前沒有可儲存的成績。');
-          return;
-        }
-        // ✅ 改存 Firebase（跨裝置排行榜）
-      var userKey = acc + '|' + pwd;   // 讓同 acc 不同密碼的人也不會互蓋
+saveResultBtn.addEventListener('click', function(){
+  if(!lastResult || !lastResult.categoryId){
+    alert('目前沒有可儲存的成績。');
+    return;
+  }
+
+      // ✅ 使用外層已宣告的 userKey（避免排行榜空白）
       var path = 'challengeRank/' + lastResult.categoryId + '/' + userKey;
-
 
       db.ref(path).set({
         name: name,
@@ -1466,6 +1463,7 @@
         alert('儲存失敗：' + err);
       });
     });
+
 
       // 查看排行榜
       viewRankBtn.addEventListener('click', function(){
