@@ -845,7 +845,7 @@ window.QUESTION_BANK = {
   // 📌 語言挑戰（英文）
   // ===========================
 
-    'lang-en-beginner': [
+    'lang-en-quarantine': [
     { text:'請問下列何者是入境的意思?', options:['arrival','airport','apply','arrange'], answer:0 },
     { text:'請問下列何者是轉機的意思?', options:['train','truck','transfer','teacher'], answer:2 },
     { text:'請問下列何者是機票的意思?', options:['passport','boarding pass','passing card','cellphone'], answer:1 },
