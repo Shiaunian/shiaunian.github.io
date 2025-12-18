@@ -845,7 +845,7 @@ window.QUESTION_BANK = {
   // 📌 語言挑戰（英文）
   // ===========================
 
-    'lang-en-quarantine': [
+    'lang-en-beginner': [
     { text:'請問下列何者是入境的意思?', options:['arrival','airport','apply','arrange'], answer:0 },
     { text:'請問下列何者是轉機的意思?', options:['train','truck','transfer','teacher'], answer:2 },
     { text:'請問下列何者是機票的意思?', options:['passport','boarding pass','passing card','cellphone'], answer:1 },
@@ -942,6 +942,24 @@ window.QUESTION_BANK = {
         '請打開'
       ], answer:2 }
   ],
+  
+      'lang-en-beginner': [
+    { text:'請問下列何者是入境的意思?', options:['arrival','airport','apply','arrange'], answer:0 },
+    { text:'請問下列何者是轉機的意思?', options:['train','truck','transfer','teacher'], answer:2 },
+    { text:'翻譯題：卡片回收', options:['Retry your card.','Revise your card.','Return your card.'], answer:2 },
+
+    { text:'翻譯題：你可以拿著你的手機', options:[
+        'You can keep your bag.',
+        'You can keep your phone.',
+        'You can keep your water.'
+      ], answer:1 },
+    { text:'翻譯題：請確認沒有肉製品、新鮮水果和蔬菜，謝謝', options:[
+        'Please make sure no meat products, fresh fruits and vegetable. Thank you.',
+        'Please make sure no computer, phone and chargers. Thank you.',
+        'Please make sure no passing card and boarding pass. Thank you.'
+      ], answer:0 }
+  ],
+
 
 
   // ===========================
