@@ -1007,7 +1007,7 @@ window.QUESTION_BANK = {
     { text:'填空題：I like to play ___.', options:['basketball','breakfast','homework','window'], answer:0 },
     { text:'填空題：The boy has two ___.', options:['healthy','hands','healing','hear'], answer:1 },
     { text:'填空題：We eat dinner in the ___.', options:['morning','afternoon','evening','midnight'], answer:2 },
-    { text:'填空題：She ___　to music every day.', options:['listens','listens to','listen','listening'], answer:1 },
+    { text:'填空題：She ___　music every day.', options:['listens','listens to','listen','listening'], answer:1 },
     { text:'填空題：I wear shoes on my ___.', options:['head','hands','feet','eyes'], answer:2 },
     { text:'填空題：My mother cooks in the ___.', options:['bedroom','bathroom','kitchen','classroom'], answer:2 },
     { text:'填空題：The apple is ___.', options:['sweet','swim','jump','run'], answer:0 },
