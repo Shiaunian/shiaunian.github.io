@@ -1019,7 +1019,7 @@ window.QUESTION_BANK = {
     { text:'填空題：They ___ soccer after school.', options:['plays','play','played','playing'], answer:1 },
     { text:'填空題：I ___ TV now.', options:['watch','watches','am watching','watched'], answer:2 },
     { text:'填空題：He ___ to school every day.', options:['go','goes','going','went'], answer:1 },
-    { text:'填空題：We ___ lunch at 12 p.m..', options:['eats','eat','eating','ate'], ansdower:1 },
+    { text:'填空題：We ___ lunch at 12 a.m..', options:['eats','eat','eating','ate'], ansdower:1 },
     { text:'填空題：___ you like apples?', options:['Are','Do','Does','Did'], answer:1 },
     { text:'填空題：She ___ my sister.', options:['am','is','my','do'], answer:1 },
     { text:'填空題：Tom ___　a book yesterday.', options:['read','reads','is reading','reading'], answer:0 },
