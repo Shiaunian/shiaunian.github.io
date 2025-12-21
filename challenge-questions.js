@@ -1037,7 +1037,7 @@ window.QUESTION_BANK = {
     { text:'填空題：They ___ friends.', options:['am','is','are','be'], answer:2 },
     { text:'填空題：I ___ a pencil in my bag.', options:['have','has','having','had'], answer:0 },
     { text:'填空題：She ___ to school by bus.', options:['go','goes','going','went'], answer:1 },
-    { text:'填空題：We ___ English now.', options:['study','studies','are studying','studied'], answer:1 },
+    { text:'填空題：We ___ English now.', options:['study','studies','are studying','studied'], answer:2 },
     { text:'填空題：Tom and I ___ classmates.', options:['am','is','are','be'], answer:2 },
     { text:'填空題：My mother ___ dinner every day.', options:['cook','cooks','cooking','cooked'], answer:1 },
     { text:'填空題：___ he like dogs?', options:['Do','Are','Does','Is'], answer:2 },
