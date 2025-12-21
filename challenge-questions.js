@@ -996,7 +996,7 @@ window.QUESTION_BANK = {
     { text:'「書」的英文單字，下列何者正確？', options:['look','boot','cook','book'], answer:3 },
 
     { text:'填空題：I am very ___. I want to eat lunch.', options:['tired','hungry','happy','tall'], answer:1 },
-    { text:'填空題：My father goes to woek by ___.', options:['bed','school','car','food'], answer:2 },
+    { text:'填空題：My father goes to work by ___.', options:['bed','school','car','food'], answer:2 },
     { text:'填空題：The sun is in the ___.', options:['night','laughing','sky','water'], answer:2 },
     { text:'填空題：She drinks a glass of ___.', options:['rice','milk','bread','egg'], answer:1 },
     { text:'填空題：I do my homework at ___.', options:['home','park','zoo','shop'], answer:0 },
@@ -1048,7 +1048,7 @@ window.QUESTION_BANK = {
     { text:'填空題：My father ___ at work now.', options:['is','are','am','be'], answer:0 },
     { text:'填空題：I ___ milk every morning.', options:['drink','drinks','drinking','drank'], answer:0 },
     { text:'填空題：___ you a student?', options:['Do','Are','Does','Is'], answer:1 },
-    { text:'填空題：She ___ her homework in the evening.', options:['do','doed','doing','did'], answer:1 },
+    { text:'填空題：She ___ her homework in the evening.', options:['do','does','doing','did'], answer:1 },
     { text:'填空題：We ___ to the zoo yesterday.', options:['go','goes','went','going'], answer:2 },
     { text:'填空題：My brother ___ soccer after school.', options:['plays','play','playing','played'], answer:0 },
     { text:'填空題：I ___ happy today.', options:['feels','feeling','felt','feel'], answer:3 },
@@ -1061,7 +1061,7 @@ window.QUESTION_BANK = {
     { text:'填空題：She is ___ the classroom.', options:['at','in','on','to'], answer:1 },
     { text:'填空題：We eat lunch ___ noon.', options:['in','on','at','to'], answer:2 },
     { text:'填空題：He sits ___ me.', options:['next','next to','near to ','close'], answer:1 },
-    { text:'填空題：I like apples ___ bananas.', options:['but','because','and','so'], answer:3 },
+    { text:'填空題：I like apples ___ bananas.', options:['but','because','and','so'], answer:2 },
     { text:'填空題：She is tired ___ she studies a lot.', options:['and','but','because','or'], answer:2 },
     { text:'填空題：He is ___ than me.', options:['tall','tller','tallest','more tall'], answer:1 },
     { text:'填空題：This book is ___ than that one.', options:['cheap','cheaper','cheapest','more cheap'], answer:1 }
