@@ -1129,7 +1129,27 @@ window.QUESTION_BANK = {
     { text:'填空題：Sore throats, headaches, fevers, and chills are common ___ of flu.', options:['symptoms','conditions','definitions','alternatives'], answer:0 },
     { text:'填空題：Liz has been studying ___ lately because she is thinking of applying for a scholarship.', options:['in a hurry','around the clock','out of order','at best'], answer:1 },
     { text:'填空題：William felt very excited when he ___ his favorite baseball player at a shopping mall yesterday.', options:['moved on','filled in','turned up','ran into'], answer:3 },
-    { text:'填空題：Generally speaking, dogs ___ to new surroundings much faster than cats.', options:['intend','oppose','adapt','confine'], answer:2 }
+    { text:'填空題：Generally speaking, dogs ___ to new surroundings much faster than cats.', options:['intend','oppose','adapt','confine'], answer:2 },
+    { text:'填空題：The first Sherlock Holmes story ___ by a doctor named Arthur Conan Doyle in 1886.', options:['wrote','written','was written','being written'], answer:2 },
+    { text:'填空題：In the four years from 1989 to 1992, the gross national product ___ by an average of over 10% per year.', options:['falls','fell','is falling','will all'], answer:1 },
+    { text:'填空題：The original frame, which was made of gold, was soon ___ a marble one before it could be stolen.', options:['put in','held on','replaced with','moved in'], answer:2 },
+    { text:'填空題：The architect of the new five-star hotel received several awards of her ___ design.', options:['elegant','opposite','admiring','courteous'], answer:0 },
+    { text:'填空題：Until recently it had been generally accepted that one of the greatest milestones in human history was the ___ of an agricultural lifestyle.', options:['excitement','interest','adoption','devotion'], answer:2 },
+    { text:'填空題：Only by making fundamental changes will it ___ possible to bring the crisis to a close.', options:['but also','may be','then','be'], answer:3 },
+    { text:'填空題：Even though the television networks claim there has been ___ in the number of children watching television, research shows that children are actually watching more than before.', options:['a decrease','a growth','an impact','a trend'], answer:0 },
+    { text:'填空題：If you wanted to get students excited about the subject, you could take some time to plan some field trips that would really ___ .', options:['bring them up','turn them on','fill them out','make them up'], answer:1 },
+    { text:'填空題：The pilot will stay away from work next week ___ a new agreement with the airline company can be signed.', options:['whether','except','once','unless'], answer:3 },
+    { text:'填空題：___ someone oppose abortion for reasons of faith, he may be criticized for imposing his religious beliefs on others.', options:['Might','Could','Should','Would'], answer:2 },
+    { text:'填空題：After the police arrive, they will begin to interview the people who ___ in the jewelry store at the time of the robbery.', options:['have been','will be','were','are'], answer:2 },
+    { text:'填空題：The city government ___ to build a new sports stadium in preparation for the coming Olympics.', options:['is going to plan','which plans','is planning','planning'], answer:2 },
+    { text:'填空題：New computer technology has ___ changed the way Hollywood movies are made.', options:['sincerely','dramatically','idly','greedily'], answer:1 },
+    { text:'填空題：This proposal for a new high speed train ___ because the cost is too high.', options:['rejected','has rejected','had been rejected','will be rejected'], answer:3 },
+    { text:'填空題：___ many desirable qualities which make it a commercially very useful metal.', options:['Aluminum has','That aluminum has','Aluminum having','Aluminum to have'], answer:0 },
+    { text:'填空題：Ms. Chen ___ her position as the new conductor of the National Orchestra only a few weeks before the fall concert season began.', options:['picked out','bent over','took up','drove down'], answer:2 },
+    { text:'填空題：So far this year four typhoons-two of them very strong ___ southern Taiwan.', options:['were striking','will strike','have been struck','have struck'], answer:3 },
+    { text:'填空題：Depending on the ___ he is in, the boss will either thank you for our suggestion or fire you for criticizing his plan.', options:['emotion','behavior','mood','attitude'], answer:2 },
+    { text:'填空題：If a typist wishes to type rapidly, he ___ develop a rhythmic movement of his fingers.', options:['used to','must','would','had to'], answer:1 },
+    { text:'填空題：During the experiment, a constant temperature of 28°C was     while the amount of sunlight was gradually increased.', options:['maintained','performed','continued','expanded'], answer:0 }
   ],
 
 
