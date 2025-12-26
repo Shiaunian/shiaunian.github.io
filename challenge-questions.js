@@ -1070,7 +1070,7 @@ window.QUESTION_BANK = {
     'lang-en-middle': [
 
 
-    { text:'填空題：My mother ___ to go back to the restaurant because of the waiter's rude manner.', options:['assumes','predicts','interrupts','refuses'], answer:3 },
+    { text:'填空題：My mother ___ to go back to the restaurant because of the waiter is rude manner.', options:['assumes','predicts','interrupts','refuses'], answer:3 },
     { text:'填空題：This book is ___ than that one.', options:['cheap','cheaper','cheapest','more cheap'], answer:1 }
   ],
 
