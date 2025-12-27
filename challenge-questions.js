@@ -1159,7 +1159,17 @@ window.QUESTION_BANK = {
     { text:'填空題：The local government is planning to build a new bridge in ___ for the coming tourist season.', options:['corporation','determination','preparation','registration'], answer:2 },
     { text:'填空題：The doctor ___ advised my father not to smoke for the sake of his health.', options:['greedily','specifically','vigorously','amazingly'], answer:1 },
     { text:'填空題：Each employee, including the CEO, ___ a key card.', options:['were given','has given','was given','have been given'], answer:2 },
-    { text:'填空題：Wendy went to work, ___ her dog alone in the apartment.', options:['leaving','she leaving','she was left','being left'], answer:0 }
+    { text:'填空題：Wendy went to work, ___ her dog alone in the apartment.', options:['leaving','she leaving','she was left','being left'], answer:0 },
+    { text:'填空題：The clock on the wall ___ . Maybe we should change the batteries.', options:['worked out','took over','ran down','shook off'], answer:2 },
+    { text:'填空題：Over the past three decades, Lin Hwai-min ___ himself to be a choreographer of great ambition, courage, and genius.', options:['was proving','will prove','has been proven','has proved'], answer:3 },
+    { text:'填空題：There are many ___ along the road to success, but we should never give up.', options:['ornaments','obstacles','beverages','souvenirs'], answer:1 },
+    { text:'填空題：Defensive drivers ___ their driving mirrors frequently so that they know at all times if there are other vehicles or people nearby.', options:['see to','look in','check into','watch out'], answer:1 },
+    { text:'填空題：___ newspaper reports, flooding in the area near the river due to the storm has been much more serious than expected.', options:['As','For','Including some','According to'], answer:3 },
+    { text:'填空題：Flight 305 ___ depart at 3:30 p.m. but was cancelled because of a mechanical problem in one of engines.', options:['was supposed to','ought to','is assumed to','might have to'], answer:0 },
+    { text:'填空題：The local government is planning to build a new bridge in ___ for the coming tourist season.', options:['corporation','determination','preparation','registration'], answer:2 },
+    { text:'填空題：The doctor ___ advised my father not to smoke for the sake of his health.', options:['greedily','specifically','vigorously','amazingly'], answer:1 },
+    { text:'填空題：Each employee, including the CEO, ___ a key card.', options:['were given','has given','was given','have been given'], answer:2 },
+    { text:'填空題：Wendy went to work, ___ her dog alone in the apartment.', options:['leaving','she leaving','she was left','being left'], answer:0 },
   ],
 
 
