@@ -1120,11 +1120,11 @@ window.QUESTION_BANK = {
     { text:'「素食的」的英文單字，下列何者正確？', options:['investor','vegetarian','phycologist','scientist'], answer:1 },
 
 
-    { text:'填空題：My mother ___ to go back to the restaurant because of the waiter's rude manner.', options:['assumes','predicts','interrupts','refuses'], answer:3 },
+    { text:"填空題：My mother ___ to go back to the restaurant because of the waiter's rude manner.", options:['assumes','predicts','interrupts','refuses'], answer:3 },
     { text:'填空題：Cabbages were on sale, so I bought five. I paid one hundred dollars ___ .', options:['indeed','cetera','somehow','altogether'], answer:3 },
-    { text:'填空題：Elle's parents are quite ___ with her pocket money, which is why she can afford an expensive cellphone.', options:['frequent','wealthy','generous','moderate'], answer:2 },
+    { text:"填空題：Elle's parents are quite ___ with her pocket money, which is why she can afford an expensive cellphone.", options:['frequent','wealthy','generous','moderate'], answer:2 },
     { text:'填空題：Anyone wanting to climb Mount Jade has to obtain a ___ before they are allowed to enter the area.', options:['permit','request','charm','method'], answer:0 },
-    { text:'填空題：Don't give up! Keep trying and you will ___ succeed.', options:['particularly','eventually','relatively','nearly'], answer:1 },
+    { text:"填空題：Don't give up! Keep trying and you will ___ succeed.", options:['particularly','eventually','relatively','nearly'], answer:1 },
     { text:'填空題：A well-developed plot is always an ___ element of a great movie.', options:['amateur','essential','organic','equivalent'], answer:0 },
     { text:'填空題：Sore throats, headaches, fevers, and chills are common ___ of flu.', options:['symptoms','conditions','definitions','alternatives'], answer:0 },
     { text:'填空題：Liz has been studying ___ lately because she is thinking of applying for a scholarship.', options:['in a hurry','around the clock','out of order','at best'], answer:1 },
