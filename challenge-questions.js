@@ -23,7 +23,7 @@ window.QUESTION_BANK = {
     {
       text: '下列何者不需要進X光機掃描?',
       options: ['行李箱', '嬰兒車', '護照', '免稅袋'],
-      answer: 0
+      answer: 1
     },
     {
       text: '下列何者不需要進X光機掃描?',
@@ -836,7 +836,7 @@ window.QUESTION_BANK = {
         '雙方都要回報',
         '幫忙換的人回報'
       ],
-      answer: null
+      answer: 3
     }
   ],
 
@@ -1216,10 +1216,30 @@ window.QUESTION_BANK = {
     { text:'填空題：Bicycles will become more popular if gasoline prices ___ rising.', options:['practice','stop','avoid','keep'], answer:3 },
     { text:'填空題：Joe spends the ___ of his time on video games.', options:['authority','majority','capacity','curiosity'], answer:1 },
     { text:"填空題：Not only children but also adults can't resist ___ Disney cartoons that are funny.", options:['to watch','watches','watch','watching'], answer:3 },
-    { text:"填空題：What matters ___ that the little boy is home safe and sound.", options:['are','is','were','to be'], answer:1 },
-    { text:"填空題：Mark raised his hand and asked the teacher to ___ the point he just mentioned.", options:['clarify','combine','comfort','calculate'], answer:0 },
-    { text:"填空題：The company will ___ in developing audio technology.", options:['take a picture','take a lead','take pity','take over'], answer:1 },
-    { text:"填空題：Some cancer patients think that chemotherapy is ___ torture.", options:['shortage of','not at all','no other','nothing short of'], answer:3 },
+    { text:"填空題：Sometimes the weather in this area is too hot, sometimes it sis too cold. It goes from one extreme to ___ .", options:['each other','one another','the other','another'], answer:2 },
+    { text:"填空題：___ it not for my wife's assistance, I couldn't get over the difficulties.", options:['Were','If','Had','Without'], answer:0 },
+    { text:"填空題：Today, most office workers ___ computers more than ever to do their work.", options:['move over','tear down','live up to','rely on'], answer:3 },
+    { text:"填空題：All of us were ___ when we heard that one of our neighbors had been broken into last night.", options:['shy','proud','shocked','spoiled'], answer:2 },
+    { text:'填空題：The church served as a ___ refuge for the flood victims.', options:['temporary','technological','timid','tolerable'], answer:0 },
+    { text:"填空題：You ___ told Amelia your secret. She is a big mouth!", options:['should',"shouldn't","shouldn't have",'should have'], answer:2 },
+    { text:"填空題：The old man was threatened by some gangsters to ___ all his money from the bank.", options:['gamble','withdraw','overthrow','establish'], answer:1 },
+    { text:'填空題：Dr. Black is an excellent surgeon and all the doctors in this hospital are looking forward to ___ with her.', options:['work','working','works','worked'], answer:1 },
+    { text:'填空題：Some social media such as Facebook and Twitter ___ people to share their lives and information with their friends online.', options:['enable','measure','mislead','disturb'], answer:0 },
+    { text:"填空題：My roommate accused me ___ spending so much time showering and getting dressed in the bathroom.", options:['of','for','with','from'], answer:0 },
+    { text:"填空題：Both my family and colleagues suggest that I ___ several days off from work and take a vacation abroad.", options:['was taken','take','am taking','took'], answer:2 },
+    { text:"填空題：To ___ harming her unborn child, Kelly quit drinking and smoking during pregnancy.", options:['ascend','approach','assure','avoid'], answer:3 },
+    { text:"填空題：A chemical change ___ when the milk turns sour.", options:['takes place','was taking place','had taken place','took place'], answer:0 },
+    { text:"填空題：The product was incented in 1974. However, ___ 1980 that the product was sold all over the United States and Europe.", options:['not until','it was until','until','it was not until'], answer:3 },
+    { text:'填空題：The famous model and fashion designer ___ going to hold a conference in Milan next week.', options:['are','be','is','being'], answer:2 },
+    { text:"填空題：On seeing Nathan's wonderful performance on stage, his parents cannot but ___ .", options:['cries',"crying","to cry",'cry'], answer:3 },
+    { text:"填空題：Simon was fired by his boss for ___ his duty.", options:['locating','spotting','neglecting','resembling'], answer:2 },
+    { text:"填空題：Jenny ___ to bed early last night; she didn't answer the phone when I called her around eight.", options:['used to go','must have gone','could have gone','had to go'], answer:1 },
+    { text:'填空題：Amanda ___ reality by reading romances and watching romantic comedy films.', options:['escapes','features','defends','inspires'], answer:0 },
+    { text:"填空題：Sara ___ into tears when she heard the news that her childhood friend died in a car accident.", options:['ran','burst','twisted','gripped'], answer:1 },
+    { text:"填空題：Only when Steve lost his parents ___ the importance of them.", options:['did he realize','does he realize','was he realize','he realized'], answer:0 },
+    { text:"填空題：We can have a picnic beside the river ___ the weather is fine.", options:['as well as','as long as','as far as','as good as'], answer:1 },
+    { text:"填空題：The job is ___ easy, so I think we should be able to finish it this afternoon.", options:['recklessly','exclusively','relatively','readily'], answer:2 },
+    { text:"填空題：We are not able to access the website ___ it is now under construction.", options:['though','despite','as','from'], answer:2 },
   ],
 
 
