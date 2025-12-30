@@ -1240,6 +1240,16 @@ window.QUESTION_BANK = {
     { text:"填空題：We can have a picnic beside the river ___ the weather is fine.", options:['as well as','as long as','as far as','as good as'], answer:1 },
     { text:"填空題：The job is ___ easy, so I think we should be able to finish it this afternoon.", options:['recklessly','exclusively','relatively','readily'], answer:2 },
     { text:"填空題：We are not able to access the website ___ it is now under construction.", options:['though','despite','as','from'], answer:2 },
+    { text:'填空題：___ Kelly gone to the movie with us last night, she could have bumped into her favorite actor, Jack.', options:['If','Had','Should','Were'], answer:1 },
+    { text:"填空題：The guests are trying to find the steps leading to the rooftop garden, where the wedding party ___ .", options:['is being held','which holds','is holding','holding'], answer:3 },
+    { text:"填空題：Compared to the climate of the past years, it is ___ warm this year.", options:['sincerely','severely','relatively','enormously'], answer:2 },
+    { text:"填空題：Wendy tried to stay calm but I ___ a slight change in her voice.", options:['encountered','distracted','detected','imitated'], answer:2 },
+    { text:'填空題：The invention of the cell phone is ___ because it changes the way people communicate all over the world.', options:['significant','expressive','democratic','sympathetic'], answer:0 },
+    { text:"填空題：Watching TV series ___ too much of your time. You should spend more time practicing your English.", options:['takes over','takes up','take offence','take after'], answer:1 },
+    { text:"填空題：If the same thing happened to Joe, what would you suggest ___ ?", options:['him','he','his','to him'], answer:3 },
+    { text:"填空題：Craig is going to hold an important meeting tomorrow; ___ , he will still go to the concert tonight.", options:['hence','likewise','nevertheless','otherwise'], answer:2 },
+    { text:"填空題：I didn't hear the phone rang. I ___ have been fast asleep.", options:['would','had to','must','used to'], answer:2 },
+    { text:"填空題：WWhat is the ___ for operating this machine?", options:['research','therapy','procedure','exposure'], answer:2 },
   ],
 
 
