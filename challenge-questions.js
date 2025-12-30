@@ -1249,7 +1249,13 @@ window.QUESTION_BANK = {
     { text:"填空題：If the same thing happened to Joe, what would you suggest ___ ?", options:['him','he','his','to him'], answer:3 },
     { text:"填空題：Craig is going to hold an important meeting tomorrow; ___ , he will still go to the concert tonight.", options:['hence','likewise','nevertheless','otherwise'], answer:2 },
     { text:"填空題：I didn't hear the phone rang. I ___ have been fast asleep.", options:['would','had to','must','used to'], answer:2 },
-    { text:"填空題：WWhat is the ___ for operating this machine?", options:['research','therapy','procedure','exposure'], answer:2 },
+    { text:"填空題：What is the ___ for operating this machine?", options:['research','therapy','procedure','exposure'], answer:2 },
+    { text:'填空題：By the time we arrived home, my grandmother ___ dinner. It was time for all of us to enjoy a big feast.', options:['were done completing','had finished preparing','had finished','were completed with'], answer:1 },
+    { text:"填空題：Many lawmakers called for a ___ of the defective and toxic products from China.", options:['strike','boycott','investigation','resignation'], answer:1 },
+    { text:"填空題：It has been raining a lot these days in Taipei, but today is an ___ .", options:['expectation','expansion','exception','excursion'], answer:2 },
+    { text:"填空題：Anna's experience in the fashion industry made the interviewer believe that she is the best ___ for the job.", options:['competitor','candidate','suspect','player'], answer:1 },
+    { text:"填空題：Everyone in the room was interviewed by Mr. Trump, ___ ?", options:["weren't","isn't he","aren't you","was he"], answer:0 },
+    { text:"填空題：Ann invited her friends to her party, but ___ were able to come.", options:['little','much','few','less'], answer:2 }
   ],
 
 
