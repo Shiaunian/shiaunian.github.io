@@ -39,7 +39,6 @@ window.ACCOUNTS = [
   {"username":"1289","password":"0115","_comment":"邱俊遠","welcome":"歡迎邱俊遠"},
   {"username":"3559","password":"1227","_comment":"王麗慧","welcome":"歡迎王麗慧"},
   {"username":"2124","password":"0115","_comment":"郭心孜","welcome":"歡迎郭心孜"},
-  {"username":"5504","password":"0627","_comment":"方雅瑩","welcome":"歡迎方雅瑩"},
   {"username":"0308","password":"1028","_comment":"温存弘","welcome":"歡迎温存弘"},
   {"username":"3404","password":"0320","_comment":"于大為","welcome":"歡迎于大為"},
   {"username":"5418","password":"0617","_comment":"黄家慶","welcome":"歡迎黄家慶"},
@@ -47,7 +46,6 @@ window.ACCOUNTS = [
   {"username":"1668","password":"1114","_comment":"蔡博超","welcome":"歡迎蔡博超"},
   {"username":"8797","password":"1018","_comment":"邱韋寧","welcome":"歡迎邱韋寧"},
   {"username":"2503","password":"0821","_comment":"吳宗翰","welcome":"歡迎吳宗翰"},
-  {"username":"3531","password":"0108","_comment":"陳欣茹","welcome":"歡迎陳欣茹"},
   {"username":"6067","password":"0116","_comment":"林鈺珈","welcome":"歡迎林鈺珈"},
   {"username":"9177","password":"0929","_comment":"林昱程","welcome":"歡迎林昱程"},
   {"username":"7681","password":"0122","_comment":"武清享","welcome":"歡迎武清享"},
@@ -92,6 +90,7 @@ window.ACCOUNTS = [
   {"username":"3470","password":"0306","_comment":"謝秉修","welcome":"歡迎謝秉修"},
   {"username":"1728","password":"0616","_comment":"呂汶芯","welcome":"歡迎呂汶芯"}
 ];
+
 
 
 
