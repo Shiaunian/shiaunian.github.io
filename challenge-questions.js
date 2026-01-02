@@ -836,7 +836,7 @@ window.QUESTION_BANK = {
         '雙方都要回報',
         '幫忙換的人回報'
       ],
-      answer: 3
+      answer: 2
     }
   ],
 
