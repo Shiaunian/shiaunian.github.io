@@ -1266,8 +1266,22 @@ window.QUESTION_BANK = {
   // ===========================
 
   'lang-kr-quarantine': [
-    { text:'다음 중 검역 대상은?', options:['물','과일','책','티켓'], answer:1 },
-    { text:'이 물건은 허용됩니까?', image:'images/sample-meat.jpg', options:['예','아니오','모름','직원 호출'], answer:1 },
+    { text:'請問下列何者是「入境」的意思?', options:['비행기표','여권','입국','환승'], answer:2 },
+    { text:'請問下列何者是「轉機」的意思?', options:['비행기표','여권','입국','환승'], answer:3 },
+    { text:'請問下列何者是「機票」的意思?', options:['비행기표','여권','입국','환승'], answer:0 },
+    { text:'請問下列何者是「護照」的意思?', options:['비행기표','여권','입국','환승'], answer:1 },
+    { text:'請問下列何者是圖片的翻譯?', image:'audio/手機.jpg', options:['핸드폰','왼쪽','세관','수하물'], answer:0 },
+    { text:'請問下列何者是「行李」的意思?', options:['핸드폰','왼쪽','세관','수하물'], answer:3 },
+    { text:'請問下列何者是「海關」的意思?', options:['핸드폰','왼쪽','세관','수하물'], answer:2 },
+    { text:'請問下列何者是「左邊」的意思?', options:['핸드폰','왼쪽','세관','수하물'], answer:1 },
+    { text:'請問下列何者是「右邊」的意思?', options:['탑승구','가방','오른쪽','사탕'], answer:2 },
+    { text:'請問下列何者是「登機門」的意思?', options:['탑승구','가방','오른쪽','사탕'], answer:0 },
+    { text:'請問下列何者是「包包」的意思?', options:['탑승구','가방','오른쪽','사탕'], answer:1 },
+    { text:'請問下列何者是「糖果」的意思?', options:['탑승구','가방','오른쪽','사탕'], answer:3 },
+    { text:'請問下列何者是「豬肉」的意思?', options:['돼지고기','닭고기','소고기','육포'], answer:0 },
+    { text:'請問下列何者是「雞肉」的意思?', options:['돼지고기','닭고기','소고기','육포'], answer:1 },
+    { text:'請問下列何者是「牛肉」的意思?', options:['돼지고기','닭고기','소고기','육포'], answer:2 },
+    { text:'請問下列何者是「肉乾」的意思?', options:['돼지고기','닭고기','소고기','육포'], answer:3 },
     { text:'검역 품목을 고르세요', options:[
       '<img src="images/opt-fruit.jpg"> 과일','<img src="images/opt-shirt.jpg"> 옷',
       '<img src="images/opt-book.jpg"> 책','<img src="images/opt-water.jpg"> 물'], answer:0 },
