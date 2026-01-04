@@ -1429,14 +1429,7 @@ window.QUESTION_BANK = {
         '이쪽으로 앉으세요.',
         '구급차가 필요하십니까?',
         '괜찮으세요?'
-      ], answer:0 },
-    
-    { text:'검역 품목을 고르세요', options:[
-      '<img src="images/opt-fruit.jpg"> 과일','<img src="images/opt-shirt.jpg"> 옷',
-      '<img src="images/opt-book.jpg"> 책','<img src="images/opt-water.jpg"> 물'], answer:0 },
-    { text:'이 사진의 분류는?', image:'images/sample-fruit.jpg',
-      options:['<img src="images/opt-ok.jpg"> 안전','<img src="images/opt-ng.jpg"> 검역 대상',
-               '<img src="images/opt-idk.jpg"> 모름','<img src="images/opt-tool.jpg"> 도구'], answer:1 }
+      ], answer:0 }
   ],
 
   'lang-kr-beginner': [
