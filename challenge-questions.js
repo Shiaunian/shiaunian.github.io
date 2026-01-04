@@ -1290,7 +1290,7 @@ window.QUESTION_BANK = {
     { text:'請問下列何者是圖中內容的翻譯?', image:'audio/麵包.jpg', options:['상추','빵','과자','씨앗'], answer:1 },
     { text:'請問下列何者是「甜食」的意思?', options:['상추','빵','과자','씨앗'], answer:2 },
     { text:'請問下列何者是「種子」的意思?', options:['상추','빵','과자','씨앗'], answer:3 },
-    { text:'請問下列何者是「飯捲」的意思?', options:['김밥','계란','반숙','완숙'], answer:0 },
+    { text:'請問下列何者是圖中內容的翻譯?', image:'audio/飯捲.jpg', options:['김밥','계란','반숙','완숙'], answer:0 },
     { text:'請問下列何者是「半熟」的意思?', options:['김밥','계란','반숙','완숙'], answer:2 },
     { text:'請問下列何者是「全熟」的意思?', options:['김밥','계란','반숙','완숙'], answer:3 },
     { text:'請問下列何者是圖中內容的翻譯?', image:'audio/雞蛋.jpg', options:['김밥','계란','반숙','완숙'], answer:1 },
