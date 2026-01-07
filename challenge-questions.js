@@ -1266,10 +1266,10 @@ window.QUESTION_BANK = {
   // ===========================
 
   'lang-kr-quarantine': [
-    { text:'請問下列何者是「入境」的意思?', options:['비행기표','여권','입국','환승'], answer:2 },
-    { text:'請問下列何者是「轉機」的意思?', options:['비행기표','여권','입국','환승'], answer:3 },
-    { text:'請問下列何者是「機票」的意思?', options:['비행기표','여권','입국','환승'], answer:0 },
-    { text:'請問下列何者是「護照」的意思?', options:['비행기표','여권','입국','환승'], answer:1 },
+    { text:'請問下列何者是「入境」的意思?', options:['<audio=audio/檢疫單字 韓文/機票.mp3>비행기표','<audio=audio/檢疫單字 韓文/護照.mp3>여권','<audio=audio/檢疫單字 韓文/入境.mp3>입국','<audio=audio/檢疫單字 韓文/轉機.mp3>환승'], answer:2 },
+    { text:'請問下列何者是「轉機」的意思?', options:['<audio=audio/檢疫單字 韓文/機票.mp3>비행기표','<audio=audio/檢疫單字 韓文/護照.mp3>여권','<audio=audio/檢疫單字 韓文/入境.mp3>입국','<audio=audio/檢疫單字 韓文/轉機.mp3>환승'], answer:3 },
+    { text:'請問下列何者是「機票」的意思?', options:['<audio=audio/檢疫單字 韓文/機票.mp3>비행기표','<audio=audio/檢疫單字 韓文/護照.mp3>여권','<audio=audio/檢疫單字 韓文/入境.mp3>입국','<audio=audio/檢疫單字 韓文/轉機.mp3>환승'], answer:0 },
+    { text:'請問下列何者是「護照」的意思?', options:['<audio=audio/檢疫單字 韓文/機票.mp3>비행기표','<audio=audio/檢疫單字 韓文/護照.mp3>여권','<audio=audio/檢疫單字 韓文/入境.mp3>입국','<audio=audio/檢疫單字 韓文/轉機.mp3>환승'], answer:1 },
     { text:'請問下列何者是圖中內容的翻譯?', image:'audio/手機.jpg', options:['핸드폰','왼쪽','세관','수하물'], answer:0 },
     { text:'請問下列何者是「行李」的意思?', options:['핸드폰','왼쪽','세관','수하물'], answer:3 },
     { text:'請問下列何者是「海關」的意思?', options:['핸드폰','왼쪽','세관','수하물'], answer:2 },
