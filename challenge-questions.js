@@ -1696,15 +1696,7 @@ window.QUESTION_BANK = {
         'すみません、大丈夫ですか？',
         'こっちにどうぞ、座ってください。',
         '救急車は必要ですか？'
-      ], answer:1 },
-
-    { text:'これは申告が必要ですか？', image:'images/sample-meat.jpg', options:['はい','いいえ','不明','スタッフ呼ぶ'], answer:0 },
-    { text:'検疫物を選んでください', options:[
-      '<img src="images/opt-fruit.jpg"> 果物','<img src="images/opt-book.jpg"> 本',
-      '<img src="images/opt-shirt.jpg"> 服','<img src="images/opt-water.jpg"> 水'], answer:0 },
-    { text:'分類してください', image:'images/sample-fruit.jpg',
-      options:['<img src="images/opt-ok.jpg"> 安全','<img src="images/opt-ng.jpg"> 検疫対象',
-               '<img src="images/opt-idk.jpg"> 不明','<img src="images/opt-tool.jpg"> 道具'], answer:1 }
+      ], answer:1 }
   ],
 
   'lang-jp-beginner': [
