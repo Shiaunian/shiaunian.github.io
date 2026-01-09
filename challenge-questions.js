@@ -1,3 +1,4 @@
+
 // challenge-questions.js
 // ✔ 每題格式：
 // { text: '題目', options: [...], answer: 0 }
@@ -1518,184 +1519,461 @@ window.QUESTION_BANK = {
   // ===========================
 
   'lang-jp-quarantine': [
-    { text:'請問下列何者是「入境」的意思?', options:['入国','乗り継ぎ','搭乗券','バスボード'], answer:0 },
-    { text:'請問下列何者是「轉機」的意思?', options:['入国','乗り継ぎ','搭乗券','バスボード'], answer:1 },
-    { text:'請問下列何者是「機票」的意思?', options:['入国','乗り継ぎ','搭乗券','バスボード'], answer:2 },
-    { text:'請問下列何者是「護照」的意思?', options:['入国','乗り継ぎ','搭乗券','バスボード'], answer:3 },
-    { text:'請問下列何者是「手機」的意思?', options:['入国審査','スマホ','お預け手荷物','荷物'], answer:1 },
-    { text:'請問下列何者是「行李」的意思?', options:['入国審査','スマホ','お預け手荷物','荷物'], answer:3 },
-    { text:'請問下列何者是「護照查驗」的意思?', options:['入国審査','スマホ','お預け手荷物','荷物'], answer:0 },
-    { text:'請問下列何者是「托運行李」的意思?', options:['入国審査','スマホ','お預け手荷物','荷物'], answer:2 },
-    { text:'請問下列何者是「海關」的意思?', options:['みぎ','ひだり','ぜいかん','ゲート'], answer:2 },
-    { text:'請問下列何者是「左邊」的意思?', options:['みぎ','ひだり','ぜいかん','ゲート'], answer:0 },
-    { text:'請問下列何者是「右邊」的意思?', options:['みぎ','ひだり','ぜいかん','ゲート'], answer:1 },
-    { text:'請問下列何者是「登機門」的意思?', options:['みぎ','ひだり','ぜいかん','ゲート'], answer:3 },
-    { text:'請問下列何者是「直走」的意思?', options:['鶏肉','カバン','まっすぐ行って','豚肉'], answer:2 },
-    { text:'請問下列何者是「包包」的意思?', options:['鶏肉','カバン','まっすぐ行って','豚肉'], answer:1 },
-    { text:'請問下列何者是「豬肉」的意思?', options:['鶏肉','カバン','まっすぐ行って','豚肉'], answer:3 },
-    { text:'請問下列何者是「雞肉」的意思?', options:['鶏肉','カバン','まっすぐ行って','豚肉'], answer:0 },
-    { text:'請問下列何者是「牛肉」的意思?', options:['牛肉','リンゴ','バナナ','ミカン'], answer:0 },
-    { text:'請問下列何者是「蘋果」的意思?', options:['牛肉','リンゴ','バナナ','ミカン'], answer:1 },
-    { text:'請問下列何者是「香蕉」的意思?', options:['牛肉','リンゴ','バナナ','ミカン'], answer:2 },
-    { text:'請問下列何者是「牛肉」的意思?', options:['牛肉','リンゴ','バナナ','ミカン'], answer:3 },
-    { text:'請問下列何者是「肉乾」的意思?', options:['腸詰め','ぞぼる','ハム','干し肉'], answer:3 },
-    { text:'請問下列何者是「肉鬆」的意思?', options:['腸詰め','ぞぼる','ハム','干し肉'], answer:1 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/火腿.jpg', options:['腸詰め','ぞぼる','ハム','干し肉'], answer:2 },
-    { text:'請問下列何者是「肉乾」的意思?', options:['腸詰め','ぞぼる','ハム','干し肉'], answer:3 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/香腸.jpg', options:['腸詰め','ぞぼる','ハム','干し肉'], answer:0 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/米.jpg', options:['パン','こめ','生野菜','あめ'], answer:1 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/生菜.jpg', options:['パン','こめ','生野菜','あめ'], answer:2 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/麵包.jpg', options:['パン','こめ','生野菜','あめ'], answer:0 },
-    { text:'請問下列何者是「糖果」的意思?', options:['パン','こめ','生野菜','あめ'], answer:3 },
-    { text:'請問下列何者是「餅乾」的意思?', options:['あまい','しゅし','おかし','クーキー'], answer:3 },
-    { text:'請問下列何者是「甜食」的意思?', options:['あまい','しゅし','おかし','クーキー'], answer:2 },
-    { text:'請問下列何者是「種子」的意思?', options:['あまい','しゅし','おかし','クーキー'], answer:1 },
-    { text:'請問下列何者是「甜的」的意思?', options:['あまい','しゅし','おかし','クーキー'], answer:0 },
-    { text:'請問下列何者是「生的」的意思?', options:['なま','半熟','よく焼き','ほうすい'], answer:0 },
-    { text:'請問下列何者是「熟的」的意思?', options:['なま','半熟','よく焼き','ほうすい'], answer:3 },
-    { text:'請問下列何者是「半熟」的意思?', options:['なま','半熟','よく焼き','ほうすい'], answer:1 },
-    { text:'請問下列何者是「全熟」的意思?', options:['なま','半熟','よく焼き','ほうすい'], answer:2 },
-    { text:'請問下列何者是圖中內容的翻譯?',image:'audio/雞蛋.jpg', options:['卵','腸詰め','生野菜','ぞぼる'], answer:0 },
+    { text:'請問下列何者是「入境」的意思?',
+      options:[
+        '入国 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国.mp3\')">🔊</button>',
+        '乗り継ぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎ.mp3\')">🔊</button>',
+        '搭乗券 <button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券.mp3\')">🔊</button>',
+        'ボーディングパス <button class="audio-btn small" onclick="playAudio(\'audio/日文/ボーディングパス.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「轉機」的意思?',
+      options:[
+        '入国 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国.mp3\')">🔊</button>',
+        '乗り継ぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎ.mp3\')">🔊</button>',
+        '搭乗券 <button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券.mp3\')">🔊</button>',
+        'ボーディングパス <button class="audio-btn small" onclick="playAudio(\'audio/日文/ボーディングパス.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「機票」的意思?',
+      options:[
+        '入国 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国.mp3\')">🔊</button>',
+        '乗り継ぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎ.mp3\')">🔊</button>',
+        '搭乗券 <button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券.mp3\')">🔊</button>',
+        'ボーディングパス <button class="audio-btn small" onclick="playAudio(\'audio/日文/ボーディングパス.mp3\')">🔊</button>'
+      ], answer:2 },
 
-    { text:'翻譯題：請問哪裡飛過來的?', options:[
-        'どちらからいらっしゃいましたか？',
-        'カードを回収お願いします。',
-        'カードはありますか？'
-      ], answer:0 },
-    { text:'翻譯題：卡片回收', options:[
-        'どちらからいらっしゃいましたか？',
-        'カードを回収お願いします。',
-        'カードはありますか？'
+    // 修正：護照題（原本選項錯）
+    { text:'請問下列何者是「護照」的意思?',
+      options:[
+        '入国 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国.mp3\')">🔊</button>',
+        '乗り継ぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎ.mp3\')">🔊</button>',
+        '搭乗券 <button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券.mp3\')">🔊</button>',
+        'ボーディングパス <button class="audio-btn small" onclick="playAudio(\'audio/日文/ボーディングパス.mp3\')">🔊</button>'
+      ], answer:3 },
+
+    { text:'請問下列何者是「手機」的意思?',
+      options:[
+        '入国審査 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国審査.mp3\')">🔊</button>',
+        'スマホ <button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホ.mp3\')">🔊</button>',
+        'お預け手荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/お預け手荷物.mp3\')">🔊</button>',
+        '荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/荷物.mp3\')">🔊</button>'
       ], answer:1 },
-    { text:'翻譯題：請問有拿卡片嗎?', options:[
-        'どちらからいらっしゃいましたか？',
-        'カードを回収お願いします。',
-        'カードはありますか？'
-      ], answer:2 },
-    { text:'翻譯題：我沒有拿', options:[
-        '搭乗券お願いします。',
-        '持っていない。',
-        'ラインでお待ちください。'
-      ], answer:1 },
-     { text:'翻譯題：請拿出機票', options:[
-        '搭乗券お願いします。',
-        '持っていない。',
-        'ラインでお待ちください。'
+    { text:'請問下列何者是「行李」的意思?',
+      options:[
+        '入国審査 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国審査.mp3\')">🔊</button>',
+        'スマホ <button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホ.mp3\')">🔊</button>',
+        'お預け手荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/お預け手荷物.mp3\')">🔊</button>',
+        '荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/荷物.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「護照查驗」的意思?',
+      options:[
+        '入国審査 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国審査.mp3\')">🔊</button>',
+        'スマホ <button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホ.mp3\')">🔊</button>',
+        'お預け手荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/お預け手荷物.mp3\')">🔊</button>',
+        '荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/荷物.mp3\')">🔊</button>'
       ], answer:0 },
-     { text:'翻譯題：麻煩請線後稍等', options:[
-        '搭乗券お願いします。',
-        '持っていない。',
-        'ラインでお待ちください。'
+    { text:'請問下列何者是「托運行李」的意思?',
+      options:[
+        '入国審査 <button class="audio-btn small" onclick="playAudio(\'audio/日文/入国審査.mp3\')">🔊</button>',
+        'スマホ <button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホ.mp3\')">🔊</button>',
+        'お預け手荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/お預け手荷物.mp3\')">🔊</button>',
+        '荷物 <button class="audio-btn small" onclick="playAudio(\'audio/日文/荷物.mp3\')">🔊</button>'
       ], answer:2 },
-     { text:'翻譯題：請問有帶食物嗎?', options:[
-        'スマホは大丈夫です。',
-        '大丈夫です、進んでください。',
-        '食べ物はありますか？'
+
+    { text:'請問下列何者是「海關」的意思?',
+      options:[
+        'みぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/みぎ.mp3\')">🔊</button>',
+        'ひだり <button class="audio-btn small" onclick="playAudio(\'audio/日文/ひだり.mp3\')">🔊</button>',
+        '税関 <button class="audio-btn small" onclick="playAudio(\'audio/日文/税関.mp3\')">🔊</button>',
+        'ゲート <button class="audio-btn small" onclick="playAudio(\'audio/日文/ゲート.mp3\')">🔊</button>'
       ], answer:2 },
+
+    // 修正：左右顛倒
+    { text:'請問下列何者是「左邊」的意思?',
+      options:[
+        'みぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/みぎ.mp3\')">🔊</button>',
+        'ひだり <button class="audio-btn small" onclick="playAudio(\'audio/日文/ひだり.mp3\')">🔊</button>',
+        '税関 <button class="audio-btn small" onclick="playAudio(\'audio/日文/税関.mp3\')">🔊</button>',
+        'ゲート <button class="audio-btn small" onclick="playAudio(\'audio/日文/ゲート.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「右邊」的意思?',
+      options:[
+        'みぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/みぎ.mp3\')">🔊</button>',
+        'ひだり <button class="audio-btn small" onclick="playAudio(\'audio/日文/ひだり.mp3\')">🔊</button>',
+        '税関 <button class="audio-btn small" onclick="playAudio(\'audio/日文/税関.mp3\')">🔊</button>',
+        'ゲート <button class="audio-btn small" onclick="playAudio(\'audio/日文/ゲート.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'請問下列何者是「登機門」的意思?',
+      options:[
+        'みぎ <button class="audio-btn small" onclick="playAudio(\'audio/日文/みぎ.mp3\')">🔊</button>',
+        'ひだり <button class="audio-btn small" onclick="playAudio(\'audio/日文/ひだり.mp3\')">🔊</button>',
+        '税関 <button class="audio-btn small" onclick="playAudio(\'audio/日文/税関.mp3\')">🔊</button>',
+        'ゲート <button class="audio-btn small" onclick="playAudio(\'audio/日文/ゲート.mp3\')">🔊</button>'
+      ], answer:3 },
+
+    { text:'請問下列何者是「直走」的意思?',
+      options:[
+        '鶏肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/鶏肉.mp3\')">🔊</button>',
+        'カバン <button class="audio-btn small" onclick="playAudio(\'audio/日文/カバン.mp3\')">🔊</button>',
+        'まっすぐ行って <button class="audio-btn small" onclick="playAudio(\'audio/日文/まっすぐ行って.mp3\')">🔊</button>',
+        '豚肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/豚肉.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「包包」的意思?',
+      options:[
+        '鶏肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/鶏肉.mp3\')">🔊</button>',
+        'カバン <button class="audio-btn small" onclick="playAudio(\'audio/日文/カバン.mp3\')">🔊</button>',
+        'まっすぐ行って <button class="audio-btn small" onclick="playAudio(\'audio/日文/まっすぐ行って.mp3\')">🔊</button>',
+        '豚肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/豚肉.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「豬肉」的意思?',
+      options:[
+        '鶏肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/鶏肉.mp3\')">🔊</button>',
+        'カバン <button class="audio-btn small" onclick="playAudio(\'audio/日文/カバン.mp3\')">🔊</button>',
+        'まっすぐ行って <button class="audio-btn small" onclick="playAudio(\'audio/日文/まっすぐ行って.mp3\')">🔊</button>',
+        '豚肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/豚肉.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「雞肉」的意思?',
+      options:[
+        '鶏肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/鶏肉.mp3\')">🔊</button>',
+        'カバン <button class="audio-btn small" onclick="playAudio(\'audio/日文/カバン.mp3\')">🔊</button>',
+        'まっすぐ行って <button class="audio-btn small" onclick="playAudio(\'audio/日文/まっすぐ行って.mp3\')">🔊</button>',
+        '豚肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/豚肉.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'請問下列何者是「牛肉」的意思?',
+      options:[
+        '牛肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/牛肉.mp3\')">🔊</button>',
+        'リンゴ <button class="audio-btn small" onclick="playAudio(\'audio/日文/リンゴ.mp3\')">🔊</button>',
+        'バナナ <button class="audio-btn small" onclick="playAudio(\'audio/日文/バナナ.mp3\')">🔊</button>',
+        'ミカン <button class="audio-btn small" onclick="playAudio(\'audio/日文/ミカン.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「蘋果」的意思?',
+      options:[
+        '牛肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/牛肉.mp3\')">🔊</button>',
+        'リンゴ <button class="audio-btn small" onclick="playAudio(\'audio/日文/リンゴ.mp3\')">🔊</button>',
+        'バナナ <button class="audio-btn small" onclick="playAudio(\'audio/日文/バナナ.mp3\')">🔊</button>',
+        'ミカン <button class="audio-btn small" onclick="playAudio(\'audio/日文/ミカン.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「香蕉」的意思?',
+      options:[
+        '牛肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/牛肉.mp3\')">🔊</button>',
+        'リンゴ <button class="audio-btn small" onclick="playAudio(\'audio/日文/リンゴ.mp3\')">🔊</button>',
+        'バナナ <button class="audio-btn small" onclick="playAudio(\'audio/日文/バナナ.mp3\')">🔊</button>',
+        'ミカン <button class="audio-btn small" onclick="playAudio(\'audio/日文/ミカン.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    // 修正：原本寫牛肉但答案是橘子
+    { text:'請問下列何者是「橘子」的意思?',
+      options:[
+        '牛肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/牛肉.mp3\')">🔊</button>',
+        'リンゴ <button class="audio-btn small" onclick="playAudio(\'audio/日文/リンゴ.mp3\')">🔊</button>',
+        'バナナ <button class="audio-btn small" onclick="playAudio(\'audio/日文/バナナ.mp3\')">🔊</button>',
+        'ミカン <button class="audio-btn small" onclick="playAudio(\'audio/日文/ミカン.mp3\')">🔊</button>'
+      ], answer:3 },
+
+    { text:'請問下列何者是「肉乾」的意思?',
+      options:[
+        '腸詰め <button class="audio-btn small" onclick="playAudio(\'audio/日文/腸詰め.mp3\')">🔊</button>',
+        'そぼろ <button class="audio-btn small" onclick="playAudio(\'audio/日文/そぼろ.mp3\')">🔊</button>',
+        'ハム <button class="audio-btn small" onclick="playAudio(\'audio/日文/ハム.mp3\')">🔊</button>',
+        '干し肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/干し肉.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「肉鬆」的意思?',
+      options:[
+        '腸詰め <button class="audio-btn small" onclick="playAudio(\'audio/日文/腸詰め.mp3\')">🔊</button>',
+        'そぼろ <button class="audio-btn small" onclick="playAudio(\'audio/日文/そぼろ.mp3\')">🔊</button>',
+        'ハム <button class="audio-btn small" onclick="playAudio(\'audio/日文/ハム.mp3\')">🔊</button>',
+        '干し肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/干し肉.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/火腿.jpg',
+      options:[
+        '腸詰め <button class="audio-btn small" onclick="playAudio(\'audio/日文/腸詰め.mp3\')">🔊</button>',
+        'そぼろ <button class="audio-btn small" onclick="playAudio(\'audio/日文/そぼろ.mp3\')">🔊</button>',
+        'ハム <button class="audio-btn small" onclick="playAudio(\'audio/日文/ハム.mp3\')">🔊</button>',
+        '干し肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/干し肉.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/香腸.jpg',
+      options:[
+        '腸詰め <button class="audio-btn small" onclick="playAudio(\'audio/日文/腸詰め.mp3\')">🔊</button>',
+        'そぼろ <button class="audio-btn small" onclick="playAudio(\'audio/日文/そぼろ.mp3\')">🔊</button>',
+        'ハム <button class="audio-btn small" onclick="playAudio(\'audio/日文/ハム.mp3\')">🔊</button>',
+        '干し肉 <button class="audio-btn small" onclick="playAudio(\'audio/日文/干し肉.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/米.jpg',
+      options:[
+        'パン <button class="audio-btn small" onclick="playAudio(\'audio/日文/パン.mp3\')">🔊</button>',
+        'こめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/こめ.mp3\')">🔊</button>',
+        '生野菜 <button class="audio-btn small" onclick="playAudio(\'audio/日文/生野菜.mp3\')">🔊</button>',
+        'あめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/あめ.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/生菜.jpg',
+      options:[
+        'パン <button class="audio-btn small" onclick="playAudio(\'audio/日文/パン.mp3\')">🔊</button>',
+        'こめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/こめ.mp3\')">🔊</button>',
+        '生野菜 <button class="audio-btn small" onclick="playAudio(\'audio/日文/生野菜.mp3\')">🔊</button>',
+        'あめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/あめ.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/麵包.jpg',
+      options:[
+        'パン <button class="audio-btn small" onclick="playAudio(\'audio/日文/パン.mp3\')">🔊</button>',
+        'こめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/こめ.mp3\')">🔊</button>',
+        '生野菜 <button class="audio-btn small" onclick="playAudio(\'audio/日文/生野菜.mp3\')">🔊</button>',
+        'あめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/あめ.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「糖果」的意思?',
+      options:[
+        'パン <button class="audio-btn small" onclick="playAudio(\'audio/日文/パン.mp3\')">🔊</button>',
+        'こめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/こめ.mp3\')">🔊</button>',
+        '生野菜 <button class="audio-btn small" onclick="playAudio(\'audio/日文/生野菜.mp3\')">🔊</button>',
+        'あめ <button class="audio-btn small" onclick="playAudio(\'audio/日文/あめ.mp3\')">🔊</button>'
+      ], answer:3 },
+
+    // 修正拼字
+    { text:'請問下列何者是「餅乾」的意思?',
+      options:[
+        'あまい <button class="audio-btn small" onclick="playAudio(\'audio/日文/あまい.mp3\')">🔊</button>',
+        'しゅし <button class="audio-btn small" onclick="playAudio(\'audio/日文/しゅし.mp3\')">🔊</button>',
+        'おかし <button class="audio-btn small" onclick="playAudio(\'audio/日文/おかし.mp3\')">🔊</button>',
+        'クッキー <button class="audio-btn small" onclick="playAudio(\'audio/日文/クッキー.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「甜食」的意思?',
+      options:[
+        'あまい <button class="audio-btn small" onclick="playAudio(\'audio/日文/あまい.mp3\')">🔊</button>',
+        'しゅし <button class="audio-btn small" onclick="playAudio(\'audio/日文/しゅし.mp3\')">🔊</button>',
+        'おかし <button class="audio-btn small" onclick="playAudio(\'audio/日文/おかし.mp3\')">🔊</button>',
+        'クッキー <button class="audio-btn small" onclick="playAudio(\'audio/日文/クッキー.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「種子」的意思?',
+      options:[
+        'あまい <button class="audio-btn small" onclick="playAudio(\'audio/日文/あまい.mp3\')">🔊</button>',
+        'しゅし <button class="audio-btn small" onclick="playAudio(\'audio/日文/しゅし.mp3\')">🔊</button>',
+        'おかし <button class="audio-btn small" onclick="playAudio(\'audio/日文/おかし.mp3\')">🔊</button>',
+        'クッキー <button class="audio-btn small" onclick="playAudio(\'audio/日文/クッキー.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「甜的」的意思?',
+      options:[
+        'あまい <button class="audio-btn small" onclick="playAudio(\'audio/日文/あまい.mp3\')">🔊</button>',
+        'しゅし <button class="audio-btn small" onclick="playAudio(\'audio/日文/しゅし.mp3\')">🔊</button>',
+        'おかし <button class="audio-btn small" onclick="playAudio(\'audio/日文/おかし.mp3\')">🔊</button>',
+        'クッキー <button class="audio-btn small" onclick="playAudio(\'audio/日文/クッキー.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'請問下列何者是「生的」的意思?',
+      options:[
+        'なま <button class="audio-btn small" onclick="playAudio(\'audio/日文/なま.mp3\')">🔊</button>',
+        '半熟 <button class="audio-btn small" onclick="playAudio(\'audio/日文/半熟.mp3\')">🔊</button>',
+        'よく焼き <button class="audio-btn small" onclick="playAudio(\'audio/日文/よく焼き.mp3\')">🔊</button>',
+        'レア <button class="audio-btn small" onclick="playAudio(\'audio/日文/レア.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    // 修正：熟的應該是 よく焼き
+    { text:'請問下列何者是「熟的」的意思?',
+      options:[
+        'なま <button class="audio-btn small" onclick="playAudio(\'audio/日文/なま.mp3\')">🔊</button>',
+        '半熟 <button class="audio-btn small" onclick="playAudio(\'audio/日文/半熟.mp3\')">🔊</button>',
+        'よく焼き <button class="audio-btn small" onclick="playAudio(\'audio/日文/よく焼き.mp3\')">🔊</button>',
+        'レア <button class="audio-btn small" onclick="playAudio(\'audio/日文/レア.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'請問下列何者是「半熟」的意思?',
+      options:[
+        'なま <button class="audio-btn small" onclick="playAudio(\'audio/日文/なま.mp3\')">🔊</button>',
+        '半熟 <button class="audio-btn small" onclick="playAudio(\'audio/日文/半熟.mp3\')">🔊</button>',
+        'よく焼き <button class="audio-btn small" onclick="playAudio(\'audio/日文/よく焼き.mp3\')">🔊</button>',
+        'レア <button class="audio-btn small" onclick="playAudio(\'audio/日文/レア.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「全熟」的意思?',
+      options:[
+        'なま <button class="audio-btn small" onclick="playAudio(\'audio/日文/なま.mp3\')">🔊</button>',
+        '半熟 <button class="audio-btn small" onclick="playAudio(\'audio/日文/半熟.mp3\')">🔊</button>',
+        'よく焼き <button class="audio-btn small" onclick="playAudio(\'audio/日文/よく焼き.mp3\')">🔊</button>',
+        'レア <button class="audio-btn small" onclick="playAudio(\'audio/日文/レア.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'請問下列何者是圖中內容的翻譯?', image:'audio/雞蛋.jpg',
+      options:[
+        '卵 <button class="audio-btn small" onclick="playAudio(\'audio/日文/卵.mp3\')">🔊</button>',
+        '腸詰め <button class="audio-btn small" onclick="playAudio(\'audio/日文/腸詰め.mp3\')">🔊</button>',
+        '生野菜 <button class="audio-btn small" onclick="playAudio(\'audio/日文/生野菜.mp3\')">🔊</button>',
+        'そぼろ <button class="audio-btn small" onclick="playAudio(\'audio/日文/そぼろ.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：請問您從哪裡來的？', options:[
+        'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
+        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：請把卡片交回', options:[
+        'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
+        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請問有卡片嗎？', options:[
+        'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
+        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'翻譯題：我沒有拿 / 我沒有', options:[
+        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        '__っていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
+        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請拿出機票/登機證', options:[
+        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        '__っていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
+        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：請在線後等候 / 請到線後等一下', options:[
+        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        '線の後ろでお待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/線の後ろでお待ちください。.mp3\')">🔊</button>',
+        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請問有帶食物嗎?', options:[
+        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
     { text:'翻譯題：你可以拿著手機', options:[
-        'スマホは大丈夫です。',
-        '大丈夫です、進んでください。',
-        '食べ物はありますか？'
+        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：沒關係，請往前走', options:[
-        'スマホは大丈夫です。',
-        '大丈夫です、進んでください。',
-        '食べ物はありますか？'
+        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
       ], answer:1 },
+
     { text:'翻譯題：請打開包包', options:[
-        'これはだめです、捨てください。',
-        'カバンを開けてください。',
-        '一人だけ残ればいい。'
+        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:1 },
+
     { text:'翻譯題：只要一個人留下來就好', options:[
-        'これはだめです、捨てください。',
-        'カバンを開けてください。',
-        '一人だけ残ればいい。'
+        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:2 },
+
     { text:'翻譯題：這個不能帶，我們需要丟棄', options:[
-        'これはだめです、捨てください。',
-        'カバンを開けてください。',
-        '一人だけ残ればいい。'
+        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：請簽名，這裡不會罰款', options:[
-        'サインしてください、罰金はいりません。',
-        '持って行ってください。',
-        '野菜、果物、お肉だめ。'
+        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：可以拿起來了', options:[
-        'サインしてください、罰金はいりません。',
-        '持って行ってください。',
-        '野菜、果物、お肉だめ。'
+        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:1 },
+
     { text:'翻譯題：蔬菜水果肉不行', options:[
-        'サインしてください、罰金はいりません。',
-        '持って行ってください。',
-        '野菜、果物、お肉だめ。'
+        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:2 },
+
     { text:'翻譯題：生鮮蔬果肉類製品禁止攜帶入境', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。',
-        'ここでは撮影禁止です。',
-        '車がきます、ここで少々お待ちください。'
+        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：這裡不能拍照', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。',
-        'ここでは撮影禁止です。',
-        '車がきます、ここで少々お待ちください。'
+        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:1 },
+
     { text:'翻譯題：因為車來了，請在這邊稍等', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。',
-        'ここでは撮影禁止です。',
-        '車がきます、ここで少々お待ちください。'
+        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:2 },
+
+    // 修正：原句「需要幫忙嗎」不要用「大丈夫ですか？」（那是你還好嗎）
     { text:'翻譯題：請問哪裡需要幫忙嗎?', options:[
-        '乗り継ぎですが、それとも入国ですが？',
-        'ずっとまっすぐ行って、左に曲がってください。',
-        'すみません、大丈夫ですか？'
+        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:2 },
+
+    // 修正：句型錯
     { text:'翻譯題：轉機或是入境?', options:[
-        '乗り継ぎですが、それとも入国ですが？',
-        'ずっとまっすぐ行って、左に曲がってください。',
-        'すみません、大丈夫ですか？'
+        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：直走到底左轉', options:[
-        '乗り継ぎですが、それとも入国ですが？',
-        'ずっとまっすぐ行って、左に曲がってください。',
-        'すみません、大丈夫ですか？'
+        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:1 },
+
+    // 修正：選項重複（原本 0 跟 2 一樣）
     { text:'翻譯題：直走到底右轉', options:[
-        'ずっとまっすぐ行って、右に曲がってください。',
-        '銀行を見たら、右に曲がってください。',
-        'ずっとまっすぐ行って、右に曲がってください。'
+        'ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、右に曲がってください。.mp3\')">🔊</button>',
+        'ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        '銀行を見たら、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：看到銀行左轉', options:[
-        '銀行を見たら、左に曲がってください。',
-        '銀行を見たら、右に曲がってください。',
-        '検査のあと、上の階へお進みください。'
+        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：看到銀行右轉', options:[
-        '銀行を見たら、左に曲がってください。',
-        '銀行を見たら、右に曲がってください。',
-        '検査のあと、上の階へお進みください。'
+        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:1 },
+
     { text:'翻譯題：檢查後上樓', options:[
-        '銀行を見たら、左に曲がってください。',
-        '銀行を見たら、右に曲がってください。',
-        '検査のあと、上の階へお進みください。'
+        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:2 },
+
     { text:'翻譯題：請問你還好嗎?', options:[
-        'すみません、大丈夫ですか？',
-        'こっちにどうぞ、座ってください。',
-        '救急車は必要ですか？'
+        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:0 },
+
     { text:'翻譯題：請問您需要救護車嗎?', options:[
-        'すみません、大丈夫ですか？',
-        'こっちにどうぞ、座ってください。',
-        '救急車は必要ですか？'
+        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:2 },
+
     { text:'翻譯題：請到這邊坐下', options:[
-        'すみません、大丈夫ですか？',
-        'こっちにどうぞ、座ってください。',
-        '救急車は必要ですか？'
+        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:1 }
   ],
 
