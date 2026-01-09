@@ -1743,7 +1743,7 @@ window.QUESTION_BANK = {
         'おかし <button class="audio-btn small" onclick="playAudio(\'audio/日文/おかし.mp3\')">🔊</button>',
         'クッキー <button class="audio-btn small" onclick="playAudio(\'audio/日文/クッキー.mp3\')">🔊</button>'
       ], answer:3 },
-    { text:'請問下列何者是「甜食」的意思?',
+    { text:'請問下列何者是「甜的」的意思?',
       options:[
         'あまい <button class="audio-btn small" onclick="playAudio(\'audio/日文/あまい.mp3\')">🔊</button>',
         'しゅし <button class="audio-btn small" onclick="playAudio(\'audio/日文/しゅし.mp3\')">🔊</button>',
