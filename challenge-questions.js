@@ -2122,34 +2122,34 @@ window.QUESTION_BANK = {
 
     // 修正：原句「需要幫忙嗎」不要用「大丈夫ですか？」（那是你還好嗎）
     { text:'翻譯題：請問哪裡需要幫忙嗎?', options:[
-        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
-        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
-        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
+        'のりつぎですか、それともにゅうこくですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐいって、ひだりにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        'なにかおてつだいしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:2 },
 
     // 修正：句型錯
     { text:'翻譯題：轉機或是入境?', options:[
-        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
-        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
-        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
+        'のりつぎですか、それともにゅうこくですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐいって、ひだりにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        'なにかおてつだいしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：直走到底左轉', options:[
-        '乗り継ぎですか、それとも入国ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
-        'ずっとまっすぐ行って、左に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
-        '何かお手伝いしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
+        'のりつぎですか、それともにゅうこくですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/乗り継ぎですか、それとも入国ですか？.mp3\')">🔊</button>',
+        'ずっとまっすぐいって、ひだりにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        'なにかおてつだいしましょうか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/何かお手伝いしましょうか？.mp3\')">🔊</button>'
       ], answer:1 },
 
     // 修正：選項重複（原本 0 跟 2 一樣）
     { text:'翻譯題：直走到底右轉', options:[
-        'ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、右に曲がってください。.mp3\')">🔊</button>',
-        'ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
-        '銀行を見たら、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。.mp3\')">🔊</button>'
+        'ずっとまっすぐ行って、ひだりにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、右に曲がってください。.mp3\')">🔊</button>',
+        'ずっとまっすぐ行って、みぎにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ずっとまっすぐ行って、左に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、みぎにまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：看到銀行左轉', options:[
-        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、ひだりにまがってください。ずっとまっすぐいって、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、みぎにまがってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
         '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:0 },
 
