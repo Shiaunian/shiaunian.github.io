@@ -2014,110 +2014,110 @@ window.QUESTION_BANK = {
 
     { text:'翻譯題：請問您從哪裡來的？', options:[
         'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
-        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードのかいしゅうをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
         'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：請把卡片交回', options:[
         'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
-        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードのかいしゅうをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
         'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：請問有卡片嗎？', options:[
         'どちらからいらっしゃいましたか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/どちらからいらっしゃいましたか？.mp3\')">🔊</button>',
-        'カードの__をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
+        'カードのかいしゅうをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードの回収をお願いします。.mp3\')">🔊</button>',
         'カードはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/カードはありますか？.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：我沒有拿 / 我沒有', options:[
-        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
-        '__っていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
-        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+        'とうじょうけをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        'もっていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
+        'ラインのあとろでおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：請拿出機票/登機證', options:[
-        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
-        '__っていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
-        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+        'とうじょうけをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        'もっていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
+        'ラインのあとろでおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：請在線後等候 / 請到線後等一下', options:[
-        '______をお願いします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
-        '線の後ろでお待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/線の後ろでお待ちください。.mp3\')">🔊</button>',
-        'ラインの__ろでお__ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
+        'とうじょうけをおねがいします。<button class="audio-btn small" onclick="playAudio(\'audio/日文/搭乗券をお願いします。.mp3\')">🔊</button>',
+        'もっていません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持っていません。.mp3\')">🔊</button>',
+        'ラインのあとろでおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ラインの後ろでお待ちください。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：請問有帶食物嗎?', options:[
-        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
-        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
-        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
+        'スマホはだいじょうぶです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        'だいじょうぶです、すすんでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        'たべものはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：你可以拿著手機', options:[
-        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
-        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
-        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
+        'スマホはだいじょうぶです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        'だいじょうぶです、すすんでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        'たべものはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：沒關係，請往前走', options:[
-        'スマホは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
-        '______です、進んでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
-        '__べ__はありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
+        'スマホはだいじょうぶです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/スマホは大丈夫です。.mp3\')">🔊</button>',
+        'だいじょうぶです、すすんでください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/大丈夫です、進んでください。.mp3\')">🔊</button>',
+        'たべものはありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/食べ物はありますか？.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：請打開包包', options:[
-        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
-        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
-        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
+        'これはもちこめません。すててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンをあけてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一にとりだけのこってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：只要一個人留下來就好', options:[
-        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
-        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
-        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
+        'これはもちこめません。すててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンをあけてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一にとりだけのこってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：這個不能帶，我們需要丟棄', options:[
-        'これは持ち込めません。捨ててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
-        'カバンを開けてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
-        'お一人だけ残ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
+        'これはもちこめません。すててください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これは持ち込めません。捨ててください。.mp3\')">🔊</button>',
+        'カバンをあけてください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/カバンを開けてください。.mp3\')">🔊</button>',
+        'お一にとりだけのこってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/お一人だけ残ってください。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：請簽名，這裡不會罰款', options:[
-        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
-        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
-        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
+        'サインしてください。ばっきんはありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        'もっていってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        'やさい、くだもの、にくるいはだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：可以拿起來了', options:[
-        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
-        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
-        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
+        'サインしてください。ばっきんはありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        'もっていってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        'やさい、くだもの、にくるいはだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：蔬菜水果肉不行', options:[
-        'サインしてください。罰金はありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
-        '持って行ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
-        '野菜、果物、肉類はだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
+        'サインしてください。ばっきんはありません。<button class="audio-btn small" onclick="playAudio(\'audio/日文/サインしてください。罰金はありません。.mp3\')">🔊</button>',
+        'もっていってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/持って行ってください。.mp3\')">🔊</button>',
+        'やさい、くだもの、にくるいはだめです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/野菜、果物、肉類はだめです。.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：生鮮蔬果肉類製品禁止攜帶入境', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
-        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
-        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
+        'しんせんなやさい、こだもの、にくせいひんはもちこみきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここではさつえいきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        'くるまがこますので、ここでしょうしょうおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：這裡不能拍照', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
-        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
-        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
+        'しんせんなやさい、こだもの、にくせいひんはもちこみきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここではさつえいきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        'くるまがこますので、ここでしょうしょうおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：因為車來了，請在這邊稍等', options:[
-        '新鮮な野菜、果物、肉製品は持ち込み禁止です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
-        'ここでは______です。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
-        '車が来ますので、ここで少々お待ちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
+        'しんせんなやさい、こだもの、にくせいひんはもちこみきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/新鮮な野菜、果物、肉製品は持ち込み禁止です。.mp3\')">🔊</button>',
+        'ここではさつえいきんしです。<button class="audio-btn small" onclick="playAudio(\'audio/日文/ここでは撮影禁止です。.mp3\')">🔊</button>',
+        'くるまがこますので、ここでしょうしょうおまちください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/車が来ますので、ここで少々お待ちください。.mp3\')">🔊</button>'
       ], answer:2 },
 
     // 修正：原句「需要幫忙嗎」不要用「大丈夫ですか？」（那是你還好嗎）
