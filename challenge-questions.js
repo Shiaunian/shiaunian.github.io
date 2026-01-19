@@ -2148,39 +2148,39 @@ window.QUESTION_BANK = {
       ], answer:0 },
 
     { text:'翻譯題：看到銀行左轉', options:[
-        'ぎんこうをみたら、ひだりにまがってください。ずっとまっすぐいって、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        'ぎんこうをみたら、みぎにまがってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
+        'ぎんこうをみたら、ひだりにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、みぎにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'けんさのあと、うえのかいへおすすみください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：看到銀行右轉', options:[
-        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
+        'ぎんこうをみたら、ひだりにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、みぎにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'けんさのあと、うえのかいへおすすみください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:1 },
 
     { text:'翻譯題：檢查後上樓', options:[
-        '銀行を見たら、__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '銀行を見たら__に曲がってください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
-        '検査のあと、__の階へお進みください。ずっとまっすぐ行って、__に曲がってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
+        'ぎんこうをみたら、ひだりにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、左に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'ぎんこうをみたら、みぎにまがってください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/銀行を見たら、右に曲がってください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>',
+        'けんさのあと、うえのかいへおすすみください。ずっとまっすぐいって、__にまがってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/検査のあと、上の階へお進みください。ずっとまっすぐ行って、__に曲がってください。.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：請問你還好嗎?', options:[
-        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
-        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
-        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
+        'すみません、だいじょうぶですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、すわってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        'きゅうしゅうしゃはひつようですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:0 },
 
     { text:'翻譯題：請問您需要救護車嗎?', options:[
-        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
-        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
-        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
+        'すみません、だいじょうぶですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、すわってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        'きゅうしゅうしゃはひつようですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:2 },
 
     { text:'翻譯題：請到這邊坐下', options:[
-        'すみません、______ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
-        'こっちにどうぞ、__ってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
-        '______は必要ですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
+        'すみません、だいじょうぶですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/すみません、大丈夫ですか？.mp3\')">🔊</button>',
+        'こっちにどうぞ、すわってください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/こっちにどうぞ、座ってください。.mp3\')">🔊</button>',
+        'きゅうしゅうしゃはひつようですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/救急車は必要ですか？.mp3\')">🔊</button>'
       ], answer:1 }
   ],
 
