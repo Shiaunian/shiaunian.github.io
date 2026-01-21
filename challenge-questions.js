@@ -2437,6 +2437,108 @@ window.QUESTION_BANK = {
         'のみほうだい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のみほうだい.mp3\')">🔊</button>',
         'していせき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/していせき.mp3\')">🔊</button>'
       ], answer:3 },
+    { text:'請問下列何者是「自由座」的意思?',
+      options:[
+        'じゆうざい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じゆうざい.mp3\')">🔊</button>',
+        'ぜいきん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ぜいきん.mp3\')">🔊</button>',
+        'よやく <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/よやく.mp3\')">🔊</button>',
+        'かいさつぐち <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいさつぐち.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「稅金」的意思?',
+      options:[
+        'じゆうざい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じゆうざい.mp3\')">🔊</button>',
+        'ぜいきん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ぜいきん.mp3\')">🔊</button>',
+        'よやく <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/よやく.mp3\')">🔊</button>',
+        'かいさつぐち <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいさつぐち.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「預約」的意思?',
+      options:[
+        'じゆうざい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じゆうざい.mp3\')">🔊</button>',
+        'ぜいきん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ぜいきん.mp3\')">🔊</button>',
+        'よやく <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/よやく.mp3\')">🔊</button>',
+        'かいさつぐち <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいさつぐち.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「檢票口」的意思?',
+      options:[
+        'じゆうざい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じゆうざい.mp3\')">🔊</button>',
+        'ぜいきん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ぜいきん.mp3\')">🔊</button>',
+        'よやく <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/よやく.mp3\')">🔊</button>',
+        'かいさつぐち <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいさつぐち.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「推薦」的意思?',
+      options:[
+        'おすすめ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おすすめ.mp3\')">🔊</button>',
+        'メニュー <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/メニュー.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>',
+        'コース <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/コース.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「菜單」的意思?',
+      options:[
+        'おすすめ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おすすめ.mp3\')">🔊</button>',
+        'メニュー <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/メニュー.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>',
+        'コース <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/コース.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「點餐」的意思?',
+      options:[
+        'おすすめ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おすすめ.mp3\')">🔊</button>',
+        'メニュー <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/メニュー.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>',
+        'コース <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/コース.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「套餐」的意思?',
+      options:[
+        'おすすめ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おすすめ.mp3\')">🔊</button>',
+        'メニュー <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/メニュー.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>',
+        'コース <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/コース.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「辣的」的意思?',
+      options:[
+        'からい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/からい.mp3\')">🔊</button>',
+        'てんない <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/てんない.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ついか <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ついか.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「內用」的意思?',
+      options:[
+        'からい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/からい.mp3\')">🔊</button>',
+        'てんない <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/てんない.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ついか <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ついか.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「外帶」的意思?',
+      options:[
+        'からい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/からい.mp3\')">🔊</button>',
+        'てんない <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/てんない.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ついか <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ついか.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「加點」的意思?',
+      options:[
+        'からい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/からい.mp3\')">🔊</button>',
+        'てんない <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/てんない.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ついか <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ついか.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「付款方式」的意思?',
+      options:[
+        'しはらい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/しはらい.mp3\')">🔊</button>',
+        'かいけい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいけい.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「結帳」的意思?',
+      options:[
+        'しはらい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/しはらい.mp3\')">🔊</button>',
+        'かいけい <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/かいけい.mp3\')">🔊</button>',
+        'おもちかえり <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おもちかえり.mp3\')">🔊</button>',
+        'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>'
+      ], answer:1 },
+
+
+
+
 
 
 
