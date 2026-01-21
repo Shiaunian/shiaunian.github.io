@@ -2185,6 +2185,91 @@ window.QUESTION_BANK = {
   ],
 
   'lang-jp-beginner': [
+    { text:'請問下列何者是「入境卡」的意思?',
+      options:[
+        'にゅうこくカード <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/にゅうこくカード.mp3\')">🔊</button>',
+        'あんないじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/あんないじょ.mp3\')">🔊</button>',
+        'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
+        'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「詢問處」的意思?',
+      options:[
+        'にゅうこくカード <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/にゅうこくカード.mp3\')">🔊</button>',
+        'あんないじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/あんないじょ.mp3\')">🔊</button>',
+        'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
+        'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「外幣兌換處」的意思?',
+      options:[
+        'にゅうこくカード <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/にゅうこくカード.mp3\')">🔊</button>',
+        'あんないじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/あんないじょ.mp3\')">🔊</button>',
+        'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
+        'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「免稅店」的意思?',
+      options:[
+        'にゅうこくカード <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/にゅうこくカード.mp3\')">🔊</button>',
+        'あんないじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/あんないじょ.mp3\')">🔊</button>',
+        'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
+        'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「車站」的意思?',
+      options:[
+        'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
+        'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
+        'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
+        'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「自動售票機」的意思?',
+      options:[
+        'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
+        'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
+        'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
+        'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「換乘」的意思?',
+      options:[
+        'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
+        'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
+        'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
+        'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「車票」的意思?',
+      options:[
+        'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
+        'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
+        'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
+        'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「靠窗」的意思?',
+      options:[
+        'まどがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/まどがわ.mp3\')">🔊</button>',
+        'つうろがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/つうろがわ.mp3\')">🔊</button>',
+        'おとな <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おとな.mp3\')">🔊</button>',
+        'こども <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/こども.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「靠走道」的意思?',
+      options:[
+        'まどがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/まどがわ.mp3\')">🔊</button>',
+        'つうろがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/つうろがわ.mp3\')">🔊</button>',
+        'おとな <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おとな.mp3\')">🔊</button>',
+        'こども <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/こども.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「成人」的意思?',
+      options:[
+        'まどがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/まどがわ.mp3\')">🔊</button>',
+        'つうろがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/つうろがわ.mp3\')">🔊</button>',
+        'おとな <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おとな.mp3\')">🔊</button>',
+        'こども <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/こども.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「兒童」的意思?',
+      options:[
+        'まどがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/まどがわ.mp3\')">🔊</button>',
+        'つうろがわ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/つうろがわ.mp3\')">🔊</button>',
+        'おとな <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/おとな.mp3\')">🔊</button>',
+        'こども <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/こども.mp3\')">🔊</button>'
+      ], answer:3 },
+    
     { text:'「りんご」はどれ？', options:['りんご','にく','ふく','みず'], answer:0 },
     { text:'これは何？', image:'images/sample-dog.jpg', options:['いぬ','ねこ','とり','さかな'], answer:0 },
     { text:'正しい画像を選んで', options:[
