@@ -2662,6 +2662,78 @@ window.QUESTION_BANK = {
         'えきまでのみちをおしえてください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/えきまでのみちをおしえてください。.mp3\')">🔊</button>'
       ], answer:2 },
 
+    { text:'翻譯題：我忘了拿---。', options:[
+        '---をわすれました。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---をわすれました。.mp3\')">🔊</button>',
+        'ふります。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ふります。.mp3\')">🔊</button>',
+        'しゃしんをとってもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもいいですか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：我要下車。', options:[
+        '---をわすれました。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---をわすれました。.mp3\')">🔊</button>',
+        'ふります。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ふります。.mp3\')">🔊</button>',
+        'しゃしんをとってもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもいいですか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請問可以拍照嗎?', options:[
+        '---をわすれました。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---をわすれました。.mp3\')">🔊</button>',
+        'ふります。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ふります。.mp3\')">🔊</button>',
+        'しゃしんをとってもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもいいですか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'翻譯題：請問要在哪裡購買車票?', options:[
+        'きっぷうりばはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/きっぷうりばはどこですか？.mp3\')">🔊</button>',
+        '---までのきっぷをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---までのきっぷをください。.mp3\')">🔊</button>',
+        'ここはなにえきですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ここはなにえきですか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：我要買往---的車票。', options:[
+        'きっぷうりばはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/きっぷうりばはどこですか？.mp3\')">🔊</button>',
+        '---までのきっぷをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---までのきっぷをください。.mp3\')">🔊</button>',
+        'ここはなにえきですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ここはなにえきですか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：這裡是哪一站?', options:[
+        'きっぷうりばはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/きっぷうりばはどこですか？.mp3\')">🔊</button>',
+        '---までのきっぷをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/---までのきっぷをください。.mp3\')">🔊</button>',
+        'ここはなにえきですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/ここはなにえきですか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'翻譯題：請問可以幫我拍照嗎?', options:[
+        'しゃしんをとってもらえますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもらえますか？.mp3\')">🔊</button>',
+        'しちゃくしてもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしてもいいですか？.mp3\')">🔊</button>',
+        'いくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/いくらですか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：請問可以試穿嗎?', options:[
+        'しゃしんをとってもらえますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもらえますか？.mp3\')">🔊</button>',
+        'しちゃくしてもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしてもいいですか？.mp3\')">🔊</button>',
+        'いくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/いくらですか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請問多少錢?', options:[
+        'しゃしんをとってもらえますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しゃしんをとってもらえますか？.mp3\')">🔊</button>',
+        'しちゃくしてもいいですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしてもいいですか？.mp3\')">🔊</button>',
+        'いくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/いくらですか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
+    { text:'翻譯題：請問可以幫我拍照嗎?', options:[
+        'あれとおなじものをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あれとおなじものをください。.mp3\')">🔊</button>',
+        'しちゃくしつはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしつはどこですか？.mp3\')">🔊</button>',
+        'あたらしいものありますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あたらしいものありますか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：請問試衣間在哪裡?', options:[
+        'あれとおなじものをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あれとおなじものをください。.mp3\')">🔊</button>',
+        'しちゃくしつはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしつはどこですか？.mp3\')">🔊</button>',
+        'あたらしいものありますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あたらしいものありますか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：請問有新的嗎', options:[
+        'あれとおなじものをください。<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あれとおなじものをください。.mp3\')">🔊</button>',
+        'しちゃくしつはどこですか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/しちゃくしつはどこですか？.mp3\')">🔊</button>',
+        'あたらしいものありますか？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 日文/あたらしいものありますか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
 
 
 
