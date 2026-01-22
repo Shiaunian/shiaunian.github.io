@@ -2536,6 +2536,42 @@ window.QUESTION_BANK = {
         'ちゅうもん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/ちゅうもん.mp3\')">🔊</button>'
       ], answer:1 },
 
+    { text:'翻譯題：這個多少錢?', options:[
+        'これはいくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これはいくらですか？.mp3\')">🔊</button>',
+        'やすくなりますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/やすくなりますか？.mp3\')">🔊</button>',
+        'これがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これがありますか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：可以便宜一點嗎?', options:[
+        'これはいくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これはいくらですか？.mp3\')">🔊</button>',
+        'やすくなりますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/やすくなりますか？.mp3\')">🔊</button>',
+        'これがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これがありますか？.mp3\')">🔊</button>'
+      ], answer:1 },
+
+    { text:'翻譯題：你有這個嗎?', options:[
+        'これはいくらですか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これはいくらですか？.mp3\')">🔊</button>',
+        'やすくなりますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/クレジットカードはつかえますか？.mp3\')">🔊</button>',
+        'これがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/これがありますか？.mp3\')">🔊</button>'
+      ], answer:2 },
+    
+    { text:'翻譯題：我要這個。', options:[
+        'これをください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これをください。.mp3\')">🔊</button>',
+        'クレジットカードはつかえますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/やすくなりますか？.mp3\')">🔊</button>',
+        'ほかのいろがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/ほかのいろがありますか？.mp3\')">🔊</button>'
+      ], answer:0 },
+
+    { text:'翻譯題：可以刷卡嗎?', options:[
+        'これをください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これをください。.mp3\')">🔊</button>',
+        'クレジットカードはつかえますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/やすくなりますか？.mp3\')">🔊</button>',
+        'ほかのいろがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/ほかのいろがありますか？.mp3\')">🔊</button>'
+      ], answer:1 },
+    
+    { text:'翻譯題：你有其他顏色嗎?', options:[
+        'これをください。<button class="audio-btn small" onclick="playAudio(\'audio/日文/これをください。.mp3\')">🔊</button>',
+        'クレジットカードはつかえますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/やすくなりますか？.mp3\')">🔊</button>',
+        'ほかのいろがありますか？<button class="audio-btn small" onclick="playAudio(\'audio/日文/ほかのいろがありますか？.mp3\')">🔊</button>'
+      ], answer:2 },
+
 
 
 
