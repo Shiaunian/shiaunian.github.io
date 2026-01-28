@@ -2199,7 +2199,8 @@ window.QUESTION_BANK = {
         'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
         'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
       ], answer:1 },
-    { text:'請問下列何者是「外幣兌換處」的意思?',
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/外幣兌換處.jpg',
       options:[
         'にゅうこくカード <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/にゅうこくカード.mp3\')">🔊</button>',
         'あんないじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/あんないじょ.mp3\')">🔊</button>',
@@ -2213,7 +2214,8 @@ window.QUESTION_BANK = {
         'りょうがえじょ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/りょうがえじょ.mp3\')">🔊</button>',
         'めんぜいてん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/めんぜいてん.mp3\')">🔊</button>'
       ], answer:3 },
-    { text:'請問下列何者是「車站」的意思?',
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/車站.jpg',
       options:[
         'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
         'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
@@ -2234,7 +2236,8 @@ window.QUESTION_BANK = {
         'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
         'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
       ], answer:2 },
-    { text:'請問下列何者是「車票」的意思?',
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/車票.jpg',
       options:[
         'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
         'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
