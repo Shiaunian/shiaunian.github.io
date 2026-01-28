@@ -2222,7 +2222,8 @@ window.QUESTION_BANK = {
         'のりかえ <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/のりかえ.mp3\')">🔊</button>',
         'じょうしゃけん <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じょうしゃけん.mp3\')">🔊</button>'
       ], answer:0 },
-    { text:'請問下列何者是「自動售票機」的意思?',
+    { text:'請問下列何者是圖中內容的翻譯?',
+      image:'audio/自動售票機.jpg',
       options:[
         'えき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/えき.mp3\')">🔊</button>',
         'じどうはんばいき <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 日文/じどうはんばいき.mp3\')">🔊</button>',
