@@ -1379,7 +1379,7 @@ window.QUESTION_BANK = {
         '닭고기 <button class="audio-btn small" onclick="playAudio(\'audio/韓文/닭고기.mp3\')">🔊</button>',
         '소고기 <button class="audio-btn small" onclick="playAudio(\'audio/韓文/소고기.mp3\')">🔊</button>',
         '육포 <button class="audio-btn small" onclick="playAudio(\'audio/韓文/육포.mp3\')">🔊</button>'
-      ], answer:2 },
+      ], answer:3 },
     { text:'請問下列何者是圖中內容的翻譯?',
       image:'audio/水果.jpg',
       options:[
