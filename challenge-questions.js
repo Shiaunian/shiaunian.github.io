@@ -1604,39 +1604,39 @@ window.QUESTION_BANK = {
       ], answer:2 },
     { text:'翻譯題：看到銀行左轉',
       options:[
-        '은행이 보이면 우회전합니다.',
-        '은행이 보이면 좌회전하세요.',
-        '수하물 검사 후 위층으로 올라갑니다.'
+        '은행이 보이면 우회전합니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 우회전합니다..mp3\')">🔊</button>',
+        '은행이 보이면 좌회전하세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 좌회전하세요..mp3\')">🔊</button>',
+        '수하물 검사 후 위층으로 올라갑니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/수하물 검사 후 위층으로 올라갑니다..mp3\')">🔊</button>'
       ], answer:1 },
     { text:'翻譯題：看到銀行右轉',
       options:[
-        '은행이 보이면 우회전합니다.',
-        '은행이 보이면 좌회전하세요.',
-        '수하물 검사 후 위층으로 올라갑니다.'
+        '은행이 보이면 우회전합니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 우회전합니다..mp3\')">🔊</button>',
+        '은행이 보이면 좌회전하세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 좌회전하세요..mp3\')">🔊</button>',
+        '수하물 검사 후 위층으로 올라갑니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/수하물 검사 후 위층으로 올라갑니다..mp3\')">🔊</button>'
       ], answer:0 },
     { text:'翻譯題：檢查行李後上樓',
       options:[
-        '은행이 보이면 우회전합니다.',
-        '은행이 보이면 좌회전하세요.',
-        '수하물 검사 후 위층으로 올라갑니다.'
+        '은행이 보이면 우회전합니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 우회전합니다..mp3\')">🔊</button>',
+        '은행이 보이면 좌회전하세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/은행이 보이면 좌회전하세요..mp3\')">🔊</button>',
+        '수하물 검사 후 위층으로 올라갑니다.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/수하물 검사 후 위층으로 올라갑니다..mp3\')">🔊</button>'
       ], answer:2 },
     { text:'翻譯題：請問你還好嗎?',
       options:[
-        '이쪽으로 앉으세요.',
-        '구급차가 필요하십니까?',
-        '괜찮으세요?'
+        '이쪽으로 앉으세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/이쪽으로 앉으세요..mp3\')">🔊</button>',
+        '구급차가 필요하십니까?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/구급차가 필요하십니까？.mp3\')">🔊</button>',
+        '괜찮으세요?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/괜찮으세요？.mp3\')">🔊</button>'
       ], answer:2 },
     { text:'翻譯題：請問您需要救護車嗎?',
       options:[
-        '이쪽으로 앉으세요.',
-        '구급차가 필요하십니까?',
-        '괜찮으세요?'
+        '이쪽으로 앉으세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/이쪽으로 앉으세요..mp3\')">🔊</button>',
+        '구급차가 필요하십니까?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/구급차가 필요하십니까？.mp3\')">🔊</button>',
+        '괜찮으세요?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/괜찮으세요？.mp3\')">🔊</button>'
       ], answer:1 },
     { text:'翻譯題：請到這邊坐下',
       options:[
-        '이쪽으로 앉으세요.',
-        '구급차가 필요하십니까?',
-        '괜찮으세요?'
+       '이쪽으로 앉으세요.<button class="audio-btn small" onclick="playAudio(\'audio/韓文/이쪽으로 앉으세요..mp3\')">🔊</button>',
+        '구급차가 필요하십니까?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/구급차가 필요하십니까？.mp3\')">🔊</button>',
+        '괜찮으세요?<button class="audio-btn small" onclick="playAudio(\'audio/韓文/괜찮으세요？.mp3\')">🔊</button>'
       ], answer:0 }
   ],
 
