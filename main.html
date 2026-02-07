@@ -53,21 +53,76 @@
       color: #0f7a3b;
       margin: -4px 0 -3px;
     }
-    /* 跑馬燈 */
-    .marquee {
-    margin: 12px 6px;
-    background: #c8cce1;
-    border-radius: 12px;
-    padding: 4px 10px;
-    color: #2f3161;
-    font-weight: 700;
-    height: 17px;
-    line-height: 18px;
+
+    /* 跑馬燈（紅光外框 + 文字漸變動畫，穩定版） */
+    .marquee{
+      position: relative;
+      margin: 12px 6px;
+      border-radius: 14px;
+      padding: 6px 12px;
+      height: 18px;
+      line-height: 18px;
+      overflow: hidden;
+
+      /* 外框：內底色 + 漸層外框 */
+      border: 2px solid transparent;
+      background:
+        linear-gradient(#c8cce1, #c8cce1) padding-box,
+        linear-gradient(120deg, #ff3b3b, #ff7a7a, #ff3b3b) border-box;
+
+      background-size: auto, 300% 300%;
+      animation: marqueeGlow 3s linear infinite;
+
+      box-shadow: 0 0 10px rgba(255,59,59,.35);
     }
-    .marquee marquee {
-    width: 100%;
-    font-size: var(--content-font-size);
+
+    /* marquee 本體 */
+    .marquee marquee{
+      width: 100%;
     }
+
+    /* 跑馬燈文字（一定顯示的基礎樣式） */
+    .marquee-text{
+      display: inline-block;
+      font-size: var(--content-font-size);
+      font-weight: 800;
+      color: #2f3161;
+    }
+
+    /* 支援漸層文字才啟用動畫 */
+    @supports (-webkit-background-clip:text) or (background-clip:text){
+      .marquee-text{
+        background: linear-gradient(
+          90deg,
+          #ff2d2d,
+          #ff7eb9,
+          #9b5cff,
+          #4f6dff,
+          #0b2cff,
+          #5fd3ff,
+          #ff2d2d
+        );
+        background-size: 400% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: marqueeTextGradient 6s linear infinite;
+      }
+    }
+
+    /* 外框流光動畫 */
+    @keyframes marqueeGlow{
+      0%   { background-position: 0% 0%, 0% 50%; }
+      50%  { background-position: 0% 0%, 100% 50%; }
+      100% { background-position: 0% 0%, 0% 50%; }
+    }
+
+    /* 文字漸變動畫 */
+    @keyframes marqueeTextGradient{
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
 
 
 
@@ -96,15 +151,19 @@
     /* 最新公告區 */
     .panel {
       margin: 10px 6px 8px;
-      background:#9aabf0;
+      background-image: url("https://res.cloudinary.com/dzj7ghbf6/image/upload/v1770451141/%E9%81%8E%E5%B9%B4_mvutbi.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       border:1px solid #e3e6f2;
       border-radius:14px;
       padding:10px 12px;
     }
+
     .panel h2 {
       margin: 0 0 8px;
       font-size: var(--subtitle-font-size);
-      color: #2f3161;
+      color: #ffffff;
       text-align: center;
     }
 
@@ -253,9 +312,11 @@
     </div>
     <div id="welcome" class="welcome">歡迎登入</div>
 
-    <div class="marquee">
-      <marquee behavior="scroll" direction="left" scrollamount="4">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</marquee>
-    </div>
+      <div class="marquee">
+        <marquee behavior="scroll" direction="left" scrollamount="4">
+          <span class="marquee-text">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</span>
+        </marquee>
+      </div>
 
     <div class="grid">
       <button class="btn btn-rule">規定</button>
