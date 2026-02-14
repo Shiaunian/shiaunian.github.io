@@ -1651,14 +1651,153 @@ window.QUESTION_BANK = {
   ],
 
   'lang-kr-beginner': [
-    { text:'"사과"는 무엇입니까?', options:['사과','고기','책','신발'], answer:0 },
-    { text:'이것은 무엇입니까?', image:'images/sample-dog.jpg', options:['개','고양이','새','물고기'], answer:0 },
-    { text:'이미지에 해당하는 단어는?', options:[
-      '<img src="images/opt-cat.jpg"> 고양이','<img src="images/opt-dog.jpg"> 개',
-      '<img src="images/opt-bird.jpg"> 새','<img src="images/opt-fish.jpg"> 물고기'], answer:1 },
-    { text:'이 사진의 동물은?', image:'images/sample-cat.jpg',
-      options:['<img src="images/opt-cat.jpg"> 고양이','<img src="images/opt-dog.jpg"> 개',
-               '<img src="images/opt-fish.jpg"> 물고기','<img src="images/opt-bird.jpg"> 새'], answer:0 }
+    { text:'請問下列何者是「洗手間」的意思?',
+      options:[
+        '화장실 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/화장실.mp3\')">🔊</button>',
+        '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
+        '관광안내소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/관광안내소.mp3\')">🔊</button>',
+        '지하철역 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/지하철역.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「兌幣處」的意思?',
+      options:[
+        '화장실 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/화장실.mp3\')">🔊</button>',
+        '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
+        '관광안내소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/관광안내소.mp3\')">🔊</button>',
+        '지하철역 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/지하철역.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「旅客諮詢中心」的意思?',
+      options:[
+        '화장실 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/화장실.mp3\')">🔊</button>',
+        '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
+        '관광안내소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/관광안내소.mp3\')">🔊</button>',
+        '지하철역 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/지하철역.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「地鐵站」的意思?',
+      options:[
+        '화장실 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/화장실.mp3\')">🔊</button>',
+        '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
+        '관광안내소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/관광안내소.mp3\')">🔊</button>',
+        '지하철역 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/지하철역.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「巴士站」的意思?',
+      options:[
+        '버스정류장 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/버스정류장.mp3\')">🔊</button>',
+        '삼겨살 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼겨살.mp3\')">🔊</button>',
+        '계람찜 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계람찜.mp3\')">🔊</button>',
+        '수하물 찾는 곳 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/수하물 찾는 곳.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「五花肉」的意思?',
+      options:[
+        '버스정류장 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/버스정류장.mp3\')">🔊</button>',
+        '삼겨살 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼겨살.mp3\')">🔊</button>',
+        '계람찜 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계람찜.mp3\')">🔊</button>',
+        '수하물 찾는 곳 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/수하물 찾는 곳.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「蒸蛋」的意思?',
+      options:[
+        '버스정류장 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/버스정류장.mp3\')">🔊</button>',
+        '삼겨살 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼겨살.mp3\')">🔊</button>',
+        '계람찜 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계람찜.mp3\')">🔊</button>',
+        '수하물 찾는 곳 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/수하물 찾는 곳.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「行李提領處」的意思?',
+      options:[
+        '버스정류장 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/버스정류장.mp3\')">🔊</button>',
+        '삼겨살 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼겨살.mp3\')">🔊</button>',
+        '계람찜 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계람찜.mp3\')">🔊</button>',
+        '수하물 찾는 곳 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/수하물 찾는 곳.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「帳單」的意思?',
+      options:[
+        '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>',
+        '약국 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/약국.mp3\')">🔊</button>',
+        '가격 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/가격.mp3\')">🔊</button>',
+        '김밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김밥.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「藥局」的意思?',
+      options:[
+        '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>',
+        '약국 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/약국.mp3\')">🔊</button>',
+        '가격 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/가격.mp3\')">🔊</button>',
+        '김밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김밥.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「價格」的意思?',
+      options:[
+        '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>',
+        '약국 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/약국.mp3\')">🔊</button>',
+        '가격 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/가격.mp3\')">🔊</button>',
+        '김밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김밥.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「飯捲」的意思?',
+      options:[
+        '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>',
+        '약국 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/약국.mp3\')">🔊</button>',
+        '가격 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/가격.mp3\')">🔊</button>',
+        '김밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김밥.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「拌飯」的意思?',
+      options:[
+        '비빔밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/비빔밥.mp3\')">🔊</button>',
+        '김치 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김치.mp3\')">🔊</button>',
+        '떡볶이 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/떡볶이.mp3\')">🔊</button>',
+        '치킨 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/치킨.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「泡菜」的意思?',
+      options:[
+        '비빔밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/비빔밥.mp3\')">🔊</button>',
+        '김치 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김치.mp3\')">🔊</button>',
+        '떡볶이 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/떡볶이.mp3\')">🔊</button>',
+        '치킨 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/치킨.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「辣炒年糕」的意思?',
+      options:[
+        '비빔밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/비빔밥.mp3\')">🔊</button>',
+        '김치 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김치.mp3\')">🔊</button>',
+        '떡볶이 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/떡볶이.mp3\')">🔊</button>',
+        '치킨 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/치킨.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「炸雞」的意思?',
+      options:[
+        '비빔밥 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/비빔밥.mp3\')">🔊</button>',
+        '김치 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/김치.mp3\')">🔊</button>',
+        '떡볶이 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/떡볶이.mp3\')">🔊</button>',
+        '치킨 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/치킨.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「炸醬麵」的意思?',
+      options:[
+        '자장면 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/자장면.mp3\')">🔊</button>',
+        '삼계탕 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼계탕.mp3\')">🔊</button>',
+        '메뉴판 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/메뉴판.mp3\')">🔊</button>',
+        '매표소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/매표소.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'請問下列何者是「蔘雞湯」的意思?',
+      options:[
+        '자장면 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/자장면.mp3\')">🔊</button>',
+        '삼계탕 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼계탕.mp3\')">🔊</button>',
+        '메뉴판 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/메뉴판.mp3\')">🔊</button>',
+        '매표소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/매표소.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'請問下列何者是「菜單」的意思?',
+      options:[
+        '자장면 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/자장면.mp3\')">🔊</button>',
+        '삼계탕 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼계탕.mp3\')">🔊</button>',
+        '메뉴판 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/메뉴판.mp3\')">🔊</button>',
+        '매표소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/매표소.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'請問下列何者是「售票處」的意思?',
+      options:[
+        '자장면 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/자장면.mp3\')">🔊</button>',
+        '삼계탕 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/삼계탕.mp3\')">🔊</button>',
+        '메뉴판 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/메뉴판.mp3\')">🔊</button>',
+        '매표소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/매표소.mp3\')">🔊</button>'
+      ], answer:3 },
+    { text:'請問下列何者是「試衣間」的意思?',
+      options:[
+        '피팅룸 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/피팅룸.mp3\')">🔊</button>',
+        '화장실 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/화장실.mp3\')">🔊</button>',
+        '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
+        '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>'
+      ], answer:0 },
   ],
 
   'lang-kr-middle': [
@@ -2806,5 +2945,6 @@ window.QUESTION_BANK = {
       options:['<img src="images/opt-ok.jpg"> OK','<img src="images/opt-ng.jpg"> 禁止',
                '<img src="images/opt-warn.jpg"> 注意','<img src="images/opt-idk.jpg"> 不明'], answer:1 }
   ]
+
 
 };
