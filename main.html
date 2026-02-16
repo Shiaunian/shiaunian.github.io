@@ -355,6 +355,37 @@
       scroll-margin: 80px;
     }
 
+    /* ===== 教程：2欄卡片 ===== */
+    .tutorial-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 8px;
+    }
+
+    .tutorial-card{
+      border:1px solid #e3e6f2;
+      border-radius:12px;
+      padding:10px;
+      background:#fff;
+    }
+
+    .tutorial-card .tag{
+      display:block;
+      margin:0 0 8px;
+    }
+
+    /* 卡片內的 note 不要有多餘間距 */
+    .tutorial-card .note{
+      margin:0;
+    }
+
+    /* 超窄螢幕自動變 1 欄 */
+    @media (max-width:360px){
+      .tutorial-grid{ grid-template-columns: 1fr; }
+    }
+
+
 </style>
 
 </head>
@@ -729,6 +760,10 @@
           <div class="section-title">步驟與流程</div>
           <p class="note">這裡放各項目的教程，包含流程說明、注意事項與參考圖片。</p>
 
+
+
+      <div class="tutorial-grid">
+        <div class="tutorial-card">
           <div class="tag">【UG 出勤異常補簽】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -741,7 +776,9 @@
               查看
             </button>
           </p>
-          
+        </div>
+
+        <div class="tutorial-card">
           <div class="tag">【分流識別卡統計表】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -750,7 +787,9 @@
               查看
             </button>
           </p>
-          
+        </div>
+
+        <div class="tutorial-card">
           <div class="tag">【UG 教育訓練】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -768,7 +807,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【勤教位置圖】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -777,7 +818,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【離職申請書範例】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -786,7 +829,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【請假單範例】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -795,7 +840,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【時數表範例】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -804,7 +851,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【系統放置手機主頁面方法】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -821,7 +870,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【清運紀錄表範例】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -832,7 +883,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【薪資證明書範例】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -841,7 +894,9 @@
               查看
             </button>
           </p>
+        </div>
 
+        <div class="tutorial-card">
           <div class="tag">【各哨正常時間表】</div>
           <p class="note">
             <button type="button" class="view-btn"
@@ -852,7 +907,9 @@
               查看
             </button>
           </p>
+        </div>
 
+          </div>
         </div>
       </div>
     </div>
