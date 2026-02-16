@@ -34,7 +34,7 @@
         background: var(--card);
         border-radius: 0px;
         box-shadow: 0 6px 22px rgba(0,0,0,.25);
-        padding: 25px 7px 44px;
+        padding: 50px 7px 44px;
         display: flex;
         flex-direction: column;
         gap: 0px;
@@ -57,7 +57,7 @@
     /* 跑馬燈（紅光外框 + 文字漸變動畫，穩定版） */
     .marquee{
       position: relative;
-      margin: 12px 6px;
+      margin: 2px 6px;
       border-radius: 14px;
       padding: 6px 12px;
       height: 18px;
@@ -128,7 +128,7 @@
 
     /* 功能鈕 */
     .grid {
-      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin: -5px 6px;
+      display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin: 5px 6px;
     }
     .btn {
       display:flex; align-items:center; justify-content:center;
@@ -150,7 +150,7 @@
 
     /* 最新公告區 */
     .panel {
-      margin: 10px 6px 8px;
+      margin: 3px 6px 4px;
       background-image: url("https://res.cloudinary.com/dzj7ghbf6/image/upload/v1770451141/%E9%81%8E%E5%B9%B4_mvutbi.png");
       background-size: cover;
       background-position: center;
@@ -168,7 +168,7 @@
     }
 
     .notice-box{
-      height: 300px;
+      height: 275px;
       overflow: auto;
       background:#fff; border:1px solid #e3e6f2; border-radius:10px; padding:8px;
     }
@@ -181,7 +181,7 @@
 
     /* 底部兩顆 */
     .footer-actions{
-      display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin: 10px 6px 4px;
+      display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin: 3px 6px 4px;
     }
     .btn.secondary{ background:#6c6e9e; }
     .hidden{ display:none; }
@@ -301,7 +301,61 @@
       background:#2f3161; color:#fff; border:1px solid #8ca0d1; border-radius:10px;
       font-size:12px; font-weight:800; letter-spacing:.1em; cursor:pointer;
     }
-  </style>
+  
+    /* ====== Global Search (Enter to search) ====== */
+    .search-wrap{ margin: 2px 6px 0; }
+    .search-input{
+      width:100%;
+      padding:4px 0px;
+      border-radius:14px;
+      border:1px solid #dfe2f2;
+      background: var(--input);
+      font-weight:800;
+      font-size: 15px;
+      outline:none;
+
+      /* ✅ 輸入文字透明度（0~1） */
+      color: rgba(47,49,97,.75);
+    }
+
+    .search-input::placeholder{
+      /* ✅ placeholder 透明度 */
+      color: rgba(47,49,97,.35);
+    }
+    .search-input:focus{ box-shadow: 0 0 0 3px rgba(47,49,97,.18); }
+
+    .search-meta{ margin:0 0 8px; }
+
+    .search-result{
+      border:1px solid #e3e6f2;
+      border-radius:12px;
+      padding:10px;
+      margin:8px 0;
+      cursor:pointer;
+      background:#fff;
+    }
+    .search-result:active{ transform: scale(.99); }
+    .search-result .meta{
+      font-weight:900;
+      color:#2f3161;
+      margin-bottom:4px;
+      letter-spacing:.04em;
+    }
+    .search-result .snippet{ margin:0; }
+
+    mark.search-mark{
+      background:#fff2a8;
+      padding:0 2px;
+      border-radius:4px;
+    }
+
+    .search-hit{
+      outline: 3px solid rgba(201,63,63,.35);
+      border-radius:10px;
+      scroll-margin: 80px;
+    }
+
+</style>
 
 </head>
 <body>
@@ -317,6 +371,12 @@
           <span class="marquee-text">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</span>
         </marquee>
       </div>
+
+    <!-- ====== 全站搜尋（按 Enter 搜尋） ====== -->
+    <div class="search-wrap">
+      <input id="globalSearch" class="search-input" placeholder="搜尋：規定 / 檢疫物 / 教程 / 公告（按 Enter）" autocomplete="off" />
+    </div>
+
 
     <div class="grid">
       <button class="btn btn-rule">規定</button>
@@ -1281,9 +1341,20 @@
         <div class="viewer-help">左右滑動切換｜雙指縮放</div>
       </div>
     </div>
-  </main>
-
-
+  
+    <!-- ====== 搜尋結果 Modal ====== -->
+    <div id="modal-search" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+        <div class="modal-header">
+          <span id="searchTitle">搜尋結果</span>
+          <button class="modal-close" data-close="modal-search">X</button>
+        </div>
+        <div class="modal-body">
+          <p id="searchMeta" class="note search-meta"></p>
+          <div id="searchResults"></div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
@@ -1782,6 +1853,215 @@
       });
     })();
   </script>
+
+
+<script>
+/* ====== Global Search (Enter to search) ====== */
+(function(){
+  const $ = (s, el=document) => el.querySelector(s);
+  const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
+
+  function openModal(id){
+    const m = document.getElementById(id);
+    if(!m) return;
+    m.classList.add("active");
+    m.setAttribute("aria-hidden","false");
+  }
+  function closeModal(id){
+    const m = document.getElementById(id);
+    if(!m) return;
+    m.classList.remove("active");
+    m.setAttribute("aria-hidden","true");
+  }
+
+  function escHtml(str){
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function norm(str){ return String(str || "").replace(/\s+/g," ").trim(); }
+
+  function highlight(text, q){
+    if(!q) return escHtml(text);
+    const safe = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const re = new RegExp("(" + safe + ")", "ig");
+    return escHtml(text).replace(re, '<mark class="search-mark">$1</mark>');
+  }
+
+  function snippet(text, q, radius=22){
+    const t = norm(text);
+    const idx = t.toLowerCase().indexOf(q.toLowerCase());
+    if(idx < 0) return t.slice(0, 80);
+    const start = Math.max(0, idx - radius);
+    const end = Math.min(t.length, idx + q.length + radius);
+    return (start>0 ? "…" : "") + t.slice(start, end) + (end<t.length ? "…" : "");
+  }
+
+  function scopeFromEl(el){
+    const overlay = el.closest(".modal-overlay");
+    if(overlay && overlay.id){
+      if(overlay.id === "modal-rule") return "rule";
+      if(overlay.id === "modal-check") return "check";
+      if(overlay.id === "modal-tutorial") return "tutorial";
+      if(overlay.id === "modal-link") return "link";
+      if(overlay.id === "modal-flow") return "flow";
+      if(overlay.id === "modal-guide") return "guide";
+      if(overlay.id === "modal-review") return "review";
+      if(overlay.id === "modal-xray") return "xray";
+      if(overlay.id === "modal-search") return "search";
+    }
+    if(el.closest("#notices")) return "notice";
+    return "other";
+  }
+
+  function modalForScope(scope){
+    const map = {
+      rule: "modal-rule",
+      check: "modal-check",
+      tutorial: "modal-tutorial",
+      link: "modal-link",
+      flow: "modal-flow",
+      guide: "modal-guide",
+      review: "modal-review",
+      xray: "modal-xray"
+    };
+    return map[scope] || null;
+  }
+
+  function titleForEl(el, scope){
+    if(scope === "notice"){
+      const t = norm(el.innerText || "");
+      const m = t.match(/^(\d{4}-\d{2}-\d{2})\s*(.+)$/);
+      return m ? (m[1] + " " + m[2].slice(0, 16)) : t.slice(0, 18);
+    }
+    const body = el.closest(".modal-body");
+    if(body){
+      const tags = $$(".tag", body);
+      let last = null;
+      for(const tg of tags){
+        if(tg.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING){
+          last = tg;
+        }
+      }
+      if(last) return norm(last.innerText || "");
+      const sec = body.querySelector(".section-title");
+      if(sec) return norm(sec.innerText || "");
+    }
+    return "";
+  }
+
+  function clearHits(){
+    $$(".search-hit").forEach(n => n.classList.remove("search-hit"));
+  }
+
+  function jumpTo(el){
+    clearHits();
+    el.classList.add("search-hit");
+    el.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+
+  function buildIndex(){
+    const nodes = [];
+    $$("#notices .notice-item").forEach(el => nodes.push(el));
+    $$(".modal-overlay .modal-body").forEach(body => {
+      $$(".note, .notice-item, li", body).forEach(el => nodes.push(el));
+    });
+    return Array.from(new Set(nodes)).map(el => {
+      const text = norm(el.innerText || "");
+      const scope = scopeFromEl(el);
+      const title = titleForEl(el, scope);
+      return { el, text, scope, title };
+    }).filter(x => x.text.length > 0 && x.scope !== "search");
+  }
+
+  function mountCloseButtons(){
+    $$("[data-close]").forEach(btn => {
+      if(btn.__closeBound) return;
+      btn.__closeBound = true;
+      btn.addEventListener("click", () => closeModal(btn.getAttribute("data-close")));
+    });
+    $$(".modal-overlay").forEach(ov => {
+      if(ov.__overlayBound) return;
+      ov.__overlayBound = true;
+      ov.addEventListener("click", (e) => {
+        if(e.target === ov) closeModal(ov.id);
+      });
+    });
+    if(!document.__escBound){
+      document.__escBound = true;
+      document.addEventListener("keydown", (e) => {
+        if(e.key !== "Escape") return;
+        const actives = $$(".modal-overlay.active");
+        if(actives.length){
+          closeModal(actives[actives.length-1].id);
+        }
+      });
+    }
+  }
+
+  function renderResults(q, hits){
+    const meta = $("#searchMeta");
+    const container = $("#searchResults");
+    if(!container || !meta) return;
+
+    meta.textContent = `關鍵字：「${q}」｜找到 ${hits.length} 筆結果（顯示前 80 筆）`;
+    container.innerHTML = "";
+
+    const scopeName = (s) => ({
+      rule:"規定", check:"檢疫物", tutorial:"教程", link:"連結",
+      flow:"分流", guide:"前導", review:"複查", xray:"X光",
+      notice:"公告", other:"其他"
+    }[s] || s);
+
+    hits.slice(0,80).forEach(h => {
+      const div = document.createElement("div");
+      div.className = "search-result";
+      const title = h.title ? `｜${escHtml(h.title)}` : "";
+      div.innerHTML = `
+        <div class="meta">${escHtml(scopeName(h.scope))}${title}</div>
+        <p class="note snippet">${highlight(snippet(h.text, q), q)}</p>
+      `;
+      div.addEventListener("click", () => {
+        closeModal("modal-search");
+
+        const modalId = modalForScope(h.scope);
+        if(modalId){
+          openModal(modalId);
+          setTimeout(()=> jumpTo(h.el), 120);
+        }else{
+          setTimeout(()=> jumpTo(h.el), 60);
+        }
+      });
+      container.appendChild(div);
+    });
+  }
+
+  function bindSearch(){
+    const input = $("#globalSearch");
+    if(!input) return;
+
+    let index = null;
+    function ensureIndex(){
+      if(!index) index = buildIndex();
+      return index;
+    }
+
+    input.addEventListener("keydown", (e) => {
+      if(e.key !== "Enter") return;
+      const q = norm(input.value);
+      if(!q) return;
+
+      const data = ensureIndex();
+      const hits = data.filter(x => x.text.toLowerCase().includes(q.toLowerCase()));
+      renderResults(q, hits);
+      openModal("modal-search");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mountCloseButtons();
+    bindSearch();
+  });
+})();
+</script>
 
 </body>
 </html>
