@@ -1961,7 +1961,43 @@ window.QUESTION_BANK = {
         '안녕하세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/안녕하세요..mp3\')">🔊</button>',
         '감사합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/감사합니다..mp3\')">🔊</button>',
         '죄송합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/죄송합니다..mp3\')">🔊</button>'
-      ], answer:3 },
+      ], answer:2 },
+    { text:'翻譯題：沒關係',
+      options:[
+        '괜찮아요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/괜찮아요..mp3\')">🔊</button>',
+        '좀만 더 싸게 해주세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/좀만 더 싸게 해주세요？.mp3\')">🔊</button>',
+        '할인 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/할인 있나요？.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：可以便宜一點嗎?',
+      options:[
+        '괜찮아요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/괜찮아요..mp3\')">🔊</button>',
+        '좀만 더 싸게 해주세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/좀만 더 싸게 해주세요？.mp3\')">🔊</button>',
+        '할인 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/할인 있나요？.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：有打折嗎?',
+      options:[
+        '괜찮아요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/괜찮아요..mp3\')">🔊</button>',
+        '좀만 더 싸게 해주세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/좀만 더 싸게 해주세요？.mp3\')">🔊</button>',
+        '할인 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/할인 있나요？.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：有別的尺寸嗎?',
+      options:[
+        '다른 사이즈 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 사이즈 있나요？.mp3\')">🔊</button>',
+        '혹시 텍스프리가 가능한가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/혹시 텍스프리가 가능한가요？.mp3\')">🔊</button>',
+        '어떤것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請問可以退稅嗎?',
+      options:[
+        '다른 사이즈 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 사이즈 있나요？.mp3\')">🔊</button>',
+        '혹시 텍스프리가 가능한가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/혹시 텍스프리가 가능한가요？.mp3\')">🔊</button>',
+        '어떤것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：有什麼推薦的嗎?',
+      options:[
+        '다른 사이즈 있나요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 사이즈 있나요？.mp3\')">🔊</button>',
+        '혹시 텍스프리가 가능한가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/혹시 텍스프리가 가능한가요？.mp3\')">🔊</button>',
+        '어떤것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:2 },
   ],
 
   'lang-kr-middle': [
@@ -3112,4 +3148,5 @@ window.QUESTION_BANK = {
 
 
 };
+
 
