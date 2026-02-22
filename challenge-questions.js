@@ -1798,6 +1798,170 @@ window.QUESTION_BANK = {
         '환전소 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/환전소.mp3\')">🔊</button>',
         '계산서 <button class="audio-btn small" onclick="playAudio(\'audio/旅遊單字 韓文/계산서.mp3\')">🔊</button>'
       ], answer:0 },
+
+    
+    { text:'翻譯題：多少錢?',
+      options:[
+        '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請問地鐵站怎麼走?',
+      options:[
+        '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：這件衣服可以試穿嗎?',
+      options:[
+        '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：有其他顏色嗎?',
+      options:[
+        '다른 색깔 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 색깔 있어요？.mp3\')">🔊</button>',
+        '카드 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/카드 돼요？.mp3\')">🔊</button>',
+        '신용카트로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/신용카트로 결제할게요..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：可以刷卡嗎？',
+      options:[
+        '다른 색깔 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 색깔 있어요？.mp3\')">🔊</button>',
+        '카드 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/카드 돼요？.mp3\')">🔊</button>',
+        '신용카트로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/신용카트로 결제할게요..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：我要用刷卡結帳。',
+      options:[
+        '다른 색깔 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/다른 색깔 있어요？.mp3\')">🔊</button>',
+        '카드 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/카드 돼요？.mp3\')">🔊</button>',
+        '신용카트로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/신용카트로 결제할게요..mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：我要用T-MONEY結帳。',
+      options:[
+        'T-MONEY로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/T-MONEY로 결제할게요..mp3\')">🔊</button>',
+        '전기어댑터 빌릴 수 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/전기어댑터 빌릴 수 있을까요？.mp3\')">🔊</button>',
+        '---어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/---어디에 있어요？.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：可以借轉換插頭嗎?',
+      options:[
+        'T-MONEY로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/T-MONEY로 결제할게요..mp3\')">🔊</button>',
+        '전기어댑터 빌릴 수 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/전기어댑터 빌릴 수 있을까요？.mp3\')">🔊</button>',
+        '---어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/---어디에 있어요？.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：請問---在哪裡?',
+      options:[
+        'T-MONEY로 결제할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/T-MONEY로 결제할게요..mp3\')">🔊</button>',
+        '전기어댑터 빌릴 수 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/전기어댑터 빌릴 수 있을까요？.mp3\')">🔊</button>',
+        '---어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/---어디에 있어요？.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：你們有中文的菜單嗎?',
+      options:[
+        '중국어 메뉴가 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/중국어 메뉴가 있어요？.mp3\')">🔊</button>',
+        '이걸 포장해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이걸 포장해 주세요..mp3\')">🔊</button>',
+        '---더 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/더 하나 주세요..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請幫我打包。',
+      options:[
+        '중국어 메뉴가 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/중국어 메뉴가 있어요？.mp3\')">🔊</button>',
+        '이걸 포장해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이걸 포장해 주세요..mp3\')">🔊</button>',
+        '---더 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/더 하나 주세요..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：---再一份。',
+      options:[
+        '중국어 메뉴가 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/중국어 메뉴가 있어요？.mp3\')">🔊</button>',
+        '이걸 포장해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이걸 포장해 주세요..mp3\')">🔊</button>',
+        '---더 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/더 하나 주세요..mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：請幫我結帳。',
+      options:[
+        '계산 해주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/계산 해주세요..mp3\')">🔊</button>',
+        '사진 찍어 주셔도 될까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/사진 찍어 주셔도 될까요？.mp3\')">🔊</button>',
+        '환전 하고 싶어요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/환전 하고 싶어요..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請問可以幫我拍照嗎？',
+      options:[
+        '계산 해주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/계산 해주세요..mp3\')">🔊</button>',
+        '사진 찍어 주셔도 될까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/사진 찍어 주셔도 될까요？.mp3\')">🔊</button>',
+        '환전 하고 싶어요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/환전 하고 싶어요..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：我想要換錢。',
+      options:[
+        '계산 해주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/계산 해주세요..mp3\')">🔊</button>',
+        '사진 찍어 주셔도 될까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/사진 찍어 주셔도 될까요？.mp3\')">🔊</button>',
+        '환전 하고 싶어요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/환전 하고 싶어요..mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：司機，我要下車。',
+      options:[
+        '기사님, 내릴게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/기사님, 내릴게요..mp3\')">🔊</button>',
+        '제 짐을 맡길 장소가 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/제 짐을 맡길 장소가 있을까요？.mp3\')">🔊</button>',
+        '주문 할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/주문 할게요..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請問可以寄放行李嗎?',
+      options:[
+        '기사님, 내릴게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/기사님, 내릴게요..mp3\')">🔊</button>',
+        '제 짐을 맡길 장소가 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/제 짐을 맡길 장소가 있을까요？.mp3\')">🔊</button>',
+        '주문 할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/주문 할게요..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：我要點餐。',
+      options:[
+        '기사님, 내릴게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/기사님, 내릴게요..mp3\')">🔊</button>',
+        '제 짐을 맡길 장소가 있을까요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/제 짐을 맡길 장소가 있을까요？.mp3\')">🔊</button>',
+        '주문 할게요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/주문 할게요..mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：請問要等多久?',
+      options:[
+        '얼마나 기다려야 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마나 기다려야 돼요？.mp3\')">🔊</button>',
+        '충전해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/충전해 주세요..mp3\')">🔊</button>',
+        '어떤 것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤 것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請幫我加值。',
+      options:[
+        '얼마나 기다려야 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마나 기다려야 돼요？.mp3\')">🔊</button>',
+        '충전해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/충전해 주세요..mp3\')">🔊</button>',
+        '어떤 것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤 것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：有什麼推薦的嗎?',
+      options:[
+        '얼마나 기다려야 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마나 기다려야 돼요？.mp3\')">🔊</button>',
+        '충전해 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/충전해 주세요..mp3\')">🔊</button>',
+        '어떤 것을 추천하세요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/어떤 것을 추천하세요？.mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：這附近哪裡有換錢所?',
+      options:[
+        '이 근처에 환전소가 어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 근처에 환전소가 어디에 있어요？.mp3\')">🔊</button>',
+        '--- 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 주세요..mp3\')">🔊</button>',
+        '--- 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 하나 주세요..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：請給我---。',
+      options:[
+        '이 근처에 환전소가 어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 근처에 환전소가 어디에 있어요？.mp3\')">🔊</button>',
+        '--- 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 주세요..mp3\')">🔊</button>',
+        '--- 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 하나 주세요..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：我要一個---。',
+      options:[
+        '이 근처에 환전소가 어디에 있어요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 근처에 환전소가 어디에 있어요？.mp3\')">🔊</button>',
+        '--- 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 주세요..mp3\')">🔊</button>',
+        '--- 하나 주세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/--- 하나 주세요..mp3\')">🔊</button>'
+      ], answer:2 },
+    { text:'翻譯題：你好',
+      options:[
+        '안녕하세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/안녕하세요..mp3\')">🔊</button>',
+        '감사합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/감사합니다..mp3\')">🔊</button>',
+        '죄송합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/죄송합니다..mp3\')">🔊</button>'
+      ], answer:0 },
+    { text:'翻譯題：謝謝',
+      options:[
+        '안녕하세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/안녕하세요..mp3\')">🔊</button>',
+        '감사합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/감사합니다..mp3\')">🔊</button>',
+        '죄송합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/죄송합니다..mp3\')">🔊</button>'
+      ], answer:1 },
+    { text:'翻譯題：對不起',
+      options:[
+        '안녕하세요.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/안녕하세요..mp3\')">🔊</button>',
+        '감사합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/감사합니다..mp3\')">🔊</button>',
+        '죄송합니다.<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/죄송합니다..mp3\')">🔊</button>'
+      ], answer:3 },
   ],
 
   'lang-kr-middle': [
@@ -2948,3 +3112,4 @@ window.QUESTION_BANK = {
 
 
 };
+
