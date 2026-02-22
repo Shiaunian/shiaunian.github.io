@@ -1803,19 +1803,19 @@ window.QUESTION_BANK = {
     { text:'翻譯題：多少錢?',
       options:[
         '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
-        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요 ？.mp3\')">🔊</button>',
         '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
       ], answer:0 },
     { text:'翻譯題：請問地鐵站怎麼走?',
       options:[
         '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
-        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요 ？.mp3\')">🔊</button>',
         '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
       ], answer:1 },
     { text:'翻譯題：這件衣服可以試穿嗎?',
       options:[
         '얼마예요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/얼마예요？.mp3\')">🔊</button>',
-        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요？.mp3\')">🔊</button>',
+        '지하철역에 어떻게 가요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/지하철역에 어떻게 가요 ？.mp3\')">🔊</button>',
         '이 옷 입어 봐도 돼요？<button class="audio-btn small" onclick="playAudio(\'audio/旅遊用句 韓文/이 옷 입어 봐도 돼요？.mp3\')">🔊</button>'
       ], answer:2 },
     { text:'翻譯題：有其他顏色嗎?',
@@ -3148,6 +3148,7 @@ window.QUESTION_BANK = {
 
 
 };
+
 
 
 
