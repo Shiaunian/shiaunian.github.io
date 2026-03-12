@@ -228,15 +228,15 @@
       overflow:auto;
     }
 
-    .tag {
-    display: inline-block;
-    background: #c93f3f;
-    color: #fff;
-    padding: 1px 5px;
-    border-radius: 8px;
-    font-weight: 800;
-    margin: 2px 0 2px;
-    font-size: 13px;
+    .tag{
+      display:inline-block;
+      background:#c93f3f;
+      color:#fff;
+      padding:3px 8px;
+      border-radius:8px;
+      font-weight:800;
+      margin:10px 0 4px;
+      font-size:13px;
     }
 
     .tag.green{ background:#2f6b2f; }
@@ -246,8 +246,21 @@
       font-size: var(--subtitle-font-size);
     }
 
+    /* modal 內段落更好閱讀 */
+    .modal-body p{
+      margin-top:6px;
+      margin-bottom:10px;
+    }
+
     .note{
-      color:#333; line-height:1.7; margin: 4px 0 8px; font-size: var(--content-font-size);
+      color:#333;
+      line-height:1.7;
+      margin:6px 0 10px;
+      font-size: var(--content-font-size);
+
+      /* 讓 1.2.3. 這種編號有對齊縮排 */
+      padding-left:1.6em;
+      text-indent:-1.6em;
     }
 
     .hr{ border:0; border-top:1px dashed #dfe2f2; margin:12px 0; }
@@ -383,6 +396,62 @@
     /* 超窄螢幕自動變 1 欄 */
     @media (max-width:360px){
       .tutorial-grid{ grid-template-columns: 1fr; }
+    }
+
+    /* ===== 檢疫物 modal 局部美化（不影響其他 modal） ===== */
+    #modal-check .modal{
+      width: min(420px, 94vw);
+      max-height: 93vh;
+      background: #f7f8fe;
+    }
+
+    #modal-check .modal-body{
+      background: #f5f7fb;
+      padding: 10px 12px 14px;
+    }
+
+    #modal-check .item-block{
+      background:#fff;
+      border:1px solid #e3e6f2;
+      border-radius:14px;
+      padding:10px 10px 8px;
+      margin:10px 0 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+
+    #modal-check .item-block .tag.green{
+      margin-top:0;
+      margin-bottom:6px;
+    }
+
+    #modal-check .img-scroll{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:6px 0 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #modal-check .img-scroll img{
+      height:200px;
+      flex:0 0 auto;
+      border-radius:10px;
+      object-fit:cover;
+      border:1px solid #dfe2f2;
+      background:#fff;
+    }
+
+    #modal-check .text-danger{
+      color:#c93f3f;
+      font-weight:800;
+    }
+
+    #modal-check .intro-box{
+      background:#fff;
+      border:1px solid #e3e6f2;
+      border-radius:14px;
+      padding:10px 12px;
+      margin-bottom:12px;
     }
 
 
@@ -601,30 +670,32 @@
         </div>
         <div class="modal-body">
           <div class="section-title">勤務須知</div>
-          <p class="note">請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，若依舊無法判定就是請旅客至檢疫櫃檯詢問。</p>
+          <div class="intro-box">
+            <p class="note">請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，若依舊無法判定就是請旅客至檢疫櫃檯詢問。</p>
+          </div>
 
           <hr class="hr" />
           <div class="section-title">注意事項</div>
 
           <div class="tag green">【蛋類】</div>
           <p class="note"><span style="color:#c93f3f;">鴨蛋、鵝蛋、煮過的皮蛋</span>請旅客下去櫃台詢問，如是雞蛋自行判定，生鮮或半熟蛋類不可攜帶。</p>
-          <div role="region" aria-label="禽鳥蛋 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E7%9A%AE%E8%9B%8B_x2e6f2.jpg" alt="蛋範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E9%B9%B9%E8%9B%8B_kmcorb.jpg" alt="蛋範例2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E6%BA%8F%E5%BF%83%E8%9B%8B_i3fz4f.jpg" alt="蛋範例3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="禽鳥蛋 範例圖片" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E7%9A%AE%E8%9B%8B_x2e6f2.jpg" alt="蛋範例1">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E9%B9%B9%E8%9B%8B_kmcorb.jpg" alt="蛋範例2">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758762847/%E6%BA%8F%E5%BF%83%E8%9B%8B_i3fz4f.jpg" alt="蛋範例3">
           </div>
 
           <div class="tag green">【牛奶】</div>
           <p class="note">保久乳、調味乳通常可以常溫保存 6 個月以上，可以攜帶。</p>
           <p class="note">鮮奶/牛奶通常需要全程冷藏保存，只有經過 UHT 超高溫瞬間殺菌（120-130 度／2-5 秒）才可以攜帶入境。</p>
-          <div role="region" aria-label="牛奶 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758763829/UHT%E8%B6%85%E9%AB%98%E6%BA%AB%E6%BB%85%E8%8F%8C_segikl.jpg" alt="牛奶範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="牛奶 範例圖片" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758763829/UHT%E8%B6%85%E9%AB%98%E6%BA%AB%E6%BB%85%E8%8F%8C_segikl.jpg" alt="牛奶範例1">
           </div>
 
           <div class="tag green">【蓮子】</div>
           <p class="note">蓮子<span style="color:#c93f3f;">去皮或去芯只要滿足其中一項即可攜帶入境</span>；若為帶皮帶芯的蓮子須請旅客拋棄。</p>
-          <div role="region" aria-label="蓮子 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1765677465/%E8%93%AE%E5%AD%90_vy34jr.jpg" alt="蓮子範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="蓮子 範例圖片" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1765677465/%E8%93%AE%E5%AD%90_vy34jr.jpg" alt="蓮子範例1">
           </div>
 
           <div class="tag green">【堅果/松果】</div>
@@ -635,11 +706,11 @@
           <div class="tag green">【穀物】</div>
           <p class="note">小米可以攜帶入境，其餘穀物類若已經過烹飪或任何加工處理，屬於即食的都可以攜帶入境。</p>
           <p class="note">白米、黎麥、蕎麥等等，需要烹飪後才能食用的穀物，需請旅客至檢疫櫃檯確認。</p>
-          <div role="region" aria-label="堅果與松果 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E7%99%BD%E7%B1%B3_j9b6vu.jpg" alt="堅果松果範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E8%95%8E%E9%BA%A5_jbghja.jpg" alt="堅果松果範例2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%BB%8E%E9%BA%A5_n7t6tb.jpg" alt="堅果松果範例3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%AB%98%E7%B2%B1_rhylsy.jpg" alt="堅果松果範例4" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="堅果與松果 範例圖片" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E7%99%BD%E7%B1%B3_j9b6vu.jpg" alt="堅果松果範例1">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E8%95%8E%E9%BA%A5_jbghja.jpg" alt="堅果松果範例2">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%BB%8E%E9%BA%A5_n7t6tb.jpg" alt="堅果松果範例3">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758765698/%E9%AB%98%E7%B2%B1_rhylsy.jpg" alt="堅果松果範例4">
           </div>
 
           <div class="tag green">【水果蛋糕/大福】</div>
@@ -651,9 +722,9 @@
           <div class="tag green">【乾燥葉子】</div>
           <p class="note">新鮮的葉菜通常色澤鮮艷有韌性，不能攜帶；完全乾燥的葉子一般一捏就碎，可以攜帶。</p>
           <p class="note">如旅客攜帶的葉子雖然顏色不鮮豔，但軟軟的還是帶有一點水分，一樣不能攜帶入境。</p>
-          <div role="region" aria-label="堅果與松果 範例圖片" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1759192515/%E5%AE%8C%E5%85%A8%E4%B9%BE%E7%87%A5%E8%88%87%E5%8D%8A%E4%B9%BE%E7%87%A5_fey4ee.jpg" alt="乾燥葉子範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1762393388/%E9%8A%80%E6%9D%8F%E8%91%89_lglmvz.jpg" alt="乾燥葉子範例2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="堅果與松果 範例圖片" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1759192515/%E5%AE%8C%E5%85%A8%E4%B9%BE%E7%87%A5%E8%88%87%E5%8D%8A%E4%B9%BE%E7%87%A5_fey4ee.jpg" alt="乾燥葉子範例1">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1762393388/%E9%8A%80%E6%9D%8F%E8%91%89_lglmvz.jpg" alt="乾燥葉子範例2">
           </div>
 
           <div class="tag green">【罐頭及加工食品】</div>
@@ -662,8 +733,8 @@
 
           <div class="tag green">【飛機餐】</div>
           <p class="note">HX有發現新的飛機餐，外觀跟維也納餐包差不多，內餡是叉燒。</P>
-          <div role="region" aria-label="飛機餐" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1766103044/HX%E5%8F%89%E7%87%92%E5%8C%85_fbqcsh.jpg" alt="飛機餐範例1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="飛機餐" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1766103044/HX%E5%8F%89%E7%87%92%E5%8C%85_fbqcsh.jpg" alt="飛機餐範例1">
           </div>
           
           <div class="tag green">【特殊狀況食物】</div>
@@ -675,14 +746,14 @@
           <p class="note">若「桃酥」成分含肉粉鬆，請旅客至櫃檯詢問，實體多半看不到明顯肉鬆，有機會放行。</p>
           <p class="note">寵物凍乾與肉乾同理，不可攜帶入境。</p>
           <p class="note">米紙含有肉鬆成分，務必特別注意。</p>
-          <div role="region" aria-label="特殊狀況食物" style="display:flex;gap:8px;overflow-x:auto;padding:6px 0;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E9%B5%9D%E8%82%9D%E9%86%AC_ypvdhd.jpg" alt="特殊狀況食物1" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9C%B2%E8%99%95_houzvc.jpg" alt="特殊狀況食物2" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%87%95%E7%AA%A9_gvgste.jpg" alt="特殊狀況食物3" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9B%9E%E5%85%A7%E9%87%91_eexfhi.jpg" alt="特殊狀況食物4" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%89%9B%E7%B3%9E%E9%A4%85_hdcmlg.jpg" alt="特殊狀況食物5" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E6%A1%83%E9%85%A5_cbykrv.jpg" alt="特殊狀況食物6" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
-            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1763257028/%E7%B1%B3%E7%B4%99_pgj4rn.jpg" alt="特殊狀況食物6" style="height:200px;flex:0 0 auto;border-radius:10px;object-fit:cover;">
+          <div role="region" aria-label="特殊狀況食物" class="img-scroll">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E9%B5%9D%E8%82%9D%E9%86%AC_ypvdhd.jpg" alt="特殊狀況食物1">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9C%B2%E8%99%95_houzvc.jpg" alt="特殊狀況食物2">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%87%95%E7%AA%A9_gvgste.jpg" alt="特殊狀況食物3">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769066/%E9%9B%9E%E5%85%A7%E9%87%91_eexfhi.jpg" alt="特殊狀況食物4">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E7%89%9B%E7%B3%9E%E9%A4%85_hdcmlg.jpg" alt="特殊狀況食物5">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1758769067/%E6%A1%83%E9%85%A5_cbykrv.jpg" alt="特殊狀況食物6">
+            <img src="https://res.cloudinary.com/dcexvv7co/image/upload/v1763257028/%E7%B1%B3%E7%B4%99_pgj4rn.jpg" alt="特殊狀況食物6">
           </div>
  
         </div>
@@ -894,11 +965,10 @@
           <p class="note">5.推嬰兒車的旅客請他們<span style="color:#c93f3f;">走1、2線，雙人嬰兒車走中間</span>。</p>
           <p class="note">6.行李推車請走3線；如果丟在我們的工作區，請旅客把車推走，不需要特地攔下。</p>
           <p class="note">7.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。4線全開，排隊超過兩邊免稅店，視狀況分流們立刻通報檢疫櫃檯告知：啟動666，於分流拒檢欄註明撥打時間，屆時防檢櫃檯會請助理上來協助。</p>
-          <p class="note">8.如非疫區國家的旅客未持卡，<span style="color:#c93f3f;">確認機票即可</span>。如旅客持卡不走綠線<span style="color:#c93f3f;">想走紅線，一樣要手檢</span>。若<span style="color:#1e88e5;">3線旅客排隊已明顯超過宣導語大聲公</span>，碰到收卡的旅客沒卡<span style="color:#c93f3f;">可確認機票放行</span>；其餘請良性勸導麻煩旅客走手檢區並提醒下次記得拿卡。</p>
+          <p class="note">8.如非疫區國家的旅客未持卡，<span style="color:#c93f3f;">需要走手檢區</span>。但如旅客持卡不走綠線<span style="color:#c93f3f;">想走紅線，一樣要手檢</span>。若<span style="color:#1e88e5;">3線旅客排隊已明顯超過宣導語大聲公</span>，碰到收卡的旅客沒卡<span style="color:#c93f3f;">可確認機票放行</span>；其餘請良性勸導麻煩旅客走手檢區並提醒下次記得拿卡。</p>
           <p class="note">9.如轉機旅客沒有要先入境，請將旅客引導至最近的轉機安檢。</p>
-          <p class="note">10.分流2在引導旅客的同時，請協助分流確認未持卡旅客的機票並引導到正確的通道。</p>
-          <p class="note">11.分流2屬於機動，如不須到分流區引導旅客，則在線上支援各線複查。</p>
-          <p class="note">12.分流現在電霸另外用專用盒子放它(需要蓋著蓋子)，示意圖上有小蜜蜂佩掛與分流收卡處的擺放，<span style="color:#c93f3f;">請務必要按照圖片上執行</span>。
+          <p class="note">10.分流2屬於機動，如不須到分流區引導旅客，則在線上支援各線複查。</p>
+          <p class="note">11.分流現在電霸另外用專用盒子放它(需要蓋著蓋子)，示意圖上有小蜜蜂佩掛與分流收卡處的擺放，<span style="color:#c93f3f;">請務必要按照圖片上執行</span>。
              <button type="button" class="view-btn"
               data-viewer-title="示意圖"
               data-viewer-images="
@@ -906,7 +976,7 @@
               詳細內容
             </button>
           </p>
-          <p class="note">13.上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。<span style="color:#c93f3f;">注意分流2、3千萬不要定點站立</span>。
+          <p class="note">12.上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。<span style="color:#c93f3f;">注意分流2、3千萬不要定點站立</span>。
             <button type="button" class="view-btn"
               data-viewer-title="各哨時間表"
               data-viewer-images="
@@ -915,7 +985,7 @@
               查看
             </button>
           </p>
-          <p class="note">14.有收卡旅客時，請免稅店的貨車走正常走道，防止撞到旅客及破壞紅龍。</p>
+          <p class="note">13.有收卡旅客時，請免稅店的貨車走正常走道，防止撞到旅客及破壞紅龍。</p>
           <div class="tag">【分流手機使用】分流目前提供兩支手機</div>
           <p class="note">分流機：背面標示C/D區</p>
           <p class="note">該手機供訊息與櫃檯聯繫、撥打電話、錄音及查閱航班使用。</p>
