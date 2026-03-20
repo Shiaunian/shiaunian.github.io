@@ -71,7 +71,6 @@ window.ACCOUNTS = [
   {"username":"2685","password":"0219","_comment":"陳博宇","welcome":"歡迎陳博宇"},
   {"username":"8691","password":"1216","_comment":"周芝瑩","welcome":"歡迎周芝瑩"},
   {"username":"4580","password":"0206","_comment":"向彥姿","welcome":"歡迎向彥姿"},
-  {"username":"8881","password":"0608","_comment":"郭裔祥","welcome":"歡迎郭裔祥"},
   {"username":"6624","password":"0102","_comment":"李秀貞","welcome":"歡迎李秀貞"},
   {"username":"1846","password":"1108","_comment":"林亭君","welcome":"歡迎林亭君"},
   {"username":"4465","password":"0611","_comment":"詹偉維","welcome":"歡迎詹偉維"},
