@@ -76,9 +76,23 @@
       box-shadow: 0 0 10px rgba(255,59,59,.35);
     }
 
-    /* marquee 本體 */
-    .marquee marquee{
-      width: 100%;
+
+    /* 新版跑馬燈軌道 */
+    .marquee-track{
+      display: flex;
+      align-items: center;
+      width: max-content;
+      white-space: nowrap;
+      animation: marqueeMove 18s linear infinite;
+    }
+
+    .marquee-text{
+      display: inline-block;
+      font-size: var(--content-font-size);
+      font-weight: 800;
+      color: #2f3161;
+      flex: 0 0 auto;
+      padding-right: 80px; /* 兩段文字中間的間距 */
     }
 
     /* 跑馬燈文字（一定顯示的基礎樣式） */
@@ -122,7 +136,14 @@
       0%   { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
     }
-
+    @keyframes marqueeMove{
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
 
 
 
@@ -466,11 +487,12 @@
     </div>
     <div id="welcome" class="welcome">歡迎登入</div>
 
-      <div class="marquee">
-        <marquee behavior="scroll" direction="left" scrollamount="4">
-          <span class="marquee-text">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</span>
-        </marquee>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="marquee-text">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</span>
+        <span class="marquee-text">【系統公告】新進人員須知：所有相關資訊規定會在記事本裡，請新同仁多注意本單位記事本，如有不懂也可請教資深同仁，畢竟規定是死的，所以當不清楚的規定請勿擅自決定或違規。</span>
       </div>
+    </div>
 
     <!-- ====== 全站搜尋（按 Enter 搜尋） ====== -->
     <div class="search-wrap">
