@@ -79,7 +79,8 @@ window.ACCOUNTS = [
   {"username":"4886","password":"0214","_comment":"楊敏得","welcome":"歡迎楊敏得"},
   {"username":"1728","password":"0616","_comment":"呂汶芯","welcome":"歡迎呂汶芯"},
   {"username":"5877","password":"0602","_comment":"侯芯筠","welcome":"歡迎侯芯筠"},
-  {"username":"6219","password":"1121","_comment":"林佑宣","welcome":"歡迎林佑宣"}
+  {"username":"6219","password":"1121","_comment":"林佑宣","welcome":"歡迎林佑宣"},
+  {"username":"1012","password":"0329","_comment":"張嘉紜","welcome":"歡迎張嘉紜"}
 ];
 
 
