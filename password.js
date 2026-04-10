@@ -84,9 +84,3 @@ window.ACCOUNTS = [
   {"username":"2287","password":"0722","_comment":"許桉瑞","welcome":"歡迎許桉瑞"},
   {"username":"5705","password":"0123","_comment":"吳玠汶","welcome":"歡迎吳玠汶"}
 ];
-
-
-
-
-
-
