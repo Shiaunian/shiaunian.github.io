@@ -423,7 +423,7 @@
     /* ===== 檢疫物 modal 局部美化（不影響其他 modal） ===== */
     #modal-check .modal{
       width: min(420px, 94vw);
-      max-height: 93vh;
+      max-height: 82vh;
       background: #f7f8fe;
     }
 
@@ -461,6 +461,58 @@
       object-fit:cover;
       border:1px solid #dfe2f2;
       background:#fff;
+    }
+
+    /* 近期檢疫物橫向滑動卡片 */
+    #modal-check .recent-check-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 2px 2px 6px;
+      margin-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #modal-check .recent-check-card {
+      flex: 0 0 110px;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e3e6f2;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    #modal-check .recent-check-img-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #eef1f5;
+    }
+
+    #modal-check .recent-check-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    #modal-check .recent-check-info {
+      padding: 7px 8px 8px;
+      text-align: center;
+    }
+
+    #modal-check .recent-check-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #333;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #modal-check .recent-check-date {
+      font-size: 11px;
+      color: #777;
     }
 
     #modal-check .text-danger{
@@ -534,13 +586,7 @@
         NEW
         </span>
 
-        2026-05-21 旅客如有情緒失控、持續辱罵或現場狀況僵持不下時，
-        <span style="color:#c93f3f;">可請警方到場協助處理。</span><br><br>
-
-        <span style="font-size:13px;">
-        <span style="color:#c93f3f;">D區</span>請由公務門警察支援｜
-        <span style="color:#c93f3f;">C區</span>則直接前往警察局請求支援。
-        </span>
+        2026.06.14 近期發現分流區早上常有桌面未擦拭的情形，甚至有同仁未確實落實清潔，麻煩早班同仁多加注意，務必完成桌面擦拭。
         </div>
 
         <div class="notice-item">
@@ -557,6 +603,40 @@
         ">
         NEW
         </span>
+
+        2026.06.14 請勿在哨上吃東西，防檢署可能會調閱監視器畫面，請同仁務必避免違規行為。
+        </div>
+
+        <div class="notice-item">
+
+        <span style="
+        background:#ff3b3b;
+        color:white;
+        font-size:11px;
+        font-weight:800;
+        padding:2px 6px;
+        border-radius:999px;
+        margin-right:6px;
+        vertical-align:middle;
+        ">
+        NEW
+        </span>
+
+        2026.06.14 手機僅供查閱班機資訊與雷達使用，請勿在勤務中使用手機處理其他事情，尤其分流區更要特別注意。
+        </div>
+
+        <div class="notice-item">
+
+        2026-05-21 旅客如有情緒失控、持續辱罵或現場狀況僵持不下時，
+        <span style="color:#c93f3f;">可請警方到場協助處理。</span><br><br>
+
+        <span style="font-size:13px;">
+        <span style="color:#c93f3f;">D區</span>請由公務門警察支援｜
+        <span style="color:#c93f3f;">C區</span>則直接前往警察局請求支援。
+        </span>
+        </div>
+
+        <div class="notice-item">
 
         2026-05-21 <span style="color:#c93f3f;">CD區百寶袋回收內容如下</span><br><br>
 
@@ -575,19 +655,6 @@
 
         <div class="notice-item">
 
-        <span style="
-        background:#ff3b3b;
-        color:white;
-        font-size:11px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:999px;
-        margin-right:6px;
-        vertical-align:middle;
-        ">
-        NEW
-        </span>
-
         2026-05-21 分2主要工作是<span style="color:#c93f3f;">引導旅客與協助現場勤務</span>，不是一上來就在查航班，請先把主要事情做好，再處理其他事項。<br><br>
 
         <span style="font-size:13px;">
@@ -597,19 +664,6 @@
         </div>
 
         <div class="notice-item">
-
-        <span style="
-        background:#ff3b3b;
-        color:white;
-        font-size:11px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:999px;
-        margin-right:6px;
-        vertical-align:middle;
-        ">
-        NEW
-        </span>
 
         2026-05-21 再次提醒，開三條線時，<span style="color:#c93f3f;">電動車旅客由二線接收</span>。<br><br>
 
@@ -828,6 +882,15 @@
           <div class="section-title">勤務須知</div>
           <div class="intro-box">
             <p class="note">請先看清楚成分表，遇到沒辦法辨別的東西或問題先詢問身旁的同事，若依舊無法判定就是請旅客至檢疫櫃檯詢問。</p>
+          </div>
+
+          <div class="section-title">近期檢疫物總覽</div>
+          <div class="intro-box">
+            <p class="note">近期常見或需特別留意項目，可左右滑動查看。</p>
+          </div>
+
+          <div class="recent-check-scroll" id="recentCheckScroll" aria-label="近期檢疫物橫向滑動列表">
+            <!-- JS 會自動填入近期檢疫物卡片 -->
           </div>
 
           <hr class="hr" />
@@ -2343,9 +2406,57 @@
     });
   }
 
+  // ====== 近期檢疫物資料與渲染 ======
+  var recentCheckItems = [
+    {
+      name: '鴨仔蛋',
+      date: '6月12日',
+      img: '檢疫物/duck_egg_20260612.jpg'
+    },
+    {
+      name: '黃粑',
+      date: '5月24日',
+      img: '檢疫物/huang_ba_20260524.png'
+    },
+    {
+      name: '海藻面膜',
+      date: '6月06日',
+      img: '檢疫物/seaweed_mask_20260606.png'
+    },
+    {
+      name: '兔毛吊飾',
+      date: '6月01日',
+      img: '檢疫物/rabbit_hair_20260601.png'
+    }
+  ];
+
+  function renderRecentChecks(){
+    var container = document.getElementById('recentCheckScroll');
+    if(!container || !Array.isArray(recentCheckItems)) return;
+
+    container.innerHTML = recentCheckItems.map(function(item){
+      var name = item.name || '';
+      var date = item.date || '';
+      var img = item.img || '';
+
+      return [
+        '<div class="recent-check-card">',
+          '<div class="recent-check-img-wrap">',
+            '<img src="' + img + '" alt="' + name + ' ' + date + '" onerror="this.style.opacity=\'0.25\';">',
+          '</div>',
+          '<div class="recent-check-info">',
+            '<div class="recent-check-name">' + name + '</div>',
+            '<div class="recent-check-date">' + date + '</div>',
+          '</div>',
+        '</div>'
+      ].join('');
+    }).join('');
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     mountCloseButtons();
     bindSearch();
+    renderRecentChecks();
   });
 })();
 </script>
