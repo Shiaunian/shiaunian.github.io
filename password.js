@@ -24,7 +24,6 @@ window.ACCOUNTS = [
   {"username":"0017","password":"0128","_comment":"郭健鴻","welcome":"歡迎郭健鴻"},
   {"username":"0017","password":"5126","_comment":"念念","welcome":"歡迎念念"},
   {"username":"0017","password":"1234","_comment":"小念","welcome":"歡迎小念"},
-  {"username":"7905","password":"0512","_comment":"洪朝明","welcome":"歡迎洪朝明"},
   {"username":"8883","password":"0319","_comment":"潘嬌媚","welcome":"歡迎潘嬌媚"},
   {"username":"4290","password":"0223","_comment":"邱詩秦","welcome":"歡迎邱詩秦"},
   {"username":"5791","password":"1110","_comment":"林依瑄","welcome":"歡迎林依瑄"},
@@ -88,7 +87,6 @@ window.ACCOUNTS = [
   {"username":"3780","password":"0309","_comment":"劉玉婷","welcome":"歡迎劉玉婷"},
   {"username":"0275","password":"0915","_comment":"張博鈞","welcome":"歡迎張博鈞"},
   {"username":"7402","password":"0407","_comment":"吳信賢","welcome":"歡迎吳信賢"},
-  {"username":"5065","password":"0523","_comment":"劉容均","welcome":"歡迎劉容均"},
   {"username":"7685","password":"0517","_comment":"吳芯倪","welcome":"歡迎吳芯倪"},
   {"username":"3740","password":"0708","_comment":"王筱媛","welcome":"歡迎王筱媛"}
 ];
