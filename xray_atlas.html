@@ -75,9 +75,73 @@
     .cap{margin-top:6px; font-size:13px; color:#a8b9ed}
 
     .center{display:flex; align-items:center; gap:10px}
+
+    /* 自訂權限提示彈窗 */
+    .modal-overlay{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 12px;
+      z-index: 9999;
+    }
+    .modal-overlay.active{ display:flex; }
+    .modal{
+      width: min(420px, 94vw);
+      background: #f7f8fe;
+      border-radius: 18px;
+      box-shadow: 0 8px 26px rgba(0,0,0,.4);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      border: 1px solid #dfe2f2;
+      color: #333;
+    }
+    .modal-header{
+      position: relative;
+      padding: 12px 20px;
+      background: #e7e9f6;
+      color:#2f3161;
+      font-weight: 800;
+      text-align: center;
+      font-size: 22px;
+      letter-spacing: .05em;
+    }
+    .modal-body{
+      padding: 22px 18px 24px;
+      background:#fff;
+      text-align: center;
+    }
+    .modal-msg{
+      color:#333;
+      line-height:1.6;
+      margin: 0 0 22px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .modal-btn{
+      display:flex; align-items:center; justify-content:center;
+      width: 100%;
+      height: 44px;
+      background: #4b4e8a; color:#fff; border:none; border-radius:14px;
+      font-size: 16px; font-weight: 800; letter-spacing:.1em; cursor:pointer;
+    }
+    .modal-btn:active{ transform:scale(.98); }
   </style>
 </head>
 <body>
+  <!-- 自訂權限提示彈窗 -->
+  <div id="modal-xray-permission" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="xrayPermTitle">
+      <div class="modal-header">
+        <span id="xrayPermTitle">無法開啟圖鑑</span>
+      </div>
+      <div class="modal-body">
+        <div class="modal-msg">此功能僅開放 X光勤務人員使用。</div>
+        <button class="modal-btn" onclick="location.replace('main.html')">返回首頁</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function checkXrayAuth(){
       var name = localStorage.getItem('t2_user_name') || '';
@@ -91,48 +155,73 @@
         return;
       }
       if(!isXray){
-        alert('此功能僅限指定 X光人員使用。');
-        window.location.replace('main.html');
+        document.addEventListener('DOMContentLoaded', function(){
+          var permModal = document.getElementById('modal-xray-permission');
+          if(permModal){
+            permModal.classList.add('active');
+            permModal.setAttribute('aria-hidden', 'false');
+            permModal.addEventListener('click', function(e){
+              if(e.target === permModal){
+                location.replace('main.html');
+              }
+            });
+          }
+          document.addEventListener('keydown', function(e){
+            if(e.key === 'Escape'){
+              location.replace('main.html');
+            }
+          });
+        });
         return;
       }
+      // 有權限，顯示主內容
+      document.addEventListener('DOMContentLoaded', function(){
+        var mainContent = document.getElementById('mainContent');
+        if(mainContent){
+          mainContent.style.display = '';
+        }
+      });
     })();
   </script>
-  <header>
-    <div class="h-wrap">
-        <button class="back-btn" onclick="location.href='main.html'">← 返回</button>
-        <div>
-        <div class="title">X 光圖鑑</div>
-        <div class="muted" id="status">初始化中…</div>
-        </div>
-    </div>
-    </header>
 
-
-  <div class="outer">
-    <div id="rail" class="rail" aria-label="X 光可滑動圖鑑"></div>
-    <div class="help">👉 <b>滑動</b>左右瀏覽。<b>點一下</b>X 光圖片可開啟底部面板，查看「側面圖」與「實物圖」。</div>
-  </div>
-
-  <!-- Bottom sheet -->
-  <div id="sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <div class="overlay" data-close></div>
-    <div class="panel">
-      <header>
-        <div class="center"><div id="sheetNo" class="badge">NO.-</div><div id="sheetTitle" class="ttl"></div></div>
-        <button class="close" data-close>關閉</button>
-      </header>
-      <div class="tabs">
-        <button id="tabSide" class="active" type="button">標示圖</button>
-        <button id="tabReal" type="button">實物圖</button>
+  <div id="mainContent" style="display:none;">
+    <header>
+      <div class="h-wrap">
+          <button class="back-btn" onclick="location.href='main.html'">← 返回</button>
+          <div>
+          <div class="title">X 光圖鑑</div>
+          <div class="muted" id="status">初始化中…</div>
+          </div>
       </div>
-      <div class="tabview">
-        <div id="viewSide" class="pic active">
-          <img id="imgSide" alt="標示圖"/>
-          <div class="cap" id="capSide"></div>
+      </header>
+
+
+    <div class="outer">
+      <div id="rail" class="rail" aria-label="X 光可滑動圖鑑"></div>
+      <div class="help">👉 <b>滑動</b>左右瀏覽。<b>點一下</b>X 光圖片可開啟底部面板，查看「側面圖」與「實物圖」。</div>
+    </div>
+
+    <!-- Bottom sheet -->
+    <div id="sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="overlay" data-close></div>
+      <div class="panel">
+        <header>
+          <div class="center"><div id="sheetNo" class="badge">NO.-</div><div id="sheetTitle" class="ttl"></div></div>
+          <button class="close" data-close>關閉</button>
+        </header>
+        <div class="tabs">
+          <button id="tabSide" class="active" type="button">標示圖</button>
+          <button id="tabReal" type="button">實物圖</button>
         </div>
-        <div id="viewReal" class="pic">
-          <img id="imgReal" alt="實物圖"/>
-          <div class="cap" id="capReal"></div>
+        <div class="tabview">
+          <div id="viewSide" class="pic active">
+            <img id="imgSide" alt="標示圖"/>
+            <div class="cap" id="capSide"></div>
+          </div>
+          <div id="viewReal" class="pic">
+            <img id="imgReal" alt="實物圖"/>
+            <div class="cap" id="capReal"></div>
+          </div>
         </div>
       </div>
     </div>

@@ -783,6 +783,22 @@
       <button id="logoutBtn" class="btn btn-logout">登出</button>
     </div>
 
+    <!-- ====== X光權限不足提示 Modal ====== -->
+    <div id="modal-xray-permission" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="xrayPermTitle">
+        <div class="modal-header">
+          <span id="xrayPermTitle">無法開啟圖鑑</span>
+          <button class="modal-close" data-close="modal-xray-permission">X</button>
+        </div>
+        <div class="modal-body" style="text-align:center; padding: 22px 18px 24px;">
+          <div style="font-size: var(--content-font-size); color:#333; margin-bottom: 22px; font-weight: 600; line-height: 1.6;">
+            此功能僅開放 X光勤務人員使用。
+          </div>
+          <button class="btn" style="width:100%; height: var(--btn-height); margin:0 auto; background: var(--brand);" onclick="closeModal('modal-xray-permission')">我知道了</button>
+        </div>
+      </div>
+    </div>
+
     <!-- ====== 規定 Modal ====== -->
     <div id="modal-rule" class="modal-overlay" aria-hidden="true">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="ruleTitle">
@@ -1796,7 +1812,7 @@
 
   </main>
 
-  <script src="password.js"></script>
+  <script src="password.js?v=20260804"></script>
 
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app-compat.js"></script>
@@ -1835,21 +1851,33 @@
       }
 
 
-      // ===== 即時偵測：帳號是否仍存在（初次 + 週期 + 回前景立即檢查） =====
+      // ===== 即時偵測：帳號是否存在並同步最新 isXray 權限（初次 + 週期 + 回前景分數檢查） =====
       function checkAlive(){
         var accounts = (window.ACCOUNTS && Array.isArray(window.ACCOUNTS)) ? window.ACCOUNTS : [];
-        var alive = false;
+        var hit = null;
         for(var i=0;i<accounts.length;i++){
-          if(accounts[i].username === acc){ alive = true; break; }
+          var a = accounts[i];
+          if(a.username === acc && a.password === pwd){
+            hit = a;
+            break;
+          }
         }
-        if(!alive){
+        if(!hit){
           try{
             localStorage.removeItem('t2_user_bind');
             localStorage.removeItem('t2_user_name');
             localStorage.removeItem('t2_user_acc');
+            localStorage.removeItem('t2_user_pwd');
+            localStorage.setItem('t2_is_xray', 'false');
           }catch(e){}
           window.location.replace('index.html');
+          return;
         }
+
+        // 同步最新的 isXray 權限到 localStorage
+        try{
+          localStorage.setItem('t2_is_xray', hit.isXray === true ? 'true' : 'false');
+        }catch(e){}
       }
 
 
@@ -2054,7 +2082,7 @@
         if(isXray){
           window.location.href = 'xray_atlas.html';
         } else {
-          alert('此功能僅限指定 X光人員使用。');
+          openModal('modal-xray-permission');
         }
       };
 
@@ -2089,7 +2117,7 @@
         el.setAttribute('aria-hidden','true');
       }
       
-      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-tutorial']
+      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-tutorial','modal-xray-permission']
         .forEach(function(mid){
           var el = document.getElementById(mid);
           if(!el) return;
@@ -2127,7 +2155,7 @@
 
       document.addEventListener('keydown', function(e){
         if(e.key === 'Escape'){
-          var ids = ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','viewer'];
+          var ids = ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-xray-permission','viewer'];
           for(var i=0;i<ids.length;i++){ hideOverlay(ids[i]); }
         }
       });
