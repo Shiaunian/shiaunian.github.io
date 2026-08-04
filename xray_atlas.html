@@ -78,7 +78,26 @@
   </style>
 </head>
 <body>
-    <header>
+  <script>
+    (function checkXrayAuth(){
+      var name = localStorage.getItem('t2_user_name') || '';
+      var bind = localStorage.getItem('t2_user_bind') || '';
+      var acc  = localStorage.getItem('t2_user_acc')  || '';
+      var pwd  = localStorage.getItem('t2_user_pwd')  || '';
+      var isXray = localStorage.getItem('t2_is_xray') === 'true';
+
+      if(!name || !bind || !acc || !pwd || bind.indexOf(acc + pwd) !== 0){
+        window.location.replace('index.html');
+        return;
+      }
+      if(!isXray){
+        alert('此功能僅限指定 X光人員使用。');
+        window.location.replace('main.html');
+        return;
+      }
+    })();
+  </script>
+  <header>
     <div class="h-wrap">
         <button class="back-btn" onclick="location.href='main.html'">← 返回</button>
         <div>

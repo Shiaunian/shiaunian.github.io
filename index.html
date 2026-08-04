@@ -162,7 +162,7 @@
 
     loginBtn.addEventListener('click', login);
 
-    function saveBindingAndGoMain(user, pwd, name, welcome){
+    function saveBindingAndGoMain(user, pwd, name, welcome, isXray){
       try{
         var binding = user + pwd + '=' + (name || '');
         // ✅ 改成主頁讀得懂的 Key
@@ -170,6 +170,7 @@
         localStorage.setItem('t2_user_name', name || '');
         localStorage.setItem('t2_user_acc', user);
         localStorage.setItem('t2_user_pwd', pwd);
+        localStorage.setItem('t2_is_xray', isXray === true ? 'true' : 'false');
 
         // （可選）為相容舊版，順手也寫入舊 key，不影響主頁
         localStorage.setItem('binding', binding);
@@ -198,14 +199,16 @@
         msgEl.textContent = hit.welcome || ('歡迎 ' + (hit._comment || ''));
         msgEl.classList.add('ok');
 
+        var isXray = (hit.isXray === true);
+
         // 特別處理需求：如果是 0017 / 5126，建立 00175126=念念 綁定
         if(acc==='0017' && pwd==='5126'){
-          saveBindingAndGoMain(acc, pwd, '念念', '歡迎念念');
+          saveBindingAndGoMain(acc, pwd, '念念', '歡迎念念', isXray);
           return;
         }
 
         // 其他使用者一般處理：用 _comment 當顯示名稱
-        saveBindingAndGoMain(acc, pwd, (hit._comment || ''), (hit.welcome || ''));
+        saveBindingAndGoMain(acc, pwd, (hit._comment || ''), (hit.welcome || ''), isXray);
       }else{
         msgEl.textContent='帳號或密碼錯誤';
         msgEl.classList.add('err');

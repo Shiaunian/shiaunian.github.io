@@ -528,6 +528,50 @@
       margin-bottom:12px;
     }
 
+    /* ===== 勤務 Modal 共用卡片樣式 ===== */
+    #modal-flow .duty-card,
+    #modal-guide .duty-card,
+    #modal-review .duty-card,
+    #modal-xray .duty-card {
+      background: #ffffff;
+      border: 1px solid #e3e6f2;
+      border-radius: 12px;
+      padding: 12px 13px;
+      margin: 0 0 12px;
+      box-shadow: 0 2px 7px rgba(47, 49, 97, 0.05);
+    }
+
+    #modal-flow .duty-card .tag,
+    #modal-guide .duty-card .tag,
+    #modal-review .duty-card .tag,
+    #modal-xray .duty-card .tag {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 0 9px;
+      line-height: 1.45;
+    }
+
+    #modal-flow .duty-card .note,
+    #modal-guide .duty-card .note,
+    #modal-review .duty-card .note,
+    #modal-xray .duty-card .note {
+      line-height: 1.7;
+    }
+
+    #modal-flow .duty-card .note:last-child,
+    #modal-guide .duty-card .note:last-child,
+    #modal-review .duty-card .note:last-child,
+    #modal-xray .duty-card .note:last-child {
+      margin-bottom: 0;
+    }
+
+    #modal-flow .modal-body,
+    #modal-guide .modal-body,
+    #modal-review .modal-body,
+    #modal-xray .modal-body {
+      padding-bottom: 24px;
+    }
 
 </style>
 
@@ -562,7 +606,7 @@
       <button class="btn btn-review">複查</button>
       <button class="btn btn-xray">X光</button>
       <button class="btn btn-tutorial">教程</button>
-      <button class="btn btn-xray" onclick="location.href='xray_atlas.html'">圖鑑</button>
+      <button class="btn btn-xray" onclick="goToXrayAtlas()">圖鑑</button>
     </div>
 
 
@@ -1169,509 +1213,553 @@
       </div>
     </div>
 
-    <div id="modal-flow" class="modal-overlay" aria-hidden="true">
+        <div id="modal-flow" class="modal-overlay" aria-hidden="true">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="flowTitle">
         <div class="modal-header"><span id="flowTitle">分流</span><button class="modal-close" data-close="modal-flow">X</button></div>
-        <div class="modal-body">
-          <div class="section-title">勤務須知</div>
-          <p class="note">
-          <span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面直接通過。
-          </p>
+        <div class="modal-body duty-content">
+          <div class="duty-card">
+            <div class="section-title">勤務須知</div>
+            <p class="note"><span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面直接通過。</p>
+            <p class="note"><span style="color:#c93f3f;">忘記關紅龍者</span>，請同仁務必多加注意。</p>
+            <p class="note"><span style="color:#c93f3f;">不管是未持卡或散客，都改回走中間走道，由2線優先接旅客。</span></p>
+            <p class="note">如果同時超過一組以上，1線再一起協助消化；如果剛關線，2線還未回到定位，中間有旅客時，請1線先協助處理。</p>
+            <p class="note">如有員工從分流通過且證件被遮住，<span style="color:#c93f3f;">務必落實確認工作證</span>。</p>
+            <p class="note">如現場發生旅客爭執，配戴密錄器的人員記得主動靠近旅客附近，<span style="color:#c93f3f;">協助蒐集現場證據</span>，不要站著發呆。</p>
+            <p class="note">分流的主要用意在於將手檢旅客平均分到線內、解決旅客的疑難雜症、區分手檢/轉機/收卡旅客，並引導旅客前往正確位置、隨時注意突發狀況第一時間回報給線上或主管、提醒旅客提前拋棄檢疫物、視現場情況引導工作人員/機組人員。</p>
+          </div>
 
-          <p class="note">
-          忘記關紅龍者，請同仁務必多加注意。
-          </p>
+          <div class="duty-card">
+            <p class="note">1.引導旅客時，務必將旅客平均分散；收卡時，一個一個收，避免漏收卡片。</p>
+            <p class="note">2.務必熟知當下要接的班機，遇到一航迷路的旅客給予正確引導。</p>
+            <p class="note">3.航空公司換卡時，請親自點交，一箱換一箱，沒有蓋子換沒有蓋子；如果正在忙就請他們待會再來領卡。</p>
+            <p class="note">4.如遇到須開中間道的情況，一律先用無線電告知同仁後再拉紅龍；除了電動車及收卡的旅客，中間道一律等前一組離開或站定位再放下一組。</p>
+            <p class="note">5.推嬰兒車的旅客請他們走1、2線，雙人嬰兒車走中間。</p>
+            <p class="note">6.行李推車請走3線；如果丟在我們的工作區，請旅客把車推走，不需要特地攔下。</p>
+            <p class="note">7.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。4線全開，排隊超過兩邊免稅店，視狀況分流們立刻通報檢疫櫃檯告知：啟動666，於分流拒檢欄註明撥打時間，屆時防檢櫃檯會請助理上來協助。</p>
+            <p class="note">8.如非疫區國家的旅客未持卡，需要走中間進入手檢區。但旅客持卡不走綠線想走紅線，一樣要手檢。若3線旅客排隊已明顯超過宣導語大聲公，碰到收卡的旅客沒卡可確認機票放行；其餘請良性勸導麻煩旅客走手檢區並提醒下次記得拿卡。</p>
+            <p class="note">9.如轉機旅客沒有要先入境，請將旅客引導至最近的轉機安檢。</p>
+            <p class="note">10.分流2屬於機動，如不須到分流區引導旅客，則在線上支援各線複查。</p>
+            <p class="note">11.上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。注意分流2、3千萬不要定點站立。
+              <button type="button" class="view-btn"
+                data-viewer-title="引導旅客及看機票"
+                data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E4%B8%8A%E5%93%A8%E6%99%82%E9%96%93%E6%9B%B4%E6%96%B0_bnt1a8.jpg">
+                查看
+              </button>
+            </p>
+            <p class="note">12.有收卡旅客時，請免稅店的貨車走正常走道，防止撞到旅客及破壞紅龍。</p>
+          </div>
 
-          <p class="note">
-          不管是<span style="color:#c93f3f;">未持卡或散客</span>，都改回走中間走道，由<span style="color:#c93f3f;">2線優先接旅客</span>。
-          </p>
+          <div class="duty-card">
+            <div class="tag">【分流手機使用】分流目前提供兩支手機</div>
+            <p class="note">分流機：背面標示C/D區<br />該手機供訊息與櫃檯聯繫、撥打電話及查閱航班使用。</p>
+            <p class="note">公務機：為提供網路給監視器，除了打電話以外的功能都不可使用。</p>
+            <p class="note">手機請與夜班確實交接。撥打電話、訊息聯絡櫃台教學及密錄器使用規範。
+              <button type="button" class="view-btn"
+                data-viewer-title="分流手機使用說明"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E6%92%A5%E6%89%93%E9%9B%BB%E8%A9%B1_sow4r0.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E8%A8%8A%E6%81%AF%E8%81%B6%E7%B5%A1%E6%9F%9C%E5%8F%B0%E6%95%99%E5%AD%B8_vhky1k.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg">
+                詳細說明
+             </button>
+            </p>
+          </div>
 
-          <p class="note">
-          如果同時超過一組以上，1線再一起協助消化；如果剛關線，2線還未回到定位，中間有旅客時，請1線先協助處理。
-          </p>
+          <div class="duty-card">
+            <div class="tag">【機組人員】離峰-3條線／尖峰-4條線</div>
+            <p class="note">離峰時段：疫區機組需手檢，如線內旅客過多，詢問機組是否可以走2線，務必收到回覆再放。</p>
+            <p class="note">尖峰時段：<span style="color:#c93f3f;">疫區機組一律整組走中間道</span>，由1.2線一起接。</p>
+            <p class="note">遇到機組時，<span style="color:#c93f3f;">先確認各線內人數再決定如何分配</span>，不要直接就問2線。</p>
+          </div>
 
-          <p class="note">
-          如有員工從分流通過且證件被遮住，務必<span style="color:#c93f3f;">落實確認工作證</span>。
-          </p>
+          <div class="duty-card">
+            <div class="tag">【代號說明】</div>
+            <p class="note">兩九五=上廁所　拐拐=走中間道的旅客　八八八=貴賓</p>
+            <p class="note">所有貴賓仍依非洲豬瘟高低風險國家規定，如有高官指示特殊禮遇會事前告知。若現場遇到任何有需禮遇的貴賓一律先電話告知主管。</p>
+            <p class="note"><span style="color:#c93f3f;">對講機代號</span>。
+              <button type="button" class="view-btn"
+                data-viewer-title="代號圖表"
+                data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1762302516/%E5%B0%8D%E8%AC%9B%E6%A9%9F%E5%91%BC%E5%8F%AB%E8%AA%AA%E6%98%8E_xyfdzu.jpg">
+                代號圖表
+              </button>
+            </p>
+          </div>
 
-          <p class="note">
-          如現場發生旅客爭執，配戴密錄器的人員記得主動靠近旅客附近，協助蒐集現場證據，不要站著發呆。
-          </p>
+          <div class="duty-card">
+            <div class="tag">【機場工作人員】</div>
+            <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+            <p class="note">入境並持外交部發的工作證，視同持卡旅客引導綠線。外交部工作證請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="工作證"
+                data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E5%A4%96%E4%BA%A4%E9%83%A8%E5%B7%A5%E4%BD%9C%E8%AD%89_zrx3wh.jpg">
+                查看
+              </button>
+            </p>
+            <p class="note">如有員工從分流通過證件被遮住，<span style="color:#c93f3f;">麻煩落實確認工作證</span>。</p>
+          </div>
 
-          <p class="note">分流的主要用意在於<span style="color:#1e88e5;">將手檢旅客平均分到線內</span>、<span style="color:#1e88e5;">解決旅客的疑難雜症</span>、<span style="color:#1e88e5;">區分手檢/轉機/收卡旅客，並引導旅客前往正確位置</span>、<span style="color:#c93f3f;">隨時注意突發狀況第一時間回報給線上或主管</span>、<span style="color:#1e88e5;">提醒旅客提前拋棄檢疫物</span>、<span style="color:#1e88e5;">視現場情況引導工作人員/機組人員</span>。</p>
-
-          <hr class="hr" />
-          <p class="note">1.引導旅客時，務必將旅客平均分散；收卡時，<span style="color:#c93f3f;">一個一個收</span>，避免漏收卡片。</p>
-          <p class="note">2.務必熟知當下要接的班機，遇到一航迷路的旅客給予正確引導。</p>
-          <p class="note">3.航空公司換卡時，請親自點交，<span style="color:#c93f3f;">一箱換一箱</span>，沒有蓋子換沒有蓋子；如果正在忙就請他們待會再來領卡。</p>
-          <p class="note">4.如遇到須開中間道的情況，一律先用無線電告知同仁後再拉紅龍；除了電動車及收卡的旅客，中間道一律等前一組離開或站定位再放下一組。</p>
-          <p class="note">5.推嬰兒車的旅客請他們<span style="color:#c93f3f;">走1、2線，雙人嬰兒車走中間</span>。</p>
-          <p class="note">6.行李推車請走3線；如果丟在我們的工作區，請旅客把車推走，不需要特地攔下。</p>
-          <p class="note">7.旅客人潮超過規定的距離，要打開等待10分鐘的廣播。4線全開，排隊超過兩邊免稅店，視狀況分流們立刻通報檢疫櫃檯告知：啟動666，於分流拒檢欄註明撥打時間，屆時防檢櫃檯會請助理上來協助。</p>
-          <p class="note">8.如非疫區國家的旅客未持卡，<span style="color:#c93f3f;">需要走中間進入手檢區</span>。但旅客持卡不走綠線<span style="color:#c93f3f;">想走紅線，一樣要手檢</span>。若<span style="color:#1e88e5;">3線旅客排隊已明顯超過宣導語大聲公</span>，碰到收卡的旅客沒卡<span style="color:#c93f3f;">可確認機票放行</span>；其餘請良性勸導麻煩旅客走手檢區並提醒下次記得拿卡。</p>
-          <p class="note">9.如轉機旅客沒有要先入境，請將旅客引導至最近的轉機安檢。</p>
-          <p class="note">10.分流2屬於機動，如不須到分流區引導旅客，則在線上支援各線複查。</p>
-          <p class="note">11.上哨時間更新，分流2需要支援呼叫分流3，協助引導旅客及看機票。<span style="color:#c93f3f;">注意分流2、3千萬不要定點站立</span>。
-            <button type="button" class="view-btn"
-              data-viewer-title="各哨時間表"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1760062227/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A801_nw5z9h.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1761873277/%E5%90%84%E5%93%A8%E6%AD%A3%E5%B8%B8%E6%99%82%E9%96%93%E8%A1%A8_dtikua.jpg,">
-              查看
-            </button>
-          </p>
-          <p class="note">12.有收卡旅客時，請免稅店的貨車走正常走道，防止撞到旅客及破壞紅龍。</p>
-          <div class="tag">【分流手機使用】分流目前提供兩支手機</div>
-          <p class="note">分流機：背面標示C/D區</p>
-          <p class="note">該手機供訊息與櫃檯聯繫、撥打電話及查閱航班使用。</p>
-          <p class="note">公務機：為提供網路給監視器，除了打電話以外的功能都不可使用。</p>
-
-          <p class="note"><span style="color:#c93f3f;">手機請與夜班確實交接</span>。撥打電話、訊息聯絡櫃台教學及密錄器使用規範。
-            <button type="button" class="view-btn"
-              data-viewer-title="分流機使用教學"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255753/%E8%A8%8A%E6%81%AF%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F1_eghcm0.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255753/%E8%A8%8A%E6%81%AF%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F2_x1ymdw.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255753/%E8%A8%8A%E6%81%AF%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F3_gfkom6.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255752/%E8%A8%8A%E6%81%AF%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F4_lmtlv3.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255753/%E8%A8%8A%E6%81%AF%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F5_jtlqcy.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255842/%E6%92%A5%E6%89%93%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F01_b2rkhn.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255842/%E6%92%A5%E6%89%93%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F02_kacgon.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1763255842/%E6%92%A5%E6%89%93%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%A9%9F03_jjuzei.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg">
-              詳細說明
-           </button>
-          </p>
-          
-          <div class="tag">【機組人員】離峰-3條線／尖峰-4條線</div>
-          <p class="note">離峰時段：疫區機組需手檢，如線內旅客過多，詢問機組是否可以走2線，務必收到回覆再放。</p>
-          <p class="note">尖峰時段：<span style="color:#c93f3f;">疫區機組一律整組走中間道</span>，由1.2線一起接。</p>
-
-          <p class="note">遇到機組時，<span style="color:#c93f3f;">先確認各線內人數再決定如何分配</span>，不要直接就問2線。</p>
-
-          <div class="tag">【代號說明】</div>
-          <p class="note">兩九五=上廁所　拐拐=走中間道的旅客　八八八=貴賓</p>
-          <p class="note">所有貴賓仍依非洲豬瘟高低風險國家規定，如有高官指示特殊禮遇會事前告知。<span style="color:#c93f3f;">若現場遇到任何有需禮遇的貴賓一律先電話告知主管</span>。</p>
-
-          <p class="note"><span style="color:#c93f3f;">對講機代號</span>。
-            <button type="button" class="view-btn"
-              data-viewer-title="代號圖表"
-              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1762302516/%E5%B0%8D%E8%AC%9B%E6%A9%9F%E5%91%BC%E5%8F%AB%E8%AA%AA%E6%98%8E_xyfdzu.jpg">
-              代號圖表
-            </button>
-          </p>
-
-          <div class="tag">【機場工作人員】</div>
-          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
-          <p class="note">入境並持外交部發的工作證，視同持卡旅客引導綠線。外交部工作證請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="工作證"
-              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E5%A4%96%E4%BA%A4%E9%83%A8%E5%B7%A5%E4%BD%9C%E8%AD%89_zrx3wh.jpg">
-              查看
-            </button>
-          </p>
-          <p class="note">如有員工從分流通過證件被遮住，<span style="color:#c93f3f;">麻煩落實確認工作證</span>。</p>
-
-          <div class="tag">【危機應對】</div>
-          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
-          <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">由分流1跟監旅客至海關</span>，請分流們互相協助。</p>
-          <p class="note">碰到救護車要通過時，<span style="color:#c93f3f;">去程通常會鳴笛</span>，可優先通過；沒有則視為一般車輛，流程也比照一般車輛執行。</p>
+          <div class="duty-card">
+            <div class="tag">【危機應對】</div>
+            <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+            <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">由分流1跟監旅客至海關</span>，請分流們互相協助。</p>
+            <p class="note">碰到救護車要通過時，<span style="color:#c93f3f;">去程通常會鳴笛</span>，可優先通過；沒有則視為一般車輛，流程也比照一般車輛執行。</p>
+          </div>
 
           <hr class="hr" />
           <div class="section-title">注意事項</div>
 
-          <div class="tag">【換哨下哨交接】</div>
-          <p class="note">換哨下哨務必交接卡片及密錄器。</p>
-          <p class="note">分流之間換哨時，<span style="color:#c93f3f;">務必第一時間交接密錄器、檢查手機、有異動的班機、電霸是否運作正常，並隨時整理工作環境</span>；如交接不實分流一個月。</p>
+          <div class="duty-card">
+            <div class="tag">【換哨下哨交接】</div>
+            <p class="note">換哨下哨務必交接卡片及密錄器。</p>
+            <p class="note">分流之間換哨時，<span style="color:#c93f3f;">務必第一時間交接密錄器、檢查手機、有異動的班機、電霸是否運作正常，並隨時整理工作環境</span>；如交接不實分流一個月。</p>
+          </div>
 
-          <div class="tag">【分流整潔】</div>
-          <p class="note">棄置桶裡的檢疫物八分滿時，使用<span style="color:#c93f3f;">透明垃圾袋</span>放在旁邊替代。</p>
-          <p class="note">分流區紅龍請遵照各區標準擺放請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="CD紅龍擺放位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
-              查看
-            </button>
-          </p>
-          <p class="note"><span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面走過去。忘記關的會獲得隨機大禮包，請大家多加注意。</p>
+          <div class="duty-card">
+            <div class="tag">【分流整潔】</div>
+            <p class="note">棄置桶裡的檢疫物八分滿時，使用<span style="color:#c93f3f;">透明垃圾袋</span>放在旁邊替代。</p>
+            <p class="note">分流區紅龍請遵照各區標準擺放請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="CD紅龍擺放位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
+                查看
+              </button>
+            </p>
+            <p class="note"><span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面走過去。忘記關的會獲得隨機大禮包，請大家多加注意。</p>
+            <p class="note">每一哨下哨備勤室由分流噴消毒水，備勤室消毒水固定交由B哨分流補充，低位線請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="分流噴消毒水"
+                data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E6%B6%88%E6%AF%92%E6%B0%B4%E4%BD%8E%E4%BD%8D%E7%B7%9A_c0nawn.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <p class="note">每一哨下哨備勤室由分流噴消毒水，備勤室消毒水固定交由B哨分流補充，低位線請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="分流噴消毒水"
-              data-viewer-images="https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E6%B6%88%E6%AF%92%E6%B0%B4%E4%BD%8E%E4%BD%8D%E7%B7%9A_c0nawn.jpg">
-              查看
-            </button>
-          </p>
+          <div class="duty-card">
+            <div class="tag">【分流2整潔】</div>
+            <p class="note">C區後方的檢疫桶及灰色櫃子；D區後方的檢疫桶，由各哨分流2清潔。
+              <button type="button" class="view-btn"
+                data-viewer-title="灰色櫃子"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1759809221/%E5%A4%A7%E9%95%B7%E6%AB%83_mfxexh.jpg">
+                查看
+              </button>
+            </p>
+            <p class="note">D區電風扇每周一由該哨分流2清潔，C區統一X光負責。備勤室電風扇由C哨分流2清潔。<span style="color:#c93f3f;">A哨分流2</span>若有懲罰的分流2，則全數由懲罰人員負責。
+              <button type="button" class="view-btn"
+                data-viewer-title="清消區域"
+                data-viewer-images="
+                https://res.cloudinary.com/dzj7ghbf6/image/upload/v1760403699/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-10-14_085102_jym0tt.png">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【分流2整潔】</div>
-          <p class="note">C區後方的檢疫桶及灰色櫃子；D區後方的檢疫桶，由各哨分流2清潔。
-            <button type="button" class="view-btn"
-              data-viewer-title="灰色櫃子"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1759809221/%E5%A4%A7%E9%95%B7%E6%AB%83_mfxexh.jpg">
-              查看
-            </button>
-          </p>
-          <p class="note">D區電風扇每周一由該哨分流2清潔，C區統一X光負責。備勤室電風扇由C哨分流2清潔。<span style="color:#c93f3f;">A哨分流2</span>若有懲罰的分流2，則全數由懲罰人員負責。
-            <button type="button" class="view-btn"
-              data-viewer-title="清消區域"
-              data-viewer-images="
-              https://res.cloudinary.com/dzj7ghbf6/image/upload/v1760403699/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2_2025-10-14_085102_jym0tt.png">
-              查看
-            </button>
-          </p>
+          <div class="duty-card">
+            <div class="tag">【UA簽收單】</div>
+            <p class="note">每月識別卡更換顏色，只要月底最後一天或月初第一天簽收單跟卡片會放在分流，有碰到UA換卡的話，記得叫他們簽單子。</p>
+          </div>
 
-          <div class="tag">【UA簽收單】</div>
-          <p class="note">每月識別卡更換顏色，只要月底最後一天或月初第一天簽收單跟卡片會放在分流，有碰到UA換卡的話，記得叫他們簽單子。</p>
+          <div class="duty-card">
+            <div class="tag">【確認公務機及電Bar】</div>
+            <p class="note">每天早上確認一下手機WiFi有沒有關閉，基地台保持開啟、手機網路保持開啟、電Bar供應有無顯示DC，如無顯示請壓DC按鈕3秒開啟。
+              <button type="button" class="view-btn"
+                data-viewer-title="電Bar操作說明"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1772242843/%E9%9B%BBBar%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E_q5lyi3.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8_bmofn3.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【確認公務機及電Bar】</div>
-          <p class="note">每天早上確認一下手機WiFi有沒有關閉，基地台保持開啟、手機網路保持開啟、電Bar供應有無顯示DC，如無顯示請壓DC按鈕3秒開啟。
-            <button type="button" class="view-btn"
-              data-viewer-title="電Bar操作說明"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1772242843/%E9%9B%BBBar%E6%93%8D%E4%BD%9C%E8%AA%AA%E6%98%8E_q5lyi3.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1758586720/%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8_bmofn3.jpg">
-              查看
-            </button>
-          </p>
-            
-          <div class="tag">【分流充電項目】</div>
-          <p class="note">分流機*1、基地台*1、分流用大聲公*1、小蜜蜂*1、分流用無線電*1</p>
-          <p class="note">注：<span style="color:#1e88e5;">CD區使用電Bar充電</span>，<span style="color:#c93f3f;">如沒電請回報主管更換</span>。</p>
-         </div>
+          <div class="duty-card">
+            <div class="tag">【分流充電項目】</div>
+            <p class="note">分流機*1、基地台*1、分流用大聲公*1、小蜜蜂*1、分流用無線電*1</p>
+            <p class="note">注：<span style="color:#1e88e5;">CD區使用電Bar充電</span>，<span style="color:#c93f3f;">如沒電請回報主管更換</span>。</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div id="modal-guide" class="modal-overlay" aria-hidden="true">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
         <div class="modal-header"><span id="guideTitle">前導</span><button class="modal-close" data-close="modal-guide">X</button></div>
-        <div class="modal-body">
-          <div class="section-title">勤務須知</div>
-          <p class="note"><span style="color:#c93f3f;">前導務必輕拿輕放旅客的行李</span>。若旅客包包已經平放，背帶稍微整理不要露出盆外即可。送進X光時也不要太用力，<span style="color:#c93f3f;">請善待任何公司及旅客的物品</span>。</p>
+        <div class="modal-body duty-content">
+          <div class="duty-card">
+            <div class="section-title">勤務須知</div>
+            <p class="note"><span style="color:#c93f3f;">前導務必輕拿輕放旅客的行李</span>。若旅客包包已經平放，背帶稍微整理不要露出盆外即可。送進X光時也不要太用力，<span style="color:#c93f3f;">請善待任何公司及旅客的物品</span>。</p>
 
-          <hr class="hr" />
-          <p class="note">1.嚴守旅客的安全，一次接一位旅客，請下一位旅客至黃線(4線為最後一根圓柱)後稍等。注意旅客<span style="color:#c93f3f;">不要撞到桌角</span>，尤其是小朋友。行動不便者，可由家屬協助放行李。如旅客提不動行李，應協助旅客搬行李。</p>
-          <p class="note">2.有任何情況(如已收卡、骨灰、包包未過X光、包內有食物等)請告知X光；如X光回報任何事項，<span style="color:#c93f3f;">請答覆讓雙方都知道</span>。</p>
-          <p class="note">3.前導碰到<span style="color:#c93f3f;">繫在皮帶上的腰包或是需要脫外套才能取下的小包</span>，一律請旅客向前，告知X光由複查手檢。</p>
-          <p class="note">4.兩位旅客的行李中間須放置空盆，避免混淆。另外，盆子須及時補充，以防倒塌。</p>
-          <p class="note">5.遇到旅客抱骨灰罈，確認文件後，告知X光「旅客手中是家人，已看過證明」，其他行李一樣過X光。</p>
-          <p class="note">6.若旅客有攜帶寵物，寵物無需過Ｘ光機，有證明請旅客<span style="color:#c93f3f;">出示證明</span>，沒有證明請旅客向前走，無論如何都要告知X光<span style="color:#c93f3f;">「旅客手上有寵物」</span>。</p>
-          <p class="note">7.務必注意旅客的行李箱會有吊牌吊飾等等，把手朝X光，不要讓旅客的吊牌吊飾碰到輸送帶；如掛繩過長，請<span style="color:#c93f3f;">事先告知X光</span>。</p>
-          <p class="note">8.遇到電動行李箱，請旅客關閉電源往前走，告知X光並由複查手檢。</p>
-          <p class="note">9.<span style="color:#c93f3f;">未持卡或是散客都走中間走道，由2線優先接旅客</span>，如果同時超過一組以上，1線再一起幫忙消化掉；如果剛關線，2線還未回到定位，中間有旅客麻煩1線先幫忙處理。</p>
-          <p class="note">10.收卡旅客爆量時加開2線收卡片，非收卡的旅客請他回去排隊。有車子來的時候，看手檢旅客走掉再停止收卡一下下。
-            <button type="button" class="view-btn"
-              data-viewer-title="收卡爆量 2線位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1774484710/%E6%94%B6%E5%8D%A1%E7%88%86%E9%87%8F_gearxf.jpg">
-              查看
-            </button>
-          </p>
-       
-          <div class="tag">【袋子開口方向】</div>
-          <p class="note">如旅客行李沒有拉鍊，開口大的朝自己，開口小的朝X光，注意有沒有貴重物品，提醒X光同仁。
-            <button type="button" class="view-btn"
-              data-viewer-title="查看範例"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%95_unwnzl.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1760414381/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%9501_bimmxe.jpg,">
-              查看
-            </button>
-          </p>
+            <hr class="hr" />
+            <p class="note">1.嚴守旅客的安全，一次接一位旅客，請下一位旅客至黃線(4線為最後一根圓柱)後稍等。注意旅客<span style="color:#c93f3f;">不要撞到桌角</span>，尤其是小朋友。行動不便者，可由家屬協助放行李。如旅客提不動行李，應協助旅客搬行李。</p>
+            <p class="note">2.有任何情況(如已收卡、骨灰、包包未過X光、包內有食物等)請告知X光；如X光回報任何事項，<span style="color:#c93f3f;">請答覆讓雙方都知道</span>。</p>
+            <p class="note">3.前導碰到<span style="color:#c93f3f;">繫在皮帶上的腰包或是需要脫外套才能取下的小包</span>，一律請旅客向前，告知X光由複查手檢。</p>
+            <p class="note">4.兩位旅客的行李中間須放置空盆，避免混淆。另外，盆子須及時補充，以防倒塌。</p>
+            <p class="note">5.遇到旅客抱骨灰罈，確認文件後，告知X光「旅客手中是家人，已看過證明」，其他行李一樣過X光。</p>
+            <p class="note">6.若旅客有攜帶寵物，寵物無需過Ｘ光機，有證明請旅客<span style="color:#c93f3f;">出示證明</span>，沒有證明請旅客向前走，無論如何都要告知X光<span style="color:#c93f3f;">「旅客手上有寵物」</span>。</p>
+            <p class="note">7.務必注意旅客的行李箱會有吊牌吊飾等等，把手朝X光，不要讓旅客的吊牌吊飾碰到輸送帶；如掛繩過長，請<span style="color:#c93f3f;">事先告知X光</span>。</p>
+            <p class="note">8.遇到電動行李箱，請旅客關閉電源往前走，告知X光並由複查手檢。</p>
+            <p class="note">9.<span style="color:#c93f3f;">未持卡或是散客都走中間走道，由2線優先接旅客</span>，如果同時超過一組以上，1線再一起幫忙消化掉；如果剛關線，2線還未回到定位，中間有旅客麻煩1線先幫忙處理。</p>
+            <p class="note">10.收卡旅客爆量時加開2線收卡片，非收卡的旅客請他回去排隊。有車子來的時候，看手檢旅客走掉再停止收卡一下下。
+              <button type="button" class="view-btn"
+                data-viewer-title="收卡爆量 2線位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1774484710/%E6%94%B6%E5%8D%A1%E7%88%86%E9%87%8F_gearxf.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【中間道旅客】</div>
-          <p class="note">除了寰宇以外，該手檢的旅客坐電動車還是要手檢，若已開3線，<span style="color:#c93f3f;">請車子開到4線由4線手檢</span>；如已開4線，請車子開到4線<span style="color:#c93f3f;">車上成人人數*3為等待人數</span>，由4線手檢。</p>
-          <p class="note">機組走中間道，<span style="color:#c93f3f;">接完6位旅客再接機組</span>，一律由1.2線一起接。(行李順序為<sapn style="color:#c93f3f;">大中小</span>)</p>
-          
-          <div class="tag">【1線前導】</div>
-          <p class="note">只要有開線就需播放大聲公宣導。</p>
-          <p class="note"><span style="color:#c93f3f;">以2線為主並與2線前導配合</span>，互相支援(如拐拐、電動車等等)，避免旅客堵塞。</p>
+          <div class="duty-card">
+            <div class="tag">【袋子開口方向】</div>
+            <p class="note">如旅客行李沒有拉鍊，開口大的朝自己，開口小的朝X光，注意有沒有貴重物品，提醒X光同仁。
+              <button type="button" class="view-btn"
+                data-viewer-title="查看範例"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1759805114/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%95_unwnzl.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1760414381/%E6%93%BA%E6%94%BE_%E9%96%8B%E5%8F%A3%E8%99%9501_bimmxe.jpg,">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【2線前導】</div>
-          <p class="note">中間道的輪椅<span style="color:#c93f3f;">總人數*3</span>為須等待人數；如4X或主管在現場，可交由4X或主管處理。</p>
-          <p class="note">與1線前導配合，互相支援(如拐拐、電動車等等)，避免旅客堵塞。</p>
+          <div class="duty-card">
+            <div class="tag">【中間道旅客】</div>
+            <p class="note">除了寰宇以外，該手檢的旅客坐電動車還是要手檢，若已開3線，<span style="color:#c93f3f;">請車子開到4線由4線手檢</span>；如已開4線，請車子開到4線<span style="color:#c93f3f;">車上成人人數*3為等待人數</span>，由4線手檢。</p>
+            <p class="note">機組走中間道，<span style="color:#c93f3f;">接完6位旅客再接機組</span>，一律由1.2線一起接。(行李順序為<span style="color:#c93f3f;">大中小</span>)</p>
+          </div>
 
-          <div class="tag">【機場工作人員】</div>
-          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+          <div class="duty-card">
+            <div class="tag">【1線前導】</div>
+            <p class="note">只要有開線就需播放大聲公宣導。</p>
+            <p class="note"><span style="color:#c93f3f;">以2線為主並與2線前導配合</span>，互相支援(如拐拐、電動車等等)，避免旅客堵塞。</p>
+          </div>
 
-          <div class="tag">【危機應對】</div>
-          <p class="note">看到有旅客受傷就立馬<span style="color:#c93f3f;">通報61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
-          <p class="note"><p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">請通知X光協助</span>。</p>
+          <div class="duty-card">
+            <div class="tag">【2線前導】</div>
+            <p class="note">中間道的輪椅<span style="color:#c93f3f;">總人數*3</span>為須等待人數；如4X或主管在現場，可交由4X或主管處理。</p>
+            <p class="note">與1線前導配合，互相支援(如拐拐、電動車等等)，避免旅客堵塞。</p>
+          </div>
 
-          <hr class="hr" />
-          <div class="section-title">注意事項</div>
+          <div class="duty-card">
+            <div class="tag">【機場工作人員】</div>
+            <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+          </div>
 
-          <div class="tag">【C.D紅龍整理】</div>
-          <p class="note">C.D區紅龍擺放標準請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="CD紅龍擺放位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
-              查看
-            </button>
-          </p>
-
-          <div class="tag">【2線前導】</div>
-          <p class="note">手檢航班結束，<span style="color:#c93f3f;">2線前導</span>負責巡視花台整潔。</p>
-          <p class="note">CD區4線電風扇下班前由<span style="color:#c93f3f;">2線前導</span>負責歸位。
-            <button type="button" class="view-btn"
-              data-viewer-title="D區電風扇位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1773105354/D%E5%8D%804X%E9%9B%BB%E9%A2%A8%E6%89%87_%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE_bzftk1.jpg">
-              查看
-            </button>
-          </p>
-          
-          <div class="tag">【3線前導】</div>
-          <p class="note">早上勤教，麻煩<span style="color:#c93f3f;">A哨3線前導</span>推手推車上D區。</p>
-
-          <div class="tag">【換哨下哨交接】</div>
-          <p class="note">換哨／下哨時<span style="color:#c93f3f;">處理檢疫物</span>，清理垃圾至指定棄置桶。</p>
-      </div>
-     </div>
-   </div>
-
-    <div id="modal-review" class="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
-        <div class="modal-header"><span id="reviewTitle">複查</span><button class="modal-close" data-close="modal-review">X</button></div>
-        <div class="modal-body">
-          <div class="section-title">勤務須知</div>
-
-          <p class="note">1.隨時注意X光是否通知需要檢查，如果需要請第一時間詢問旅客是否方便受檢；如果旅客不願意檢查，<span style="color:#c93f3f;">出示豬瘟疫區檢查公告</span>。</p>
-          <p class="note">2.接到旅客行李要檢查時，請等全部行李到齊後，再全部一起往最後一張桌子移動。旅客及協勤<span style="color:#c93f3f;">一對一檢查</span>，若非需要幫助，無關人等請離。</p>
-          <p class="note">3.不同旅客的行李之間請保持距離，避免旅客拿錯行李。</p>
-          <p class="note">4.如果X光同仁把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「<span style="color:#c93f3f;">請問裡面沒有帶到含肉製品、新鮮水果嗎？</span>」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</p>
-          <p class="note">5.如有查獲不確定或無法判斷的東西，先詢問身邊的同事，如果現場都沒有人可以判定，請旅客把東西拿到檢疫櫃檯詢問。如旅客自願拋棄，需請旅客簽名後在檢疫物登記本上註明。</p>
-          <p class="note">6.丟檢疫物要確實<span style="color:#c93f3f;">分類跟破壞包裝</span>。</p>
-          <p class="note">7.第二、三位以後的複查請勿擋到桌子，避免複查第一位要檢查時擋住作業動線。</p>
-          <p class="note">8.一律由複二來搬盆子，請勿把盆子疊太高；請後面的人不要一直幫忙收盆子，除非看起來是來不及的狀態再動手。</p>
-          <p class="note">9.務必記住在旅客面前才能觸碰旅客的行李，檢查一位旅客就要換一次手扒雞手套，並且需在<span style="color:#c93f3f;">旅客面前更換</span>。</p>
-          <p class="note">10.如果遇到食物沒有成份<span style="color:#c93f3f;">不要剝開看</span>，跟旅客確認成分並宣導就好。</p>
-          <p class="note">11.拐拐旅客行李一律由接的人拉到最後，如果<span style="color:#c93f3f;">超過3件以上</span>再由下一位接手。每個人都有兩次的機會！！！未落實者收假一天。</p>
-          <p class="note">12.旅客有任何狀況請回報給X光(如拒檢、回頭處理檢疫物、轉機等等)。</p>
-          <p class="note">13.遇到電動車，如果旅客快檢查完或是正在收拾行李，協助旅客處理完讓旅客先走；如果才剛要打開檢查，則請旅客迴避車輛。</p>
-          <p class="note">14.自己接的旅客，空盆自己收，<span style="color:#c93f3f;">不要留給下一位複查</span>；；發現旅客行李沒拿，請當下的複查去追，下一位複查視情況遞補，不要站在後面發呆。</p>
-          <p class="note">15.哨上已提供密錄器，由每條線複二配戴，請詳讀使用規範。
-               <button type="button" class="view-btn"
-              data-viewer-title="密錄器使用規範"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1775443368/%E9%85%8D%E6%88%B4%E4%BD%8D%E7%BD%AE_epnmo8.jpg">
-              詳細內容
-            </button>
-          </p>
-          
-          <div class="tag">【機場工作人員】</div>
-          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
-
-          <div class="tag">【危機應對】</div>
-          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
-          <p class="note"><p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">由當下的複查跟監至海關</span>，請複查們互相協助。</p></p>
-          <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（"消毒桶"那張桌子）填寫意見單。</p>
+          <div class="duty-card">
+            <div class="tag">【危機應對】</div>
+            <p class="note">看到有旅客受傷就立馬<span style="color:#c93f3f;">通報61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+            <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">請通知X光協助</span>。</p>
+          </div>
 
           <hr class="hr" />
           <div class="section-title">注意事項</div>
 
-          <div class="tag">【C.D紅龍整理】</div>
-          <p class="note">C.D區紅龍擺放標準請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="CD紅龍擺放位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
-              查看
-            </button>
-          </p>
-        
+          <div class="duty-card">
+            <div class="tag">【C.D紅龍整理】</div>
+            <p class="note">C.D區紅龍擺放標準請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="CD紅龍擺放位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【1線複一】</div>
-          <p class="note">1-1負責擺放及回收百寶袋，如果1-1不在現場請同線的同仁幫忙注意一下。
-          <button type="button" class="view-btn"
-              data-viewer-title="CD區百寶袋回收"
-              data-viewer-images="
-             https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/D%E5%8D%80%E7%99%BE%E5%AF%B6%E8%A2%8B_oxfqqt.jpg,
-             https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/C%E5%8D%80%E7%99%BE%E5%AF%B6%E8%A2%8B_xepfcz.jpg,
-             https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/4X_%E8%B7%9F%E7%9B%A3%E6%8B%8D%E7%85%A7%E6%89%8B%E6%A9%9F_zklxje.jpg">
-              回收清單
-            </button>
-          </p>
-          <p class="note">所有分流需要使用的東西都交給分流自己充電。</p>
+          <div class="duty-card">
+            <div class="tag">【2線前導】</div>
+            <p class="note">手檢航班結束，<span style="color:#c93f3f;">2線前導</span>負責巡視花台整潔。</p>
+            <p class="note">CD區4線電風扇下班前由<span style="color:#c93f3f;">2線前導</span>負責歸位。
+              <button type="button" class="view-btn"
+                data-viewer-title="D區電風扇位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1773105354/D%E5%8D%804X%E9%9B%BB%E9%A2%A8%E6%89%87_%E6%93%BA%E6%94%BE%E4%BD%8D%E7%BD%AE_bzftk1.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【1線複二】</div>
-          <p class="note">上哨不能攜帶手機，1-2在每次上哨前記得在群組回報手機，如果主管在現場就直接跟主管報備。請勿放錯，點錯手機，違者值勤分流2。</p>
+          <div class="duty-card">
+            <div class="tag">【3線前導】</div>
+            <p class="note">早上勤教，麻煩<span style="color:#c93f3f;">A哨3線前導</span>推手推車上D區。</p>
+          </div>
 
-          <div class="tag">【2線複一】</div>
-          <p class="note">2-1運送檢疫物至檢疫櫃檯，請於A.B班12:30先整理檢疫物。</p>
-          <p class="note">麻煩清運記錄表寫完，把寫完的放到最下面，最上面為新的一頁。</p>
-
-          <div class="tag">【2線複二】</div>
-          <p class="note">噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</p>
-          <p class="note">消毒毯時間為<span style="color:#c93f3f;">雙數30分</span>麻煩請由各哨2-2執行(如2-2不在由2-1)。</p>
-          <p class="note"><span style="color:#c93f3f">噴消毒毯一律採霧狀噴灑</span>，有損壞請回報；靠近手檢區的消毒毯噴溼點，靠近發燒站的稍微乾點。</p>
-          <p class="note">C區噴完消毒水，務必記得簽名！！！避免罰款。</p>
-
-          <div class="tag">【換哨下哨交接】</div>
-          <p class="note">換哨要交接<span style="color:#c93f3f;">剪刀、膠帶</span>。</p>
-          <p class="note">換哨下哨要清空手套桶。</p>
-          <p class="note">4-2與夜班交接循環扇遙控器(<span style="color:#c93f3f;">四線後方的收納盒</span>)。</p>
-
-          <div class="tag">【移民署公務門】</div>
-          <p class="note">帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，人數多就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</p>
+          <div class="duty-card">
+            <div class="tag">【換哨下哨交接】</div>
+            <p class="note">換哨／下哨時<span style="color:#c93f3f;">處理檢疫物</span>，清理垃圾至指定棄置桶。</p>
+          </div>
         </div>
       </div>
     </div>
 
+    <div id="modal-review" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+        <div class="modal-header"><span id="reviewTitle">複查</span><button class="modal-close" data-close="modal-review">X</button></div>
+        <div class="modal-body duty-content">
+          <div class="duty-card">
+            <div class="section-title">勤務須知</div>
+
+            <p class="note">1.隨時注意X光是否通知需要檢查，如果需要請第一時間詢問旅客是否方便受檢；如果旅客不願意檢查，<span style="color:#c93f3f;">出示豬瘟疫區檢查公告</span>。</p>
+            <p class="note">2.接到旅客行李要檢查時，請等全部行李到齊後，再全部一起往最後一張桌子移動。旅客及協勤<span style="color:#c93f3f;">一對一檢查</span>，若非需要幫助，無關人等請離。</p>
+            <p class="note">3.不同旅客的行李之間請保持距離，避免旅客拿錯行李。</p>
+            <p class="note">4.如果X光同仁把宣導ＤＭ放在盆子的時候，請直接詢問旅客：「<span style="color:#c93f3f;">請問裡面沒有帶到含肉製品、新鮮水果嗎？</span>」如果旅客說確定沒有，那就把放在盆子的ＤＭ遞給旅客做個宣導。</p>
+            <p class="note">5.如有查獲不確定或無法判斷的東西，先詢問身邊的同事，如果現場都沒有人可以判定，請旅客把東西拿到檢疫櫃檯詢問。如旅客自願拋棄，需請旅客簽名後在檢疫物登記本上註明。</p>
+            <p class="note">6.丟檢疫物要確實<span style="color:#c93f3f;">分類跟破壞包裝</span>。</p>
+            <p class="note">7.第二、三位以後的複查請勿擋到桌子，避免複查第一位要檢查時擋住作業動線。</p>
+            <p class="note">8.一律由複二來搬盆子，請勿把盆子疊太高；請後面的人不要一直幫忙收盆子，除非看起來是來不及的狀態再動手。</p>
+            <p class="note">9.務必記住在旅客面前才能觸碰旅客的行李，檢查一位旅客就要換一次手扒雞手套，並且需在<span style="color:#c93f3f;">旅客面前更換</span>。</p>
+            <p class="note">10.如果遇到食物沒有成份<span style="color:#c93f3f;">不要剝開看</span>，跟旅客確認成分並宣導就好。</p>
+            <p class="note">11.拐拐旅客行李一律由接的人拉到最後，如果<span style="color:#c93f3f;">超過3件以上</span>再由下一位接手。每個人都有兩次的機會！！！未落實者收假一天。</p>
+            <p class="note">12.旅客有任何狀況請回報給X光(如拒檢、回頭處理檢疫物、轉機等等)。</p>
+            <p class="note">13.遇到電動車，如果旅客快檢查完或是正在收拾行李，協助旅客處理完讓旅客先走；如果才剛要打開檢查，則請旅客迴避車輛。</p>
+            <p class="note">14.自己接的旅客，空盆自己收，<span style="color:#c93f3f;">不要留給下一位複查</span>；；發現旅客行李沒拿，請當下的複查去追，下一位複查視情況遞補，不要站在後面發呆。</p>
+            <p class="note">15.哨上已提供密錄器，由每條線複二配戴，請詳讀使用規範。
+                 <button type="button" class="view-btn"
+                data-viewer-title="密錄器使用規範"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1775443368/%E9%85%8D%E6%88%B4%E4%BD%8D%E7%BD%AE_epnmo8.jpg">
+                詳細內容
+               </button>
+            </p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【機場工作人員】</div>
+            <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【危機應對】</div>
+            <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+            <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">由當下的複查跟監至海關</span>，請複查們互相協助。</p>
+            <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（"消毒桶"那張桌子）填寫意見單。</p>
+          </div>
+
+          <hr class="hr" />
+          <div class="section-title">注意事項</div>
+
+          <div class="duty-card">
+            <div class="tag">【C.D紅龍整理】</div>
+            <p class="note">C.D區紅龍擺放標準請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="CD紅龍擺放位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
+                查看
+              </button>
+            </p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【1線複一】</div>
+            <p class="note">1-1負責擺放及回收百寶袋，如果1-1不在現場請同線的同仁幫忙注意一下。
+            <button type="button" class="view-btn"
+                data-viewer-title="CD區百寶袋回收"
+                data-viewer-images="
+               https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/D%E5%8D%80%E7%99%BE%E5%AF%B6%E8%A2%8B_oxfqqt.jpg,
+               https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/C%E5%8D%80%E7%99%BE%E5%AF%B6%E8%A2%8B_xepfcz.jpg,
+               https://res.cloudinary.com/dcexvv7co/image/upload/v1775209901/4X_%E8%B7%9F%E7%9B%A3%E6%8B%8D%E7%85%A7%E6%89%8B%E6%A9%9F_zklxje.jpg">
+                回收清單
+              </button>
+            </p>
+            <p class="note">所有分流需要使用的東西都交給分流自己充電。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【1線複二】</div>
+            <p class="note">上哨不能攜帶手機，1-2在每次上哨前記得在群組回報手機，如果主管在現場就直接跟主管報備。請勿放錯，點錯手機，違者值勤分流2。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【2線複一】</div>
+            <p class="note">2-1運送檢疫物至檢疫櫃檯，請於A.B班12:30先整理檢疫物。</p>
+            <p class="note">麻煩清運記錄表寫完，把寫完的放到最下面，最上面為新的一頁。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【2線複二】</div>
+            <p class="note">噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</p>
+            <p class="note">消毒毯時間為<span style="color:#c93f3f;">雙數30分</span>麻煩請由各哨2-2執行(如2-2不在由2-1)。</p>
+            <p class="note"><span style="color:#c93f3f">噴消毒毯一律採霧狀噴灑</span>，有損壞請回報；靠近手檢區的消毒毯噴溼點，靠近發燒站的稍微乾點。</p>
+            <p class="note">C區噴完消毒水，務必記得簽名！！！避免罰款。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【換哨下哨交接】</div>
+            <p class="note">換哨要交接<span style="color:#c93f3f;">剪刀、膠帶</span>。</p>
+            <p class="note">換哨下哨要清空手套桶。</p>
+            <p class="note">4-2與夜班交接循環扇遙控器(<span style="color:#c93f3f;">四線後方的收納盒</span>)。</p>
+          </div>
+
+          <div class="duty-card">
+            <div class="tag">【移民署公務門】</div>
+            <p class="note">帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，人數多就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="modal-xray" class="modal-overlay" aria-hidden="true">
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="xrayTitle">
         <div class="modal-header"><span id="xrayTitle">X光</span><button class="modal-close" data-close="modal-xray">X</button></div>
-        <div class="modal-body">
-          <div class="section-title">勤務須知</div>
-          <p class="note">X光拉行李請注意後面的狀況，不是一直送行李。是否需要檢查請迅速果斷的判斷，水瓶、行李吊牌等等不應該完全依靠前導的資訊，請增加自己的應變能力。</p>
+        <div class="modal-body duty-content">
+          <div class="duty-card">
+            <div class="section-title">勤務須知</div>
+            <p class="note">X光拉行李請注意後面的狀況，不是一直送行李。是否需要檢查請迅速果斷的判斷，水瓶、行李吊牌等等不應該完全依靠前導的資訊，請增加自己的應變能力。</p>
 
-          <hr class="hr" />
-          <p class="note">1.桌上有空盆第一件事就是<span style="color:#c93f3f;">收空盆</span>，如果有空就協助搬盆。</p>
-          <p class="note">2.小心拉旅客的行李，以防刮傷旅客的行李。</p>
-          <p class="note">3.X光跟前導要互相配合，任何一方要告知任何事，例如拐拐或是包包有食物等等，<span style="color:#c93f3f;">雙方都要回應一下</span>，確認彼此有收到訊息。</p>
-          <p class="note">4.2X在沒開2線的時候屬於機動X光，<span style="color:#c93f3f;">需隨時注意分流與線上狀況</span>，及時給予協助。</p>
-          <p class="note">5.哨上已提供密錄器，<span style="color:#c93f3f;">若開3條線時，2線X不在則由3線X負責配戴密錄器</span>。
-             <button type="button" class="view-btn"
-                 data-viewer-title="密錄器使用規範"
-                 data-viewer-images="
-                 https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg,
-                 https://res.cloudinary.com/dcexvv7co/image/upload/v1775443368/%E9%85%8D%E6%88%B4%E4%BD%8D%E7%BD%AE_epnmo8.jpg">
-              詳細內容
-             </button>
-          </p>
-          <p class="note">6.分流除了正常需要分流2的狀況（如手檢非手檢同時出現），其餘時候如分流1提出需要支援，<span style="color:#c93f3f;">由機動X光視情況決定是否有需要派分流2去支援</span>，還有分流2是否需要回來線上也同上。</p>
-          <p class="note">7.檢查行李時記得，後方有空間就往後移動；如X光有發現後方還有空間，也麻煩提醒複查往後，避免行李卡住。</p>
-          <p class="note">8.只要機動X光（目前是2X）是閒置的，拐拐優先給2X處理。開3條線時，因拐拐不用在前面等候，分流先詢問是否可以一起放行，如選擇多組一起放，2X請視拐拐的組數及現場人力配置決定需要幾位複查；機組的部分優先X2一人獨立作業，如需複查再請一位複查幫忙。</p>
+            <hr class="hr" />
+            <p class="note">1.桌上有空盆第一件事就是<span style="color:#c93f3f;">收空盆</span>，如果有空就協助搬盆。</p>
+            <p class="note">2.小心拉旅客的行李，以防刮傷旅客的行李。</p>
+            <p class="note">3.X光跟前導要互相配合，任何一方要告知任何事，例如拐拐或是包包有食物等等，<span style="color:#c93f3f;">雙方都要回應一下</span>，確認彼此有收到訊息。</p>
+            <p class="note">4.2X在沒開2線的時候屬於機動X光，<span style="color:#c93f3f;">需隨時注意分流與線上狀況</span>，及時給予協助。</p>
+            <p class="note">5.哨上已提供密錄器，<span style="color:#c93f3f;">若開3條線時，2線X不在則由3線X負責配戴密錄器</span>。
+               <button type="button" class="view-btn"
+                   data-viewer-title="密錄器使用規範"
+                   data-viewer-images="
+                   https://res.cloudinary.com/dcexvv7co/image/upload/v1774761125/%E5%AF%86%E9%8C%84%E5%99%A8_buwqy5.jpg,
+                   https://res.cloudinary.com/dcexvv7co/image/upload/v1775443368/%E9%85%8D%E6%88%B4%E4%BD%8D%E7%BD%AE_epnmo8.jpg">
+                詳細內容
+               </button>
+            </p>
+            <p class="note">6.分流除了正常需要分流2的狀況（如手檢非手檢同時出現），其餘時候如分流1提出需要支援，<span style="color:#c93f3f;">由機動X光視情況決定是否有需要派分流2去支援</span>，還有分流2是否需要回來線上也同上。</p>
+            <p class="note">7.檢查行李時記得，後方有空間就往後移動；如X光有發現後方還有空間，也麻煩提醒複查往後，避免行李卡住。</p>
+            <p class="note">8.只要機動X光（目前是2X）是閒置的，拐拐優先給2X處理。開3條線時，因拐拐不用在前面等候，分流先詢問是否可以一起放行，如選擇多組一起放，2X請視拐拐的組數及現場人力配置決定需要幾位複查；機組的部分優先X2一人獨立作業，如需複查再請一位複查幫忙。</p>
+          </div>
 
+          <div class="duty-card">
+            <div class="tag">【肉品採樣】</div>
+            <p class="note">每日2-3件，2線X光負責記錄<span style="color:#c93f3f;">日期、地區、航班</span>；標籤及10號夾鏈袋暫存4線檢疫桶。</p>
+              
+            <p class="note">為確保採樣品質與作業效率，請各位X光人員在進行肉品採樣時，<span style="color:#c93f3f;">務必遵守以下規範</span>。
+               <button type="button" class="view-btn"
+                data-viewer-title="肉品採樣規範"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1760918312/%E8%82%89%E5%93%81%E6%8E%A1%E6%A8%A3%E8%A6%8F%E7%AF%84_zq84mc.jpg,">
+                查看
+              </button>
+            </p>
+          </div>
 
-          
+          <div class="duty-card">
+            <div class="tag">【機場工作人員】</div>
+            <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道</p>
+          </div>
 
-          <div class="tag">【肉品採樣】</div>
-          <p class="note">每日2-3件，2線X光負責記錄<span style="color:#c93f3f;">日期、地區、航班</span>；標籤及10號夾鏈袋暫存4線檢疫桶。</p>
-            
-          <p class="note">為確保採樣品質與作業效率，請各位X光人員在進行肉品採樣時，<span style="color:#c93f3f;">務必遵守以下規範</span>。
-             <button type="button" class="view-btn"
-              data-viewer-title="肉品採樣規範"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1760918312/%E8%82%89%E5%93%81%E6%8E%A1%E6%A8%A3%E8%A6%8F%E7%AF%84_zq84mc.jpg,">
-              查看
-            </button>
-          </p>
-
-          <div class="tag">【機場工作人員】</div>
-          <p class="note">除了帶貴賓的官員以外，機場工作人員一律走綠線或中間道；推空輪椅一律走中間道，如不聽勸，請回報給主管知道</p>
-
-          <div class="tag">【危機應對】</div>
-          <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          <div class="duty-card">
+            <div class="tag">【危機應對】</div>
+            <p class="note">看到有旅客受傷就立馬通報<span style="color:#c93f3f;">61999</span>，第一個發現旅客受傷的人，請立馬上前關心詢問是否需要協助。</p>
+          </div>
           
           <hr class="hr" />
           <div class="section-title">重要事項</div>
 
-          <div class="tag">【C.D紅龍整理】</div>
-          <p class="note">C.D區紅龍擺放標準請參考圖片。
-            <button type="button" class="view-btn"
-              data-viewer-title="CD紅龍擺放位置"
-              data-viewer-images="
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
-              https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
-              查看
-            </button>
-          </p>
+          <div class="duty-card">
+            <div class="tag">【C.D紅龍整理】</div>
+            <p class="note">C.D區紅龍擺放標準請參考圖片。
+              <button type="button" class="view-btn"
+                data-viewer-title="CD紅龍擺放位置"
+                data-viewer-images="
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8001_nqvndq.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8002_jp8tj0.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966439/C%E5%8D%8003_ibgite.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8004_iph0pr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966436/C%E5%8D%8005_qmdvgi.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966435/C%E5%8D%8006_clfz9n.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1761874511/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE01_nmzpwm.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE02_ayp24a.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906139/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE03_s9gqdb.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1762906137/C%E5%8D%80%E4%BD%8D%E7%BD%AE%E6%93%BA%E6%94%BE04_hmsbcv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966532/D%E5%8D%8001_tnw9iu.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966533/D%E5%8D%8002_htc9ql.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966535/D%E5%8D%8003_ztjk8l.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8004_iptkhv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8005_msfu3y.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8006_io6cuh.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8007_gyhpfr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966528/D%E5%8D%8008_uw2zvw.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966536/D%E5%8D%8009_p4bict.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966526/D%E5%8D%8010_nzzcbx.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966527/D%E5%8D%8011_ifydqv.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966531/D%E5%8D%8012_b2lxvt.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1770966538/D%E5%8D%8013_agu7mo.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8014_j8ircd.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8015_rrencj.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8016_xfizjr.jpg,
+                https://res.cloudinary.com/dcexvv7co/image/upload/v1776244718/D%E5%8D%8017_qwlovv.jpg">
+                查看
+              </button>
+            </p>
+          </div>
 
-          <div class="tag">【B哨下班清消】</div>
-          <p class="note">打掃由各線X光落實檢查/監督(請參閱備勤室公佈欄)。</p>
-          <p class="note">重點檢查/監督：B2分流：微波爐下<span style="color:#c93f3f;">三個櫃子都要確認</span>。</p>
-          <p class="note">3線檢查重點：督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭；冰箱裡門旁與底部抽屜，檢查是否有擦拭。</p>
-          <p class="note">4線檢查重點：手機架、門旁邊鏡子，確認是否有擦拭。</p>
+          <div class="duty-card">
+            <div class="tag">【B哨下班清消】</div>
+            <p class="note">打掃由各線X光落實檢查/監督(請參閱備勤室公佈欄)。</p>
+            <p class="note">重點檢查/監督：B2分流：微波爐下<span style="color:#c93f3f;">三個櫃子都要確認</span>。</p>
+            <p class="note">3線檢查重點：督導旁櫃子與裡面都要檢查，還有書架是否有移開擦拭；冰箱裡門旁與底部抽屜，檢查是否有擦拭。</p>
+            <p class="note">4線檢查重點：手機架、門旁邊鏡子，確認是否有擦拭。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1736,13 +1824,13 @@
 
       // 如果登入資訊不完整，就請他回登入頁
       if(!name || !bind || !acc || !pwd){
-        window.location.replace('T2日動植物檢疫登入系統.html');
+        window.location.replace('index.html');
         return;
       }
 
       // 確認 bind 裡面真的是「這個帳號+這個密碼」
       if(bind.indexOf(acc + pwd) !== 0){
-        window.location.replace('T2日動植物檢疫登入系統.html');
+        window.location.replace('index.html');
         return;
       }
 
@@ -1760,7 +1848,7 @@
             localStorage.removeItem('t2_user_name');
             localStorage.removeItem('t2_user_acc');
           }catch(e){}
-          window.location.replace('T2日動植物檢疫登入系統.html');
+          window.location.replace('index.html');
         }
       }
 
@@ -1961,11 +2049,22 @@
 
 
       // ====== 登出 / 大挑戰（原功能保留） ======
+      window.goToXrayAtlas = function(){
+        var isXray = (localStorage.getItem('t2_is_xray') === 'true');
+        if(isXray){
+          window.location.href = 'xray_atlas.html';
+        } else {
+          alert('此功能僅限指定 X光人員使用。');
+        }
+      };
+
       document.getElementById('logoutBtn').addEventListener('click', function(){
         try{
           localStorage.removeItem('t2_user_bind');
           localStorage.removeItem('t2_user_name');
           localStorage.removeItem('t2_user_acc');
+          localStorage.removeItem('t2_user_pwd');
+          localStorage.removeItem('t2_is_xray');
         }catch(e){}
         window.location.replace('index.html');
       });
@@ -2312,7 +2411,7 @@
     const nodes = [];
     $$("#notices .notice-item").forEach(el => nodes.push(el));
     $$(".modal-overlay .modal-body").forEach(body => {
-      $$(".note, .notice-item, li", body).forEach(el => nodes.push(el));
+      $$(".note, .notice-item, li, .recent-check-card", body).forEach(el => nodes.push(el));
     });
     return Array.from(new Set(nodes)).map(el => {
       const text = norm(el.innerText || "");
@@ -2408,6 +2507,21 @@
 
   // ====== 近期檢疫物資料與渲染 ======
   var recentCheckItems = [
+    {
+      name: '香腸碎肉餅乾',
+      date: '7月25日',
+      img: '檢疫物/7月25日 香腸碎肉餅乾.jpg'
+    },
+    {
+      name: '豬肉餅乾',
+      date: '7月19日',
+      img: '檢疫物/7月19日 豬肉餅乾.jpg'
+    },
+    {
+      name: '鴨肉鹹蛋黃',
+      date: '7月17日',
+      img: '檢疫物/7月17 鴨肉鹹蛋黃.jpg'
+    },
     {
       name: '飛機餐蘿蔔',
       date: '6月13日',
