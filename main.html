@@ -164,7 +164,8 @@
     .btn-rule { background:#b73a3a; }                              /* 紅：規定 */
     .btn-check { background:#2f6b2f; }                             /* 綠：檢疫物 */
     .btn-link  { background:#d68b2f; }                             /* 橘：連結 */
-    .btn-flow, .btn-guide, .btn-review, .btn-xray { background:#767acf; } /* 藍：分流/前導/複查/X光 */
+    .btn-post, .btn-xray { background:#767acf; } /* 藍：崗位/X光 */
+    .btn-post { grid-column: 1 / -1; }
     .btn-tutorial { background:#2b2b2b; color:#fff; }              /* 黑灰：教程 */
     .btn-challenge { background:#c7a64a; color:#fff; }             /* 金：動植物大挑戰 */
     .btn-logout    { background:#a12a5e; color:#fff; }             /* 紫紅：登出 */
@@ -191,15 +192,173 @@
 
     .notice-box{
       height: 275px;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
       background:#fff; border:1px solid #e3e6f2; border-radius:10px; padding:8px;
     }
 
     .notice-item{
-      padding:6px 4px; border-bottom:1px dashed #e3e6f2; font-size: var(--content-font-size); color:#333;
+      padding:8px 4px; border-bottom:1px dashed #e3e6f2; font-size: var(--content-font-size); color:#333; line-height: 1.6;
     }
 
     .notice-item:last-child{ border-bottom:none; }
+
+    .new-badge {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      background: #ff3b3b;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 999px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    .notice-date {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #e8edf5;
+      color: #53627a;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    
+    /* ===== 崗位 Modal 第一張勤務須知原型樣式 ===== */
+    #modal-post .duty-card-prototype {
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #dfe3f0;
+      border-top: 3px solid #767acf;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 3px 10px rgba(42, 48, 90, 0.06);
+      margin-bottom: 12px;
+    }
+
+    #modal-post .duty-card-prototype .duty-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #f4f6fb;
+      border-bottom: 1px solid #e9ecf5;
+    }
+
+    #modal-post .duty-card-prototype .duty-card-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      color: #59639a;
+      flex-shrink: 0;
+    }
+
+    #modal-post .duty-card-prototype .section-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #2b3054;
+      text-align: left;
+    }
+
+    #modal-post .duty-card-prototype .duty-card-body {
+      padding: 4px 14px 10px;
+      text-align: left;
+    }
+
+    #modal-post .duty-card-prototype .note {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 10px 2px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: #2c3246;
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: left;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    #modal-post .duty-card-prototype .note + .note {
+      margin-top: 0;
+      border-top: 1px solid #edf0f6;
+    }
+
+    #modal-post .duty-card-prototype .note span[style*="color:#c93f3f"] {
+      font-weight: 600;
+      line-height: inherit;
+    }
+
+/* ===== 崗位 Modal 分頁控制與寬度安全邊界 ===== */
+    #modal-post .post-tab-panel,
+    #modal-post .duty-card,
+    #modal-post .note {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    #modal-post img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .post-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 12px;
+      position: sticky;
+      top: -12px;
+      z-index: 10;
+      background: #ffffff;
+      padding-top: 4px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e3e6f2;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .post-tab-btn {
+      border: 1px solid #767acf;
+      background: #ffffff;
+      color: #767acf;
+      border-radius: 8px;
+      padding: 6px 4px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      min-width: 0;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .post-tab-btn.active {
+      background: #767acf;
+      color: #ffffff;
+    }
+
+    .post-tab-panel[hidden] {
+      display: none !important;
+    }
 
     /* 底部兩顆 */
     .footer-actions{
@@ -529,9 +688,7 @@
     }
 
     /* ===== 勤務 Modal 共用卡片樣式 ===== */
-    #modal-flow .duty-card,
-    #modal-guide .duty-card,
-    #modal-review .duty-card,
+    #modal-post .duty-card,
     #modal-xray .duty-card {
       background: #ffffff;
       border: 1px solid #e3e6f2;
@@ -541,9 +698,7 @@
       box-shadow: 0 2px 7px rgba(47, 49, 97, 0.05);
     }
 
-    #modal-flow .duty-card .tag,
-    #modal-guide .duty-card .tag,
-    #modal-review .duty-card .tag,
+    #modal-post .duty-card .tag,
     #modal-xray .duty-card .tag {
       display: block;
       width: fit-content;
@@ -552,23 +707,17 @@
       line-height: 1.45;
     }
 
-    #modal-flow .duty-card .note,
-    #modal-guide .duty-card .note,
-    #modal-review .duty-card .note,
+    #modal-post .duty-card .note,
     #modal-xray .duty-card .note {
       line-height: 1.7;
     }
 
-    #modal-flow .duty-card .note:last-child,
-    #modal-guide .duty-card .note:last-child,
-    #modal-review .duty-card .note:last-child,
+    #modal-post .duty-card .note:last-child,
     #modal-xray .duty-card .note:last-child {
       margin-bottom: 0;
     }
 
-    #modal-flow .modal-body,
-    #modal-guide .modal-body,
-    #modal-review .modal-body,
+    #modal-post .modal-body,
     #modal-xray .modal-body {
       padding-bottom: 24px;
     }
@@ -601,9 +750,7 @@
       <button class="btn btn-rule">規定</button>
       <button class="btn btn-check">檢疫物</button>
       <button class="btn btn-link">連結</button>
-      <button class="btn btn-flow">分流</button>
-      <button class="btn btn-guide">前導</button>
-      <button class="btn btn-review">複查</button>
+      <button class="btn btn-post">崗位</button>
       <button class="btn btn-xray">X光</button>
       <button class="btn btn-tutorial">教程</button>
       <button class="btn btn-xray" onclick="goToXrayAtlas()">圖鑑</button>
@@ -616,108 +763,85 @@
       <div class="notice-box" id="notices">
 
         <div class="notice-item">
-
-        <span style="
-        background:#ff3b3b;
-        color:white;
-        font-size:11px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:999px;
-        margin-right:6px;
-        vertical-align:middle;
-        ">
-        NEW
-        </span>
-
-        2026.06.14 近期發現分流區早上常有桌面未擦拭的情形，甚至有同仁未確實落實清潔，麻煩早班同仁多加注意，務必完成桌面擦拭。
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.05</span>
+          進行清掃時，X光機台請使用除塵撢子清理，請勿使用衛可消毒水擦拭或清潔機台。
         </div>
 
         <div class="notice-item">
-
-        <span style="
-        background:#ff3b3b;
-        color:white;
-        font-size:11px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:999px;
-        margin-right:6px;
-        vertical-align:middle;
-        ">
-        NEW
-        </span>
-
-        2026.06.14 請勿在哨上吃東西，防檢署可能會調閱監視器畫面，請同仁務必避免違規行為。
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.07.31</span>
+          近期收卡旅客越來越多，如有已收卡的旅客想走手檢，請告知旅客需通過行李檢查，並由旅客自行抉擇。
         </div>
 
         <div class="notice-item">
-
-        <span style="
-        background:#ff3b3b;
-        color:white;
-        font-size:11px;
-        font-weight:800;
-        padding:2px 6px;
-        border-radius:999px;
-        margin-right:6px;
-        vertical-align:middle;
-        ">
-        NEW
-        </span>
-
-        2026.06.14 手機僅供查閱班機資訊與雷達使用，請勿在勤務中使用手機處理其他事情，尤其分流區更要特別注意。
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.07.31</span>
+          分流人員收卡時，請盡可能於地毯位置進行，以便監視器清楚拍攝；如有事件或糾紛發生，也較方便後續調閱相關畫面。
         </div>
 
         <div class="notice-item">
-
-        2026-05-21 旅客如有情緒失控、持續辱罵或現場狀況僵持不下時，
-        <span style="color:#c93f3f;">可請警方到場協助處理。</span><br><br>
-
-        <span style="font-size:13px;">
-        <span style="color:#c93f3f;">D區</span>請由公務門警察支援｜
-        <span style="color:#c93f3f;">C區</span>則直接前往警察局請求支援。
-        </span>
+          <span class="notice-date">2026.06.14</span>
+          近期發現分流區早上常有桌面未擦拭的情形，甚至有同仁未確實落實清潔，麻煩早班同仁多加注意，務必完成桌面擦拭。
         </div>
 
         <div class="notice-item">
-
-        2026-05-21 <span style="color:#c93f3f;">CD區百寶袋回收內容如下</span><br><br>
-
-        <span style="font-size:13px; line-height:1.8;">
-        1. 美工刀 ×3<br>
-        2. 小蜜蜂 1組<br>
-        3. 對講機 3台（分流＋1前＋2前）<br>
-        4. 分流文具袋子<br>
-        5. 密錄器（5台）<br>
-        6. 密錄器電池（5顆）<br>
-        7. 公務機手機 ×1
-        </span>
-
-        </div>
-
-
-        <div class="notice-item">
-
-        2026-05-21 分2主要工作是<span style="color:#c93f3f;">引導旅客與協助現場勤務</span>，不是一上來就在查航班，請先把主要事情做好，再處理其他事項。<br><br>
-
-        <span style="font-size:13px;">
-        手檢區也一樣，除<span style="color:#c93f3f;">X2</span>外，請勿長時間使用手機查詢航班資訊。
-        </span>
-
+          <span class="notice-date">2026.06.14</span>
+          請勿在哨上吃東西，防檢署可能會調閱監視器畫面，請同仁務必避免違規行為。
         </div>
 
         <div class="notice-item">
+          <span class="notice-date">2026.06.14</span>
+          手機僅供查閱班機資訊與雷達使用，請勿在勤務中使用手機處理其他事情，尤其分流區更要特別注意。
+        </div>
 
-        2026-05-21 再次提醒，開三條線時，<span style="color:#c93f3f;">電動車旅客由二線接收</span>。<br><br>
+        <div class="notice-item">
+          <span class="notice-date">2026-05-21</span>
+          旅客如有情緒失控、持續辱罵或現場狀況僵持不下時，
+          <span style="color:#c93f3f;">可請警方到場協助處理。</span><br><br>
 
-        <span style="font-size:13px;">
-        分流接收到電動車旅客時，優先引導34線，但不要全部集中塞進34線，仍需依現場排隊狀況彈性分配。
-        </span>
+          <span style="font-size:13px;">
+          <span style="color:#c93f3f;">D區</span>請由公務門警察支援｜
+          <span style="color:#c93f3f;">C區</span>則直接前往警察局請求支援。
+          </span>
+        </div>
 
+        <div class="notice-item">
+          <span class="notice-date">2026-05-21</span>
+          <span style="color:#c93f3f;">CD區百寶袋回收內容如下</span><br><br>
+
+          <span style="font-size:13px; line-height:1.8;">
+          1. 美工刀 ×3<br>
+          2. 小蜜蜂 1組<br>
+          3. 對講機 3台（分流＋1前＋2前）<br>
+          4. 分流文具袋子<br>
+          5. 密錄器（5台）<br>
+          6. 密錄器電池（5顆）<br>
+          7. 公務機手機 ×1
+          </span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026-05-21</span>
+          分2主要工作是<span style="color:#c93f3f;">引導旅客與協助現場勤務</span>，不是一上來就在查航班，請先把主要事情做好，再處理其他事項。<br><br>
+
+          <span style="font-size:13px;">
+          手檢區也一樣，除<span style="color:#c93f3f;">X2</span>外，請勿長時間使用手機查詢航班資訊。
+          </span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026-05-21</span>
+          再次提醒，開三條線時，<span style="color:#c93f3f;">電動車旅客由二線接收</span>。<br><br>
+
+          <span style="font-size:13px;">
+          分流接收到電動車旅客時，優先引導34線，但不要全部集中塞進34線，仍需依現場排隊狀況彈性分配。
+          </span>
         </div>
         
-        <div class="notice-item">2026-03-29 哨上提供密錄器，收音麥克風已回收，請同仁詳讀密錄器相關使用規範。
+        <div class="notice-item">
+          <span class="notice-date">2026-03-29</span>
+          哨上提供密錄器，收音麥克風已回收，請同仁詳讀密錄器相關使用規範。
           <button type="button" class="view-btn"
             data-viewer-title="密錄器使用規範"
             data-viewer-images="
@@ -729,11 +853,19 @@
         
 
 
-        <div class="notice-item">2026-03-27 分流除了正常需要分流2的狀況（如手檢非手檢同時出現），其餘時候如分流1提出需要支援，<span style="color:#c93f3f;">由機動X光情況決定</span>是否有需要派分流2去支援，還有分流2是否需要回來線上也同上。</div>
+        <div class="notice-item">
+          <span class="notice-date">2026-03-27</span>
+          分流除了正常需要分流2的狀況（如手檢非手檢同時出現），其餘時候如分流1提出需要支援，<span style="color:#c93f3f;">由機動X光情況決定</span>是否有需要派分流2去支援，還有分流2是否需要回來線上也同上。
+        </div>
 
-        <div class="notice-item">2026-03-27 只要機動X光（目前是2X）是閒置的，拐拐優先給2X處理。開3條線時，因拐拐不用在前面等候，分流先詢問是否可以一起放行，如選擇多組一起放，2X請視拐拐的組數及現場人力配置決定需要幾位複查；機組的部分優先X2一人獨立作業，如需複查再請一位複查幫忙。</div>
+        <div class="notice-item">
+          <span class="notice-date">2026-03-27</span>
+          只要機動X光（目前是2X）是閒置的，拐拐優先給2X處理。開3條線時，因拐拐不用在前面等候，分流先詢問是否可以一起放行，如選擇多組一起放，2X請視拐拐的組數及現場人力配置決定需要幾位複查；機組的部分優先X2一人獨立作業，如需複查再請一位複查幫忙。
+        </div>
 
-        <div class="notice-item">2026-03-26 收卡旅客爆量時加開2線收卡片，非收卡的旅客請他回去排隊。有車子來的時候，看手檢旅客走掉再停止收卡一下下。
+        <div class="notice-item">
+          <span class="notice-date">2026-03-26</span>
+          收卡旅客爆量時加開2線收卡片，非收卡的旅客請他回去排隊。有車子來的時候，看手檢旅客走掉再停止收卡一下下。
           <button type="button" class="view-btn"
             data-viewer-title="收卡爆量 2線位置"
             data-viewer-images="
@@ -741,8 +873,10 @@
             查看
           </button>
         </div>
-                
-        <div class="notice-item">2026-03-10 請D區下班前把4X電風扇歸位，位置如圖。
+
+        <div class="notice-item">
+          <span class="notice-date">2026-03-10</span>
+          請D區下班前把4X電風扇歸位，位置如圖。
           <button type="button" class="view-btn"
             data-viewer-title="D區4X電風扇 擺放位置"
             data-viewer-images="
@@ -750,21 +884,22 @@
             查看
           </button>
         </div>
-        
+
         <div class="notice-item">
-        2026-01-16 哨上線材使用與交接規範公告：<br>
-        各哨接任何線材時，拔除請勿拉扯線身‼️請務必抓住接頭（頭的部分）再拔除，避免線材損壞。<br><br>
-        ⛔️ 各哨分流與 2、4 線前導在換哨時請確實交接所有線材。<br>
-        ▶️ 當哨若發現線材有損壞，將由前一哨負責 ◀️<br>
-        （請雙方換哨時務必確認）
-        
-        <button type="button" class="view-btn"
-          data-viewer-title="哨上線材使用與交接規範"
-          data-viewer-images="
-          https://res.cloudinary.com/dzj7ghbf6/image/upload/v1768549283/%E7%AF%84%E4%BE%8B%E5%9C%96%E7%89%87_ct0w6x.jpg">
-          查看
-        </button>
-       </div>
+          <span class="notice-date">2026-01-16</span>
+          哨上線材使用與交接規範公告：<br>
+          各哨接任何線材時，拔除請勿拉扯線身‼️請務必抓住接頭（頭的部分）再拔除，避免線材損壞。<br><br>
+          ⛔️ 各哨分流與 2、4 線前導在換哨時請確實交接所有線材。<br>
+          ▶️ 當哨若發現線材有損壞，將由前一哨負責 ◀️<br>
+          （請雙方換哨時務必確認）
+
+          <button type="button" class="view-btn"
+            data-viewer-title="哨上線材使用與交接規範"
+            data-viewer-images="
+            https://res.cloudinary.com/dzj7ghbf6/image/upload/v1768549283/%E7%AF%84%E4%BE%8B%E5%9C%96%E7%89%87_ct0w6x.jpg">
+            查看
+          </button>
+        </div>
 
         
         
@@ -1229,19 +1364,42 @@
       </div>
     </div>
 
-        <div id="modal-flow" class="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="flowTitle">
-        <div class="modal-header"><span id="flowTitle">分流</span><button class="modal-close" data-close="modal-flow">X</button></div>
-        <div class="modal-body duty-content">
-          <div class="duty-card">
-            <div class="section-title">勤務須知</div>
-            <p class="note"><span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面直接通過。</p>
-            <p class="note"><span style="color:#c93f3f;">忘記關紅龍者</span>，請同仁務必多加注意。</p>
-            <p class="note"><span style="color:#c93f3f;">不管是未持卡或散客，都改回走中間走道，由2線優先接旅客。</span></p>
-            <p class="note">如果同時超過一組以上，1線再一起協助消化；如果剛關線，2線還未回到定位，中間有旅客時，請1線先協助處理。</p>
-            <p class="note">如有員工從分流通過且證件被遮住，<span style="color:#c93f3f;">務必落實確認工作證</span>。</p>
-            <p class="note">如現場發生旅客爭執，配戴密錄器的人員記得主動靠近旅客附近，<span style="color:#c93f3f;">協助蒐集現場證據</span>，不要站著發呆。</p>
-            <p class="note">分流的主要用意在於將手檢旅客平均分到線內、解決旅客的疑難雜症、區分手檢/轉機/收卡旅客，並引導旅客前往正確位置、隨時注意突發狀況第一時間回報給線上或主管、提醒旅客提前拋棄檢疫物、視現場情況引導工作人員/機組人員。</p>
+                <!-- ====== 崗位 Modal (包含分流、前導、複查三個分頁) ====== -->
+    <div id="modal-post" class="modal-overlay" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="postTitle">
+        <div class="modal-header">
+          <span id="postTitle">崗位</span>
+          <button class="modal-close" data-close="modal-post">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="post-tabs" role="tablist">
+            <button class="post-tab-btn active" data-post-tab="flow" role="tab" aria-selected="true">分流</button>
+            <button class="post-tab-btn" data-post-tab="guide" role="tab" aria-selected="false">前導</button>
+            <button class="post-tab-btn" data-post-tab="review" role="tab" aria-selected="false">複查</button>
+          </div>
+
+          <div id="panel-flow" class="post-tab-panel active" data-post-panel="flow" role="tabpanel">
+          <div class="duty-card duty-card-prototype">
+            <div class="duty-card-header">
+              <span class="duty-card-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#59639a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  <path d="M9 12h6"></path>
+                  <path d="M9 16h6"></path>
+                </svg>
+              </span>
+              <div class="section-title">勤務須知</div>
+            </div>
+            <div class="duty-card-body">
+              <p class="note"><span style="color:#c93f3f;">分流旁邊的紅龍一律關起來</span>，避免有人從後面直接通過。</p>
+              <p class="note"><span style="color:#c93f3f;">忘記關紅龍者</span>，請同仁務必多加注意。</p>
+              <p class="note"><span style="color:#c93f3f;">不管是未持卡或散客，都改回走中間走道，由2線優先接旅客。</span></p>
+              <p class="note">如果同時超過一組以上，1線再一起協助消化；如果剛關線，2線還未回到定位，中間有旅客時，請1線先協助處理。</p>
+              <p class="note">如有員工從分流通過且證件被遮住，<span style="color:#c93f3f;">務必落實確認工作證</span>。</p>
+              <p class="note">如現場發生旅客爭執，配戴密錄器的人員記得主動靠近旅客附近，<span style="color:#c93f3f;">協助蒐集現場證據</span>，不要站著發呆。</p>
+              <p class="note">分流的主要用意在於將手檢旅客平均分到線內、解決旅客的疑難雜症、區分手檢/轉機/收卡旅客，並引導旅客前往正確位置、隨時注意突發狀況第一時間回報給線上或主管、提醒旅客提前拋棄檢疫物、視現場情況引導工作人員/機組人員。</p>
+            </div>
           </div>
 
           <div class="duty-card">
@@ -1321,9 +1479,6 @@
             <p class="note">碰到救護車要通過時，<span style="color:#c93f3f;">去程通常會鳴笛</span>，可優先通過；沒有則視為一般車輛，流程也比照一般車輛執行。</p>
           </div>
 
-          <hr class="hr" />
-          <div class="section-title">注意事項</div>
-
           <div class="duty-card">
             <div class="tag">【換哨下哨交接】</div>
             <p class="note">換哨下哨務必交接卡片及密錄器。</p>
@@ -1402,14 +1557,9 @@
             <p class="note">分流機*1、基地台*1、分流用大聲公*1、小蜜蜂*1、分流用無線電*1</p>
             <p class="note">注：<span style="color:#1e88e5;">CD區使用電Bar充電</span>，<span style="color:#c93f3f;">如沒電請回報主管更換</span>。</p>
           </div>
-        </div>
-      </div>
-    </div>
+          </div>
 
-    <div id="modal-guide" class="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
-        <div class="modal-header"><span id="guideTitle">前導</span><button class="modal-close" data-close="modal-guide">X</button></div>
-        <div class="modal-body duty-content">
+          <div id="panel-guide" class="post-tab-panel" data-post-panel="guide" role="tabpanel" hidden>
           <div class="duty-card">
             <div class="section-title">勤務須知</div>
             <p class="note"><span style="color:#c93f3f;">前導務必輕拿輕放旅客的行李</span>。若旅客包包已經平放，背帶稍微整理不要露出盆外即可。送進X光時也不要太用力，<span style="color:#c93f3f;">請善待任何公司及旅客的物品</span>。</p>
@@ -1476,9 +1626,6 @@
             <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">請通知X光協助</span>。</p>
           </div>
 
-          <hr class="hr" />
-          <div class="section-title">注意事項</div>
-
           <div class="duty-card">
             <div class="tag">【C.D紅龍整理】</div>
             <p class="note">C.D區紅龍擺放標準請參考圖片。
@@ -1539,14 +1686,9 @@
             <div class="tag">【換哨下哨交接】</div>
             <p class="note">換哨／下哨時<span style="color:#c93f3f;">處理檢疫物</span>，清理垃圾至指定棄置桶。</p>
           </div>
-        </div>
-      </div>
-    </div>
+          </div>
 
-    <div id="modal-review" class="modal-overlay" aria-hidden="true">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
-        <div class="modal-header"><span id="reviewTitle">複查</span><button class="modal-close" data-close="modal-review">X</button></div>
-        <div class="modal-body duty-content">
+          <div id="panel-review" class="post-tab-panel" data-post-panel="review" role="tabpanel" hidden>
           <div class="duty-card">
             <div class="section-title">勤務須知</div>
 
@@ -1586,9 +1728,6 @@
             <p class="note">只要有旅客拒檢，<span style="color:#c93f3f;">由當下的複查跟監至海關</span>，請複查們互相協助。</p>
             <p class="note">如遇到旅客主動提出申訴，請先請旅客到旁邊桌子（"消毒桶"那張桌子）填寫意見單。</p>
           </div>
-
-          <hr class="hr" />
-          <div class="section-title">注意事項</div>
 
           <div class="duty-card">
             <div class="tag">【C.D紅龍整理】</div>
@@ -1672,6 +1811,7 @@
           <div class="duty-card">
             <div class="tag">【移民署公務門】</div>
             <p class="note">帶旅客去檢疫櫃檯，自動通關沒人就請旅客走自動通關，人數多就走公務門旁的護照查驗，只能帶一位，其他人走一般通道。</p>
+          </div>
           </div>
         </div>
       </div>
@@ -2100,6 +2240,52 @@
         window.location.href = '動植物大挑戰.html';
       });
 
+      // ====== 崗位分頁切換工具 ======
+      function switchPostTab(tabName, options){
+        var opts = options || {};
+        var tabBtns = document.querySelectorAll('.post-tab-btn');
+        var tabPanels = document.querySelectorAll('.post-tab-panel');
+
+        for(var i=0; i<tabBtns.length; i++){
+          var btn = tabBtns[i];
+          var isMatch = (btn.getAttribute('data-post-tab') === tabName);
+          if(isMatch){
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+          } else {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          }
+        }
+
+        for(var j=0; j<tabPanels.length; j++){
+          var panel = tabPanels[j];
+          var isPanelMatch = (panel.getAttribute('data-post-panel') === tabName);
+          if(isPanelMatch){
+            panel.classList.add('active');
+            panel.removeAttribute('hidden');
+          } else {
+            panel.classList.remove('active');
+            panel.setAttribute('hidden', '');
+          }
+        }
+
+        if(opts.resetScroll){
+          var modalBody = document.querySelector('#modal-post .modal-body');
+          if(modalBody){ modalBody.scrollTop = 0; }
+        }
+      }
+
+      document.addEventListener('click', function(e){
+        var t = e.target;
+        if(!t) return;
+        var btn = t.closest ? t.closest('.post-tab-btn') : null;
+        if(btn){
+          var tab = btn.getAttribute('data-post-tab');
+          if(tab){ switchPostTab(tab, { resetScroll: true }); }
+        }
+      });
+
       // ====== Modal 開關工具（原有） ======
       function openModal(id){
         var el = document.getElementById(id);
@@ -2117,7 +2303,7 @@
         el.setAttribute('aria-hidden','true');
       }
       
-      ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-tutorial','modal-xray-permission']
+      ['modal-rule','modal-check','modal-link','modal-post','modal-xray','modal-tutorial','modal-xray-permission']
         .forEach(function(mid){
           var el = document.getElementById(mid);
           if(!el) return;
@@ -2135,9 +2321,7 @@
         { btn: '.btn-rule',   modal: 'modal-rule'  },
         { btn: '.btn-check',  modal: 'modal-check' },
         { btn: '.btn-link',   modal: 'modal-link'  },
-        { btn: '.btn-flow',   modal: 'modal-flow'  },
-        { btn: '.btn-guide',  modal: 'modal-guide' },
-        { btn: '.btn-review', modal: 'modal-review'},
+        { btn: '.btn-post',   modal: 'modal-post'  },
         { btn: '.btn-xray',   modal: 'modal-xray'  },
         { btn: '.btn-tutorial', modal: 'modal-tutorial' }
       ];
@@ -2155,7 +2339,7 @@
 
       document.addEventListener('keydown', function(e){
         if(e.key === 'Escape'){
-          var ids = ['modal-rule','modal-check','modal-link','modal-flow','modal-guide','modal-review','modal-xray','modal-xray-permission','viewer'];
+          var ids = ['modal-rule','modal-check','modal-link','modal-post','modal-xray','modal-xray-permission','viewer'];
           for(var i=0;i<ids.length;i++){ hideOverlay(ids[i]); }
         }
       });
@@ -2379,9 +2563,7 @@
       if(overlay.id === "modal-check") return "check";
       if(overlay.id === "modal-tutorial") return "tutorial";
       if(overlay.id === "modal-link") return "link";
-      if(overlay.id === "modal-flow") return "flow";
-      if(overlay.id === "modal-guide") return "guide";
-      if(overlay.id === "modal-review") return "review";
+      
       if(overlay.id === "modal-xray") return "xray";
       if(overlay.id === "modal-search") return "search";
     }
@@ -2395,9 +2577,9 @@
       check: "modal-check",
       tutorial: "modal-tutorial",
       link: "modal-link",
-      flow: "modal-flow",
-      guide: "modal-guide",
-      review: "modal-review",
+      flow: "modal-post",
+      guide: "modal-post",
+      review: "modal-post",
       xray: "modal-xray"
     };
     return map[scope] || null;
