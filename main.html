@@ -32,6 +32,8 @@
     }
     .phone {
         width: min(420px, 94vw);
+        max-width: 100%;
+        box-sizing: border-box;
         background: var(--card);
         border-radius: 0px;
         box-shadow: 0 6px 22px rgba(0,0,0,.25);
@@ -154,10 +156,9 @@
     }
     .btn {
       display:flex; align-items:center; justify-content:center;
-      height: var(--btn-height);
       background: var(--brand); color:#fff; border:none; border-radius:14px;
       font-size:18px; font-weight:800; letter-spacing:.2em; cursor:pointer;
-      height: 33px; /* 直接指定 */
+      height: 33px;
     }
     .btn:active{ transform:scale(.98); }
     /* 按鈕顏色群組（依你截圖） */
@@ -202,6 +203,48 @@
     }
 
     .notice-item:last-child{ border-bottom:none; }
+
+    .notice-main {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .notice-detail {
+      display: block;
+      margin-top: 7px;
+      padding: 6px 8px;
+      border-left: 3px solid #e3e7ef;
+      border-radius: 0 7px 7px 0;
+      background: #f8f9fc;
+      color: #566072;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .notice-key {
+      color: #c93f3f;
+      font-weight: 700;
+    }
+
+    .notice-list {
+      display: block;
+      margin-top: 7px;
+      padding: 7px 9px;
+      border-radius: 7px;
+      background: #f8f9fc;
+      color: #4e596b;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .notice-list-row {
+      display: block;
+      padding: 3px 0;
+    }
+
+    .notice-list-row + .notice-list-row {
+      border-top: 1px dashed #dfe4ec;
+    }
 
     .new-badge {
       display: inline-flex;
@@ -380,6 +423,8 @@
     .modal{
       width: min(420px, 94vw);
       max-height: 93vh;
+      max-height: 93dvh;
+      box-sizing: border-box;
       background: #f7f8fe;
       border-radius: 18px;
       box-shadow: 0 8px 26px rgba(0,0,0,.35);
@@ -474,7 +519,7 @@
     }
     .viewer-canvas{
       position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(1);
-      will-change:transform; user-select:none; -webkit-user-drag:none;
+      will-change:transform; -webkit-user-select:none; user-select:none;
       max-width:100%; max-height:100%;
     }
     .viewer-dots{
@@ -500,7 +545,8 @@
     .search-wrap{ margin: 2px 6px 0; }
     .search-input{
       width:100%;
-      padding:4px 0px;
+      box-sizing:border-box;
+      padding:4px 10px;
       border-radius:14px;
       border:1px solid #dfe2f2;
       background: var(--input);
@@ -610,7 +656,6 @@
       gap:8px;
       overflow-x:auto;
       padding:6px 0 2px;
-      -webkit-overflow-scrolling: touch;
     }
 
     #modal-check .img-scroll img{
@@ -629,7 +674,6 @@
       overflow-x: auto;
       padding: 2px 2px 6px;
       margin-bottom: 4px;
-      -webkit-overflow-scrolling: touch;
     }
 
     #modal-check .recent-check-card {
@@ -764,18 +808,94 @@
 
         <div class="notice-item">
           <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          <span class="notice-main">近期有許多食品，尤其是餅類、糕點類，外包裝可能沒有標示成分，拆成單包裝的食品更常遇到這種情況。</span>
+          <span class="notice-detail">如果看到外包裝沒有成分標示，請先詢問旅客購買的食品<span class="notice-key">是否含有肉類</span>。尤其是月餅，如果旅客堅持表示沒有含肉，請禮貌地請旅客帶至<span class="notice-key">樓下檢疫櫃檯</span>詢問確認，並記得提供一張<span class="notice-key">「檢疫櫃檯檢查單」</span>給旅客。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          準備開放4線時，<span class="notice-key">紅龍歸位請靠齊地毯</span>，否則2線的人員會沒有足夠的作業空間。
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          <span class="notice-main">複查進行檢查時，請<span class="notice-key">只留一位旅客在現場</span>，並請其他親朋好友往前走，到前方空地稍等。</span>
+          <span class="notice-detail">如果接受檢查的旅客是小朋友，可以通融一位大人陪同；但如果小朋友的年齡或體型已幾乎與成年人相同，<span class="notice-key">仍然只留一位旅客即可</span>。<br><br>部分旅客可能有特殊需求，確實需要家人陪伴，也可以通融陪同，請大家自行判斷。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          請旅客到前方稍等時，可以使用<span class="notice-key">「目前旅客比較多」</span>或<span class="notice-key">「通道比較窄」</span>等說法，請旅客至前方稍等。
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          <span class="notice-main">檢查時如果需要使用剪刀✂️，<span class="notice-key">千萬不可以將剪刀交給旅客使用</span>。</span>
+          <span class="notice-detail">剪刀✂️屬於管制物品，<span class="notice-key">旅客不可以拿取或使用</span>。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          備勤室的消毒水固定交由<span class="notice-key">B哨分流補充</span>。<span class="notice-detail">分流二懲罰時，一樣由B分流負責補充，並要自行評估消毒水的量是否足夠AC哨的分流人員噴灑。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="new-badge">NEW</span>
+          <span class="notice-date">2026.08.18</span>
+          <span class="notice-main notice-key">噴灑消毒地毯時請特別注意：</span>
+          <span class="notice-detail">昨天分署長經過時，發現同仁使用水柱狀的方式澆花，在此提醒：</span>
+          <span class="notice-list"><span class="notice-list-row"><span class="notice-key">（1）</span>噴罐一律採用霧狀方式噴灑，如有損壞，麻煩回報。</span><span class="notice-list-row"><span class="notice-key">（2）</span>消毒毯前面兩片（靠近手檢區）要噴得濕一點；後面兩片（靠近發燒篩檢站）則稍微乾一點。</span></span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.17</span>
+          前後有電動車時，最後一位等待中的複查人員要<span class="notice-key">按「叮咚」</span>，提醒前導有電動車。前導收到通知後，也要<span class="notice-key">回覆「收到」</span>，確認已接收到有電動車的資訊。🚗
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.17</span>
+          開放3條線讓機組員通行時，請<span class="notice-key">先看清楚線內的旅客人數</span>，再決定能否直接放入線內，或詢問能否改走4線。
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.17</span>
+          <span class="notice-main notice-key">1、2線的前導請注意：</span>
+          <span class="notice-detail">拐拐和車子由<span class="notice-key">2線控管</span>，機組人員則由<span class="notice-key">1線控管</span>。如果是一整組機組人員進來，記得<span class="notice-key">1線和2線要一起接掉</span>。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.17</span>
+          <span class="notice-main">分流如果要讓拐拐或機組人員走4線，請<span class="notice-key">使用疑問句詢問能否走4線</span>，例如：「請問機組／拐拐可以走4線嗎？」</span>
+          <span class="notice-detail">請不要在分流呼叫完後就直接放行，因為後方X光人員有可能剛好少一位，可能正在上廁所，或正在忙碌而無法離開。</span>
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.15</span>
+          拐拐有陪同人員時，如果線內沒有太多旅客，請<span class="notice-key">陪同人員走1、2、3線，拐拐走4線</span>。
+        </div>
+
+        <div class="notice-item">
+          <span class="notice-date">2026.08.15</span>
+          開放4條線時，拐拐、車子及機組人員要記得<span class="notice-key">一組一組放行</span>，而且必須等前導將中間的紅龍拉起來後，才能放行下一組。
+        </div>
+
+        <div class="notice-item">
           <span class="notice-date">2026.08.05</span>
           進行清掃時，X光機台請使用除塵撢子清理，請勿使用衛可消毒水擦拭或清潔機台。
         </div>
 
         <div class="notice-item">
-          <span class="new-badge">NEW</span>
           <span class="notice-date">2026.07.31</span>
           近期收卡旅客越來越多，如有已收卡的旅客想走手檢，請告知旅客需通過行李檢查，並由旅客自行抉擇。
         </div>
 
         <div class="notice-item">
-          <span class="new-badge">NEW</span>
           <span class="notice-date">2026.07.31</span>
           分流人員收卡時，請盡可能於地毯位置進行，以便監視器清楚拍攝；如有事件或糾紛發生，也較方便後續調閱相關畫面。
         </div>
@@ -1022,7 +1142,7 @@
 
           <div class="tag">【備勤室使用規定】</div>
           <p class="note">私人物品請勿隨意放置，離開前桌面東西未清，椅子未歸位者備勤室輪值分流2（2天）。</p>
-          <p class="note">備勤室外的工業用電風扇應移至正確位置，公共區域請大家共同維護。</p>
+          <p class="note">備勤室外的工業用電風扇應移至正確位置，公共區域請大家共同維護。
             <button type="button" class="view-btn"
               data-viewer-title="工業用電風扇"
               data-viewer-images="
@@ -1797,7 +1917,7 @@
             <div class="tag">【2線複二】</div>
             <p class="note">噴消毒毯的時候記得面向旅客（面向走來的入境旅客）。</p>
             <p class="note">消毒毯時間為<span style="color:#c93f3f;">雙數30分</span>麻煩請由各哨2-2執行(如2-2不在由2-1)。</p>
-            <p class="note"><span style="color:#c93f3f">噴消毒毯一律採霧狀噴灑</span>，有損壞請回報；靠近手檢區的消毒毯噴溼點，靠近發燒站的稍微乾點。</p>
+            <p class="note"><span style="color:#c93f3f;">噴消毒毯一律採霧狀噴灑</span>，有損壞請回報；靠近手檢區的消毒毯噴溼點，靠近發燒站的稍微乾點。</p>
             <p class="note">C區噴完消毒水，務必記得簽名！！！避免罰款。</p>
           </div>
 
@@ -1929,7 +2049,7 @@
           <button class="viewer-close" type="button" data-close="viewer">X</button>
         </div>
         <div class="viewer-body" id="viewerBody">
-          <img id="viewerImg" class="viewer-canvas" alt="圖像" src="">
+          <img id="viewerImg" class="viewer-canvas" alt="圖像" src="" draggable="false">
         </div>
         <div class="viewer-dots" id="viewerDots"></div>
         <div class="viewer-help">左右滑動切換｜雙指縮放</div>
