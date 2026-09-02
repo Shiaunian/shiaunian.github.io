@@ -2838,6 +2838,21 @@
   // ====== 近期檢疫物資料與渲染 ======
   var recentCheckItems = [
     {
+      name: '從韓國豆皮包含有豬肉',
+      date: '9月2日',
+      img: '檢疫物/9月2日 從韓國豆皮包含有豬肉.jpg'
+    },
+    {
+      name: '越南含肉跟肉鬆餅乾',
+      date: '9月2日',
+      img: '檢疫物/9月2日 越南含肉跟肉鬆餅乾.jpg'
+    },
+    {
+      name: '從中國外觀像茶葉的含肉類餅',
+      date: '8月27日',
+      img: '檢疫物/8月27日 從中國外觀像茶葉的含肉類餅.jpg'
+    },
+    {
       name: '香腸碎肉餅乾',
       date: '7月25日',
       img: '檢疫物/7月25日 香腸碎肉餅乾.jpg'
@@ -2889,12 +2904,12 @@
       var img = item.img || '';
 
       return [
-        '<div class="recent-check-card">',
+        '<div class="recent-check-card" title="' + name + ' (' + date + ')">',
           '<div class="recent-check-img-wrap">',
             '<img src="' + img + '" alt="' + name + ' ' + date + '" onerror="this.style.opacity=\'0.25\';">',
           '</div>',
           '<div class="recent-check-info">',
-            '<div class="recent-check-name">' + name + '</div>',
+            '<div class="recent-check-name" title="' + name + '">' + name + '</div>',
             '<div class="recent-check-date">' + date + '</div>',
           '</div>',
         '</div>'
